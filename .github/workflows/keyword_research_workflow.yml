@@ -1,0 +1,54 @@
+name: Keyword Research
+
+on:
+  workflow_dispatch:
+    inputs:
+      seed_keywords:
+        description: "Comma-separated seed keywords (e.g. ac repair dubai,ac not cooling)"
+        required: true
+        default: "ac repair dubai,ac not cooling,ac service dubai,air conditioner repair"
+      customer_id:
+        description: "Google Ads Customer ID, digits only (e.g. 5345847360)"
+        required: true
+      location_id:
+        description: "Geo target ID (2784 = UAE, 2840 = USA)"
+        required: false
+        default: "2784"
+      language_id:
+        description: "Language ID (1000 = English, 1019 = Arabic)"
+        required: false
+        default: "1000"
+
+jobs:
+  fetch-keywords:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install google-ads
+
+      - name: Run keyword research
+        env:
+          GOOGLE_ADS_DEVELOPER_TOKEN: ${{ secrets.GOOGLE_ADS_DEVELOPER_TOKEN }}
+          GOOGLE_ADS_CLIENT_ID: ${{ secrets.GOOGLE_ADS_CLIENT_ID }}
+          GOOGLE_ADS_CLIENT_SECRET: ${{ secrets.GOOGLE_ADS_CLIENT_SECRET }}
+          GOOGLE_ADS_REFRESH_TOKEN: ${{ secrets.GOOGLE_ADS_REFRESH_TOKEN }}
+          GOOGLE_ADS_USE_PROTO_PLUS: "True"
+          GOOGLE_ADS_CUSTOMER_ID: ${{ github.event.inputs.customer_id }}
+          SEED_KEYWORDS: ${{ github.event.inputs.seed_keywords }}
+          LOCATION_ID: ${{ github.event.inputs.location_id }}
+          LANGUAGE_ID: ${{ github.event.inputs.language_id }}
+        run: python keyword_research.py
+
+      - name: Upload result
+        uses: actions/upload-artifact@v4
+        with:
+          name: keyword-data
+          path: keyword_data_output.txt
