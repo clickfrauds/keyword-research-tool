@@ -79,7 +79,9 @@ exactly this shape:
       "intent": "transactional|informational|branded",
       "suggested_match_type": "phrase|exact|broad",
       "priority": "high|medium|low",
-      "reasoning": "1-2 sentences: why this cluster is worth bidding on for THIS specific business, noting the volume/competition tradeoff"
+      "trend": "GROWING|DECLINING|SEASONAL|STABLE|UNKNOWN",
+      "seasonal_schedule": "e.g. Jun-Sep only, or null if not seasonal",
+      "reasoning": "1-2 sentences: why this cluster is worth bidding on for THIS specific business, noting volume/competition tradeoff AND trend direction"
     }
   ],
   "ad_groups": [
@@ -116,6 +118,13 @@ Rules:
 - Use informational and branded clusters mainly for faqs / people_also_ask / content_briefs, not as paid ad targets, unless the business context specifically suggests otherwise.
 - Write FAQs and content briefs in natural, engaging language a real customer of this specific business would find genuinely useful — not generic template text.
 - Aim for 15-25 google_ads_targets, 5-10 ad_groups, 15-25 faqs, 15-25 people_also_ask, 10-15 content_briefs.
+- Each cluster now has a "trend" field (GROWING/DECLINING/SEASONAL/STABLE/UNKNOWN) and "peak_months".
+  Use this data actively:
+    GROWING   -> flag as high priority; bid now while CPC is still low
+    DECLINING -> deprioritize or exclude from ad targets; note in reasoning
+    SEASONAL  -> recommend scheduling ads only during peak_months to save budget
+    STABLE    -> reliable year-round targets, good for always-on campaigns
+  Include a "trend" key in each google_ads_targets entry and mention seasonal scheduling in ad_groups where relevant.
 """
 
 
