@@ -3,30 +3,9 @@ filter_and_cluster.py  (UNIVERSAL / niche-agnostic version)
 --------------------------------------------------------------
 STAGE 2 of the pipeline (runs after keyword_research.py).
 
-This version has NO hardcoded business vocabulary (no "repair", "dubai",
-"samsung" etc.). It works the same way whether the keywords are about
-AC repair, running shoes, project management software, or dentists.
-
-What it does (purely mechanical, works for any niche):
-  1. Parses raw keyword_data_output.txt / .csv (keyword, avg_monthly_searches,
-     competition)
-  2. Deduplicates near-identical phrasings using a generic token-signature
-     (same words, different order/spacing/stopwords -> treated as one)
-  3. Groups keywords into topic clusters using generic token-overlap
-     similarity (no synonym dictionary — that step needs real language
-     understanding, which is exactly what we hand off to Claude in Stage 3)
-  4. Tags volume tier (HIGH >= 1000, MEDIUM 200-999, LOW < 200) — pure math,
-     no domain knowledge needed
-  5. Does NOT decide "transactional vs informational vs branded" here.
-     That requires actually understanding the niche and the language of the
-     query, which a hardcoded word list can never do reliably across
-     different industries. Claude does that classification in Stage 3,
-     using the business context you provide at that step.
-
-Output: clustered_keywords.json
-
-Usage:
-    python filter_and_cluster.py keyword_data_output.txt
+Now carries trend (GROWING/DECLINING/SEASONAL/STABLE) and peak_months
+through from the updated keyword_research.py output.
+Falls back gracefully if old-format files (without trend columns) are used.
 """
 
 import sys
@@ -37,8 +16,6 @@ from collections import defaultdict
 INPUT_FILE = sys.argv[1] if len(sys.argv) > 1 else "keyword_data_output.txt"
 OUTPUT_FILE = "clustered_keywords.json"
 
-# Only truly universal, language-level stopwords/connectors — nothing
-# industry-specific lives here. Safe for any niche.
 GENERIC_STOPWORDS = {
     "a", "an", "the", "in", "of", "and", "&", "to", "is", "my", "for",
     "on", "at", "with", "near", "me",
@@ -46,8 +23,6 @@ GENERIC_STOPWORDS = {
 
 
 def parse_input(path):
-    """Parses either the fixed-width .txt from keyword_research.py or a
-    comma-separated .csv with the same 3 columns."""
     rows = []
     with open(path, "r", encoding="utf-8") as f:
         lines = f.readlines()
@@ -65,12 +40,17 @@ def parse_input(path):
         parts = [p for p in parts if p != ""]
         if len(parts) < 3:
             continue
-        keyword, searches, competition = parts[0], parts[1], parts[2]
+        keyword    = parts[0]
+        searches   = parts[1]
+        competition= parts[2]
+        # NEW: pick up trend + peak_months if present (cols 3 & 4)
+        trend = parts[3].strip().upper() if len(parts) > 3 else "UNKNOWN"
+        peak  = parts[4].strip()         if len(parts) > 4 else ""
         try:
             searches = int(str(searches).replace(",", ""))
         except ValueError:
             continue
-        rows.append((keyword.strip().lower(), searches, competition.strip().upper()))
+        rows.append((keyword.strip().lower(), searches, competition.strip().upper(), trend, peak))
     return rows
 
 
@@ -88,41 +68,32 @@ def volume_tier(searches):
 
 
 def dedupe_by_token_signature(rows):
-    """Collapses pure word-order/stopword variants into one entry
-    (e.g. 'best running shoes' vs 'running shoes best' vs 'the best
-    running shoes' -> same signature). Does NOT try to merge true
-    synonyms (e.g. 'sneakers' vs 'shoes') — that needs real language
-    understanding, which we deliberately leave to Claude in Stage 3
-    rather than faking it with a hardcoded synonym dictionary."""
-    seen_signatures = {}
-    for keyword, searches, competition in rows:
+    """Collapses word-order / stopword variants. Keeps trend+peak from the
+    highest-volume representative of each signature."""
+    seen = {}
+    for keyword, searches, competition, trend, peak in rows:
         tokens = normalize_tokens(keyword)
-        signature = tuple(sorted(set(tokens)))
-        if not signature:
+        sig = tuple(sorted(set(tokens)))
+        if not sig:
             continue
-        if signature not in seen_signatures or searches > seen_signatures[signature][1]:
-            seen_signatures[signature] = (keyword, searches, competition, tokens)
-    return list(seen_signatures.values())
+        if sig not in seen or searches > seen[sig][1]:
+            seen[sig] = (keyword, searches, competition, tokens, trend, peak)
+    return list(seen.values())
 
 
 def cluster_keywords(deduped):
-    """Groups keywords by their most distinctive shared tokens (longest
-    words = usually most specific/meaningful, a generic heuristic that
-    doesn't assume any industry)."""
     clusters = defaultdict(list)
-
-    for keyword, searches, competition, tokens in deduped:
+    for keyword, searches, competition, tokens, trend, peak in deduped:
         unique_tokens = sorted(set(tokens))
-        if not unique_tokens:
-            key_tokens = ["misc"]
-        else:
-            # pick the 2 longest/most distinctive tokens as the cluster key
-            key_tokens = sorted(unique_tokens, key=len, reverse=True)[:2]
+        key_tokens = sorted(unique_tokens, key=len, reverse=True)[:2] if unique_tokens else ["misc"]
         cluster_key = " ".join(sorted(key_tokens))
-        clusters[cluster_key].append(
-            {"keyword": keyword, "avg_monthly_searches": searches, "competition": competition}
-        )
-
+        clusters[cluster_key].append({
+            "keyword": keyword,
+            "avg_monthly_searches": searches,
+            "competition": competition,
+            "trend": trend,
+            "peak_months": peak,
+        })
     return clusters
 
 
@@ -143,17 +114,18 @@ def main():
     output_clusters = []
     for cluster_key, items in clusters.items():
         items.sort(key=lambda x: x["avg_monthly_searches"], reverse=True)
+        top = items[0]
         output_clusters.append({
             "cluster_topic": cluster_key,
             "keyword_count": len(items),
-            "top_keyword": items[0]["keyword"],
-            "top_keyword_volume": items[0]["avg_monthly_searches"],
-            "volume_tier": volume_tier(items[0]["avg_monthly_searches"]),
+            "top_keyword": top["keyword"],
+            "top_keyword_volume": top["avg_monthly_searches"],
+            "volume_tier": volume_tier(top["avg_monthly_searches"]),
+            "trend": top["trend"],
+            "peak_months": top["peak_months"],
             "sample_keywords": items[:8],
         })
 
-    # Sort purely by volume — no niche-specific priority assumptions here.
-    # Claude will re-prioritize in Stage 3 once it understands the business.
     output_clusters.sort(key=lambda c: -c["top_keyword_volume"])
 
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
@@ -165,7 +137,6 @@ def main():
         }, f, indent=2, ensure_ascii=False)
 
     print(f"✅ Done. Clustered summary saved to {OUTPUT_FILE}")
-    print("Next: run analyze_with_claude.py to get ad-group targets, FAQs, and PAA content.")
 
 
 if __name__ == "__main__":
