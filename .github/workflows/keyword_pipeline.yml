@@ -1,0 +1,62 @@
+name: Keyword Research Pipeline
+
+on:
+  workflow_dispatch:
+    inputs:
+      business_name:
+        description: "Business name"
+        required: true
+      niche_description:
+        description: "What the business does (e.g. 'AC repair and installation company')"
+        required: true
+      target_location:
+        description: "Target location (e.g. 'Dubai, UAE', or 'N/A' if not local)"
+        required: true
+      seed_keywords:
+        description: "Comma-separated seed keywords for this client"
+        required: true
+
+jobs:
+  research:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Stage 1 - Pull real keyword data from Google Ads
+        env:
+          GOOGLE_ADS_DEVELOPER_TOKEN: ${{ secrets.GOOGLE_ADS_DEVELOPER_TOKEN }}
+          GOOGLE_ADS_CLIENT_ID: ${{ secrets.GOOGLE_ADS_CLIENT_ID }}
+          GOOGLE_ADS_CLIENT_SECRET: ${{ secrets.GOOGLE_ADS_CLIENT_SECRET }}
+          GOOGLE_ADS_REFRESH_TOKEN: ${{ secrets.GOOGLE_ADS_REFRESH_TOKEN }}
+          GOOGLE_ADS_CUSTOMER_ID: ${{ secrets.GOOGLE_ADS_CUSTOMER_ID }}
+          SEED_KEYWORDS: ${{ github.event.inputs.seed_keywords }}
+        run: python scripts/keyword_research.py
+
+      - name: Stage 2 - Filter and cluster keywords (niche-agnostic)
+        run: python scripts/filter_and_cluster.py keyword_data_output.txt
+
+      - name: Stage 3 - Claude strategy analysis (business context passed per run)
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          CLAUDE_MODEL: claude-sonnet-5
+          BUSINESS_NAME: ${{ github.event.inputs.business_name }}
+          NICHE_DESCRIPTION: ${{ github.event.inputs.niche_description }}
+          TARGET_LOCATION: ${{ github.event.inputs.target_location }}
+        run: python scripts/analyze_with_claude.py
+
+      - name: Upload results as workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: keyword-strategy-${{ github.event.inputs.business_name }}-${{ github.run_number }}
+          path: |
+            keyword_data_output.txt
+            clustered_keywords.json
+            keyword_strategy.json
+            keyword_strategy.md
