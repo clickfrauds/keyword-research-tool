@@ -140,9 +140,9 @@ def main():
     # ── NEW: ask for historical monthly breakdown ──────────────────────────
     # include_adult_keywords defaults to False — fine to leave unset.
     # historical_metrics_options lets us request the month-by-month breakdown.
-    historical_options = client.get_type("HistoricalMetricsOptions")
-    historical_options.include_average_cpc = False   # CPC data not needed
-    request.historical_metrics_options.CopyFrom(historical_options)
+    # (with GOOGLE_ADS_USE_PROTO_PLUS=true, nested message fields are set
+    # directly — no .CopyFrom() needed/available on proto-plus objects)
+    request.historical_metrics_options.include_average_cpc = False   # CPC data not needed
     # ──────────────────────────────────────────────────────────────────────
 
     try:
