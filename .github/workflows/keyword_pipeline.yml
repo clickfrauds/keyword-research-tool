@@ -85,6 +85,7 @@ jobs:
         run: python scripts/push_results.py
 
       - name: Upload results as workflow artifact (backup / manual runs)
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: keyword-strategy-${{ github.event.inputs.business_name }}-${{ github.run_number }}
