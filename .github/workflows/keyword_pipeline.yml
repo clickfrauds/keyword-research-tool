@@ -15,6 +15,14 @@ on:
       seed_keywords:
         description: "Comma-separated seed keywords for this client"
         required: true
+      request_id:
+        description: "Unique id for this run — set automatically when triggered from the Netlify form. Leave blank for manual runs."
+        required: false
+
+# Needed so Stage 5 can push the finished report to the results-data branch
+# using the automatic GITHUB_TOKEN (no extra secret required for this part).
+permissions:
+  contents: write
 
 jobs:
   research:
@@ -28,6 +36,15 @@ jobs:
 
       - name: Install dependencies
         run: pip install -r requirements.txt
+
+      - name: Resolve request id (fallback for manual runs)
+        id: reqid
+        run: |
+          if [ -z "${{ github.event.inputs.request_id }}" ]; then
+            echo "value=manual-${{ github.run_id }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "value=${{ github.event.inputs.request_id }}" >> "$GITHUB_OUTPUT"
+          fi
 
       - name: Stage 1 - Pull real keyword data from Google Ads
         env:
@@ -51,7 +68,22 @@ jobs:
           TARGET_LOCATION: ${{ github.event.inputs.target_location }}
         run: python scripts/analyze_with_claude.py
 
-      - name: Upload results as workflow artifact
+      - name: Stage 4 - Generate client-ready HTML + CSV reports
+        env:
+          BUSINESS_NAME: ${{ github.event.inputs.business_name }}
+          NICHE_DESCRIPTION: ${{ github.event.inputs.niche_description }}
+          TARGET_LOCATION: ${{ github.event.inputs.target_location }}
+        run: python scripts/generate_reports.py
+
+      - name: Stage 5 - Push results for the Netlify form to pick up
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          REQUEST_ID: ${{ steps.reqid.outputs.value }}
+          RESULTS_BRANCH: results-data
+        run: python scripts/push_results.py
+
+      - name: Upload results as workflow artifact (backup / manual runs)
         uses: actions/upload-artifact@v4
         with:
           name: keyword-strategy-${{ github.event.inputs.business_name }}-${{ github.run_number }}
@@ -60,3 +92,5 @@ jobs:
             clustered_keywords.json
             keyword_strategy.json
             keyword_strategy.md
+            keyword_strategy_report.html
+            keyword_strategy_targets.csv
