@@ -207,22 +207,28 @@ def main():
 
     print(f"Sending {min(MAX_CLUSTERS, data['total_clusters'])} of {data['total_clusters']} clusters to {MODEL}...")
 
-    response = client.messages.create(
-        model=MODEL,
-        max_tokens=8000,
-        system=SYSTEM_PROMPT,
-        messages=[{"role": "user", "content": user_prompt}],
-    )
+    strategy = None
+    raw_text = ""
+    for attempt in range(2):  # try once, and retry once more on JSON failure
+        response = client.messages.create(
+            model=MODEL,
+            max_tokens=8000,
+            system=SYSTEM_PROMPT,
+            messages=[{"role": "user", "content": user_prompt}],
+        )
+        raw_text = "".join(block.text for block in response.content if block.type == "text")
+        try:
+            strategy = extract_json(raw_text)
+            break  # success
+        except json.JSONDecodeError as e:
+            print(f"⚠️ Attempt {attempt + 1}: Could not parse Claude's response as JSON. Error: {e}")
+            if attempt == 0:
+                print("Retrying once...")
 
-    raw_text = "".join(block.text for block in response.content if block.type == "text")
-
-    try:
-        strategy = extract_json(raw_text)
-    except json.JSONDecodeError as e:
-        print("⚠️ Could not parse Claude's response as JSON. Saving raw output for debugging.")
+    if strategy is None:
+        print("❌ Both attempts failed to produce valid JSON. Saving raw output for debugging.")
         with open("keyword_strategy_raw.txt", "w", encoding="utf-8") as f:
             f.write(raw_text)
-        print(f"Error: {e}")
         return
 
     with open("keyword_strategy.json", "w", encoding="utf-8") as f:
