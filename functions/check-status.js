@@ -42,6 +42,7 @@ export async function onRequestGet(context) {
       // application/vnd.github.raw makes GitHub return the plain file
       // content directly, instead of a JSON envelope with base64 inside it.
       Accept: "application/vnd.github.raw",
+      "User-Agent": "keyword-research-tool",
     },
   });
 
