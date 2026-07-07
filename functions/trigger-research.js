@@ -71,6 +71,7 @@ export async function onRequestPost(context) {
       Authorization: `Bearer ${GITHUB_TOKEN}`,
       Accept: "application/vnd.github+json",
       "Content-Type": "application/json",
+      "User-Agent": "keyword-research-tool",
     },
     body: JSON.stringify({
       ref: BRANCH,
