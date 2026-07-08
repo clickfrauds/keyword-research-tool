@@ -512,13 +512,121 @@ def write_csv(strategy):
 # main
 # ============================================================
 
+SEO_FILE = "website_builder_inputs.json"
+
+
+def render_seo_html(seo):
+    """Compact self-contained report for SEO runs (research_type=seo)."""
+    generated_at = datetime.now(timezone.utc).strftime("%d %b %Y, %H:%M UTC")
+    m4 = seo.get("mode4_cluster", {})
+    m3 = seo.get("mode3_full_website", {})
+    m2 = seo.get("mode2_services_hub", {})
+    m5 = seo.get("mode5_pseo", {})
+    nq = sum(len(c.get("questions", [])) for c in m4.get("clusters", []))
+
+    cluster_cards = []
+    for c in m4.get("clusters", []):
+        p = c.get("primary_keyword") or {}
+        qs = "".join(
+            f"<li><strong>{esc(q.get('q'))}</strong> "
+            f"<span class='badge intent-badge'>{esc(q.get('type'))}</span>"
+            f"<div class='meta-line'>{esc(q.get('answer_angle'))}</div></li>"
+            for q in c.get("questions", []))
+        kws = ", ".join(f"{esc(k['keyword'])} <span class='kw-vol'>({k['volume']})</span>"
+                        for k in c.get("keywords", []))
+        ents = ", ".join(esc(e) for e in c.get("entities_to_mention", []))
+        cluster_cards.append(f"""
+        <div class="card">
+          <div class="card-head"><h3>{esc(c.get('cluster_name'))}</h3>
+            <span class="badge intent-badge">{esc(c.get('funnel'))}</span></div>
+          <div class="meta-line">Primary: <strong>{esc(p.get('keyword'))}</strong>
+            ({p.get('volume', 0)}/mo, KD {p.get('kd', '—')}) &middot; cluster volume {c.get('total_volume', 0)}/mo</div>
+          <div class="meta-line">Keywords: {kws}</div>
+          <ul style="font-size:13px; padding-left:18px; margin:10px 0 0;">{qs}</ul>
+          {f"<div class='meta-line'>Entities: {ents}</div>" if ents else ""}
+        </div>""")
+
+    cities = "".join(
+        f"<div class='meta-line'>• <strong>{esc(c.get('city'))}</strong> — "
+        f"{c.get('total_volume', 0)}/mo across {len(c.get('keywords', []))} keywords</div>"
+        for c in m5.get("cities_in_data", []))
+
+    services_chips = "".join(f'<span class="chip">{esc(s)}</span>' for s in m3.get("services", []))
+
+    return f"""<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{esc(BUSINESS_NAME or 'SEO Content Plan')}</title>
+<style>
+ body{{margin:0;background:#f6f5f2;color:#14181c;font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;line-height:1.55}}
+ .wrap{{max-width:860px;margin:0 auto;padding:36px 20px 70px}}
+ h1{{font-size:24px;margin:0 0 4px}} .sub{{color:#6b6560;font-size:13px;margin-bottom:24px}}
+ section{{margin-bottom:34px}} section>h2{{font-family:ui-monospace,Consolas,monospace;font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:#6b6560;border-bottom:1px solid #dcdad3;padding-bottom:8px}}
+ .card{{background:#fdfcfa;border:1px solid #dcdad3;border-left:3px solid #0b5d5a;border-radius:0 8px 8px 0;padding:15px 17px;margin-bottom:12px}}
+ .card h3{{margin:0;font-size:15px}} .card-head{{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}}
+ .meta-line{{font-size:13px;color:#6b6560;margin-top:6px}} .kw-vol{{font-size:11px;color:#6b6560}}
+ .badge{{font-family:ui-monospace,Consolas,monospace;font-size:10px;font-weight:700;padding:3px 8px;border-radius:4px}}
+ .intent-badge{{background:#e3f0ef;color:#0b5d5a}}
+ .chip{{display:inline-block;background:#e3f0ef;color:#0b5d5a;font-size:12px;padding:5px 11px;border-radius:999px;margin:3px 4px 0 0}}
+ .stat-bar{{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:30px}}
+ .stat{{background:#fdfcfa;border:1px solid #dcdad3;border-radius:8px;padding:11px 15px;flex:1;min-width:105px;text-align:center}}
+ .stat b{{display:block;font-family:ui-monospace,Consolas,monospace;font-size:19px;color:#0b5d5a}}
+ code{{background:#e3f0ef;padding:2px 7px;border-radius:5px;font-size:12px}}
+</style></head><body><div class="wrap">
+ <h1>SEO Content Plan — {esc(BUSINESS_NAME or 'Untitled')}</h1>
+ <div class="sub">{esc(NICHE_DESCRIPTION)} &middot; {esc(TARGET_LOCATION)} &middot; Generated {esc(generated_at)}</div>
+ <div class="stat-bar">
+   <div class="stat"><b>{len(m4.get('clusters', []))}</b>Clusters</div>
+   <div class="stat"><b>{nq}</b>AI-Overview Questions</div>
+   <div class="stat"><b>{len(m3.get('services', []))}</b>Demand-Backed Services</div>
+   <div class="stat"><b>{len(m5.get('cities_in_data', []))}</b>Cities Detected</div>
+ </div>
+ <section><h2>Mode 4 — Cluster Architecture (primary)</h2>
+   <div class="meta-line">main_topic: <code>{esc(m4.get('workflow_inputs', {}).get('main_topic'))}</code></div>
+   <div class="meta-line" style="margin-bottom:12px">problem_clusters: <code>{esc(m4.get('workflow_inputs', {}).get('problem_clusters'))}</code></div>
+   {''.join(cluster_cards)}
+ </section>
+ <section><h2>Mode 3 — Full Website Services (demand-backed)</h2><div>{services_chips}</div></section>
+ <section><h2>Mode 2 — Services Hub</h2>
+   <div class="meta-line">main_service: <strong>{esc(m2.get('workflow_inputs', {}).get('main_service'))}</strong></div>
+   <div class="meta-line">sub_services: {esc(m2.get('workflow_inputs', {}).get('sub_services'))}</div></section>
+ <section><h2>Mode 5 — pSEO Cities</h2>{cities or "<div class='meta-line'>No extra cities detected in the data.</div>"}
+   <div class="meta-line">Recommended: {esc(', '.join(m5.get('recommended_city_targets', [])) or '—')}</div></section>
+ {f"<section><h2>Strategy Notes</h2><div class='meta-line'>{esc(seo.get('notes'))}</div></section>" if seo.get('notes') else ""}
+</div></body></html>"""
+
+
+def write_seo_csv(seo):
+    """Ahrefs-style keyword metrics table."""
+    with open(CSV_OUTPUT, "w", encoding="utf-8", newline="") as f:
+        w = csv.writer(f)
+        w.writerow(["keyword", "volume", "kd", "funnel", "intent",
+                    "trend", "ai_overview_prone", "flags"])
+        for k in seo.get("keyword_metrics", []):
+            w.writerow([k.get("keyword"), k.get("volume"), k.get("kd"),
+                        k.get("funnel"), k.get("intent"), k.get("trend"),
+                        k.get("ai_overview_prone"), ",".join(k.get("flags", []))])
+
+
 def main():
-    # Graceful failure instead of a traceback when Stage 3 didn't produce output
-    if not os.path.exists(STRATEGY_FILE):
-        print(f"❌ {STRATEGY_FILE} not found — Stage 3 (analyze_with_claude.py) "
-              f"failed or was skipped. Fix that stage first; skipping report generation.")
+    strategy_exists = os.path.exists(STRATEGY_FILE)
+    seo_exists = os.path.exists(SEO_FILE)
+
+    if not strategy_exists and seo_exists:
+        # SEO-only run (research_type=seo)
+        seo = load_json(SEO_FILE, required=True)
+        with open(HTML_OUTPUT, "w", encoding="utf-8") as f:
+            f.write(render_seo_html(seo))
+        write_seo_csv(seo)
+        print(f"✅ SEO HTML report saved to {HTML_OUTPUT}")
+        print(f"✅ Keyword-metrics CSV saved to {CSV_OUTPUT}")
+        return
+
+    if not strategy_exists:
+        print(f"❌ Neither {STRATEGY_FILE} nor {SEO_FILE} found — earlier stages "
+              f"failed or were skipped. Fix those first; skipping report generation.")
         import sys
         sys.exit(1)
+
     strategy = load_json(STRATEGY_FILE, required=True)
     clusters_data = load_json(CLUSTERS_FILE, required=False)
 

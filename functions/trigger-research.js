@@ -80,6 +80,9 @@ export async function onRequestPost(context) {
         niche_description: String(niche_description).slice(0, 500),
         target_location: String(target_location).slice(0, 200),
         seed_keywords: String(seed_keywords).slice(0, 1000),
+        // Deliverable selector: google_ads | seo | both
+        research_type: ["google_ads", "seo", "both"].includes(body.research_type)
+          ? body.research_type : "google_ads",
         // Existing Account Mode (optional) — incremental ad groups into a live campaign
         existing_campaign: String(body.existing_campaign || "").slice(0, 200),
         existing_ad_groups: String(body.existing_ad_groups || "").slice(0, 1000),

@@ -15,6 +15,15 @@ on:
       seed_keywords:
         description: "Comma-separated seed keywords for this client"
         required: true
+      research_type:
+        description: "Deliverable type: google_ads (campaigns+script) | seo (website-builder content plan) | both"
+        required: false
+        default: 'google_ads'
+        type: choice
+        options:
+          - google_ads
+          - seo
+          - both
       request_id:
         description: "Unique id for this run — set automatically when triggered from the Netlify form. Leave blank for manual runs."
         required: false
@@ -79,6 +88,7 @@ jobs:
         run: python scripts/score_keywords.py
 
       - name: Stage 3 - Claude campaigns + ad groups + landing pages (~$0.30/run)
+        if: ${{ github.event.inputs.research_type != 'seo' }}
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           CLAUDE_MODEL: claude-sonnet-5
@@ -92,6 +102,7 @@ jobs:
         run: python scripts/analyze_with_claude.py
 
       - name: Stage 3.6 - Generate negative-guard Google Ads Script (~$0.02)
+        if: ${{ github.event.inputs.research_type != 'seo' }}
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           CLAUDE_MODEL: claude-sonnet-5
@@ -99,6 +110,18 @@ jobs:
           NICHE_DESCRIPTION: ${{ github.event.inputs.niche_description }}
           TARGET_LOCATION: ${{ github.event.inputs.target_location }}
         run: python scripts/generate_ads_script.py
+
+      - name: Stage 3-SEO - Website-builder content plan (Mode 4 focus, ~$0.20)
+        if: ${{ github.event.inputs.research_type == 'seo' || github.event.inputs.research_type == 'both' }}
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          CLAUDE_MODEL: claude-sonnet-5
+          CLAUDE_EFFORT: "medium"
+          MAX_SEO_CLUSTERS: "8"
+          BUSINESS_NAME: ${{ github.event.inputs.business_name }}
+          NICHE_DESCRIPTION: ${{ github.event.inputs.niche_description }}
+          TARGET_LOCATION: ${{ github.event.inputs.target_location }}
+        run: python scripts/generate_seo_strategy.py
 
       - name: Stage 4 - Generate client-ready HTML + CSV reports
         env:
@@ -130,5 +153,7 @@ jobs:
             google_ads_editor.csv
             landing_pages.json
             negative_guard_script.js
+            website_builder_inputs.json
+            seo_content_plan.md
             keyword_strategy_report.html
             keyword_strategy_targets.csv
