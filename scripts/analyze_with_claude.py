@@ -65,6 +65,16 @@ BUSINESS_NAME = os.environ.get("BUSINESS_NAME", "").strip()
 NICHE_DESCRIPTION = os.environ.get("NICHE_DESCRIPTION", "").strip()
 TARGET_LOCATION = os.environ.get("TARGET_LOCATION", "").strip()
 
+# ── EXISTING ACCOUNT MODE (incremental) ─────────────────────────────────────
+# Jab client ka account pehle se chal raha ho aur sirf naya ad group add karna
+# ho: existing campaign ka naam + existing ad groups ki list de do. Tool phir:
+#   - naye groups ko USI campaign mein rakhta hai (nayi campaign invent nahi)
+#   - naye groups ko existing groups ke against negatives deta hai
+#   - existing groups ke liye bhi negatives suggest karta hai (2-way siloing)
+#   - MAX_AD_GROUPS ko chhota rakho (e.g. 1-2) taake over-splitting na ho
+EXISTING_CAMPAIGN = os.environ.get("EXISTING_CAMPAIGN", "").strip()
+EXISTING_AD_GROUPS = [g.strip() for g in os.environ.get("EXISTING_AD_GROUPS", "").split(",") if g.strip()]
+
 
 # ══════════════════════════════════════════════════════════════════════════
 # Robust JSON parsing (4 repair passes — battle-tested in the website builder)
@@ -215,6 +225,32 @@ HARD RULES:
 7. Reference provided keywords ONLY by numeric id. Never echo their text.
 8. Use volumes/competition/scores to set priorities: the campaign and group
    holding the best opportunity keywords is "high".
+9. SMALL DATASETS: if the keyword set is small or low-volume (niche service,
+   max volume under a few hundred), that is normal — do NOT split it to look
+   thorough. One tight group with strong intent expansions beats three thin
+   groups. Low absolute volume is fine; relative opportunity is what matters.
+"""
+
+if EXISTING_CAMPAIGN or EXISTING_AD_GROUPS:
+    SYSTEM_PROMPT += f"""
+EXISTING ACCOUNT MODE — this client's Google Ads account is ALREADY RUNNING:
+- Existing campaign: "{EXISTING_CAMPAIGN or '(unnamed — use a sensible name)'}"
+- Existing ad groups already live: {json.dumps(EXISTING_AD_GROUPS)}
+
+Extra rules that OVERRIDE the ones above:
+A. Do NOT invent new campaigns. Return exactly one campaign named
+   "{EXISTING_CAMPAIGN}" and put every new ad group in it.
+B. Your new ad group themes must NOT overlap any existing ad group's theme.
+   If a provided keyword actually belongs to an existing group's theme,
+   EXCLUDE it (excluded_ids) — do not build a competing group around it.
+C. Each new group's negative_keywords must include the distinctive core terms
+   of the EXISTING groups (so the new group never steals their traffic).
+D. Also return this extra top-level key:
+   "negatives_for_existing_groups": {{"<existing group name>": ["term", ...]}}
+   = the distinctive terms of your NEW groups, to be added as negatives to
+   each existing group so they cannot cannibalize the new group either.
+   Only include existing groups that actually need protection.
+E. Landing pages: only for the NEW themes (1 page per new theme is typical).
 """
 
 
@@ -254,17 +290,32 @@ def validate_strategy(raw, kept):
         for v in k.get("variants", []):
             provided_sigs.add(_norm_sig(v))
 
-    campaigns = []
-    seen_camp = set()
-    for c in raw.get("campaigns", [])[:3]:
-        name = str(c.get("name", "")).strip()[:60]
-        if name and name.lower() not in seen_camp:
-            campaigns.append({"name": name, "priority": c.get("priority", "medium")})
-            seen_camp.add(name.lower())
-    if not campaigns:
-        campaigns = [{"name": f"{BUSINESS_NAME or 'Main'} Campaign", "priority": "high"}]
+    if EXISTING_CAMPAIGN:
+        # Incremental mode: sab kuch client ki existing campaign mein hi jata hai
+        campaigns = [{"name": EXISTING_CAMPAIGN, "priority": "high"}]
+    else:
+        campaigns = []
+        seen_camp = set()
+        for c in raw.get("campaigns", [])[:3]:
+            name = str(c.get("name", "")).strip()[:60]
+            if name and name.lower() not in seen_camp:
+                campaigns.append({"name": name, "priority": c.get("priority", "medium")})
+                seen_camp.add(name.lower())
+        if not campaigns:
+            campaigns = [{"name": f"{BUSINESS_NAME or 'Main'} Campaign", "priority": "high"}]
     default_campaign = campaigns[0]["name"]
     camp_names = {c["name"] for c in campaigns}
+
+    # Two-way siloing: negatives Claude suggests for the EXISTING ad groups
+    negatives_for_existing = {}
+    if EXISTING_AD_GROUPS:
+        raw_nfe = raw.get("negatives_for_existing_groups", {}) or {}
+        existing_lookup = {g.lower(): g for g in EXISTING_AD_GROUPS}
+        for gname, terms in raw_nfe.items() if isinstance(raw_nfe, dict) else []:
+            real = existing_lookup.get(str(gname).strip().lower())
+            clean = [str(t).strip().lower() for t in (terms or []) if str(t).strip()]
+            if real and clean:
+                negatives_for_existing[real] = clean
 
     seen_ids = set()
     seen_expansion_sigs = set()
@@ -356,16 +407,18 @@ def validate_strategy(raw, kept):
     unassigned = [by_id[i]["keyword"] for i in by_id
                   if i not in seen_ids and i not in excluded]
 
-    return campaigns, groups, pages, uncovered_groups, sorted(excluded), unassigned
+    return campaigns, groups, pages, uncovered_groups, sorted(excluded), unassigned, negatives_for_existing
 
 
 # ══════════════════════════════════════════════════════════════════════════
 # Output writers
 # ══════════════════════════════════════════════════════════════════════════
 
-def write_ads_editor_csv(groups):
+def write_ads_editor_csv(groups, negatives_for_existing=None):
     """Google Ads Editor paste-ready CSV — keywords, intent expansions, AND
-    ad-group-level negatives (the anti-cannibalization layer)."""
+    ad-group-level negatives (the anti-cannibalization layer). In existing-
+    account mode it also emits Negative Phrase rows for the CLIENT'S existing
+    ad groups so they can't cannibalize the new group."""
     with open("google_ads_editor.csv", "w", encoding="utf-8", newline="") as f:
         w = csv.writer(f)
         w.writerow(["Campaign", "Ad Group", "Keyword", "Criterion Type"])
@@ -378,6 +431,10 @@ def write_ads_editor_csv(groups):
                 w.writerow([g["campaign"], g["name"], e, "Phrase"])
             for n in g["negative_keywords"]:
                 w.writerow([g["campaign"], g["name"], n, "Negative Phrase"])
+        for gname, terms in (negatives_for_existing or {}).items():
+            for t in terms:
+                w.writerow([EXISTING_CAMPAIGN or (groups[0]["campaign"] if groups else ""),
+                            gname, t, "Negative Phrase"])
 
 
 def write_landing_pages_json(pages, groups):
@@ -467,7 +524,7 @@ def main():
         print(f"❌ Could not get valid JSON: {last_err}. Raw saved for debugging.")
         sys.exit(1)
 
-    campaigns, groups, pages, uncovered, excluded_ids, unassigned = validate_strategy(raw, kept)
+    campaigns, groups, pages, uncovered, excluded_ids, unassigned, negatives_for_existing = validate_strategy(raw, kept)
 
     # SEO material = Claude's exclusions + Python-flagged question/informational
     all_kw = data["keywords"]
@@ -485,6 +542,9 @@ def main():
                      "location": TARGET_LOCATION},
         "model_used": MODEL,
         "campaigns": campaigns,
+        "existing_account_mode": bool(EXISTING_CAMPAIGN or EXISTING_AD_GROUPS),
+        "existing_ad_groups": EXISTING_AD_GROUPS,
+        "negatives_for_existing_groups": negatives_for_existing,
         "ad_groups": groups,
         "landing_pages": pages,
         "uncovered_ad_groups": uncovered,
@@ -520,7 +580,7 @@ def main():
     with open("keyword_strategy.json", "w", encoding="utf-8") as f:
         json.dump(strategy, f, indent=2, ensure_ascii=False)
 
-    write_ads_editor_csv(groups)
+    write_ads_editor_csv(groups, negatives_for_existing)
     lp = write_landing_pages_json(pages, groups)
 
     # ── Markdown summary ──
@@ -543,6 +603,13 @@ def main():
             if g["negative_keywords"]:
                 md.append(f"- 🚫 Negatives (anti-cannibalization): " + ", ".join(g["negative_keywords"]))
             md.append("")
+    if negatives_for_existing:
+        md.append("## 🛡️ Negatives for EXISTING ad groups (2-way anti-cannibalization)")
+        md.append("_Ye terms client ke pehle se chalne wale ad groups mein NEGATIVE ke "
+                  "taur par add karein taake wo naye group ki traffic na khayein:_")
+        for gname, terms in negatives_for_existing.items():
+            md.append(f"- **{gname}**: " + ", ".join(terms))
+        md.append("")
     md.append("## 🖥️ Landing Pages (Mode 1 generator inputs)")
     for p in lp:
         md.append(f"### {p['page_name']}  →  /{p['url_slug']}/")

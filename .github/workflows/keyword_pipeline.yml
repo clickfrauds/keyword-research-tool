@@ -18,6 +18,18 @@ on:
       request_id:
         description: "Unique id for this run — set automatically when triggered from the Netlify form. Leave blank for manual runs."
         required: false
+      existing_campaign:
+        description: "EXISTING ACCOUNT MODE: client ki already-running campaign ka naam (naye ad groups isi mein jayenge)"
+        required: false
+        default: ''
+      existing_ad_groups:
+        description: "EXISTING ACCOUNT MODE: client ke already-live ad groups (comma-separated) — 2-way negative siloing ke liye"
+        required: false
+        default: ''
+      max_ad_groups:
+        description: "Max NEW ad groups (chhote/niche keyword sets ke liye 1-2 rakhen)"
+        required: false
+        default: '10'
 
 # Needed so Stage 5 can push the finished report to the results-data branch
 # using the automatic GITHUB_TOKEN (no extra secret required for this part).
@@ -71,7 +83,9 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           CLAUDE_MODEL: claude-sonnet-5
           CLAUDE_EFFORT: "medium"
-          MAX_AD_GROUPS: "10"
+          MAX_AD_GROUPS: ${{ github.event.inputs.max_ad_groups || '10' }}
+          EXISTING_CAMPAIGN: ${{ github.event.inputs.existing_campaign }}
+          EXISTING_AD_GROUPS: ${{ github.event.inputs.existing_ad_groups }}
           BUSINESS_NAME: ${{ github.event.inputs.business_name }}
           NICHE_DESCRIPTION: ${{ github.event.inputs.niche_description }}
           TARGET_LOCATION: ${{ github.event.inputs.target_location }}
