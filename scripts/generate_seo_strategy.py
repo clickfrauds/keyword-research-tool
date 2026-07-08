@@ -318,10 +318,15 @@ def validate(raw, by_id):
         pillar_id = None
     pillar = expand_kw(by_id[pillar_id]) if pillar_id in by_id else None
 
+    main_topic = str(m4.get("main_topic", "")).strip()
     mode4 = {
         "workflow_inputs": {
-            "main_topic": str(m4.get("main_topic", "")).strip(),
-            "problem_clusters": ", ".join(c["cluster_name"] for c in clusters),
+            "main_topic": main_topic,
+            # Mode 4's parser expects "Cluster :: problem1, problem2" lines —
+            # a bare comma list parses to ZERO clusters. One umbrella cluster
+            # under the main topic, each SEO cluster = one problem page.
+            "problem_clusters": f"{main_topic or 'Guide'} :: "
+                                + ", ".join(c["cluster_name"] for c in clusters),
         },
         "pillar_keyword": pillar,
         "clusters": clusters,
