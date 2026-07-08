@@ -1,40 +1,52 @@
 """
-analyze_with_claude.py  (v2 — ID-based ad grouping, cost-optimized)
---------------------------------------------------------------------
+analyze_with_claude.py  (v3 — campaigns + ad groups + landing pages + intent expansion)
+----------------------------------------------------------------------------------------
 STAGE 3 of the pipeline (runs after score_keywords.py).
 
-WHAT CHANGED vs v1 (and why v1 wasted money):
-  v1 sent 80 full clusters and asked Claude for targets + ad groups +
-  15-25 FAQs + 15-25 PAA + content briefs in ONE response. That needs
-  12-15K output tokens but max_tokens was 8000 → the JSON was truncated
-  mid-string on EVERY run ("Unterminated string"), the retry repeated the
-  identical call, and ~$1 died for zero output.
+UNIVERSAL: no industry is hardcoded anywhere. Business context comes from env
+vars, so the same tool serves a carpenter, a dentist, a SaaS, an e-commerce
+store — anything.
 
-  v2 principles:
-  - Python (score_keywords.py) already did intent/local/voice/scoring for free.
-  - Claude does ONLY what needs language understanding: semantic ad-group
-    theming with zero cannibalization.
-  - Claude returns keyword IDs, never the keyword text back → output is
-    ~1-2K tokens → truncation impossible, cost ~$0.03-0.05 per run on
-    Sonnet (20-30 runs per dollar).
-  - Content generation (FAQs, briefs, ad copy) is intentionally REMOVED —
-    that lives in the website-builder side, separately.
+WHAT THIS STAGE PRODUCES (per run, one Claude call):
+  1. CAMPAIGN STRUCTURE   — 1-3 campaigns grouping related ad groups by priority
+  2. AD GROUPS            — tightly-themed, ZERO cannibalization:
+                            every keyword in exactly one group (Python-enforced),
+                            + negative-keyword siloing so Google can never serve
+                            two of your groups against the same query
+  3. INTENT EXPANSION     — per group, NEW high-buying-intent keywords the
+                            Keyword Planner didn't return (cost/price/quote/
+                            near-me/location variants, problem phrases)
+  4. LANDING PAGE SPECS   — per campaign theme: service_name + 6 sub_services +
+                            industry label + URL slug — direct inputs for the
+                            Mode 1 landing engine (message match = Quality Score)
+  5. FILES: keyword_strategy.json, keyword_strategy.md,
+            google_ads_editor.csv (paste-ready, negatives included),
+            landing_pages.json (Mode 1 generator inputs)
+
+COST DESIGN (why v1 wasted $1/run and v3 doesn't):
+  Claude references keywords ONLY by numeric id — it never echoes keyword text.
+  Everything deterministic (dedupe, intent classify, scoring) happened in
+  Python for free in Stage 2.5. claude-sonnet-5 thinks by default and thinking
+  bills as output tokens, so effort is capped (CLAUDE_EFFORT, default medium).
 
 Required env vars:
     ANTHROPIC_API_KEY
-    BUSINESS_NAME, NICHE_DESCRIPTION, TARGET_LOCATION  (business context)
+    BUSINESS_NAME, NICHE_DESCRIPTION, TARGET_LOCATION
 
 Optional env vars:
     CLAUDE_MODEL     (default: claude-sonnet-5)
-    MAX_AD_GROUPS    (default: 7 — Claude may return FEWER if the data
-                      only supports fewer distinct themes; never more)
+    CLAUDE_EFFORT    (default: medium — low/medium/high)
+    MAX_AD_GROUPS    (default: 10 — Claude may return FEWER; count comes
+                      from the data, never padded)
 
 Input : scored_keywords.json
-Output: keyword_strategy.json, keyword_strategy.md
+Output: keyword_strategy.json, keyword_strategy.md,
+        google_ads_editor.csv, landing_pages.json
 """
 
 import os
 import sys
+import csv
 import json
 import re
 
@@ -46,7 +58,8 @@ except ImportError:
 
 INPUT_FILE = "scored_keywords.json"
 MODEL = os.environ.get("CLAUDE_MODEL", "claude-sonnet-5")
-MAX_AD_GROUPS = int(os.environ.get("MAX_AD_GROUPS", "7"))
+MAX_AD_GROUPS = int(os.environ.get("MAX_AD_GROUPS", "10"))
+EFFORT = os.environ.get("CLAUDE_EFFORT", "medium")
 
 BUSINESS_NAME = os.environ.get("BUSINESS_NAME", "").strip()
 NICHE_DESCRIPTION = os.environ.get("NICHE_DESCRIPTION", "").strip()
@@ -54,7 +67,7 @@ TARGET_LOCATION = os.environ.get("TARGET_LOCATION", "").strip()
 
 
 # ══════════════════════════════════════════════════════════════════════════
-# Robust JSON parsing (ported from the website-builder's battle-tested code)
+# Robust JSON parsing (4 repair passes — battle-tested in the website builder)
 # ══════════════════════════════════════════════════════════════════════════
 
 def _repair_control_chars(s):
@@ -126,23 +139,38 @@ def parse_json_robust(text):
 # Prompt
 # ══════════════════════════════════════════════════════════════════════════
 
-SYSTEM_PROMPT = f"""You are a senior Google Ads account strategist. You receive
-pre-scored keyword data (real Google Ads Keyword Planner numbers, already
-deduped, intent-classified and opportunity-scored by an upstream system).
+SYSTEM_PROMPT = f"""You are a senior Google Ads account strategist AND landing
+page architect. You receive pre-scored keyword data (real Google Ads Keyword
+Planner numbers — already deduped, intent-classified and opportunity-scored).
+You work for ANY business type — never assume an industry beyond the given
+business context.
 
-Your ONLY job: organise the commercially viable keywords into tightly-themed
-ad groups with ZERO cannibalization. You do NOT write ads, FAQs or content.
+Your job has FOUR outputs (one JSON object, nothing else, no markdown fences):
 
-Return ONLY a valid JSON object, no markdown fences, exactly this shape:
 {{
+  "campaigns": [
+    {{"name": "short campaign name", "priority": "high|medium|low"}}
+  ],
   "ad_groups": [
     {{
       "name": "short ad group name",
+      "campaign": "exact campaign name from above",
       "theme": "one sentence: the single user intent this group targets",
       "match_type": "phrase|exact",
       "priority": "high|medium|low",
       "keyword_ids": [1, 2, 3],
-      "negative_keywords": ["term", "term"]
+      "negative_keywords": ["term", "term"],
+      "intent_expansion_keywords": ["new keyword", "new keyword"]
+    }}
+  ],
+  "landing_pages": [
+    {{
+      "page_name": "short page name",
+      "url_slug": "kebab-case-slug",
+      "service_name": "the main service this page sells (title case)",
+      "industry": "2-4 word industry label for an AI page generator",
+      "sub_services": ["Six", "Title Case", "Sub Service", "Names", "Exactly", "Six"],
+      "ad_groups_covered": ["ad group name", "ad group name"]
     }}
   ],
   "excluded_ids": [4, 5],
@@ -150,22 +178,42 @@ Return ONLY a valid JSON object, no markdown fences, exactly this shape:
 }}
 
 HARD RULES:
-1. Between 1 and {MAX_AD_GROUPS} ad groups. The COUNT MUST COME FROM THE DATA:
-   one group per genuinely distinct commercial theme you can see in the
-   keywords. If the data only supports 3 themes, return 3 groups. NEVER pad
-   with thin groups, NEVER split one theme into two groups.
-2. ZERO CANNIBALIZATION:
+1. CAMPAIGNS: 1-3. Group related ad groups by service line and priority
+   (e.g. core money-makers vs adjacent/low-volume services). Every ad group
+   belongs to exactly one campaign.
+2. AD GROUPS: between 1 and {MAX_AD_GROUPS}. The COUNT MUST COME FROM THE
+   DATA: one group per genuinely distinct commercial theme visible in the
+   keywords. If the data only supports 4 themes, return 4. NEVER pad with
+   thin groups, NEVER split one theme into two.
+3. ZERO CANNIBALIZATION:
    - Every keyword id appears in AT MOST one group.
-   - Group themes must be mutually exclusive — a real search query should
-     match exactly one group's theme, never two.
+   - Themes must be mutually exclusive — a real search query should match
+     exactly one group, never two.
    - negative_keywords for each group = the distinctive core terms of the
-     OTHER groups (classic negative-keyword siloing), so Google cannot
-     serve two of your groups against the same query.
-3. EXCLUDE (put in excluded_ids) ids that are: informational/question
-   queries (they are SEO content material, not paid-ads material),
-   irrelevant to this business, or branded terms of competitors.
-4. Reference keywords ONLY by their numeric id. Never echo keyword text.
-5. Use the provided scores/volumes/competition to set priority: the group
+     OTHER groups (negative-keyword siloing). Be thorough — this is what
+     stops Google serving two of your groups against one query.
+4. INTENT EXPANSION (your unique value): for each ad group, add 5-12 NEW
+   keywords that real buyers of THIS business type in THIS location search
+   but which are missing from the data. Use: buying modifiers (cost, price,
+   quote, installation, best, hire), urgency, the target location appended
+   naturally, and problem-phrases in the searcher's own words. Rules:
+   - Must be NEW: never duplicate (or trivially reorder) any provided
+     keyword or another expansion, in this group or any other group.
+   - Must belong to THIS group's theme only (respect the siloing).
+   - Lowercase, realistic search queries — no marketing copy.
+5. LANDING PAGES: 3-6 pages. Each page covers 1+ ad groups whose themes fit
+   ONE selling proposition (message match = Quality Score). Fields feed an
+   AI landing-page generator directly:
+   - service_name: what the page sells, title case.
+   - sub_services: EXACTLY 6 title-case service names (become page sections).
+   - industry: short label steering the generator's design/copy tone.
+   - url_slug: kebab-case, keyword-rich, no location suffix.
+   Every ad group must be covered by exactly one landing page.
+6. EXCLUDE (excluded_ids): informational/question queries (SEO material,
+   not ads), competitor brand names, DIY-intent, and anything irrelevant
+   to this business.
+7. Reference provided keywords ONLY by numeric id. Never echo their text.
+8. Use volumes/competition/scores to set priorities: the campaign and group
    holding the best opportunity keywords is "high".
 """
 
@@ -184,7 +232,7 @@ def build_user_prompt(data):
     header = (
         f"BUSINESS: {BUSINESS_NAME or '(not provided)'}\n"
         f"NICHE: {NICHE_DESCRIPTION or '(infer from keywords)'}\n"
-        f"LOCATION: {TARGET_LOCATION or '(not local)'}\n\n"
+        f"TARGET LOCATION: {TARGET_LOCATION or '(not local)'}\n\n"
         f"KEYWORDS ({len(kept)} rows — format: id|keyword|volume|competition_index"
         f"|cpc_range|trend|intent|flags|opportunity_score):\n"
     )
@@ -195,9 +243,31 @@ def build_user_prompt(data):
 # Post-validation — Python enforces what the prompt requests
 # ══════════════════════════════════════════════════════════════════════════
 
+def _norm_sig(kw):
+    return tuple(sorted(set(re.findall(r"[a-z0-9]+", str(kw).lower()))))
+
+
 def validate_strategy(raw, kept):
     by_id = {k["id"]: k for k in kept}
+    provided_sigs = {_norm_sig(k["keyword"]) for k in kept}
+    for k in kept:
+        for v in k.get("variants", []):
+            provided_sigs.add(_norm_sig(v))
+
+    campaigns = []
+    seen_camp = set()
+    for c in raw.get("campaigns", [])[:3]:
+        name = str(c.get("name", "")).strip()[:60]
+        if name and name.lower() not in seen_camp:
+            campaigns.append({"name": name, "priority": c.get("priority", "medium")})
+            seen_camp.add(name.lower())
+    if not campaigns:
+        campaigns = [{"name": f"{BUSINESS_NAME or 'Main'} Campaign", "priority": "high"}]
+    default_campaign = campaigns[0]["name"]
+    camp_names = {c["name"] for c in campaigns}
+
     seen_ids = set()
+    seen_expansion_sigs = set()
     groups = []
 
     for g in raw.get("ad_groups", [])[:MAX_AD_GROUPS]:
@@ -213,12 +283,29 @@ def validate_strategy(raw, kept):
         if not ids:
             continue
         kws = [by_id[i] for i in ids]
+
+        # Expansion keywords: must be genuinely NEW and unique across groups
+        expansions = []
+        for e in g.get("intent_expansion_keywords", []):
+            e = str(e).strip().lower()
+            sig = _norm_sig(e)
+            if not e or not sig or sig in provided_sigs or sig in seen_expansion_sigs:
+                continue
+            seen_expansion_sigs.add(sig)
+            expansions.append(e)
+
+        camp = str(g.get("campaign", "")).strip()
+        if camp not in camp_names:
+            camp = default_campaign
+
         groups.append({
             "name": str(g.get("name", "Ad Group")).strip()[:60],
+            "campaign": camp,
             "theme": str(g.get("theme", "")).strip(),
             "match_type": g.get("match_type", "phrase"),
             "priority": g.get("priority", "medium"),
             "negative_keywords": [str(n).strip().lower() for n in g.get("negative_keywords", []) if str(n).strip()],
+            "intent_expansion_keywords": expansions,
             "keywords": [
                 {
                     "keyword": k["keyword"],
@@ -239,6 +326,27 @@ def validate_strategy(raw, kept):
             "avg_score": round(sum(k.get("score", 0) for k in kws) / len(kws), 1),
         })
 
+    group_names = {g["name"] for g in groups}
+
+    # Landing pages: validate coverage, force exactly 6 sub_services
+    pages = []
+    covered = set()
+    for p in raw.get("landing_pages", [])[:6]:
+        ag = [a for a in p.get("ad_groups_covered", []) if a in group_names]
+        subs = [str(s).strip() for s in p.get("sub_services", []) if str(s).strip()][:6]
+        if not p.get("service_name") or not subs:
+            continue
+        covered.update(ag)
+        pages.append({
+            "page_name": str(p.get("page_name", p.get("service_name", ""))).strip()[:80],
+            "url_slug": re.sub(r"[^a-z0-9-]", "", str(p.get("url_slug", "")).strip().lower().replace(" ", "-"))[:60],
+            "service_name": str(p.get("service_name", "")).strip(),
+            "industry": str(p.get("industry", NICHE_DESCRIPTION[:40])).strip(),
+            "sub_services": subs,
+            "ad_groups_covered": ag,
+        })
+    uncovered_groups = sorted(group_names - covered)
+
     excluded = set()
     for i in raw.get("excluded_ids", []):
         try:
@@ -248,18 +356,58 @@ def validate_strategy(raw, kept):
     unassigned = [by_id[i]["keyword"] for i in by_id
                   if i not in seen_ids and i not in excluded]
 
-    # Cross-group overlap warning (theme words shared between group names)
-    warn = []
-    for a in range(len(groups)):
-        for b in range(a + 1, len(groups)):
-            ta = set(re.findall(r"[a-z0-9]+", groups[a]["name"].lower()))
-            tb = set(re.findall(r"[a-z0-9]+", groups[b]["name"].lower()))
-            shared = ta & tb - {"dubai", "repair", "service", "services", "custom", "ad", "group"}
-            if len(shared) >= 2:
-                warn.append(f"groups '{groups[a]['name']}' and '{groups[b]['name']}' share theme words {sorted(shared)}")
+    return campaigns, groups, pages, uncovered_groups, sorted(excluded), unassigned
 
-    return groups, sorted(excluded), unassigned, warn
 
+# ══════════════════════════════════════════════════════════════════════════
+# Output writers
+# ══════════════════════════════════════════════════════════════════════════
+
+def write_ads_editor_csv(groups):
+    """Google Ads Editor paste-ready CSV — keywords, intent expansions, AND
+    ad-group-level negatives (the anti-cannibalization layer)."""
+    with open("google_ads_editor.csv", "w", encoding="utf-8", newline="") as f:
+        w = csv.writer(f)
+        w.writerow(["Campaign", "Ad Group", "Keyword", "Criterion Type"])
+        ctype = {"phrase": "Phrase", "exact": "Exact"}
+        for g in groups:
+            mt = ctype.get(g["match_type"], "Phrase")
+            for k in g["keywords"]:
+                w.writerow([g["campaign"], g["name"], k["keyword"], mt])
+            for e in g["intent_expansion_keywords"]:
+                w.writerow([g["campaign"], g["name"], e, "Phrase"])
+            for n in g["negative_keywords"]:
+                w.writerow([g["campaign"], g["name"], n, "Negative Phrase"])
+
+
+def write_landing_pages_json(pages, groups):
+    """Mode 1 landing-engine inputs — one entry per page, ready to feed the
+    website builder (service_name → main_service, sub_services list, industry)."""
+    by_name = {g["name"]: g for g in groups}
+    out = []
+    for p in pages:
+        kw_count = sum(len(by_name[a]["keywords"]) for a in p["ad_groups_covered"] if a in by_name)
+        vol = sum(by_name[a]["total_volume"] for a in p["ad_groups_covered"] if a in by_name)
+        out.append({
+            **p,
+            "keywords_covered": kw_count,
+            "monthly_volume_covered": vol,
+            "mode1_config": {
+                "main_service": p["service_name"],
+                "sub_services": ", ".join(p["sub_services"]),
+                "industry": p["industry"],
+            },
+            "google_ads_tracking_tip": "Final URL suffix: kw={keyword} — enables the "
+                                       "landing page's Dynamic Keyword Insertion (DKI).",
+        })
+    with open("landing_pages.json", "w", encoding="utf-8") as f:
+        json.dump(out, f, indent=2, ensure_ascii=False)
+    return out
+
+
+# ══════════════════════════════════════════════════════════════════════════
+# Main
+# ══════════════════════════════════════════════════════════════════════════
 
 def main():
     if not os.environ.get("ANTHROPIC_API_KEY"):
@@ -276,25 +424,35 @@ def main():
     user_prompt, kept = build_user_prompt(data)
     est_in = len(SYSTEM_PROMPT + user_prompt) // 4
     print(f"Sending {len(kept)} scored keywords to {MODEL} "
-          f"(~{est_in} input tokens, expected cost well under $0.10)...")
+          f"(effort={EFFORT}, ~{est_in} input tokens)...")
 
     client = anthropic.Anthropic()
     raw = None
+    text = ""
     last_err = ""
     for attempt in range(2):
         _prompt = user_prompt
         if attempt == 1:
             _prompt += ("\n\nIMPORTANT: your previous response was not valid JSON. "
                         "Return ONLY the JSON object, nothing else.")
-        response = client.messages.create(
+        # claude-sonnet-5: no temperature, no prefill; adaptive thinking is on
+        # by default and bills as output tokens — effort caps that spend.
+        # max_tokens generous (thinking + ids + expansions + landing pages);
+        # streaming required by the SDK for outputs this large.
+        with client.messages.stream(
             model=MODEL,
-            max_tokens=4000,          # output is IDs + short strings — tiny
-            temperature=0.2,          # deterministic grouping, not creativity
+            max_tokens=24000,
+            output_config={"effort": EFFORT},
             system=SYSTEM_PROMPT,
-            messages=[{"role": "user", "content": _prompt},
-                      {"role": "assistant", "content": "{"}],  # prefill forces raw JSON
-        )
-        text = "{" + "".join(b.text for b in response.content if b.type == "text")
+            messages=[{"role": "user", "content": _prompt}],
+        ) as stream:
+            response = stream.get_final_message()
+        text = "".join(b.text for b in response.content if b.type == "text")
+        if not text.strip():
+            _types = [b.type for b in response.content]
+            print(f"⚠️ Attempt {attempt + 1}: empty text (blocks={_types}, "
+                  f"stop_reason={response.stop_reason}); retrying...")
+            continue
         try:
             raw = parse_json_robust(text)
             break
@@ -309,9 +467,9 @@ def main():
         print(f"❌ Could not get valid JSON: {last_err}. Raw saved for debugging.")
         sys.exit(1)
 
-    groups, excluded_ids, unassigned, warnings = validate_strategy(raw, kept)
+    campaigns, groups, pages, uncovered, excluded_ids, unassigned = validate_strategy(raw, kept)
 
-    # SEO material = what Claude excluded + what Python flagged as question/info
+    # SEO material = Claude's exclusions + Python-flagged question/informational
     all_kw = data["keywords"]
     seo_content = [k for k in all_kw
                    if k.get("intent") in ("question", "informational")
@@ -320,15 +478,19 @@ def main():
     local_kws = [k["keyword"] for k in all_kw
                  if "local" in k.get("flags", []) and k.get("kept_for_ai")]
 
+    total_expansions = sum(len(g["intent_expansion_keywords"]) for g in groups)
+
     strategy = {
         "business": {"name": BUSINESS_NAME, "niche": NICHE_DESCRIPTION,
                      "location": TARGET_LOCATION},
         "model_used": MODEL,
+        "campaigns": campaigns,
         "ad_groups": groups,
+        "landing_pages": pages,
+        "uncovered_ad_groups": uncovered,
         "notes": raw.get("notes", ""),
         "excluded_keyword_ids": excluded_ids,
         "unassigned_keywords": unassigned,
-        "cannibalization_warnings": warnings,
         "seo_content_keywords": [
             {"keyword": k["keyword"], "volume": k["avg_monthly_searches"],
              "intent": k.get("intent", ""), "flags": k.get("flags", [])}
@@ -336,7 +498,7 @@ def main():
         ],
         "voice_search_questions": voice_qs,
         "local_intent_keywords": local_kws,
-        # ── legacy shape so generate_reports.py keeps working ──
+        # legacy shape so generate_reports.py keeps working
         "google_ads_targets": [
             {
                 "cluster_topic": g["name"],
@@ -358,28 +520,42 @@ def main():
     with open("keyword_strategy.json", "w", encoding="utf-8") as f:
         json.dump(strategy, f, indent=2, ensure_ascii=False)
 
+    write_ads_editor_csv(groups)
+    lp = write_landing_pages_json(pages, groups)
+
     # ── Markdown summary ──
-    md = [f"# Google Ads Keyword Strategy — {BUSINESS_NAME or 'Untitled'}\n"]
+    md = [f"# Google Ads Strategy — {BUSINESS_NAME or 'Untitled'}\n"]
     if NICHE_DESCRIPTION:
         md.append(f"*{NICHE_DESCRIPTION}* — {TARGET_LOCATION}\n")
-    md.append(f"**{len(groups)} ad groups** (data-driven count, max {MAX_AD_GROUPS})\n")
-    for g in groups:
-        md.append(f"## {g['name']}  `{g['priority']}` `{g['match_type']}`")
-        md.append(f"_{g['theme']}_")
-        md.append(f"- Total volume: {g['total_volume']}/mo | Avg opportunity score: {g['avg_score']}")
-        md.append(f"- Keywords: " + ", ".join(k["keyword"] for k in g["keywords"]))
-        if g["negative_keywords"]:
-            md.append(f"- Negative keywords (anti-cannibalization): " + ", ".join(g["negative_keywords"]))
+    md.append(f"**{len(campaigns)} campaigns | {len(groups)} ad groups | "
+              f"{sum(len(g['keywords']) for g in groups)} keywords + "
+              f"{total_expansions} intent expansions | {len(pages)} landing pages**\n")
+    for c in campaigns:
+        md.append(f"## 📣 Campaign: {c['name']}  `{c['priority']}`")
+        for g in [g for g in groups if g["campaign"] == c["name"]]:
+            md.append(f"### {g['name']}  `{g['priority']}` `{g['match_type']}`")
+            md.append(f"_{g['theme']}_")
+            md.append(f"- Volume: {g['total_volume']}/mo | Avg score: {g['avg_score']} | {len(g['keywords'])} keywords")
+            md.append(f"- Keywords: " + ", ".join(k["keyword"] for k in g["keywords"][:15])
+                      + (f" … +{len(g['keywords'])-15} more" if len(g["keywords"]) > 15 else ""))
+            if g["intent_expansion_keywords"]:
+                md.append(f"- 🆕 Intent expansions: " + ", ".join(g["intent_expansion_keywords"]))
+            if g["negative_keywords"]:
+                md.append(f"- 🚫 Negatives (anti-cannibalization): " + ", ".join(g["negative_keywords"]))
+            md.append("")
+    md.append("## 🖥️ Landing Pages (Mode 1 generator inputs)")
+    for p in lp:
+        md.append(f"### {p['page_name']}  →  /{p['url_slug']}/")
+        md.append(f"- service_name: **{p['service_name']}** | industry: {p['industry']}")
+        md.append(f"- sub_services: " + ", ".join(p["sub_services"]))
+        md.append(f"- Covers: {', '.join(p['ad_groups_covered'])} "
+                  f"({p['keywords_covered']} keywords, {p['monthly_volume_covered']}/mo)")
         md.append("")
     if strategy["notes"]:
         md.append(f"**Strategy notes:** {strategy['notes']}\n")
     if voice_qs:
         md.append("## Voice-search / question keywords (SEO content, not ads)")
         md.extend(f"- {q}" for q in voice_qs[:20])
-        md.append("")
-    if warnings:
-        md.append("## ⚠️ Possible theme overlap")
-        md.extend(f"- {w}" for w in warnings)
     with open("keyword_strategy.md", "w", encoding="utf-8") as f:
         f.write("\n".join(md))
 
@@ -388,9 +564,13 @@ def main():
         cost = usage.input_tokens * 3 / 1e6 + usage.output_tokens * 15 / 1e6
         print(f"   Tokens: {usage.input_tokens} in / {usage.output_tokens} out "
               f"≈ ${cost:.3f} this run")
-    print(f"✅ {len(groups)} ad groups | {len(excluded_ids)} excluded "
-          f"| {len(unassigned)} unassigned | {len(warnings)} overlap warnings")
-    print("✅ Saved keyword_strategy.json and keyword_strategy.md")
+    print(f"✅ {len(campaigns)} campaigns | {len(groups)} ad groups | "
+          f"{total_expansions} intent expansions | {len(pages)} landing pages "
+          f"| {len(excluded_ids)} excluded | {len(unassigned)} unassigned")
+    if uncovered:
+        print(f"⚠️ Ad groups not covered by any landing page: {uncovered}")
+    print("✅ Saved: keyword_strategy.json, keyword_strategy.md, "
+          "google_ads_editor.csv, landing_pages.json")
 
 
 if __name__ == "__main__":

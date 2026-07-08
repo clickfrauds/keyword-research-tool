@@ -63,14 +63,15 @@ jobs:
       - name: Stage 2.5 - Score keywords (Python data refinery — free, no API)
         env:
           TARGET_LOCATION: ${{ github.event.inputs.target_location }}
-          MAX_KEYWORDS_FOR_AI: "150"
+          MAX_KEYWORDS_FOR_AI: "400"
         run: python scripts/score_keywords.py
 
-      - name: Stage 3 - Claude ad grouping (ID-based, ~$0.03-0.05 per run)
+      - name: Stage 3 - Claude campaigns + ad groups + landing pages (~$0.30/run)
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           CLAUDE_MODEL: claude-sonnet-5
-          MAX_AD_GROUPS: "7"
+          CLAUDE_EFFORT: "medium"
+          MAX_AD_GROUPS: "10"
           BUSINESS_NAME: ${{ github.event.inputs.business_name }}
           NICHE_DESCRIPTION: ${{ github.event.inputs.niche_description }}
           TARGET_LOCATION: ${{ github.event.inputs.target_location }}
@@ -103,5 +104,7 @@ jobs:
             scored_keywords.json
             keyword_strategy.json
             keyword_strategy.md
+            google_ads_editor.csv
+            landing_pages.json
             keyword_strategy_report.html
             keyword_strategy_targets.csv

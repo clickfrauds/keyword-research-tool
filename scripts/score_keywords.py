@@ -44,7 +44,7 @@ INPUT_JSON = "keyword_data_output.json"
 INPUT_TXT = "keyword_data_output.txt"
 OUTPUT_FILE = "scored_keywords.json"
 
-MAX_FOR_AI = int(os.environ.get("MAX_KEYWORDS_FOR_AI", "150"))
+MAX_FOR_AI = int(os.environ.get("MAX_KEYWORDS_FOR_AI", "400"))
 TARGET_LOCATION = os.environ.get("TARGET_LOCATION", "").strip().lower()
 
 # ── Intent vocabularies (generic — work across niches) ──────────────────────
