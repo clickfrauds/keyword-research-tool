@@ -109,6 +109,7 @@ def render_ads_targets(targets):
 
 
 def render_ad_groups(groups):
+    """Legacy v1/v2 shape only (keywords = list of strings)."""
     if not groups:
         return "<p class='empty'>No ad groups generated.</p>"
     cards = []
@@ -124,6 +125,91 @@ def render_ad_groups(groups):
           </div>
         </div>""")
     return "\n".join(cards)
+
+
+def render_v3_campaigns(strategy):
+    """v3 shape: campaigns → ad groups with rich keyword dicts, expansions,
+    negative-keyword siloing."""
+    campaigns = strategy.get("campaigns", [])
+    groups = strategy.get("ad_groups", [])
+    blocks = []
+    for c in campaigns:
+        cgroups = [g for g in groups if g.get("campaign") == c.get("name")]
+        cards = []
+        for g in cgroups:
+            kws = g.get("keywords") or []
+            kw_html = ", ".join(
+                f"{esc(k.get('keyword'))} <span class='kw-vol'>({k.get('avg_monthly_searches', 0)})</span>"
+                for k in kws
+            )
+            exp = g.get("intent_expansion_keywords") or []
+            exp_html = ""
+            if exp:
+                chips = "".join(f'<span class="chip">{esc(e)}</span>' for e in exp)
+                exp_html = f"<div class='meta-line'>🆕 Intent expansions:</div><div class='chip-wrap'>{chips}</div>"
+            neg = g.get("negative_keywords") or []
+            neg_html = ""
+            if neg:
+                neg_html = ("<div class='meta-line neg-line'>🚫 Negatives (anti-cannibalization): "
+                            + esc(", ".join(neg)) + "</div>")
+            cards.append(f"""
+        <div class="card">
+          <div class="card-head">
+            <h3>{esc(g.get('name'))}</h3>
+            <div class="badges">{priority_badge(g.get('priority'))}<span class="badge intent-badge">{esc((g.get('match_type') or 'phrase').upper())}</span></div>
+          </div>
+          <p class="reasoning">{esc(g.get('theme'))}</p>
+          <div class="meta-line">Volume: <strong>{g.get('total_volume', 0)}/mo</strong> &middot; Avg score: <strong>{g.get('avg_score', 0)}</strong> &middot; {len(kws)} keywords</div>
+          <div class="meta-line">Keywords: {kw_html}</div>
+          {exp_html}
+          {neg_html}
+        </div>""")
+        blocks.append(f"""
+    <div class="campaign-block">
+      <div class="campaign-head">📣 Campaign: {esc(c.get('name'))} {priority_badge(c.get('priority'))}</div>
+      {''.join(cards)}
+    </div>""")
+    return "\n".join(blocks) or "<p class='empty'>No campaigns generated.</p>"
+
+
+def render_negatives_for_existing(strategy):
+    nfe = strategy.get("negatives_for_existing_groups") or {}
+    if not nfe:
+        return ""
+    rows = "".join(
+        f"<div class='card'><h3>{esc(g)}</h3><div class='meta-line neg-line'>🚫 Add as negatives: {esc(', '.join(terms))}</div></div>"
+        for g, terms in nfe.items()
+    )
+    return f"""
+  <section>
+    <h2>Negatives for your EXISTING ad groups (2-way siloing)</h2>
+    <p class="empty">Add these as negative keywords to your live ad groups so they can't steal the new group's traffic.</p>
+    {rows}
+  </section>"""
+
+
+def render_landing_pages(pages):
+    if not pages:
+        return ""
+    cards = []
+    for p in pages:
+        subs = ", ".join(esc(s) for s in p.get("sub_services", []))
+        covers = ", ".join(esc(a) for a in p.get("ad_groups_covered", []))
+        cards.append(f"""
+        <div class="card">
+          <div class="card-head">
+            <h3>{esc(p.get('page_name'))}</h3>
+            <span class="badge intent-badge">/{esc(p.get('url_slug'))}/</span>
+          </div>
+          <div class="meta-line">Main service: <strong>{esc(p.get('service_name'))}</strong> &middot; Industry: {esc(p.get('industry'))}</div>
+          <div class="meta-line">Sub-services (page sections): {subs}</div>
+          <div class="meta-line">Covers ad groups: {covers}</div>
+        </div>""")
+    return f"""
+  <section>
+    <h2>Landing Pages (website generator inputs)</h2>
+    {''.join(cards)}
+  </section>"""
 
 
 def render_faqs(faqs):
@@ -163,12 +249,22 @@ def render_content_briefs(briefs):
 
 
 def stat_bar(strategy, clusters_data):
-    stats = [
-        ("Ad Targets", len(strategy.get("google_ads_targets", []))),
-        ("Ad Groups", len(strategy.get("ad_groups", []))),
-        ("FAQs", len(strategy.get("faqs", []))),
-        ("Content Briefs", len(strategy.get("content_briefs", []))),
-    ]
+    if strategy.get("campaigns"):  # v3
+        groups = strategy.get("ad_groups", [])
+        stats = [
+            ("Campaigns", len(strategy.get("campaigns", []))),
+            ("Ad Groups", len(groups)),
+            ("Keywords", sum(len(g.get("keywords") or []) for g in groups)),
+            ("Intent Expansions", sum(len(g.get("intent_expansion_keywords") or []) for g in groups)),
+            ("Landing Pages", len(strategy.get("landing_pages", []))),
+        ]
+    else:  # legacy
+        stats = [
+            ("Ad Targets", len(strategy.get("google_ads_targets", []))),
+            ("Ad Groups", len(strategy.get("ad_groups", []))),
+            ("FAQs", len(strategy.get("faqs", []))),
+            ("Content Briefs", len(strategy.get("content_briefs", []))),
+        ]
     if clusters_data:
         stats.insert(0, ("Keywords Analyzed", clusters_data.get("total_deduped_keywords", "—")))
     items = "".join(
@@ -180,6 +276,54 @@ def stat_bar(strategy, clusters_data):
 
 def high_priority_count(targets):
     return sum(1 for t in targets if (t.get("priority") or "").lower() == "high")
+
+
+def main_sections(strategy):
+    """v3 strategies render campaigns + landing pages; legacy strategies keep
+    the old sections. Empty sections are hidden instead of showing 'No X'."""
+    if strategy.get("campaigns"):  # ── v3 ──
+        parts = [f"""
+  <section>
+    <h2>Campaign &amp; Ad Group Structure</h2>
+    {render_v3_campaigns(strategy)}
+  </section>"""]
+        parts.append(render_negatives_for_existing(strategy))
+        parts.append(render_landing_pages(strategy.get("landing_pages", [])))
+        voice = strategy.get("voice_search_questions") or []
+        if voice:
+            chips = "".join(f'<span class="chip">{esc(q)}</span>' for q in voice[:20])
+            parts.append(f"""
+  <section>
+    <h2>Voice-search / question keywords (SEO content, not ads)</h2>
+    <div class="chip-wrap">{chips}</div>
+  </section>""")
+        notes = strategy.get("notes")
+        if notes:
+            parts.append(f"""
+  <section>
+    <h2>Strategy Notes</h2>
+    <p class="reasoning">{esc(notes)}</p>
+  </section>""")
+        return "\n".join(p for p in parts if p)
+
+    # ── legacy ──
+    parts = [f"""
+  <section>
+    <h2>Google Ads Target Keywords</h2>
+    {render_ads_targets(strategy.get("google_ads_targets", []))}
+  </section>
+
+  <section>
+    <h2>Suggested Ad Groups</h2>
+    {render_ad_groups(strategy.get("ad_groups", []))}
+  </section>"""]
+    if strategy.get("faqs"):
+        parts.append(f"<section><h2>Frequently Asked Questions</h2>{render_faqs(strategy['faqs'])}</section>")
+    if strategy.get("people_also_ask"):
+        parts.append(f"<section><h2>People Also Ask</h2>{render_paa(strategy['people_also_ask'])}</section>")
+    if strategy.get("content_briefs"):
+        parts.append(f"<section><h2>Content Briefs</h2>{render_content_briefs(strategy['content_briefs'])}</section>")
+    return "\n".join(parts)
 
 
 # ============================================================
@@ -305,6 +449,10 @@ def render_html(strategy, clusters_data):
   .chip-wrap {{ display: flex; flex-wrap: wrap; gap: 7px; }}
   .chip {{ background: var(--accent-soft); color: var(--accent); font-size: 12px; padding: 5px 11px; border-radius: 999px; }}
   .empty {{ color: var(--muted); font-style: italic; font-size: 14px; }}
+  .campaign-block {{ margin-bottom: 26px; }}
+  .campaign-head {{ font-family: var(--mono); font-size: 13px; font-weight: 700; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }}
+  .kw-vol {{ color: var(--muted); font-size: 11px; }}
+  .neg-line {{ color: #9c2b1f; }}
   footer {{ text-align: center; font-family: var(--mono); color: var(--muted); font-size: 11px; margin-top: 56px; }}
   @media (max-width: 480px) {{
     .stamp {{ position: static; display: inline-block; margin-top: 12px; transform: rotate(-1deg); }}
@@ -324,30 +472,7 @@ def render_html(strategy, clusters_data):
 
   {stat_bar(strategy, clusters_data)}
 
-  <section>
-    <h2>Google Ads Target Keywords</h2>
-    {render_ads_targets(targets)}
-  </section>
-
-  <section>
-    <h2>Suggested Ad Groups</h2>
-    {render_ad_groups(strategy.get("ad_groups", []))}
-  </section>
-
-  <section>
-    <h2>Frequently Asked Questions</h2>
-    {render_faqs(strategy.get("faqs", []))}
-  </section>
-
-  <section>
-    <h2>People Also Ask</h2>
-    {render_paa(strategy.get("people_also_ask", []))}
-  </section>
-
-  <section>
-    <h2>Content Briefs</h2>
-    {render_content_briefs(strategy.get("content_briefs", []))}
-  </section>
+  {main_sections(strategy)}
 
   <footer>SEOblogy &middot; Keyword Strategy Report</footer>
 
