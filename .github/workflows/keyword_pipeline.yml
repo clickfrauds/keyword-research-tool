@@ -91,6 +91,15 @@ jobs:
           TARGET_LOCATION: ${{ github.event.inputs.target_location }}
         run: python scripts/analyze_with_claude.py
 
+      - name: Stage 3.6 - Generate negative-guard Google Ads Script (~$0.02)
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          CLAUDE_MODEL: claude-sonnet-5
+          BUSINESS_NAME: ${{ github.event.inputs.business_name }}
+          NICHE_DESCRIPTION: ${{ github.event.inputs.niche_description }}
+          TARGET_LOCATION: ${{ github.event.inputs.target_location }}
+        run: python scripts/generate_ads_script.py
+
       - name: Stage 4 - Generate client-ready HTML + CSV reports
         env:
           BUSINESS_NAME: ${{ github.event.inputs.business_name }}
@@ -120,5 +129,6 @@ jobs:
             keyword_strategy.md
             google_ads_editor.csv
             landing_pages.json
+            negative_guard_script.js
             keyword_strategy_report.html
             keyword_strategy_targets.csv
