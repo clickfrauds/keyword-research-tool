@@ -101,7 +101,17 @@
 
     <label for="seed_keywords">Seed keywords</label>
     <textarea id="seed_keywords" name="seed_keywords" required placeholder="ac repair dubai, ac not cooling, ac service dubai"></textarea>
-    <div class="hint">Comma-separated. 3–6 seed terms works well.</div>
+    <div class="hint">Comma-separated. 3–6 seed terms works well. Tip: include your city in a few seeds for local data.</div>
+
+    <label for="existing_campaign">Existing campaign name <span style="opacity:.6">(optional — for accounts already running)</span></label>
+    <input id="existing_campaign" name="existing_campaign" placeholder="e.g. Plumbing Services Dubai">
+
+    <label for="existing_ad_groups">Existing ad groups <span style="opacity:.6">(optional, comma-separated)</span></label>
+    <textarea id="existing_ad_groups" name="existing_ad_groups" placeholder="Emergency Plumbing, Drain Cleaning, Water Heater Repair"></textarea>
+    <div class="hint">Fill both to add NEW ad groups into a live account — new groups slot into this campaign with 2-way negative siloing against these groups.</div>
+
+    <label for="max_ad_groups">Max new ad groups <span style="opacity:.6">(optional)</span></label>
+    <input id="max_ad_groups" name="max_ad_groups" type="number" min="1" max="10" placeholder="10 (use 1-2 for a small niche service)">
 
     <button type="submit" id="submit-btn">Generate Report</button>
   </form>

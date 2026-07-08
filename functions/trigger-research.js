@@ -80,6 +80,10 @@ export async function onRequestPost(context) {
         niche_description: String(niche_description).slice(0, 500),
         target_location: String(target_location).slice(0, 200),
         seed_keywords: String(seed_keywords).slice(0, 1000),
+        // Existing Account Mode (optional) — incremental ad groups into a live campaign
+        existing_campaign: String(body.existing_campaign || "").slice(0, 200),
+        existing_ad_groups: String(body.existing_ad_groups || "").slice(0, 1000),
+        max_ad_groups: String(body.max_ad_groups || "").slice(0, 3),
         request_id,
       },
     }),
