@@ -55,7 +55,7 @@ def parse_input(path):
 
 
 def normalize_tokens(keyword):
-    tokens = re.findall(r"[a-z0-9]+", keyword.lower())
+    tokens = re.findall(r"[^\W_]+", keyword.lower(), re.UNICODE)
     return [t for t in tokens if t not in GENERIC_STOPWORDS]
 
 

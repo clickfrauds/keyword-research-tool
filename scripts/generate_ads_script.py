@@ -83,7 +83,8 @@ def robust_json(text):
 
 
 def tokens_of(s):
-    return re.findall(r"[a-z0-9]+", str(s).lower())
+    # Unicode-aware: Arabic/any-script tokens survive (old regex was ASCII-only)
+    return re.findall(r"[^\W_]+", str(s).lower(), re.UNICODE)
 
 
 def build_lists(strategy):
@@ -129,10 +130,16 @@ Return ONLY JSON:
   "extra_actions": ["..."]
 }}
 
+LANGUAGE RULE (critical): detect every language present in the bid keywords
+above (English, Arabic, Hindi/Urdu transliteration, etc.) AND the languages
+customers commonly search in for this market. EVERY list below must cover ALL
+of those languages — e.g. for a UAE/Saudi market include Arabic script terms
+and Hinglish/Urdu transliterations alongside English.
+
 Rules:
 - forbidden_locations: cities/regions/countries NEAR the target location that
   the business does NOT serve (competing emirates/cities, neighbor countries),
-  including common misspellings and local-language spellings if relevant.
+  including common misspellings and local-language spellings.
   NEVER include the target location itself or its own areas/neighborhoods.
 - forbidden_words: 40-80 terms that signal WRONG intent for this specific
   business: adjacent trades it does NOT do, DIY/informational intent (how to,
@@ -226,14 +233,34 @@ function main() {
 
   var ACTIONS = %%ACTIONS%%;
 
-  // ============ MATCHERS ============
+  // ============ MATCHERS (Unicode-aware — Arabic/Hindi/any script) ============
   function esc(w) { return w.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); }
 
-  // whole-word/phrase boundary match — never inside another word
+  // JS \W treats Arabic letters as non-word chars, so a plain \W boundary
+  // would match INSIDE Arabic words. Use Unicode letter/number classes when
+  // the runtime supports them (Google Ads Scripts V8 does); fall back to \W.
+  var U_BOUND = "[^\\p{L}\\p{N}_]";
+  var UNICODE_OK = true;
+  try { new RegExp(U_BOUND, "u"); } catch (e) { UNICODE_OK = false; }
+
+  function boundaryRegex(word) {
+    if (UNICODE_OK)
+      return new RegExp("(^|" + U_BOUND + ")" + esc(word) + "($|" + U_BOUND + ")", "iu");
+    return new RegExp("(^|[\\s\\W_])" + esc(word) + "([\\s\\W_]|$)", "i");
+  }
+
+  function splitTokens(text) {
+    if (UNICODE_OK) {
+      var m = text.match(new RegExp("[\\p{L}\\p{N}_]+", "gu"));
+      return m || [];
+    }
+    return text.split(/[\s\W_]+/);
+  }
+
+  // whole-word/phrase boundary match — never inside another word (any script)
   function matchStrict(text, list) {
     for (var i = 0; i < list.length; i++) {
-      var rx = new RegExp("(^|[\\s\\W_])" + esc(list[i]) + "([\\s\\W_]|$)", "i");
-      if (rx.test(text)) return list[i];
+      if (boundaryRegex(list[i]).test(text)) return list[i];
     }
     return null;
   }
@@ -262,7 +289,7 @@ function main() {
   function matchFuzzy(text, list) {
     var hit = matchStrict(text, list);
     if (hit) return hit;
-    var toks = text.split(/[\s\W_]+/);
+    var toks = splitTokens(text);
     for (var i = 0; i < list.length; i++) {
       var phrase = list[i];
       if (phrase.indexOf(" ") !== -1 || phrase.length < 5) continue; // fuzzy = single words only
@@ -377,7 +404,8 @@ def js_list(items, per_line=6):
     items = sorted(set(str(i).lower().strip() for i in items if str(i).strip()))
     lines = []
     for i in range(0, len(items), per_line):
-        lines.append(", ".join(json.dumps(x) for x in items[i:i + per_line]))
+        # ensure_ascii=False: Arabic/Hindi entries stay readable (not \uXXXX)
+        lines.append(", ".join(json.dumps(x, ensure_ascii=False) for x in items[i:i + per_line]))
     return "[\n    " + ",\n    ".join(lines) + "\n  ]"
 
 

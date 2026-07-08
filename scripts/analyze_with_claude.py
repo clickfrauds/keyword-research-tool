@@ -280,7 +280,7 @@ def build_user_prompt(data):
 # ══════════════════════════════════════════════════════════════════════════
 
 def _norm_sig(kw):
-    return tuple(sorted(set(re.findall(r"[a-z0-9]+", str(kw).lower()))))
+    return tuple(sorted(set(re.findall(r"[^\W_]+", str(kw).lower(), re.UNICODE))))
 
 
 def validate_strategy(raw, kept):

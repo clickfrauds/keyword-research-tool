@@ -83,7 +83,10 @@ COMP_FALLBACK_INDEX = {"LOW": 20, "MEDIUM": 50, "HIGH": 80, "UNKNOWN": 50}
 
 
 def tokens_of(kw):
-    return re.findall(r"[a-z0-9]+", kw.lower())
+    # Unicode-aware: Arabic/Hindi/Urdu/any-script keywords tokenize correctly.
+    # The old [a-z0-9]+ regex returned [] for non-Latin keywords, which made
+    # dedupe() silently DROP every Arabic keyword (empty signature).
+    return re.findall(r"[^\W_]+", str(kw).lower(), re.UNICODE)
 
 
 def classify(kw):
