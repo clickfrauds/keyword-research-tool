@@ -60,10 +60,17 @@ jobs:
       - name: Stage 2 - Filter and cluster keywords (niche-agnostic)
         run: python scripts/filter_and_cluster.py keyword_data_output.txt
 
-      - name: Stage 3 - Claude strategy analysis (business context passed per run)
+      - name: Stage 2.5 - Score keywords (Python data refinery — free, no API)
+        env:
+          TARGET_LOCATION: ${{ github.event.inputs.target_location }}
+          MAX_KEYWORDS_FOR_AI: "150"
+        run: python scripts/score_keywords.py
+
+      - name: Stage 3 - Claude ad grouping (ID-based, ~$0.03-0.05 per run)
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           CLAUDE_MODEL: claude-sonnet-5
+          MAX_AD_GROUPS: "7"
           BUSINESS_NAME: ${{ github.event.inputs.business_name }}
           NICHE_DESCRIPTION: ${{ github.event.inputs.niche_description }}
           TARGET_LOCATION: ${{ github.event.inputs.target_location }}
@@ -91,7 +98,9 @@ jobs:
           name: keyword-strategy-${{ github.event.inputs.business_name }}-${{ github.run_number }}
           path: |
             keyword_data_output.txt
+            keyword_data_output.json
             clustered_keywords.json
+            scored_keywords.json
             keyword_strategy.json
             keyword_strategy.md
             keyword_strategy_report.html

@@ -388,6 +388,12 @@ def write_csv(strategy):
 # ============================================================
 
 def main():
+    # Graceful failure instead of a traceback when Stage 3 didn't produce output
+    if not os.path.exists(STRATEGY_FILE):
+        print(f"❌ {STRATEGY_FILE} not found — Stage 3 (analyze_with_claude.py) "
+              f"failed or was skipped. Fix that stage first; skipping report generation.")
+        import sys
+        sys.exit(1)
     strategy = load_json(STRATEGY_FILE, required=True)
     clusters_data = load_json(CLUSTERS_FILE, required=False)
 

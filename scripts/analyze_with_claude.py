@@ -1,32 +1,36 @@
 """
-analyze_with_claude.py  (UNIVERSAL / niche-agnostic version)
----------------------------------------------------------------
-STAGE 3 of the pipeline (runs after filter_and_cluster.py).
+analyze_with_claude.py  (v2 — ID-based ad grouping, cost-optimized)
+--------------------------------------------------------------------
+STAGE 3 of the pipeline (runs after score_keywords.py).
 
-This version has NO hardcoded industry (no "AC company in Dubai" baked in).
-The business context comes from environment variables, so the exact same
-script works for a plumber in Karachi, a SaaS product, an e-commerce store,
-a dentist, anything — just change the env vars per client/run.
+WHAT CHANGED vs v1 (and why v1 wasted money):
+  v1 sent 80 full clusters and asked Claude for targets + ad groups +
+  15-25 FAQs + 15-25 PAA + content briefs in ONE response. That needs
+  12-15K output tokens but max_tokens was 8000 → the JSON was truncated
+  mid-string on EVERY run ("Unterminated string"), the retry repeated the
+  identical call, and ~$1 died for zero output.
 
-Claude is also asked to do the intent classification (transactional /
-informational / branded) AND merge obvious synonym clusters (e.g. "ac" vs
-"air conditioner", "shoes" vs "sneakers") itself, because that requires
-real language understanding of the specific niche — something a fixed
-Python word-list can never generalize across industries.
+  v2 principles:
+  - Python (score_keywords.py) already did intent/local/voice/scoring for free.
+  - Claude does ONLY what needs language understanding: semantic ad-group
+    theming with zero cannibalization.
+  - Claude returns keyword IDs, never the keyword text back → output is
+    ~1-2K tokens → truncation impossible, cost ~$0.03-0.05 per run on
+    Sonnet (20-30 runs per dollar).
+  - Content generation (FAQs, briefs, ad copy) is intentionally REMOVED —
+    that lives in the website-builder side, separately.
 
 Required env vars:
     ANTHROPIC_API_KEY
-    BUSINESS_NAME       e.g. "CoolBreeze AC Services"
-    NICHE_DESCRIPTION   e.g. "AC repair, installation and maintenance company"
-    TARGET_LOCATION     e.g. "Dubai, UAE"  (or "N/A" for non-local businesses)
+    BUSINESS_NAME, NICHE_DESCRIPTION, TARGET_LOCATION  (business context)
 
 Optional env vars:
-    CLAUDE_MODEL   (default: claude-sonnet-5)
-    MAX_CLUSTERS   (default: 80)
+    CLAUDE_MODEL     (default: claude-sonnet-5)
+    MAX_AD_GROUPS    (default: 7 — Claude may return FEWER if the data
+                      only supports fewer distinct themes; never more)
 
-Output:
-    keyword_strategy.json
-    keyword_strategy.md
+Input : scored_keywords.json
+Output: keyword_strategy.json, keyword_strategy.md
 """
 
 import os
@@ -40,204 +44,353 @@ except ImportError:
     print("Missing dependency. Run: pip install anthropic")
     sys.exit(1)
 
-INPUT_FILE = "clustered_keywords.json"
+INPUT_FILE = "scored_keywords.json"
 MODEL = os.environ.get("CLAUDE_MODEL", "claude-sonnet-5")
-MAX_CLUSTERS = int(os.environ.get("MAX_CLUSTERS", "80"))
+MAX_AD_GROUPS = int(os.environ.get("MAX_AD_GROUPS", "7"))
 
 BUSINESS_NAME = os.environ.get("BUSINESS_NAME", "").strip()
 NICHE_DESCRIPTION = os.environ.get("NICHE_DESCRIPTION", "").strip()
 TARGET_LOCATION = os.environ.get("TARGET_LOCATION", "").strip()
 
-SYSTEM_PROMPT = """You are a senior SEO + Google Ads strategist working across
-many different industries. You will be given:
-  1. A business context (name, niche, target location)
-  2. Pre-clustered keyword research data (real search volume + competition
-     from Google Ads Keyword Planner) — clustered mechanically by shared
-     words, WITHOUT any industry-specific logic, so some clusters may
-     actually be the same real-world topic phrased differently (e.g. "ac"
-     vs "air conditioner", "sneakers" vs "shoes") or may be mis-grouped.
-     Use your understanding of the business's actual niche to merge or
-     re-split clusters where it makes sense.
 
-Your job:
-  - Understand the business's real search intent landscape from the data
-  - Classify each relevant cluster as transactional (ready to buy/hire),
-    informational (researching a problem/topic, not ready to buy), or
-    branded (specific product/brand names)
-  - Recommend which clusters are worth bidding on in Google Ads
-  - Produce genuinely useful FAQ and content ideas for the SPECIFIC niche
-    given — do not default to any particular industry's typical vocabulary
+# ══════════════════════════════════════════════════════════════════════════
+# Robust JSON parsing (ported from the website-builder's battle-tested code)
+# ══════════════════════════════════════════════════════════════════════════
 
-Respond with ONLY valid JSON (no markdown fences, no preamble), matching
-exactly this shape:
+def _repair_control_chars(s):
+    out, in_str, esc = [], False, False
+    for ch in s:
+        if esc:
+            out.append(ch); esc = False
+        elif ch == '\\':
+            out.append(ch); esc = True
+        elif ch == '"':
+            out.append(ch); in_str = not in_str
+        elif in_str and ch == '\n':
+            out.append('\\n')
+        elif in_str and ch == '\r':
+            out.append('\\r')
+        elif in_str and ch == '\t':
+            out.append('\\t')
+        else:
+            out.append(ch)
+    return ''.join(out)
 
-{
-  "google_ads_targets": [
-    {
-      "cluster_topic": "...",
-      "recommended_keywords": ["...", "..."],
-      "intent": "transactional|informational|branded",
-      "suggested_match_type": "phrase|exact|broad",
-      "priority": "high|medium|low",
-      "trend": "GROWING|DECLINING|SEASONAL|STABLE|UNKNOWN",
-      "seasonal_schedule": "e.g. Jun-Sep only, or null if not seasonal",
-      "reasoning": "1-2 sentences: why this cluster is worth bidding on for THIS specific business, noting volume/competition tradeoff AND trend direction"
-    }
-  ],
+
+def _escape_inner_quotes(s):
+    out, in_str = [], False
+    i, n = 0, len(s)
+    while i < n:
+        ch = s[i]
+        if not in_str:
+            if ch == '"':
+                in_str = True
+            out.append(ch)
+        else:
+            if ch == '\\' and i + 1 < n:
+                out.append(ch); out.append(s[i + 1]); i += 1
+            elif ch == '"':
+                j = i + 1
+                while j < n and s[j] in ' \t\r\n':
+                    j += 1
+                if j >= n or s[j] in ',}]:':
+                    in_str = False
+                    out.append(ch)
+                else:
+                    out.append('\\"')
+            else:
+                out.append(ch)
+        i += 1
+    return ''.join(out)
+
+
+def parse_json_robust(text):
+    text = re.sub(r"^```json\s*|^```\s*|```$", "", text.strip(), flags=re.MULTILINE).strip()
+    start, end = text.find('{'), text.rfind('}') + 1
+    if start == -1 or end == 0:
+        raise json.JSONDecodeError("no JSON object found", text, 0)
+    text = text[start:end]
+    for fixer in (lambda t: t,
+                  _repair_control_chars,
+                  lambda t: _escape_inner_quotes(_repair_control_chars(t)),
+                  lambda t: re.sub(r',\s*([}\]])', r'\1',
+                                   _escape_inner_quotes(_repair_control_chars(t)))):
+        try:
+            return json.loads(fixer(text))
+        except json.JSONDecodeError:
+            continue
+    raise json.JSONDecodeError("unrecoverable JSON", text, 0)
+
+
+# ══════════════════════════════════════════════════════════════════════════
+# Prompt
+# ══════════════════════════════════════════════════════════════════════════
+
+SYSTEM_PROMPT = f"""You are a senior Google Ads account strategist. You receive
+pre-scored keyword data (real Google Ads Keyword Planner numbers, already
+deduped, intent-classified and opportunity-scored by an upstream system).
+
+Your ONLY job: organise the commercially viable keywords into tightly-themed
+ad groups with ZERO cannibalization. You do NOT write ads, FAQs or content.
+
+Return ONLY a valid JSON object, no markdown fences, exactly this shape:
+{{
   "ad_groups": [
-    {
-      "ad_group_name": "...",
-      "keywords": ["...", "..."],
-      "suggested_headline": "...",
-      "suggested_description": "..."
-    }
+    {{
+      "name": "short ad group name",
+      "theme": "one sentence: the single user intent this group targets",
+      "match_type": "phrase|exact",
+      "priority": "high|medium|low",
+      "keyword_ids": [1, 2, 3],
+      "negative_keywords": ["term", "term"]
+    }}
   ],
-  "faqs": [
-    {
-      "question": "a natural, conversational question a real customer of THIS business would type or ask",
-      "answer": "a genuinely helpful, semantically rich answer (2-4 sentences), written for humans not just search engines"
-    }
-  ],
-  "people_also_ask": [
-    "question variant 1",
-    "question variant 2"
-  ],
-  "content_briefs": [
-    {
-      "cluster_topic": "...",
-      "content_angle": "what a blog post or landing page targeting this cluster should cover, specific to this business's niche",
-      "target_intent": "transactional|informational|branded"
-    }
-  ]
-}
+  "excluded_ids": [4, 5],
+  "notes": "2-3 sentences max: overall strategy rationale"
+}}
 
-Rules:
-- Base every recommendation on the actual volume/competition numbers given, don't invent data.
-- Merge clusters that are clearly the same real-world search intent (synonyms, plural/singular, common misspellings) before recommending them — don't treat "ac repair" and "air conditioner repair" as two separate targets.
-- Prioritize clusters with real search volume and manageable competition for google_ads_targets.
-- Use informational and branded clusters mainly for faqs / people_also_ask / content_briefs, not as paid ad targets, unless the business context specifically suggests otherwise.
-- Write FAQs and content briefs in natural, engaging language a real customer of this specific business would find genuinely useful — not generic template text.
-- Aim for 15-25 google_ads_targets, 5-10 ad_groups, 15-25 faqs, 15-25 people_also_ask, 10-15 content_briefs.
-- Each cluster now has a "trend" field (GROWING/DECLINING/SEASONAL/STABLE/UNKNOWN) and "peak_months".
-  Use this data actively:
-    GROWING   -> flag as high priority; bid now while CPC is still low
-    DECLINING -> deprioritize or exclude from ad targets; note in reasoning
-    SEASONAL  -> recommend scheduling ads only during peak_months to save budget
-    STABLE    -> reliable year-round targets, good for always-on campaigns
-  Include a "trend" key in each google_ads_targets entry and mention seasonal scheduling in ad_groups where relevant.
+HARD RULES:
+1. Between 1 and {MAX_AD_GROUPS} ad groups. The COUNT MUST COME FROM THE DATA:
+   one group per genuinely distinct commercial theme you can see in the
+   keywords. If the data only supports 3 themes, return 3 groups. NEVER pad
+   with thin groups, NEVER split one theme into two groups.
+2. ZERO CANNIBALIZATION:
+   - Every keyword id appears in AT MOST one group.
+   - Group themes must be mutually exclusive — a real search query should
+     match exactly one group's theme, never two.
+   - negative_keywords for each group = the distinctive core terms of the
+     OTHER groups (classic negative-keyword siloing), so Google cannot
+     serve two of your groups against the same query.
+3. EXCLUDE (put in excluded_ids) ids that are: informational/question
+   queries (they are SEO content material, not paid-ads material),
+   irrelevant to this business, or branded terms of competitors.
+4. Reference keywords ONLY by their numeric id. Never echo keyword text.
+5. Use the provided scores/volumes/competition to set priority: the group
+   holding the best opportunity keywords is "high".
 """
 
 
 def build_user_prompt(data):
-    clusters = data["clusters"][:MAX_CLUSTERS]
-    payload = {
-        "business_context": {
-            "business_name": BUSINESS_NAME or "(not provided)",
-            "niche": NICHE_DESCRIPTION or "(not provided — infer from the keywords themselves)",
-            "target_location": TARGET_LOCATION or "(not location-specific)",
-        },
-        "total_clusters_available": data["total_clusters"],
-        "clusters_included_in_this_request": len(clusters),
-        "clusters": clusters,
-    }
-    return json.dumps(payload, ensure_ascii=False)
+    kept = [k for k in data["keywords"] if k.get("kept_for_ai")]
+    lines = []
+    for k in kept:
+        flags = ",".join(k.get("flags", [])) or "-"
+        cpc = f"{k.get('low_top_bid', 0)}-{k.get('high_top_bid', 0)}"
+        lines.append(
+            f"{k['id']}|{k['keyword']}|vol:{k['avg_monthly_searches']}"
+            f"|comp:{k.get('competition_index', 0)}|cpc:{cpc}"
+            f"|{k.get('trend', 'UNKNOWN')}|{k.get('intent', '?')}|{flags}|score:{k.get('score', 0)}"
+        )
+    header = (
+        f"BUSINESS: {BUSINESS_NAME or '(not provided)'}\n"
+        f"NICHE: {NICHE_DESCRIPTION or '(infer from keywords)'}\n"
+        f"LOCATION: {TARGET_LOCATION or '(not local)'}\n\n"
+        f"KEYWORDS ({len(kept)} rows — format: id|keyword|volume|competition_index"
+        f"|cpc_range|trend|intent|flags|opportunity_score):\n"
+    )
+    return header + "\n".join(lines), kept
 
 
-def extract_json(text):
-    text = text.strip()
-    text = re.sub(r"^```json\s*|^```\s*|```$", "", text.strip(), flags=re.MULTILINE).strip()
-    return json.loads(text)
+# ══════════════════════════════════════════════════════════════════════════
+# Post-validation — Python enforces what the prompt requests
+# ══════════════════════════════════════════════════════════════════════════
 
+def validate_strategy(raw, kept):
+    by_id = {k["id"]: k for k in kept}
+    seen_ids = set()
+    groups = []
 
-def render_markdown(strategy, data):
-    lines = [f"# Keyword Strategy Report — {BUSINESS_NAME or 'Untitled Business'}\n"]
-    if NICHE_DESCRIPTION:
-        lines.append(f"*Niche: {NICHE_DESCRIPTION}*")
-    if TARGET_LOCATION:
-        lines.append(f"*Location: {TARGET_LOCATION}*")
-    lines.append("")
+    for g in raw.get("ad_groups", [])[:MAX_AD_GROUPS]:
+        ids = []
+        for i in g.get("keyword_ids", []):
+            try:
+                i = int(i)
+            except (TypeError, ValueError):
+                continue
+            if i in by_id and i not in seen_ids:   # unknown/duplicate ids dropped
+                ids.append(i)
+                seen_ids.add(i)
+        if not ids:
+            continue
+        kws = [by_id[i] for i in ids]
+        groups.append({
+            "name": str(g.get("name", "Ad Group")).strip()[:60],
+            "theme": str(g.get("theme", "")).strip(),
+            "match_type": g.get("match_type", "phrase"),
+            "priority": g.get("priority", "medium"),
+            "negative_keywords": [str(n).strip().lower() for n in g.get("negative_keywords", []) if str(n).strip()],
+            "keywords": [
+                {
+                    "keyword": k["keyword"],
+                    "variants": k.get("variants", []),
+                    "avg_monthly_searches": k["avg_monthly_searches"],
+                    "competition": k.get("competition", ""),
+                    "competition_index": k.get("competition_index", 0),
+                    "cpc_range": f"{k.get('low_top_bid', 0)}-{k.get('high_top_bid', 0)}",
+                    "trend": k.get("trend", "UNKNOWN"),
+                    "peak_months": k.get("peak_months", ""),
+                    "intent": k.get("intent", ""),
+                    "flags": k.get("flags", []),
+                    "score": k.get("score", 0),
+                }
+                for k in kws
+            ],
+            "total_volume": sum(k["avg_monthly_searches"] for k in kws),
+            "avg_score": round(sum(k.get("score", 0) for k in kws) / len(kws), 1),
+        })
 
-    lines.append("## 1. Google Ads Target Keywords\n")
-    for t in strategy.get("google_ads_targets", []):
-        lines.append(f"### {t['cluster_topic']} (priority: {t['priority']}, intent: {t.get('intent','')}, match type: {t['suggested_match_type']})")
-        lines.append(f"- Keywords: {', '.join(t['recommended_keywords'])}")
-        lines.append(f"- Why: {t['reasoning']}\n")
+    excluded = set()
+    for i in raw.get("excluded_ids", []):
+        try:
+            excluded.add(int(i))
+        except (TypeError, ValueError):
+            pass
+    unassigned = [by_id[i]["keyword"] for i in by_id
+                  if i not in seen_ids and i not in excluded]
 
-    lines.append("## 2. Suggested Ad Groups\n")
-    for g in strategy.get("ad_groups", []):
-        lines.append(f"### {g['ad_group_name']}")
-        lines.append(f"- Keywords: {', '.join(g['keywords'])}")
-        lines.append(f"- Headline: {g['suggested_headline']}")
-        lines.append(f"- Description: {g['suggested_description']}\n")
+    # Cross-group overlap warning (theme words shared between group names)
+    warn = []
+    for a in range(len(groups)):
+        for b in range(a + 1, len(groups)):
+            ta = set(re.findall(r"[a-z0-9]+", groups[a]["name"].lower()))
+            tb = set(re.findall(r"[a-z0-9]+", groups[b]["name"].lower()))
+            shared = ta & tb - {"dubai", "repair", "service", "services", "custom", "ad", "group"}
+            if len(shared) >= 2:
+                warn.append(f"groups '{groups[a]['name']}' and '{groups[b]['name']}' share theme words {sorted(shared)}")
 
-    lines.append("## 3. FAQs\n")
-    for f in strategy.get("faqs", []):
-        lines.append(f"**Q: {f['question']}**")
-        lines.append(f"A: {f['answer']}\n")
-
-    lines.append("## 4. People Also Ask\n")
-    for q in strategy.get("people_also_ask", []):
-        lines.append(f"- {q}")
-    lines.append("")
-
-    lines.append("## 5. Content Briefs\n")
-    for c in strategy.get("content_briefs", []):
-        lines.append(f"### {c['cluster_topic']} ({c['target_intent']})")
-        lines.append(f"{c['content_angle']}\n")
-
-    return "\n".join(lines)
+    return groups, sorted(excluded), unassigned, warn
 
 
 def main():
     if not os.environ.get("ANTHROPIC_API_KEY"):
         print("❌ ANTHROPIC_API_KEY is missing — check your secrets.")
-        return
-    if not NICHE_DESCRIPTION:
-        print("⚠️  NICHE_DESCRIPTION is not set. Claude will try to infer the "
-              "business type from the keywords, but results will be more "
-              "accurate if you set BUSINESS_NAME / NICHE_DESCRIPTION / "
-              "TARGET_LOCATION as env vars (or GitHub Secrets/Variables) "
-              "for each client/run.")
+        sys.exit(1)
+
+    if not os.path.exists(INPUT_FILE):
+        print(f"❌ {INPUT_FILE} not found — run score_keywords.py first.")
+        sys.exit(1)
 
     with open(INPUT_FILE, "r", encoding="utf-8") as f:
         data = json.load(f)
 
+    user_prompt, kept = build_user_prompt(data)
+    est_in = len(SYSTEM_PROMPT + user_prompt) // 4
+    print(f"Sending {len(kept)} scored keywords to {MODEL} "
+          f"(~{est_in} input tokens, expected cost well under $0.10)...")
+
     client = anthropic.Anthropic()
-    user_prompt = build_user_prompt(data)
-
-    print(f"Sending {min(MAX_CLUSTERS, data['total_clusters'])} of {data['total_clusters']} clusters to {MODEL}...")
-
-    strategy = None
-    raw_text = ""
-    for attempt in range(2):  # try once, and retry once more on JSON failure
+    raw = None
+    last_err = ""
+    for attempt in range(2):
+        _prompt = user_prompt
+        if attempt == 1:
+            _prompt += ("\n\nIMPORTANT: your previous response was not valid JSON. "
+                        "Return ONLY the JSON object, nothing else.")
         response = client.messages.create(
             model=MODEL,
-            max_tokens=8000,
+            max_tokens=4000,          # output is IDs + short strings — tiny
+            temperature=0.2,          # deterministic grouping, not creativity
             system=SYSTEM_PROMPT,
-            messages=[{"role": "user", "content": user_prompt}],
+            messages=[{"role": "user", "content": _prompt},
+                      {"role": "assistant", "content": "{"}],  # prefill forces raw JSON
         )
-        raw_text = "".join(block.text for block in response.content if block.type == "text")
+        text = "{" + "".join(b.text for b in response.content if b.type == "text")
         try:
-            strategy = extract_json(raw_text)
-            break  # success
+            raw = parse_json_robust(text)
+            break
         except json.JSONDecodeError as e:
-            print(f"⚠️ Attempt {attempt + 1}: Could not parse Claude's response as JSON. Error: {e}")
-            if attempt == 0:
-                print("Retrying once...")
+            last_err = str(e)
+            print(f"⚠️ Attempt {attempt + 1}: JSON parse failed ({e}); "
+                  + ("retrying with reminder..." if attempt == 0 else "giving up."))
 
-    if strategy is None:
-        print("❌ Both attempts failed to produce valid JSON. Saving raw output for debugging.")
+    if raw is None:
         with open("keyword_strategy_raw.txt", "w", encoding="utf-8") as f:
-            f.write(raw_text)
-        return
+            f.write(text)
+        print(f"❌ Could not get valid JSON: {last_err}. Raw saved for debugging.")
+        sys.exit(1)
+
+    groups, excluded_ids, unassigned, warnings = validate_strategy(raw, kept)
+
+    # SEO material = what Claude excluded + what Python flagged as question/info
+    all_kw = data["keywords"]
+    seo_content = [k for k in all_kw
+                   if k.get("intent") in ("question", "informational")
+                   or k["id"] in excluded_ids]
+    voice_qs = [k["keyword"] for k in all_kw if "voice" in k.get("flags", [])]
+    local_kws = [k["keyword"] for k in all_kw
+                 if "local" in k.get("flags", []) and k.get("kept_for_ai")]
+
+    strategy = {
+        "business": {"name": BUSINESS_NAME, "niche": NICHE_DESCRIPTION,
+                     "location": TARGET_LOCATION},
+        "model_used": MODEL,
+        "ad_groups": groups,
+        "notes": raw.get("notes", ""),
+        "excluded_keyword_ids": excluded_ids,
+        "unassigned_keywords": unassigned,
+        "cannibalization_warnings": warnings,
+        "seo_content_keywords": [
+            {"keyword": k["keyword"], "volume": k["avg_monthly_searches"],
+             "intent": k.get("intent", ""), "flags": k.get("flags", [])}
+            for k in seo_content
+        ],
+        "voice_search_questions": voice_qs,
+        "local_intent_keywords": local_kws,
+        # ── legacy shape so generate_reports.py keeps working ──
+        "google_ads_targets": [
+            {
+                "cluster_topic": g["name"],
+                "recommended_keywords": [k["keyword"] for k in g["keywords"]],
+                "intent": "transactional",
+                "suggested_match_type": g["match_type"],
+                "priority": g["priority"],
+                "trend": max(set(k["trend"] for k in g["keywords"]),
+                             key=[k["trend"] for k in g["keywords"]].count),
+                "seasonal_schedule": next((k["peak_months"] for k in g["keywords"]
+                                           if k["trend"] == "SEASONAL" and k["peak_months"]), None),
+                "reasoning": g["theme"],
+            }
+            for g in groups
+        ],
+        "faqs": [], "people_also_ask": [], "content_briefs": [],
+    }
 
     with open("keyword_strategy.json", "w", encoding="utf-8") as f:
         json.dump(strategy, f, indent=2, ensure_ascii=False)
 
+    # ── Markdown summary ──
+    md = [f"# Google Ads Keyword Strategy — {BUSINESS_NAME or 'Untitled'}\n"]
+    if NICHE_DESCRIPTION:
+        md.append(f"*{NICHE_DESCRIPTION}* — {TARGET_LOCATION}\n")
+    md.append(f"**{len(groups)} ad groups** (data-driven count, max {MAX_AD_GROUPS})\n")
+    for g in groups:
+        md.append(f"## {g['name']}  `{g['priority']}` `{g['match_type']}`")
+        md.append(f"_{g['theme']}_")
+        md.append(f"- Total volume: {g['total_volume']}/mo | Avg opportunity score: {g['avg_score']}")
+        md.append(f"- Keywords: " + ", ".join(k["keyword"] for k in g["keywords"]))
+        if g["negative_keywords"]:
+            md.append(f"- Negative keywords (anti-cannibalization): " + ", ".join(g["negative_keywords"]))
+        md.append("")
+    if strategy["notes"]:
+        md.append(f"**Strategy notes:** {strategy['notes']}\n")
+    if voice_qs:
+        md.append("## Voice-search / question keywords (SEO content, not ads)")
+        md.extend(f"- {q}" for q in voice_qs[:20])
+        md.append("")
+    if warnings:
+        md.append("## ⚠️ Possible theme overlap")
+        md.extend(f"- {w}" for w in warnings)
     with open("keyword_strategy.md", "w", encoding="utf-8") as f:
-        f.write(render_markdown(strategy, data))
+        f.write("\n".join(md))
 
-    print("✅ Done. Saved keyword_strategy.json and keyword_strategy.md")
+    usage = getattr(response, "usage", None)
+    if usage:
+        cost = usage.input_tokens * 3 / 1e6 + usage.output_tokens * 15 / 1e6
+        print(f"   Tokens: {usage.input_tokens} in / {usage.output_tokens} out "
+              f"≈ ${cost:.3f} this run")
+    print(f"✅ {len(groups)} ad groups | {len(excluded_ids)} excluded "
+          f"| {len(unassigned)} unassigned | {len(warnings)} overlap warnings")
+    print("✅ Saved keyword_strategy.json and keyword_strategy.md")
 
 
 if __name__ == "__main__":
