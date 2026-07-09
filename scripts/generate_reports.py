@@ -23,6 +23,7 @@ import os
 import csv
 import json
 import html
+import shutil
 from datetime import datetime, timezone
 
 STRATEGY_FILE = "keyword_strategy.json"
@@ -617,6 +618,15 @@ def main():
         with open(HTML_OUTPUT, "w", encoding="utf-8") as f:
             f.write(render_seo_html(seo))
         write_seo_csv(seo)
+
+        # --- FIX: publish website_builder_inputs.json under the standard
+        # keyword_strategy.json name too, so downstream stages (push_results.py)
+        # and any consumer expecting that filename always find real SEO data,
+        # not just a "file not found" skip. This is a plain file copy, not a
+        # data reshape — SEO consumers should read the mode2-5 keys directly.
+        shutil.copy(SEO_FILE, STRATEGY_FILE)
+        print(f"✅ {STRATEGY_FILE} (copy of {SEO_FILE}) saved for downstream/live use")
+
         print(f"✅ SEO HTML report saved to {HTML_OUTPUT}")
         print(f"✅ Keyword-metrics CSV saved to {CSV_OUTPUT}")
         return
