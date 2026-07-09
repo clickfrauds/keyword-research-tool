@@ -1,0 +1,2667 @@
+{
+  "business": {
+    "name": "Dubai Tank Cleaners",
+    "niche": "Water tank cleaning and disinfection services for villas, apartments and buildings",
+    "location": "Dubai, UAE"
+  },
+  "model_used": "claude-sonnet-5",
+  "notes": "The strategy centers on a high-volume Dubai water tank cleaning pillar supported by tightly-scoped BOFU clusters for price, tank location type, property type, tank material, and adjacent services (maintenance, disinfection, septic), avoiding cannibalization while covering nearly all commercial intent. Excluded ids are competitor brand terms (Urbanclap, Urban Company, Pristine, Balaji, Khan), off-market locations (Manila, Wairarapa, Nepal), and unrelated appliances/industries (oven, carpet, car wash, window units, water softeners) with zero relevance to Dubai tank cleaning.",
+  "mode4_cluster": {
+    "workflow_inputs": {
+      "main_topic": "Water Tank Cleaning Services in Dubai",
+      "problem_clusters": "Water Tank Cleaning Services in Dubai, Water Tank Cleaning Cost & Pricing in Dubai, Overhead, Underground & Rooftop Tank Cleaning, Villa & Apartment Water Tank Cleaning, Commercial & Industrial Water Tank Cleaning, Water Tank Disinfection & Chemical Treatment, Tank Material-Specific Cleaning (Sintex, Concrete & More), Water Tank Maintenance & AMC Plans"
+    },
+    "pillar_keyword": {
+      "keyword": "water tank cleaning",
+      "volume": 880,
+      "kd": 88,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "STABLE",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    "clusters": [
+      {
+        "cluster_name": "Water Tank Cleaning Services in Dubai",
+        "funnel": "BOFU",
+        "primary_keyword": {
+          "keyword": "water tank cleaning dubai",
+          "volume": 390,
+          "kd": 79,
+          "funnel": "BOFU",
+          "intent": "transactional",
+          "trend": "STABLE",
+          "ai_overview_prone": false,
+          "flags": [
+            "local"
+          ]
+        },
+        "keywords": [
+          {
+            "keyword": "water tank cleaning company in dubai",
+            "volume": 170,
+            "kd": 62,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "SEASONAL",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "water tank cleaning services dubai",
+            "volume": 170,
+            "kd": 62,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "SEASONAL",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "water tank cleaning dubai",
+            "volume": 390,
+            "kd": 79,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "STABLE",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "best water tank cleaning dubai",
+            "volume": 30,
+            "kd": 20,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "SEASONAL",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "clean water tank services",
+            "volume": 70,
+            "kd": 64,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "SEASONAL",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "water tank cleaning",
+            "volume": 880,
+            "kd": 88,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "STABLE",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "water tank cleaning company",
+            "volume": 70,
+            "kd": 70,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "SEASONAL",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "tanks cleaning",
+            "volume": 210,
+            "kd": 80,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "SEASONAL",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "water tank cleaning services",
+            "volume": 140,
+            "kd": 82,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "SEASONAL",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "watertankcleaning",
+            "volume": 880,
+            "kd": 88,
+            "funnel": "MOFU",
+            "intent": "commercial",
+            "trend": "STABLE",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "tank cleaning companies in dubai",
+            "volume": 20,
+            "kd": 43,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "SEASONAL",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "water storage tank cleaning",
+            "volume": 10,
+            "kd": 0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "STABLE",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "crystal clear water tank cleaning",
+            "volume": 10,
+            "kd": 0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "STABLE",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "professional water tank cleaning",
+            "volume": 10,
+            "kd": 14,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "STABLE",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "dubai municipality approved water tank cleaning companies",
+            "volume": 10,
+            "kd": 26,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "STABLE",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "water tank cleaning dubai municipality",
+            "volume": 10,
+            "kd": 84,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "GROWING",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "storage tank cleaning services",
+            "volume": 10,
+            "kd": 23,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "STABLE",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "tank cleaning dubai",
+            "volume": 20,
+            "kd": 96,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "SEASONAL",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "easy clean water tank",
+            "volume": 10,
+            "kd": 0,
+            "funnel": "MOFU",
+            "intent": "commercial",
+            "trend": "STABLE",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "water storage tank cleaning services",
+            "volume": 10,
+            "kd": 0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "STABLE",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "cleaning tank services",
+            "volume": 10,
+            "kd": 0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "STABLE",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "best water tank cleaning services",
+            "volume": 10,
+            "kd": 0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "STABLE",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "aqua water tank cleaning services",
+            "volume": 10,
+            "kd": 36,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "STABLE",
+            "ai_overview_prone": false,
+            "flags": []
+          }
+        ],
+        "total_volume": 3160,
+        "questions": [
+          {
+            "q": "who is the best water tank cleaning company in Dubai?",
+            "answer_angle": "Lead with a short trust statement naming Dubai Tank Cleaners, cite Dubai Municipality approval and years of experience, then list top 3 differentiators.",
+            "type": "conversational"
+          },
+          {
+            "q": "is there a water tank cleaning company near me in Dubai?",
+            "answer_angle": "Confirm coverage across all Dubai areas with same-day service and a clickable area list.",
+            "type": "local"
+          },
+          {
+            "q": "how often should water tanks be cleaned in Dubai?",
+            "answer_angle": "State the Dubai Municipality recommended frequency (every 6 months) in the first sentence.",
+            "type": "paa"
+          },
+          {
+            "q": "Dubai mein water tank cleaning kaise karte hain?",
+            "answer_angle": "Give a numbered step-by-step process (drain, scrub, disinfect, refill, test) in simple language.",
+            "type": "conversational"
+          },
+          {
+            "q": "hey Siri, find water tank cleaning services near me in Dubai",
+            "answer_angle": "Ensure NAP, service area schema, and a direct answer sentence stating 24/7 booking availability.",
+            "type": "voice"
+          },
+          {
+            "q": "are water tank cleaning companies in Dubai municipality approved?",
+            "answer_angle": "State clearly whether the company is Dubai Municipality approved/licensed and link the certificate.",
+            "type": "paa"
+          }
+        ],
+        "entities_to_mention": [
+          "Dubai Municipality approval",
+          "DEWA regulations",
+          "water tank disinfection",
+          "chlorination",
+          "food-grade tank cleaning",
+          "residential and commercial water tanks",
+          "UAE drinking water standards"
+        ]
+      },
+      {
+        "cluster_name": "Water Tank Cleaning Cost & Pricing in Dubai",
+        "funnel": "BOFU",
+        "primary_keyword": {
+          "keyword": "water tank cleaning dubai price",
+          "volume": 20,
+          "kd": 91,
+          "funnel": "BOFU",
+          "intent": "transactional",
+          "trend": "SEASONAL",
+          "ai_overview_prone": false,
+          "flags": [
+            "local"
+          ]
+        },
+        "keywords": [
+          {
+            "keyword": "water tank cleaning dubai price",
+            "volume": 20,
+            "kd": 91,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "SEASONAL",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "water tank cleaning services price",
+            "volume": 10,
+            "kd": 0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "STABLE",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "water tank cleaning services charges",
+            "volume": 10,
+            "kd": 0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "STABLE",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "water tank cleaning charges",
+            "volume": 10,
+            "kd": 0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "STABLE",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "tank cleaning cost",
+            "volume": 10,
+            "kd": 0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "STABLE",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "water tank cleaning price",
+            "volume": 10,
+            "kd": 77,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "STABLE",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "water tank 1000 ltr cleaning price",
+            "volume": 10,
+            "kd": 0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "UNKNOWN",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "cost to clean water tank",
+            "volume": 10,
+            "kd": 0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "UNKNOWN",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "tank cleaning services charges",
+            "volume": 10,
+            "kd": 0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "UNKNOWN",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "water tank 500 ltr cleaning price",
+            "volume": 10,
+            "kd": 0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "UNKNOWN",
+            "ai_overview_prone": false,
+            "flags": []
+          }
+        ],
+        "total_volume": 110,
+        "questions": [
+          {
+            "q": "how much does water tank cleaning cost in Dubai?",
+            "answer_angle": "Open with an AED price range (e.g., AED 150-500) based on tank size, then break down by capacity in a table.",
+            "type": "conversational"
+          },
+          {
+            "q": "what is the price for cleaning a 1000 litre tank?",
+            "answer_angle": "Give the exact AED figure for a 1000L tank first, then note factors that change price.",
+            "type": "paa"
+          },
+          {
+            "q": "what is the price for cleaning a 500 litre tank?",
+            "answer_angle": "State the exact AED figure for 500L tanks upfront, then compare to other sizes.",
+            "type": "paa"
+          },
+          {
+            "q": "how much do tank cleaning services charge per visit?",
+            "answer_angle": "Show a simple per-visit fee range and mention AMC discounts.",
+            "type": "conversational"
+          },
+          {
+            "q": "why does water tank cleaning price vary in Dubai?",
+            "answer_angle": "List the 4 key cost drivers (size, location, access difficulty, disinfection type) in a short list.",
+            "type": "paa"
+          }
+        ],
+        "entities_to_mention": [
+          "AED pricing",
+          "tank capacity (litres)",
+          "villa vs apartment pricing",
+          "AMC contracts",
+          "free quote",
+          "transparent pricing"
+        ]
+      },
+      {
+        "cluster_name": "Overhead, Underground & Rooftop Tank Cleaning",
+        "funnel": "BOFU",
+        "primary_keyword": {
+          "keyword": "cleaning of underground water tanks",
+          "volume": 20,
+          "kd": 62,
+          "funnel": "BOFU",
+          "intent": "transactional",
+          "trend": "SEASONAL",
+          "ai_overview_prone": false,
+          "flags": []
+        },
+        "keywords": [
+          {
+            "keyword": "cleaning of underground water tanks",
+            "volume": 20,
+            "kd": 62,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "SEASONAL",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "sumpit tank cleaning",
+            "volume": 10,
+            "kd": 57,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "GROWING",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "overhead tank cleaning",
+            "volume": 10,
+            "kd": 0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "STABLE",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "loft tank cleaning",
+            "volume": 10,
+            "kd": 0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "STABLE",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "roof tank cleaning",
+            "volume": 10,
+            "kd": 0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "STABLE",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "clean cistern",
+            "volume": 10,
+            "kd": 0,
+            "funnel": "MOFU",
+            "intent": "commercial",
+            "trend": "STABLE",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "overhead water tank cleaning",
+            "volume": 10,
+            "kd": 0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "STABLE",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "loft water tank cleaning",
+            "volume": 10,
+            "kd": 0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "STABLE",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "roof water tank cleaning",
+            "volume": 10,
+            "kd": 0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "STABLE",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "overhead water tank cleaning near me",
+            "volume": 10,
+            "kd": 0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "UNKNOWN",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "underground water tank cleaning services",
+            "volume": 10,
+            "kd": 34,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "STABLE",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "underground tank cleaner",
+            "volume": 10,
+            "kd": 23,
+            "funnel": "MOFU",
+            "intent": "commercial",
+            "trend": "STABLE",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "over head tank cleaner",
+            "volume": 10,
+            "kd": 0,
+            "funnel": "MOFU",
+            "intent": "commercial",
+            "trend": "UNKNOWN",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "cistern cleaning services",
+            "volume": 10,
+            "kd": 0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "UNKNOWN",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "rainwater tank cleaning service",
+            "volume": 10,
+            "kd": 0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "UNKNOWN",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "underground tank cleaning services",
+            "volume": 10,
+            "kd": 0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "UNKNOWN",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "cleaning cistern tanks",
+            "volume": 10,
+            "kd": 0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "UNKNOWN",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "ground water tank cleaning",
+            "volume": 10,
+            "kd": 0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "UNKNOWN",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "municipal water tank cleaning",
+            "volume": 10,
+            "kd": 0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "UNKNOWN",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "overhead tank cleaning machine",
+            "volume": 10,
+            "kd": 0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "UNKNOWN",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "under water tank cleaning",
+            "volume": 10,
+            "kd": 0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "UNKNOWN",
+            "ai_overview_prone": false,
+            "flags": []
+          }
+        ],
+        "total_volume": 220,
+        "questions": [
+          {
+            "q": "how do you clean an underground water tank?",
+            "answer_angle": "Explain the confined-space entry, draining, scrubbing and disinfection process step by step.",
+            "type": "conversational"
+          },
+          {
+            "q": "who cleans overhead water tanks near me?",
+            "answer_angle": "Confirm rooftop/overhead tank service availability across Dubai with safety equipment mention.",
+            "type": "local"
+          },
+          {
+            "q": "is it safe to clean an underground tank without draining it fully?",
+            "answer_angle": "State the safety standard requiring full or partial drain based on tank type, referencing safety protocol.",
+            "type": "paa"
+          },
+          {
+            "q": "how do you clean a loft or roof tank?",
+            "answer_angle": "Describe the access method and tools used for loft/roof tanks in a short numbered list.",
+            "type": "conversational"
+          },
+          {
+            "q": "what equipment is used for overhead tank cleaning machine cleaning?",
+            "answer_angle": "Name the specific equipment (submersible pumps, vacuum extractors, UV disinfection) used.",
+            "type": "paa"
+          }
+        ],
+        "entities_to_mention": [
+          "confined space safety",
+          "sump/underground tank",
+          "overhead/rooftop tank",
+          "cistern",
+          "vacuum extraction equipment",
+          "manhole access"
+        ]
+      },
+      {
+        "cluster_name": "Villa & Apartment Water Tank Cleaning",
+        "funnel": "BOFU",
+        "primary_keyword": {
+          "keyword": "residential water tank cleaning",
+          "volume": 10,
+          "kd": 0,
+          "funnel": "BOFU",
+          "intent": "transactional",
+          "trend": "STABLE",
+          "ai_overview_prone": false,
+          "flags": []
+        },
+        "keywords": [
+          {
+            "keyword": "residential water tank cleaning",
+            "volume": 10,
+            "kd": 0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "STABLE",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "apartment water tank cleaning",
+            "volume": 10,
+            "kd": 0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "STABLE",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "domestic water tank cleaning",
+            "volume": 10,
+            "kd": 0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "STABLE",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "domestic water tank cleaning services",
+            "volume": 10,
+            "kd": 0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "STABLE",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "house water tank cleaning",
+            "volume": 10,
+            "kd": 0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "STABLE",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "domestic tank cleaning",
+            "volume": 10,
+            "kd": 0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "STABLE",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "household water tank cleaning",
+            "volume": 10,
+            "kd": 0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "STABLE",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "home water tank cleaning",
+            "volume": 10,
+            "kd": 37,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "STABLE",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "residential water tank cleaning services",
+            "volume": 10,
+            "kd": 0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "UNKNOWN",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "house water tank cleaning services",
+            "volume": 10,
+            "kd": 0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "UNKNOWN",
+            "ai_overview_prone": false,
+            "flags": []
+          }
+        ],
+        "total_volume": 100,
+        "questions": [
+          {
+            "q": "how much does it cost to clean a villa water tank in Dubai?",
+            "answer_angle": "Give the villa-specific AED price range upfront, distinct from apartment pricing.",
+            "type": "local"
+          },
+          {
+            "q": "do apartment buildings need separate water tank cleaning?",
+            "answer_angle": "Explain shared building tank cleaning requirements and frequency for apartments/towers.",
+            "type": "paa"
+          },
+          {
+            "q": "can I book residential water tank cleaning same day?",
+            "answer_angle": "Confirm same-day/next-day booking availability for homes and give a direct booking CTA.",
+            "type": "conversational"
+          },
+          {
+            "q": "do you clean domestic water tanks inside villas without mess?",
+            "answer_angle": "Describe the mess-free vacuum extraction process reassuring homeowners.",
+            "type": "conversational"
+          },
+          {
+            "q": "how long does house water tank cleaning take?",
+            "answer_angle": "State the typical duration (1-2 hours) for a standard villa tank upfront.",
+            "type": "paa"
+          }
+        ],
+        "entities_to_mention": [
+          "villa water tank",
+          "apartment/building tank",
+          "residential disinfection",
+          "homeowner association (OA) requirements",
+          "family safety"
+        ]
+      },
+      {
+        "cluster_name": "Commercial & Industrial Water Tank Cleaning",
+        "funnel": "BOFU",
+        "primary_keyword": {
+          "keyword": "commercial water tank cleaning",
+          "volume": 20,
+          "kd": 0,
+          "funnel": "BOFU",
+          "intent": "transactional",
+          "trend": "SEASONAL",
+          "ai_overview_prone": false,
+          "flags": []
+        },
+        "keywords": [
+          {
+            "keyword": "commercial water tank cleaning",
+            "volume": 20,
+            "kd": 0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "SEASONAL",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "industrial water tank cleaning",
+            "volume": 10,
+            "kd": 0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "STABLE",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "industrial water tank cleaning services",
+            "volume": 10,
+            "kd": 0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "STABLE",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "commercial water tank cleaning services",
+            "volume": 10,
+            "kd": 0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "SEASONAL",
+            "ai_overview_prone": false,
+            "flags": []
+          }
+        ],
+        "total_volume": 50,
+        "questions": [
+          {
+            "q": "do you offer commercial water tank cleaning contracts in Dubai?",
+            "answer_angle": "Confirm B2B contract options and mention compliance certificates for businesses.",
+            "type": "conversational"
+          },
+          {
+            "q": "how often should industrial water tanks be cleaned?",
+            "answer_angle": "State the industrial standard frequency and cite relevant Dubai Municipality/OSHAD guidance.",
+            "type": "paa"
+          },
+          {
+            "q": "which industries need regular water tank cleaning in Dubai?",
+            "answer_angle": "List hotels, factories, malls, schools as key sectors requiring scheduled cleaning.",
+            "type": "paa"
+          },
+          {
+            "q": "can you provide compliance certificates after commercial tank cleaning?",
+            "answer_angle": "Confirm certification/report issuance after each service for compliance audits.",
+            "type": "conversational"
+          }
+        ],
+        "entities_to_mention": [
+          "commercial compliance certificate",
+          "OSHAD standards",
+          "industrial tank maintenance",
+          "facility management contracts",
+          "hospitality/hotel water safety"
+        ]
+      },
+      {
+        "cluster_name": "Water Tank Disinfection & Chemical Treatment",
+        "funnel": "BOFU",
+        "primary_keyword": {
+          "keyword": "water tank cleaning and disinfection",
+          "volume": 30,
+          "kd": 74,
+          "funnel": "BOFU",
+          "intent": "transactional",
+          "trend": "SEASONAL",
+          "ai_overview_prone": false,
+          "flags": []
+        },
+        "keywords": [
+          {
+            "keyword": "water tank cleaning and disinfection",
+            "volume": 30,
+            "kd": 74,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "SEASONAL",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "chemical for cleaning water tank",
+            "volume": 70,
+            "kd": 100,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "STABLE",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "tank cleaning solution",
+            "volume": 10,
+            "kd": 0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "STABLE",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "water well cleaning chemicals",
+            "volume": 10,
+            "kd": 0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "UNKNOWN",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "overhead water tank cleaning chemicals",
+            "volume": 10,
+            "kd": 0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "UNKNOWN",
+            "ai_overview_prone": false,
+            "flags": []
+          }
+        ],
+        "total_volume": 130,
+        "questions": [
+          {
+            "q": "what chemicals are used to disinfect water tanks in Dubai?",
+            "answer_angle": "Name the approved chemical (chlorine/sodium hypochlorite) and dosage standard used.",
+            "type": "conversational"
+          },
+          {
+            "q": "is chlorine safe for cleaning drinking water tanks?",
+            "answer_angle": "Confirm safe chlorine concentration per UAE drinking water standards and rinse process.",
+            "type": "paa"
+          },
+          {
+            "q": "what disinfection solution do you use for overhead tanks?",
+            "answer_angle": "State the specific food-grade disinfectant used and why it's safe for potable water.",
+            "type": "paa"
+          },
+          {
+            "q": "how do you disinfect a water tank without harmful residue?",
+            "answer_angle": "Describe the flush-and-test process ensuring zero chemical residue before refill.",
+            "type": "conversational"
+          }
+        ],
+        "entities_to_mention": [
+          "sodium hypochlorite",
+          "food-grade disinfectant",
+          "UAE drinking water standards",
+          "chlorine residual testing",
+          "potable water safety"
+        ]
+      },
+      {
+        "cluster_name": "Tank Material-Specific Cleaning (Sintex, Concrete & More)",
+        "funnel": "BOFU",
+        "primary_keyword": {
+          "keyword": "sintex tank cleaning",
+          "volume": 10,
+          "kd": 0,
+          "funnel": "BOFU",
+          "intent": "transactional",
+          "trend": "STABLE",
+          "ai_overview_prone": false,
+          "flags": []
+        },
+        "keywords": [
+          {
+            "keyword": "concrete tank cleaning",
+            "volume": 10,
+            "kd": 0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "STABLE",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "sintex tank cleaning",
+            "volume": 10,
+            "kd": 0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "STABLE",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "cement tank cleaning",
+            "volume": 10,
+            "kd": 0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "STABLE",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "solar tank cleaning",
+            "volume": 10,
+            "kd": 0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "STABLE",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "sintex tank cleaning services",
+            "volume": 10,
+            "kd": 0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "UNKNOWN",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "cement water tank cleaning",
+            "volume": 10,
+            "kd": 0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "UNKNOWN",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "cleaning jojo tanks",
+            "volume": 10,
+            "kd": 0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "UNKNOWN",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "sintex water tank cleaning services",
+            "volume": 10,
+            "kd": 0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "UNKNOWN",
+            "ai_overview_prone": false,
+            "flags": []
+          }
+        ],
+        "total_volume": 80,
+        "questions": [
+          {
+            "q": "how do you clean a Sintex plastic water tank?",
+            "answer_angle": "Explain the non-abrasive scrubbing method safe for plastic/Sintex tanks.",
+            "type": "conversational"
+          },
+          {
+            "q": "can concrete water tanks be cleaned without damaging them?",
+            "answer_angle": "Describe the low-pressure method used to protect concrete tank walls.",
+            "type": "paa"
+          },
+          {
+            "q": "do you clean Jojo or solar water tanks?",
+            "answer_angle": "Confirm service coverage for Jojo/solar tank types with material-safe methods.",
+            "type": "conversational"
+          },
+          {
+            "q": "is cement tank cleaning different from plastic tank cleaning?",
+            "answer_angle": "Compare the two methods side by side in a short table.",
+            "type": "paa"
+          }
+        ],
+        "entities_to_mention": [
+          "Sintex tanks",
+          "concrete/cement tanks",
+          "solar water tanks",
+          "Jojo tanks",
+          "material-safe cleaning methods"
+        ]
+      },
+      {
+        "cluster_name": "Water Tank Maintenance & AMC Plans",
+        "funnel": "MOFU",
+        "primary_keyword": {
+          "keyword": "water tank servicing",
+          "volume": 110,
+          "kd": 44,
+          "funnel": "MOFU",
+          "intent": "commercial",
+          "trend": "SEASONAL",
+          "ai_overview_prone": false,
+          "flags": []
+        },
+        "keywords": [
+          {
+            "keyword": "water tank servicing",
+            "volume": 110,
+            "kd": 44,
+            "funnel": "MOFU",
+            "intent": "commercial",
+            "trend": "SEASONAL",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "automated tank cleaning",
+            "volume": 10,
+            "kd": 0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "STABLE",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "water tank cleaning system",
+            "volume": 10,
+            "kd": 17,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "STABLE",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "water tank maintenance companies",
+            "volume": 10,
+            "kd": 0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "STABLE",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "water tank maintenance",
+            "volume": 10,
+            "kd": 90,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "GROWING",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "water storage tank maintenance",
+            "volume": 10,
+            "kd": 0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "UNKNOWN",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "water pressure tank maintenance",
+            "volume": 10,
+            "kd": 0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "UNKNOWN",
+            "ai_overview_prone": false,
+            "flags": []
+          }
+        ],
+        "total_volume": 170,
+        "questions": [
+          {
+            "q": "what is included in a water tank maintenance contract?",
+            "answer_angle": "List AMC inclusions (cleaning, inspection, disinfection, reporting) in bullet form.",
+            "type": "conversational"
+          },
+          {
+            "q": "how much does an annual water tank maintenance contract cost in Dubai?",
+            "answer_angle": "Give an AED annual price range for AMC upfront then explain visit frequency.",
+            "type": "local"
+          },
+          {
+            "q": "do automated tank cleaning systems need less maintenance?",
+            "answer_angle": "Compare automated vs manual system maintenance needs honestly.",
+            "type": "paa"
+          },
+          {
+            "q": "what maintenance does a water pressure tank need?",
+            "answer_angle": "List the 3 key maintenance checks for pressure tanks (pressure, sediment, seals).",
+            "type": "paa"
+          }
+        ],
+        "entities_to_mention": [
+          "Annual Maintenance Contract (AMC)",
+          "preventive maintenance",
+          "tank inspection report",
+          "automated tank systems",
+          "pressure tank servicing"
+        ]
+      }
+    ]
+  },
+  "mode3_full_website": {
+    "workflow_inputs": {
+      "industry": "Water Tank Cleaning",
+      "services_mode3": "Water Tank Cleaning Dubai, Water Tank Disinfection & Chemical Treatment, Overhead & Rooftop Tank Cleaning, Underground Tank Cleaning, Villa Water Tank Cleaning, Apartment & Building Water Tank Cleaning, Commercial Water Tank Cleaning, Industrial Water Tank Cleaning, Sintex & Plastic Tank Cleaning, Concrete & Cement Tank Cleaning, Water Tank Maintenance & AMC Plans, Septic Tank & Sewage Chamber Cleaning"
+    },
+    "services": [
+      "Water Tank Cleaning Dubai",
+      "Water Tank Disinfection & Chemical Treatment",
+      "Overhead & Rooftop Tank Cleaning",
+      "Underground Tank Cleaning",
+      "Villa Water Tank Cleaning",
+      "Apartment & Building Water Tank Cleaning",
+      "Commercial Water Tank Cleaning",
+      "Industrial Water Tank Cleaning",
+      "Sintex & Plastic Tank Cleaning",
+      "Concrete & Cement Tank Cleaning",
+      "Water Tank Maintenance & AMC Plans",
+      "Septic Tank & Sewage Chamber Cleaning"
+    ]
+  },
+  "mode2_services_hub": {
+    "workflow_inputs": {
+      "main_service": "Water Tank Cleaning & Disinfection",
+      "sub_services": "Overhead Tank Cleaning, Underground Tank Cleaning, Villa Water Tank Cleaning, Apartment/Building Tank Cleaning, Commercial Tank Cleaning, Industrial Tank Cleaning, Sintex & Plastic Tank Cleaning, Water Tank Disinfection, Annual Maintenance Contracts (AMC), Septic & STP Tank Cleaning"
+    }
+  },
+  "mode5_pseo": {
+    "cities_in_data": [
+      {
+        "city": "Dubai",
+        "keywords": [
+          {
+            "keyword": "water tank cleaning company in dubai",
+            "volume": 170,
+            "kd": 62,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "SEASONAL",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "water tank cleaning services dubai",
+            "volume": 170,
+            "kd": 62,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "SEASONAL",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "water tank cleaning dubai",
+            "volume": 390,
+            "kd": 79,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "STABLE",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "best water tank cleaning dubai",
+            "volume": 30,
+            "kd": 20,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "SEASONAL",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "tank cleaning companies in dubai",
+            "volume": 20,
+            "kd": 43,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "SEASONAL",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "dubai municipality approved water tank cleaning companies",
+            "volume": 10,
+            "kd": 26,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "STABLE",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "water tank cleaning dubai price",
+            "volume": 20,
+            "kd": 91,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "SEASONAL",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "water tank cleaning dubai municipality",
+            "volume": 10,
+            "kd": 84,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "GROWING",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "tank cleaning dubai",
+            "volume": 20,
+            "kd": 96,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "SEASONAL",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "overhead water tank cleaning near me",
+            "volume": 10,
+            "kd": 0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "UNKNOWN",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          }
+        ],
+        "total_volume": 850
+      }
+    ],
+    "recommended_city_targets": [
+      "Dubai Marina",
+      "Downtown Dubai",
+      "Business Bay",
+      "Jumeirah",
+      "Al Barsha",
+      "Deira",
+      "Arabian Ranches",
+      "Palm Jumeirah"
+    ],
+    "notes": "Only 'Dubai' appears explicitly in the keyword data as a location; no distinct neighborhood/city terms were searched. Recommended targets are high-density residential Dubai areas worth dedicated pSEO pages to capture 'near me' and hyperlocal intent not yet reflected in keyword volume."
+  },
+  "keyword_metrics": [
+    {
+      "keyword": "water tank cleaning",
+      "volume": 880,
+      "kd": 88,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "STABLE",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "watertankcleaning",
+      "volume": 880,
+      "kd": 88,
+      "funnel": "MOFU",
+      "intent": "commercial",
+      "trend": "STABLE",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "water tank cleaning dubai",
+      "volume": 390,
+      "kd": 79,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "STABLE",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "tanks cleaning",
+      "volume": 210,
+      "kd": 80,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "SEASONAL",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "water tank cleaning company in dubai",
+      "volume": 170,
+      "kd": 62,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "SEASONAL",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "water tank cleaning services dubai",
+      "volume": 170,
+      "kd": 62,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "SEASONAL",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "water tank cleaning services",
+      "volume": 140,
+      "kd": 82,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "SEASONAL",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "water tank servicing",
+      "volume": 110,
+      "kd": 44,
+      "funnel": "MOFU",
+      "intent": "commercial",
+      "trend": "SEASONAL",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "clean water tank services",
+      "volume": 70,
+      "kd": 64,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "SEASONAL",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "water tank cleaning company",
+      "volume": 70,
+      "kd": 70,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "SEASONAL",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "chemical for cleaning water tank",
+      "volume": 70,
+      "kd": 100,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "STABLE",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "self cleaning water tank",
+      "volume": 30,
+      "kd": 5,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "SEASONAL",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "best water tank cleaning dubai",
+      "volume": 30,
+      "kd": 20,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "SEASONAL",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "water tank cleaning and disinfection",
+      "volume": 30,
+      "kd": 74,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "SEASONAL",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "commercial water tank cleaning",
+      "volume": 20,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "SEASONAL",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "cleaning of underground water tanks",
+      "volume": 20,
+      "kd": 62,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "SEASONAL",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "tank cleaning companies in dubai",
+      "volume": 20,
+      "kd": 43,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "SEASONAL",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "water tank cleaning dubai price",
+      "volume": 20,
+      "kd": 91,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "SEASONAL",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "tank cleaning dubai",
+      "volume": 20,
+      "kd": 96,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "SEASONAL",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "sumpit tank cleaning",
+      "volume": 10,
+      "kd": 57,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "GROWING",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "overhead tank cleaning",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "STABLE",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "oven cleaning dip tank",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "STABLE",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "water storage tank cleaning",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "STABLE",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "carpet cleaning water tank",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "STABLE",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "residential water tank cleaning",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "STABLE",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "industrial water tank cleaning",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "STABLE",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "apartment water tank cleaning",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "STABLE",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "automated tank cleaning",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "STABLE",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "crystal clear water tank cleaning",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "STABLE",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "loft tank cleaning",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "STABLE",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "roof tank cleaning",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "STABLE",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "stp tank cleaning",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "STABLE",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "trough cleaning",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "STABLE",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "water tank cleaning business",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "STABLE",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "water tank cleaning png",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "STABLE",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "professional water tank cleaning",
+      "volume": 10,
+      "kd": 14,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "STABLE",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "dubai municipality approved water tank cleaning companies",
+      "volume": 10,
+      "kd": 26,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "STABLE",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "water tank cleaning system",
+      "volume": 10,
+      "kd": 17,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "STABLE",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "water tank cleaning dubai municipality",
+      "volume": 10,
+      "kd": 84,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "GROWING",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "storage tank cleaning services",
+      "volume": 10,
+      "kd": 23,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "STABLE",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "clean cistern",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "MOFU",
+      "intent": "commercial",
+      "trend": "STABLE",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "easy clean water tank",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "MOFU",
+      "intent": "commercial",
+      "trend": "STABLE",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "domestic water tank cleaning",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "STABLE",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "window cleaning tank",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "STABLE",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "water storage tank cleaning services",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "STABLE",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "window cleaning water tank",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "STABLE",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "domestic water tank cleaning services",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "STABLE",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "urban company water tank cleaning",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "STABLE",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "overhead water tank cleaning",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "STABLE",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "di tank window cleaning",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "STABLE",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "water tank maintenance companies",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "STABLE",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "water tank cleaning services price",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "STABLE",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "water tank cleaning services charges",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "STABLE",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "cleaning tank services",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "STABLE",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "house water tank cleaning",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "STABLE",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "loft water tank cleaning",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "STABLE",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "concrete tank cleaning",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "STABLE",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "water tank cleaning charges",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "STABLE",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "sintex tank cleaning",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "STABLE",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "industrial water tank cleaning services",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "STABLE",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "best water tank cleaning services",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "STABLE",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "cement tank cleaning",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "STABLE",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "domestic tank cleaning",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "STABLE",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "household water tank cleaning",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "STABLE",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "roof water tank cleaning",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "STABLE",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "solar tank cleaning",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "STABLE",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "tank cleaning cost",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "STABLE",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "tank cleaning solution",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "STABLE",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "overhead water tank cleaning near me",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "UNKNOWN",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "underground water tank cleaning services",
+      "volume": 10,
+      "kd": 34,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "STABLE",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "waste water tank cleaning",
+      "volume": 10,
+      "kd": 34,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "STABLE",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "commercial water tank cleaning services",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "SEASONAL",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "aqua water tank cleaning services",
+      "volume": 10,
+      "kd": 36,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "STABLE",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "underground tank cleaner",
+      "volume": 10,
+      "kd": 23,
+      "funnel": "MOFU",
+      "intent": "commercial",
+      "trend": "STABLE",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "water tank cleaning price",
+      "volume": 10,
+      "kd": 77,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "STABLE",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "home water tank cleaning",
+      "volume": 10,
+      "kd": 37,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "STABLE",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "over head tank cleaner",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "MOFU",
+      "intent": "commercial",
+      "trend": "UNKNOWN",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "water tank maintenance",
+      "volume": 10,
+      "kd": 90,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "GROWING",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "cistern cleaning services",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "UNKNOWN",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "rainwater tank cleaning service",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "UNKNOWN",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "urbanclap water tank cleaning",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "UNKNOWN",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "water tank cleaning services urbanclap",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "UNKNOWN",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "underground tank cleaning services",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "UNKNOWN",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "gd water tank cleaning",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "UNKNOWN",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "pristine water tank cleaning",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "UNKNOWN",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "water storage tank maintenance",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "UNKNOWN",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "residential water tank cleaning services",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "UNKNOWN",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "water tank 1000 ltr cleaning price",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "UNKNOWN",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "urbanclap tank cleaning price",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "UNKNOWN",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "sintex tank cleaning services",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "UNKNOWN",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "house water tank cleaning services",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "UNKNOWN",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "manila water septic tank cleaning",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "UNKNOWN",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "water tank cleaning wairarapa",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "UNKNOWN",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "pristine tank cleaning",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "UNKNOWN",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "water well cleaning chemicals",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "UNKNOWN",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "balaji water tank cleaning services",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "UNKNOWN",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "boudha water tank cleaning service",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "UNKNOWN",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "car wash tank cleaning",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "UNKNOWN",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "cement water tank cleaning",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "UNKNOWN",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "cleaning cistern tanks",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "UNKNOWN",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "cleaning jojo tanks",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "UNKNOWN",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "cleaning out water softener tank",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "UNKNOWN",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "cost to clean water tank",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "UNKNOWN",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "ground water tank cleaning",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "UNKNOWN",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "khan tank cleaning",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "UNKNOWN",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "mm water tank clean services",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "UNKNOWN",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "municipal water tank cleaning",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "UNKNOWN",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "overhead tank cleaning machine",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "UNKNOWN",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "overhead water tank cleaning chemicals",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "UNKNOWN",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "sewage chamber cleaning",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "UNKNOWN",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "sintex water tank cleaning services",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "UNKNOWN",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "tank cleaning services charges",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "UNKNOWN",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "under water tank cleaning",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "UNKNOWN",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "water pressure tank maintenance",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "UNKNOWN",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "water tank 500 ltr cleaning price",
+      "volume": 10,
+      "kd": 0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "UNKNOWN",
+      "ai_overview_prone": false,
+      "flags": []
+    }
+  ]
+}
