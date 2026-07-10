@@ -1,0 +1,1283 @@
+{
+  "business": {
+    "name": "SEOblogy",
+    "niche": "Lead generation websites, local SEO and Google Ads management for service businesses",
+    "location": "Dubai, UAE"
+  },
+  "model_used": "claude-sonnet-5",
+  "notes": "The data shows three clear commercial intents beyond the core pillar: comparison-stage web agency shopping, ecommerce-specific development demand, and a strong separate Google Ads/AdWords service line—each deserving its own page to avoid cannibalizing the high-volume 'website design company dubai' pillar. Prioritize the pillar and Google Ads cluster first since they carry the highest volume and clearest transactional intent in the Dubai market.",
+  "mode4_cluster": {
+    "workflow_inputs": {
+      "main_topic": "Website Design & Development Company in Dubai",
+      "problem_clusters": "Website Design & Development Company in Dubai :: Web Design Agency Comparison Shopping, Google Ads and AdWords Management, Ecommerce Website Development"
+    },
+    "pillar_keyword": {
+      "keyword": "website design company dubai",
+      "volume": 1300,
+      "kd": 56,
+      "cpc_low": 1079.17,
+      "cpc_high": 2911.12,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "DECLINING",
+      "peak_months": "Sep",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    "clusters": [
+      {
+        "cluster_name": "Web Design Agency Comparison Shopping",
+        "funnel": "MOFU",
+        "primary_keyword": {
+          "keyword": "web design agency in dubai",
+          "volume": 1300,
+          "kd": 56,
+          "cpc_low": 1152.63,
+          "cpc_high": 3243.67,
+          "funnel": "MOFU",
+          "intent": "commercial",
+          "trend": "DECLINING",
+          "peak_months": "Sep",
+          "ai_overview_prone": false,
+          "flags": [
+            "local"
+          ]
+        },
+        "keywords": [
+          {
+            "keyword": "web design agency in dubai",
+            "volume": 1300,
+            "kd": 56,
+            "cpc_low": 1152.63,
+            "cpc_high": 3243.67,
+            "funnel": "MOFU",
+            "intent": "commercial",
+            "trend": "DECLINING",
+            "peak_months": "Sep",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "website design agency dubai",
+            "volume": 1300,
+            "kd": 56,
+            "cpc_low": 1152.63,
+            "cpc_high": 3243.67,
+            "funnel": "MOFU",
+            "intent": "commercial",
+            "trend": "DECLINING",
+            "peak_months": "Sep",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "web development agency in dubai",
+            "volume": 720,
+            "kd": 57,
+            "cpc_low": 1330.26,
+            "cpc_high": 4335.87,
+            "funnel": "MOFU",
+            "intent": "commercial",
+            "trend": "DECLINING",
+            "peak_months": "Sep",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "best website development companies in dubai",
+            "volume": 10,
+            "kd": 40,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "funnel": "MOFU",
+            "intent": "commercial",
+            "trend": "GROWING",
+            "peak_months": "Sep/Dec/Feb/Mar/Apr/Jun",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "web agencies dubai",
+            "volume": 70,
+            "kd": 60,
+            "cpc_low": 1027.19,
+            "cpc_high": 2727.05,
+            "funnel": "MOFU",
+            "intent": "commercial",
+            "trend": "DECLINING",
+            "peak_months": "Sep/Oct",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          }
+        ],
+        "total_volume": 3400,
+        "questions": [
+          {
+            "q": "what is the difference between a web design agency and a web design company in dubai",
+            "answer_angle": "Explain agency vs in-house company model, then state SEOblogy operates as a full-service agency with in-house designers and developers.",
+            "type": "conversational"
+          },
+          {
+            "q": "which is the best web design agency in dubai",
+            "answer_angle": "Lead with a clear ranking criteria list (portfolio, reviews, pricing, turnaround) and position SEOblogy as a top contender with proof points.",
+            "type": "paa"
+          },
+          {
+            "q": "how do I choose a web development agency near me in dubai",
+            "answer_angle": "Give a 5-point checklist voice assistants can read aloud: license, portfolio, pricing transparency, SEO knowledge, aftercare.",
+            "type": "voice"
+          },
+          {
+            "q": "are dubai web design agencies expensive compared to freelancers",
+            "answer_angle": "Give a real AED price range comparison table for agency vs freelancer to win the snippet.",
+            "type": "conversational"
+          },
+          {
+            "q": "best website development companies in dubai reviews",
+            "answer_angle": "Summarize aggregated review scores and link to case studies for credibility.",
+            "type": "paa"
+          }
+        ],
+        "entities_to_mention": [
+          "UAE Trade License",
+          "Google Partner Agency",
+          "Portfolio",
+          "Turnaround Time",
+          "AED Pricing",
+          "Client Reviews"
+        ]
+      },
+      {
+        "cluster_name": "Google Ads and AdWords Management",
+        "funnel": "MOFU",
+        "primary_keyword": {
+          "keyword": "google ads agency dubai",
+          "volume": 210,
+          "kd": 50,
+          "cpc_low": 818.11,
+          "cpc_high": 3229.7,
+          "funnel": "MOFU",
+          "intent": "commercial",
+          "trend": "DECLINING",
+          "peak_months": "Sep",
+          "ai_overview_prone": false,
+          "flags": [
+            "local"
+          ]
+        },
+        "keywords": [
+          {
+            "keyword": "google ads management services in dubai",
+            "volume": 10,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "GROWING",
+            "peak_months": "Sep/Oct/Nov/Jan/Mar/Apr/Jun",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "google ads services in dubai",
+            "volume": 10,
+            "kd": 1,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "SEASONAL",
+            "peak_months": "Jun",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "google adwords company dubai",
+            "volume": 70,
+            "kd": 48,
+            "cpc_low": 5126.08,
+            "cpc_high": 11990.42,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "DECLINING",
+            "peak_months": "Sep",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "best google ads agency in dubai",
+            "volume": 10,
+            "kd": 9,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "funnel": "MOFU",
+            "intent": "commercial",
+            "trend": "STABLE",
+            "peak_months": "Dec",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "google ads agency dubai",
+            "volume": 210,
+            "kd": 50,
+            "cpc_low": 818.11,
+            "cpc_high": 3229.7,
+            "funnel": "MOFU",
+            "intent": "commercial",
+            "trend": "DECLINING",
+            "peak_months": "Sep",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "google ads management dubai",
+            "volume": 10,
+            "kd": 54,
+            "cpc_low": 1287.14,
+            "cpc_high": 3908.6,
+            "funnel": "MOFU",
+            "intent": "commercial",
+            "trend": "STABLE",
+            "peak_months": "Sep/Dec/Jan/Mar/May",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "google adwords in dubai",
+            "volume": 70,
+            "kd": 48,
+            "cpc_low": 5126.08,
+            "cpc_high": 11990.42,
+            "funnel": "MOFU",
+            "intent": "commercial",
+            "trend": "DECLINING",
+            "peak_months": "Sep",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "effective google ads services in dubai",
+            "volume": 10,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "UNKNOWN",
+            "peak_months": "Jul/Oct",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "google adwords services in dubai",
+            "volume": 10,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "UNKNOWN",
+            "peak_months": "Oct",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "google ads dubai",
+            "volume": 70,
+            "kd": 59,
+            "cpc_low": 1178.93,
+            "cpc_high": 7842.93,
+            "funnel": "MOFU",
+            "intent": "commercial",
+            "trend": "DECLINING",
+            "peak_months": "Sep",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          }
+        ],
+        "total_volume": 480,
+        "questions": [
+          {
+            "q": "how much does google ads management cost in dubai",
+            "answer_angle": "Lead with a monthly management fee range in AED plus typical ad spend minimums.",
+            "type": "conversational"
+          },
+          {
+            "q": "which is the best google ads agency in dubai",
+            "answer_angle": "State Google Partner certification and show verified client ROAS results to win the AI overview.",
+            "type": "paa"
+          },
+          {
+            "q": "how do google ads campaigns work for small businesses in uae",
+            "answer_angle": "Give a simple 3-step voice-friendly explanation: keyword bidding, ad auction, landing page conversion.",
+            "type": "voice"
+          },
+          {
+            "q": "google adwords company near me in dubai",
+            "answer_angle": "Add local business schema and mention on-site consultations across Dubai.",
+            "type": "local"
+          },
+          {
+            "q": "is google ads worth it for service businesses in dubai",
+            "answer_angle": "Cite average CPC and conversion benchmarks for UAE service industries with a clear yes/no answer upfront.",
+            "type": "conversational"
+          },
+          {
+            "q": "what is the difference between google ads and google adwords",
+            "answer_angle": "Clarify AdWords was rebranded to Google Ads in 2018, same platform, avoiding customer confusion.",
+            "type": "paa"
+          }
+        ],
+        "entities_to_mention": [
+          "Google Ads",
+          "Google AdWords",
+          "Google Partner",
+          "PPC",
+          "ROAS",
+          "CPC",
+          "Landing Page Conversion",
+          "Google Analytics"
+        ]
+      },
+      {
+        "cluster_name": "Ecommerce Website Development",
+        "funnel": "BOFU",
+        "primary_keyword": {
+          "keyword": "ecommerce development company in dubai",
+          "volume": 90,
+          "kd": 4,
+          "cpc_low": 0.0,
+          "cpc_high": 0.0,
+          "funnel": "BOFU",
+          "intent": "transactional",
+          "trend": "STABLE",
+          "peak_months": "Nov/Jan/Feb/Mar",
+          "ai_overview_prone": false,
+          "flags": [
+            "local"
+          ]
+        },
+        "keywords": [
+          {
+            "keyword": "ecommerce website development company in dubai",
+            "volume": 50,
+            "kd": 2,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "GROWING",
+            "peak_months": "Dec",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "ecommerce development company in dubai",
+            "volume": 90,
+            "kd": 4,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "STABLE",
+            "peak_months": "Nov/Jan/Feb/Mar",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "ecommerce web development company in dubai",
+            "volume": 30,
+            "kd": 51,
+            "cpc_low": 2545.25,
+            "cpc_high": 4509.22,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "GROWING",
+            "peak_months": "Jun",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "best ecommerce development company in dubai",
+            "volume": 10,
+            "kd": 37,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "SEASONAL",
+            "peak_months": "Mar",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          }
+        ],
+        "total_volume": 180,
+        "questions": [
+          {
+            "q": "how much does it cost to build an ecommerce website in dubai",
+            "answer_angle": "Open with an AED price range broken down by platform (Shopify vs WooCommerce vs custom) to win the featured snippet.",
+            "type": "conversational"
+          },
+          {
+            "q": "which is the best ecommerce development company in dubai",
+            "answer_angle": "State top 3 evaluation criteria and highlight SEOblogy's ecommerce case study with measurable ROI.",
+            "type": "paa"
+          },
+          {
+            "q": "can you build a shopify store for my business in dubai",
+            "answer_angle": "Confirm Shopify expertise, list included services (payment gateway setup, VAT-compliant checkout).",
+            "type": "voice"
+          },
+          {
+            "q": "best ecommerce website builder for uae businesses",
+            "answer_angle": "Compare Shopify, WooCommerce, Magento with a UAE-specific pros/cons table including VAT and local payment gateway support.",
+            "type": "conversational"
+          },
+          {
+            "q": "ecommerce web development company near me in dubai",
+            "answer_angle": "Include local NAP schema and map embed, mention service areas across Dubai districts.",
+            "type": "local"
+          }
+        ],
+        "entities_to_mention": [
+          "Shopify",
+          "WooCommerce",
+          "Magento",
+          "Payment Gateway",
+          "VAT Compliance",
+          "UAE Central Bank",
+          "Telr",
+          "Network International"
+        ]
+      }
+    ]
+  },
+  "mode3_full_website": {
+    "workflow_inputs": {
+      "industry": "Web Development & Digital Marketing",
+      "services_mode3": "Website Design Company, Website Development Company, Web Design Agency Services, Ecommerce Website Development, Google Ads Management, Google AdWords Campaign Setup"
+    },
+    "services": [
+      "Website Design Company",
+      "Website Development Company",
+      "Web Design Agency Services",
+      "Ecommerce Website Development",
+      "Google Ads Management",
+      "Google AdWords Campaign Setup"
+    ]
+  },
+  "mode2_services_hub": {
+    "workflow_inputs": {
+      "main_service": "Website Design, Development & Digital Marketing",
+      "sub_services": "Website Design, Website Development, Ecommerce Website Development, Shopify Store Development, Web Design Agency Consulting, Google Ads Management, Google AdWords Campaign Optimization, PPC Landing Page Design, Local SEO for Service Businesses"
+    }
+  },
+  "mode5_pseo": {
+    "cities_in_data": [
+      {
+        "city": "Dubai",
+        "keywords": [
+          {
+            "keyword": "ecommerce website development company in dubai",
+            "volume": 50,
+            "kd": 2,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "GROWING",
+            "peak_months": "Dec",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "ecommerce development company in dubai",
+            "volume": 90,
+            "kd": 4,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "STABLE",
+            "peak_months": "Nov/Jan/Feb/Mar",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "ecommerce web development company in dubai",
+            "volume": 30,
+            "kd": 51,
+            "cpc_low": 2545.25,
+            "cpc_high": 4509.22,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "GROWING",
+            "peak_months": "Jun",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "google ads management services in dubai",
+            "volume": 10,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "GROWING",
+            "peak_months": "Sep/Oct/Nov/Jan/Mar/Apr/Jun",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "website design company dubai",
+            "volume": 1300,
+            "kd": 56,
+            "cpc_low": 1079.17,
+            "cpc_high": 2911.12,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "DECLINING",
+            "peak_months": "Sep",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "web designing company dubai",
+            "volume": 1300,
+            "kd": 56,
+            "cpc_low": 1079.17,
+            "cpc_high": 2911.12,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "DECLINING",
+            "peak_months": "Sep",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "website development company dubai",
+            "volume": 720,
+            "kd": 57,
+            "cpc_low": 1330.26,
+            "cpc_high": 4335.87,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "DECLINING",
+            "peak_months": "Sep",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "web development company dubai",
+            "volume": 720,
+            "kd": 57,
+            "cpc_low": 1330.26,
+            "cpc_high": 4335.87,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "DECLINING",
+            "peak_months": "Sep",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "google ads services in dubai",
+            "volume": 10,
+            "kd": 1,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "SEASONAL",
+            "peak_months": "Jun",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "web design agency in dubai",
+            "volume": 1300,
+            "kd": 56,
+            "cpc_low": 1152.63,
+            "cpc_high": 3243.67,
+            "funnel": "MOFU",
+            "intent": "commercial",
+            "trend": "DECLINING",
+            "peak_months": "Sep",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "website design agency dubai",
+            "volume": 1300,
+            "kd": 56,
+            "cpc_low": 1152.63,
+            "cpc_high": 3243.67,
+            "funnel": "MOFU",
+            "intent": "commercial",
+            "trend": "DECLINING",
+            "peak_months": "Sep",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "best web development company in dubai",
+            "volume": 260,
+            "kd": 57,
+            "cpc_low": 1240.24,
+            "cpc_high": 3530.68,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "DECLINING",
+            "peak_months": "Jul/Oct/Jan/May",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "web design & development company dubai",
+            "volume": 10,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "SEASONAL",
+            "peak_months": "Jul/Aug/Nov/Feb/Apr/May/Jun",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "google adwords company dubai",
+            "volume": 70,
+            "kd": 48,
+            "cpc_low": 5126.08,
+            "cpc_high": 11990.42,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "DECLINING",
+            "peak_months": "Sep",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "web development agency in dubai",
+            "volume": 720,
+            "kd": 57,
+            "cpc_low": 1330.26,
+            "cpc_high": 4335.87,
+            "funnel": "MOFU",
+            "intent": "commercial",
+            "trend": "DECLINING",
+            "peak_months": "Sep",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "best google ads agency in dubai",
+            "volume": 10,
+            "kd": 9,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "funnel": "MOFU",
+            "intent": "commercial",
+            "trend": "STABLE",
+            "peak_months": "Dec",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "google ads agency dubai",
+            "volume": 210,
+            "kd": 50,
+            "cpc_low": 818.11,
+            "cpc_high": 3229.7,
+            "funnel": "MOFU",
+            "intent": "commercial",
+            "trend": "DECLINING",
+            "peak_months": "Sep",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "google ads management dubai",
+            "volume": 10,
+            "kd": 54,
+            "cpc_low": 1287.14,
+            "cpc_high": 3908.6,
+            "funnel": "MOFU",
+            "intent": "commercial",
+            "trend": "STABLE",
+            "peak_months": "Sep/Dec/Jan/Mar/May",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "google adwords in dubai",
+            "volume": 70,
+            "kd": 48,
+            "cpc_low": 5126.08,
+            "cpc_high": 11990.42,
+            "funnel": "MOFU",
+            "intent": "commercial",
+            "trend": "DECLINING",
+            "peak_months": "Sep",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "best website development companies in dubai",
+            "volume": 10,
+            "kd": 40,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "funnel": "MOFU",
+            "intent": "commercial",
+            "trend": "GROWING",
+            "peak_months": "Sep/Dec/Feb/Mar/Apr/Jun",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "effective google ads services in dubai",
+            "volume": 10,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "UNKNOWN",
+            "peak_months": "Jul/Oct",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "google adwords services in dubai",
+            "volume": 10,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "UNKNOWN",
+            "peak_months": "Oct",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "best ecommerce development company in dubai",
+            "volume": 10,
+            "kd": 37,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "SEASONAL",
+            "peak_months": "Mar",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "google ads dubai",
+            "volume": 70,
+            "kd": 59,
+            "cpc_low": 1178.93,
+            "cpc_high": 7842.93,
+            "funnel": "MOFU",
+            "intent": "commercial",
+            "trend": "DECLINING",
+            "peak_months": "Sep",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "web agencies dubai",
+            "volume": 70,
+            "kd": 60,
+            "cpc_low": 1027.19,
+            "cpc_high": 2727.05,
+            "funnel": "MOFU",
+            "intent": "commercial",
+            "trend": "DECLINING",
+            "peak_months": "Sep/Oct",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          }
+        ],
+        "total_volume": 8370
+      }
+    ],
+    "recommended_city_targets": [
+      "Dubai"
+    ],
+    "notes": "All 25 keywords target Dubai exclusively with no other UAE city or district names present, so pSEO expansion should focus on Dubai neighborhoods (e.g., Business Bay, JLT, Deira) rather than separate emirates."
+  },
+  "keyword_metrics": [
+    {
+      "keyword": "website design company dubai",
+      "volume": 1300,
+      "kd": 56,
+      "cpc_low": 1079.17,
+      "cpc_high": 2911.12,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "DECLINING",
+      "peak_months": "Sep",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "web designing company dubai",
+      "volume": 1300,
+      "kd": 56,
+      "cpc_low": 1079.17,
+      "cpc_high": 2911.12,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "DECLINING",
+      "peak_months": "Sep",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "web design agency in dubai",
+      "volume": 1300,
+      "kd": 56,
+      "cpc_low": 1152.63,
+      "cpc_high": 3243.67,
+      "funnel": "MOFU",
+      "intent": "commercial",
+      "trend": "DECLINING",
+      "peak_months": "Sep",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "website design agency dubai",
+      "volume": 1300,
+      "kd": 56,
+      "cpc_low": 1152.63,
+      "cpc_high": 3243.67,
+      "funnel": "MOFU",
+      "intent": "commercial",
+      "trend": "DECLINING",
+      "peak_months": "Sep",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "website development company dubai",
+      "volume": 720,
+      "kd": 57,
+      "cpc_low": 1330.26,
+      "cpc_high": 4335.87,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "DECLINING",
+      "peak_months": "Sep",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "web development company dubai",
+      "volume": 720,
+      "kd": 57,
+      "cpc_low": 1330.26,
+      "cpc_high": 4335.87,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "DECLINING",
+      "peak_months": "Sep",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "web development agency in dubai",
+      "volume": 720,
+      "kd": 57,
+      "cpc_low": 1330.26,
+      "cpc_high": 4335.87,
+      "funnel": "MOFU",
+      "intent": "commercial",
+      "trend": "DECLINING",
+      "peak_months": "Sep",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "best web development company in dubai",
+      "volume": 260,
+      "kd": 57,
+      "cpc_low": 1240.24,
+      "cpc_high": 3530.68,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "DECLINING",
+      "peak_months": "Jul/Oct/Jan/May",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "google ads agency dubai",
+      "volume": 210,
+      "kd": 50,
+      "cpc_low": 818.11,
+      "cpc_high": 3229.7,
+      "funnel": "MOFU",
+      "intent": "commercial",
+      "trend": "DECLINING",
+      "peak_months": "Sep",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "ecommerce development company in dubai",
+      "volume": 90,
+      "kd": 4,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "STABLE",
+      "peak_months": "Nov/Jan/Feb/Mar",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "google adwords company dubai",
+      "volume": 70,
+      "kd": 48,
+      "cpc_low": 5126.08,
+      "cpc_high": 11990.42,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "DECLINING",
+      "peak_months": "Sep",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "google adwords in dubai",
+      "volume": 70,
+      "kd": 48,
+      "cpc_low": 5126.08,
+      "cpc_high": 11990.42,
+      "funnel": "MOFU",
+      "intent": "commercial",
+      "trend": "DECLINING",
+      "peak_months": "Sep",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "google ads dubai",
+      "volume": 70,
+      "kd": 59,
+      "cpc_low": 1178.93,
+      "cpc_high": 7842.93,
+      "funnel": "MOFU",
+      "intent": "commercial",
+      "trend": "DECLINING",
+      "peak_months": "Sep",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "web agencies dubai",
+      "volume": 70,
+      "kd": 60,
+      "cpc_low": 1027.19,
+      "cpc_high": 2727.05,
+      "funnel": "MOFU",
+      "intent": "commercial",
+      "trend": "DECLINING",
+      "peak_months": "Sep/Oct",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "ecommerce website development company in dubai",
+      "volume": 50,
+      "kd": 2,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "GROWING",
+      "peak_months": "Dec",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "ecommerce web development company in dubai",
+      "volume": 30,
+      "kd": 51,
+      "cpc_low": 2545.25,
+      "cpc_high": 4509.22,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "GROWING",
+      "peak_months": "Jun",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "google ads management services in dubai",
+      "volume": 10,
+      "kd": 0,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "GROWING",
+      "peak_months": "Sep/Oct/Nov/Jan/Mar/Apr/Jun",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "google ads services in dubai",
+      "volume": 10,
+      "kd": 1,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "SEASONAL",
+      "peak_months": "Jun",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "web design & development company dubai",
+      "volume": 10,
+      "kd": 0,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "SEASONAL",
+      "peak_months": "Jul/Aug/Nov/Feb/Apr/May/Jun",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "best google ads agency in dubai",
+      "volume": 10,
+      "kd": 9,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "MOFU",
+      "intent": "commercial",
+      "trend": "STABLE",
+      "peak_months": "Dec",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "google ads management dubai",
+      "volume": 10,
+      "kd": 54,
+      "cpc_low": 1287.14,
+      "cpc_high": 3908.6,
+      "funnel": "MOFU",
+      "intent": "commercial",
+      "trend": "STABLE",
+      "peak_months": "Sep/Dec/Jan/Mar/May",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "best website development companies in dubai",
+      "volume": 10,
+      "kd": 40,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "MOFU",
+      "intent": "commercial",
+      "trend": "GROWING",
+      "peak_months": "Sep/Dec/Feb/Mar/Apr/Jun",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "effective google ads services in dubai",
+      "volume": 10,
+      "kd": 0,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "UNKNOWN",
+      "peak_months": "Jul/Oct",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "google adwords services in dubai",
+      "volume": 10,
+      "kd": 0,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "UNKNOWN",
+      "peak_months": "Oct",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "best ecommerce development company in dubai",
+      "volume": 10,
+      "kd": 37,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "SEASONAL",
+      "peak_months": "Mar",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    }
+  ]
+}
