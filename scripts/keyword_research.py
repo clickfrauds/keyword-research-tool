@@ -23,8 +23,12 @@ Required env vars (set as GitHub Secrets):
 
 Optional env vars (have defaults):
     SEED_KEYWORDS   (comma-separated, e.g. "ac repair dubai,ac not cooling")
-    LOCATION_ID     (default 2784 = United Arab Emirates)
-    LANGUAGE_ID     (default 1000 = English, 1019 = Arabic)
+    TARGET_LOCATION (free text, e.g. "Dubai, UAE" / "Lahore, Pakistan" —
+                     auto-resolved to a Google geo target id via the API.
+                     UNIVERSAL: no country is hardcoded anywhere.)
+    LOCATION_ID     (explicit override — skips auto-resolution)
+    LANGUAGE_ID     (explicit override — otherwise auto-detected from the
+                     seed keywords' script, e.g. Arabic seeds → Arabic)
 
 OUTPUT:
     keyword_data_output.txt
@@ -33,6 +37,7 @@ OUTPUT:
 """
 
 import os
+import re
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
 
@@ -48,14 +53,13 @@ SEED_KEYWORDS = [
     ).split(",")
     if kw.strip()
 ]
-LOCATION_ID = os.environ.get("LOCATION_ID", "2784")   # UAE
-LANGUAGE_ID = os.environ.get("LANGUAGE_ID", "1000")   # English
+# UNIVERSAL geo/language: nothing hardcoded. Explicit ids win; otherwise the
+# free-text TARGET_LOCATION is resolved via the Google Ads API and the
+# language is detected from the seed keywords themselves.
+TARGET_LOCATION = os.environ.get("TARGET_LOCATION", "").strip()
+LOCATION_ID = os.environ.get("LOCATION_ID", "").strip()
+LANGUAGE_ID = os.environ.get("LANGUAGE_ID", "").strip()
 OUTPUT_FILE  = "keyword_data_output.txt"
-
-MONTH_NAMES = [
-    "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
-]
 
 # ============================================================
 # TREND HELPERS — pure math, no domain knowledge
@@ -66,54 +70,116 @@ def classify_trend(monthly_volumes):
     Takes a list of up to 12 monthly search volumes (oldest → newest)
     and returns one of: GROWING / DECLINING / SEASONAL / STABLE
 
-    Logic:
-      - SEASONAL : max month is >= 2.5x the min month (big spike exists)
-      - GROWING  : last 3 months average > first 3 months average by 20%+
-      - DECLINING: first 3 months average > last 3 months average by 20%+
+    GROWING/DECLINING are checked FIRST — a keyword growing steadily 2.5x
+    used to be mislabeled SEASONAL just because its max/min ratio crossed
+    the spike threshold. The middle-3 average must sit between the ends so
+    a single seasonal spike can't fake a trend. Zero months are KEPT: a
+    dead off-season is the strongest seasonal signal there is.
+
+      - GROWING  : last-3 avg >= 1.2x first-3 avg, middle-3 in between
+      - DECLINING: mirror image
+      - SEASONAL : dead (0) months alongside live ones, or max >= 2.5x min
       - STABLE   : everything else
     """
-    vols = [v for v in monthly_volumes if v is not None and v > 0]
-    if len(vols) < 3:
+    vols = [v for v in monthly_volumes if v is not None]
+    nonzero = [v for v in vols if v > 0]
+    if len(nonzero) < 3:
         return "UNKNOWN"
 
-    max_v = max(vols)
-    min_v = min(vols)
-
-    # Seasonal: huge peak relative to trough
-    if min_v > 0 and max_v / min_v >= 2.5:
-        return "SEASONAL"
-
-    # Need at least 6 months for growing/declining detection
     if len(vols) >= 6:
         first_avg = sum(vols[:3]) / 3
         last_avg  = sum(vols[-3:]) / 3
+        mid_start = (len(vols) - 3) // 2
+        mid_avg   = sum(vols[mid_start:mid_start + 3]) / 3
         if first_avg > 0:
-            change = (last_avg - first_avg) / first_avg
-            if change >= 0.20:
+            if last_avg >= first_avg * 1.2 and mid_avg >= first_avg * 0.95:
                 return "GROWING"
-            if change <= -0.20:
+            if first_avg >= last_avg * 1.2 and mid_avg <= first_avg * 1.05:
                 return "DECLINING"
+
+    if len(vols) > len(nonzero) and max(nonzero) >= 10:
+        return "SEASONAL"
+    if min(nonzero) > 0 and max(nonzero) / min(nonzero) >= 2.5:
+        return "SEASONAL"
 
     return "STABLE"
 
 
-def peak_months(monthly_volumes):
-    """
-    Returns the names of months whose volume is >= 80% of the max volume.
-    E.g. for AC repair in UAE, summer months will dominate.
-    Returns empty string if no meaningful data.
-    """
-    vols = monthly_volumes  # list of 12 values, some may be None
-    if not vols:
-        return ""
+# Google Ads MonthOfYear enum name → short label. Positional lookup was wrong:
+# the API's 12-month window starts wherever "12 months ago" falls (e.g. a
+# Jul→Jun window), so index 0 is almost never January.
+MONTH_ENUM_ABBR = {
+    "JANUARY": "Jan", "FEBRUARY": "Feb", "MARCH": "Mar", "APRIL": "Apr",
+    "MAY": "May", "JUNE": "Jun", "JULY": "Jul", "AUGUST": "Aug",
+    "SEPTEMBER": "Sep", "OCTOBER": "Oct", "NOVEMBER": "Nov", "DECEMBER": "Dec",
+}
 
-    clean = [(i, v) for i, v in enumerate(vols) if v is not None and v > 0]
+
+def peak_months(monthly_data):
+    """
+    Returns the names of months whose volume is >= 80% of the max volume,
+    using each row's OWN month enum from the API (never list position).
+    Takes the sorted monthly_search_volumes objects. Empty string if no data.
+    """
+    clean = []
+    for m in monthly_data:
+        v = m.monthly_searches
+        name = MONTH_ENUM_ABBR.get(getattr(m.month, "name", str(m.month)), "")
+        if v and v > 0 and name:
+            clean.append((name, v))
     if not clean:
         return ""
 
     max_v = max(v for _, v in clean)
-    peaks = [MONTH_NAMES[i] for i, v in clean if v >= 0.80 * max_v]
-    return "/".join(peaks)
+    return "/".join(name for name, v in clean if v >= 0.80 * max_v)
+
+
+# ============================================================
+# UNIVERSAL GEO + LANGUAGE RESOLUTION — no market hardcoded
+# ============================================================
+
+def detect_language_id(seeds):
+    """Pick the Keyword Planner language from the seeds' own script.
+    Explicit LANGUAGE_ID env always wins. Extend the map as markets grow."""
+    text = " ".join(seeds)
+    if re.search(r"[؀-ۿ]", text):      # Arabic script
+        return "1019", "Arabic (auto-detected from seeds)"
+    if re.search(r"[ऀ-ॿ]", text):      # Devanagari
+        return "1023", "Hindi (auto-detected from seeds)"
+    return "1000", "English (default)"
+
+
+def resolve_location_id(client):
+    """Resolve free-text TARGET_LOCATION ('Dubai, UAE', 'Lahore', 'United
+    Kingdom' — any market) to a geo target constant id via the official
+    GeoTargetConstantService. Returns None → worldwide (no geo filter)."""
+    if LOCATION_ID:
+        print(f"🌍 Location: explicit LOCATION_ID={LOCATION_ID} (env override)")
+        return LOCATION_ID
+    loc = TARGET_LOCATION
+    if not loc or loc.lower() in ("n/a", "na", "none", "worldwide", "global", "-"):
+        print("🌍 Location: none given — pulling WORLDWIDE data.")
+        return None
+    try:
+        svc = client.get_service("GeoTargetConstantService")
+        parts = [p.strip() for p in loc.split(",") if p.strip()]
+        for query in [loc] + parts:
+            request = client.get_type("SuggestGeoTargetConstantsRequest")
+            request.locale = "en"
+            request.location_names.names.append(query)
+            resp = svc.suggest_geo_target_constants(request=request)
+            suggestions = list(resp.geo_target_constant_suggestions)
+            if suggestions:
+                geo = suggestions[0].geo_target_constant
+                print(f"🌍 Location resolved: '{query}' → {geo.name}, "
+                      f"{geo.country_code} (geo id {geo.id})")
+                return str(geo.id)
+    except Exception as e:
+        print(f"⚠️ Geo lookup failed ({e}) — continuing WORLDWIDE (no geo filter).")
+        return None
+    print(f"⚠️ Could not resolve '{loc}' to a Google geo target — "
+          f"continuing WORLDWIDE. Set LOCATION_ID env to override.")
+    return None
 
 
 # ============================================================
@@ -128,10 +194,18 @@ def main():
     client = GoogleAdsClient.load_from_env()
     keyword_plan_idea_service = client.get_service("KeywordPlanIdeaService")
 
+    # Universal targeting: resolve geo from the form's free-text location and
+    # language from the seeds' own script — works for any market on earth.
+    location_id = resolve_location_id(client)
+    language_id, lang_label = (LANGUAGE_ID, f"explicit LANGUAGE_ID={LANGUAGE_ID}") \
+        if LANGUAGE_ID else detect_language_id(SEED_KEYWORDS)
+    print(f"🗣️ Language: {lang_label}")
+
     request = client.get_type("GenerateKeywordIdeasRequest")
     request.customer_id = CUSTOMER_ID
-    request.language = f"languageConstants/{LANGUAGE_ID}"
-    request.geo_target_constants.append(f"geoTargetConstants/{LOCATION_ID}")
+    request.language = f"languageConstants/{language_id}"
+    if location_id:
+        request.geo_target_constants.append(f"geoTargetConstants/{location_id}")
     request.keyword_plan_network = (
         client.enums.KeywordPlanNetworkEnum.GOOGLE_SEARCH
     )
@@ -184,7 +258,7 @@ def main():
             monthly_vols = []
 
         trend      = classify_trend(monthly_vols)
-        peak       = peak_months(monthly_vols)
+        peak       = peak_months(monthly_data)
         # ──────────────────────────────────────────────────────────────────
 
         if avg_searches > 0:

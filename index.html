@@ -82,6 +82,28 @@
   }
   #report { margin-top: 16px; }
   #report iframe { width: 100%; height: 80vh; border: 1px solid var(--line); border-radius: 8px; }
+  /* ── Seed keyword guide ── */
+  #seed-guide { margin-top: 8px; }
+  .sg-title { font-size: 18px; margin: 0 0 6px; }
+  .sg-sub { font-size: 13px; color: var(--muted); margin: 0 0 18px; }
+  .sg-card { background: var(--paper); border: 1px solid var(--line); border-left: 3px solid var(--accent); border-radius: 0 8px 8px 0; padding: 14px 16px; margin-bottom: 14px; }
+  .sg-head { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin-bottom: 8px; }
+  .sg-badge { font-family: var(--mono); font-size: 11px; font-weight: 700; color: var(--accent); background: var(--accent-soft); padding: 3px 9px; border-radius: 4px; }
+  .sg-eg { font-size: 12px; color: var(--muted); }
+  .sg-formula { font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: .02em; margin-bottom: 8px; }
+  .sg-seeds { display: block; font-family: var(--mono); font-size: 12px; background: var(--accent-soft); color: var(--ink); padding: 9px 11px; border-radius: 6px; margin-bottom: 10px; line-height: 1.6; }
+  .sg-tips { font-size: 12.5px; color: var(--muted); line-height: 1.7; margin-bottom: 10px; }
+  .sg-tips b { color: var(--ink); }
+  .sg-use { margin-top: 0; width: auto; font-size: 12px; padding: 7px 14px; background: var(--paper); color: var(--accent); border: 1px solid var(--accent); }
+  .sg-check { font-size: 12.5px; color: var(--muted); border: 1px dashed var(--line); border-radius: 8px; padding: 11px 14px; line-height: 1.7; }
+  .sg-check b { color: var(--ink); }
+  .sg-niche { font-size: 12.5px; color: var(--muted); margin-bottom: 8px; }
+  .sg-niche b { color: var(--ink); }
+  .sg-flow { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 14px 18px; margin-bottom: 14px; }
+  .sg-flow h3 { font-size: 12px; margin: 0 0 8px; font-family: var(--mono); text-transform: uppercase; letter-spacing: .08em; color: var(--accent); }
+  .sg-flow ol { margin: 0; padding-left: 20px; font-size: 13px; color: var(--muted); line-height: 1.75; }
+  .sg-flow b { color: var(--ink); }
+  .sg-section { font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin: 26px 0 10px; border-bottom: 1px solid var(--line); padding-bottom: 6px; }
 </style>
 </head>
 <body>
@@ -128,7 +150,171 @@
   <div id="report-actions" hidden>
     <button id="download-btn" type="button">Download HTML</button>
   </div>
+
+  <!-- Mode 4 feed: auto-generated raw link of website_builder_inputs.json -->
+  <div id="seo-link-row" hidden style="margin-top:14px; padding:12px 14px; border:1px solid var(--line); border-radius:8px; background:var(--paper);">
+    <div style="font-size:12px; font-weight:600; margin-bottom:6px;">
+      Mode 4 SEO data link
+      <span style="opacity:.6; font-weight:400">(website builder ke "SEO data URL" field mein paste karein)</span>
+    </div>
+    <div style="display:flex; gap:8px;">
+      <input id="seo-link-input" readonly style="font-family:var(--mono); font-size:12px;">
+      <button id="seo-copy-btn" type="button" style="margin-top:0; width:auto; background:var(--paper); color:var(--accent); border:1px solid var(--accent); white-space:nowrap;">Copy</button>
+    </div>
+  </div>
+
+  <!-- Google Ads deliverables: Editor CSV + negative-guard script -->
+  <div id="ads-links-row" hidden style="margin-top:14px; padding:12px 14px; border:1px solid var(--line); border-radius:8px; background:var(--paper);">
+    <div style="font-size:12px; font-weight:600; margin-bottom:8px;">
+      Google Ads deliverables
+      <span style="opacity:.6; font-weight:400">(CSV → Ads Editor mein paste/import; Script → Tools &gt; Scripts)</span>
+    </div>
+    <div style="display:flex; gap:8px; flex-wrap:wrap;">
+      <a id="ads-csv-link" hidden download target="_blank" rel="noopener" style="display:inline-block; font-size:13px; font-weight:600; color:var(--accent); border:1px solid var(--accent); border-radius:8px; padding:8px 14px; text-decoration:none;">⬇️ Ads Editor CSV</a>
+      <a id="guard-js-link" hidden download target="_blank" rel="noopener" style="display:inline-block; font-size:13px; font-weight:600; color:var(--accent); border:1px solid var(--accent); border-radius:8px; padding:8px 14px; text-decoration:none;">⬇️ Negative Guard Script</a>
+    </div>
+  </div>
+
   <div id="report"></div>
+
+  <!-- ── GUIDE: seed formulas, business templates & best practices ── -->
+  <div id="seed-guide">
+    <div class="eyebrow" style="margin-top:56px">Guide</div>
+    <h2 class="sg-title">How to use this tool — seed formulas, templates &amp; best practices</h2>
+    <p class="sg-sub">Get the first step right and everything downstream — scoring, ad groups, SEO clusters, website content — comes out right on its own. Give <b>3–6 seed keywords, one from each pattern</b> shown on the card. Click <b>Use template</b> to fill the form (niche, location, seeds, deliverable type), then adjust it for your business.</p>
+
+    <div class="sg-check" style="margin-bottom:22px">
+      <b>Every run, 5 rules:</b> 3–6 seeds &nbsp;·&nbsp; no brand names &nbsp;·&nbsp; no single generic words ("cleaning" ❌ → "sofa cleaning dubai" ✅) &nbsp;·&nbsp; one language per run (do a separate Arabic run — the data comes back in Arabic too) &nbsp;·&nbsp; location as free text ("Lahore, Pakistan", or "N/A" for worldwide) — the geo target resolves automatically
+    </div>
+
+    <div class="sg-section">Business type templates</div>
+
+    <div class="sg-card">
+      <div class="sg-head"><span class="sg-badge">1 · LOCAL SERVICE</span><span class="sg-eg">AC repair company — Dubai, UAE</span></div>
+      <div class="sg-formula">core service · service + city · price/cost modifier · problem phrase · urgency</div>
+      <div class="sg-niche"><b>Niche:</b> <span class="sg-niche-text">AC repair, installation and maintenance company for homes and offices</span><span class="sg-loc" hidden>Dubai, UAE</span></div>
+      <code class="sg-seeds">ac repair dubai, ac not cooling, ac service cost dubai, emergency ac repair, ac maintenance dubai</code>
+      <div class="sg-tips">
+        <div>• Deliverable: <b>Both</b> — the Ads package (campaigns, negatives, guard script) and the SEO package (Mode 4 cluster site) in one run.</div>
+        <div>• Problem phrases ("ac not cooling") pull the diagnostic long-tail that becomes your strongest SEO pages.</div>
+        <div>• Small niche? Set <b>Max new ad groups to 1–2</b> — the tool never pads to look thorough.</div>
+      </div>
+      <button type="button" class="sg-use" data-rt="both">Use template</button>
+    </div>
+
+    <div class="sg-card">
+      <div class="sg-head"><span class="sg-badge">2 · MULTI-TRADE SERVICES</span><span class="sg-eg">home maintenance company — this card = the plumbing run</span></div>
+      <div class="sg-formula">run each trade SEPARATELY — clone this run for electrical, carpentry, painting…</div>
+      <div class="sg-niche"><b>Niche:</b> <span class="sg-niche-text">Plumbing repair and installation services for villas and apartments</span><span class="sg-loc" hidden>Dubai, UAE</span></div>
+      <code class="sg-seeds">plumber dubai, emergency plumber near me, plumbing repair cost, leaking pipe fix, water heater installation</code>
+      <div class="sg-tips">
+        <div>• <b>Never mix trades in one run</b> — the 400-keyword cap and the percentile floor squeeze out each trade's long-tail and the clusters go shallow.</div>
+        <div>• Ads: each run = its own campaign (per-trade budget control). Adding a trade to a live account later? Fill the <b>Existing campaign / ad groups</b> fields — 2-way negative siloing is automatic.</div>
+        <div>• SEO: each run's Mode 4 JSON builds its own site section via parent slug (<b>/plumbing/, /electrical/</b>). Umbrella homepage → Mode 3.</div>
+      </div>
+      <button type="button" class="sg-use" data-rt="both">Use template</button>
+    </div>
+
+    <div class="sg-card">
+      <div class="sg-head"><span class="sg-badge">3 · ECOMMERCE STORE</span><span class="sg-eg">online perfume store — UAE</span></div>
+      <div class="sg-formula">buy + product · product + price · best X for Y · category / type · occasion / gifting</div>
+      <div class="sg-niche"><b>Niche:</b> <span class="sg-niche-text">Online store selling perfumes and fragrances with UAE-wide delivery</span><span class="sg-loc" hidden>United Arab Emirates</span></div>
+      <code class="sg-seeds">buy perfume online uae, perfume price in dubai, best perfume for men, oud perfume, perfume gift set for women</code>
+      <div class="sg-tips">
+        <div>• <b>One run per main category</b> (perfumes ≠ watches) — one category = one clean cluster architecture.</div>
+        <div>• Never seed your own brand or competitor brands — competitors get auto-excluded and auto-negatived.</div>
+        <div>• SEO clusters become <b>category pages + buying guides</b>; "best X for Y" seeds create the MOFU comparison content that converts.</div>
+      </div>
+      <button type="button" class="sg-use" data-rt="both">Use template</button>
+    </div>
+
+    <div class="sg-card">
+      <div class="sg-head"><span class="sg-badge">4 · BLOG / CONTENT SITE</span><span class="sg-eg">home improvement blog — worldwide</span></div>
+      <div class="sg-formula">how-to question · cost query · best X comparison · DIY topic · ideas / inspiration</div>
+      <div class="sg-niche"><b>Niche:</b> <span class="sg-niche-text">Home improvement blog covering repairs, renovation costs and DIY guides</span><span class="sg-loc" hidden>N/A</span></div>
+      <code class="sg-seeds">how to fix a leaking tap, bathroom renovation cost, best water heater for home, diy wall painting tips, small kitchen design ideas</code>
+      <div class="sg-tips">
+        <div>• Deliverable: <b>SEO</b> — a blog doesn't need the ads package; question/informational keywords are the content gold here.</div>
+        <div>• Question seeds make the tool generate <b>AI-overview / voice questions with answer angles</b> — they become the H2/H3 headings on your pages.</div>
+        <div>• Monetizing with affiliate? Add <b>"best X"</b> comparison seeds — MOFU clusters are where the revenue is. Location <b>N/A</b> = worldwide data.</div>
+      </div>
+      <button type="button" class="sg-use" data-rt="seo">Use template</button>
+    </div>
+
+    <div class="sg-card">
+      <div class="sg-head"><span class="sg-badge">5 · CLINIC / HEALTHCARE</span><span class="sg-eg">dental clinic — Lahore, Pakistan</span></div>
+      <div class="sg-formula">practitioner + city · treatment + price · treatment cost · condition / symptom</div>
+      <div class="sg-niche"><b>Niche:</b> <span class="sg-niche-text">Dental clinic offering implants, braces, whitening and general dentistry</span><span class="sg-loc" hidden>Lahore, Pakistan</span></div>
+      <code class="sg-seeds">dentist lahore, teeth whitening price lahore, dental implant cost, braces for teeth, tooth pain treatment</code>
+      <div class="sg-tips">
+        <div>• Symptom seeds ("tooth pain") pull TOFU keywords: <b>excluded from ads automatically</b>, but they power the SEO cluster pages that bring patients in.</div>
+        <div>• If one treatment matters most commercially (implants), give it its <b>own run</b> for depth.</div>
+        <div>• Same pattern works for any clinic — physio, derma, vet — just swap the treatments.</div>
+      </div>
+      <button type="button" class="sg-use" data-rt="both">Use template</button>
+    </div>
+
+    <div class="sg-card">
+      <div class="sg-head"><span class="sg-badge">6 · B2B / SAAS</span><span class="sg-eg">HR software — GCC market</span></div>
+      <div class="sg-formula">category + market · product + price · best X for business · feature / use-case · vs comparison</div>
+      <div class="sg-niche"><b>Niche:</b> <span class="sg-niche-text">Cloud HR and payroll software for small and medium businesses</span><span class="sg-loc" hidden>United Arab Emirates</span></div>
+      <code class="sg-seeds">hr software uae, payroll software price, best hr software for small business, employee attendance system, hr software vs excel</code>
+      <div class="sg-tips">
+        <div>• Low volumes are <b>normal in B2B</b> — the tool scores against the dataset itself (no absolute floors), so relative opportunity still surfaces.</div>
+        <div>• <b>"vs / comparison"</b> seeds create the MOFU clusters that actually convert in long sales cycles.</div>
+        <div>• Check the <b>CPC columns</b> in the report before committing ads budget — B2B clicks are expensive; SEO often wins on cost.</div>
+      </div>
+      <button type="button" class="sg-use" data-rt="both">Use template</button>
+    </div>
+
+    <div class="sg-card">
+      <div class="sg-head"><span class="sg-badge">7 · REAL ESTATE</span><span class="sg-eg">property agency — Dubai, UAE</span></div>
+      <div class="sg-formula">inventory + intent (rent/buy) · area-specific · price query · market segment</div>
+      <div class="sg-niche"><b>Niche:</b> <span class="sg-niche-text">Real estate agency for buying, selling and renting apartments and villas</span><span class="sg-loc" hidden>Dubai, UAE</span></div>
+      <code class="sg-seeds">apartments for rent dubai, buy villa dubai, studio for rent in marina, property prices dubai, off plan projects dubai</code>
+      <div class="sg-tips">
+        <div>• <b>Rent vs buy are different intents</b> — expect the tool to silo them into separate ad groups with cross-negatives automatically.</div>
+        <div>• Area names in seeds ("marina") feed <b>Mode 5 pSEO</b>: the JSON lists areas ranked by search demand for per-area pages.</div>
+      </div>
+      <button type="button" class="sg-use" data-rt="both">Use template</button>
+    </div>
+
+    <div class="sg-card">
+      <div class="sg-head"><span class="sg-badge">8 · EDUCATION / COACHING</span><span class="sg-eg">IELTS academy — Karachi, Pakistan</span></div>
+      <div class="sg-formula">course + city · fees / price · best X · online variant · how-to (content)</div>
+      <div class="sg-niche"><b>Niche:</b> <span class="sg-niche-text">IELTS and English language test preparation academy with online classes</span><span class="sg-loc" hidden>Karachi, Pakistan</span></div>
+      <code class="sg-seeds">ielts preparation karachi, ielts coaching fees, best ielts academy, ielts online classes pakistan, how to prepare for ielts at home</code>
+      <div class="sg-tips">
+        <div>• Use the words your market uses — here <b>"fees"</b> is the price modifier, not "price".</div>
+        <div>• Serving remote students too? Do a <b>second run with location N/A</b> (worldwide) for the online demand — different volumes, different competition.</div>
+        <div>• "how to prepare" seeds feed the SEO content plan (TOFU articles that rank and funnel into the course pages).</div>
+      </div>
+      <button type="button" class="sg-use" data-rt="both">Use template</button>
+    </div>
+
+    <div class="sg-section">Google Ads — best practices after the run</div>
+    <div class="sg-flow">
+      <ol>
+        <li><b>Import the CSV:</b> download <b>Ads Editor CSV</b> from the result page → Google Ads Editor → Account → Import. Campaigns, ad groups, keywords (Phrase/Exact — never Broad), intent expansions and the anti-cannibalization negatives all land in one import. Review, then post.</li>
+        <li><b>Install the guard script:</b> Google Ads → Tools → Scripts → paste the <b>Negative Guard Script</b> → run with <b>DRY_RUN = true for 2–3 days</b> → read the logs → set it to false and schedule hourly. Search terms with conversions are never banned.</li>
+        <li><b>Build matching landing pages:</b> <code>landing_pages.json</code> (in the run artifact) gives ready Mode 1 generator inputs per ad-group theme — message match raises Quality Score and lowers CPC.</li>
+        <li><b>Account already running?</b> Fill <b>Existing campaign name + Existing ad groups</b> before the run — new groups slot into that campaign with 2-way negative siloing, plus a list of negatives to add to your old groups.</li>
+        <li><b>Who decides how many ad groups?</b> The data does (one group per genuinely distinct commercial theme — if it only supports 4, you get 4), you cap it (<b>Max new ad groups</b>), and Python enforces it (every keyword in exactly one group, empties dropped).</li>
+      </ol>
+    </div>
+
+    <div class="sg-section">SEO — best practices after the run</div>
+    <div class="sg-flow">
+      <ol>
+        <li><b>Copy the link:</b> the result page shows the <b>Mode 4 SEO data link</b> the moment the run is ready — no manual file handling.</li>
+        <li><b>Feed the website builder:</b> choose Mode 4 → paste the link into <b>SEO data URL</b> → leave Main topic and Problem clusters <b>blank</b>; they fill themselves from real search demand.</li>
+        <li><b>What each page gets:</b> its own primary keyword (forced into the hero title and first paragraph), the top-10 target keywords with volumes, and real customer questions as <b>H2 sections and H3 FAQs</b> — each answer's first line follows its answer angle, the pattern that wins featured snippets and AI overviews. The pillar page gets the pillar keyword and its own questions.</li>
+        <li><b>Multi-section sites:</b> one run per section, each with its own <b>parent slug</b> (/plumbing/, /electrical/).</li>
+        <li><b>Same JSON, other modes:</b> it also carries a demand-backed services list (<b>Mode 3</b>) and city targets (<b>Mode 5</b>) — reuse the same link when you run those modes.</li>
+        <li><b>Cluster count is data-driven:</b> 3–8, based on the distinct problems actually visible in the keywords — never padded, and one keyword never appears in two clusters (cannibalization guard).</li>
+      </ol>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -158,6 +344,8 @@
 
     submitBtn.disabled = true;
     reportActionsEl.hidden = true;
+    document.getElementById("seo-link-row").hidden = true;
+    document.getElementById("ads-links-row").hidden = true;
     reportEl.innerHTML = "";
     setStatus("Starting your report...", false);
 
@@ -197,6 +385,21 @@
         statusEl.hidden = true;
         reportActionsEl.hidden = false;
 
+        // SEO runs: show the auto-generated Mode 4 JSON link, ready to copy
+        if (json.seo_json_url) {
+          document.getElementById("seo-link-input").value = json.seo_json_url;
+          document.getElementById("seo-link-row").hidden = false;
+        }
+
+        // Ads runs: direct downloads for the Editor CSV + guard script
+        const csvA = document.getElementById("ads-csv-link");
+        const jsA = document.getElementById("guard-js-link");
+        csvA.hidden = !json.ads_csv_url;
+        jsA.hidden = !json.guard_js_url;
+        if (json.ads_csv_url) csvA.href = json.ads_csv_url;
+        if (json.guard_js_url) jsA.href = json.guard_js_url;
+        document.getElementById("ads-links-row").hidden = !(json.ads_csv_url || json.guard_js_url);
+
         const iframe = document.createElement("iframe");
         iframe.srcdoc = json.html; // set as a property, not a string attribute — no escaping needed
         reportEl.innerHTML = "";
@@ -222,6 +425,33 @@
     };
 
     setTimeout(poll, POLL_INTERVAL_MS);
+  });
+
+  /* Seed guide: "Use template" fills the form (niche, location, seeds,
+     deliverable) so the first step starts right — then adjust and run */
+  document.querySelectorAll(".sg-use").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const card = btn.closest(".sg-card");
+      document.getElementById("seed_keywords").value = card.querySelector(".sg-seeds").textContent.trim();
+      document.getElementById("research_type").value = btn.dataset.rt;
+      const niche = card.querySelector(".sg-niche-text");
+      if (niche) document.getElementById("niche_description").value = niche.textContent.trim();
+      const loc = card.querySelector(".sg-loc");
+      if (loc) document.getElementById("target_location").value = loc.textContent.trim();
+      document.getElementById("business_name").scrollIntoView({ behavior: "smooth", block: "center" });
+      btn.textContent = "Filled ✓";
+      setTimeout(() => { btn.textContent = "Use template"; }, 1500);
+    });
+  });
+
+  document.getElementById("seo-copy-btn").addEventListener("click", () => {
+    const inp = document.getElementById("seo-link-input");
+    const btn = document.getElementById("seo-copy-btn");
+    inp.select();
+    navigator.clipboard.writeText(inp.value).then(() => {
+      btn.textContent = "Copied ✓";
+      setTimeout(() => { btn.textContent = "Copy"; }, 1500);
+    }).catch(() => { document.execCommand("copy"); });
   });
 
   downloadBtn.addEventListener("click", () => {

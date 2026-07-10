@@ -39,6 +39,14 @@ on:
         description: "Max NEW ad groups (chhote/niche keyword sets ke liye 1-2 rakhen)"
         required: false
         default: '10'
+      location_id:
+        description: "OPTIONAL: explicit Google geo target id — blank = auto-resolve from target_location (universal, any market)"
+        required: false
+        default: ''
+      language_id:
+        description: "OPTIONAL: explicit Google language id — blank = auto-detect from seed keywords' script"
+        required: false
+        default: ''
 
 # Needed so Stage 5 can push the finished report to the results-data branch
 # using the automatic GITHUB_TOKEN (no extra secret required for this part).
@@ -76,6 +84,11 @@ jobs:
           GOOGLE_ADS_CUSTOMER_ID: ${{ secrets.GOOGLE_ADS_CUSTOMER_ID }}
           GOOGLE_ADS_USE_PROTO_PLUS: "true"
           SEED_KEYWORDS: ${{ github.event.inputs.seed_keywords }}
+          # Universal targeting: geo auto-resolves from the free-text location,
+          # language auto-detects from the seeds. Explicit ids override both.
+          TARGET_LOCATION: ${{ github.event.inputs.target_location }}
+          LOCATION_ID: ${{ github.event.inputs.location_id }}
+          LANGUAGE_ID: ${{ github.event.inputs.language_id }}
         run: python scripts/keyword_research.py
 
       - name: Stage 2 - Filter and cluster keywords (niche-agnostic)

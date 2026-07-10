@@ -43,7 +43,29 @@ FILES_TO_PUSH = [
     ("keyword_strategy_report.html", "html"),
     ("keyword_strategy_targets.csv", "csv"),
     ("keyword_strategy.json", "json"),
+    # Mode 4 feed: publishing this here means the raw link auto-generates —
+    # no more manual artifact-download + client-data commit. The frontend
+    # shows the link (via check-status.js) the moment the run is ready.
+    ("website_builder_inputs.json", "seo.json"),
+    # Google Ads deliverables: paste-ready Editor CSV + the negative-guard
+    # Ads Script — downloadable straight from the result page, no GitHub
+    # artifact digging needed.
+    ("google_ads_editor.csv", "editor.csv"),
+    ("negative_guard_script.js", "guard.js"),
 ]
+
+
+def _existing_sha(url):
+    """Contents API needs the current sha to UPDATE a file — without it a
+    re-run with the same REQUEST_ID fails with 422."""
+    req = urllib.request.Request(f"{url}?ref={RESULTS_BRANCH}")
+    req.add_header("Authorization", f"Bearer {GITHUB_TOKEN}")
+    req.add_header("Accept", "application/vnd.github+json")
+    try:
+        with urllib.request.urlopen(req) as resp:
+            return json.loads(resp.read().decode("utf-8")).get("sha")
+    except (urllib.error.HTTPError, urllib.error.URLError):
+        return None
 
 
 def push_file(local_path, remote_ext):
@@ -57,11 +79,15 @@ def push_file(local_path, remote_ext):
     remote_path = f"results/{REQUEST_ID}.{remote_ext}"
     url = f"https://api.github.com/repos/{GITHUB_REPOSITORY}/contents/{remote_path}"
 
-    body = json.dumps({
+    payload = {
         "message": f"Add {remote_ext} result for {REQUEST_ID}",
         "content": content_b64,
         "branch": RESULTS_BRANCH,
-    }).encode("utf-8")
+    }
+    sha = _existing_sha(url)
+    if sha:
+        payload["sha"] = sha
+    body = json.dumps(payload).encode("utf-8")
 
     req = urllib.request.Request(url, data=body, method="PUT")
     req.add_header("Authorization", f"Bearer {GITHUB_TOKEN}")
@@ -94,6 +120,13 @@ def main():
 
     for local_path, ext in FILES_TO_PUSH:
         push_file(local_path, ext)
+
+    if os.path.exists("website_builder_inputs.json"):
+        raw_link = (f"https://raw.githubusercontent.com/{GITHUB_REPOSITORY}"
+                    f"/{RESULTS_BRANCH}/results/{REQUEST_ID}.seo.json")
+        print("")
+        print("🔗 Mode 4 SEO data link (website builder ke 'SEO data URL' field mein paste karein):")
+        print(f"   {raw_link}")
 
 
 if __name__ == "__main__":

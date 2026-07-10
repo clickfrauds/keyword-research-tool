@@ -22,7 +22,7 @@ WHAT IT DOES (all deterministic, zero API cost):
         × competition damping        (1 - 0.45*comp_index/100 — high comp
                                       still viable when volume justifies it)
   5. Keep the top slice for Claude: score >= 35th percentile of this run's
-     own scores, capped at MAX_KEYWORDS_FOR_AI (default 150). The cutoff
+     own scores, capped at MAX_KEYWORDS_FOR_AI (default 400). The cutoff
      adapts to each niche's data — a weak niche keeps fewer keywords, a
      strong one keeps more.
 
@@ -197,7 +197,24 @@ def percentile_ranks(values):
     return ranks
 
 
+def script_bucket(kw):
+    """Unicode-block bucket of the first non-Latin letter — universal, no
+    script names hardcoded. Latin/digits-only keywords → 'latin'."""
+    for ch in str(kw):
+        if ch.isalpha() and ord(ch) > 0x036F:
+            return f"u{ord(ch) >> 8:03x}"
+    return "latin"
+
+
 def main():
+    # Windows console guard: emoji prints crash on cp1252 terminals (the JSON
+    # was already written, but the run looks failed). Actions/Linux unaffected.
+    if hasattr(sys.stdout, "reconfigure"):
+        try:
+            sys.stdout.reconfigure(errors="replace")
+        except Exception:
+            pass
+
     rows = load_rows()
     if not rows:
         print(f"❌ No keyword data found ({INPUT_JSON} / {INPUT_TXT}). Run Stage 1 first.")
@@ -234,10 +251,25 @@ def main():
 
     rows.sort(key=lambda r: -r["score"])
 
-    # ── Data-driven cutoff: 35th percentile of this run's own scores ────────
-    scores = sorted(r["score"] for r in rows)
-    floor = scores[int(len(scores) * 0.35)] if len(scores) >= 10 else 0
-    kept = [r for r in rows if r["score"] >= floor][:MAX_FOR_AI]
+    # ── Data-driven cutoff: 35th percentile — computed PER SCRIPT-GROUP.
+    # A single global floor let the majority language's volumes squeeze out
+    # every minority-language keyword (e.g. Arabic keywords in a Dubai run
+    # scored fine but sat below the English-dominated floor and vanished).
+    # Each language segment now ranks against ITSELF; tiny segments
+    # (<10 rows) keep everything. Global MAX_FOR_AI cap still applies.
+    from collections import defaultdict
+    by_script = defaultdict(list)
+    for r in rows:
+        by_script[script_bucket(r["keyword"])].append(r)
+    floors = {}
+    kept = []
+    for bucket, g_rows in by_script.items():
+        g_scores = sorted(x["score"] for x in g_rows)
+        g_floor = g_scores[int(len(g_scores) * 0.35)] if len(g_scores) >= 10 else 0
+        floors[bucket] = g_floor
+        kept.extend(x for x in g_rows if x["score"] >= g_floor)
+    kept.sort(key=lambda r: -r["score"])
+    kept = kept[:MAX_FOR_AI]
     kept_ids = set(id(r) for r in kept)
 
     for i, r in enumerate(rows, 1):
@@ -247,7 +279,7 @@ def main():
     out = {
         "total_keywords": len(rows),
         "kept_for_ai": len(kept),
-        "score_floor_used": floor,
+        "score_floor_used": floors,
         "keywords": [
             {k: r[k] for k in (
                 "id", "keyword", "avg_monthly_searches", "competition",
@@ -263,7 +295,8 @@ def main():
     from collections import Counter
     ic = Counter(r["intent"] for r in rows)
     print(f"✅ Scored {len(rows)} keywords → {OUTPUT_FILE}")
-    print(f"   Kept for AI grouping: {len(kept)} (score floor {floor}, data-driven)")
+    _floor_txt = ", ".join(f"{b}={f}" for b, f in floors.items())
+    print(f"   Kept for AI grouping: {len(kept)} (per-script score floors: {_floor_txt})")
     print("   Intent mix: " + ", ".join(f"{k}={v}" for k, v in ic.most_common()))
     print("   Flags: local=%d, voice=%d, urgent=%d" % (
         sum(1 for r in rows if "local" in r["flags"]),

@@ -235,6 +235,11 @@ HARD RULES:
    are new text — write them fully.
 8. Match the searchers' language(s): if keywords are Arabic/mixed, questions
    and services must cover those languages too.
+9. cluster_name: plain text ONLY — NEVER use commas, colons, pipes or
+   slashes inside a cluster name (they break the downstream page parser).
+   Keep each name under 60 characters.
+10. NO cluster may have the same name/theme as main_topic — the pillar page
+   already covers it. Clusters are its DISTINCT subtopics only.
 """
 
 
@@ -265,12 +270,30 @@ def expand_kw(k):
         "keyword": k["keyword"],
         "volume": k["avg_monthly_searches"],
         "kd": k["kd_proxy"],
+        # Ahrefs/SEMrush-style extras: CPC shows commercial value of ranking,
+        # peak_months drives seasonal content scheduling.
+        "cpc_low": k.get("low_top_bid", 0),
+        "cpc_high": k.get("high_top_bid", 0),
         "funnel": k["funnel"],
         "intent": k.get("intent", ""),
         "trend": k.get("trend", ""),
+        "peak_months": k.get("peak_months", ""),
         "ai_overview_prone": k["ai_overview_prone"],
         "flags": k.get("flags", []),
     }
+
+
+def _safe_page_name(s):
+    """Cluster names travel inside a comma-separated 'Topic :: a, b, c'
+    string that Mode 4 splits on commas — a comma (or ::/|) INSIDE a name
+    used to shatter it into bogus half-name pages. Strip those chars.
+    Matching downstream is unaffected: it normalizes to a-z0-9 anyway."""
+    s = str(s).replace("::", " ").replace("|", " ").replace(",", " ")
+    return re.sub(r"\s+", " ", s).strip()
+
+
+def _norm_name(s):
+    return re.sub(r"[^a-z0-9]+", "", str(s).lower())
 
 
 def validate(raw, by_id):
@@ -318,15 +341,31 @@ def validate(raw, by_id):
         pillar_id = None
     pillar = expand_kw(by_id[pillar_id]) if pillar_id in by_id else None
 
+    # Highest-opportunity clusters first — the builder generates pages in
+    # this order, so the money pages exist even if a run stops early.
+    clusters.sort(key=lambda c: -c["total_volume"])
+
     main_topic = str(m4.get("main_topic", "")).strip()
+
+    # Page list for Mode 4's "Topic :: page1, page2" parser. Names are
+    # comma-sanitized, and a cluster that duplicates main_topic gets no
+    # separate page (the pillar targets that query — two pages competing
+    # for one query is self-cannibalization). Its questions still ride in
+    # clusters[] where the builder's pillar generator can pick them up.
+    page_names = []
+    for c in clusters:
+        n = _safe_page_name(c["cluster_name"])
+        if n and _norm_name(n) != _norm_name(main_topic):
+            page_names.append(n)
+    if not page_names:
+        page_names = [_safe_page_name(c["cluster_name"]) for c in clusters
+                      if _safe_page_name(c["cluster_name"])]
+    page_names = list(dict.fromkeys(page_names))
+
     mode4 = {
         "workflow_inputs": {
             "main_topic": main_topic,
-            # Mode 4's parser expects "Cluster :: problem1, problem2" lines —
-            # a bare comma list parses to ZERO clusters. One umbrella cluster
-            # under the main topic, each SEO cluster = one problem page.
-            "problem_clusters": f"{main_topic or 'Guide'} :: "
-                                + ", ".join(c["cluster_name"] for c in clusters),
+            "problem_clusters": f"{main_topic or 'Guide'} :: " + ", ".join(page_names),
         },
         "pillar_keyword": pillar,
         "clusters": clusters,

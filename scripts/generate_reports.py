@@ -489,7 +489,8 @@ def render_html(strategy, clusters_data):
 
 def write_csv(strategy):
     targets = strategy.get("google_ads_targets", [])
-    with open(CSV_OUTPUT, "w", encoding="utf-8", newline="") as f:
+    # utf-8-sig: Excel needs the BOM to read Arabic/any-script keywords
+    with open(CSV_OUTPUT, "w", encoding="utf-8-sig", newline="") as f:
         writer = csv.writer(f)
         writer.writerow([
             "cluster_topic", "recommended_keywords", "intent",
@@ -597,14 +598,17 @@ def render_seo_html(seo):
 
 
 def write_seo_csv(seo):
-    """Ahrefs-style keyword metrics table."""
-    with open(CSV_OUTPUT, "w", encoding="utf-8", newline="") as f:
+    """Ahrefs-style keyword metrics table (CPC + seasonality included)."""
+    with open(CSV_OUTPUT, "w", encoding="utf-8-sig", newline="") as f:
         w = csv.writer(f)
-        w.writerow(["keyword", "volume", "kd", "funnel", "intent",
-                    "trend", "ai_overview_prone", "flags"])
+        w.writerow(["keyword", "volume", "kd", "cpc_low", "cpc_high",
+                    "funnel", "intent", "trend", "peak_months",
+                    "ai_overview_prone", "flags"])
         for k in seo.get("keyword_metrics", []):
             w.writerow([k.get("keyword"), k.get("volume"), k.get("kd"),
+                        k.get("cpc_low", ""), k.get("cpc_high", ""),
                         k.get("funnel"), k.get("intent"), k.get("trend"),
+                        k.get("peak_months", ""),
                         k.get("ai_overview_prone"), ",".join(k.get("flags", []))])
 
 

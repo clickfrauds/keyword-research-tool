@@ -349,13 +349,41 @@ def validate_strategy(raw, kept):
         if camp not in camp_names:
             camp = default_campaign
 
+        # 🛡️ SELF-BLOCK GUARD: a negative that matches this group's OWN
+        # keywords/variants/expansions would stop the group from serving at
+        # all. Cross-group negatives are the point (siloing) — only self-hits
+        # get dropped. The prompt asks Claude not to do this, but the CSV
+        # goes straight into Google Ads Editor, so Python enforces it.
+        own_texts = ([k["keyword"] for k in kws]
+                     + [v for k in kws for v in k.get("variants", [])]
+                     + expansions)
+        own_tokens = {t for txt in own_texts
+                      for t in re.findall(r"[^\W_]+", str(txt).lower(), re.UNICODE)}
+        own_blob = " | ".join(str(t).lower() for t in own_texts)
+        negatives, dropped_negs = [], []
+        for n in g.get("negative_keywords", []):
+            n = str(n).strip().lower()
+            if not n:
+                continue
+            n_toks = re.findall(r"[^\W_]+", n, re.UNICODE)
+            if ((len(n_toks) == 1 and n_toks and n_toks[0] in own_tokens)
+                    or (len(n_toks) > 1
+                        and re.search(r"(^|[\s|])" + re.escape(n) + r"([\s|]|$)", own_blob))):
+                dropped_negs.append(n)
+                continue
+            negatives.append(n)
+        if dropped_negs:
+            print(f"   🛡️ '{str(g.get('name', '')).strip()[:40]}': dropped "
+                  f"{len(dropped_negs)} self-blocking negatives: {dropped_negs[:6]}"
+                  f"{'...' if len(dropped_negs) > 6 else ''}")
+
         groups.append({
             "name": str(g.get("name", "Ad Group")).strip()[:60],
             "campaign": camp,
             "theme": str(g.get("theme", "")).strip(),
             "match_type": g.get("match_type", "phrase"),
             "priority": g.get("priority", "medium"),
-            "negative_keywords": [str(n).strip().lower() for n in g.get("negative_keywords", []) if str(n).strip()],
+            "negative_keywords": negatives,
             "intent_expansion_keywords": expansions,
             "keywords": [
                 {
@@ -376,6 +404,49 @@ def validate_strategy(raw, kept):
             "total_volume": sum(k["avg_monthly_searches"] for k in kws),
             "avg_score": round(sum(k.get("score", 0) for k in kws) / len(kws), 1),
         })
+
+    # 🧱 DETERMINISTIC CROSS-SILO NEGATIVES (Python-computed, not prompt-trust):
+    # a token that appears in exactly ONE group's keywords/expansions is that
+    # group's distinctive theme term — every OTHER group gets it as a negative,
+    # so a real query can only ever match one group. Claude's negatives stay;
+    # this fills whatever the prompt missed. Intent modifiers (emergency/price/
+    # book...) and the target location are never used — they belong to every
+    # group, blocking them would misroute genuine queries.
+    _MODIFIERS = {"the", "and", "for", "with", "near", "nearby", "me", "in", "of",
+                  "a", "an", "to", "best", "top", "cheap", "affordable", "price",
+                  "prices", "cost", "quote", "quotes", "emergency", "urgent",
+                  "hour", "same", "day", "now", "today", "book", "booking",
+                  "hire", "contact", "number", "call", "whatsapp", "service",
+                  "services", "company", "professional", "expert"}
+    _loc_toks = set(re.findall(r"[^\W_]+", TARGET_LOCATION.lower(), re.UNICODE))
+
+    def _group_tokens(g):
+        texts = ([k["keyword"] for k in g["keywords"]]
+                 + [v for k in g["keywords"] for v in k.get("variants", [])]
+                 + g["intent_expansion_keywords"])
+        return {t for txt in texts
+                for t in re.findall(r"[^\W_]+", str(txt).lower(), re.UNICODE)
+                if len(t) >= 3 and t not in _MODIFIERS and t not in _loc_toks}
+
+    if len(groups) > 1:
+        tok_sets = {g["name"]: _group_tokens(g) for g in groups}
+        owners = {}
+        for _name, _toks in tok_sets.items():
+            for _t in _toks:
+                owners.setdefault(_t, set()).add(_name)
+        distinctive = {name: {t for t in toks if len(owners[t]) == 1}
+                       for name, toks in tok_sets.items()}
+        for g in groups:
+            auto = sorted(
+                set().union(*(distinctive[o] for o in tok_sets if o != g["name"]))
+                - set(g["negative_keywords"]) - tok_sets[g["name"]])
+            if auto:
+                g["negative_keywords"] = g["negative_keywords"] + auto
+                g["auto_silo_negatives"] = auto
+        _n_auto = sum(len(g.get("auto_silo_negatives", [])) for g in groups)
+        if _n_auto:
+            print(f"   🧱 Cross-silo guard: {_n_auto} distinctive-token negatives "
+                  f"auto-added across {len(groups)} groups")
 
     group_names = {g["name"] for g in groups}
 
@@ -418,8 +489,13 @@ def write_ads_editor_csv(groups, negatives_for_existing=None):
     """Google Ads Editor paste-ready CSV — keywords, intent expansions, AND
     ad-group-level negatives (the anti-cannibalization layer). In existing-
     account mode it also emits Negative Phrase rows for the CLIENT'S existing
-    ad groups so they can't cannibalize the new group."""
-    with open("google_ads_editor.csv", "w", encoding="utf-8", newline="") as f:
+    ad groups so they can't cannibalize the new group.
+
+    Import: Ads Editor → Account → Import → "Paste text" (or select this file).
+    Header follows the Editor's recognized column set; Criterion Type values
+    Broad/Phrase/Exact/Negative Phrase map directly. utf-8-sig BOM so Excel
+    and the Editor read Arabic/any-script keywords correctly."""
+    with open("google_ads_editor.csv", "w", encoding="utf-8-sig", newline="") as f:
         w = csv.writer(f)
         w.writerow(["Campaign", "Ad Group", "Keyword", "Criterion Type"])
         ctype = {"phrase": "Phrase", "exact": "Exact"}

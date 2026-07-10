@@ -97,15 +97,19 @@ def build_lists(strategy):
         bid_keywords.extend(e.lower() for e in g.get("intent_expansion_keywords", []))
     bid_keywords = sorted(set(bid_keywords))
 
-    # Distinctive product tokens: frequent, non-action, non-stopword tokens
+    # Distinctive product tokens: frequent, non-action, non-stopword tokens.
+    # Threshold adapts to dataset size — a small niche (few bid keywords)
+    # would otherwise produce ZERO products, and then the product+action
+    # rule can never allow anything: every non-safe-root term gets banned.
     freq = {}
     for kw in bid_keywords:
         for t in set(tokens_of(kw)):
             freq[t] = freq.get(t, 0) + 1
     action_tokens = {t for a in UNIVERSAL_ACTIONS for t in tokens_of(a)}
     loc_tokens = set(tokens_of(TARGET_LOCATION))
+    min_freq = 3 if len(bid_keywords) >= 15 else 2
     products = sorted(t for t, c in freq.items()
-                      if c >= 3 and len(t) >= 4
+                      if c >= min_freq and len(t) >= 4
                       and t not in action_tokens and t not in STOPWORDS
                       and t not in loc_tokens)
     return bid_keywords, products
@@ -308,11 +312,16 @@ function main() {
   // ============ ENGINE ============
   Logger.log("🛡️ Negative Guard starting (" + (DRY_RUN ? "DRY RUN — no changes" : "LIVE") + ")...");
 
+  // GAQL string literal — escape quotes so a campaign name like
+  // "Naseem's Solar" can never break the query syntax
+  function gaqlEscape(s) { return s.replace(/\\/g, "\\\\").replace(/'/g, "\\'"); }
+  var campaignList = CAMPAIGN_NAMES.map(function (c) { return gaqlEscape(c); }).join("','");
+
   var query =
     "SELECT search_term_view.search_term, metrics.impressions, metrics.clicks, " +
     "metrics.conversions, ad_group.id " +
     "FROM search_term_view " +
-    "WHERE campaign.name IN ('" + CAMPAIGN_NAMES.join("','") + "') " +
+    "WHERE campaign.name IN ('" + campaignList + "') " +
     "AND metrics.impressions >= " + MIN_IMPRESSIONS + " " +
     "AND segments.date DURING " + DATE_RANGE;
 
@@ -387,6 +396,12 @@ function main() {
              (DRY_RUN ? " would be banned (DRY RUN)" : " banned"));
 
   function addNegative(id, term, reason) {
+    // Google's negative keyword limits: max 10 words / 80 chars — long
+    // voice-search terms can't be exact negatives, log instead of erroring
+    if (term.length > 80 || splitTokens(term).length > 10) {
+      Logger.log("⚠️ SKIP (too long for an exact negative): [" + term + "] | " + reason);
+      return;
+    }
     try {
       var it = AdsApp.adGroups().withIds([id]).get();
       if (it.hasNext()) {

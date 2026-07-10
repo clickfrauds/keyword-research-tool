@@ -63,8 +63,36 @@ export async function onRequestGet(context) {
 
   const htmlContent = await ghResponse.text();
 
-  return new Response(JSON.stringify({ status: "ready", html: htmlContent }), {
-    status: 200,
-    headers: { "Content-Type": "application/json" },
-  });
+  // Extra deliverables pushed by the pipeline alongside the report:
+  //   {id}.seo.json    → Mode 4 feed (copy-paste link for the website builder)
+  //   {id}.editor.csv  → paste-ready Google Ads Editor CSV
+  //   {id}.guard.js    → negative-guard Google Ads Script
+  // Probe each; return its raw link only if it exists. (Raw links need a
+  // public repo; for a private repo these fetches would need a token.)
+  const probe = async (ext) => {
+    try {
+      const res = await fetch(
+        `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/results/${request_id}.${ext}?ref=${BRANCH}`,
+        {
+          headers: {
+            Authorization: `Bearer ${GITHUB_TOKEN}`,
+            Accept: "application/vnd.github+json",
+            "User-Agent": "keyword-research-tool",
+          },
+        }
+      );
+      if (res.status === 200) {
+        return `https://raw.githubusercontent.com/${GITHUB_OWNER}/${GITHUB_REPO}/${BRANCH}/results/${request_id}.${ext}`;
+      }
+    } catch (e) { /* non-fatal — the link just stays hidden */ }
+    return null;
+  };
+  const [seo_json_url, ads_csv_url, guard_js_url] = await Promise.all([
+    probe("seo.json"), probe("editor.csv"), probe("guard.js"),
+  ]);
+
+  return new Response(
+    JSON.stringify({ status: "ready", html: htmlContent, seo_json_url, ads_csv_url, guard_js_url }),
+    { status: 200, headers: { "Content-Type": "application/json" } }
+  );
 }
