@@ -172,6 +172,7 @@
     <div style="display:flex; gap:8px; flex-wrap:wrap;">
       <a id="ads-csv-link" hidden download target="_blank" rel="noopener" style="display:inline-block; font-size:13px; font-weight:600; color:var(--accent); border:1px solid var(--accent); border-radius:8px; padding:8px 14px; text-decoration:none;">⬇️ Ads Editor CSV</a>
       <a id="guard-js-link" hidden download target="_blank" rel="noopener" style="display:inline-block; font-size:13px; font-weight:600; color:var(--accent); border:1px solid var(--accent); border-radius:8px; padding:8px 14px; text-decoration:none;">⬇️ Negative Guard Script</a>
+      <a id="audiences-csv-link" hidden download target="_blank" rel="noopener" style="display:inline-block; font-size:13px; font-weight:600; color:var(--accent); border:1px solid var(--accent); border-radius:8px; padding:8px 14px; text-decoration:none;">⬇️ Audiences CSV (+/−)</a>
     </div>
   </div>
 
@@ -391,14 +392,17 @@
           document.getElementById("seo-link-row").hidden = false;
         }
 
-        // Ads runs: direct downloads for the Editor CSV + guard script
+        // Ads runs: direct downloads for the Editor CSV + guard script + audience plan
         const csvA = document.getElementById("ads-csv-link");
         const jsA = document.getElementById("guard-js-link");
+        const audA = document.getElementById("audiences-csv-link");
         csvA.hidden = !json.ads_csv_url;
         jsA.hidden = !json.guard_js_url;
+        audA.hidden = !json.audiences_csv_url;
         if (json.ads_csv_url) csvA.href = json.ads_csv_url;
         if (json.guard_js_url) jsA.href = json.guard_js_url;
-        document.getElementById("ads-links-row").hidden = !(json.ads_csv_url || json.guard_js_url);
+        if (json.audiences_csv_url) audA.href = json.audiences_csv_url;
+        document.getElementById("ads-links-row").hidden = !(json.ads_csv_url || json.guard_js_url || json.audiences_csv_url);
 
         const iframe = document.createElement("iframe");
         iframe.srcdoc = json.html; // set as a property, not a string attribute — no escaping needed

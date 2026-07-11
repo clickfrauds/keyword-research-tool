@@ -47,6 +47,14 @@ on:
         description: "OPTIONAL: explicit Google language id — blank = auto-detect from seed keywords' script"
         required: false
         default: ''
+      bid_currency:
+        description: "Currency label for suggested Max CPC bids (Planner data is in the API account's currency)"
+        required: false
+        default: 'PKR'
+      bid_fx_rate:
+        description: "FX multiplier account-currency → bid_currency (1 = account already in that currency)"
+        required: false
+        default: '1'
 
 # Needed so Stage 5 can push the finished report to the results-data branch
 # using the automatic GITHUB_TOKEN (no extra secret required for this part).
@@ -112,6 +120,8 @@ jobs:
           BUSINESS_NAME: ${{ github.event.inputs.business_name }}
           NICHE_DESCRIPTION: ${{ github.event.inputs.niche_description }}
           TARGET_LOCATION: ${{ github.event.inputs.target_location }}
+          BID_CURRENCY: ${{ github.event.inputs.bid_currency || 'PKR' }}
+          BID_FX_RATE: ${{ github.event.inputs.bid_fx_rate || '1' }}
         run: python scripts/analyze_with_claude.py
 
       - name: Stage 3.6 - Generate negative-guard Google Ads Script (~$0.02)
@@ -123,6 +133,17 @@ jobs:
           NICHE_DESCRIPTION: ${{ github.event.inputs.niche_description }}
           TARGET_LOCATION: ${{ github.event.inputs.target_location }}
         run: python scripts/generate_ads_script.py
+
+      - name: Stage 3.7 - Niche-matched audience plan (Sonnet, prompt-cached, ~$0.05)
+        if: ${{ github.event.inputs.research_type != 'seo' }}
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          CLAUDE_MODEL: claude-sonnet-5
+          CLAUDE_EFFORT_AUDIENCES: "low"
+          BUSINESS_NAME: ${{ github.event.inputs.business_name }}
+          NICHE_DESCRIPTION: ${{ github.event.inputs.niche_description }}
+          TARGET_LOCATION: ${{ github.event.inputs.target_location }}
+        run: python scripts/suggest_audiences.py
 
       - name: Stage 3-SEO - Website-builder content plan (Mode 4 focus, ~$0.20)
         if: ${{ github.event.inputs.research_type == 'seo' || github.event.inputs.research_type == 'both' }}
@@ -166,6 +187,9 @@ jobs:
             google_ads_editor.csv
             landing_pages.json
             negative_guard_script.js
+            audiences_editor.csv
+            audience_plan.json
+            audiences.md
             website_builder_inputs.json
             seo_content_plan.md
             keyword_strategy_report.html

@@ -493,7 +493,7 @@ def write_csv(strategy):
     with open(CSV_OUTPUT, "w", encoding="utf-8-sig", newline="") as f:
         writer = csv.writer(f)
         writer.writerow([
-            "cluster_topic", "recommended_keywords", "intent",
+            "cluster_topic", "recommended_keywords", "suggested_bid_range", "intent",
             "suggested_match_type", "priority", "trend",
             "seasonal_schedule", "reasoning",
         ])
@@ -501,6 +501,7 @@ def write_csv(strategy):
             writer.writerow([
                 t.get("cluster_topic", ""),
                 "; ".join(t.get("recommended_keywords") or []),
+                t.get("suggested_bid_range", ""),
                 t.get("intent", ""),
                 t.get("suggested_match_type", ""),
                 t.get("priority", ""),

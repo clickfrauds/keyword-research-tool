@@ -52,6 +52,9 @@ FILES_TO_PUSH = [
     # artifact digging needed.
     ("google_ads_editor.csv", "editor.csv"),
     ("negative_guard_script.js", "guard.js"),
+    # Stage 3.7: niche-matched audience plan (positive + negative segments,
+    # Editor paste-ready) — downloadable straight from the result page.
+    ("audiences_editor.csv", "audiences.csv"),
 ]
 
 

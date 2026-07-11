@@ -65,6 +65,57 @@ BUSINESS_NAME = os.environ.get("BUSINESS_NAME", "").strip()
 NICHE_DESCRIPTION = os.environ.get("NICHE_DESCRIPTION", "").strip()
 TARGET_LOCATION = os.environ.get("TARGET_LOCATION", "").strip()
 
+# ── SUGGESTED BIDS ──────────────────────────────────────────────────────────
+# Keyword Planner returns low/high top-of-page bids in the API ACCOUNT's
+# currency (micros → units in Stage 1). BID_CURRENCY sirf label hai;
+# BID_FX_RATE tab use karo jab account currency PKR na ho (e.g. account USD
+# hai to BID_FX_RATE=278 se sab bids PKR mein convert ho jayengi).
+BID_CURRENCY = os.environ.get("BID_CURRENCY", "PKR").strip().upper() or "PKR"
+try:
+    BID_FX_RATE = float(os.environ.get("BID_FX_RATE", "1") or 1)
+except ValueError:
+    BID_FX_RATE = 1.0
+# Whole-number currencies — paisa/decimal bids make no sense in these markets
+_WHOLE_UNIT_CURRENCIES = {"PKR", "INR", "JPY", "KRW", "IDR", "VND", "LKR", "BDT", "NGN"}
+
+
+def _round_bid(v):
+    v = v * BID_FX_RATE
+    if BID_CURRENCY in _WHOLE_UNIT_CURRENCIES and v >= 5:
+        return int(round(v))
+    return round(v, 2)
+
+
+def suggest_bids(low, high, comp_index=0):
+    """PRO bid formula — real Google Ads data → starting Max CPC per match type.
+
+    Logic (top-of-page bid range = what advertisers actually pay for top slots):
+      anchor = low + (high - low) * (0.35 + 0.40 * competition/100)
+        → low-competition keywords anchor near 35% of the range (no need to
+          overpay), cut-throat keywords anchor near 75% (must pay to play).
+      EXACT  = 1.00 × anchor  — tightest targeting, highest CVR → bid the most
+      PHRASE = 0.85 × anchor  — some query variance → moderate discount
+      BROAD  = 0.70 × anchor  — widest matching, smart-bidding explores cheap
+                                queries → biggest discount
+      EXACT is floored at `low` (below the first-page floor you simply don't
+      serve top-of-page at all).
+    Returns None when the Planner gave no bid data for this keyword.
+    """
+    low, high = float(low or 0), float(high or 0)
+    if high <= 0 and low <= 0:
+        return None
+    if high <= 0:
+        high = low * 2
+    if low <= 0:
+        low = high * 0.30
+    c = min(max(float(comp_index or 0), 0), 100) / 100.0
+    anchor = low + (high - low) * (0.35 + 0.40 * c)
+    return {
+        "exact": max(anchor, low),
+        "phrase": max(anchor * 0.85, low * 0.90),
+        "broad": anchor * 0.70,
+    }
+
 # ── EXISTING ACCOUNT MODE (incremental) ─────────────────────────────────────
 # Jab client ka account pehle se chal raha ho aur sirf naya ad group add karna
 # ho: existing campaign ka naam + existing ad groups ki list de do. Tool phir:
@@ -168,6 +219,7 @@ Your job has FOUR outputs (one JSON object, nothing else, no markdown fences):
       "theme": "one sentence: the single user intent this group targets",
       "match_type": "phrase|exact",
       "priority": "high|medium|low",
+      "bid_multiplier": 1.0,
       "keyword_ids": [1, 2, 3],
       "negative_keywords": ["term", "term"],
       "intent_expansion_keywords": ["new keyword", "new keyword"]
@@ -225,6 +277,12 @@ HARD RULES:
 7. Reference provided keywords ONLY by numeric id. Never echo their text.
 8. Use volumes/competition/scores to set priorities: the campaign and group
    holding the best opportunity keywords is "high".
+8b. BID_MULTIPLIER (per ad group, 0.8-1.3): a Python formula computes each
+   keyword's starting Max CPC from its real Google cpc_range + competition.
+   Your multiplier scales the whole group based on STRATEGY the formula
+   can't see: money-maker/high-priority groups with strong buying intent
+   → 1.1-1.3; experimental, adjacent-service or low-priority groups
+   → 0.8-0.95; everything normal → 1.0.
 9. SMALL DATASETS: if the keyword set is small or low-volume (niche service,
    max volume under a few hundred), that is normal — do NOT split it to look
    thorough. One tight group with strong intent expansions beats three thin
@@ -377,30 +435,50 @@ def validate_strategy(raw, kept):
                   f"{len(dropped_negs)} self-blocking negatives: {dropped_negs[:6]}"
                   f"{'...' if len(dropped_negs) > 6 else ''}")
 
+        # Claude's strategic bid multiplier for this group (clamped for safety)
+        try:
+            bid_mult = float(g.get("bid_multiplier", 1.0) or 1.0)
+        except (TypeError, ValueError):
+            bid_mult = 1.0
+        bid_mult = min(max(bid_mult, 0.7), 1.5)
+        group_match = g.get("match_type", "phrase")
+
+        def _kw_entry(k):
+            entry = {
+                "keyword": k["keyword"],
+                "variants": k.get("variants", []),
+                "avg_monthly_searches": k["avg_monthly_searches"],
+                "competition": k.get("competition", ""),
+                "competition_index": k.get("competition_index", 0),
+                "cpc_range": f"{k.get('low_top_bid', 0)}-{k.get('high_top_bid', 0)}",
+                "trend": k.get("trend", "UNKNOWN"),
+                "peak_months": k.get("peak_months", ""),
+                "intent": k.get("intent", ""),
+                "flags": k.get("flags", []),
+                "score": k.get("score", 0),
+            }
+            bids = suggest_bids(k.get("low_top_bid", 0), k.get("high_top_bid", 0),
+                                k.get("competition_index", 0))
+            if bids:
+                entry["suggested_bid_exact"] = _round_bid(bids["exact"] * bid_mult)
+                entry["suggested_bid_phrase"] = _round_bid(bids["phrase"] * bid_mult)
+                entry["suggested_bid_broad"] = _round_bid(bids["broad"] * bid_mult)
+                entry["suggested_bid"] = entry.get(
+                    f"suggested_bid_{group_match}", entry["suggested_bid_phrase"])
+                entry["bid_currency"] = BID_CURRENCY
+            return entry
+
         groups.append({
             "name": str(g.get("name", "Ad Group")).strip()[:60],
             "campaign": camp,
             "theme": str(g.get("theme", "")).strip(),
-            "match_type": g.get("match_type", "phrase"),
+            "match_type": group_match,
             "priority": g.get("priority", "medium"),
+            "bid_multiplier": bid_mult,
+            "bid_currency": BID_CURRENCY,
             "negative_keywords": negatives,
             "intent_expansion_keywords": expansions,
-            "keywords": [
-                {
-                    "keyword": k["keyword"],
-                    "variants": k.get("variants", []),
-                    "avg_monthly_searches": k["avg_monthly_searches"],
-                    "competition": k.get("competition", ""),
-                    "competition_index": k.get("competition_index", 0),
-                    "cpc_range": f"{k.get('low_top_bid', 0)}-{k.get('high_top_bid', 0)}",
-                    "trend": k.get("trend", "UNKNOWN"),
-                    "peak_months": k.get("peak_months", ""),
-                    "intent": k.get("intent", ""),
-                    "flags": k.get("flags", []),
-                    "score": k.get("score", 0),
-                }
-                for k in kws
-            ],
+            "keywords": [_kw_entry(k) for k in kws],
             "total_volume": sum(k["avg_monthly_searches"] for k in kws),
             "avg_score": round(sum(k.get("score", 0) for k in kws) / len(kws), 1),
         })
@@ -494,23 +572,35 @@ def write_ads_editor_csv(groups, negatives_for_existing=None):
     Import: Ads Editor → Account → Import → "Paste text" (or select this file).
     Header follows the Editor's recognized column set; Criterion Type values
     Broad/Phrase/Exact/Negative Phrase map directly. utf-8-sig BOM so Excel
-    and the Editor read Arabic/any-script keywords correctly."""
+    and the Editor read Arabic/any-script keywords correctly.
+
+    Max CPC = suggested starting bid in BID_CURRENCY (default PKR) — computed by the
+    suggest_bids() formula from each keyword's REAL Google top-of-page bid
+    range + competition index, scaled by Claude's per-group bid_multiplier.
+    Intent-expansion keywords have no Planner data, so they inherit the
+    MEDIAN suggested bid of their ad group. Negatives never carry a bid."""
     with open("google_ads_editor.csv", "w", encoding="utf-8-sig", newline="") as f:
         w = csv.writer(f)
-        w.writerow(["Campaign", "Ad Group", "Keyword", "Criterion Type"])
+        w.writerow(["Campaign", "Ad Group", "Keyword", "Criterion Type", "Max CPC"])
         ctype = {"phrase": "Phrase", "exact": "Exact"}
         for g in groups:
             mt = ctype.get(g["match_type"], "Phrase")
+            # group median (match-type bid) — fallback for keywords the
+            # Planner returned no bid data for, and for intent expansions
+            group_bids = sorted(k["suggested_bid"] for k in g["keywords"]
+                                if k.get("suggested_bid"))
+            median_bid = group_bids[len(group_bids) // 2] if group_bids else ""
             for k in g["keywords"]:
-                w.writerow([g["campaign"], g["name"], k["keyword"], mt])
+                w.writerow([g["campaign"], g["name"], k["keyword"], mt,
+                            k.get("suggested_bid") or median_bid])
             for e in g["intent_expansion_keywords"]:
-                w.writerow([g["campaign"], g["name"], e, "Phrase"])
+                w.writerow([g["campaign"], g["name"], e, "Phrase", median_bid])
             for n in g["negative_keywords"]:
-                w.writerow([g["campaign"], g["name"], n, "Negative Phrase"])
+                w.writerow([g["campaign"], g["name"], n, "Negative Phrase", ""])
         for gname, terms in (negatives_for_existing or {}).items():
             for t in terms:
                 w.writerow([EXISTING_CAMPAIGN or (groups[0]["campaign"] if groups else ""),
-                            gname, t, "Negative Phrase"])
+                            gname, t, "Negative Phrase", ""])
 
 
 def write_landing_pages_json(pages, groups):
@@ -639,6 +729,9 @@ def main():
             {
                 "cluster_topic": g["name"],
                 "recommended_keywords": [k["keyword"] for k in g["keywords"]],
+                "suggested_bid_range": (
+                    lambda _b: f"{min(_b)}-{max(_b)} {BID_CURRENCY}" if _b else ""
+                )([k["suggested_bid"] for k in g["keywords"] if k.get("suggested_bid")]),
                 "intent": "transactional",
                 "suggested_match_type": g["match_type"],
                 "priority": g["priority"],
@@ -672,7 +765,14 @@ def main():
             md.append(f"### {g['name']}  `{g['priority']}` `{g['match_type']}`")
             md.append(f"_{g['theme']}_")
             md.append(f"- Volume: {g['total_volume']}/mo | Avg score: {g['avg_score']} | {len(g['keywords'])} keywords")
-            md.append(f"- Keywords: " + ", ".join(k["keyword"] for k in g["keywords"][:15])
+            _bids = [k["suggested_bid"] for k in g["keywords"] if k.get("suggested_bid")]
+            if _bids:
+                md.append(f"- 💰 Suggested Max CPC ({BID_CURRENCY}, {g['match_type']}): "
+                          f"{min(_bids)}–{max(_bids)} (group bid multiplier ×{g['bid_multiplier']})")
+            md.append(f"- Keywords: " + ", ".join(
+                          k["keyword"] + (f" [{k['suggested_bid']} {BID_CURRENCY}]"
+                                          if k.get("suggested_bid") else "")
+                          for k in g["keywords"][:15])
                       + (f" … +{len(g['keywords'])-15} more" if len(g["keywords"]) > 15 else ""))
             if g["intent_expansion_keywords"]:
                 md.append(f"- 🆕 Intent expansions: " + ", ".join(g["intent_expansion_keywords"]))
