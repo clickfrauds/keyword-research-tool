@@ -128,7 +128,7 @@ def main():
         raw_link = (f"https://raw.githubusercontent.com/{GITHUB_REPOSITORY}"
                     f"/{RESULTS_BRANCH}/results/{REQUEST_ID}.seo.json")
         print("")
-        print("🔗 Mode 4 SEO data link (website builder ke 'SEO data URL' field mein paste karein):")
+        print("🔗 SEO data link — website builder ke 'SEO data URL' field mein paste karein (Mode 3 ya Mode 4, dono cards mein field hai):")
         print(f"   {raw_link}")
 
 
