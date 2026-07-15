@@ -1,0 +1,93 @@
+name: Mode 3 Site Plan (full-website keyword wiring)
+
+# Paste the SAME comma-separated services you give the website builder's
+# Mode 3. This pipeline groups them into categories (builder-compatible),
+# pulls real Google Ads volume per category (20-seed batches), assigns
+# keywords + questions to every service page, and publishes ONE json link.
+# Paste that link into the builder's seo_inputs_url field — or leave that
+# field empty and the builder works exactly as before.
+
+on:
+  workflow_dispatch:
+    inputs:
+      business_name:
+        description: "Business name"
+        required: true
+      niche_description:
+        description: "What the business does (e.g. 'home maintenance company')"
+        required: true
+      target_location:
+        description: "Target location (e.g. 'Dubai, UAE', or 'N/A' if not local)"
+        required: true
+      services_mode3:
+        description: "Comma-separated services — SAME list you give Mode 3 (up to 100+)"
+        required: true
+      location_id:
+        description: "OPTIONAL: explicit Google geo target id — blank = auto-resolve"
+        required: false
+        default: ''
+      language_id:
+        description: "OPTIONAL: explicit Google language id — blank = auto-detect"
+        required: false
+        default: ''
+      request_id:
+        description: "Unique id for this run — blank = auto"
+        required: false
+
+permissions:
+  contents: write
+
+jobs:
+  mode3-plan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Resolve request id (fallback for manual runs)
+        id: reqid
+        run: |
+          if [ -z "${{ github.event.inputs.request_id }}" ]; then
+            echo "value=m3plan-${{ github.run_id }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "value=${{ github.event.inputs.request_id }}" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Generate Mode 3 site plan (Ads volumes + Claude assignment)
+        env:
+          GOOGLE_ADS_DEVELOPER_TOKEN: ${{ secrets.GOOGLE_ADS_DEVELOPER_TOKEN }}
+          GOOGLE_ADS_CLIENT_ID: ${{ secrets.GOOGLE_ADS_CLIENT_ID }}
+          GOOGLE_ADS_CLIENT_SECRET: ${{ secrets.GOOGLE_ADS_CLIENT_SECRET }}
+          GOOGLE_ADS_REFRESH_TOKEN: ${{ secrets.GOOGLE_ADS_REFRESH_TOKEN }}
+          GOOGLE_ADS_CUSTOMER_ID: ${{ secrets.GOOGLE_ADS_CUSTOMER_ID }}
+          GOOGLE_ADS_USE_PROTO_PLUS: "true"
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          CLAUDE_MODEL: claude-sonnet-5
+          CLAUDE_EFFORT: "medium"
+          BUSINESS_NAME: ${{ github.event.inputs.business_name }}
+          NICHE_DESCRIPTION: ${{ github.event.inputs.niche_description }}
+          TARGET_LOCATION: ${{ github.event.inputs.target_location }}
+          LOCATION_ID: ${{ github.event.inputs.location_id }}
+          LANGUAGE_ID: ${{ github.event.inputs.language_id }}
+          SERVICES_MODE3: ${{ github.event.inputs.services_mode3 }}
+        run: python scripts/generate_mode3_plan.py
+
+      - name: Publish result JSON (raw link for the builder)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          REQUEST_ID: ${{ steps.reqid.outputs.value }}
+        run: python scripts/push_results.py
+
+      - name: Upload artifact (backup copy)
+        uses: actions/upload-artifact@v4
+        with:
+          name: mode3-site-plan-${{ steps.reqid.outputs.value }}
+          path: website_builder_inputs.json
+          retention-days: 30
