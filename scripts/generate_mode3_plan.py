@@ -311,6 +311,14 @@ RETURN JSON ONLY:
 # ══════════════════════════════════════════════════════════════════════════
 
 def main():
+    # Windows console guard (same as score_keywords.py): emoji prints crash
+    # on cp1252 terminals. Actions/Linux unaffected.
+    if hasattr(sys.stdout, "reconfigure"):
+        try:
+            sys.stdout.reconfigure(errors="replace")
+        except Exception:
+            pass
+
     if not SERVICES:
         print("❌ SERVICES_MODE3 is empty — paste the same comma-separated "
               "service list you give the website builder's Mode 3.")

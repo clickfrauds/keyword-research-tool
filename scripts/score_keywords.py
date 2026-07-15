@@ -103,7 +103,10 @@ def classify(kw):
         flags.append("voice")
 
     loc_words = set(tokens_of(TARGET_LOCATION)) if TARGET_LOCATION else set()
-    if (tokset & LOCAL_MARKERS and "near" in tokset) or (loc_words and tokset & loc_words):
+    # "near me" / "nearby" / "local" each signal local intent on their own —
+    # the old check required the literal token "near", so "plumber nearby"
+    # and "local electrician" never got the local flag (scoring undervalued).
+    if ({"near", "nearby", "local"} & tokset) or (loc_words and tokset & loc_words):
         flags.append("local")
     if tokset & URGENT_MARKERS:
         flags.append("urgent")
