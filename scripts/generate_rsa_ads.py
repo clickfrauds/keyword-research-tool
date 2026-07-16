@@ -152,7 +152,15 @@ def headline_has_keyword(headline, kw_token_sets):
     h = tokens_of(headline)
     for kw_toks in kw_token_sets:
         core = kw_toks - {"the", "a", "an", "for", "in", "of", "and", "to", "my"}
-        if core and len(core & h) >= max(1, len(core) - 1):
+        if not core:
+            continue
+        # Long keywords ("google ads management for small business", 5 core
+        # tokens) can never fit near-complete inside a 30-char headline —
+        # the old all-but-one rule marked every headline unmatched (the
+        # "0 keyword-matched" run). Half the core tokens (min 2) is a real
+        # message match at headline length.
+        need = len(core) if len(core) <= 2 else max(2, (len(core) + 1) // 2)
+        if len(core & h) >= need:
             return True
     return False
 
@@ -274,10 +282,22 @@ def validate_and_repair(raw, group_keywords):
         if len(headlines) >= N_HEADLINES and coverage() >= MIN_KEYWORD_HEADLINES:
             break
         cand = title_case_keyword(kw)
-        if cand and cand.lower() not in seen and len(cand) <= H_MAX:
-            if coverage() < MIN_KEYWORD_HEADLINES or len(headlines) < N_HEADLINES:
-                headlines.append(cand)
-                seen.add(cand.lower())
+        if not cand or cand.lower() in seen or len(cand) > H_MAX:
+            continue
+        if len(headlines) < N_HEADLINES:
+            headlines.append(cand)
+            seen.add(cand.lower())
+        elif coverage() < MIN_KEYWORD_HEADLINES:
+            # Already 15 headlines but under-covered: REPLACE the last
+            # non-keyword headline instead of appending — appended items
+            # were silently trimmed by the [:15] cut, which is exactly how
+            # a "15 headlines (0 keyword-matched)" ad shipped.
+            for i in range(len(headlines) - 1, -1, -1):
+                if not headline_has_keyword(headlines[i], kw_token_sets):
+                    seen.discard(headlines[i].lower())
+                    headlines[i] = cand
+                    seen.add(cand.lower())
+                    break
 
     descriptions, dseen, bang_used = [], set(), False
     for d in (raw.get("descriptions") or []):

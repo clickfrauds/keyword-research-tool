@@ -206,6 +206,9 @@ jobs:
             audiences_editor.csv
             audience_plan.json
             audiences.md
+            rsa_ads.json
+            rsa_editor.csv
+            rsa_ads.md
             website_builder_inputs.json
             seo_content_plan.md
             keyword_strategy_report.html
