@@ -161,6 +161,12 @@ jobs:
           WEBSITE_URL: ${{ github.event.inputs.website_url }}
         run: python scripts/generate_rsa_ads.py
 
+      - name: Stage 3.9 - Location targeting CSV (real geo ids, no AI cost)
+        if: ${{ github.event.inputs.research_type != 'seo' }}
+        env:
+          TARGET_LOCATION: ${{ github.event.inputs.target_location }}
+        run: python scripts/generate_locations.py
+
       - name: Stage 3-SEO - Website-builder content plan (Mode 4 focus, ~$0.20)
         if: ${{ github.event.inputs.research_type == 'seo' || github.event.inputs.research_type == 'both' }}
         env:
@@ -209,6 +215,8 @@ jobs:
             rsa_ads.json
             rsa_editor.csv
             rsa_ads.md
+            locations_editor.csv
+            locations.md
             website_builder_inputs.json
             seo_content_plan.md
             keyword_strategy_report.html

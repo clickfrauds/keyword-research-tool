@@ -62,6 +62,8 @@ FILES_TO_PUSH = [
     # Stage 3.8: RSA ad copy — 15 headlines + 4 descriptions per ad group,
     # policy-validated, Google Ads Editor import format.
     ("rsa_editor.csv", "rsa.csv"),
+    # Stage 3.9: location targeting rows (real geo target ids) per campaign.
+    ("locations_editor.csv", "locations.csv"),
     # LAST on purpose — the readiness marker (see note above).
     ("keyword_strategy_report.html", "html"),
 ]
