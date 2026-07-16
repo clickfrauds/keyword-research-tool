@@ -1,0 +1,25 @@
+﻿Campaign,Ad Group,Audience,Bid Modifier,Flexible Reach,Comment
+Google Ads Management Services,,Advertising & Marketing Services,25%,,IN_MARKET | observation | Direct match for ad management buyers
+Google Ads Management Services,,SEO & SEM Services,25%,,IN_MARKET | observation | High-intent PPC/SEM service seekers
+Click Fraud Protection,,Business Technology,20%,,IN_MARKET | observation | Tech-savvy business buyers likely relevant
+Google Ads Management Services,,Web Services,15%,,IN_MARKET | observation | Adjacent web/marketing service seekers
+Click Fraud Protection,Click Fraud Protection Software,Network & Enterprise Security,,Audience segments,IN_MARKET | targeting | Ultra-relevant fraud/security software intent
+Click Fraud Protection,Click Fraud Protection Software,Antivirus & Security Software,30%,,IN_MARKET | observation | Security software researchers near-perfect fit
+Google Ads Management Services,,Enterprise Software,15%,,IN_MARKET | observation | Business software buyers overlap with automation
+Google Ads Management Services,PPC Landing Page Design,Web Design & Development,20%,,IN_MARKET | observation | Landing page design intent overlap
+Click Fraud Protection,,Payment Processing & Merchant Services,10%,,IN_MARKET | observation | Service businesses managing online transactions
+Google Ads Management Services,,CRM Solutions,10%,,IN_MARKET | observation | Business software buyers with marketing needs
+Google Ads Management Services,,Business Professionals,15%,,AFFINITY | observation | Decision-makers hiring agencies
+Click Fraud Protection,,Avid Business News Readers,15%,,AFFINITY | observation | Business-minded owners informed on trends
+Click Fraud Protection,,Technophiles,10%,,AFFINITY | observation | Tech-forward buyers for software solutions
+Google Ads Management Services,,Avid Investors,10%,,AFFINITY | observation | Financially engaged business owners
+
+Campaign,Ad Group,Negative Audience,Comment
+Google Ads Management Services,,Accounting & Finance Jobs,"IN_MARKET | Job seekers, not buyers of services"
+Click Fraud Protection,,IT & Technical Jobs,"IN_MARKET | Job seekers, not software buyers"
+Google Ads Management Services,,Sales & Marketing Jobs,"IN_MARKET | Job seekers, not agency clients"
+Google Ads Management Services,,Business Education,"IN_MARKET | Students, not paying business owners"
+Click Fraud Protection,,Technology Education,IN_MARKET | Learners not enterprise software buyers
+Google Ads Management Services,,Bargain Hunters,AFFINITY | Discount seekers unfit for premium service
+Click Fraud Protection,,Value Shoppers,"AFFINITY | Low-budget mindset, wrong fit"
+Google Ads Management Services,,Internships,"IN_MARKET | Students seeking internships, not clients"
