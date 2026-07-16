@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ClickAds Protector</title>
+<style>
+  :root {
+    --ink: #14181c;
+    --muted: #6b6560;
+    --line: #dcdad3;
+    --paper: #fdfcfa;
+    --bg: #f6f5f2;
+    --accent: #0b5d5a;
+    --accent-soft: #e3f0ef;
+    --mono: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Menlo, Consolas, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    line-height: 1.55;
+  }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 36px 20px 70px; }
+  header {
+    position: relative;
+    border-bottom: 2px dashed var(--line);
+    padding-bottom: 22px;
+    margin-bottom: 30px;
+  }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  header h1 { font-size: 26px; margin: 0 0 6px; }
+  header .subtitle { color: var(--muted); font-size: 14px; }
+  header .generated { font-family: var(--mono); color: var(--muted); font-size: 11px; margin-top: 12px; }
+  .stamp {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    line-height: 1.3;
+    text-align: center;
+    color: var(--accent);
+    border: 2px solid var(--accent);
+    border-radius: 6px;
+    padding: 6px 10px;
+    transform: rotate(4deg);
+  }
+  .stat-bar { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 36px; }
+  .stat {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 12px 16px;
+    flex: 1;
+    min-width: 110px;
+    text-align: center;
+  }
+  .stat-num { font-family: var(--mono); font-size: 20px; font-weight: 700; color: var(--accent); }
+  .stat-label { font-size: 11px; color: var(--muted); margin-top: 3px; }
+  section { margin-bottom: 40px; }
+  section > h2 {
+    font-family: var(--mono);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 9px;
+    margin-bottom: 16px;
+  }
+  .card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    padding: 16px 18px;
+    margin-bottom: 12px;
+  }
+  .card-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; flex-wrap: wrap; }
+  .card h3 { margin: 0; font-size: 15px; }
+  .badges { display: flex; gap: 6px; flex-wrap: wrap; }
+  .badge { font-family: var(--mono); font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 4px; white-space: nowrap; }
+  .intent-badge { background: var(--accent-soft); color: var(--accent); }
+  .meta-line { font-size: 13px; color: var(--muted); margin-top: 7px; }
+  .reasoning { font-size: 14px; margin-top: 9px; margin-bottom: 0; }
+  .ad-preview { margin-top: 11px; background: var(--bg); border: 1px dashed var(--line); border-radius: 6px; padding: 10px 13px; }
+  .ad-headline { color: #1a0dab; font-size: 14px; font-weight: 600; }
+  .ad-description { color: #4d5156; font-size: 13px; margin-top: 3px; }
+  .faq { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 11px 15px; margin-bottom: 7px; }
+  .faq summary { cursor: pointer; font-weight: 600; font-size: 14px; }
+  .faq summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .faq p { font-size: 14px; color: var(--muted); margin: 9px 0 2px; }
+  .chip-wrap { display: flex; flex-wrap: wrap; gap: 7px; }
+  .chip { background: var(--accent-soft); color: var(--accent); font-size: 12px; padding: 5px 11px; border-radius: 999px; }
+  .empty { color: var(--muted); font-style: italic; font-size: 14px; }
+  .campaign-block { margin-bottom: 26px; }
+  .campaign-head { font-family: var(--mono); font-size: 13px; font-weight: 700; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+  .kw-vol { color: var(--muted); font-size: 11px; }
+  .neg-line { color: #9c2b1f; }
+  footer { text-align: center; font-family: var(--mono); color: var(--muted); font-size: 11px; margin-top: 56px; }
+  @media (max-width: 480px) {
+    .stamp { position: static; display: inline-block; margin-top: 12px; transform: rotate(-1deg); }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="eyebrow">Keyword Strategy Report</div>
+    <h1>ClickAds Protector</h1>
+    <div class="subtitle">Click fraud protection and complete Google Ads management for service-based businesses &middot; United States</div>
+    <div class="generated">Generated 16 Jul 2026, 06:14 UTC</div>
+    <div class="stamp">1 HIGH<br>PRIORITY</div>
+  </header>
+
+  <div class="stat-bar"><div class="stat"><div class="stat-num">187</div><div class="stat-label">Keywords Analyzed</div></div><div class="stat"><div class="stat-num">2</div><div class="stat-label">Campaigns</div></div><div class="stat"><div class="stat-num">4</div><div class="stat-label">Ad Groups</div></div><div class="stat"><div class="stat-num">72</div><div class="stat-label">Keywords</div></div><div class="stat"><div class="stat-num">31</div><div class="stat-label">Intent Expansions</div></div><div class="stat"><div class="stat-num">4</div><div class="stat-label">Landing Pages</div></div></div>
+
+  
+  <section>
+    <h2>Campaign &amp; Ad Group Structure</h2>
+    
+    <div class="campaign-block">
+      <div class="campaign-head">📣 Campaign: Click Fraud Protection <span class="badge" style="color:#92400e;background:#fef0dc">HIGH</span></div>
+      
+        <div class="card">
+          <div class="card-head">
+            <h3>Click Fraud Protection</h3>
+            <div class="badges"><span class="badge" style="color:#92400e;background:#fef0dc">HIGH</span><span class="badge intent-badge">PHRASE</span></div>
+          </div>
+          <p class="reasoning">Business owners searching for software or a service to detect and stop fraudulent/invalid clicks on their Google Ads campaigns.</p>
+          <div class="meta-line">Volume: <strong>880/mo</strong> &middot; Avg score: <strong>56.8</strong> &middot; 27 keywords</div>
+          <div class="meta-line">Keywords: best click fraud protection software <span class='kw-vol'>(30)</span>, ad fraud prevention <span class='kw-vol'>(70)</span>, click fraud protection <span class='kw-vol'>(40)</span>, best click fraud software <span class='kw-vol'>(30)</span>, click fraud software <span class='kw-vol'>(40)</span>, ppc fraud protection <span class='kw-vol'>(20)</span>, ad fraud tools <span class='kw-vol'>(10)</span>, best click fraud protection <span class='kw-vol'>(20)</span>, click fraud protection service <span class='kw-vol'>(10)</span>, ad fraud protection <span class='kw-vol'>(10)</span>, click fraud protection software <span class='kw-vol'>(170)</span>, click fraud prevention <span class='kw-vol'>(20)</span>, click fraud tools <span class='kw-vol'>(10)</span>, ad fraud detection tools <span class='kw-vol'>(70)</span>, google click fraud detection <span class='kw-vol'>(10)</span>, click fraud detection techniques <span class='kw-vol'>(10)</span>, click fraud detection software <span class='kw-vol'>(70)</span>, ad fraud detection software <span class='kw-vol'>(50)</span>, click fraud prevention software <span class='kw-vol'>(90)</span>, best click fraud prevention software <span class='kw-vol'>(10)</span>, google ad fraud detection <span class='kw-vol'>(10)</span>, mobile ad fraud detection and prevention <span class='kw-vol'>(10)</span>, ad fraud software <span class='kw-vol'>(10)</span>, advertisement click fraud detection <span class='kw-vol'>(10)</span>, adwords click fraud software <span class='kw-vol'>(10)</span>, click fraud solutions <span class='kw-vol'>(20)</span>, click fraud detection service <span class='kw-vol'>(20)</span></div>
+          <div class='meta-line'>🆕 Intent expansions:</div><div class='chip-wrap'><span class="chip">click fraud protection cost</span><span class="chip">click fraud protection pricing</span><span class="chip">hire click fraud protection service</span><span class="chip">click fraud protection company united states</span><span class="chip">google ads click fraud protection service</span><span class="chip">stop click fraud on google ads</span><span class="chip">competitor click fraud protection</span><span class="chip">click fraud monitoring service</span><span class="chip">click fraud protection for small business</span><span class="chip">invalid clicks protection google ads</span></div>
+          <div class='meta-line neg-line'>🚫 Negatives (anti-cannibalization): script, scripts, landing page, negative keyword, negative keywords, landing pages, account, add, agency, all, audit, automation, bid, broad, budget, campaigns, consultant, create, design, designer, editor, examples, expanded, free, gram, installation, keyword, keywords, landing, level, list, lists, manager, match, max, monthly, negative, new, ongoing, pacing, page, pages, performance, pmax, rate, remarketing, smart</div>
+        </div>
+    </div>
+
+    <div class="campaign-block">
+      <div class="campaign-head">📣 Campaign: Google Ads Management Services <span class="badge" style="color:#6b5a3a;background:#f2ede0">MEDIUM</span></div>
+      
+        <div class="card">
+          <div class="card-head">
+            <h3>Google Ads Scripts &amp; Automation</h3>
+            <div class="badges"><span class="badge" style="color:#6b5a3a;background:#f2ede0">MEDIUM</span><span class="badge intent-badge">PHRASE</span></div>
+          </div>
+          <p class="reasoning">Advertisers looking for scripts, automation tools, or management help to run their Google Ads accounts more efficiently.</p>
+          <div class="meta-line">Volume: <strong>560/mo</strong> &middot; Avg score: <strong>58.6</strong> &middot; 16 keywords</div>
+          <div class="meta-line">Keywords: google ads scripts <span class='kw-vol'>(170)</span>, ads script <span class='kw-vol'>(140)</span>, google ads management for small business <span class='kw-vol'>(20)</span>, google ads conversion script <span class='kw-vol'>(10)</span>, google ads automation scripts <span class='kw-vol'>(10)</span>, ppc scripts <span class='kw-vol'>(10)</span>, google ads budget pacing script <span class='kw-vol'>(10)</span>, google shopping scripts <span class='kw-vol'>(10)</span>, google ads monthly budget script <span class='kw-vol'>(10)</span>, n gram script google ads <span class='kw-vol'>(10)</span>, google ads script <span class='kw-vol'>(40)</span>, google ad scripts <span class='kw-vol'>(30)</span>, google adwords script <span class='kw-vol'>(30)</span>, google remarketing script <span class='kw-vol'>(10)</span>, google ad manager for small business <span class='kw-vol'>(40)</span>, new google ads scripts <span class='kw-vol'>(10)</span></div>
+          <div class='meta-line'>🆕 Intent expansions:</div><div class='chip-wrap'><span class="chip">google ads scripts service</span><span class="chip">hire google ads scripts expert</span><span class="chip">google ads automation service cost</span><span class="chip">google ads script installation service</span><span class="chip">custom google ads scripts for agencies</span><span class="chip">google ads bid automation service</span><span class="chip">google ads scripts consultant united states</span><span class="chip">google ads management automation pricing</span></div>
+          <div class='meta-line neg-line'>🚫 Negatives (anti-cannibalization): click fraud, ad fraud, landing page, negative keyword, negative keywords, account, add, advertisement, agency, all, audit, broad, campaigns, click, clicks, competitor, create, design, designer, detection, editor, examples, expanded, fraud, free, invalid, keyword, keywords, landing, level, list, lists, match, max, mobile, monitoring, negative, ongoing, page, pages, performance, pmax, prevention, protection, rate, smart, software, solutions, stop, techniques, tools</div>
+        </div>
+        <div class="card">
+          <div class="card-head">
+            <h3>PPC Landing Pages</h3>
+            <div class="badges"><span class="badge" style="color:#6b5a3a;background:#f2ede0">MEDIUM</span><span class="badge intent-badge">PHRASE</span></div>
+          </div>
+          <p class="reasoning">Advertisers seeking landing page design or examples specifically built for Google Ads/PPC campaigns to improve conversions.</p>
+          <div class="meta-line">Volume: <strong>810/mo</strong> &middot; Avg score: <strong>61.1</strong> &middot; 12 keywords</div>
+          <div class="meta-line">Keywords: landing page for ppc <span class='kw-vol'>(110)</span>, adwords landing page <span class='kw-vol'>(20)</span>, google adwords landing page <span class='kw-vol'>(30)</span>, google ad landing page <span class='kw-vol'>(30)</span>, adwords landing page examples <span class='kw-vol'>(10)</span>, expanded landing pages google ads <span class='kw-vol'>(10)</span>, best google ads landing pages <span class='kw-vol'>(10)</span>, create landing page for google ads <span class='kw-vol'>(10)</span>, google landing pages <span class='kw-vol'>(390)</span>, google ads landing pages <span class='kw-vol'>(110)</span>, landing page for google ads <span class='kw-vol'>(70)</span>, free landing page for google ads <span class='kw-vol'>(10)</span></div>
+          <div class='meta-line'>🆕 Intent expansions:</div><div class='chip-wrap'><span class="chip">ppc landing page design service</span><span class="chip">google ads landing page agency</span><span class="chip">hire ppc landing page designer</span><span class="chip">landing page optimization for google ads cost</span><span class="chip">conversion rate optimization landing page service</span><span class="chip">google ads landing page design pricing</span><span class="chip">custom ppc landing pages united states</span></div>
+          <div class='meta-line neg-line'>🚫 Negatives (anti-cannibalization): click fraud, ad fraud, script, scripts, negative keyword, negative keywords, account, add, advertisement, all, audit, automation, bid, broad, budget, campaigns, click, clicks, competitor, consultant, detection, editor, fraud, gram, installation, invalid, keyword, keywords, level, list, lists, manager, match, max, mobile, monitoring, monthly, negative, new, ongoing, pacing, performance, pmax, prevention, protection, remarketing, smart, software, solutions, stop, techniques, tools</div>
+        </div>
+        <div class="card">
+          <div class="card-head">
+            <h3>Negative Keyword Management</h3>
+            <div class="badges"><span class="badge" style="color:#57534e;background:#ece9e4">LOW</span><span class="badge intent-badge">PHRASE</span></div>
+          </div>
+          <p class="reasoning">Advertisers wanting ongoing negative keyword management or setup across their Google Ads and Shopping campaigns.</p>
+          <div class="meta-line">Volume: <strong>860/mo</strong> &middot; Avg score: <strong>51.9</strong> &middot; 17 keywords</div>
+          <div class="meta-line">Keywords: negative keywords google ads <span class='kw-vol'>(140)</span>, keyword negative <span class='kw-vol'>(390)</span>, account level negative keywords <span class='kw-vol'>(10)</span>, add negative keywords to performance max <span class='kw-vol'>(10)</span>, account level negative keywords google ads <span class='kw-vol'>(10)</span>, google ads editor negative keyword lists <span class='kw-vol'>(10)</span>, negative keywords shopping campaigns <span class='kw-vol'>(10)</span>, smart shopping negative keywords <span class='kw-vol'>(10)</span>, google adwords negative keywords <span class='kw-vol'>(50)</span>, google negative keywords <span class='kw-vol'>(50)</span>, add negative keywords <span class='kw-vol'>(40)</span>, add negative keywords google ads <span class='kw-vol'>(30)</span>, broad match negative keyword <span class='kw-vol'>(20)</span>, pmax negative keywords <span class='kw-vol'>(20)</span>, add negative keywords to all campaigns <span class='kw-vol'>(20)</span>, adwords negative keyword list <span class='kw-vol'>(20)</span>, google shopping negative keywords <span class='kw-vol'>(20)</span></div>
+          <div class='meta-line'>🆕 Intent expansions:</div><div class='chip-wrap'><span class="chip">negative keyword management service</span><span class="chip">hire ppc negative keyword expert</span><span class="chip">google ads negative keyword audit service</span><span class="chip">ongoing negative keyword management pricing</span><span class="chip">negative keyword list service for agencies</span><span class="chip">google ads account optimization negative keywords service</span></div>
+          <div class='meta-line neg-line'>🚫 Negatives (anti-cannibalization): click fraud, ad fraud, landing page, landing pages, script, scripts, advertisement, agency, automation, bid, budget, click, clicks, competitor, consultant, create, design, designer, detection, examples, expanded, fraud, free, gram, installation, invalid, landing, manager, mobile, monitoring, monthly, new, pacing, page, pages, prevention, protection, rate, remarketing, software, solutions, stop, techniques, tools</div>
+        </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Landing Pages (website generator inputs)</h2>
+    
+        <div class="card">
+          <div class="card-head">
+            <h3>Click Fraud Protection</h3>
+            <span class="badge intent-badge">/click-fraud-protection-service/</span>
+          </div>
+          <div class="meta-line">Main service: <strong>Click Fraud Protection</strong> &middot; Industry: PPC Fraud Prevention</div>
+          <div class="meta-line">Sub-services (page sections): Automated Click Fraud Detection, IP Blocking And Blacklisting, Competitor Click Fraud Monitoring, Mobile Ad Fraud Prevention, Real Time Traffic Analysis, Fraud Protection Reporting</div>
+          <div class="meta-line">Covers ad groups: Click Fraud Protection</div>
+        </div>
+        <div class="card">
+          <div class="card-head">
+            <h3>Google Ads Scripts &amp; Automation</h3>
+            <span class="badge intent-badge">/google-ads-scripts-automation-management/</span>
+          </div>
+          <div class="meta-line">Main service: <strong>Google Ads Scripts &amp; Automation Management</strong> &middot; Industry: PPC Management Services</div>
+          <div class="meta-line">Sub-services (page sections): Automated Bid Management Scripts, Budget Pacing Automation, Performance Reporting Scripts, Account Audit Automation, Custom Script Development, Ongoing Script Maintenance</div>
+          <div class="meta-line">Covers ad groups: Google Ads Scripts &amp; Automation</div>
+        </div>
+        <div class="card">
+          <div class="card-head">
+            <h3>PPC Landing Page Design</h3>
+            <span class="badge intent-badge">/ppc-landing-page-design/</span>
+          </div>
+          <div class="meta-line">Main service: <strong>PPC Landing Page Design</strong> &middot; Industry: PPC Management Services</div>
+          <div class="meta-line">Sub-services (page sections): Custom Landing Page Design, Conversion Rate Optimization, A/B Testing, Mobile Responsive Pages, Landing Page Copywriting, Post Click Analytics</div>
+          <div class="meta-line">Covers ad groups: PPC Landing Pages</div>
+        </div>
+        <div class="card">
+          <div class="card-head">
+            <h3>Negative Keyword Management</h3>
+            <span class="badge intent-badge">/negative-keyword-management-service/</span>
+          </div>
+          <div class="meta-line">Main service: <strong>Negative Keyword Management</strong> &middot; Industry: PPC Management Services</div>
+          <div class="meta-line">Sub-services (page sections): Negative Keyword Research, Ongoing List Maintenance, Account Level Negative Lists, Shopping Campaign Negatives, Search Term Audits, Wasted Spend Reduction</div>
+          <div class="meta-line">Covers ad groups: Negative Keyword Management</div>
+        </div>
+  </section>
+
+  <section>
+    <h2>Voice-search / question keywords (SEO content, not ads)</h2>
+    <div class="chip-wrap"><span class="chip">negative keywords can help advertisers better target their ads by</span></div>
+  </section>
+
+  <section>
+    <h2>Strategy Notes</h2>
+    <p class="reasoning">Core spend is concentrated in click fraud protection (highest scores and CPCs), positioned as the flagship high-priority campaign, while scripts, landing pages, and negative keyword management are bundled as supporting Google Ads management services. Informational, DIY &#x27;how-to/example/list&#x27; queries and competitor brand terms (Lunio, PPC Protect) were excluded since they signal research or rival intent rather than a buying decision.</p>
+  </section>
+
+  <footer>SEOblogy &middot; Keyword Strategy Report</footer>
+
+</div>
+</body>
+</html>
