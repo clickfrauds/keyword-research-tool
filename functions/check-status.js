@@ -87,12 +87,12 @@ export async function onRequestGet(context) {
     } catch (e) { /* non-fatal — the link just stays hidden */ }
     return null;
   };
-  const [seo_json_url, ads_csv_url, guard_js_url, audiences_csv_url] = await Promise.all([
-    probe("seo.json"), probe("editor.csv"), probe("guard.js"), probe("audiences.csv"),
+  const [seo_json_url, ads_csv_url, guard_js_url, audiences_csv_url, rsa_csv_url] = await Promise.all([
+    probe("seo.json"), probe("editor.csv"), probe("guard.js"), probe("audiences.csv"), probe("rsa.csv"),
   ]);
 
   return new Response(
-    JSON.stringify({ status: "ready", html: htmlContent, seo_json_url, ads_csv_url, guard_js_url, audiences_csv_url }),
+    JSON.stringify({ status: "ready", html: htmlContent, seo_json_url, ads_csv_url, guard_js_url, audiences_csv_url, rsa_csv_url }),
     { status: 200, headers: { "Content-Type": "application/json" } }
   );
 }

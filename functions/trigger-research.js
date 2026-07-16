@@ -93,6 +93,8 @@ export async function onRequestPost(context) {
         existing_campaign: String(body.existing_campaign || "").slice(0, 200),
         existing_ad_groups: String(body.existing_ad_groups || "").slice(0, 1000),
         max_ad_groups: String(body.max_ad_groups || "").slice(0, 3),
+        // Stage 3.8 RSA ads: Final URLs = website_url + landing-page slug
+        website_url: String(body.website_url || "").slice(0, 300),
         request_id,
       };
 

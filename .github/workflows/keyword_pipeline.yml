@@ -55,6 +55,10 @@ on:
         description: "FX multiplier account-currency → bid_currency (1 = account already in that currency)"
         required: false
         default: '1'
+      website_url:
+        description: "Client website (e.g. https://clickadsprotector.com) — used for RSA Final URLs (Stage 3.8)"
+        required: false
+        default: ''
 
 # Needed so Stage 5 can push the finished report to the results-data branch
 # using the automatic GITHUB_TOKEN (no extra secret required for this part).
@@ -144,6 +148,18 @@ jobs:
           NICHE_DESCRIPTION: ${{ github.event.inputs.niche_description }}
           TARGET_LOCATION: ${{ github.event.inputs.target_location }}
         run: python scripts/suggest_audiences.py
+
+      - name: Stage 3.8 - RSA ad copy per ad group (policy-validated, ~$0.05)
+        if: ${{ github.event.inputs.research_type != 'seo' }}
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          CLAUDE_MODEL: claude-sonnet-5
+          CLAUDE_EFFORT_RSA: "low"
+          BUSINESS_NAME: ${{ github.event.inputs.business_name }}
+          NICHE_DESCRIPTION: ${{ github.event.inputs.niche_description }}
+          TARGET_LOCATION: ${{ github.event.inputs.target_location }}
+          WEBSITE_URL: ${{ github.event.inputs.website_url }}
+        run: python scripts/generate_rsa_ads.py
 
       - name: Stage 3-SEO - Website-builder content plan (Mode 4 focus, ~$0.20)
         if: ${{ github.event.inputs.research_type == 'seo' || github.event.inputs.research_type == 'both' }}
