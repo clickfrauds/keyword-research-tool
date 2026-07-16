@@ -1,0 +1,25 @@
+﻿Campaign,Ad Group,Audience,Bid Modifier,Flexible Reach,Comment
+Core Appliance Repair,,Home Appliances,,Audience segments,IN_MARKET | targeting | Direct high-intent appliance shoppers/owners
+Core Appliance Repair,Washing Machine Repair,Washers & Dryers,25%,,IN_MARKET | observation | Exact match to washer repair intent
+Core Appliance Repair,Refrigerator & Freezer Repair,Refrigerators,25%,,IN_MARKET | observation | Direct fridge owner intent match
+Specialty Appliance Repair,Dishwasher Repair,Dishwashers,25%,,IN_MARKET | observation | Exact dishwasher intent match
+Core Appliance Repair,Stove & Cooking Range Repair,Cooking Ranges & Stoves,25%,,IN_MARKET | observation | Direct stove/range owner intent
+Core Appliance Repair,,Home & Garden Services,20%,,"IN_MARKET | observation | Home service seekers, strong overlap"
+Core Appliance Repair,,Plumbing Services,15%,,IN_MARKET | observation | Similar home repair service intent
+Specialty Appliance Repair,,Electrician Services,15%,,IN_MARKET | observation | Related home appliance/electrical fix intent
+Core Appliance Repair,,Residential Properties (For Rent),10%,,IN_MARKET | observation | Renters need urgent appliance fixes
+Specialty Appliance Repair,,Home Improvement,15%,,IN_MARKET | observation | Homeowners investing in home upkeep
+Core Appliance Repair,,Do-It-Yourselfers,10%,,AFFINITY | observation | Home maintenance-minded households
+Core Appliance Repair,,Family-Focused,15%,,AFFINITY | observation | Families rely heavily on appliances
+Specialty Appliance Repair,,Home Decor Enthusiasts,10%,,AFFINITY | observation | Households investing in kitchen/home quality
+Specialty Appliance Repair,,Value Shoppers,10%,,AFFINITY | observation | Seeking cost-effective repair over replacement
+
+Campaign,Ad Group,Negative Audience,Comment
+Core Appliance Repair,,Employment,"IN_MARKET | Job seekers, not repair customers"
+Specialty Appliance Repair,,IT & Technical Jobs,"IN_MARKET | Job seekers, irrelevant to repair services"
+Core Appliance Repair,,Motor Vehicles (New),IN_MARKET | Auto shoppers unrelated to appliances
+Specialty Appliance Repair,,Bargain Hunters,"AFFINITY | Price-only shoppers, low-value leads"
+Core Appliance Repair,,Luxury Shoppers,AFFINITY | Premium buyers not seeking repair deals
+Core Appliance Repair,,Business Travelers,AFFINITY | Irrelevant traveler segment
+Specialty Appliance Repair,,Post-Secondary Education,"IN_MARKET | Students, unrelated to home repairs"
+Core Appliance Repair,,Gamers,"AFFINITY | Irrelevant lifestyle segment, low intent"
