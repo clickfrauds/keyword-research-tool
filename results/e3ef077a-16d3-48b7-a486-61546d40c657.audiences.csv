@@ -1,0 +1,25 @@
+﻿Campaign,Ad Group,Audience,Bid Modifier,Flexible Reach,Comment
+Click Fraud Protection,,Business Technology,20%,,"IN_MARKET | observation | B2B software buyers, high relevance"
+Google Ads Management Services,,SEO & SEM Services,,Audience segments,IN_MARKET | targeting | Ultra-high-intent PPC service seekers
+Google Ads Management Services,,Advertising & Marketing Services,25%,,IN_MARKET | observation | Core service-related in-market audience
+Click Fraud Protection,,Enterprise Software,20%,,IN_MARKET | observation | Buyers of business-grade software solutions
+Google Ads Management Services,,Web Services,15%,,IN_MARKET | observation | Adjacent web/marketing services interest
+Click Fraud Protection,,Business Financial Services,15%,,IN_MARKET | observation | Business owners managing ad spend/budgets
+Google Ads Management Services,PPC Landing Pages,Web Design & Development,20%,,IN_MARKET | observation | Landing page design intent match
+Click Fraud Protection,,Network & Enterprise Security,20%,,IN_MARKET | observation | Security-conscious business decision makers
+Google Ads Management Services,Google Ads Scripts & Automation,CRM Solutions,15%,,IN_MARKET | observation | Automation-focused business software users
+Google Ads Management Services,,Staffing & Recruitment Services,10%,,IN_MARKET | observation | Service-based business owner proxy
+Click Fraud Protection,,Business Professionals,20%,,AFFINITY | observation | Core decision-maker demographic
+Google Ads Management Services,,Technophiles,15%,,AFFINITY | observation | Tech-savvy marketers interested in tools
+Click Fraud Protection,,Avid Business News Readers,10%,,"AFFINITY | observation | Business-minded audience, budget aware"
+Google Ads Management Services,,Avid Investors,10%,,AFFINITY | observation | ROI-focused business owner mindset
+
+Campaign,Ad Group,Negative Audience,Comment
+Google Ads Management Services,,Internships,"IN_MARKET | Job seekers, not business buyers"
+Google Ads Management Services,,IT & Technical Jobs,IN_MARKET | Job seekers not agency clients
+Google Ads Management Services,,Resumes & Portfolios,"IN_MARKET | Job hunting intent, irrelevant"
+Click Fraud Protection,,Business Education,"IN_MARKET | Students, not decision-makers"
+Google Ads Management Services,,Bargain Hunters,"AFFINITY | Low-budget shoppers, not premium clients"
+Click Fraud Protection,,Value Shoppers,"AFFINITY | Price-sensitive, poor fit for service"
+Google Ads Management Services,,Career Consulting Services,"IN_MARKET | Career seekers, not advertisers"
+Click Fraud Protection,,Temporary & Seasonal Jobs,IN_MARKET | Irrelevant job-seeker audience
