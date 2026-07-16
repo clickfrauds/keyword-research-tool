@@ -63,19 +63,25 @@ export async function onRequestPost(context) {
   }
 
   const request_id = crypto.randomUUID();
-  const dispatchUrl = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/actions/workflows/keyword_pipeline.yml/dispatches`;
 
-  const ghResponse = await fetch(dispatchUrl, {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${GITHUB_TOKEN}`,
-      Accept: "application/vnd.github+json",
-      "Content-Type": "application/json",
-      "User-Agent": "keyword-research-tool",
-    },
-    body: JSON.stringify({
-      ref: BRANCH,
-      inputs: {
+  // mode3 = the dedicated "Mode 3 Site Plan" workflow: the keywords box
+  // carries the comma-separated SERVICES list (same list the builder gets),
+  // and the run publishes {id}.seo.json with the mode3_site_plan block plus
+  // a stub html so the same polling flow works. Everything else goes to the
+  // normal keyword pipeline.
+  const isMode3 = body.research_type === "mode3";
+  const workflowFile = isMode3 ? "mode3_plan.yml" : "keyword_pipeline.yml";
+  const dispatchUrl = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/actions/workflows/${workflowFile}/dispatches`;
+
+  const inputs = isMode3
+    ? {
+        business_name: String(business_name).slice(0, 200),
+        niche_description: String(niche_description).slice(0, 500),
+        target_location: String(target_location).slice(0, 200),
+        services_mode3: String(seed_keywords).slice(0, 4000),
+        request_id,
+      }
+    : {
         business_name: String(business_name).slice(0, 200),
         niche_description: String(niche_description).slice(0, 500),
         target_location: String(target_location).slice(0, 200),
@@ -88,8 +94,17 @@ export async function onRequestPost(context) {
         existing_ad_groups: String(body.existing_ad_groups || "").slice(0, 1000),
         max_ad_groups: String(body.max_ad_groups || "").slice(0, 3),
         request_id,
-      },
-    }),
+      };
+
+  const ghResponse = await fetch(dispatchUrl, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${GITHUB_TOKEN}`,
+      Accept: "application/vnd.github+json",
+      "Content-Type": "application/json",
+      "User-Agent": "keyword-research-tool",
+    },
+    body: JSON.stringify({ ref: BRANCH, inputs }),
   });
 
   // GitHub returns 204 No Content on a successful dispatch — no run id comes

@@ -39,8 +39,12 @@ REQUEST_ID = os.environ.get("REQUEST_ID", "").strip()
 RESULTS_BRANCH = os.environ.get("RESULTS_BRANCH", "results-data")
 
 # (local_filename, extension_to_publish_as)
+# ORDER MATTERS: check-status.js treats "{id}.html exists" as the run being
+# READY, and probes every other link at that same instant. The html must
+# therefore be pushed LAST — pushing it first (the old order) opened a race
+# where the frontend showed the report but the seo.json/csv/js links were
+# still seconds away from existing, so they stayed hidden forever.
 FILES_TO_PUSH = [
-    ("keyword_strategy_report.html", "html"),
     ("keyword_strategy_targets.csv", "csv"),
     ("keyword_strategy.json", "json"),
     # Mode 4 feed: publishing this here means the raw link auto-generates —
@@ -55,6 +59,8 @@ FILES_TO_PUSH = [
     # Stage 3.7: niche-matched audience plan (positive + negative segments,
     # Editor paste-ready) — downloadable straight from the result page.
     ("audiences_editor.csv", "audiences.csv"),
+    # LAST on purpose — the readiness marker (see note above).
+    ("keyword_strategy_report.html", "html"),
 ]
 
 
@@ -123,6 +129,34 @@ def main():
 
     for local_path, ext in FILES_TO_PUSH:
         push_file(local_path, ext)
+
+    # Mode 3 runs produce ONLY website_builder_inputs.json — no report html.
+    # But the frontend's check-status.js uses "{id}.html exists" as its READY
+    # signal, so without one the form would poll forever. Publish a tiny stub
+    # report that simply presents the seo.json link (still pushed last, after
+    # the seo.json itself, to keep the readiness contract).
+    if (not os.path.exists("keyword_strategy_report.html")
+            and os.path.exists("website_builder_inputs.json")):
+        raw_link = (f"https://raw.githubusercontent.com/{GITHUB_REPOSITORY}"
+                    f"/{RESULTS_BRANCH}/results/{REQUEST_ID}.seo.json")
+        stub = f"""<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mode 3 Site Plan — ready</title>
+<style>body{{font-family:-apple-system,Segoe UI,Roboto,sans-serif;background:#f6f5f2;color:#14181c;
+margin:0;padding:40px 20px}}.card{{max-width:640px;margin:0 auto;background:#fdfcfa;border:1px solid #dcdad3;
+border-radius:10px;padding:28px}}h1{{font-size:20px;margin:0 0 10px}}p{{font-size:14px;color:#6b6560;line-height:1.6}}
+code{{display:block;background:#eef2f1;border:1px solid #dcdad3;border-radius:6px;padding:12px;
+font-size:12px;word-break:break-all;margin-top:14px}}</style></head><body>
+<div class="card"><h1>✅ Mode 3 Site Plan is ready</h1>
+<p>Copy the JSON link below (also shown above this report) and paste it into the
+website builder's <strong>seo_inputs_url</strong> field when running <strong>Mode 3</strong>.
+Every service page will then use real Google Ads search volumes, assigned keywords
+and PAA questions instead of AI guesses.</p>
+<code>{raw_link}</code></div></body></html>"""
+        with open("mode3_stub_report.html", "w", encoding="utf-8") as f:
+            f.write(stub)
+        push_file("mode3_stub_report.html", "html")
 
     if os.path.exists("website_builder_inputs.json"):
         raw_link = (f"https://raw.githubusercontent.com/{GITHUB_REPOSITORY}"

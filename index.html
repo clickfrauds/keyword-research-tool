@@ -126,11 +126,28 @@
       <option value="google_ads">Google Ads — campaigns, ad groups, negatives, guard script</option>
       <option value="seo">SEO — website content plan (clusters, services, questions)</option>
       <option value="both">Both — Ads package + SEO package</option>
+      <option value="mode3">Mode 3 Site Plan — full website (services list → per-page keywords)</option>
     </select>
 
-    <label for="seed_keywords">Seed keywords</label>
+    <label for="seed_keywords" id="seed-label">Seed keywords</label>
     <textarea id="seed_keywords" name="seed_keywords" required placeholder="ac repair dubai, ac not cooling, ac service dubai"></textarea>
-    <div class="hint">Comma-separated. 3–6 seed terms works well. Tip: include your city in a few seeds for local data.</div>
+    <div class="hint" id="seed-hint">Comma-separated. 3–6 seed terms works well. Tip: include your city in a few seeds for local data.</div>
+    <script>
+      // Mode 3 reuses the same box, but its meaning changes: it carries the
+      // SERVICES list (the exact list you give the builder's Mode 3), not
+      // seed keywords. Swap the label/hint/placeholder so nobody pastes the
+      // wrong thing.
+      document.getElementById("research_type").addEventListener("change", function () {
+        var m3 = this.value === "mode3";
+        document.getElementById("seed-label").textContent = m3 ? "Services list (same as builder Mode 3)" : "Seed keywords";
+        document.getElementById("seed_keywords").placeholder = m3
+          ? "AC Repair, Fridge Repair, Washing Machine Repair, Oven Repair, ..."
+          : "ac repair dubai, ac not cooling, ac service dubai";
+        document.getElementById("seed-hint").textContent = m3
+          ? "Comma-separated SERVICES — paste the exact same list you give the website builder's Mode 3 (up to 100+). The result is one JSON link for the builder's seo_inputs_url field."
+          : "Comma-separated. 3–6 seed terms works well. Tip: include your city in a few seeds for local data.";
+      });
+    </script>
 
     <label for="existing_campaign">Existing campaign name <span style="opacity:.6">(optional — for accounts already running)</span></label>
     <input id="existing_campaign" name="existing_campaign" placeholder="e.g. Plumbing Services Dubai">
