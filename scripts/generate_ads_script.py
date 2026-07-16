@@ -412,6 +412,11 @@ function main() {
     if (t.length > 4 && t.slice(-3) === "ies") return t.slice(0, -3) + "y";
     if (t.length > 3 && t.slice(-2) === "es") return t.slice(0, -2);
     if (t.length > 3 && t.slice(-1) === "s") return t.slice(0, -1);
+    // gerunds: "blocking"->"block", "monitoring"->"monitor" — without this a
+    // STRONG_ACTIONS entry like "block" never matches the "-ing" form real
+    // search terms use, and rule 5 wrongly reads "no service signal" and
+    // blocks a genuine buyer query (false negative).
+    if (t.length > 6 && t.slice(-3) === "ing") return t.slice(0, -3);
     return t;
   }
 
@@ -551,9 +556,18 @@ function main() {
               if (ctx && !serviceSignal) {
                 reason = "Context word (shopping, no service signal): [" + ctx + "]";
               }
-              // 6️⃣ misspelled head service token → potential lead, KEEP
-              else if (fuzzyRootHit && !safeHit) {
-                isSafe = true; reason = "fuzzy root [" + fuzzyRootHit + "]";
+              // 6️⃣a misspelled head service token → a lead ONLY when it
+              // comes WITH an action/problem word. A bare fuzzy hit is too
+              // loose: real English words sit 1 edit from service roots
+              // ("plumper"→plumber, "lending"→landing) and were getting a
+              // free ALLOW here (false positive, wasted spend).
+              else if (fuzzyRootHit && !safeHit && (actionHit || problemHit || strongHit)) {
+                isSafe = true; reason = "fuzzy root [" + fuzzyRootHit + "] + action/problem signal";
+              }
+              // 6️⃣b bare typo'd service search ("plumbr", "plumbrs") —
+              // 1-2 words with nothing else in them is still a lead
+              else if (fuzzyRootHit && !safeHit && splitTokens(term).length <= 2) {
+                isSafe = true; reason = "fuzzy root [" + fuzzyRootHit + "] (short bare query)";
               }
               // 7️⃣ safe roots (our own keywords + known-good phrases)
               else if (safeHit) {
