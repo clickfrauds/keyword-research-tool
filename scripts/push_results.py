@@ -55,6 +55,10 @@ FILES_TO_PUSH = [
     # Ads Script — downloadable straight from the result page, no GitHub
     # artifact digging needed.
     ("google_ads_editor.csv", "editor.csv"),
+    # Negatives SPLIT into their own file (Jul 2026): the Editor's Keywords
+    # grid imported mixed-file Negative Phrase rows as POSITIVE keywords.
+    # Paste this one into the "Keywords, Negative" section separately.
+    ("google_ads_editor_negatives.csv", "negatives.csv"),
     ("negative_guard_script.js", "guard.js"),
     # Stage 3.7: niche-matched audience plan (positive + negative segments,
     # Editor paste-ready) — downloadable straight from the result page.

@@ -20,7 +20,8 @@ WHAT THIS STAGE PRODUCES (per run, one Claude call):
                             industry label + URL slug — direct inputs for the
                             Mode 1 landing engine (message match = Quality Score)
   5. FILES: keyword_strategy.json, keyword_strategy.md,
-            google_ads_editor.csv (paste-ready, negatives included),
+            google_ads_editor.csv (paste-ready positives) +
+            google_ads_editor_negatives.csv (negatives, separate file),
             landing_pages.json (Mode 1 generator inputs)
 
 COST DESIGN (why v1 wasted $1/run and v3 doesn't):
@@ -40,8 +41,8 @@ Optional env vars:
                       from the data, never padded)
 
 Input : scored_keywords.json
-Output: keyword_strategy.json, keyword_strategy.md,
-        google_ads_editor.csv, landing_pages.json
+Output: keyword_strategy.json, keyword_strategy.md, google_ads_editor.csv,
+        google_ads_editor_negatives.csv, landing_pages.json
 """
 
 import os
@@ -564,25 +565,35 @@ def validate_strategy(raw, kept):
 # ══════════════════════════════════════════════════════════════════════════
 
 def write_ads_editor_csv(groups, negatives_for_existing=None):
-    """Google Ads Editor paste-ready CSV — keywords, intent expansions, AND
-    ad-group-level negatives (the anti-cannibalization layer). In existing-
-    account mode it also emits Negative Phrase rows for the CLIENT'S existing
-    ad groups so they can't cannibalize the new group.
+    """Google Ads Editor paste-ready CSVs — TWO separate files:
 
-    Import: Ads Editor → Account → Import → "Paste text" (or select this file).
-    Header follows the Editor's recognized column set; Criterion Type values
-    Broad/Phrase/Exact/Negative Phrase map directly. utf-8-sig BOM so Excel
-    and the Editor read Arabic/any-script keywords correctly.
+      google_ads_editor.csv            → positive keywords + intent expansions
+      google_ads_editor_negatives.csv  → ad-group-level Negative Phrase rows
+                                         (the anti-cannibalization layer; in
+                                         existing-account mode also negatives
+                                         for the client's existing ad groups)
+
+    Why split (Jul 2026): a single mixed file silently broke — pasting it into
+    the Editor's "Keywords" grid imported every row as a POSITIVE keyword
+    (the grid ignores Criterion Type), and pasting into "Keywords, Negative"
+    produced empty rows ("Keyword text can't be empty") because that grid's
+    columns don't line up. The Editor needs positives and negatives pasted
+    into their own sections, so we ship them as separate files.
+
+    Import: Ads Editor → Account → Import → "Paste text" (or select the file) —
+    once per file. Header follows the Editor's recognized column set; Criterion
+    Type values Broad/Phrase/Exact/Negative Phrase map directly. utf-8-sig BOM
+    so Excel and the Editor read Arabic/any-script keywords correctly.
 
     Max CPC = suggested starting bid in BID_CURRENCY (default PKR) — computed by the
     suggest_bids() formula from each keyword's REAL Google top-of-page bid
     range + competition index, scaled by Claude's per-group bid_multiplier.
     Intent-expansion keywords have no Planner data, so they inherit the
     MEDIAN suggested bid of their ad group. Negatives never carry a bid."""
+    ctype = {"phrase": "Phrase", "exact": "Exact"}
     with open("google_ads_editor.csv", "w", encoding="utf-8-sig", newline="") as f:
         w = csv.writer(f)
         w.writerow(["Campaign", "Ad Group", "Keyword", "Criterion Type", "Max CPC"])
-        ctype = {"phrase": "Phrase", "exact": "Exact"}
         for g in groups:
             mt = ctype.get(g["match_type"], "Phrase")
             # group median (match-type bid) — fallback for keywords the
@@ -595,12 +606,16 @@ def write_ads_editor_csv(groups, negatives_for_existing=None):
                             k.get("suggested_bid") or median_bid])
             for e in g["intent_expansion_keywords"]:
                 w.writerow([g["campaign"], g["name"], e, "Phrase", median_bid])
+    with open("google_ads_editor_negatives.csv", "w", encoding="utf-8-sig", newline="") as f:
+        w = csv.writer(f)
+        w.writerow(["Campaign", "Ad Group", "Keyword", "Criterion Type"])
+        for g in groups:
             for n in g["negative_keywords"]:
-                w.writerow([g["campaign"], g["name"], n, "Negative Phrase", ""])
+                w.writerow([g["campaign"], g["name"], n, "Negative Phrase"])
         for gname, terms in (negatives_for_existing or {}).items():
             for t in terms:
                 w.writerow([EXISTING_CAMPAIGN or (groups[0]["campaign"] if groups else ""),
-                            gname, t, "Negative Phrase", ""])
+                            gname, t, "Negative Phrase"])
 
 
 def write_landing_pages_json(pages, groups):
@@ -813,7 +828,8 @@ def main():
     if uncovered:
         print(f"⚠️ Ad groups not covered by any landing page: {uncovered}")
     print("✅ Saved: keyword_strategy.json, keyword_strategy.md, "
-          "google_ads_editor.csv, landing_pages.json")
+          "google_ads_editor.csv, google_ads_editor_negatives.csv, "
+          "landing_pages.json")
 
 
 if __name__ == "__main__":

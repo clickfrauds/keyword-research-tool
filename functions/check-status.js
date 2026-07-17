@@ -65,8 +65,10 @@ export async function onRequestGet(context) {
 
   // Extra deliverables pushed by the pipeline alongside the report:
   //   {id}.seo.json    → Mode 4 feed (copy-paste link for the website builder)
-  //   {id}.editor.csv  → paste-ready Google Ads Editor CSV
-  //   {id}.guard.js    → negative-guard Google Ads Script
+  //   {id}.editor.csv    → paste-ready Google Ads Editor CSV (positives only)
+  //   {id}.negatives.csv → ad-group negatives (separate file — the Editor's
+  //                        Keywords grid can't take mixed positive/negative)
+  //   {id}.guard.js      → negative-guard Google Ads Script
   // Probe each; return its raw link only if it exists. (Raw links need a
   // public repo; for a private repo these fetches would need a token.)
   const probe = async (ext) => {
@@ -87,12 +89,12 @@ export async function onRequestGet(context) {
     } catch (e) { /* non-fatal — the link just stays hidden */ }
     return null;
   };
-  const [seo_json_url, ads_csv_url, guard_js_url, audiences_csv_url, rsa_csv_url, locations_csv_url] = await Promise.all([
-    probe("seo.json"), probe("editor.csv"), probe("guard.js"), probe("audiences.csv"), probe("rsa.csv"), probe("locations.csv"),
+  const [seo_json_url, ads_csv_url, negatives_csv_url, guard_js_url, audiences_csv_url, rsa_csv_url, locations_csv_url] = await Promise.all([
+    probe("seo.json"), probe("editor.csv"), probe("negatives.csv"), probe("guard.js"), probe("audiences.csv"), probe("rsa.csv"), probe("locations.csv"),
   ]);
 
   return new Response(
-    JSON.stringify({ status: "ready", html: htmlContent, seo_json_url, ads_csv_url, guard_js_url, audiences_csv_url, rsa_csv_url, locations_csv_url }),
+    JSON.stringify({ status: "ready", html: htmlContent, seo_json_url, ads_csv_url, negatives_csv_url, guard_js_url, audiences_csv_url, rsa_csv_url, locations_csv_url }),
     { status: 200, headers: { "Content-Type": "application/json" } }
   );
 }

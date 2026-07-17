@@ -207,6 +207,7 @@ jobs:
             keyword_strategy.json
             keyword_strategy.md
             google_ads_editor.csv
+            google_ads_editor_negatives.csv
             landing_pages.json
             negative_guard_script.js
             audiences_editor.csv
