@@ -118,8 +118,21 @@
     <label for="niche_description">Niche / what the business does</label>
     <textarea id="niche_description" name="niche_description" required placeholder="e.g. AC repair, installation and maintenance company"></textarea>
 
-    <label for="target_location">Target location</label>
-    <input id="target_location" name="target_location" required placeholder="e.g. Dubai, UAE">
+    <label for="loc-country">Target location</label>
+    <!-- Structured picker backed by the same ClickAds Protector geo dataset
+         (geo/index.json = 246 countries) that generate_locations.py resolves
+         against — so whatever is picked here is guaranteed to map to real
+         Google geo target ids in the Locations CSV. Selections auto-fill the
+         target_location field below (still editable as free text). -->
+    <div style="display:flex; gap:8px; flex-wrap:wrap;">
+      <select id="loc-country" style="flex:1 1 220px; padding:10px 12px; border:1px solid #dcdad3; border-radius:8px; font-size:14px; background:#fff;">
+        <option value="">Loading countries…</option>
+      </select>
+      <input id="loc-city" list="loc-city-list" disabled placeholder="City / area (optional — whole country)" style="flex:1 1 220px;">
+      <datalist id="loc-city-list"></datalist>
+    </div>
+    <input id="target_location" name="target_location" required placeholder="e.g. Dubai, UAE — or pick above">
+    <div class="hint">Pick country + city above (auto-fills this field), or type free text. For Google Ads runs the Locations CSV targets the best areas of the country — narrowed to the city when one is chosen. Use <b>Worldwide (N/A)</b> for global SEO runs.</div>
 
     <label for="website_url">Website URL <span style="opacity:.6">(optional — RSA ads ke Final URLs iske landing-page slugs par banenge)</span></label>
     <input id="website_url" name="website_url" placeholder="https://yourdomain.com">
@@ -150,6 +163,73 @@
           ? "Comma-separated SERVICES — paste the exact same list you give the website builder's Mode 3 (up to 100+). The result is one JSON link for the builder's seo_inputs_url field."
           : "Comma-separated. 3–6 seed terms works well. Tip: include your city in a few seeds for local data.";
       });
+    </script>
+
+    <script>
+      // Location picker — same geo dataset the pipeline resolves against
+      // (clickadsprotector.com/geo). Country list = all 246 countries from
+      // index.json; city list = City/Province-level rows of the chosen
+      // country's {CC}.json (neighborhoods excluded — generate_locations.py
+      // auto-expands a chosen city/province into its sub-areas anyway).
+      (function () {
+        var GEO_BASE = "https://clickadsprotector.com/geo";
+        var countrySel = document.getElementById("loc-country");
+        var cityInput = document.getElementById("loc-city");
+        var cityList = document.getElementById("loc-city-list");
+        var target = document.getElementById("target_location");
+        var CITY_TYPES = { City: 1, Province: 1, State: 1, Region: 1,
+                           Governorate: 1, Territory: 1, Municipality: 1, County: 1 };
+
+        function compose() {
+          var cc = countrySel.value;
+          if (!cc) return;                      // manual free-text mode
+          if (cc === "N/A") { target.value = "N/A"; return; }
+          var name = countrySel.options[countrySel.selectedIndex].textContent;
+          var city = cityInput.value.trim();
+          target.value = city ? city + ", " + name : name;
+        }
+
+        fetch(GEO_BASE + "/index.json")
+          .then(function (r) { return r.json(); })
+          .then(function (idx) {
+            var opts = '<option value="">— pick a country (or type below) —</option>' +
+                       '<option value="N/A">🌍 Worldwide (N/A)</option>';
+            idx.filter(function (e) { return e.cc && e.name && e.name !== e.cc; })
+               .sort(function (a, b) { return a.name.localeCompare(b.name); })
+               .forEach(function (e) {
+                 opts += '<option value="' + e.cc + '">' + e.name + "</option>";
+               });
+            countrySel.innerHTML = opts;
+          })
+          .catch(function () {
+            countrySel.innerHTML = '<option value="">Country list unavailable — type location below</option>';
+          });
+
+        countrySel.addEventListener("change", function () {
+          cityInput.value = "";
+          cityList.innerHTML = "";
+          var cc = countrySel.value;
+          cityInput.disabled = !cc || cc === "N/A";
+          compose();
+          if (!cc || cc === "N/A") return;
+          fetch(GEO_BASE + "/" + cc + ".json")
+            .then(function (r) { return r.json(); })
+            .then(function (geo) {
+              var seen = {};
+              var opts = "";
+              geo.forEach(function (g) {
+                if (CITY_TYPES[g.t] && g.n && !seen[g.n]) {
+                  seen[g.n] = 1;
+                  opts += '<option value="' + g.n.replace(/"/g, "&quot;") + '">';
+                }
+              });
+              cityList.innerHTML = opts;
+            })
+            .catch(function () { /* datalist stays empty — free typing still works */ });
+        });
+        cityInput.addEventListener("input", compose);
+        cityInput.addEventListener("change", compose);
+      })();
     </script>
 
     <label for="existing_campaign">Existing campaign name <span style="opacity:.6">(optional — for accounts already running)</span></label>
