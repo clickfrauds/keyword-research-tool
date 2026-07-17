@@ -73,6 +73,7 @@
   }
   #status.error { color: #9c2b1f; border-color: #f2c9c2; background: #fbe2de; }
   #report-actions { margin-top: 20px; display: flex; gap: 10px; }
+  #report-actions[hidden] { display: none; }
   #report-actions button {
     margin-top: 0;
     width: auto;
@@ -143,6 +144,7 @@
       <option value="seo">SEO — website content plan (clusters, services, questions)</option>
       <option value="both">Both — Ads package + SEO package</option>
       <option value="mode3">Mode 3 Site Plan — full website (services list → per-page keywords)</option>
+      <option value="locations">Locations only — instant Editor CSV (no pipeline run)</option>
     </select>
 
     <label for="seed_keywords" id="seed-label">Seed keywords</label>
@@ -153,8 +155,30 @@
       // SERVICES list (the exact list you give the builder's Mode 3), not
       // seed keywords. Swap the label/hint/placeholder so nobody pastes the
       // wrong thing.
+      // "Locations only" runs entirely in the browser (same geo dataset, same
+      // row format as generate_locations.py) — no GitHub Actions run needed.
+      // The form shrinks to: campaign name(s) + the location picker.
+      var LOC_HIDE = ["niche_description", "website_url", "seed_keywords",
+                      "existing_campaign", "existing_ad_groups", "max_ad_groups"];
+      function setLocationsOnly(on) {
+        LOC_HIDE.forEach(function (id) {
+          var el = document.getElementById(id);
+          var lab = document.querySelector('label[for="' + id + '"]');
+          el.style.display = on ? "none" : "";
+          if (lab) lab.style.display = on ? "none" : "";
+          if (id === "niche_description" || id === "seed_keywords") el.required = !on;
+        });
+        document.getElementById("seed-hint").style.display = on ? "none" : "";
+        document.getElementById("existing-hint").style.display = on ? "none" : "";
+        document.querySelector('label[for="business_name"]').textContent =
+          on ? "Campaign name(s) — exact names from your account, comma-separated" : "Business name";
+        document.getElementById("business_name").placeholder =
+          on ? "Core Appliance Repair, Specialty Appliance Repair" : "e.g. Awais AC & Plumber";
+        document.getElementById("submit-btn").textContent = on ? "Download Locations CSV" : "Generate Report";
+      }
       document.getElementById("research_type").addEventListener("change", function () {
         var m3 = this.value === "mode3";
+        setLocationsOnly(this.value === "locations");
         document.getElementById("seed-label").textContent = m3 ? "Services list (same as builder Mode 3)" : "Seed keywords";
         document.getElementById("seed_keywords").placeholder = m3
           ? "AC Repair, Fridge Repair, Washing Machine Repair, Oven Repair, ..."
@@ -237,7 +261,7 @@
 
     <label for="existing_ad_groups">Existing ad groups <span style="opacity:.6">(optional, comma-separated)</span></label>
     <textarea id="existing_ad_groups" name="existing_ad_groups" placeholder="Emergency Plumbing, Drain Cleaning, Water Heater Repair"></textarea>
-    <div class="hint">Fill both to add NEW ad groups into a live account — new groups slot into this campaign with 2-way negative siloing against these groups.</div>
+    <div class="hint" id="existing-hint">Fill both to add NEW ad groups into a live account — new groups slot into this campaign with 2-way negative siloing against these groups.</div>
 
     <label for="max_ad_groups">Max new ad groups <span style="opacity:.6">(optional)</span></label>
     <input id="max_ad_groups" name="max_ad_groups" type="number" min="1" max="10" placeholder="10 (use 1-2 for a small niche service)">
@@ -442,10 +466,70 @@
     statusEl.classList.toggle("error", Boolean(isError));
   }
 
+  // ── Locations-only: build the Editor CSV in the browser ──────────────
+  // Mirrors generate_locations.py (pick_locations + exact 18-column header)
+  // against the same geo dataset, so the output is byte-compatible with the
+  // pipeline's locations_editor.csv. Exposed on window for testability.
+  const GEO_BASE = "https://clickadsprotector.com/geo";
+  const MAX_LOC_ROWS = 300;
+  function normTxt(s) { return String(s).toLowerCase().replace(/[^a-z0-9 ]+/g, "").trim(); }
+  function pickLocations(geo, city) {
+    if (city) {
+      const cn = normTxt(city);
+      const exact = geo.filter(g => normTxt(g.n || "") === cn);
+      if (exact.length) {
+        const provNames = exact.filter(g => g.t === "Province").map(g => g.n);
+        const inside = geo.filter(g => exact.indexOf(g) < 0 &&
+          provNames.some(p => ("," + (g.c || "") + ",").indexOf("," + p + ",") >= 0));
+        return exact.concat(inside);
+      }
+      const part = geo.filter(g => normTxt(g.n || "").indexOf(cn) >= 0);
+      if (part.length) return part;
+    }
+    const country = geo.filter(g => g.t === "Country");
+    const provs = geo.filter(g => ["Province", "State", "Region", "Governorate", "Territory"].indexOf(g.t) >= 0)
+                     .sort((a, b) => (a.n || "").localeCompare(b.n || ""));
+    return country.concat(provs);
+  }
+  function csvCell(v) { return /[",\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v; }
+  window.buildLocationsCsv = async function (cc, city, campaigns) {
+    const geo = await (await fetch(GEO_BASE + "/" + cc + ".json")).json();
+    const chosen = pickLocations(geo, city).slice(0, MAX_LOC_ROWS);
+    if (!chosen.length) throw new Error("No matching locations for that city — leave city blank for whole country.");
+    const header = ["Campaign", "Ad Group", "ID#Original", "ID", "Location#Original",
+                    "Location", "Reach", "Location groups#Original", "Location groups",
+                    "Radius#Original", "Radius", "Unit#Original", "Unit",
+                    "Bid Modifier", "Campaign Status", "Ad Group Status", "Status", "Comment"];
+    const rows = [header.join(",")];
+    campaigns.forEach(camp => chosen.forEach(g =>
+      rows.push([camp, "", "", g.id, "", g.c, "", "", "", "", "", "", "", "", "Paused", "", "Enabled", ""].map(csvCell).join(","))));
+    return { csv: "﻿" + rows.join("\r\n"), count: chosen.length };
+  };
+  async function locationsOnlyRun(data) {
+    const cc = document.getElementById("loc-country").value;
+    const city = document.getElementById("loc-city").value.trim();
+    const campaigns = (data.business_name || "").split(",").map(s => s.trim()).filter(Boolean);
+    if (!cc || cc === "N/A") { setStatus("Locations only: pick a country in the dropdown first.", true); return; }
+    if (!campaigns.length) { setStatus("Locations only: enter at least one campaign name.", true); return; }
+    setStatus("Building Locations CSV…", false);
+    try {
+      const out = await window.buildLocationsCsv(cc, city, campaigns);
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(new Blob([out.csv], { type: "text/csv;charset=utf-8" }));
+      a.download = "locations_editor.csv";
+      a.click();
+      URL.revokeObjectURL(a.href);
+      setStatus("✅ " + out.count + " locations × " + campaigns.length + " campaign(s) downloaded — Ads Editor → Account → Import. Campaigns import Paused if they don't exist yet.", false);
+    } catch (err) {
+      setStatus("Error: " + err.message, true);
+    }
+  }
+
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
     const data = Object.fromEntries(new FormData(form).entries());
     lastBusinessName = data.business_name || "report";
+    if (data.research_type === "locations") { await locationsOnlyRun(data); return; }
 
     submitBtn.disabled = true;
     reportActionsEl.hidden = true;

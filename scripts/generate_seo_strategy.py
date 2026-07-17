@@ -229,7 +229,9 @@ HARD RULES:
 4. mode3 services: ONLY services with visible search demand in the data —
    if nobody searches it, it doesn't get a page. Order by demand.
 5. mode5: detect city/area names present in the keywords (any language).
-   If none beyond the target location, say so in notes.
+   If none beyond the target location, say so in notes. When a REAL GEO
+   AREAS list is provided, recommended_city_targets must come from that
+   list only (best first) — those names map to real Google geo targets.
 6. EXCLUDE ids that are pure junk/competitor brands/irrelevant.
 7. Reference provided keywords ONLY by numeric id. Questions/services/names
    are new text — write them fully.
@@ -243,7 +245,36 @@ HARD RULES:
 """
 
 
-def build_user_prompt(keywords):
+def fetch_geo_areas():
+    """Real area names for TARGET_LOCATION from the ClickAds Protector geo
+    dataset — the exact same source + resolution logic generate_locations.py
+    uses for the Ads Locations CSV, so SEO city targets and Ads geo targeting
+    always agree. City selected → that city's real sub-areas/neighborhoods;
+    country only → its cities/provinces. Any failure = empty list, never
+    fatal — mode5 targets then stay model-inferred as before."""
+    if not TARGET_LOCATION or TARGET_LOCATION.strip().upper() in ("N/A", "NA"):
+        return []
+    try:
+        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+        from generate_locations import fetch_json, resolve_country, pick_locations, GEO_BASE
+        index = fetch_json(f"{GEO_BASE}/index.json")
+        cc, city = resolve_country(TARGET_LOCATION, index)
+        if not cc:
+            return []
+        geo = fetch_json(f"{GEO_BASE}/{cc}.json")
+        names, seen = [], set()
+        for g in pick_locations(geo, city):
+            n = str(g.get("n", "")).strip()
+            if n and n.lower() not in seen:
+                seen.add(n.lower())
+                names.append(n)
+        return names[:80]
+    except Exception as e:
+        print(f"⚠️ Geo areas unavailable ({e}) — mode5 city targets stay model-inferred.")
+        return []
+
+
+def build_user_prompt(keywords, geo_areas=None):
     lines = []
     for k in keywords:
         flags = ",".join(k.get("flags", [])) or "-"
@@ -252,10 +283,20 @@ def build_user_prompt(keywords):
             f"|kd:{k['kd_proxy']}|{k['funnel']}"
             f"|{k.get('trend', 'UNKNOWN')}|{k.get('intent', '?')}|{flags}"
         )
+    geo_block = ""
+    if geo_areas:
+        geo_block = (
+            f"REAL GEO AREAS for {TARGET_LOCATION} (from Google's geo-target "
+            "database — for mode5_pseo.recommended_city_targets use ONLY names "
+            "from this list, ordered by the search demand you see in the "
+            "keywords; never invent area names):\n"
+            + ", ".join(geo_areas) + "\n\n"
+        )
     header = (
         f"BUSINESS: {BUSINESS_NAME or '(not provided)'}\n"
         f"NICHE: {NICHE_DESCRIPTION or '(infer from keywords)'}\n"
         f"TARGET LOCATION: {TARGET_LOCATION or '(not local)'}\n\n"
+        + geo_block +
         f"KEYWORDS ({len(lines)} rows — format: id|keyword|volume|kd|funnel|trend|intent|flags):\n"
     )
     return header + "\n".join(lines)
@@ -438,7 +479,11 @@ def main():
           f"{sum(1 for k in keywords if k['ai_overview_prone'])} AI-overview-prone) → {MODEL} (effort={EFFORT})")
 
     client = anthropic.Anthropic()
-    user_prompt = build_user_prompt(keywords)
+    geo_areas = fetch_geo_areas()
+    if geo_areas:
+        print(f"🌍 {len(geo_areas)} real geo areas for '{TARGET_LOCATION}' "
+              "feed the mode5 pSEO targets")
+    user_prompt = build_user_prompt(keywords, geo_areas)
     raw = None
     text = ""
     last_err = ""
@@ -471,6 +516,9 @@ def main():
         sys.exit(1)
 
     mode4, mode3, mode2, mode5 = validate(raw, by_id)
+    # Full candidate list (not just Claude's picks) — Mode 5 in the website
+    # builder can page over ALL real areas of the selected city/country.
+    mode5["geo_area_candidates"] = geo_areas
 
     out = {
         "business": {"name": BUSINESS_NAME, "niche": NICHE_DESCRIPTION,
