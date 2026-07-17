@@ -324,6 +324,23 @@ def main():
         print("❌ No valid positive audiences returned — nothing to write.")
         sys.exit(1)
 
+    # Google forbids positive audience segments on both an ad group and its
+    # parent campaign — with single-campaign mode (the default) any ad-group
+    # level entry conflicts with the campaign-level ones and red-errors the
+    # Editor import. Demote everything to campaign level and dedupe.
+    if os.environ.get("SINGLE_CAMPAIGN", "").strip().lower() not in ("", "false", "0", "no", "off"):
+        seen_names, flat = set(), []
+        for a in positive:
+            if a["name"].lower() in seen_names:
+                continue
+            seen_names.add(a["name"].lower())
+            a["ad_group"], a["level"] = "", "campaign"
+            flat.append(a)
+        if len(flat) != len(positive):
+            print(f"   🎯 Single-campaign mode: audiences flattened to campaign level "
+                  f"({len(positive)} → {len(flat)})")
+        positive = flat
+
     write_editor_csv(positive, negative)
     write_md(positive, negative, note)
     with open("audience_plan.json", "w", encoding="utf-8") as f:

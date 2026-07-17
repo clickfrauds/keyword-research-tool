@@ -62,7 +62,7 @@ HEADER = (
      "Bid Strategy Type", "Enhanced CPC", "Campaign Status",
      "Ad Group", "Ad Group Type", "Ad Group Status", "Max CPC",
      "Keyword", "Criterion Type", "ID", "Location", "Bid Modifier",
-     "Audience", "Flexible Reach", "Negative Audience", "Ad type"]
+     "Audience", "Flexible Reach", "Ad type"]
     + [c for i in range(1, N_HEADLINES + 1)
        for c in (f"Headline {i}", f"Headline {i} position")]
     + [f"Description {j}" for j in range(1, N_DESCRIPTIONS + 1)]
@@ -181,31 +181,31 @@ def main():
                        "Bid Modifier": r.get("Bid Modifier", "")}))
                 n_loc += 1
 
-    # 7) audience rows — from Stage 3.7's structured plan. Positive rows use
-    # the targeting tool's proven column set (Audience + Bid Modifier +
-    # Flexible Reach); negative rows use the Negative Audience column.
-    n_aud = n_aud_neg = 0
+    # 7) audience rows — from Stage 3.7's structured plan. ALL positives go
+    # at CAMPAIGN level: Google forbids positive segments on both an ad
+    # group and its parent campaign, and mixed levels red-error the whole
+    # import (user hit this Jul 2026). Negative audiences are NOT in this
+    # file — the Editor silently ignores a "Negative Audience" column in a
+    # combined import; they ship in audiences_editor_negatives.csv instead.
+    n_aud = 0
     if os.path.exists(AUD_JSON):
         with open(AUD_JSON, encoding="utf-8") as f:
             plan = json.load(f)
         camp_set = set(campaigns)
+        seen_aud = set()
         for a in plan.get("positive", []):
+            name = a.get("name", "")
+            if not name or name.lower() in seen_aud:
+                continue
+            seen_aud.add(name.lower())
             camp = a.get("campaign") if a.get("campaign") in camp_set else campaigns[0]
             rows.append(set_cells(
                 blank_row(), Campaign=camp,
-                **{"Ad Group": a.get("ad_group", "") or "",
-                   "Audience": a.get("name", ""),
+                **{"Audience": name,
                    "Bid Modifier": f"{a['bid_adjustment']}%" if a.get("bid_adjustment") else "",
                    "Flexible Reach": "Audience segments" if a.get("mode") == "targeting" else "",
                    "Comment": f"{a.get('type', '')} | {a.get('mode', '')} | {a.get('reason', '')}"}))
             n_aud += 1
-        for a in plan.get("negative", []):
-            camp = a.get("campaign") if a.get("campaign") in camp_set else campaigns[0]
-            rows.append(set_cells(
-                blank_row(), Campaign=camp,
-                **{"Negative Audience": a.get("name", ""),
-                   "Comment": f"{a.get('type', '')} | {a.get('reason', '')}"}))
-            n_aud_neg += 1
 
     with open(OUT, "w", encoding="utf-8-sig", newline="") as f:
         w = csv.writer(f)
@@ -217,7 +217,7 @@ def main():
     n_neg = sum(len(g.get("negative_keywords", [])) for g in groups)
     print(f"✅ Master CSV: {len(campaigns)} campaign | {len(groups)} ad groups | "
           f"{n_kw} keywords | {n_neg} negatives | {n_rsa} RSAs | {n_loc} locations | "
-          f"{n_aud}+/{n_aud_neg}− audiences "
+          f"{n_aud} audiences (campaign-level; negatives via separate file) "
           f"→ {OUT} (one Editor import, campaigns Paused, Manual CPC, partners off)")
 
 

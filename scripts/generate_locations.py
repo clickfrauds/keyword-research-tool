@@ -282,7 +282,11 @@ def main():
         return
 
     tiers, neg_names = classify_bid_tiers(chosen, cc, city, geo, index)
-    adj = {"premium": f"{PREMIUM_BID_ADJ}%", "low": f"{LOW_BID_ADJ}%"}
+    # Editor wants location bid adjustments as DECIMAL MULTIPLIERS, not
+    # percentages: +25% → 1.25, -90% → 0.10 ("25%"/"-90%" import as
+    # "bid adjustment is invalid" — user hit this Jul 2026).
+    adj = {"premium": f"{1 + PREMIUM_BID_ADJ / 100:.2f}",
+           "low": f"{1 + LOW_BID_ADJ / 100:.2f}"}
 
     # exact header the targeting tool already imports successfully
     header = ["Campaign", "Ad Group", "ID#Original", "ID", "Location#Original",
