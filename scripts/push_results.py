@@ -63,6 +63,9 @@ FILES_TO_PUSH = [
     # Stage 3.7: niche-matched audience plan (positive + negative segments,
     # Editor paste-ready) — downloadable straight from the result page.
     ("audiences_editor.csv", "audiences.csv"),
+    # Same split as the keywords file: negative audiences in their own file
+    # so a mixed paste can't import them as positives.
+    ("audiences_editor_negatives.csv", "audiences_negatives.csv"),
     # Stage 3.8: RSA ad copy — 15 headlines + 4 descriptions per ad group,
     # policy-validated, Google Ads Editor import format.
     ("rsa_editor.csv", "rsa.csv"),

@@ -24,17 +24,20 @@ The master list is sent as a CACHED system prompt (Anthropic prompt caching)
 so repeat runs pay ~10% of the input cost.
 
 Outputs:
-  audiences_editor.csv — Google Ads Editor import blocks (positive +
-                         negative sections, same proven format as the
-                         ClickAds Protector targeting tool)
-  audience_plan.json   — full structured plan
-  audiences.md         — human-readable summary with the strategy note
+  audiences_editor.csv           — Google Ads Editor import (positive
+                                   audiences, same proven format as the
+                                   ClickAds Protector targeting tool)
+  audiences_editor_negatives.csv — negative audiences (separate file —
+                                   the Editor can't take a mixed paste)
+  audience_plan.json             — full structured plan
+  audiences.md                   — human-readable summary with the strategy note
 
 Env vars: ANTHROPIC_API_KEY, BUSINESS_NAME, NICHE_DESCRIPTION, TARGET_LOCATION
 Optional: CLAUDE_MODEL (default claude-sonnet-5),
           CLAUDE_EFFORT_AUDIENCES (default low)
 Input : keyword_strategy.json, data/audiences.json
-Output: audiences_editor.csv, audience_plan.json, audiences.md
+Output: audiences_editor.csv, audiences_editor_negatives.csv,
+        audience_plan.json, audiences.md
 """
 
 import os
@@ -242,9 +245,12 @@ def validate_plan(raw, by_type, strategy):
 
 
 def write_editor_csv(positive, negative):
-    """Google Ads Editor import blocks. Same proven column set as the
-    ClickAds Protector targeting tool. Import each section separately via
-    Account → Import → Paste text (Editor reads one record type per paste)."""
+    """Google Ads Editor import files — TWO separate CSVs. Same proven column
+    set as the ClickAds Protector targeting tool. Split (Jul 2026) for the
+    same reason as google_ads_editor.csv (commit dc20ab3): a mixed file pasted
+    in one go imports every row as the first record type, so positives and
+    negatives ship as their own files, imported one at a time via
+    Account → Import → Paste text (or select file)."""
     with open("audiences_editor.csv", "w", encoding="utf-8-sig", newline="") as f:
         w = csv.writer(f)
         w.writerow(["Campaign", "Ad Group", "Audience", "Bid Modifier",
@@ -256,7 +262,8 @@ def write_editor_csv(positive, negative):
                 "Audience segments" if a["mode"] == "targeting" else "",
                 f"{a['type']} | {a['mode']} | {a['reason']}",
             ])
-        w.writerow([])
+    with open("audiences_editor_negatives.csv", "w", encoding="utf-8-sig", newline="") as f:
+        w = csv.writer(f)
         w.writerow(["Campaign", "Ad Group", "Negative Audience", "Comment"])
         for a in negative:
             w.writerow([a["campaign"], "", a["name"], f"{a['type']} | {a['reason']}"])
@@ -282,11 +289,11 @@ def write_md(positive, negative, note):
     if note:
         md.append(f"\n## 💡 Strategy\n{note}\n")
     md.append("\n## 📥 How to import\n"
-              "1. Open **audiences_editor.csv** — it has TWO blocks.\n"
-              "2. Google Ads Editor → Account → Import → *Paste text* → paste the "
-              "FIRST block (positive audiences).\n"
-              "3. Repeat with the SECOND block (negative audiences).\n"
-              "4. Review, then Post. Observation rows never restrict reach — "
+              "1. Google Ads Editor → Account → Import → *Paste text* (or select "
+              "file) → **audiences_editor.csv** (positive audiences).\n"
+              "2. Repeat with **audiences_editor_negatives.csv** (negative "
+              "audiences) — a separate import, never mixed with the positives.\n"
+              "3. Review, then Post. Observation rows never restrict reach — "
               "they only enable the bid adjustments.")
     with open("audiences.md", "w", encoding="utf-8") as f:
         f.write("\n".join(md))
@@ -327,7 +334,8 @@ def main():
     n_ag = len(positive) - n_camp
     print(f"✅ Audience plan: {len(positive)} positive ({n_camp} campaign-level, "
           f"{n_ag} ad-group-level) | {len(negative)} negative")
-    print("✅ Saved: audiences_editor.csv, audience_plan.json, audiences.md")
+    print("✅ Saved: audiences_editor.csv, audiences_editor_negatives.csv, "
+          "audience_plan.json, audiences.md")
 
 
 if __name__ == "__main__":

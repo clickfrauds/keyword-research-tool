@@ -211,6 +211,7 @@ jobs:
             landing_pages.json
             negative_guard_script.js
             audiences_editor.csv
+            audiences_editor_negatives.csv
             audience_plan.json
             audiences.md
             rsa_ads.json

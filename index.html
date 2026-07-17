@@ -193,7 +193,8 @@
       <a id="ads-csv-link" hidden download target="_blank" rel="noopener" style="display:inline-block; font-size:13px; font-weight:600; color:var(--accent); border:1px solid var(--accent); border-radius:8px; padding:8px 14px; text-decoration:none;">⬇️ Ads Editor CSV (positives)</a>
       <a id="negatives-csv-link" hidden download target="_blank" rel="noopener" style="display:inline-block; font-size:13px; font-weight:600; color:var(--accent); border:1px solid var(--accent); border-radius:8px; padding:8px 14px; text-decoration:none;">⬇️ Negatives CSV (alag paste karein)</a>
       <a id="guard-js-link" hidden download target="_blank" rel="noopener" style="display:inline-block; font-size:13px; font-weight:600; color:var(--accent); border:1px solid var(--accent); border-radius:8px; padding:8px 14px; text-decoration:none;">⬇️ Negative Guard Script</a>
-      <a id="audiences-csv-link" hidden download target="_blank" rel="noopener" style="display:inline-block; font-size:13px; font-weight:600; color:var(--accent); border:1px solid var(--accent); border-radius:8px; padding:8px 14px; text-decoration:none;">⬇️ Audiences CSV (+/−)</a>
+      <a id="audiences-csv-link" hidden download target="_blank" rel="noopener" style="display:inline-block; font-size:13px; font-weight:600; color:var(--accent); border:1px solid var(--accent); border-radius:8px; padding:8px 14px; text-decoration:none;">⬇️ Audiences CSV (+)</a>
+      <a id="audiences-negatives-csv-link" hidden download target="_blank" rel="noopener" style="display:inline-block; font-size:13px; font-weight:600; color:var(--accent); border:1px solid var(--accent); border-radius:8px; padding:8px 14px; text-decoration:none;">⬇️ Audiences Negatives CSV (−)</a>
       <a id="rsa-csv-link" hidden download target="_blank" rel="noopener" style="display:inline-block; font-size:13px; font-weight:600; color:var(--accent); border:1px solid var(--accent); border-radius:8px; padding:8px 14px; text-decoration:none;">⬇️ RSA Ads CSV (15H+4D)</a>
       <a id="locations-csv-link" hidden download target="_blank" rel="noopener" style="display:inline-block; font-size:13px; font-weight:600; color:var(--accent); border:1px solid var(--accent); border-radius:8px; padding:8px 14px; text-decoration:none;">⬇️ Locations CSV (geo ids)</a>
     </div>
@@ -420,21 +421,24 @@
         const negA = document.getElementById("negatives-csv-link");
         const jsA = document.getElementById("guard-js-link");
         const audA = document.getElementById("audiences-csv-link");
+        const audNegA = document.getElementById("audiences-negatives-csv-link");
         const rsaA = document.getElementById("rsa-csv-link");
         const locA = document.getElementById("locations-csv-link");
         csvA.hidden = !json.ads_csv_url;
         negA.hidden = !json.negatives_csv_url;
         jsA.hidden = !json.guard_js_url;
         audA.hidden = !json.audiences_csv_url;
+        audNegA.hidden = !json.audiences_negatives_csv_url;
         rsaA.hidden = !json.rsa_csv_url;
         locA.hidden = !json.locations_csv_url;
         if (json.ads_csv_url) csvA.href = json.ads_csv_url;
         if (json.negatives_csv_url) negA.href = json.negatives_csv_url;
         if (json.guard_js_url) jsA.href = json.guard_js_url;
         if (json.audiences_csv_url) audA.href = json.audiences_csv_url;
+        if (json.audiences_negatives_csv_url) audNegA.href = json.audiences_negatives_csv_url;
         if (json.rsa_csv_url) rsaA.href = json.rsa_csv_url;
         if (json.locations_csv_url) locA.href = json.locations_csv_url;
-        document.getElementById("ads-links-row").hidden = !(json.ads_csv_url || json.negatives_csv_url || json.guard_js_url || json.audiences_csv_url || json.rsa_csv_url || json.locations_csv_url);
+        document.getElementById("ads-links-row").hidden = !(json.ads_csv_url || json.negatives_csv_url || json.guard_js_url || json.audiences_csv_url || json.audiences_negatives_csv_url || json.rsa_csv_url || json.locations_csv_url);
 
         const iframe = document.createElement("iframe");
         iframe.srcdoc = json.html; // set as a property, not a string attribute — no escaping needed
