@@ -168,6 +168,7 @@
           if (lab) lab.style.display = on ? "none" : "";
           if (id === "niche_description" || id === "seed_keywords") el.required = !on;
         });
+        document.getElementById("push-block").style.display = on ? "none" : "";
         document.getElementById("seed-hint").style.display = on ? "none" : "";
         document.getElementById("existing-hint").style.display = on ? "none" : "";
         document.querySelector('label[for="business_name"]').textContent =
@@ -266,6 +267,18 @@
     <label for="max_ad_groups">Max new ad groups <span style="opacity:.6">(optional)</span></label>
     <input id="max_ad_groups" name="max_ad_groups" type="number" min="1" max="10" placeholder="10 (use 1-2 for a small niche service)">
 
+    <div id="push-block">
+      <label for="push_customer_id">🚀 API Push — Google Ads customer ID <span style="opacity:.6">(optional — blank = sirf CSV files)</span></label>
+      <div style="display:flex; gap:8px; flex-wrap:wrap;">
+        <input id="push_customer_id" name="push_customer_id" placeholder="123-456-7890 (MCC-linked account)" style="flex:2 1 220px;">
+        <select id="push_mode" name="push_mode" style="flex:1 1 160px; padding:10px 12px; border:1px solid #dcdad3; border-radius:8px; font-size:14px; background:#fff;">
+          <option value="validate">Validate — dry-run test (kuch create nahi hota)</option>
+          <option value="live">Live — campaign create karo (Paused)</option>
+        </select>
+      </div>
+      <div class="hint">Poori campaign API se seedha account mein — Editor/import ki zaroorat nahi. Pehle <b>Validate</b> chalao (Google har cheez check karta hai, account ko haath nahi lagata), phir Live. Campaign hamesha <b>Paused</b> banti hai. Account aapke MCC se linked hona chahiye.</div>
+    </div>
+
     <button type="submit" id="submit-btn">Generate Report</button>
   </form>
 
@@ -295,6 +308,7 @@
     </div>
     <div style="display:flex; gap:8px; flex-wrap:wrap;">
       <a id="master-csv-link" hidden download target="_blank" rel="noopener" style="display:inline-block; font-size:13px; font-weight:700; color:#fff; background:var(--accent); border:1px solid var(--accent); border-radius:8px; padding:8px 14px; text-decoration:none;">⭐ Master CSV — ONE import (poori campaign)</a>
+      <a id="push-report-link" hidden download target="_blank" rel="noopener" style="display:inline-block; font-size:13px; font-weight:700; color:var(--accent); background:var(--accent-soft); border:1px solid var(--accent); border-radius:8px; padding:8px 14px; text-decoration:none;">🚀 API Push Report</a>
       <a id="ads-csv-link" hidden download target="_blank" rel="noopener" style="display:inline-block; font-size:13px; font-weight:600; color:var(--accent); border:1px solid var(--accent); border-radius:8px; padding:8px 14px; text-decoration:none;">⬇️ Ads Editor CSV (positives)</a>
       <a id="negatives-csv-link" hidden download target="_blank" rel="noopener" style="display:inline-block; font-size:13px; font-weight:600; color:var(--accent); border:1px solid var(--accent); border-radius:8px; padding:8px 14px; text-decoration:none;">⬇️ Negatives CSV (alag paste karein)</a>
       <a id="guard-js-link" hidden download target="_blank" rel="noopener" style="display:inline-block; font-size:13px; font-weight:600; color:var(--accent); border:1px solid var(--accent); border-radius:8px; padding:8px 14px; text-decoration:none;">⬇️ Negative Guard Script</a>
@@ -369,6 +383,19 @@
         <div><b>What runs:</b> nothing on the server — your browser fetches the real Google geo-target database and builds the same 18-column Editor CSV the full pipeline produces. Country only → country + all states/provinces. Country + city → the city + its province + every sub-area inside it (Dubai = 107 rows).</div>
         <div><b>Best when:</b> you already have campaigns and just need proper location targeting — enter the exact campaign names from your account, comma-separated for several at once.</div>
         <div><b>Perfect-use tips:</b> import via Ads Editor → Account → Import. Campaigns that don't exist yet import <b>Paused</b>. After import set each campaign to <b>"Presence: people in or regularly in"</b> — never "interest" — so budget only buys clicks inside the target.</div>
+      </div>
+    </div>
+
+    <div class="sg-flow">
+      <h3>🚀 Fastest path — API push (no Editor at all)</h3>
+      <div style="font-size:13px; color:var(--ink); line-height:1.7;">
+        Fill the <b>API Push — Google Ads customer ID</b> field and the whole campaign goes <b>straight into the account through the Google Ads API</b> — campaign settings, ad groups, keywords with bids, negatives, RSAs, locations with premium/low bid tiers, excluded locations, and audiences. No CSV, no import, no format errors, and it even sets <b>Presence-only</b> location targeting (which a CSV can't).
+        <ol style="margin:8px 0 0; padding-left:20px;">
+          <li><b>Validate first</b> (default): Google checks every single operation and reports any problem <b>without creating anything</b> — account stays untouched. Read the <b>API Push Report</b> on the result page.</li>
+          <li>Validation clean? Run again with <b>Live</b> — the campaign lands <b>Paused</b> (zero spend) in one atomic write: either the whole thing lands or nothing does.</li>
+          <li>Requirement: the account must be <b>linked to your MCC</b> (Manager Account). Only the guard script stays manual (Ads Scripts can't be pushed via API).</li>
+        </ol>
+        Leave the field <b>blank</b> and you get the CSV files exactly as before — the manual path never goes away.
       </div>
     </div>
 
@@ -652,6 +679,7 @@
 
         // Ads runs: direct downloads for the Editor CSV + guard script + audience plan + RSA ads
         const masterA = document.getElementById("master-csv-link");
+        const pushA = document.getElementById("push-report-link");
         const csvA = document.getElementById("ads-csv-link");
         const negA = document.getElementById("negatives-csv-link");
         const jsA = document.getElementById("guard-js-link");
@@ -661,6 +689,7 @@
         const locA = document.getElementById("locations-csv-link");
         const locNegA = document.getElementById("locations-negative-csv-link");
         masterA.hidden = !json.master_csv_url;
+        pushA.hidden = !json.push_report_url;
         csvA.hidden = !json.ads_csv_url;
         negA.hidden = !json.negatives_csv_url;
         jsA.hidden = !json.guard_js_url;
@@ -670,6 +699,7 @@
         locA.hidden = !json.locations_csv_url;
         locNegA.hidden = !json.locations_negative_csv_url;
         if (json.master_csv_url) masterA.href = json.master_csv_url;
+        if (json.push_report_url) pushA.href = json.push_report_url;
         if (json.ads_csv_url) csvA.href = json.ads_csv_url;
         if (json.negatives_csv_url) negA.href = json.negatives_csv_url;
         if (json.guard_js_url) jsA.href = json.guard_js_url;

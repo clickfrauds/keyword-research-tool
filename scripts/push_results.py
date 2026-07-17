@@ -57,6 +57,9 @@ FILES_TO_PUSH = [
     # THE one-import file: campaign settings + ad groups + keywords +
     # negatives + RSAs + locations in a single Editor import.
     ("google_ads_master.csv", "master.csv"),
+    # API push outcome (validate errors or live-push summary) — shown as a
+    # download so the user sees exactly what landed / what to fix.
+    ("google_ads_push_report.md", "push.md"),
     ("google_ads_editor.csv", "editor.csv"),
     # Negatives SPLIT into their own file (Jul 2026): the Editor's Keywords
     # grid imported mixed-file Negative Phrase rows as POSITIVE keywords.

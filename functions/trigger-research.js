@@ -95,6 +95,9 @@ export async function onRequestPost(context) {
         max_ad_groups: String(body.max_ad_groups || "").slice(0, 3),
         // Stage 3.8 RSA ads: Final URLs = website_url + landing-page slug
         website_url: String(body.website_url || "").slice(0, 300),
+        // Stage 4-PUSH: direct API push (digits-only id; blank = CSV-only)
+        push_customer_id: String(body.push_customer_id || "").replace(/\D/g, "").slice(0, 12),
+        push_mode: body.push_mode === "live" ? "live" : "validate",
         request_id,
       };
 
