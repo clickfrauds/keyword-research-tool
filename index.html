@@ -374,7 +374,7 @@
 
     <div class="sg-flow">
       <h3>Full account import order (Ads Editor)</h3>
-      <div style="font-size:13px; color:var(--ink); background:var(--accent-soft); border-radius:6px; padding:10px 12px; margin-bottom:10px;"><b>⭐ Shortcut — Master CSV:</b> one file, one import, complete campaign: campaign settings (Search only, Google partners OFF, Manual CPC, Paused) + ad groups + keywords with bids + negatives + RSA ads + locations. Import it via Account → Import, set the daily budget, review, Post. Only two things stay separate: the audiences CSVs and the guard script (Tools → Scripts). Steps 1–5 below are the manual per-file path if you prefer it.</div>
+      <div style="font-size:13px; color:var(--ink); background:var(--accent-soft); border-radius:6px; padding:10px 12px; margin-bottom:10px;"><b>⭐ Shortcut — Master CSV:</b> one file, one import, complete campaign: campaign settings (Search only, Google partners OFF, Manual CPC, Paused) + ad groups + keywords with bids + negatives + RSA ads + locations with premium/low bid tiers + <b>excluded locations</b> + audiences <b>included AND excluded</b> (via the Editor's documented Type column). Import via Account → Import, set the daily budget, review, Post. The ONLY thing left out is the guard script (Tools → Scripts — Ads Scripts can't import from CSV). Steps 1–5 below are the manual per-file path if you prefer it.</div>
       <ol>
         <li><b>Ads Editor CSV</b> — campaigns, ad groups, keywords with suggested bids.</li>
         <li><b>Negatives CSV</b> — the anti-cannibalization layer. <b>Always a separate import</b> — pasting positives and negatives together makes the Editor import everything as positive keywords.</li>
