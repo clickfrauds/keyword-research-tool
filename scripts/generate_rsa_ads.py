@@ -74,6 +74,10 @@ BUSINESS_NAME = os.environ.get("BUSINESS_NAME", "").strip()
 NICHE_DESCRIPTION = os.environ.get("NICHE_DESCRIPTION", "").strip()
 TARGET_LOCATION = os.environ.get("TARGET_LOCATION", "").strip()
 WEBSITE_URL = os.environ.get("WEBSITE_URL", "").strip().rstrip("/")
+# Google Ads requires an http(s) scheme on Final URLs — a bare domain from
+# the form ("appliancerepairsabudhabi.com") gets rejected at import/review.
+if WEBSITE_URL and not re.match(r"^https?://", WEBSITE_URL, re.IGNORECASE):
+    WEBSITE_URL = "https://" + WEBSITE_URL
 
 INPUT_JSON = "keyword_strategy.json"
 OUT_JSON = "rsa_ads.json"
