@@ -17,14 +17,19 @@ columns are populated:
   negative rows  → ad-group-level Negative Phrase (incl. negatives for
                    the client's existing groups in existing-account mode).
   RSA rows       → read from rsa_editor.csv (Stage 3.8) if present.
-  location rows  → read from locations_editor.csv (Stage 3.9) if present.
+  location rows  → read from locations_editor.csv (Stage 3.9) if present,
+                   including Claude's bid-tier modifiers (premium +25%,
+                   labour/fraud-prone -90%).
+  audience rows  → read from audience_plan.json (Stage 3.7) if present:
+                   positive (Audience + Bid Modifier + Flexible Reach) and
+                   excluded (Negative Audience) — targeting-tool proven cols.
 
 The individual per-type files still ship alongside — this file is the
 "just import it" path. Campaigns arrive Paused; budget defaults to
 DAILY_BUDGET (account currency) and should be reviewed before enabling.
-What is NOT in this file (Editor can't import them from CSV the same way):
-audiences (separate proven 2-file import) and the negative-guard Ads
-Script (paste manually in Tools → Scripts).
+What is NOT in this file: negative LOCATIONS (locations_negative.csv →
+Editor's "Locations, Negative" paste; no proven combined-import header)
+and the negative-guard Ads Script (paste manually in Tools → Scripts).
 
 Env: DAILY_BUDGET (optional, default 1000)
 Input : keyword_strategy.json, rsa_editor.csv?, locations_editor.csv?
@@ -42,6 +47,7 @@ if hasattr(sys.stdout, "reconfigure"):
 STRATEGY = "keyword_strategy.json"
 RSA_CSV = "rsa_editor.csv"
 LOC_CSV = "locations_editor.csv"
+AUD_JSON = "audience_plan.json"
 OUT = "google_ads_master.csv"
 
 DAILY_BUDGET = os.environ.get("DAILY_BUDGET", "1000").strip()
@@ -55,11 +61,12 @@ HEADER = (
     ["Campaign", "Campaign Type", "Networks", "Budget", "Budget type",
      "Bid Strategy Type", "Enhanced CPC", "Campaign Status",
      "Ad Group", "Ad Group Type", "Ad Group Status", "Max CPC",
-     "Keyword", "Criterion Type", "ID", "Location", "Ad type"]
+     "Keyword", "Criterion Type", "ID", "Location", "Bid Modifier",
+     "Audience", "Flexible Reach", "Negative Audience", "Ad type"]
     + [c for i in range(1, N_HEADLINES + 1)
        for c in (f"Headline {i}", f"Headline {i} position")]
     + [f"Description {j}" for j in range(1, N_DESCRIPTIONS + 1)]
-    + ["Path 1", "Path 2", "Final URL", "Status"]
+    + ["Path 1", "Path 2", "Final URL", "Status", "Comment"]
 )
 IDX = {c: i for i, c in enumerate(HEADER)}
 
@@ -160,7 +167,8 @@ def main():
                 rows.append(row)
                 n_rsa += 1
 
-    # 6) location rows — pass through from Stage 3.9
+    # 6) location rows — pass through from Stage 3.9 (incl. Claude bid tiers:
+    # premium areas +%, labour/fraud-prone areas -90%)
     n_loc = 0
     if os.path.exists(LOC_CSV):
         with open(LOC_CSV, encoding="utf-8-sig", newline="") as f:
@@ -169,8 +177,35 @@ def main():
                     continue
                 rows.append(set_cells(
                     blank_row(), Campaign=r.get("Campaign", campaigns[0]),
-                    **{"ID": r["ID"], "Location": r.get("Location", "")}))
+                    **{"ID": r["ID"], "Location": r.get("Location", ""),
+                       "Bid Modifier": r.get("Bid Modifier", "")}))
                 n_loc += 1
+
+    # 7) audience rows — from Stage 3.7's structured plan. Positive rows use
+    # the targeting tool's proven column set (Audience + Bid Modifier +
+    # Flexible Reach); negative rows use the Negative Audience column.
+    n_aud = n_aud_neg = 0
+    if os.path.exists(AUD_JSON):
+        with open(AUD_JSON, encoding="utf-8") as f:
+            plan = json.load(f)
+        camp_set = set(campaigns)
+        for a in plan.get("positive", []):
+            camp = a.get("campaign") if a.get("campaign") in camp_set else campaigns[0]
+            rows.append(set_cells(
+                blank_row(), Campaign=camp,
+                **{"Ad Group": a.get("ad_group", "") or "",
+                   "Audience": a.get("name", ""),
+                   "Bid Modifier": f"{a['bid_adjustment']}%" if a.get("bid_adjustment") else "",
+                   "Flexible Reach": "Audience segments" if a.get("mode") == "targeting" else "",
+                   "Comment": f"{a.get('type', '')} | {a.get('mode', '')} | {a.get('reason', '')}"}))
+            n_aud += 1
+        for a in plan.get("negative", []):
+            camp = a.get("campaign") if a.get("campaign") in camp_set else campaigns[0]
+            rows.append(set_cells(
+                blank_row(), Campaign=camp,
+                **{"Negative Audience": a.get("name", ""),
+                   "Comment": f"{a.get('type', '')} | {a.get('reason', '')}"}))
+            n_aud_neg += 1
 
     with open(OUT, "w", encoding="utf-8-sig", newline="") as f:
         w = csv.writer(f)
@@ -181,7 +216,8 @@ def main():
                for g in groups)
     n_neg = sum(len(g.get("negative_keywords", [])) for g in groups)
     print(f"✅ Master CSV: {len(campaigns)} campaign | {len(groups)} ad groups | "
-          f"{n_kw} keywords | {n_neg} negatives | {n_rsa} RSAs | {n_loc} locations "
+          f"{n_kw} keywords | {n_neg} negatives | {n_rsa} RSAs | {n_loc} locations | "
+          f"{n_aud}+/{n_aud_neg}− audiences "
           f"→ {OUT} (one Editor import, campaigns Paused, Manual CPC, partners off)")
 
 

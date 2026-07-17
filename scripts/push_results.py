@@ -74,6 +74,9 @@ FILES_TO_PUSH = [
     ("rsa_editor.csv", "rsa.csv"),
     # Stage 3.9: location targeting rows (real geo target ids) per campaign.
     ("locations_editor.csv", "locations.csv"),
+    # Claude-suggested excluded locations (sibling regions + bot-source
+    # countries) — Editor's "Locations, Negative" paste.
+    ("locations_negative.csv", "locations_negative.csv"),
     # LAST on purpose — the readiness marker (see note above).
     ("keyword_strategy_report.html", "html"),
 ]

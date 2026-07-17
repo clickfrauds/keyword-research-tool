@@ -136,6 +136,7 @@ EXISTING_AD_GROUPS = [g.strip() for g in os.environ.get("EXISTING_AD_GROUPS", ""
 # audiences, locations) read keyword_strategy.json, so the override
 # propagates everywhere automatically.
 SINGLE_CAMPAIGN = os.environ.get("SINGLE_CAMPAIGN", "").strip()
+MAX_KEYWORDS_PER_GROUP = int(os.environ.get("MAX_KEYWORDS_PER_GROUP", "40"))
 
 
 # ══════════════════════════════════════════════════════════════════════════
@@ -403,6 +404,13 @@ def validate_strategy(raw, kept):
         if not ids:
             continue
         kws = [by_id[i] for i in ids]
+        # Cap keywords per ad group (user rule, Jul 2026): a tight theme
+        # doesn't need more than ~40 keywords — beyond that it's usually
+        # theme drift. Keep the highest-scored; the rest stay available to
+        # SEO/report outputs untouched.
+        if len(kws) > MAX_KEYWORDS_PER_GROUP:
+            kws = sorted(kws, key=lambda k: -k.get("score", 0))[:MAX_KEYWORDS_PER_GROUP]
+            ids = [k["id"] for k in kws]
 
         # Expansion keywords: must be genuinely NEW and unique across groups
         expansions = []
