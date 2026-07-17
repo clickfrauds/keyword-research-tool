@@ -38,7 +38,11 @@ on:
       max_ad_groups:
         description: "Max NEW ad groups (chhote/niche keyword sets ke liye 1-2 rakhen)"
         required: false
-        default: '10'
+        default: '7'
+      single_campaign:
+        description: "Sab ad groups AIK campaign mein (true) — ya campaign ka naam likh dein. 'false' = Claude 1-3 campaigns bana sakta hai"
+        required: false
+        default: 'true'
       location_id:
         description: "OPTIONAL: explicit Google geo target id — blank = auto-resolve from target_location (universal, any market)"
         required: false
@@ -118,7 +122,8 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           CLAUDE_MODEL: claude-sonnet-5
           CLAUDE_EFFORT: "medium"
-          MAX_AD_GROUPS: ${{ github.event.inputs.max_ad_groups || '10' }}
+          MAX_AD_GROUPS: ${{ github.event.inputs.max_ad_groups || '7' }}
+          SINGLE_CAMPAIGN: ${{ github.event.inputs.single_campaign || 'true' }}
           EXISTING_CAMPAIGN: ${{ github.event.inputs.existing_campaign }}
           EXISTING_AD_GROUPS: ${{ github.event.inputs.existing_ad_groups }}
           BUSINESS_NAME: ${{ github.event.inputs.business_name }}
@@ -167,6 +172,10 @@ jobs:
           TARGET_LOCATION: ${{ github.event.inputs.target_location }}
         run: python scripts/generate_locations.py
 
+      - name: Stage 3.95 - Master CSV (ONE Editor import - campaign settings + keywords + negatives + RSAs + locations)
+        if: ${{ github.event.inputs.research_type != 'seo' }}
+        run: python scripts/generate_master_csv.py
+
       - name: Stage 3-SEO - Website-builder content plan (Mode 4 focus, ~$0.20)
         if: ${{ github.event.inputs.research_type == 'seo' || github.event.inputs.research_type == 'both' }}
         env:
@@ -208,6 +217,7 @@ jobs:
             keyword_strategy.md
             google_ads_editor.csv
             google_ads_editor_negatives.csv
+            google_ads_master.csv
             landing_pages.json
             negative_guard_script.js
             audiences_editor.csv

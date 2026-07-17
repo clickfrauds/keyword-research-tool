@@ -127,6 +127,16 @@ def suggest_bids(low, high, comp_index=0):
 EXISTING_CAMPAIGN = os.environ.get("EXISTING_CAMPAIGN", "").strip()
 EXISTING_AD_GROUPS = [g.strip() for g in os.environ.get("EXISTING_AD_GROUPS", "").split(",") if g.strip()]
 
+# Single-campaign mode (user request, Jul 2026): Ads Editor imports of a
+# multi-campaign file are easy to get wrong (the second campaign's rows get
+# skipped when a paste range starts mid-file), and small accounts usually
+# want ONE campaign anyway for budget control. "true"/"1"/"yes" collapses
+# everything into the first campaign Claude names; any other non-empty value
+# is used as the campaign name itself. Downstream stages (negatives, RSA,
+# audiences, locations) read keyword_strategy.json, so the override
+# propagates everywhere automatically.
+SINGLE_CAMPAIGN = os.environ.get("SINGLE_CAMPAIGN", "").strip()
+
 
 # ══════════════════════════════════════════════════════════════════════════
 # Robust JSON parsing (4 repair passes — battle-tested in the website builder)
@@ -556,6 +566,16 @@ def validate_strategy(raw, kept):
             pass
     unassigned = [by_id[i]["keyword"] for i in by_id
                   if i not in seen_ids and i not in excluded]
+
+    if (SINGLE_CAMPAIGN and not EXISTING_CAMPAIGN
+            and SINGLE_CAMPAIGN.lower() not in ("false", "0", "no", "off")):
+        single = (campaigns[0]["name"]
+                  if SINGLE_CAMPAIGN.lower() in ("true", "1", "yes")
+                  else SINGLE_CAMPAIGN[:60])
+        campaigns = [{"name": single, "priority": "high"}]
+        for g in groups:
+            g["campaign"] = single
+        print(f"🎯 Single-campaign mode: all {len(groups)} ad groups under '{single}'")
 
     return campaigns, groups, pages, uncovered_groups, sorted(excluded), unassigned, negatives_for_existing
 

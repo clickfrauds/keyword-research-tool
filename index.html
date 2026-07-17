@@ -294,6 +294,7 @@
       <span style="opacity:.6; font-weight:400">(CSV → Ads Editor mein paste/import; Script → Tools &gt; Scripts)</span>
     </div>
     <div style="display:flex; gap:8px; flex-wrap:wrap;">
+      <a id="master-csv-link" hidden download target="_blank" rel="noopener" style="display:inline-block; font-size:13px; font-weight:700; color:#fff; background:var(--accent); border:1px solid var(--accent); border-radius:8px; padding:8px 14px; text-decoration:none;">⭐ Master CSV — ONE import (poori campaign)</a>
       <a id="ads-csv-link" hidden download target="_blank" rel="noopener" style="display:inline-block; font-size:13px; font-weight:600; color:var(--accent); border:1px solid var(--accent); border-radius:8px; padding:8px 14px; text-decoration:none;">⬇️ Ads Editor CSV (positives)</a>
       <a id="negatives-csv-link" hidden download target="_blank" rel="noopener" style="display:inline-block; font-size:13px; font-weight:600; color:var(--accent); border:1px solid var(--accent); border-radius:8px; padding:8px 14px; text-decoration:none;">⬇️ Negatives CSV (alag paste karein)</a>
       <a id="guard-js-link" hidden download target="_blank" rel="noopener" style="display:inline-block; font-size:13px; font-weight:600; color:var(--accent); border:1px solid var(--accent); border-radius:8px; padding:8px 14px; text-decoration:none;">⬇️ Negative Guard Script</a>
@@ -372,6 +373,7 @@
 
     <div class="sg-flow">
       <h3>Full account import order (Ads Editor)</h3>
+      <div style="font-size:13px; color:var(--ink); background:var(--accent-soft); border-radius:6px; padding:10px 12px; margin-bottom:10px;"><b>⭐ Shortcut — Master CSV:</b> one file, one import, complete campaign: campaign settings (Search only, Google partners OFF, Manual CPC, Paused) + ad groups + keywords with bids + negatives + RSA ads + locations. Import it via Account → Import, set the daily budget, review, Post. Only two things stay separate: the audiences CSVs and the guard script (Tools → Scripts). Steps 1–5 below are the manual per-file path if you prefer it.</div>
       <ol>
         <li><b>Ads Editor CSV</b> — campaigns, ad groups, keywords with suggested bids.</li>
         <li><b>Negatives CSV</b> — the anti-cannibalization layer. <b>Always a separate import</b> — pasting positives and negatives together makes the Editor import everything as positive keywords.</li>
@@ -648,6 +650,7 @@
         }
 
         // Ads runs: direct downloads for the Editor CSV + guard script + audience plan + RSA ads
+        const masterA = document.getElementById("master-csv-link");
         const csvA = document.getElementById("ads-csv-link");
         const negA = document.getElementById("negatives-csv-link");
         const jsA = document.getElementById("guard-js-link");
@@ -655,6 +658,7 @@
         const audNegA = document.getElementById("audiences-negatives-csv-link");
         const rsaA = document.getElementById("rsa-csv-link");
         const locA = document.getElementById("locations-csv-link");
+        masterA.hidden = !json.master_csv_url;
         csvA.hidden = !json.ads_csv_url;
         negA.hidden = !json.negatives_csv_url;
         jsA.hidden = !json.guard_js_url;
@@ -662,6 +666,7 @@
         audNegA.hidden = !json.audiences_negatives_csv_url;
         rsaA.hidden = !json.rsa_csv_url;
         locA.hidden = !json.locations_csv_url;
+        if (json.master_csv_url) masterA.href = json.master_csv_url;
         if (json.ads_csv_url) csvA.href = json.ads_csv_url;
         if (json.negatives_csv_url) negA.href = json.negatives_csv_url;
         if (json.guard_js_url) jsA.href = json.guard_js_url;
@@ -669,7 +674,7 @@
         if (json.audiences_negatives_csv_url) audNegA.href = json.audiences_negatives_csv_url;
         if (json.rsa_csv_url) rsaA.href = json.rsa_csv_url;
         if (json.locations_csv_url) locA.href = json.locations_csv_url;
-        document.getElementById("ads-links-row").hidden = !(json.ads_csv_url || json.negatives_csv_url || json.guard_js_url || json.audiences_csv_url || json.audiences_negatives_csv_url || json.rsa_csv_url || json.locations_csv_url);
+        document.getElementById("ads-links-row").hidden = !(json.master_csv_url || json.ads_csv_url || json.negatives_csv_url || json.guard_js_url || json.audiences_csv_url || json.audiences_negatives_csv_url || json.rsa_csv_url || json.locations_csv_url);
 
         const iframe = document.createElement("iframe");
         iframe.srcdoc = json.html; // set as a property, not a string attribute — no escaping needed

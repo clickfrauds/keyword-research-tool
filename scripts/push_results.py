@@ -54,6 +54,9 @@ FILES_TO_PUSH = [
     # Google Ads deliverables: paste-ready Editor CSV + the negative-guard
     # Ads Script — downloadable straight from the result page, no GitHub
     # artifact digging needed.
+    # THE one-import file: campaign settings + ad groups + keywords +
+    # negatives + RSAs + locations in a single Editor import.
+    ("google_ads_master.csv", "master.csv"),
     ("google_ads_editor.csv", "editor.csv"),
     # Negatives SPLIT into their own file (Jul 2026): the Editor's Keywords
     # grid imported mixed-file Negative Phrase rows as POSITIVE keywords.

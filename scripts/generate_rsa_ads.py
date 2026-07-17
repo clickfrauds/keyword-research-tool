@@ -87,13 +87,34 @@ MIN_KEYWORD_HEADLINES = 7
 # Acronyms that may legitimately appear in caps
 CAPS_OK = {"PPC", "USA", "UAE", "UK", "AI", "SEO", "CPC", "ROI", "RSA",
            "HVAC", "LLC", "CRM", "API", "IP", "VPN", "GPS", "TV", "AC",
-           "FAQ", "B2B", "B2C", "CEO", "IT", "HR", "3D", "24", "7"}
+           "FAQ", "B2B", "B2C", "CEO", "IT", "HR", "3D", "24", "7",
+           "LG", "GE", "AEG", "IFB", "TCL", "LED", "LCD", "CCTV", "RO",
+           "UPS", "PVC", "DIY", "KSA", "GCC"}
+
+# Tokens safe to force into caps wherever they appear ("Lg Fridge Repair" →
+# "LG Fridge Repair"). Deliberately EXCLUDES ambiguous acronyms that are
+# also English words in Title Case (It, Hr, Ai...) — only unambiguous
+# brand/tech tokens go here.
+FORCE_CAPS = {"lg": "LG", "ge": "GE", "aeg": "AEG", "ifb": "IFB",
+              "tcl": "TCL", "hvac": "HVAC", "cctv": "CCTV", "led": "LED",
+              "lcd": "LCD", "uae": "UAE", "usa": "USA", "ksa": "KSA",
+              "gcc": "GCC", "ac": "AC", "diy": "DIY", "upvc": "UPVC"}
 
 BANNED_PHRASES = [
     "click here", "click now", "tap here",
     "#1", "no. 1", "no.1", "number one", "number 1",
     "best in the world", "world's best", "worlds best",
     "guaranteed #", "100% guaranteed",
+]
+
+# Agency-grade quality floor: assets with these template-filler patterns are
+# dropped (the keyword-coverage top-up then fills the slot with a clean
+# keyword headline). "Rough copy" complaint, Jul 2026.
+WEAK_FILLER = [
+    " woes", "say goodbye", "look no further", "hassle-free", "hassle free",
+    "got you covered", "made easy", "trusted partner", "one stop", "one-stop",
+    "stress-free", "stress free", "worry-free", "worry free", "we care",
+    "look further", "dream come true",
 ]
 
 PHONE_RE = re.compile(r"(\+?\d[\d\s\-().]{7,}\d)")
@@ -132,6 +153,10 @@ def clean_text(s, is_headline):
         w = m.group(0)
         return w if w in CAPS_OK else w.title()
     s = re.sub(r"\b[A-Z]{2,}\b", _fix, s)
+    # brand/tech casing: "Lg" / "lg" -> "LG" wherever it appears
+    def _brand(m):
+        return FORCE_CAPS[m.group(0).lower()]
+    s = re.sub(r"\b(" + "|".join(FORCE_CAPS) + r")\b", _brand, s, flags=re.IGNORECASE)
     return s.strip()
 
 
@@ -139,6 +164,8 @@ def violates_policy(s):
     low = s.lower()
     if any(p in low for p in BANNED_PHRASES):
         return "banned phrase"
+    if any(p in low for p in WEAK_FILLER):
+        return "weak template filler"
     if PHONE_RE.search(s):
         return "phone number in text"
     return None
@@ -218,16 +245,34 @@ ABSOLUTE RULES (violations get your output discarded):
 7. All 15 headlines must be clearly different from each other — different
    angles, not the same sentence reworded.
 8. Write in the LANGUAGE of the keywords you are given.
+9. Brand names keep their OFFICIAL casing: LG, Bosch, Siemens, GE,
+   Samsung — never "Lg" or "bosch".
+
+CRAFT BAR — write like a top agency's senior copywriter, not a template:
+- Specifics beat adjectives: "Fixed In One Visit" beats "Fast Service";
+  a real process detail ("Free Diagnosis Before Repair") beats "Quality
+  Service You Can Trust".
+- BANNED filler patterns (auto-reject): "No More X Woes", "Say Goodbye
+  To X", "X Made Easy", "Look No Further", "Your Trusted Partner",
+  "We've Got You Covered", "Hassle-Free X", "Your X Solution".
+- USE THE SPACE: headlines should mostly run 24-30 characters and
+  descriptions 78-90 — short assets waste auction real estate.
+- Name the TARGET MARKET location in 2-3 headlines and at least 2
+  descriptions — local searchers click local ads.
+- The HIGHEST-VOLUME keywords deserve the most natural, closest-to-verbatim
+  headlines: match the exact words people type, then add one click trigger
+  (today / near you / cost / same day).
 
 HEADLINE MIX (exactly 15):
 - 5 keyword-led: the target keyword itself, naturally phrased, clickable
   (these carry the Quality Score message match)
-- 3 benefit-led: the outcome the buyer gets
+- 3 benefit-led: the concrete outcome the buyer gets
 - 3 call-to-action: specific action + value ("Get Your Free Audit Today")
 - 2 trust/proof: specifics beat adjectives ("Setup In Under 5 Minutes")
 - 2 offer/price-angle: honest, no fake discounts
 
-DESCRIPTION MIX (exactly 4, each a complete thought with its own CTA):
+DESCRIPTION MIX (exactly 4, each a complete thought with its own CTA,
+each using words from the actual keywords so the ad bolds on the query):
 1. keyword + core benefit + CTA
 2. differentiator (what competitors do not offer)
 3. objection-killer (risk, effort, price doubt)
