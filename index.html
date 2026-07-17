@@ -316,6 +316,73 @@
       <b>Every run, 5 rules:</b> 3–6 seeds &nbsp;·&nbsp; no brand names &nbsp;·&nbsp; no single generic words ("cleaning" ❌ → "sofa cleaning dubai" ✅) &nbsp;·&nbsp; one language per run (do a separate Arabic run — the data comes back in Arabic too) &nbsp;·&nbsp; location as free text ("Lahore, Pakistan", or "N/A" for worldwide) — the geo target resolves automatically
     </div>
 
+    <div class="sg-section">The 5 deliverable modes — every pipeline explained</div>
+
+    <div class="sg-card">
+      <div class="sg-head"><span class="sg-badge">MODE · GOOGLE ADS</span><span class="sg-eg">launch or expand a paid search account</span></div>
+      <div class="sg-formula">planner pull → python scoring → claude campaign architecture → bids → RSA ads → audiences → guard script → locations</div>
+      <div class="sg-tips">
+        <div><b>What runs:</b> your seeds go to the real Google Ads Keyword Planner (volumes, CPC ranges, competition, 12-month trend) → Python dedupes, classifies intent and scores 0–100 against the dataset itself → Claude designs 1–3 campaigns and up to 10 ad groups <b>(count comes from the data, never padded)</b> with cross-group negative siloing so groups can never cannibalize each other → every keyword gets a suggested starting bid computed from its real top-of-page bid range → 15 headlines + 4 descriptions per ad group (policy-checked) → audience plan matched from the 3,504-segment master list → an hourly negative-guard Ads Script → Editor-ready geo target rows.</div>
+        <div><b>You get 7 downloads:</b> Ads Editor CSV (positives) · Negatives CSV · Negative Guard Script · Audiences CSV (+) · Audiences Negatives CSV (−) · RSA Ads CSV · Locations CSV.</div>
+        <div><b>Best when:</b> a client is paying for clicks. Fill <b>Website URL</b> so RSA Final URLs point at real landing-page slugs, never the homepage.</div>
+        <div><b>Perfect-use tips:</b> pick country + city in the location picker (city → the Locations CSV targets that city's real areas). Account already live? Fill <b>Existing campaign + ad groups</b> — new groups arrive pre-siloed. Small niche → cap Max new ad groups at 1–2.</div>
+      </div>
+    </div>
+
+    <div class="sg-card">
+      <div class="sg-head"><span class="sg-badge">MODE · SEO</span><span class="sg-eg">content plan for a site that should rank</span></div>
+      <div class="sg-formula">planner pull → python scoring → claude cluster strategy → one JSON link for the website builder</div>
+      <div class="sg-tips">
+        <div><b>What runs:</b> same real-Planner data collection and scoring, then Claude builds the <b>Mode 4 cluster architecture</b>: a pillar topic + 3–8 clusters (count data-driven), each with its primary keyword, keyword set, funnel stage, 4–8 real customer questions with answer angles (the pattern that wins featured snippets and AI overviews) and entities to mention. One keyword never sits in two clusters — cannibalization guard. The same JSON also carries a demand-backed services list (Mode 3), a services hub (Mode 2) and city/area targets (Mode 5).</div>
+        <div><b>City-level pSEO:</b> pick a city in the location picker and the Mode 5 block is built from that city's <b>real Google geo areas</b> (all candidates included as <code>geo_area_candidates</code>) — ready for per-area pages, no invented area names.</div>
+        <div><b>You get:</b> the <b>Mode 4 SEO data link</b> on the result page — paste it into the website builder's <b>SEO data URL</b> field and leave Main topic / Problem clusters blank; they fill from real demand.</div>
+        <div><b>Perfect-use tips:</b> question seeds ("how to…", "cost of…") are the gold here. Blogs/affiliate: location <b>N/A</b> for worldwide volumes. Multi-section sites: one run per section, each with its own parent slug.</div>
+      </div>
+    </div>
+
+    <div class="sg-card">
+      <div class="sg-head"><span class="sg-badge">MODE · BOTH</span><span class="sg-eg">the default for local service clients</span></div>
+      <div class="sg-formula">one data pull → the full Ads package + the full SEO package</div>
+      <div class="sg-tips">
+        <div><b>What runs:</b> everything from both modes above on a single Planner pull — same seeds, same scoring, two strategy stages. The ads keywords and the SEO clusters come from the same demand data, so your landing pages and your content plan tell one consistent story.</div>
+        <div><b>Best when:</b> a client wants leads now (ads) and cheaper leads later (SEO) — which is almost every local service business.</div>
+        <div><b>Perfect-use tips:</b> BOFU commercial keywords go to ads; TOFU problem/question keywords are auto-excluded from ads but become your strongest SEO pages — nothing is wasted, every keyword lands on the side it converts on.</div>
+      </div>
+    </div>
+
+    <div class="sg-card">
+      <div class="sg-head"><span class="sg-badge">MODE · MODE 3 SITE PLAN</span><span class="sg-eg">full website — services list in, per-page keywords out</span></div>
+      <div class="sg-formula">paste your services list → claude groups into categories → per-category planner pull → per-page keyword + question assignment</div>
+      <div class="sg-tips">
+        <div><b>What runs:</b> the seed box becomes a <b>services list</b> (paste the exact same comma-separated list you give the website builder's Mode 3 — 100+ services is fine). Claude groups them into up to 10 categories (names copied character-for-character), each category gets its own Planner pull for clean attribution, then every page is assigned its primary keyword, supporting keywords with real volumes, and 3–6 questions with answer angles — plus a site-wide cannibalization guard.</div>
+        <div><b>You get:</b> one JSON link for the builder's <b>seo_inputs_url</b> field — the builder adopts this plan's category tree and real keywords instead of guessing.</div>
+        <div><b>Perfect-use tips:</b> the services list must match the builder run <b>exactly</b>. Zero-volume services stay in the plan (flagged) — pages still build. Use for high-value clients; for quick sites the builder's own guesses are fine.</div>
+      </div>
+    </div>
+
+    <div class="sg-card">
+      <div class="sg-head"><span class="sg-badge">MODE · LOCATIONS ONLY</span><span class="sg-eg">instant geo CSV — no pipeline run, no wait</span></div>
+      <div class="sg-formula">campaign name(s) + country/city picker → Editor CSV built in your browser in seconds</div>
+      <div class="sg-tips">
+        <div><b>What runs:</b> nothing on the server — your browser fetches the real Google geo-target database and builds the same 18-column Editor CSV the full pipeline produces. Country only → country + all states/provinces. Country + city → the city + its province + every sub-area inside it (Dubai = 107 rows).</div>
+        <div><b>Best when:</b> you already have campaigns and just need proper location targeting — enter the exact campaign names from your account, comma-separated for several at once.</div>
+        <div><b>Perfect-use tips:</b> import via Ads Editor → Account → Import. Campaigns that don't exist yet import <b>Paused</b>. After import set each campaign to <b>"Presence: people in or regularly in"</b> — never "interest" — so budget only buys clicks inside the target.</div>
+      </div>
+    </div>
+
+    <div class="sg-flow">
+      <h3>Full account import order (Ads Editor)</h3>
+      <ol>
+        <li><b>Ads Editor CSV</b> — campaigns, ad groups, keywords with suggested bids.</li>
+        <li><b>Negatives CSV</b> — the anti-cannibalization layer. <b>Always a separate import</b> — pasting positives and negatives together makes the Editor import everything as positive keywords.</li>
+        <li><b>RSA Ads CSV</b> — responsive search ads per ad group.</li>
+        <li><b>Audiences CSV (+)</b>, then <b>Audiences Negatives CSV (−)</b> — again, two separate imports.</li>
+        <li><b>Locations CSV</b> — geo targets per campaign.</li>
+        <li>Set budgets and bidding manually, review everything, then <b>Post</b>. All campaigns arrive Paused — nothing spends until you enable it.</li>
+      </ol>
+      <div style="font-size:12.5px; color:var(--muted); margin-top:8px;">Golden rule: every file goes through <b>Account → Import</b> (paste text or select file) — never paste into the keyword grids directly; the grids ignore the Criterion Type column.</div>
+    </div>
+
     <div class="sg-section">Business type templates</div>
 
     <div class="sg-card">
@@ -424,7 +491,7 @@
     <div class="sg-section">Google Ads — best practices after the run</div>
     <div class="sg-flow">
       <ol>
-        <li><b>Import the CSV:</b> download <b>Ads Editor CSV</b> from the result page → Google Ads Editor → Account → Import. Campaigns, ad groups, keywords (Phrase/Exact — never Broad), intent expansions and the anti-cannibalization negatives all land in one import. Review, then post.</li>
+        <li><b>Import the CSVs:</b> download <b>Ads Editor CSV</b> (positives) from the result page → Google Ads Editor → Account → Import. Campaigns, ad groups, keywords (Phrase/Exact — never Broad) and intent expansions land in one import. Then import <b>Negatives CSV</b> as a <b>separate</b> second import — never mix the two files (see the import-order box above). Review, then post.</li>
         <li><b>Install the guard script:</b> Google Ads → Tools → Scripts → paste the <b>Negative Guard Script</b> → run with <b>DRY_RUN = true for 2–3 days</b> → read the logs → set it to false and schedule hourly. Search terms with conversions are never banned.</li>
         <li><b>Build matching landing pages:</b> <code>landing_pages.json</code> (in the run artifact) gives ready Mode 1 generator inputs per ad-group theme — message match raises Quality Score and lowers CPC.</li>
         <li><b>Account already running?</b> Fill <b>Existing campaign name + Existing ad groups</b> before the run — new groups slot into that campaign with 2-way negative siloing, plus a list of negatives to add to your old groups.</li>
@@ -439,7 +506,7 @@
         <li><b>Feed the website builder:</b> choose Mode 4 → paste the link into <b>SEO data URL</b> → leave Main topic and Problem clusters <b>blank</b>; they fill themselves from real search demand.</li>
         <li><b>What each page gets:</b> its own primary keyword (forced into the hero title and first paragraph), the top-10 target keywords with volumes, and real customer questions as <b>H2 sections and H3 FAQs</b> — each answer's first line follows its answer angle, the pattern that wins featured snippets and AI overviews. The pillar page gets the pillar keyword and its own questions.</li>
         <li><b>Multi-section sites:</b> one run per section, each with its own <b>parent slug</b> (/plumbing/, /electrical/).</li>
-        <li><b>Same JSON, other modes:</b> it also carries a demand-backed services list (<b>Mode 3</b>) and city targets (<b>Mode 5</b>) — reuse the same link when you run those modes.</li>
+        <li><b>Same JSON, other modes:</b> it also carries a demand-backed services list (<b>Mode 3</b>) and real geo-area city targets (<b>Mode 5</b> — pick a city in the location picker and every candidate area ships in <code>geo_area_candidates</code>) — reuse the same link when you run those modes.</li>
         <li><b>Cluster count is data-driven:</b> 3–8, based on the distinct problems actually visible in the keywords — never padded, and one keyword never appears in two clusters (cannibalization guard).</li>
       </ol>
     </div>
