@@ -27,9 +27,10 @@ columns are populated:
 The individual per-type files still ship alongside — this file is the
 "just import it" path. Campaigns arrive Paused; budget defaults to
 DAILY_BUDGET (account currency) and should be reviewed before enabling.
-What is NOT in this file: negative LOCATIONS (locations_negative.csv →
-Editor's "Locations, Negative" paste; no proven combined-import header)
-and the negative-guard Ads Script (paste manually in Tools → Scripts).
+Excluded locations and excluded audiences ride the same file via the
+documented "Type" column (Negative / Campaign negative — answer/57747).
+The ONLY thing not in this file is the negative-guard Ads Script
+(paste manually in Google Ads → Tools → Scripts).
 
 Env: DAILY_BUDGET (optional, default 1000)
 Input : keyword_strategy.json, rsa_editor.csv?, locations_editor.csv?
@@ -62,7 +63,7 @@ HEADER = (
      "Bid Strategy Type", "Enhanced CPC", "Campaign Status",
      "Ad Group", "Ad Group Type", "Ad Group Status", "Max CPC",
      "Keyword", "Criterion Type", "ID", "Location", "Bid Modifier",
-     "Audience", "Flexible Reach", "Ad type"]
+     "Audience", "Flexible Reach", "Type", "Ad type"]
     + [c for i in range(1, N_HEADLINES + 1)
        for c in (f"Headline {i}", f"Headline {i} position")]
     + [f"Description {j}" for j in range(1, N_DESCRIPTIONS + 1)]
@@ -181,13 +182,29 @@ def main():
                        "Bid Modifier": r.get("Bid Modifier", "")}))
                 n_loc += 1
 
+    # 6b) NEGATIVE location rows — the Editor-documented way (answer/57747):
+    # same Location columns + Type="Negative" marks the row as an excluded
+    # location. (A separate "Negative Audience"-style column is silently
+    # ignored; pasting into the normal Locations grid TARGETS them — user
+    # hit both failure modes Jul 2026.)
+    n_loc_neg = 0
+    if os.path.exists("locations_negative.csv"):
+        with open("locations_negative.csv", encoding="utf-8-sig", newline="") as f:
+            for r in csv.DictReader(f):
+                if not r.get("ID"):
+                    continue
+                rows.append(set_cells(
+                    blank_row(), Campaign=r.get("Campaign", campaigns[0]),
+                    **{"ID": r["ID"], "Location": r.get("Location", ""),
+                       "Type": "Negative"}))
+                n_loc_neg += 1
+
     # 7) audience rows — from Stage 3.7's structured plan. ALL positives go
     # at CAMPAIGN level: Google forbids positive segments on both an ad
     # group and its parent campaign, and mixed levels red-error the whole
-    # import (user hit this Jul 2026). Negative audiences are NOT in this
-    # file — the Editor silently ignores a "Negative Audience" column in a
-    # combined import; they ship in audiences_editor_negatives.csv instead.
-    n_aud = 0
+    # import (user hit this Jul 2026). Excluded audiences ride the same
+    # file with Type="Campaign negative" (the documented Editor mechanism).
+    n_aud = n_aud_neg = 0
     if os.path.exists(AUD_JSON):
         with open(AUD_JSON, encoding="utf-8") as f:
             plan = json.load(f)
@@ -206,6 +223,17 @@ def main():
                    "Flexible Reach": "Audience segments" if a.get("mode") == "targeting" else "",
                    "Comment": f"{a.get('type', '')} | {a.get('mode', '')} | {a.get('reason', '')}"}))
             n_aud += 1
+        for a in plan.get("negative", []):
+            name = a.get("name", "")
+            if not name or ("neg:" + name.lower()) in seen_aud:
+                continue
+            seen_aud.add("neg:" + name.lower())
+            camp = a.get("campaign") if a.get("campaign") in camp_set else campaigns[0]
+            rows.append(set_cells(
+                blank_row(), Campaign=camp,
+                **{"Audience": name, "Type": "Campaign negative",
+                   "Comment": f"{a.get('type', '')} | {a.get('reason', '')}"}))
+            n_aud_neg += 1
 
     with open(OUT, "w", encoding="utf-8-sig", newline="") as f:
         w = csv.writer(f)
@@ -217,7 +245,7 @@ def main():
     n_neg = sum(len(g.get("negative_keywords", [])) for g in groups)
     print(f"✅ Master CSV: {len(campaigns)} campaign | {len(groups)} ad groups | "
           f"{n_kw} keywords | {n_neg} negatives | {n_rsa} RSAs | {n_loc} locations | "
-          f"{n_aud} audiences (campaign-level; negatives via separate file) "
+          f"{n_aud}+/{n_aud_neg}− audiences | {n_loc_neg} negative locations "
           f"→ {OUT} (one Editor import, campaigns Paused, Manual CPC, partners off)")
 
 
