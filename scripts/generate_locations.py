@@ -282,11 +282,12 @@ def main():
         return
 
     tiers, neg_names = classify_bid_tiers(chosen, cc, city, geo, index)
-    # Editor wants location bid adjustments as DECIMAL MULTIPLIERS, not
-    # percentages: +25% → 1.25, -90% → 0.10 ("25%"/"-90%" import as
-    # "bid adjustment is invalid" — user hit this Jul 2026).
-    adj = {"premium": f"{1 + PREMIUM_BID_ADJ / 100:.2f}",
-           "low": f"{1 + LOW_BID_ADJ / 100:.2f}"}
+    # Editor CSV bulk-import format for bid adjustments (per Google's docs,
+    # support.google.com/google-ads/editor/answer/30532): a PLAIN NUMBER
+    # with no percent sign — "+25%" is written as 25, "-90%" as -90.
+    # Both "25%" and "1.25" import as "bid adjustment is invalid"
+    # (user hit both, Jul 2026).
+    adj = {"premium": str(PREMIUM_BID_ADJ), "low": str(LOW_BID_ADJ)}
 
     # exact header the targeting tool already imports successfully
     header = ["Campaign", "Ad Group", "ID#Original", "ID", "Location#Original",
