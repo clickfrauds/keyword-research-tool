@@ -1,0 +1,14 @@
+﻿Campaign,Ad Group,Audience,Bid Modifier,Flexible Reach,Comment
+Emergency Electrician Dubai,,Electrician Services,,Audience segments,"IN_MARKET | targeting | Exact service match, ultra high intent"
+Emergency Electrician Dubai,,Home Security,15%,,IN_MARKET | observation | Safety-conscious homeowners near electrical faults
+Emergency Electrician Dubai,,Home Improvement,20%,,"IN_MARKET | observation | Homeowners upgrading wiring, sockets, switches"
+Emergency Electrician Dubai,,General Contracting & Remodeling Services,15%,,IN_MARKET | observation | Renovation projects need electrical work
+Emergency Electrician Dubai,,Home Inspection Services,15%,,IN_MARKET | observation | Pre-purchase checks reveal electrical issues
+Emergency Electrician Dubai,,Hybrid & Alternative Vehicles,20%,,IN_MARKET | observation | EV owners need charger installation
+Emergency Electrician Dubai,,Commercial Properties,20%,,IN_MARKET | observation | Property managers seeking maintenance contracts
+Emergency Electrician Dubai,,Residential Properties,15%,,IN_MARKET | observation | Homeowners likely to need electrical repairs
+Emergency Electrician Dubai,,Home Cleaning Services,10%,,IN_MARKET | observation | Similar recurring home service buyers
+Emergency Electrician Dubai,,Business Professionals,15%,,AFFINITY | observation | B2B decision-makers for maintenance contracts
+Emergency Electrician Dubai,,Home Decor Enthusiasts,10%,,"AFFINITY | observation | Home improvement mindset, installs sockets/lights"
+Emergency Electrician Dubai,,Home Automation Enthusiasts,15%,,AFFINITY | observation | Tech-savvy homeowners upgrading electrical systems
+Emergency Electrician Dubai,,Do-It-Yourselfers,10%,,AFFINITY | observation | DIYers who eventually call professionals
