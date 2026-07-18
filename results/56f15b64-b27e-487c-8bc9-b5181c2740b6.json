@@ -1,0 +1,961 @@
+{
+  "business": {
+    "name": "Electrician Near Dubai",
+    "niche": "Electrician services for homes and offices — electrical repairs, wiring, socket and switch installation, EV car charger installation, DB board and short circuit fixing",
+    "location": "Dubai, United Arab Emirates"
+  },
+  "model_used": "claude-sonnet-5",
+  "campaigns": [
+    {
+      "name": "Emergency Electrician Services",
+      "priority": "high"
+    }
+  ],
+  "existing_account_mode": false,
+  "existing_ad_groups": [],
+  "negatives_for_existing_groups": {},
+  "ad_groups": [
+    {
+      "name": "Emergency Electrician Near Me",
+      "campaign": "Emergency Electrician Services",
+      "theme": "Users needing urgent, same-day or 24-hour electrician callout for faults or power loss.",
+      "match_type": "phrase",
+      "priority": "high",
+      "bid_multiplier": 1.2,
+      "bid_currency": "PKR",
+      "negative_keywords": [
+        "contractor",
+        "maintenance company",
+        "technician",
+        "electrical work",
+        "required",
+        "installation",
+        "socket",
+        "switch",
+        "annual",
+        "board",
+        "charger",
+        "commercial",
+        "contract",
+        "contractors",
+        "fixing",
+        "industrial",
+        "licensed",
+        "list",
+        "tender",
+        "villa",
+        "works"
+      ],
+      "intent_expansion_keywords": [
+        "emergency electrician dubai marina",
+        "24 hour electrician dubai cost",
+        "urgent electrician call out dubai",
+        "weekend electrician dubai",
+        "emergency electrician price dubai",
+        "short circuit repair dubai emergency",
+        "power outage electrician dubai",
+        "emergency electrician near me open now",
+        "fast electrician response dubai",
+        "emergency electrical fault repair dubai"
+      ],
+      "keywords": [
+        {
+          "keyword": "emergency electrician near me",
+          "variants": [
+            "electrician emergency near me"
+          ],
+          "avg_monthly_searches": 20,
+          "competition": "MEDIUM",
+          "competition_index": 57,
+          "cpc_range": "0.0-0.0",
+          "trend": "GROWING",
+          "peak_months": "Jan/Mar/Apr",
+          "intent": "transactional",
+          "flags": [
+            "local",
+            "urgent"
+          ],
+          "score": 88.6
+        },
+        {
+          "keyword": "emergency electrician dubai",
+          "variants": [],
+          "avg_monthly_searches": 70,
+          "competition": "HIGH",
+          "competition_index": 85,
+          "cpc_range": "930.91-2265.81",
+          "trend": "SEASONAL",
+          "peak_months": "Dec/Mar",
+          "intent": "transactional",
+          "flags": [
+            "local",
+            "urgent"
+          ],
+          "score": 69.9,
+          "suggested_bid_exact": 2222,
+          "suggested_bid_phrase": 1889,
+          "suggested_bid_broad": 1556,
+          "suggested_bid": 1889,
+          "bid_currency": "PKR"
+        },
+        {
+          "keyword": "emergency electrical service near me",
+          "variants": [
+            "electrical emergency service near me"
+          ],
+          "avg_monthly_searches": 10,
+          "competition": "LOW",
+          "competition_index": 0,
+          "cpc_range": "0.0-0.0",
+          "trend": "SEASONAL",
+          "peak_months": "Oct/Jan/Feb/Mar/Apr/May/Jun",
+          "intent": "transactional",
+          "flags": [
+            "local",
+            "urgent"
+          ],
+          "score": 66.0
+        },
+        {
+          "keyword": "same day electrician near me",
+          "variants": [],
+          "avg_monthly_searches": 10,
+          "competition": "UNKNOWN",
+          "competition_index": 0,
+          "cpc_range": "0.0-0.0",
+          "trend": "SEASONAL",
+          "peak_months": "Sep/Nov/Dec/Apr",
+          "intent": "transactional",
+          "flags": [
+            "local",
+            "urgent"
+          ],
+          "score": 56.2
+        },
+        {
+          "keyword": "24 7 emergency electrician near me",
+          "variants": [],
+          "avg_monthly_searches": 10,
+          "competition": "UNKNOWN",
+          "competition_index": 0,
+          "cpc_range": "0.0-0.0",
+          "trend": "UNKNOWN",
+          "peak_months": "Feb",
+          "intent": "transactional",
+          "flags": [
+            "local",
+            "urgent"
+          ],
+          "score": 53.3
+        },
+        {
+          "keyword": "24 hour electrical service near me",
+          "variants": [],
+          "avg_monthly_searches": 10,
+          "competition": "UNKNOWN",
+          "competition_index": 0,
+          "cpc_range": "0.0-0.0",
+          "trend": "UNKNOWN",
+          "peak_months": "Mar",
+          "intent": "transactional",
+          "flags": [
+            "local",
+            "urgent"
+          ],
+          "score": 53.3
+        },
+        {
+          "keyword": "emergency electrician service near me",
+          "variants": [],
+          "avg_monthly_searches": 10,
+          "competition": "UNKNOWN",
+          "competition_index": 0,
+          "cpc_range": "0.0-0.0",
+          "trend": "UNKNOWN",
+          "peak_months": "Aug/Sep",
+          "intent": "transactional",
+          "flags": [
+            "local",
+            "urgent"
+          ],
+          "score": 53.3
+        },
+        {
+          "keyword": "24 hr electrical services near me",
+          "variants": [],
+          "avg_monthly_searches": 10,
+          "competition": "UNKNOWN",
+          "competition_index": 0,
+          "cpc_range": "0.0-0.0",
+          "trend": "UNKNOWN",
+          "peak_months": "Jul/Mar",
+          "intent": "transactional",
+          "flags": [
+            "local",
+            "urgent"
+          ],
+          "score": 53.3
+        },
+        {
+          "keyword": "best emergency electricians near me",
+          "variants": [],
+          "avg_monthly_searches": 10,
+          "competition": "UNKNOWN",
+          "competition_index": 0,
+          "cpc_range": "0.0-0.0",
+          "trend": "UNKNOWN",
+          "peak_months": "Mar",
+          "intent": "transactional",
+          "flags": [
+            "local",
+            "urgent"
+          ],
+          "score": 53.3
+        },
+        {
+          "keyword": "emergency electrician near me now",
+          "variants": [],
+          "avg_monthly_searches": 10,
+          "competition": "UNKNOWN",
+          "competition_index": 0,
+          "cpc_range": "0.0-0.0",
+          "trend": "UNKNOWN",
+          "peak_months": "Apr",
+          "intent": "transactional",
+          "flags": [
+            "local",
+            "urgent"
+          ],
+          "score": 53.3
+        },
+        {
+          "keyword": "emergency electricians in my area",
+          "variants": [],
+          "avg_monthly_searches": 10,
+          "competition": "UNKNOWN",
+          "competition_index": 0,
+          "cpc_range": "0.0-0.0",
+          "trend": "UNKNOWN",
+          "peak_months": "Feb",
+          "intent": "transactional",
+          "flags": [
+            "urgent"
+          ],
+          "score": 48.4
+        },
+        {
+          "keyword": "24 electrician near me",
+          "variants": [],
+          "avg_monthly_searches": 10,
+          "competition": "UNKNOWN",
+          "competition_index": 0,
+          "cpc_range": "0.0-0.0",
+          "trend": "UNKNOWN",
+          "peak_months": "Dec",
+          "intent": "commercial",
+          "flags": [
+            "local",
+            "urgent"
+          ],
+          "score": 46.9
+        },
+        {
+          "keyword": "24hr electrician near me",
+          "variants": [],
+          "avg_monthly_searches": 10,
+          "competition": "UNKNOWN",
+          "competition_index": 0,
+          "cpc_range": "0.0-0.0",
+          "trend": "UNKNOWN",
+          "peak_months": "Feb/May",
+          "intent": "commercial",
+          "flags": [
+            "local"
+          ],
+          "score": 43.4
+        },
+        {
+          "keyword": "24hrs electrician near me",
+          "variants": [],
+          "avg_monthly_searches": 10,
+          "competition": "UNKNOWN",
+          "competition_index": 0,
+          "cpc_range": "0.0-0.0",
+          "trend": "UNKNOWN",
+          "peak_months": "Mar",
+          "intent": "commercial",
+          "flags": [
+            "local"
+          ],
+          "score": 43.4
+        },
+        {
+          "keyword": "24x7 electrician near me",
+          "variants": [],
+          "avg_monthly_searches": 10,
+          "competition": "UNKNOWN",
+          "competition_index": 0,
+          "cpc_range": "0.0-0.0",
+          "trend": "UNKNOWN",
+          "peak_months": "Aug/Sep",
+          "intent": "commercial",
+          "flags": [
+            "local"
+          ],
+          "score": 43.4
+        }
+      ],
+      "total_volume": 220,
+      "avg_score": 55.1,
+      "auto_silo_negatives": [
+        "annual",
+        "board",
+        "charger",
+        "commercial",
+        "contract",
+        "contractors",
+        "fixing",
+        "industrial",
+        "licensed",
+        "list",
+        "tender",
+        "villa",
+        "works"
+      ]
+    },
+    {
+      "name": "General Electrician Services",
+      "campaign": "Emergency Electrician Services",
+      "theme": "Homeowners and tenants searching for a general electrician in Dubai for installation and standard work.",
+      "match_type": "phrase",
+      "priority": "high",
+      "bid_multiplier": 1.15,
+      "bid_currency": "PKR",
+      "negative_keywords": [
+        "emergency",
+        "24 hour",
+        "24hr",
+        "contractor",
+        "maintenance company",
+        "technician",
+        "repair",
+        "near me now",
+        "24hrs",
+        "24x7",
+        "annual",
+        "area",
+        "board",
+        "commercial",
+        "contract",
+        "contractors",
+        "electricians",
+        "fast",
+        "fixing",
+        "industrial",
+        "open",
+        "out",
+        "outage",
+        "power",
+        "required",
+        "response",
+        "tender",
+        "weekend",
+        "works"
+      ],
+      "intent_expansion_keywords": [
+        "electrician dubai price list",
+        "hire electrician dubai",
+        "best electrician dubai",
+        "villa electrician dubai marina",
+        "home electrician dubai cost",
+        "office electrician dubai",
+        "electrician installation dubai",
+        "socket and switch installation dubai",
+        "ev charger installation dubai",
+        "licensed electrician dubai",
+        "electrician quote dubai"
+      ],
+      "keywords": [
+        {
+          "keyword": "electrician service dubai",
+          "variants": [],
+          "avg_monthly_searches": 170,
+          "competition": "LOW",
+          "competition_index": 21,
+          "cpc_range": "947.62-2342.34",
+          "trend": "SEASONAL",
+          "peak_months": "Sep",
+          "intent": "transactional",
+          "flags": [
+            "local"
+          ],
+          "score": 103.0,
+          "suggested_bid_exact": 1786,
+          "suggested_bid_phrase": 1518,
+          "suggested_bid_broad": 1250,
+          "suggested_bid": 1518,
+          "bid_currency": "PKR"
+        },
+        {
+          "keyword": "electrician dubai",
+          "variants": [],
+          "avg_monthly_searches": 1300,
+          "competition": "MEDIUM",
+          "competition_index": 57,
+          "cpc_range": "973.21-2277.2",
+          "trend": "STABLE",
+          "peak_months": "Sep/Dec/Jan/Feb/Mar/Apr",
+          "intent": "commercial",
+          "flags": [
+            "local"
+          ],
+          "score": 89.7,
+          "suggested_bid_exact": 1986,
+          "suggested_bid_phrase": 1688,
+          "suggested_bid_broad": 1390,
+          "suggested_bid": 1688,
+          "bid_currency": "PKR"
+        },
+        {
+          "keyword": "electrical work services in dubai",
+          "variants": [],
+          "avg_monthly_searches": 10,
+          "competition": "LOW",
+          "competition_index": 25,
+          "cpc_range": "0.0-0.0",
+          "trend": "SEASONAL",
+          "peak_months": "Jul/Sep/Nov/Dec/Jan/Feb/Mar/Apr/Jun",
+          "intent": "transactional",
+          "flags": [
+            "local"
+          ],
+          "score": 59.6
+        },
+        {
+          "keyword": "electrician dubai marina",
+          "variants": [],
+          "avg_monthly_searches": 10,
+          "competition": "HIGH",
+          "competition_index": 76,
+          "cpc_range": "0.0-0.0",
+          "trend": "GROWING",
+          "peak_months": "Apr",
+          "intent": "commercial",
+          "flags": [
+            "local"
+          ],
+          "score": 47.1
+        }
+      ],
+      "total_volume": 1490,
+      "avg_score": 74.8,
+      "auto_silo_negatives": [
+        "24hrs",
+        "24x7",
+        "annual",
+        "area",
+        "board",
+        "commercial",
+        "contract",
+        "contractors",
+        "electricians",
+        "fast",
+        "fixing",
+        "industrial",
+        "open",
+        "out",
+        "outage",
+        "power",
+        "required",
+        "response",
+        "tender",
+        "weekend",
+        "works"
+      ]
+    },
+    {
+      "name": "Electrical Repair & Maintenance",
+      "campaign": "Emergency Electrician Services",
+      "theme": "Customers with an existing electrical fault, wiring issue or maintenance need wanting a repair fix.",
+      "match_type": "exact",
+      "priority": "medium",
+      "bid_multiplier": 1.0,
+      "bid_currency": "PKR",
+      "negative_keywords": [
+        "emergency",
+        "near me",
+        "contractor",
+        "technician",
+        "maintenance company",
+        "installation",
+        "hire",
+        "24hr",
+        "24hrs",
+        "24x7",
+        "annual",
+        "area",
+        "charger",
+        "commercial",
+        "contract",
+        "contractors",
+        "electricians",
+        "fast",
+        "industrial",
+        "licensed",
+        "list",
+        "open",
+        "out",
+        "outage",
+        "power",
+        "required",
+        "response",
+        "switch",
+        "tender",
+        "villa",
+        "weekend",
+        "works"
+      ],
+      "intent_expansion_keywords": [
+        "electrical repair cost dubai",
+        "short circuit repair dubai",
+        "db board repair dubai",
+        "wiring repair dubai",
+        "electrical fault fixing dubai",
+        "home electrical repair service dubai",
+        "electrical maintenance cost dubai",
+        "socket repair dubai"
+      ],
+      "keywords": [
+        {
+          "keyword": "electrical maintenance dubai",
+          "variants": [],
+          "avg_monthly_searches": 30,
+          "competition": "LOW",
+          "competition_index": 23,
+          "cpc_range": "0.0-0.0",
+          "trend": "DECLINING",
+          "peak_months": "Sep",
+          "intent": "transactional",
+          "flags": [
+            "local"
+          ],
+          "score": 50.2
+        },
+        {
+          "keyword": "electrical repair dubai",
+          "variants": [],
+          "avg_monthly_searches": 70,
+          "competition": "MEDIUM",
+          "competition_index": 50,
+          "cpc_range": "415.6-1264.85",
+          "trend": "DECLINING",
+          "peak_months": "Sep",
+          "intent": "transactional",
+          "flags": [
+            "local"
+          ],
+          "score": 47.0,
+          "suggested_bid_exact": 883,
+          "suggested_bid_phrase": 750,
+          "suggested_bid_broad": 618,
+          "suggested_bid": 883,
+          "bid_currency": "PKR"
+        }
+      ],
+      "total_volume": 100,
+      "avg_score": 48.6,
+      "auto_silo_negatives": [
+        "24hr",
+        "24hrs",
+        "24x7",
+        "annual",
+        "area",
+        "charger",
+        "commercial",
+        "contract",
+        "contractors",
+        "electricians",
+        "fast",
+        "industrial",
+        "licensed",
+        "list",
+        "open",
+        "out",
+        "outage",
+        "power",
+        "required",
+        "response",
+        "switch",
+        "tender",
+        "villa",
+        "weekend",
+        "works"
+      ]
+    },
+    {
+      "name": "Electrical Contractors & Technicians",
+      "campaign": "Emergency Electrician Services",
+      "theme": "Businesses and property managers seeking a contracted electrical company or technician for ongoing work.",
+      "match_type": "phrase",
+      "priority": "medium",
+      "bid_multiplier": 0.9,
+      "bid_currency": "PKR",
+      "negative_keywords": [
+        "emergency",
+        "near me",
+        "24 hour",
+        "repair",
+        "marina",
+        "installation",
+        "quote",
+        "24hr",
+        "24hrs",
+        "24x7",
+        "area",
+        "board",
+        "charger",
+        "electricians",
+        "fast",
+        "fixing",
+        "licensed",
+        "list",
+        "open",
+        "out",
+        "outage",
+        "power",
+        "response",
+        "switch",
+        "villa",
+        "weekend"
+      ],
+      "intent_expansion_keywords": [
+        "electrical contractor company dubai",
+        "commercial electrical contractor dubai",
+        "office wiring contractor dubai",
+        "electrical maintenance contract dubai",
+        "electrical technician hire dubai",
+        "industrial electrician dubai",
+        "electrical works tender dubai",
+        "annual maintenance contract electrician dubai"
+      ],
+      "keywords": [
+        {
+          "keyword": "electrical work in dubai",
+          "variants": [],
+          "avg_monthly_searches": 260,
+          "competition": "LOW",
+          "competition_index": 29,
+          "cpc_range": "6.42-973.21",
+          "trend": "DECLINING",
+          "peak_months": "Jul/Sep",
+          "intent": "commercial",
+          "flags": [
+            "local"
+          ],
+          "score": 52.2,
+          "suggested_bid_exact": 411,
+          "suggested_bid_phrase": 350,
+          "suggested_bid_broad": 288,
+          "suggested_bid": 350,
+          "bid_currency": "PKR"
+        },
+        {
+          "keyword": "electrician required in dubai",
+          "variants": [],
+          "avg_monthly_searches": 260,
+          "competition": "LOW",
+          "competition_index": 29,
+          "cpc_range": "6.42-973.21",
+          "trend": "DECLINING",
+          "peak_months": "Jul/Sep",
+          "intent": "commercial",
+          "flags": [
+            "local"
+          ],
+          "score": 52.2,
+          "suggested_bid_exact": 411,
+          "suggested_bid_phrase": 350,
+          "suggested_bid_broad": 288,
+          "suggested_bid": 350,
+          "bid_currency": "PKR"
+        },
+        {
+          "keyword": "electrical contractors in dubai",
+          "variants": [],
+          "avg_monthly_searches": 320,
+          "competition": "MEDIUM",
+          "competition_index": 46,
+          "cpc_range": "524.18-1235.55",
+          "trend": "DECLINING",
+          "peak_months": "Sep/Jan",
+          "intent": "commercial",
+          "flags": [
+            "local"
+          ],
+          "score": 48.7,
+          "suggested_bid_exact": 814,
+          "suggested_bid_phrase": 692,
+          "suggested_bid_broad": 570,
+          "suggested_bid": 692,
+          "bid_currency": "PKR"
+        },
+        {
+          "keyword": "electrical maintenance company in dubai",
+          "variants": [],
+          "avg_monthly_searches": 70,
+          "competition": "MEDIUM",
+          "competition_index": 46,
+          "cpc_range": "659.36-2265.85",
+          "trend": "DECLINING",
+          "peak_months": "Sep",
+          "intent": "transactional",
+          "flags": [
+            "local"
+          ],
+          "score": 48.1,
+          "suggested_bid_exact": 1366,
+          "suggested_bid_phrase": 1161,
+          "suggested_bid_broad": 956,
+          "suggested_bid": 1161,
+          "bid_currency": "PKR"
+        },
+        {
+          "keyword": "electrical technician dubai",
+          "variants": [],
+          "avg_monthly_searches": 10,
+          "competition": "MEDIUM",
+          "competition_index": 48,
+          "cpc_range": "501.06-1497.04",
+          "trend": "SEASONAL",
+          "peak_months": "Mar/Jun",
+          "intent": "commercial",
+          "flags": [
+            "local"
+          ],
+          "score": 46.4,
+          "suggested_bid_exact": 937,
+          "suggested_bid_phrase": 796,
+          "suggested_bid_broad": 656,
+          "suggested_bid": 796,
+          "bid_currency": "PKR"
+        }
+      ],
+      "total_volume": 920,
+      "avg_score": 49.5,
+      "auto_silo_negatives": [
+        "24hr",
+        "24hrs",
+        "24x7",
+        "area",
+        "board",
+        "charger",
+        "electricians",
+        "fast",
+        "fixing",
+        "licensed",
+        "list",
+        "open",
+        "out",
+        "outage",
+        "power",
+        "response",
+        "switch",
+        "villa",
+        "weekend"
+      ]
+    }
+  ],
+  "landing_pages": [
+    {
+      "page_name": "Emergency Electrician Dubai",
+      "url_slug": "emergency-electrician-dubai",
+      "service_name": "Emergency Electrician Services",
+      "industry": "Emergency Electrician Services",
+      "sub_services": [
+        "Emergency Electrical Repairs",
+        "Power Outage Troubleshooting",
+        "Short Circuit Fixing",
+        "DB Board Emergency Repair",
+        "After Hours Electrician Callout",
+        "Urgent Safety Inspections"
+      ],
+      "ad_groups_covered": [
+        "Emergency Electrician Near Me"
+      ]
+    },
+    {
+      "page_name": "General Electrician Services Dubai",
+      "url_slug": "electrician-services-dubai",
+      "service_name": "General Electrician Services",
+      "industry": "Residential & Commercial Electrician",
+      "sub_services": [
+        "Socket And Switch Installation",
+        "EV Charger Installation",
+        "Home Wiring Services",
+        "Office Electrical Installation",
+        "Lighting Installation",
+        "General Electrical Repairs"
+      ],
+      "ad_groups_covered": [
+        "General Electrician Services"
+      ]
+    },
+    {
+      "page_name": "Electrical Repair & Maintenance Dubai",
+      "url_slug": "electrical-repair-maintenance-dubai",
+      "service_name": "Electrical Repair & Maintenance",
+      "industry": "Electrical Repair Services",
+      "sub_services": [
+        "Short Circuit Repair",
+        "DB Board Repair",
+        "Wiring Fault Repair",
+        "Socket And Switch Repair",
+        "Electrical Safety Maintenance",
+        "Preventive Maintenance Plans"
+      ],
+      "ad_groups_covered": [
+        "Electrical Repair & Maintenance"
+      ]
+    },
+    {
+      "page_name": "Commercial Electrical Contracting Dubai",
+      "url_slug": "electrical-contractor-services-dubai",
+      "service_name": "Commercial Electrical Contracting",
+      "industry": "Commercial Electrical Contractor",
+      "sub_services": [
+        "Commercial Electrical Contracting",
+        "Office Wiring Solutions",
+        "Annual Maintenance Contracts",
+        "Industrial Electrical Services",
+        "Electrical Technician Deployment",
+        "Facility Electrical Compliance"
+      ],
+      "ad_groups_covered": [
+        "Electrical Contractors & Technicians"
+      ]
+    }
+  ],
+  "uncovered_ad_groups": [],
+  "notes": "Split by urgency-tier (emergency vs planned work) and by buyer type (residential general/repair vs commercial contractor) to stop cannibalization between near-me emergency traffic and standard installation/contract searches. Emergency and core general services get top budget given strongest CPC and volume, while contractor/technician terms get a slightly lower multiplier as a secondary B2B opportunity.",
+  "excluded_keyword_ids": [],
+  "unassigned_keywords": [],
+  "seo_content_keywords": [
+    {
+      "keyword": "how to find electrical short in house",
+      "volume": 10,
+      "intent": "question",
+      "flags": [
+        "voice"
+      ]
+    }
+  ],
+  "voice_search_questions": [
+    "how to find electrical short in house"
+  ],
+  "local_intent_keywords": [
+    "electrician service dubai",
+    "electrician dubai",
+    "emergency electrician near me",
+    "emergency electrician dubai",
+    "emergency electrical service near me",
+    "electrical work services in dubai",
+    "same day electrician near me",
+    "24 7 emergency electrician near me",
+    "24 hour electrical service near me",
+    "emergency electrician service near me",
+    "24 hr electrical services near me",
+    "best emergency electricians near me",
+    "emergency electrician near me now",
+    "electrical work in dubai",
+    "electrician required in dubai",
+    "electrical maintenance dubai",
+    "electrical contractors in dubai",
+    "electrical maintenance company in dubai",
+    "electrician dubai marina",
+    "electrical repair dubai",
+    "24 electrician near me",
+    "electrical technician dubai",
+    "24hr electrician near me",
+    "24hrs electrician near me",
+    "24x7 electrician near me"
+  ],
+  "google_ads_targets": [
+    {
+      "cluster_topic": "Emergency Electrician Near Me",
+      "recommended_keywords": [
+        "emergency electrician near me",
+        "emergency electrician dubai",
+        "emergency electrical service near me",
+        "same day electrician near me",
+        "24 7 emergency electrician near me",
+        "24 hour electrical service near me",
+        "emergency electrician service near me",
+        "24 hr electrical services near me",
+        "best emergency electricians near me",
+        "emergency electrician near me now",
+        "emergency electricians in my area",
+        "24 electrician near me",
+        "24hr electrician near me",
+        "24hrs electrician near me",
+        "24x7 electrician near me"
+      ],
+      "suggested_bid_range": "1889-1889 PKR",
+      "intent": "transactional",
+      "suggested_match_type": "phrase",
+      "priority": "high",
+      "trend": "UNKNOWN",
+      "seasonal_schedule": "Dec/Mar",
+      "reasoning": "Users needing urgent, same-day or 24-hour electrician callout for faults or power loss."
+    },
+    {
+      "cluster_topic": "General Electrician Services",
+      "recommended_keywords": [
+        "electrician service dubai",
+        "electrician dubai",
+        "electrical work services in dubai",
+        "electrician dubai marina"
+      ],
+      "suggested_bid_range": "1518-1688 PKR",
+      "intent": "transactional",
+      "suggested_match_type": "phrase",
+      "priority": "high",
+      "trend": "SEASONAL",
+      "seasonal_schedule": "Sep",
+      "reasoning": "Homeowners and tenants searching for a general electrician in Dubai for installation and standard work."
+    },
+    {
+      "cluster_topic": "Electrical Repair & Maintenance",
+      "recommended_keywords": [
+        "electrical maintenance dubai",
+        "electrical repair dubai"
+      ],
+      "suggested_bid_range": "883-883 PKR",
+      "intent": "transactional",
+      "suggested_match_type": "exact",
+      "priority": "medium",
+      "trend": "DECLINING",
+      "seasonal_schedule": null,
+      "reasoning": "Customers with an existing electrical fault, wiring issue or maintenance need wanting a repair fix."
+    },
+    {
+      "cluster_topic": "Electrical Contractors & Technicians",
+      "recommended_keywords": [
+        "electrical work in dubai",
+        "electrician required in dubai",
+        "electrical contractors in dubai",
+        "electrical maintenance company in dubai",
+        "electrical technician dubai"
+      ],
+      "suggested_bid_range": "350-1161 PKR",
+      "intent": "transactional",
+      "suggested_match_type": "phrase",
+      "priority": "medium",
+      "trend": "DECLINING",
+      "seasonal_schedule": "Mar/Jun",
+      "reasoning": "Businesses and property managers seeking a contracted electrical company or technician for ongoing work."
+    }
+  ],
+  "faqs": [],
+  "people_also_ask": [],
+  "content_briefs": []
+}
