@@ -273,6 +273,11 @@ def main():
         kept.extend(x for x in g_rows if x["score"] >= g_floor)
     kept.sort(key=lambda r: -r["score"])
     kept = kept[:MAX_FOR_AI]
+    # Small-dataset guard (the 45-keyword electrician run, Jul 2026): when
+    # the whole pool is tiny, a percentile floor just throws away signal —
+    # Claude's grouping stage excludes junk anyway. Under 40 kept → keep all.
+    if len(kept) < 40:
+        kept = sorted(rows, key=lambda r: -r["score"])[:MAX_FOR_AI]
     kept_ids = set(id(r) for r in kept)
 
     for i, r in enumerate(rows, 1):

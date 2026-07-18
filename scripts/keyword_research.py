@@ -201,38 +201,50 @@ def main():
         if LANGUAGE_ID else detect_language_id(SEED_KEYWORDS)
     print(f"🗣️ Language: {lang_label}")
 
-    request = client.get_type("GenerateKeywordIdeasRequest")
-    request.customer_id = CUSTOMER_ID
-    request.language = f"languageConstants/{language_id}"
-    if location_id:
-        request.geo_target_constants.append(f"geoTargetConstants/{location_id}")
-    request.keyword_plan_network = (
-        client.enums.KeywordPlanNetworkEnum.GOOGLE_SEARCH
-    )
-    request.keyword_seed.keywords.extend(SEED_KEYWORDS)
-
-    # ── Ask for historical monthly breakdown + CPC ─────────────────────────
-    # include_adult_keywords defaults to False — fine to leave unset.
-    # historical_metrics_options lets us request the month-by-month breakdown.
-    # (with GOOGLE_ADS_USE_PROTO_PLUS=true, nested message fields are set
-    # directly — no .CopyFrom() needed/available on proto-plus objects)
-    # CPC + competition_index now ENABLED — the scoring stage (Stage 2.5)
-    # uses them to rank keywords from a real Google Ads bidding perspective.
-    request.historical_metrics_options.include_average_cpc = True
-    # ──────────────────────────────────────────────────────────────────────
-
-    try:
-        response = keyword_plan_idea_service.generate_keyword_ideas(
-            request=request
+    def pull_ideas(seeds):
+        request = client.get_type("GenerateKeywordIdeasRequest")
+        request.customer_id = CUSTOMER_ID
+        request.language = f"languageConstants/{language_id}"
+        if location_id:
+            request.geo_target_constants.append(f"geoTargetConstants/{location_id}")
+        request.keyword_plan_network = (
+            client.enums.KeywordPlanNetworkEnum.GOOGLE_SEARCH
         )
-    except GoogleAdsException as ex:
-        print("Google Ads API error:")
-        for error in ex.failure.errors:
-            print(f"  - {error.message}")
+        request.keyword_seed.keywords.extend(seeds)
+        # historical_metrics_options: month-by-month breakdown + CPC — the
+        # scoring stage ranks from a real bidding perspective. (proto-plus:
+        # nested fields set directly, no .CopyFrom())
+        request.historical_metrics_options.include_average_cpc = True
+        return keyword_plan_idea_service.generate_keyword_ideas(request=request)
+
+    # ── ONE REQUEST PER SEED, merged (fix for the 45-keyword run, Jul 2026):
+    # a combined multi-seed request makes Google INTERSECT the themes and
+    # return a fraction of the ideas ("electrician dubai" + 5 specific seeds
+    # → 45 ideas). Pulled separately, each seed brings its own full long-tail
+    # (the appliance run's 5 broader seeds → 545). Same lesson as Mode 3's
+    # per-category batching. 6 requests instead of 1 — nothing for the quota.
+    ideas_by_text = {}
+    for seed in SEED_KEYWORDS:
+        try:
+            response = pull_ideas([seed])
+        except GoogleAdsException as ex:
+            print(f"⚠️ Planner error for seed '{seed}' (continuing):")
+            for error in ex.failure.errors:
+                print(f"  - {error.message}")
+            continue
+        n_new = 0
+        for idea in response:
+            key = idea.text.lower().strip()
+            if key and key not in ideas_by_text:
+                ideas_by_text[key] = idea
+                n_new += 1
+        print(f"   🌱 '{seed}': +{n_new} new ideas (running total {len(ideas_by_text)})")
+    if not ideas_by_text:
+        print("❌ No keyword ideas returned for any seed — check seeds/geo.")
         return
 
     rows = []
-    for idea in response:
+    for idea in ideas_by_text.values():
         metrics = idea.keyword_idea_metrics
 
         avg_searches = metrics.avg_monthly_searches or 0
