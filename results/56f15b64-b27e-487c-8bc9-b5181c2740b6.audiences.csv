@@ -1,0 +1,15 @@
+﻿Campaign,Ad Group,Audience,Bid Modifier,Flexible Reach,Comment
+Emergency Electrician Services,,Electrician Services,,Audience segments,IN_MARKET | targeting | Core high-intent service match
+Emergency Electrician Services,,Home Security,15%,,IN_MARKET | observation | Homeowners investing in property systems
+Emergency Electrician Services,,Home Improvement,20%,,IN_MARKET | observation | Renovation-related electrical need
+Emergency Electrician Services,,General Contracting & Remodeling Services,20%,,IN_MARKET | observation | Overlaps contractor/property manager demand
+Emergency Electrician Services,,Home Inspection Services,15%,,IN_MARKET | observation | Pre-purchase inspection leads to repairs
+Emergency Electrician Services,,Residential Properties (For Rent),15%,,IN_MARKET | observation | Tenants needing electrical fixes
+Emergency Electrician Services,,Residential Properties (For Sale),10%,,IN_MARKET | observation | New homeowners need installations
+Emergency Electrician Services,,Commercial Properties (For Rent),20%,,IN_MARKET | observation | Office/business electrical contract demand
+Emergency Electrician Services,,Hybrid & Alternative Vehicles,25%,,IN_MARKET | observation | EV owners need home charger install
+Emergency Electrician Services,,Tesla Motors,25%,,IN_MARKET | observation | EV charger installation prospects
+Emergency Electrician Services,,Home Automation Enthusiasts,15%,,AFFINITY | observation | Smart home owners need wiring/DB work
+Emergency Electrician Services,,Do-It-Yourselfers,10%,,AFFINITY | observation | DIY failures often need professional fix
+Emergency Electrician Services,,Home Decor Enthusiasts,10%,,AFFINITY | observation | Renovation-linked electrical demand
+Emergency Electrician Services,,Business Professionals,15%,,AFFINITY | observation | Office managers seeking contractors
