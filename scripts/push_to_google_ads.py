@@ -128,6 +128,14 @@ def main():
         client.enums.PositiveGeoTargetTypeEnum.PRESENCE      # "People in" only
     c.geo_target_type_setting.negative_geo_target_type = \
         client.enums.NegativeGeoTargetTypeEnum.PRESENCE
+    # Required since the EU political-ads regulation (API rejects campaign
+    # creation without it — hit on first live push, Jul 2026). Our campaigns
+    # are local-service ads, never EU political advertising.
+    try:
+        c.contains_eu_political_advertising = \
+            client.enums.EuPoliticalAdvertisingStatusEnum.DOES_NOT_CONTAIN_EU_POLITICAL_ADVERTISING
+    except AttributeError:
+        pass  # older google-ads lib without the field
     ops.append(o)
 
     # ── ad groups + keywords + negatives ────────────────────────────────
