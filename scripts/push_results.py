@@ -57,6 +57,10 @@ FILES_TO_PUSH = [
     # THE one-import file: campaign settings + ad groups + keywords +
     # negatives + RSAs + locations in a single Editor import.
     ("google_ads_master.csv", "master.csv"),
+    # Mode 1 batch landing pages: paste this link in the website builder's
+    # Mode 1 "Landing pages JSON URL" field — one page per ad-group theme,
+    # exact RSA url_slugs, internally linked.
+    ("landing_pages.json", "pages.json"),
     # API push outcome (validate errors or live-push summary) — shown as a
     # download so the user sees exactly what landed / what to fix.
     ("google_ads_push_report.md", "push.md"),

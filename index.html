@@ -300,6 +300,18 @@
     </div>
   </div>
 
+  <!-- Mode 1 batch landing pages: auto-generated raw link of landing_pages.json -->
+  <div id="pages-link-row" hidden style="margin-top:14px; padding:12px 14px; border:1px solid var(--line); border-radius:8px; background:var(--paper);">
+    <div style="font-size:12px; font-weight:600; margin-bottom:6px;">
+      Mode 1 landing pages link
+      <span style="opacity:.6; font-weight:400">(website builder ke Mode 1 "Landing pages JSON URL" field mein paste karein — EK run mein saare ad-group landing pages, RSA slugs par, internally linked)</span>
+    </div>
+    <div style="display:flex; gap:8px;">
+      <input id="pages-link-input" readonly style="font-family:var(--mono); font-size:12px;">
+      <button id="pages-copy-btn" type="button" style="margin-top:0; width:auto; background:var(--paper); color:var(--accent); border:1px solid var(--accent); white-space:nowrap;">Copy</button>
+    </div>
+  </div>
+
   <!-- Google Ads deliverables: Editor CSV + negative-guard script -->
   <div id="ads-links-row" hidden style="margin-top:14px; padding:12px 14px; border:1px solid var(--line); border-radius:8px; background:var(--paper);">
     <div style="font-size:12px; font-weight:600; margin-bottom:8px;">
@@ -523,7 +535,7 @@
       <ol>
         <li><b>Import the CSVs:</b> download <b>Ads Editor CSV</b> (positives) from the result page → Google Ads Editor → Account → Import. Campaigns, ad groups, keywords (Phrase/Exact — never Broad) and intent expansions land in one import. Then import <b>Negatives CSV</b> as a <b>separate</b> second import — never mix the two files (see the import-order box above). Review, then post.</li>
         <li><b>Install the guard script:</b> Google Ads → Tools → Scripts → paste the <b>Negative Guard Script</b> → run with <b>DRY_RUN = true for 2–3 days</b> → read the logs → set it to false and schedule hourly. Search terms with conversions are never banned.</li>
-        <li><b>Build matching landing pages:</b> <code>landing_pages.json</code> (in the run artifact) gives ready Mode 1 generator inputs per ad-group theme — message match raises Quality Score and lowers CPC.</li>
+        <li><b>Build matching landing pages:</b> copy the <b>Mode 1 landing pages link</b> from the result page → website builder → Mode 1 → paste into <b>Landing pages JSON URL</b> → ONE run generates every ad-group's landing page at the exact slug its RSA Final URLs point to, internally linked, same logo/brand. Message match raises Quality Score and lowers CPC.</li>
         <li><b>Account already running?</b> Fill <b>Existing campaign name + Existing ad groups</b> before the run — new groups slot into that campaign with 2-way negative siloing, plus a list of negatives to add to your old groups.</li>
         <li><b>Who decides how many ad groups?</b> The data does (one group per genuinely distinct commercial theme — if it only supports 4, you get 4), you cap it (<b>Max new ad groups</b>), and Python enforces it (every keyword in exactly one group, empties dropped).</li>
       </ol>
@@ -631,6 +643,7 @@
     submitBtn.disabled = true;
     reportActionsEl.hidden = true;
     document.getElementById("seo-link-row").hidden = true;
+    document.getElementById("pages-link-row").hidden = true;
     document.getElementById("ads-links-row").hidden = true;
     reportEl.innerHTML = "";
     setStatus("Starting your report...", false);
@@ -675,6 +688,12 @@
         if (json.seo_json_url) {
           document.getElementById("seo-link-input").value = json.seo_json_url;
           document.getElementById("seo-link-row").hidden = false;
+        }
+
+        // Ads runs: Mode 1 batch landing pages link (landing_pages.json)
+        if (json.pages_json_url) {
+          document.getElementById("pages-link-input").value = json.pages_json_url;
+          document.getElementById("pages-link-row").hidden = false;
         }
 
         // Ads runs: direct downloads for the Editor CSV + guard script + audience plan + RSA ads
@@ -757,6 +776,16 @@
   document.getElementById("seo-copy-btn").addEventListener("click", () => {
     const inp = document.getElementById("seo-link-input");
     const btn = document.getElementById("seo-copy-btn");
+    inp.select();
+    navigator.clipboard.writeText(inp.value).then(() => {
+      btn.textContent = "Copied ✓";
+      setTimeout(() => { btn.textContent = "Copy"; }, 1500);
+    }).catch(() => { document.execCommand("copy"); });
+  });
+
+  document.getElementById("pages-copy-btn").addEventListener("click", () => {
+    const inp = document.getElementById("pages-link-input");
+    const btn = document.getElementById("pages-copy-btn");
     inp.select();
     navigator.clipboard.writeText(inp.value).then(() => {
       btn.textContent = "Copied ✓";
