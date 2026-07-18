@@ -1,0 +1,102 @@
+[
+  {
+    "page_name": "General Electrician Services",
+    "url_slug": "electrician-services-dubai",
+    "service_name": "Electrician Services",
+    "industry": "Home & Office Electrical Services",
+    "sub_services": [
+      "Wiring Installation",
+      "Socket And Switch Installation",
+      "Electrical Maintenance",
+      "Lighting Installation",
+      "Electrical Inspection",
+      "Rewiring Services"
+    ],
+    "ad_groups_covered": [
+      "General Electrician Services Dubai"
+    ],
+    "keywords_covered": 18,
+    "monthly_volume_covered": 2610,
+    "mode1_config": {
+      "main_service": "Electrician Services",
+      "sub_services": "Wiring Installation, Socket And Switch Installation, Electrical Maintenance, Lighting Installation, Electrical Inspection, Rewiring Services",
+      "industry": "Home & Office Electrical Services"
+    },
+    "google_ads_tracking_tip": "Final URL suffix: kw={keyword} — enables the landing page's Dynamic Keyword Insertion (DKI)."
+  },
+  {
+    "page_name": "Emergency Electrician",
+    "url_slug": "emergency-electrician-dubai",
+    "service_name": "Emergency Electrician Service",
+    "industry": "Emergency Electrical Repair",
+    "sub_services": [
+      "24/7 Emergency Callout",
+      "Power Outage Repair",
+      "Urgent Wiring Fixes",
+      "Same Day Service",
+      "Electrical Fault Diagnosis",
+      "After Hours Repairs"
+    ],
+    "ad_groups_covered": [
+      "Emergency & 24/7 Electrician Near Me"
+    ],
+    "keywords_covered": 19,
+    "monthly_volume_covered": 260,
+    "mode1_config": {
+      "main_service": "Emergency Electrician Service",
+      "sub_services": "24/7 Emergency Callout, Power Outage Repair, Urgent Wiring Fixes, Same Day Service, Electrical Fault Diagnosis, After Hours Repairs",
+      "industry": "Emergency Electrical Repair"
+    },
+    "google_ads_tracking_tip": "Final URL suffix: kw={keyword} — enables the landing page's Dynamic Keyword Insertion (DKI)."
+  },
+  {
+    "page_name": "EV Charger Installation",
+    "url_slug": "ev-charger-installation-dubai",
+    "service_name": "Ev Charger Installation",
+    "industry": "EV Charging Installation",
+    "sub_services": [
+      "Home Charger Installation",
+      "Villa Charger Installation",
+      "Charger Point Wiring",
+      "Charger Maintenance",
+      "Fast Charging Setup",
+      "Charger Consultation"
+    ],
+    "ad_groups_covered": [
+      "EV Charger Installation"
+    ],
+    "keywords_covered": 1,
+    "monthly_volume_covered": 90,
+    "mode1_config": {
+      "main_service": "Ev Charger Installation",
+      "sub_services": "Home Charger Installation, Villa Charger Installation, Charger Point Wiring, Charger Maintenance, Fast Charging Setup, Charger Consultation",
+      "industry": "EV Charging Installation"
+    },
+    "google_ads_tracking_tip": "Final URL suffix: kw={keyword} — enables the landing page's Dynamic Keyword Insertion (DKI)."
+  },
+  {
+    "page_name": "DB Board & Short Circuit Repair",
+    "url_slug": "db-board-short-circuit-repair-dubai",
+    "service_name": "Db Board And Short Circuit Repair",
+    "industry": "Electrical Fault Repair",
+    "sub_services": [
+      "Db Board Replacement",
+      "Short Circuit Diagnosis",
+      "Circuit Breaker Repair",
+      "Fuse Box Upgrade",
+      "Fault Finding",
+      "Power Tripping Fixes"
+    ],
+    "ad_groups_covered": [
+      "DB Board & Short Circuit Repair"
+    ],
+    "keywords_covered": 1,
+    "monthly_volume_covered": 10,
+    "mode1_config": {
+      "main_service": "Db Board And Short Circuit Repair",
+      "sub_services": "Db Board Replacement, Short Circuit Diagnosis, Circuit Breaker Repair, Fuse Box Upgrade, Fault Finding, Power Tripping Fixes",
+      "industry": "Electrical Fault Repair"
+    },
+    "google_ads_tracking_tip": "Final URL suffix: kw={keyword} — enables the landing page's Dynamic Keyword Insertion (DKI)."
+  }
+]
