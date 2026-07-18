@@ -1,0 +1,15 @@
+﻿Campaign,Ad Group,Audience,Bid Modifier,Flexible Reach,Comment
+Core Electrician Services,,Electrician Services,,Audience segments,IN_MARKET | targeting | Core high-intent service match
+Core Electrician Services,,Home Improvement,20%,,IN_MARKET | observation | Strong overlap with home service seekers
+Core Electrician Services,,Home & Garden Services,20%,,IN_MARKET | observation | Broader home services intent
+Core Electrician Services,,Tesla Motors,25%,,IN_MARKET | observation | EV owners need chargers
+Core Electrician Services,,Hybrid & Alternative Vehicles,20%,,IN_MARKET | observation | EV/hybrid owners target audience
+Core Electrician Services,,Home Security,15%,,IN_MARKET | observation | Concerned with electrical safety issues
+Core Electrician Services,,Home Automation Enthusiasts,15%,,AFFINITY | observation | Tech-savvy home upgrade owners
+Core Electrician Services,,Home Decor Enthusiasts,10%,,AFFINITY | observation | Home improvement engaged homeowners
+Core Electrician Services,,Do-It-Yourselfers,10%,,AFFINITY | observation | Home project-focused audience overlap
+Core Electrician Services,,Residential Properties,15%,,IN_MARKET | observation | Homeowners likely needing electrical work
+Core Electrician Services,,Business Technology,10%,,IN_MARKET | observation | Office electrical service needs
+Core Electrician Services,,Commercial Properties,15%,,IN_MARKET | observation | Office/commercial electrician demand
+Core Electrician Services,,Homeschooling Parents,10%,,"AFFINITY | observation | Home-based, family-focused decision makers"
+Core Electrician Services,,Family-Focused,10%,,AFFINITY | observation | Homeowners prioritizing family safety
