@@ -563,8 +563,11 @@
   const reportActionsEl = document.getElementById("report-actions");
   const downloadBtn = document.getElementById("download-btn");
 
-  const POLL_INTERVAL_MS = 8000;
-  const MAX_ATTEMPTS = 40; // ~5-6 minutes total
+  const POLL_INTERVAL_MS = 10000;
+  const MAX_ATTEMPTS = 120; // ~20 minutes total — pipeline now runs keyword pull,
+  // clustering, ad groups, negative guard, audiences, per-ad-group RSA (with
+  // retries on malformed JSON), locations, master CSV, live Ads push and
+  // reports; a 12-15 seed run with 7 ad groups regularly takes 7-9 minutes.
 
   let lastHtml = null;
   let lastBusinessName = "report";
