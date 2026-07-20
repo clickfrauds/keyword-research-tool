@@ -38,8 +38,10 @@ OUTPUT:
 
 import os
 import re
+import time
 from google.ads.googleads.client import GoogleAdsClient
 from google.ads.googleads.errors import GoogleAdsException
+from google.api_core.exceptions import ResourceExhausted
 
 # ============================================================
 # CONFIG — pulled from environment variables, with safe defaults
@@ -197,11 +199,16 @@ def main():
     # Universal targeting: resolve geo from the form's free-text location and
     # language from the seeds' own script — works for any market on earth.
     location_id = resolve_location_id(client)
-    language_id, lang_label = (LANGUAGE_ID, f"explicit LANGUAGE_ID={LANGUAGE_ID}") \
-        if LANGUAGE_ID else detect_language_id(SEED_KEYWORDS)
-    print(f"🗣️ Language: {lang_label}")
+    # Language is resolved PER SEED, not per run: one Arabic seed in a mixed
+    # list used to flip the WHOLE run to Arabic, so every English seed was
+    # pulled under the Arabic language filter and returned almost nothing.
+    if LANGUAGE_ID:
+        print(f"🗣️ Language: explicit LANGUAGE_ID={LANGUAGE_ID} (all seeds)")
+    else:
+        print("🗣️ Language: auto-detected per seed "
+              "(mixed Arabic+English lists pull each seed in its own language)")
 
-    def pull_ideas(seeds):
+    def pull_ideas(seeds, language_id):
         request = client.get_type("GenerateKeywordIdeasRequest")
         request.customer_id = CUSTOMER_ID
         request.language = f"languageConstants/{language_id}"
@@ -223,14 +230,31 @@ def main():
     # → 45 ideas). Pulled separately, each seed brings its own full long-tail
     # (the appliance run's 5 broader seeds → 545). Same lesson as Mode 3's
     # per-category batching. 6 requests instead of 1 — nothing for the quota.
+    # Basic-access accounts rate-limit this method per-minute; one fat seed
+    # ("glass for railing" → 1,496 ideas) burns the allowance and the next
+    # request 429s (ResourceExhausted — NOT a GoogleAdsException, so it used
+    # to crash the whole run). Pace the seeds and retry with backoff.
     ideas_by_text = {}
-    for seed in SEED_KEYWORDS:
-        try:
-            response = pull_ideas([seed])
-        except GoogleAdsException as ex:
-            print(f"⚠️ Planner error for seed '{seed}' (continuing):")
-            for error in ex.failure.errors:
-                print(f"  - {error.message}")
+    for i, seed in enumerate(SEED_KEYWORDS):
+        if i:
+            time.sleep(3)
+        seed_lang = LANGUAGE_ID or detect_language_id([seed])[0]
+        response = None
+        for attempt in range(1, 6):
+            try:
+                response = pull_ideas([seed], seed_lang)
+                break
+            except ResourceExhausted:
+                wait = 5 * attempt
+                print(f"   ⏳ Rate limit on '{seed}' — waiting {wait}s (retry {attempt}/5)")
+                time.sleep(wait)
+            except GoogleAdsException as ex:
+                print(f"⚠️ Planner error for seed '{seed}' (continuing):")
+                for error in ex.failure.errors:
+                    print(f"  - {error.message}")
+                break
+        if response is None:
+            print(f"⚠️ Skipping seed '{seed}' — still failing after retries.")
             continue
         n_new = 0
         for idea in response:
@@ -238,7 +262,8 @@ def main():
             if key and key not in ideas_by_text:
                 ideas_by_text[key] = idea
                 n_new += 1
-        print(f"   🌱 '{seed}': +{n_new} new ideas (running total {len(ideas_by_text)})")
+        lang_tag = {"1000": "en", "1019": "ar", "1023": "hi"}.get(seed_lang, seed_lang)
+        print(f"   🌱 '{seed}' [{lang_tag}]: +{n_new} new ideas (running total {len(ideas_by_text)})")
     if not ideas_by_text:
         print("❌ No keyword ideas returned for any seed — check seeds/geo.")
         return
