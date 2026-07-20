@@ -1,0 +1,130 @@
+[
+  {
+    "page_name": "Shower Glass Partitions",
+    "url_slug": "shower-glass-partitions-dubai",
+    "service_name": "Shower Glass Partitions",
+    "industry": "Glass Fabrication",
+    "sub_services": [
+      "Frameless Shower Screens",
+      "Sliding Shower Cabins",
+      "Bathtub Glass Partitions",
+      "Frosted Glass Partitions",
+      "Custom Shower Enclosures",
+      "Toilet Glass Cubicles"
+    ],
+    "ad_groups_covered": [
+      "Shower & Bathroom Glass Partitions"
+    ],
+    "keywords_covered": 40,
+    "monthly_volume_covered": 550,
+    "mode1_config": {
+      "main_service": "Shower Glass Partitions",
+      "sub_services": "Frameless Shower Screens, Sliding Shower Cabins, Bathtub Glass Partitions, Frosted Glass Partitions, Custom Shower Enclosures, Toilet Glass Cubicles",
+      "industry": "Glass Fabrication"
+    },
+    "google_ads_tracking_tip": "Final URL suffix: kw={keyword} — enables the landing page's Dynamic Keyword Insertion (DKI)."
+  },
+  {
+    "page_name": "Office Glass Partitions",
+    "url_slug": "office-glass-partitions-dubai",
+    "service_name": "Office Glass Partitions",
+    "industry": "Commercial Interior Fit-Out",
+    "sub_services": [
+      "Frameless Office Partitions",
+      "Acoustic Glass Partitions",
+      "Aluminium Glass Partitions",
+      "Demountable Partition Walls",
+      "Glass Desk Dividers",
+      "Office Cabin Partitions"
+    ],
+    "ad_groups_covered": [
+      "Office Glass Partitions"
+    ],
+    "keywords_covered": 35,
+    "monthly_volume_covered": 510,
+    "mode1_config": {
+      "main_service": "Office Glass Partitions",
+      "sub_services": "Frameless Office Partitions, Acoustic Glass Partitions, Aluminium Glass Partitions, Demountable Partition Walls, Glass Desk Dividers, Office Cabin Partitions",
+      "industry": "Commercial Interior Fit-Out"
+    },
+    "google_ads_tracking_tip": "Final URL suffix: kw={keyword} — enables the landing page's Dynamic Keyword Insertion (DKI)."
+  },
+  {
+    "page_name": "Glass Staircase Railings",
+    "url_slug": "glass-staircase-railings-dubai",
+    "service_name": "Glass Staircase Railings",
+    "industry": "Glass and Metal Fabrication",
+    "sub_services": [
+      "Frameless Glass Handrails",
+      "Spigot Glass Railings",
+      "Structural Glass Balustrades",
+      "Stainless Steel Glass Railings",
+      "Glass Railing Fabrication",
+      "Custom Staircase Railings"
+    ],
+    "ad_groups_covered": [
+      "Staircase Glass Handrails & Railings",
+      "General Glass Balustrade Systems"
+    ],
+    "keywords_covered": 80,
+    "monthly_volume_covered": 3570,
+    "mode1_config": {
+      "main_service": "Glass Staircase Railings",
+      "sub_services": "Frameless Glass Handrails, Spigot Glass Railings, Structural Glass Balustrades, Stainless Steel Glass Railings, Glass Railing Fabrication, Custom Staircase Railings",
+      "industry": "Glass and Metal Fabrication"
+    },
+    "google_ads_tracking_tip": "Final URL suffix: kw={keyword} — enables the landing page's Dynamic Keyword Insertion (DKI)."
+  },
+  {
+    "page_name": "Balcony Glass Balustrades",
+    "url_slug": "balcony-glass-balustrades-dubai",
+    "service_name": "Balcony Glass Balustrades",
+    "industry": "Glass and Metal Fabrication",
+    "sub_services": [
+      "Balcony Glass Railings",
+      "Pool Glass Fencing",
+      "Terrace Glass Balustrades",
+      "Rooftop Glass Railings",
+      "Villa Balcony Railings",
+      "Frameless Outdoor Glass Panels"
+    ],
+    "ad_groups_covered": [
+      "Balcony & Outdoor Glass Balustrades"
+    ],
+    "keywords_covered": 40,
+    "monthly_volume_covered": 730,
+    "mode1_config": {
+      "main_service": "Balcony Glass Balustrades",
+      "sub_services": "Balcony Glass Railings, Pool Glass Fencing, Terrace Glass Balustrades, Rooftop Glass Railings, Villa Balcony Railings, Frameless Outdoor Glass Panels",
+      "industry": "Glass and Metal Fabrication"
+    },
+    "google_ads_tracking_tip": "Final URL suffix: kw={keyword} — enables the landing page's Dynamic Keyword Insertion (DKI)."
+  },
+  {
+    "page_name": "Aluminium Fabrication Dubai",
+    "url_slug": "aluminium-fabrication-dubai",
+    "service_name": "Aluminium Fabrication Dubai",
+    "industry": "Aluminium Fabrication",
+    "sub_services": [
+      "Sliding Aluminium Doors",
+      "Aluminium Door Installation",
+      "Custom Aluminium Doors",
+      "Fixed Aluminium Pergolas",
+      "Motorized Pergolas",
+      "Pergola Fabrication"
+    ],
+    "ad_groups_covered": [
+      "Aluminium Doors",
+      "Aluminium Pergolas"
+    ],
+    "keywords_covered": 8,
+    "monthly_volume_covered": 340,
+    "mode1_config": {
+      "main_service": "Aluminium Fabrication Dubai",
+      "sub_services": "Sliding Aluminium Doors, Aluminium Door Installation, Custom Aluminium Doors, Fixed Aluminium Pergolas, Motorized Pergolas, Pergola Fabrication",
+      "industry": "Aluminium Fabrication"
+    },
+    "google_ads_tracking_tip": "Final URL suffix: kw={keyword} — enables the landing page's Dynamic Keyword Insertion (DKI).",
+    "_note": "Merged from separate 'Aluminium Doors' + 'Aluminium Pergolas' pages (2026-07-20) — both had thin keyword pools (4 each). Google Ads ad groups stay separate for bid/negative control; point both ad groups' RSA Final URLs to this one page's slug when merging."
+  }
+]
