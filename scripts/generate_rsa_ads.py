@@ -79,6 +79,21 @@ WEBSITE_URL = os.environ.get("WEBSITE_URL", "").strip().rstrip("/")
 if WEBSITE_URL and not re.match(r"^https?://", WEBSITE_URL, re.IGNORECASE):
     WEBSITE_URL = "https://" + WEBSITE_URL
 
+# Content language (Jul 2026): the SYSTEM prompt already says "write in the
+# language of the keywords", but a group with few/short keywords can slip into
+# English. When LANGUAGE is set explicitly we name the language so every RSA
+# asset is unambiguously in it. Blank/"en" = unchanged.
+_RSA_LANG_NAMES = {
+    "en": "English", "ar": "Arabic", "es": "Spanish", "fr": "French",
+    "de": "German", "it": "Italian", "pt": "Portuguese", "nl": "Dutch",
+    "ru": "Russian", "tr": "Turkish", "hi": "Hindi", "ur": "Urdu",
+    "zh": "Chinese", "ja": "Japanese", "ko": "Korean", "pl": "Polish",
+}
+_rsa_lang = os.environ.get("LANGUAGE", "").strip().lower()
+_rsa_lang = {"no": "", "english": "en", "spanish": "es", "french": "fr",
+             "german": "de", "arabic": "ar"}.get(_rsa_lang, _rsa_lang)
+RSA_LANG_NAME = _RSA_LANG_NAMES.get(_rsa_lang, "") if _rsa_lang != "en" else ""
+
 INPUT_JSON = "keyword_strategy.json"
 OUT_JSON = "rsa_ads.json"
 OUT_CSV = "rsa_editor.csv"
@@ -284,6 +299,11 @@ each using words from the actual keywords so the ad bolds on the query):
 
 Output ONLY valid JSON:
 {{"headlines": ["...", 15 items], "descriptions": ["...", 4 items]}}"""
+
+if RSA_LANG_NAME:
+    SYSTEM += (f"\n\nHARD LANGUAGE RULE: write EVERY headline and description in "
+               f"{RSA_LANG_NAME}. Character limits (30/90) still apply to the "
+               f"{RSA_LANG_NAME} text. Brand names keep official casing.")
 
 
 def ask_claude(client, group, kw_lines, retry_note=""):

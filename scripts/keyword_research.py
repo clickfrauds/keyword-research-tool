@@ -61,6 +61,18 @@ SEED_KEYWORDS = [
 TARGET_LOCATION = os.environ.get("TARGET_LOCATION", "").strip()
 LOCATION_ID = os.environ.get("LOCATION_ID", "").strip()
 LANGUAGE_ID = os.environ.get("LANGUAGE_ID", "").strip()
+# NEW (Jul 2026): a content-language CODE ("es"/"fr"/"de"/...). Latin-script
+# languages can't be told apart by script, so detect_language_id() sends them
+# all to English (1000) — Spanish seeds then pulled English-biased ideas. Set
+# LANGUAGE=es and the correct Planner languageConstant is resolved via the API
+# for EVERY seed. Precedence: explicit LANGUAGE_ID (numeric) > LANGUAGE (code)
+# > per-seed script detect. Blank = OLD behavior, byte-for-byte.
+LANGUAGE = os.environ.get("LANGUAGE", "").strip().lower()
+_LANG_ALIASES = {"english": "en", "arabic": "ar", "spanish": "es", "french": "fr",
+                 "german": "de", "italian": "it", "portuguese": "pt", "dutch": "nl",
+                 "russian": "ru", "turkish": "tr", "hindi": "hi", "urdu": "ur",
+                 "chinese": "zh", "japanese": "ja", "korean": "ko", "no": ""}
+LANGUAGE = _LANG_ALIASES.get(LANGUAGE, LANGUAGE)
 OUTPUT_FILE  = "keyword_data_output.txt"
 
 # ============================================================
@@ -151,6 +163,40 @@ def detect_language_id(seeds):
     return "1000", "English (default)"
 
 
+# Our ISO code → Google Ads languageConstant.code (mostly identical; a few
+# specials). Used only to build the API query; the numeric id comes from Google.
+_GADS_LANG_CODE = {"zh": "zh_CN", "he": "iw", "nb": "no"}
+# Fast-path for codes whose ids the tool already hardcodes elsewhere — avoids an
+# API round-trip for the existing en/ar/hi runs.
+_KNOWN_LANG_IDS = {"en": "1000", "ar": "1019", "hi": "1023"}
+
+
+def resolve_language_from_code(client, code):
+    """ISO code ('es'/'fr'/'de'/...) → Google Ads languageConstant id via the
+    official API (no fragile hardcoded id table). Returns a numeric id string,
+    or None on blank/unknown/error so the caller falls back to per-seed script
+    detection — i.e. a bad code never breaks the run, it just degrades to today's
+    behavior."""
+    code = (code or "").strip().lower()
+    if not code:
+        return None
+    if code in _KNOWN_LANG_IDS:
+        return _KNOWN_LANG_IDS[code]
+    gcode = _GADS_LANG_CODE.get(code, code)
+    try:
+        svc = client.get_service("GoogleAdsService")
+        q = ("SELECT language_constant.id, language_constant.code "
+             "FROM language_constant WHERE language_constant.code = '%s'" % gcode)
+        for row in svc.search(customer_id=CUSTOMER_ID, query=q):
+            lid = str(row.language_constant.id)
+            print(f"🗣️ Language '{code}' → languageConstant {lid} ({gcode}, API-resolved)")
+            return lid
+        print(f"⚠️ Language code '{code}' not found in Google Ads — per-seed detect.")
+    except Exception as e:
+        print(f"⚠️ Language lookup failed for '{code}' ({str(e)[:70]}) — per-seed detect.")
+    return None
+
+
 def resolve_location_id(client):
     """Resolve free-text TARGET_LOCATION ('Dubai, UAE', 'Lahore', 'United
     Kingdom' — any market) to a geo target constant id via the official
@@ -202,8 +248,15 @@ def main():
     # Language is resolved PER SEED, not per run: one Arabic seed in a mixed
     # list used to flip the WHOLE run to Arabic, so every English seed was
     # pulled under the Arabic language filter and returned almost nothing.
+    resolved_lang_id = None
     if LANGUAGE_ID:
         print(f"🗣️ Language: explicit LANGUAGE_ID={LANGUAGE_ID} (all seeds)")
+    elif LANGUAGE:
+        resolved_lang_id = resolve_language_from_code(client, LANGUAGE)
+        if resolved_lang_id:
+            print(f"🗣️ Language: '{LANGUAGE}' → id {resolved_lang_id} (all seeds)")
+        else:
+            print("🗣️ Language: code unresolved — auto-detected per seed")
     else:
         print("🗣️ Language: auto-detected per seed "
               "(mixed Arabic+English lists pull each seed in its own language)")
@@ -238,7 +291,7 @@ def main():
     for i, seed in enumerate(SEED_KEYWORDS):
         if i:
             time.sleep(3)
-        seed_lang = LANGUAGE_ID or detect_language_id([seed])[0]
+        seed_lang = LANGUAGE_ID or resolved_lang_id or detect_language_id([seed])[0]
         response = None
         for attempt in range(1, 6):
             try:

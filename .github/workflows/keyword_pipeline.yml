@@ -47,8 +47,12 @@ on:
         description: "OPTIONAL: explicit Google geo target id — blank = auto-resolve from target_location (universal, any market)"
         required: false
         default: ''
+      language:
+        description: "Content language CODE for a non-English/Arabic market: es, fr, de, it, pt, tr, ru... Blank = auto (English/Arabic by seed script). Sets Planner language + writes ad groups/landing pages/RSAs in this language. MUST match the website builder's language."
+        required: false
+        default: ''
       language_id:
-        description: "OPTIONAL: explicit Google language id — blank = auto-detect from seed keywords' script"
+        description: "OPTIONAL: explicit numeric Google language id (overrides 'language' above) — blank = auto"
         required: false
         default: ''
       bid_currency:
@@ -117,6 +121,7 @@ jobs:
           TARGET_LOCATION: ${{ github.event.inputs.target_location }}
           LOCATION_ID: ${{ github.event.inputs.location_id }}
           LANGUAGE_ID: ${{ github.event.inputs.language_id }}
+          LANGUAGE: ${{ github.event.inputs.language }}
         run: python scripts/keyword_research.py
 
       - name: Stage 2 - Filter and cluster keywords (niche-agnostic)
@@ -144,6 +149,7 @@ jobs:
           TARGET_LOCATION: ${{ github.event.inputs.target_location }}
           BID_CURRENCY: ${{ github.event.inputs.bid_currency || 'PKR' }}
           BID_FX_RATE: ${{ github.event.inputs.bid_fx_rate || '1' }}
+          LANGUAGE: ${{ github.event.inputs.language }}
         run: python scripts/analyze_with_claude.py
 
       - name: Stage 3.6 - Generate negative-guard Google Ads Script (~$0.02)
@@ -178,6 +184,7 @@ jobs:
           NICHE_DESCRIPTION: ${{ github.event.inputs.niche_description }}
           TARGET_LOCATION: ${{ github.event.inputs.target_location }}
           WEBSITE_URL: ${{ github.event.inputs.website_url }}
+          LANGUAGE: ${{ github.event.inputs.language }}
         run: python scripts/generate_rsa_ads.py
 
       - name: Stage 3.9 - Location targeting CSV + Claude bid tiers + negative locations (~$0.02)

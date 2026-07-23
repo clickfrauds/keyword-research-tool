@@ -66,6 +66,25 @@ BUSINESS_NAME = os.environ.get("BUSINESS_NAME", "").strip()
 NICHE_DESCRIPTION = os.environ.get("NICHE_DESCRIPTION", "").strip()
 TARGET_LOCATION = os.environ.get("TARGET_LOCATION", "").strip()
 
+# Content language (Jul 2026): same LANGUAGE code Stage 1 uses. When set to a
+# non-English language, Claude writes all GENERATED text (group names, themes,
+# landing-page names, sub_services, intent expansions, notes) in that language
+# so the whole pipeline + the website builder speak one language. Blank/"en" =
+# unchanged English output.
+CONTENT_LANGUAGE = os.environ.get("LANGUAGE", "").strip().lower()
+_LANG_NAMES = {
+    "en": "English", "ar": "Arabic", "es": "Spanish", "fr": "French",
+    "de": "German", "it": "Italian", "pt": "Portuguese", "nl": "Dutch",
+    "ru": "Russian", "tr": "Turkish", "hi": "Hindi", "ur": "Urdu",
+    "zh": "Chinese", "ja": "Japanese", "ko": "Korean", "pl": "Polish",
+    "sv": "Swedish", "id": "Indonesian", "th": "Thai", "vi": "Vietnamese",
+    "el": "Greek", "ro": "Romanian", "cs": "Czech", "hu": "Hungarian",
+}
+_LANG_ALIASES = {v.lower(): k for k, v in _LANG_NAMES.items()}
+_LANG_ALIASES["no"] = ""   # legacy "no language" default → English
+CONTENT_LANGUAGE = _LANG_ALIASES.get(CONTENT_LANGUAGE, CONTENT_LANGUAGE)
+CONTENT_LANG_NAME = _LANG_NAMES.get(CONTENT_LANGUAGE, "")
+
 # ── SUGGESTED BIDS ──────────────────────────────────────────────────────────
 # Keyword Planner returns low/high top-of-page bids in the API ACCOUNT's
 # currency (micros → units in Stage 1). BID_CURRENCY sirf label hai;
@@ -321,6 +340,20 @@ D. Also return this extra top-level key:
    each existing group so they cannot cannibalize the new group either.
    Only include existing groups that actually need protection.
 E. Landing pages: only for the NEW themes (1 page per new theme is typical).
+"""
+
+if CONTENT_LANG_NAME and CONTENT_LANGUAGE != "en":
+    SYSTEM_PROMPT += f"""
+OUTPUT LANGUAGE — this account targets a {CONTENT_LANG_NAME}-speaking market:
+- The keyword data below is ALREADY in {CONTENT_LANG_NAME}. Keep every provided
+  keyword exactly as given — NEVER translate or alter a provided keyword.
+- Write ALL text YOU generate in {CONTENT_LANG_NAME}: campaign names, ad group
+  names, `theme` sentences, `intent_expansion_keywords` (real {CONTENT_LANG_NAME}
+  search queries), `negative_keywords`, landing-page `page_name`/`service_name`/
+  `sub_services`/`industry`, and `notes`.
+- KEEP IN ENGLISH ASCII (do NOT translate): every JSON KEY, and each landing
+  page's `url_slug` — slugs stay clean kebab-case English for tidy URLs even
+  though the page sells in {CONTENT_LANG_NAME}.
 """
 
 
