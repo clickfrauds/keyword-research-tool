@@ -344,8 +344,13 @@ function main() {
   var CAMPAIGN_NAMES = %%CAMPAIGNS%%;
   var DATE_RANGE = "TODAY";        // TODAY | YESTERDAY | LAST_7_DAYS
   var MIN_IMPRESSIONS = 0;
-  var DRY_RUN = true;              // ⚠️ pehle 2-3 din TRUE rakhein — sirf log karega.
-                                   // Log theek lagay to false kar dein.
+  var DRY_RUN = false;             // LIVE by default (user rule, Jul 2026):
+                                   // script lagtay hi direct act kare. Safety
+                                   // nets: converted terms kabhi ban nahi hote,
+                                   // negatives sirf EXACT [term] hain (surgical,
+                                   // koi phrase collateral nahi), aur har ban
+                                   // log mein reason ke saath likha jata hai.
+                                   // Audit ke liye TRUE kar ke sirf log dekh lein.
   var PROTECT_CONVERTERS = true;   // conversion wali term kabhi ban nahi hogi
   var ALLOW_SHORT_PRODUCT = true;  // "kitchen cabinets" type <=3-word product query allow
 
@@ -726,7 +731,8 @@ def main():
           f"{stats['info_diy']} info/DIY | {stats['context']} context words | "
           f"{stats['problems']} problem signals | {stats['locations']} locations | "
           f"{stats['products']} products | {stats['actions']} actions")
-    print("   Paste into Google Ads > Tools > Scripts, run DRY first, then set DRY_RUN=false + hourly schedule.")
+    print("   Paste into Google Ads > Tools > Scripts + hourly schedule — LIVE by default "
+          "(DRY_RUN=false); converted terms are always protected.")
 
 
 if __name__ == "__main__":
