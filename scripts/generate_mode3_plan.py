@@ -52,7 +52,24 @@ except ImportError:
 # Reuse the battle-tested pieces from the existing stages — no logic forks.
 from keyword_research import (
     classify_trend, peak_months, detect_language_id, resolve_location_id,
+    resolve_language_from_code,
 )
+
+# Content language (Jul 2026): same LANGUAGE code the website builder uses, so
+# the Mode 3 plan's questions/answer-angles/entities come back in that language
+# and the Planner pulls the right-language data. Blank = unchanged behavior.
+CONTENT_LANGUAGE = os.environ.get("LANGUAGE", "").strip().lower()
+_M3_LANG_NAMES = {
+    "en": "English", "ar": "Arabic", "es": "Spanish", "fr": "French",
+    "de": "German", "it": "Italian", "pt": "Portuguese", "nl": "Dutch",
+    "ru": "Russian", "tr": "Turkish", "hi": "Hindi", "ur": "Urdu",
+    "zh": "Chinese", "ja": "Japanese", "ko": "Korean", "pl": "Polish",
+    "sv": "Swedish", "id": "Indonesian", "th": "Thai", "vi": "Vietnamese",
+    "el": "Greek", "ro": "Romanian", "cs": "Czech", "hu": "Hungarian",
+}
+CONTENT_LANGUAGE = {"no": "", "english": "en", "spanish": "es", "french": "fr",
+                    "german": "de", "arabic": "ar"}.get(CONTENT_LANGUAGE, CONTENT_LANGUAGE)
+CONTENT_LANG_NAME = _M3_LANG_NAMES.get(CONTENT_LANGUAGE, "") if CONTENT_LANGUAGE != "en" else ""
 from generate_seo_strategy import parse_json_robust, enrich, expand_kw
 
 JSON_OUT = "website_builder_inputs.json"
@@ -256,7 +273,10 @@ RULES:
    for topical authority.
 5. "name" must be a CHARACTER-FOR-CHARACTER copy of a service page name.
 6. A page with no matching keywords still appears (empty keyword_ids).
-
+""" + (f"""7. LANGUAGE: write every `q`, `answer_angle` and `entities_to_mention`
+   value in {CONTENT_LANG_NAME} (real {CONTENT_LANG_NAME} customer phrasing).
+   Do NOT translate the page `name` (copy it exactly) or the JSON keys.
+""" if CONTENT_LANG_NAME else "") + """
 RETURN JSON ONLY:
 {{"services": [{{"name": "exact page name", "primary_keyword_id": 1,
   "keyword_ids": [1, 2], "questions": [{{"q": "...", "answer_angle": "...",
@@ -332,10 +352,17 @@ def main():
     claude = anthropic.Anthropic()
 
     location_id = resolve_location_id(ads_client)
+    # Precedence: explicit numeric LANGUAGE_ID > LANGUAGE code (API-resolved) >
+    # per-seed script detect (unchanged). Blank LANGUAGE = old behavior.
     language_id, lang_label = detect_language_id(SERVICES)
     if os.environ.get("LANGUAGE_ID", "").strip():
         language_id, lang_label = os.environ["LANGUAGE_ID"].strip(), "explicit LANGUAGE_ID"
-    print(f"🗣️ Language: {lang_label}")
+    elif CONTENT_LANGUAGE:
+        _rid = resolve_language_from_code(ads_client, CONTENT_LANGUAGE)
+        if _rid:
+            language_id, lang_label = _rid, f"'{CONTENT_LANGUAGE}' (code)"
+    print(f"🗣️ Language: {lang_label}"
+          + (f" | output in {CONTENT_LANG_NAME}" if CONTENT_LANG_NAME else ""))
 
     print(f"\n🗂️ Stage A — grouping {len(SERVICES)} services into categories...")
     categories = group_services(claude, SERVICES)

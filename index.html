@@ -147,6 +147,23 @@
       <option value="locations">Locations only — instant Editor CSV (no pipeline run)</option>
     </select>
 
+    <label for="language">Language <span style="opacity:.6">(content + Google Ads output; MUST match the website builder's language)</span></label>
+    <select id="language" name="language" style="width:100%; padding:10px 12px; border:1px solid #dcdad3; border-radius:8px; font-size:14px; background:#fff;">
+      <option value="no">English (default)</option>
+      <option value="ar">Arabic — العربية (RTL)</option>
+      <option value="es">Spanish — Español</option>
+      <option value="fr">French — Français</option>
+      <option value="de">German — Deutsch</option>
+      <option value="it">Italian — Italiano</option>
+      <option value="pt">Portuguese — Português</option>
+      <option value="nl">Dutch — Nederlands</option>
+      <option value="tr">Turkish — Türkçe</option>
+      <option value="ru">Russian — Русский</option>
+      <option value="ur">Urdu — اردو (RTL)</option>
+      <option value="hi">Hindi — हिन्दी</option>
+    </select>
+    <div class="hint">Seeds/services aap isi language mein do (e.g. Spanish site ke liye Spanish seeds). Planner data + ad groups + landing pages sab isi language mein aayenge; URLs saaf English rehte hain. Blank/English = purana behavior.</div>
+
     <label for="seed_keywords" id="seed-label">Seed keywords</label>
     <textarea id="seed_keywords" name="seed_keywords" required placeholder="ac repair dubai, ac not cooling, ac service dubai"></textarea>
     <div class="hint" id="seed-hint">Comma-separated. 3–6 seed terms works well. Tip: include your city in a few seeds for local data.</div>
@@ -341,7 +358,7 @@
     <p class="sg-sub">Get the first step right and everything downstream — scoring, ad groups, SEO clusters, website content — comes out right on its own. Give <b>3–6 seed keywords, one from each pattern</b> shown on the card. Click <b>Use template</b> to fill the form (niche, location, seeds, deliverable type), then adjust it for your business.</p>
 
     <div class="sg-check" style="margin-bottom:22px">
-      <b>Every run, 5 rules:</b> 3–6 seeds &nbsp;·&nbsp; no brand names &nbsp;·&nbsp; no single generic words ("cleaning" ❌ → "sofa cleaning dubai" ✅) &nbsp;·&nbsp; one language per run (do a separate Arabic run — the data comes back in Arabic too) &nbsp;·&nbsp; location as free text ("Lahore, Pakistan", or "N/A" for worldwide) — the geo target resolves automatically
+      <b>Every run, 5 rules:</b> 3–6 seeds &nbsp;·&nbsp; no brand names &nbsp;·&nbsp; no single generic words ("cleaning" ❌ → "sofa cleaning dubai" ✅) &nbsp;·&nbsp; one language per run — pick it in the <b>Language</b> dropdown and give seeds in that language (data, ad groups & landing pages all come back in it; URLs stay English) &nbsp;·&nbsp; location as free text ("Lahore, Pakistan", or "N/A" for worldwide) — the geo target resolves automatically
     </div>
 
     <div class="sg-section">The 5 deliverable modes — every pipeline explained</div>

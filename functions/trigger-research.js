@@ -73,12 +73,21 @@ export async function onRequestPost(context) {
   const workflowFile = isMode3 ? "mode3_plan.yml" : "keyword_pipeline.yml";
   const dispatchUrl = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/actions/workflows/${workflowFile}/dispatches`;
 
+  // Content language CODE (es/fr/de/ar/...). "no"/blank = English (unchanged).
+  // Whitelisted so a junk value can't reach the workflow.
+  const LANG_CODES = ["no", "en", "ar", "es", "fr", "de", "it", "pt", "nl",
+                      "tr", "ru", "ur", "hi", "zh", "ja", "ko", "pl", "sv",
+                      "id", "th", "vi", "el", "ro", "cs", "hu"];
+  const language = LANG_CODES.includes(String(body.language || "").toLowerCase())
+    ? String(body.language).toLowerCase() : "no";
+
   const inputs = isMode3
     ? {
         business_name: String(business_name).slice(0, 200),
         niche_description: String(niche_description).slice(0, 500),
         target_location: String(target_location).slice(0, 200),
         services_mode3: String(seed_keywords).slice(0, 4000),
+        language,
         request_id,
       }
     : {
@@ -86,6 +95,7 @@ export async function onRequestPost(context) {
         niche_description: String(niche_description).slice(0, 500),
         target_location: String(target_location).slice(0, 200),
         seed_keywords: String(seed_keywords).slice(0, 1000),
+        language,
         // Deliverable selector: google_ads | seo | both
         research_type: ["google_ads", "seo", "both"].includes(body.research_type)
           ? body.research_type : "google_ads",

@@ -26,8 +26,12 @@ on:
         description: "OPTIONAL: explicit Google geo target id — blank = auto-resolve"
         required: false
         default: ''
+      language:
+        description: "Content language CODE (es/fr/de/ar/...) — Planner language + questions/answers in this language. Blank = auto. MUST match the website builder's language."
+        required: false
+        default: ''
       language_id:
-        description: "OPTIONAL: explicit Google language id — blank = auto-detect"
+        description: "OPTIONAL: explicit numeric Google language id (overrides 'language') — blank = auto"
         required: false
         default: ''
       request_id:
@@ -75,6 +79,7 @@ jobs:
           TARGET_LOCATION: ${{ github.event.inputs.target_location }}
           LOCATION_ID: ${{ github.event.inputs.location_id }}
           LANGUAGE_ID: ${{ github.event.inputs.language_id }}
+          LANGUAGE: ${{ github.event.inputs.language }}
           SERVICES_MODE3: ${{ github.event.inputs.services_mode3 }}
         run: python scripts/generate_mode3_plan.py
 
