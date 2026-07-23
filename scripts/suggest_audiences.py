@@ -131,12 +131,9 @@ SEARCH-CAMPAIGN BEST PRACTICE (follow strictly):
    Google's recommended Search setup. Use "ad_group" ONLY when a segment
    maps to exactly ONE ad group's theme (e.g. "Home Cleaning Services"
    segment → the deep-cleaning ad group, not the whole account).
-3. MODE: default "observation" (never restricts reach; enables bid
-   adjustments). Recommend "targeting" (narrowing) for AT MOST 1-2
-   ultra-high-intent IN_MARKET segments, and only if the niche is premium /
-   budget-sensitive.
-4. bid_adjustment: observation segments get +10 to +30 (%) based on intent
-   strength; "targeting" rows get 0. Never negative here.
+3. MODE: ALWAYS "observation" — never "targeting". On Search, targeting mode
+   restricts the campaign to only those segments and kills impressions.
+4. bid_adjustment: +10 to +30 (%) based on intent strength. Never negative here.
 5. negative: 5-8 segments that attract WRONG clicks for this business:
    job seekers (Employment), students/education for non-education niches,
    DIY-leaning segments, bargain hunters for premium services, business
@@ -212,7 +209,12 @@ def validate_plan(raw, by_type, strategy):
         camp = str(a.get("campaign", "")).strip()
         if camp not in camp_set:
             camp = default_campaign
-        mode = a.get("mode") if a.get("mode") in ("observation", "targeting") else "observation"
+        # SEARCH = OBSERVATION ONLY (Jul 2026): a single "targeting" audience
+        # narrows the whole campaign to that segment — the Glass Partition
+        # Dubai push served ads ONLY to 14 segments and got zero impressions.
+        # Narrowing is a Display/remarketing tactic; for Search we never
+        # restrict reach, so every positive audience is forced to observation.
+        mode = "observation"
         try:
             adj = int(float(a.get("bid_adjustment", 0) or 0))
         except (TypeError, ValueError):

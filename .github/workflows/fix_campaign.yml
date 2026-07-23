@@ -1,0 +1,41 @@
+name: Fix Campaign (audiences -> Observation + kw suffix)
+
+# One-shot repair for campaigns pushed BEFORE the Jul-2026 fix: flips all
+# attached audiences from Targeting (narrowed reach, zero impressions) to
+# Observation, and sets final_url_suffix=kw={keyword} for the landing
+# pages' ?kw= H1 message-match swap.
+
+on:
+  workflow_dispatch:
+    inputs:
+      push_customer_id:
+        description: "Target Google Ads customer id (digits only)"
+        required: true
+      campaign_name:
+        description: "Exact campaign name (e.g. Glass Partitions Dubai)"
+        required: true
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install google-ads
+
+      - name: Flip audiences to Observation + set kw suffix
+        env:
+          GOOGLE_ADS_DEVELOPER_TOKEN: ${{ secrets.GOOGLE_ADS_DEVELOPER_TOKEN }}
+          GOOGLE_ADS_CLIENT_ID: ${{ secrets.GOOGLE_ADS_CLIENT_ID }}
+          GOOGLE_ADS_CLIENT_SECRET: ${{ secrets.GOOGLE_ADS_CLIENT_SECRET }}
+          GOOGLE_ADS_REFRESH_TOKEN: ${{ secrets.GOOGLE_ADS_REFRESH_TOKEN }}
+          GOOGLE_ADS_LOGIN_CUSTOMER_ID: ${{ secrets.GOOGLE_ADS_LOGIN_CUSTOMER_ID || secrets.GOOGLE_ADS_CUSTOMER_ID }}
+          GOOGLE_ADS_USE_PROTO_PLUS: "true"
+          PUSH_CUSTOMER_ID: ${{ github.event.inputs.push_customer_id }}
+          CAMPAIGN_NAME: ${{ github.event.inputs.campaign_name }}
+        run: python scripts/fix_audience_observation.py

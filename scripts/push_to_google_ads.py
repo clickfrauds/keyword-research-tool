@@ -128,6 +128,20 @@ def main():
         client.enums.PositiveGeoTargetTypeEnum.PRESENCE      # "People in" only
     c.geo_target_type_setting.negative_geo_target_type = \
         client.enums.NegativeGeoTargetTypeEnum.PRESENCE
+    # AUDIENCES = OBSERVATION, NEVER NARROWING (Jul 2026 fix): without this,
+    # every positive audience criterion attaches in TARGETING mode by API
+    # default — "You're showing ads only to the audiences below" — and the
+    # campaign serves ONLY to those in-market/affinity segments (the
+    # zero-impressions bug on the Glass Partition Dubai push). bid_only=True
+    # = Observation: full reach, audiences just enable bid adjustments.
+    _tr = client.get_type("TargetRestriction")
+    _tr.targeting_dimension = client.enums.TargetingDimensionEnum.AUDIENCE
+    _tr.bid_only = True
+    c.targeting_setting.target_restrictions.append(_tr)
+    # Landing-page DKI: kw={keyword} suffix campaign-wide so every RSA click
+    # carries its bid keyword — the Mode 1 pages' ?kw= H1 message-match swap
+    # runs on this. Was a manual step in the report; now set automatically.
+    c.final_url_suffix = "kw={keyword}"
     # Required since the EU political-ads regulation (API rejects campaign
     # creation without it — hit on first live push, Jul 2026). Our campaigns
     # are local-service ads, never EU political advertising.

@@ -60,7 +60,7 @@ N_HEADLINES, N_DESCRIPTIONS = 15, 4
 # keyword cols → location cols → ad cols → status.
 HEADER = (
     ["Campaign", "Campaign Type", "Networks", "Budget", "Budget type",
-     "Bid Strategy Type", "Enhanced CPC", "Campaign Status",
+     "Bid Strategy Type", "Enhanced CPC", "Final URL suffix", "Campaign Status",
      "Ad Group", "Ad Group Type", "Ad Group Status", "Max CPC",
      "Keyword", "Criterion Type", "ID", "Location", "Bid Modifier",
      "Audience", "Flexible Reach", "Type", "Ad type"]
@@ -107,6 +107,9 @@ def main():
                 "Budget": DAILY_BUDGET, "Budget type": "Daily",
                 "Bid Strategy Type": "Manual CPC",
                 "Enhanced CPC": "Disabled",
+                # landing-page DKI: every click carries its bid keyword so the
+                # Mode 1 pages' ?kw= H1 message-match swap works automatically
+                "Final URL suffix": "kw={keyword}",
                 "Campaign Status": "Paused",
             }))
 
