@@ -353,6 +353,31 @@ def _norm_sig(kw):
     return tuple(sorted(set(re.findall(r"[^\W_]+", str(kw).lower(), re.UNICODE))))
 
 
+def _stem(t):
+    """Light morphological stem so singular/plural/verb-form variants of the
+    SAME theme word can never end up as that group's own negative (Jul 2026:
+    the shower-partition group shipped with negative "partitions" while its
+    keywords said "partition" — every plural query self-blocked; same for
+    handrail/handrails, install/installers/installation). English-suffix only;
+    non-Latin tokens pass through untouched."""
+    if len(t) <= 3:
+        return t
+    # pass 1: plurals (partitions→partition, cubicles→cubicle, companies→company)
+    if t.endswith("ies") and len(t) >= 6:
+        t = t[:-3] + "y"
+    elif (t.endswith(("ses", "xes", "zes", "ches", "shes")) and len(t) >= 6):
+        t = t[:-2]          # true -es plurals: glasses→glass, boxes→box
+    elif t.endswith("s") and not t.endswith("ss") and len(t) >= 5:
+        t = t[:-1]          # cubicles→cubicle, doors→door
+    # pass 2: derivational forms → shared root (installation/installer/
+    # installing → install). Over-merging is SAFE here: a dropped negative
+    # costs nothing, a self-blocking negative kills the group's serving.
+    for suf in ("ation", "ing", "er"):
+        if t.endswith(suf) and len(t) - len(suf) >= 4:
+            return t[: len(t) - len(suf)]
+    return t
+
+
 def validate_strategy(raw, kept):
     by_id = {k["id"]: k for k in kept}
     provided_sigs = {_norm_sig(k["keyword"]) for k in kept}
@@ -436,6 +461,11 @@ def validate_strategy(raw, kept):
                      + expansions)
         own_tokens = {t for txt in own_texts
                       for t in re.findall(r"[^\W_]+", str(txt).lower(), re.UNICODE)}
+        # STEM-level self check (Jul 2026): "partitions" vs own "partition",
+        # "handrails" vs own "handrail", "installers" vs own "installation" —
+        # token-exact comparison shipped negatives that blocked the group's
+        # own plural/verb-form queries.
+        own_stems = {_stem(t) for t in own_tokens}
         own_blob = " | ".join(str(t).lower() for t in own_texts)
         negatives, dropped_negs = [], []
         for n in g.get("negative_keywords", []):
@@ -443,9 +473,10 @@ def validate_strategy(raw, kept):
             if not n:
                 continue
             n_toks = re.findall(r"[^\W_]+", n, re.UNICODE)
-            if ((len(n_toks) == 1 and n_toks and n_toks[0] in own_tokens)
+            if ((len(n_toks) == 1 and n_toks and _stem(n_toks[0]) in own_stems)
                     or (len(n_toks) > 1
-                        and re.search(r"(^|[\s|])" + re.escape(n) + r"([\s|]|$)", own_blob))):
+                        and (re.search(r"(^|[\s|])" + re.escape(n) + r"([\s|]|$)", own_blob)
+                             or all(_stem(t) in own_stems for t in n_toks)))):
                 dropped_negs.append(n)
                 continue
             negatives.append(n)
@@ -527,16 +558,23 @@ def validate_strategy(raw, kept):
 
     if len(groups) > 1:
         tok_sets = {g["name"]: _group_tokens(g) for g in groups}
+        # Ownership at STEM level (Jul 2026): "partition" (shower group) and
+        # "partitions" (office group) are the same theme word — token-exact
+        # ownership called "partitions" distinctive-to-office and handed it to
+        # the shower group as a negative, blocking its own plural queries.
+        stem_sets = {name: {_stem(t) for t in toks} for name, toks in tok_sets.items()}
         owners = {}
         for _name, _toks in tok_sets.items():
             for _t in _toks:
-                owners.setdefault(_t, set()).add(_name)
-        distinctive = {name: {t for t in toks if len(owners[t]) == 1}
+                owners.setdefault(_stem(_t), set()).add(_name)
+        distinctive = {name: {t for t in toks if owners[_stem(t)] == {name}}
                        for name, toks in tok_sets.items()}
         for g in groups:
             auto = sorted(
-                set().union(*(distinctive[o] for o in tok_sets if o != g["name"]))
-                - set(g["negative_keywords"]) - tok_sets[g["name"]])
+                t for t in set().union(
+                    *(distinctive[o] for o in tok_sets if o != g["name"]))
+                - set(g["negative_keywords"])
+                if _stem(t) not in stem_sets[g["name"]])
             if auto:
                 g["negative_keywords"] = g["negative_keywords"] + auto
                 g["auto_silo_negatives"] = auto
