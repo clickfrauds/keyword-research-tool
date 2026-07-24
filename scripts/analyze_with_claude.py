@@ -656,7 +656,56 @@ def validate_strategy(raw, kept):
             g["campaign"] = single
         print(f"🎯 Single-campaign mode: all {len(groups)} ad groups under '{single}'")
 
+    _normalize_bids(groups)
     return campaigns, groups, pages, uncovered_groups, sorted(excluded), unassigned, negatives_for_existing
+
+
+def _normalize_bids(groups):
+    """Two real bugs the Keyword Planner data causes (seen in the SEOBlogy UAE
+    push, Jul 2026):
+      1. LOW-VOLUME groups get NO top-of-page bid from the Planner → suggest_bids
+         returns None → the ad group's median bid is empty → Google lands it at
+         the account minimum (~PKR 1) → BELOW first-page bid → ZERO impressions.
+      2. One outlier keyword ("google display advertising") comes back with a
+         huge Planner bid → an ad-group default like PKR 86,129 → budget-burn.
+    Fix: compute the CAMPAIGN-WIDE median from the groups that DO have bids;
+    backfill every no-bid keyword with it (so every group can serve), and CAP
+    any bid above a sane ceiling. Currency-agnostic — works on whatever units
+    suggest_bids already produced. No-op if nothing had a bid."""
+    bid_keys = ("suggested_bid", "suggested_bid_exact",
+                "suggested_bid_phrase", "suggested_bid_broad")
+    all_bids = sorted(k["suggested_bid"] for g in groups for k in g["keywords"]
+                      if k.get("suggested_bid"))
+    if not all_bids:
+        print("   ⚠️ Bid guard: Planner returned NO bid data for ANY keyword — "
+              "ad groups will need manual Max CPC in the account.")
+        return
+    n = len(all_bids)
+    g_med = all_bids[n // 2]
+    # Ceiling from the MEDIAN (robust to the outlier itself — a p90/max-based
+    # cap fails because the outlier IS the max). 5x median allows genuinely
+    # competitive keywords through while taming a 15x freak bid.
+    ceiling = round(g_med * 5, 2)
+    n_fill = n_cap = 0
+    for g in groups:
+        for k in g["keywords"]:
+            b = k.get("suggested_bid")
+            if not b:
+                # group/keyword had no Planner bid → campaign median so it serves
+                for bk in bid_keys:
+                    k[bk] = g_med
+                k["bid_source"] = "campaign_median_fallback"
+                n_fill += 1
+            elif b > ceiling:
+                for bk in bid_keys:
+                    if k.get(bk) and k[bk] > ceiling:
+                        k[bk] = ceiling
+                k["bid_source"] = "capped_outlier"
+                n_cap += 1
+    if n_fill or n_cap:
+        print(f"   💰 Bid guard: campaign median={g_med}, ceiling={ceiling} | "
+              f"{n_fill} no-bid keywords back-filled (would have been ~min bid / "
+              f"zero impressions), {n_cap} outliers capped")
 
 
 # ══════════════════════════════════════════════════════════════════════════
