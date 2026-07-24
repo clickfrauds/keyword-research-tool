@@ -552,6 +552,8 @@ def main():
         "business": {"name": BUSINESS_NAME, "niche": NICHE_DESCRIPTION,
                      "location": TARGET_LOCATION},
         "model_used": MODEL,
+        # Builder reads this to auto-match its language (set language once here).
+        "language": CONTENT_LANGUAGE or "",
         "notes": str(raw.get("notes", "")).strip(),
         "mode4_cluster": mode4,
         "mode3_full_website": mode3,

@@ -401,6 +401,9 @@ def main():
         "business": {"name": BUSINESS_NAME, "niche": NICHE_DESCRIPTION,
                      "location": TARGET_LOCATION},
         "model_used": MODEL,
+        # The website builder reads this to auto-match its own language, so you
+        # only pick the language ONCE (here). Blank = English.
+        "language": CONTENT_LANGUAGE or "",
         "mode3_site_plan": {
             "industry_label": NICHE_DESCRIPTION[:40],
             "categories": plan_categories,
