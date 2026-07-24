@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEOBlogy</title>
+<style>
+  :root {
+    --ink: #14181c;
+    --muted: #6b6560;
+    --line: #dcdad3;
+    --paper: #fdfcfa;
+    --bg: #f6f5f2;
+    --accent: #0b5d5a;
+    --accent-soft: #e3f0ef;
+    --mono: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Menlo, Consolas, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    line-height: 1.55;
+  }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 36px 20px 70px; }
+  header {
+    position: relative;
+    border-bottom: 2px dashed var(--line);
+    padding-bottom: 22px;
+    margin-bottom: 30px;
+  }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  header h1 { font-size: 26px; margin: 0 0 6px; }
+  header .subtitle { color: var(--muted); font-size: 14px; }
+  header .generated { font-family: var(--mono); color: var(--muted); font-size: 11px; margin-top: 12px; }
+  .stamp {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    line-height: 1.3;
+    text-align: center;
+    color: var(--accent);
+    border: 2px solid var(--accent);
+    border-radius: 6px;
+    padding: 6px 10px;
+    transform: rotate(4deg);
+  }
+  .stat-bar { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 36px; }
+  .stat {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 12px 16px;
+    flex: 1;
+    min-width: 110px;
+    text-align: center;
+  }
+  .stat-num { font-family: var(--mono); font-size: 20px; font-weight: 700; color: var(--accent); }
+  .stat-label { font-size: 11px; color: var(--muted); margin-top: 3px; }
+  section { margin-bottom: 40px; }
+  section > h2 {
+    font-family: var(--mono);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 9px;
+    margin-bottom: 16px;
+  }
+  .card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    padding: 16px 18px;
+    margin-bottom: 12px;
+  }
+  .card-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; flex-wrap: wrap; }
+  .card h3 { margin: 0; font-size: 15px; }
+  .badges { display: flex; gap: 6px; flex-wrap: wrap; }
+  .badge { font-family: var(--mono); font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 4px; white-space: nowrap; }
+  .intent-badge { background: var(--accent-soft); color: var(--accent); }
+  .meta-line { font-size: 13px; color: var(--muted); margin-top: 7px; }
+  .reasoning { font-size: 14px; margin-top: 9px; margin-bottom: 0; }
+  .ad-preview { margin-top: 11px; background: var(--bg); border: 1px dashed var(--line); border-radius: 6px; padding: 10px 13px; }
+  .ad-headline { color: #1a0dab; font-size: 14px; font-weight: 600; }
+  .ad-description { color: #4d5156; font-size: 13px; margin-top: 3px; }
+  .faq { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 11px 15px; margin-bottom: 7px; }
+  .faq summary { cursor: pointer; font-weight: 600; font-size: 14px; }
+  .faq summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .faq p { font-size: 14px; color: var(--muted); margin: 9px 0 2px; }
+  .chip-wrap { display: flex; flex-wrap: wrap; gap: 7px; }
+  .chip { background: var(--accent-soft); color: var(--accent); font-size: 12px; padding: 5px 11px; border-radius: 999px; }
+  .empty { color: var(--muted); font-style: italic; font-size: 14px; }
+  .campaign-block { margin-bottom: 26px; }
+  .campaign-head { font-family: var(--mono); font-size: 13px; font-weight: 700; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+  .kw-vol { color: var(--muted); font-size: 11px; }
+  .neg-line { color: #9c2b1f; }
+  footer { text-align: center; font-family: var(--mono); color: var(--muted); font-size: 11px; margin-top: 56px; }
+  @media (max-width: 480px) {
+    .stamp { position: static; display: inline-block; margin-top: 12px; transform: rotate(-1deg); }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="eyebrow">Keyword Strategy Report</div>
+    <h1>SEOBlogy</h1>
+    <div class="subtitle">Google Ads campaign setup and management service that builds keyword-researched campaigns — ad groups, RSA ad copy, negative-keyword protection and matching landing pages — and pushes them live into a client&#x27;s account via API. Done-for-you PPC for service businesses. &middot; United Arab Emirates</div>
+    <div class="generated">Generated 24 Jul 2026, 07:50 UTC</div>
+    <div class="stamp">2 HIGH<br>PRIORITY</div>
+  </header>
+
+  <div class="stat-bar"><div class="stat"><div class="stat-num">73</div><div class="stat-label">Keywords Analyzed</div></div><div class="stat"><div class="stat-num">1</div><div class="stat-label">Campaigns</div></div><div class="stat"><div class="stat-num">5</div><div class="stat-label">Ad Groups</div></div><div class="stat"><div class="stat-num">55</div><div class="stat-label">Keywords</div></div><div class="stat"><div class="stat-num">39</div><div class="stat-label">Intent Expansions</div></div><div class="stat"><div class="stat-num">5</div><div class="stat-label">Landing Pages</div></div></div>
+
+  
+  <section>
+    <h2>Campaign &amp; Ad Group Structure</h2>
+    
+    <div class="campaign-block">
+      <div class="campaign-head">📣 Campaign: Core PPC Services - UAE <span class="badge" style="color:#92400e;background:#fef0dc">HIGH</span></div>
+      
+        <div class="card">
+          <div class="card-head">
+            <h3>Google Local Services Ads (LSA)</h3>
+            <div class="badges"><span class="badge" style="color:#92400e;background:#fef0dc">HIGH</span><span class="badge intent-badge">PHRASE</span></div>
+          </div>
+          <p class="reasoning">Buyers searching specifically for Google Local Services Ads / LSA setup and management.</p>
+          <div class="meta-line">Volume: <strong>270/mo</strong> &middot; Avg score: <strong>93.3</strong> &middot; 13 keywords</div>
+          <div class="meta-line">Keywords: local services ads <span class='kw-vol'>(50)</span>, google local ads <span class='kw-vol'>(50)</span>, google local advertising <span class='kw-vol'>(50)</span>, google local service ads <span class='kw-vol'>(30)</span>, local services ads google <span class='kw-vol'>(10)</span>, local services ads by google <span class='kw-vol'>(10)</span>, google local ad services <span class='kw-vol'>(10)</span>, local search ad <span class='kw-vol'>(10)</span>, google local service <span class='kw-vol'>(10)</span>, google local search ads <span class='kw-vol'>(10)</span>, local search ads on google maps <span class='kw-vol'>(10)</span>, ads google com local services ads <span class='kw-vol'>(10)</span>, google local leads <span class='kw-vol'>(10)</span></div>
+          <div class='meta-line'>🆕 Intent expansions:</div><div class='chip-wrap'><span class="chip">local services ads dubai cost</span><span class="chip">get listed on google local services ads uae</span><span class="chip">google local services ads setup dubai</span><span class="chip">local service ads management abu dhabi</span><span class="chip">google local ads pricing uae</span><span class="chip">local services ads for contractors dubai</span><span class="chip">google map ads management uae</span><span class="chip">google local services ads verification uae</span></div>
+          <div class='meta-line neg-line'>🚫 Negatives (anti-cannibalization): agency, hire, consultant, expert, guaranteed, shopping, display, law firm, real estate, cleaning business, construction, moving, junk removal, small business management, ppc campaign setup, marketing firm, account, adwords, agents, application, audit, badge, cleaning, control, dedicated, dentists, design, ecommerce, estate, help, how, hvac, interior, junk, landscaping, law, logistics, marketing, monthly, network, package, pest, real, recommended, removal, restaurants, retail, salons, screened, small, specialist, stores</div>
+        </div>
+        <div class="card">
+          <div class="card-head">
+            <h3>Hire a Google Ads / PPC Agency</h3>
+            <div class="badges"><span class="badge" style="color:#92400e;background:#fef0dc">HIGH</span><span class="badge intent-badge">PHRASE</span></div>
+          </div>
+          <p class="reasoning">Business owners looking to hire or compare a Google Ads / PPC management agency or specialist.</p>
+          <div class="meta-line">Volume: <strong>370/mo</strong> &middot; Avg score: <strong>62.3</strong> &middot; 26 keywords</div>
+          <div class="meta-line">Keywords: agency google adwords <span class='kw-vol'>(20)</span>, google ads companies <span class='kw-vol'>(30)</span>, google ad agency <span class='kw-vol'>(50)</span>, google ads management company <span class='kw-vol'>(10)</span>, google ads services agency <span class='kw-vol'>(10)</span>, google adwords management company <span class='kw-vol'>(10)</span>, hire adwords expert <span class='kw-vol'>(10)</span>, hire adwords professional <span class='kw-vol'>(10)</span>, hire dedicated adwords expert <span class='kw-vol'>(10)</span>, hire google adwords expert <span class='kw-vol'>(10)</span>, hire a google ads specialist <span class='kw-vol'>(10)</span>, hire a google adwords consultant <span class='kw-vol'>(10)</span>, hire adwords specialist <span class='kw-vol'>(10)</span>, adwords agency near me <span class='kw-vol'>(10)</span>, google ads marketing agency near me <span class='kw-vol'>(10)</span>, google marketing firm <span class='kw-vol'>(10)</span>, adwords management companies <span class='kw-vol'>(10)</span>, google adwords advertising agency <span class='kw-vol'>(10)</span>, google ppc advertising agency <span class='kw-vol'>(10)</span>, ppc campaign setup <span class='kw-vol'>(10)</span>, google ad company <span class='kw-vol'>(30)</span>, google adwords company <span class='kw-vol'>(30)</span>, adwords companies <span class='kw-vol'>(10)</span>, recommended google marketing companies <span class='kw-vol'>(10)</span>, adwords marketing agency <span class='kw-vol'>(10)</span>, ppc online advertising <span class='kw-vol'>(10)</span></div>
+          <div class='meta-line'>🆕 Intent expansions:</div><div class='chip-wrap'><span class="chip">google ads management dubai cost</span><span class="chip">best ppc agency in dubai</span><span class="chip">google ads campaign setup uae</span><span class="chip">hire ppc expert dubai</span><span class="chip">google ads management pricing uae</span><span class="chip">ppc agency for service businesses dubai</span><span class="chip">google ads account audit dubai</span><span class="chip">affordable google ads management uae</span><span class="chip">google ads agency abu dhabi</span><span class="chip">monthly google ads management package uae</span></div>
+          <div class='meta-line neg-line'>🚫 Negatives (anti-cannibalization): local services ads, google guaranteed, google screened, shopping, display, real estate, cleaning business, construction, moving, junk removal, law firm, agents, application, badge, cleaning, com, contractors, control, dentists, design, ecommerce, estate, guaranteed, help, how, hvac, interior, junk, landscaping, law, leads, listed, local, logistics, map, maps, network, pest, real, removal, restaurants, retail, salons, screened, search, small, stores, verification</div>
+        </div>
+        <div class="card">
+          <div class="card-head">
+            <h3>Industry-Specific Google Ads</h3>
+            <div class="badges"><span class="badge" style="color:#6b5a3a;background:#f2ede0">MEDIUM</span><span class="badge intent-badge">PHRASE</span></div>
+          </div>
+          <p class="reasoning">Vertical-specific business owners (law, real estate, cleaning, construction, moving, junk removal) searching for Google Ads tailored to their industry.</p>
+          <div class="meta-line">Volume: <strong>90/mo</strong> &middot; Avg score: <strong>53.5</strong> &middot; 9 keywords</div>
+          <div class="meta-line">Keywords: google ads for law firms <span class='kw-vol'>(10)</span>, google ads for service business <span class='kw-vol'>(10)</span>, google ads for cleaning business <span class='kw-vol'>(10)</span>, google ads for real estate agents <span class='kw-vol'>(10)</span>, google ads for construction companies <span class='kw-vol'>(10)</span>, google ads for moving companies <span class='kw-vol'>(10)</span>, google ads management for small business <span class='kw-vol'>(10)</span>, google ads for junk removal <span class='kw-vol'>(10)</span>, google ads for estate agents <span class='kw-vol'>(10)</span></div>
+          <div class='meta-line'>🆕 Intent expansions:</div><div class='chip-wrap'><span class="chip">google ads for restaurants dubai</span><span class="chip">google ads for hvac companies uae</span><span class="chip">google ads for dentists dubai</span><span class="chip">ppc for interior design companies uae</span><span class="chip">google ads for logistics companies dubai</span><span class="chip">google ads for salons uae</span><span class="chip">google ads for pest control dubai</span><span class="chip">google ads for landscaping companies uae</span></div>
+          <div class='meta-line neg-line'>🚫 Negatives (anti-cannibalization): local services ads, agency, hire, guaranteed, shopping, display, near me, account, adwords, application, audit, badge, com, consultant, contractors, dedicated, ecommerce, help, how, leads, listed, local, map, maps, marketing, monthly, network, package, recommended, retail, screened, search, specialist, stores, verification</div>
+        </div>
+        <div class="card">
+          <div class="card-head">
+            <h3>Google Guaranteed Program Setup</h3>
+            <div class="badges"><span class="badge" style="color:#6b5a3a;background:#f2ede0">MEDIUM</span><span class="badge intent-badge">PHRASE</span></div>
+          </div>
+          <p class="reasoning">Businesses researching the Google Guaranteed / Google Screened badge program.</p>
+          <div class="meta-line">Volume: <strong>30/mo</strong> &middot; Avg score: <strong>62.0</strong> &middot; 3 keywords</div>
+          <div class="meta-line">Keywords: google guaranteed <span class='kw-vol'>(10)</span>, google guaranteed ads <span class='kw-vol'>(10)</span>, google guaranteed business <span class='kw-vol'>(10)</span></div>
+          <div class='meta-line'>🆕 Intent expansions:</div><div class='chip-wrap'><span class="chip">google guaranteed badge dubai</span><span class="chip">google screened businesses uae</span><span class="chip">how to get google guaranteed in uae</span><span class="chip">google guaranteed cost dubai</span><span class="chip">google guaranteed application help uae</span><span class="chip">google guaranteed setup service dubai</span></div>
+          <div class='meta-line neg-line'>🚫 Negatives (anti-cannibalization): local services ads, agency, shopping, display, law firm, real estate, cleaning business, construction, moving, junk removal, account, adwords, agents, audit, cleaning, com, consultant, contractors, control, dedicated, dentists, design, ecommerce, estate, hvac, interior, junk, landscaping, law, leads, listed, local, logistics, map, maps, marketing, monthly, network, package, pest, real, recommended, removal, restaurants, retail, salons, search, small, specialist, stores, verification</div>
+        </div>
+        <div class="card">
+          <div class="card-head">
+            <h3>Shopping &amp; Display Ads Management</h3>
+            <div class="badges"><span class="badge" style="color:#6b5a3a;background:#f2ede0">MEDIUM</span><span class="badge intent-badge">PHRASE</span></div>
+          </div>
+          <p class="reasoning">Businesses looking to run Google Shopping or Display network campaigns rather than search ads.</p>
+          <div class="meta-line">Volume: <strong>100/mo</strong> &middot; Avg score: <strong>60.4</strong> &middot; 4 keywords</div>
+          <div class="meta-line">Keywords: google shopping management company <span class='kw-vol'>(10)</span>, google shopping ads agency <span class='kw-vol'>(10)</span>, google display advertising companies <span class='kw-vol'>(70)</span>, google display advertising agency <span class='kw-vol'>(10)</span></div>
+          <div class='meta-line'>🆕 Intent expansions:</div><div class='chip-wrap'><span class="chip">google shopping ads management dubai</span><span class="chip">display ads agency uae</span><span class="chip">google shopping campaign setup dubai</span><span class="chip">ecommerce ppc management uae</span><span class="chip">google display network ads dubai cost</span><span class="chip">retail google ads management uae</span><span class="chip">shopping ads for online stores dubai</span></div>
+          <div class='meta-line neg-line'>🚫 Negatives (anti-cannibalization): local services ads, guaranteed, hire, law firm, real estate, cleaning business, construction, moving, junk removal, account, adwords, agents, application, audit, badge, cleaning, com, consultant, contractors, control, dedicated, dentists, design, estate, help, how, hvac, interior, junk, landscaping, law, leads, listed, local, logistics, map, maps, marketing, monthly, package, pest, real, recommended, removal, restaurants, salons, screened, search, small, specialist, verification</div>
+        </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Landing Pages (website generator inputs)</h2>
+    
+        <div class="card">
+          <div class="card-head">
+            <h3>Local Services Ads Management</h3>
+            <span class="badge intent-badge">/google-local-services-ads-management/</span>
+          </div>
+          <div class="meta-line">Main service: <strong>Local Services Ads Management</strong> &middot; Industry: PPC Advertising Agency</div>
+          <div class="meta-line">Sub-services (page sections): LSA Profile Setup, Google Screened Verification, Lead Quality Optimization, Budget Management, Review Growth Strategy, Local Ranking Boost</div>
+          <div class="meta-line">Covers ad groups: Google Local Services Ads (LSA)</div>
+        </div>
+        <div class="card">
+          <div class="card-head">
+            <h3>Google Ads Campaign Management</h3>
+            <span class="badge intent-badge">/google-ads-campaign-management-uae/</span>
+          </div>
+          <div class="meta-line">Main service: <strong>Google Ads Campaign Management</strong> &middot; Industry: PPC Advertising Agency</div>
+          <div class="meta-line">Sub-services (page sections): Keyword Research, RSA Ad Copywriting, Negative Keyword Protection, Landing Page Matching, Conversion Tracking Setup, Monthly Performance Reporting</div>
+          <div class="meta-line">Covers ad groups: Hire a Google Ads / PPC Agency</div>
+        </div>
+        <div class="card">
+          <div class="card-head">
+            <h3>Industry-Specific Google Ads</h3>
+            <span class="badge intent-badge">/google-ads-for-service-businesses/</span>
+          </div>
+          <div class="meta-line">Main service: <strong>Industry-Specific Google Ads Campaigns</strong> &middot; Industry: Service Business Marketing</div>
+          <div class="meta-line">Sub-services (page sections): Real Estate Ads, Construction Ads, Cleaning Business Ads, Moving Company Ads, Law Firm Ads, Junk Removal Ads</div>
+          <div class="meta-line">Covers ad groups: Industry-Specific Google Ads</div>
+        </div>
+        <div class="card">
+          <div class="card-head">
+            <h3>Google Guaranteed Setup Service</h3>
+            <span class="badge intent-badge">/google-guaranteed-setup-service/</span>
+          </div>
+          <div class="meta-line">Main service: <strong>Google Guaranteed Program Setup</strong> &middot; Industry: PPC Advertising Agency</div>
+          <div class="meta-line">Sub-services (page sections): Eligibility Assessment, Background Screening Support, Badge Application Filing, Profile Optimization, Review Collection Setup, Ongoing Compliance Management</div>
+          <div class="meta-line">Covers ad groups: Google Guaranteed Program Setup</div>
+        </div>
+        <div class="card">
+          <div class="card-head">
+            <h3>Shopping &amp; Display Ads Management</h3>
+            <span class="badge intent-badge">/google-shopping-display-ads-management/</span>
+          </div>
+          <div class="meta-line">Main service: <strong>Shopping &amp; Display Ads Management</strong> &middot; Industry: Ecommerce PPC Advertising</div>
+          <div class="meta-line">Sub-services (page sections): Product Feed Optimization, Shopping Campaign Setup, Display Banner Creative, Remarketing Campaigns, Audience Targeting, Performance Bid Management</div>
+          <div class="meta-line">Covers ad groups: Shopping &amp; Display Ads Management</div>
+        </div>
+  </section>
+
+  <section>
+    <h2>Voice-search / question keywords (SEO content, not ads)</h2>
+    <div class="chip-wrap"><span class="chip">how to set up ppc campaign in google</span><span class="chip">how to set up amazon ppc</span></div>
+  </section>
+
+  <section>
+    <h2>Strategy Notes</h2>
+    <p class="reasoning">Priority is split between high-intent Local Services Ads and general &#x27;hire an agency&#x27; searches, both core money-makers for SEOBlogy&#x27;s done-for-you PPC service in the UAE. Industry-specific and Google Guaranteed searches are grouped as medium-priority adjacent opportunities, while Shopping/Display is kept separate as a lower-priority, distinct product line. Informational, free-seeker, and tool-confusion queries (Ad Manager, cost/hours/credits/free ads) were excluded as non-buyer intent.</p>
+  </section>
+
+  <footer>SEOblogy &middot; Keyword Strategy Report</footer>
+
+</div>
+</body>
+</html>
