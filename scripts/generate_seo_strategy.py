@@ -59,6 +59,22 @@ BUSINESS_NAME = os.environ.get("BUSINESS_NAME", "").strip()
 NICHE_DESCRIPTION = os.environ.get("NICHE_DESCRIPTION", "").strip()
 TARGET_LOCATION = os.environ.get("TARGET_LOCATION", "").strip()
 
+# Content language (Jul 2026): same LANGUAGE code the builder + other stages
+# use, so the SEO content plan (cluster names, questions, answer angles,
+# entities, briefs) comes back in that language. Blank/"en" = English (unchanged).
+CONTENT_LANGUAGE = os.environ.get("LANGUAGE", "").strip().lower()
+_SEO_LANG_NAMES = {
+    "ar": "Arabic", "es": "Spanish", "fr": "French", "de": "German",
+    "it": "Italian", "pt": "Portuguese", "nl": "Dutch", "ru": "Russian",
+    "tr": "Turkish", "hi": "Hindi", "ur": "Urdu", "zh": "Chinese",
+    "ja": "Japanese", "ko": "Korean", "pl": "Polish", "sv": "Swedish",
+    "id": "Indonesian", "th": "Thai", "vi": "Vietnamese", "el": "Greek",
+    "ro": "Romanian", "cs": "Czech", "hu": "Hungarian",
+}
+CONTENT_LANGUAGE = {"no": "", "english": "en", "spanish": "es", "french": "fr",
+                    "german": "de", "arabic": "ar"}.get(CONTENT_LANGUAGE, CONTENT_LANGUAGE)
+CONTENT_LANG_NAME = _SEO_LANG_NAMES.get(CONTENT_LANGUAGE, "") if CONTENT_LANGUAGE not in ("en", "") else ""
+
 
 # ══════════════════════════════════════════════════════════════════════════
 # Robust JSON parsing (same 4-pass repair as the ads stage)
@@ -242,6 +258,18 @@ HARD RULES:
    Keep each name under 60 characters.
 10. NO cluster may have the same name/theme as main_topic — the pillar page
    already covers it. Clusters are its DISTINCT subtopics only.
+"""
+
+if CONTENT_LANG_NAME:
+    SYSTEM_PROMPT += f"""
+OUTPUT LANGUAGE — this site targets a {CONTENT_LANG_NAME}-speaking market:
+- The keyword DATA below is already in {CONTENT_LANG_NAME}; keep provided
+  keywords exactly as given (never translate them).
+- Write ALL generated TEXT in {CONTENT_LANG_NAME}: main_topic, cluster names/
+  themes, questions, answer_angles, entities, content briefs, titles, and any
+  services/city labels. Real {CONTENT_LANG_NAME} customer phrasing.
+- KEEP IN ENGLISH ASCII: every JSON KEY, and any url_slug/slug field (clean
+  URLs even though the page sells in {CONTENT_LANG_NAME}).
 """
 
 

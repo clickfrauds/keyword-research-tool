@@ -224,6 +224,7 @@ jobs:
           BUSINESS_NAME: ${{ github.event.inputs.business_name }}
           NICHE_DESCRIPTION: ${{ github.event.inputs.niche_description }}
           TARGET_LOCATION: ${{ github.event.inputs.target_location }}
+          LANGUAGE: ${{ github.event.inputs.language }}
         run: python scripts/generate_seo_strategy.py
 
       - name: Stage 4 - Generate client-ready HTML + CSV reports
