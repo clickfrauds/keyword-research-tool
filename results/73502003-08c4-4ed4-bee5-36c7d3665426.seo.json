@@ -1,0 +1,1687 @@
+{
+  "business": {
+    "name": "Trusted Handyman Dubai",
+    "niche": "Handyman and painting services in Dubai — wall painting, villa and apartment painting, wallpaper installation and epoxy flooring.",
+    "location": "Dubai, United Arab Emirates"
+  },
+  "model_used": "claude-sonnet-5",
+  "language": "",
+  "notes": "The strategy centers the pillar on the highest-volume broad term 'painting services dubai' while splitting BOFU-heavy service types (villa, apartment, wallpaper, epoxy, wall/door, commercial) into distinct pages to avoid cannibalization. Epoxy flooring and wallpaper installation are treated as separate high-intent service lines since they have unique buyer vocabulary and cost questions, and general 'painter/company' searches are grouped into a broad conversion-focused cluster targeting brand and comparison queries.",
+  "mode4_cluster": {
+    "workflow_inputs": {
+      "main_topic": "Painting Services in Dubai",
+      "problem_clusters": "Painting Services in Dubai :: Apartment and Home Painting, Epoxy Flooring Solutions, Villa Painting Packages, Wallpaper Installation and Fixing, Wall and Door Painting, Commercial and Office Painting"
+    },
+    "pillar_keyword": {
+      "keyword": "painting services dubai",
+      "volume": 2900,
+      "kd": 66,
+      "cpc_low": 1169.83,
+      "cpc_high": 2434.57,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "DECLINING",
+      "peak_months": "Jul",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    "clusters": [
+      {
+        "cluster_name": "Apartment and Home Painting",
+        "funnel": "BOFU",
+        "primary_keyword": {
+          "keyword": "house painting services dubai",
+          "volume": 390,
+          "kd": 81,
+          "cpc_low": 1287.24,
+          "cpc_high": 2682.61,
+          "funnel": "BOFU",
+          "intent": "transactional",
+          "trend": "DECLINING",
+          "peak_months": "Aug/Sep/Nov/Feb",
+          "ai_overview_prone": false,
+          "flags": [
+            "local"
+          ]
+        },
+        "keywords": [
+          {
+            "keyword": "apartment painting services in dubai",
+            "volume": 320,
+            "kd": 71,
+            "cpc_low": 1169.71,
+            "cpc_high": 2428.94,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "DECLINING",
+            "peak_months": "Jul/Aug",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "house painting services dubai",
+            "volume": 390,
+            "kd": 81,
+            "cpc_low": 1287.24,
+            "cpc_high": 2682.61,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "DECLINING",
+            "peak_months": "Aug/Sep/Nov/Feb",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "home painting services in dubai",
+            "volume": 390,
+            "kd": 81,
+            "cpc_low": 1287.24,
+            "cpc_high": 2682.61,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "DECLINING",
+            "peak_months": "Aug/Sep/Nov/Feb",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "home painting dubai",
+            "volume": 90,
+            "kd": 63,
+            "cpc_low": 630.99,
+            "cpc_high": 2286.13,
+            "funnel": "MOFU",
+            "intent": "commercial",
+            "trend": "DECLINING",
+            "peak_months": "Jul/Aug/Oct/Dec/Jan/Feb/Jun",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "apartment painting dubai",
+            "volume": 140,
+            "kd": 79,
+            "cpc_low": 1391.13,
+            "cpc_high": 2670.07,
+            "funnel": "MOFU",
+            "intent": "commercial",
+            "trend": "DECLINING",
+            "peak_months": "Jul/Oct",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "interior painting services in dubai",
+            "volume": 10,
+            "kd": 54,
+            "cpc_low": 1007.62,
+            "cpc_high": 2380.0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "SEASONAL",
+            "peak_months": "Jun",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "interior painting dubai",
+            "volume": 20,
+            "kd": 45,
+            "cpc_low": 1170.29,
+            "cpc_high": 2434.5,
+            "funnel": "MOFU",
+            "intent": "commercial",
+            "trend": "GROWING",
+            "peak_months": "Jun",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "1 bhk painting cost in dubai",
+            "volume": 30,
+            "kd": 84,
+            "cpc_low": 591.26,
+            "cpc_high": 1881.55,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "SEASONAL",
+            "peak_months": "May/Jun",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          }
+        ],
+        "total_volume": 1390,
+        "questions": [
+          {
+            "q": "how much does it cost to paint a 1 bhk apartment in Dubai",
+            "answer_angle": "Give a direct AED price range for 1BHK painting upfront, then breakdown by room.",
+            "type": "conversational"
+          },
+          {
+            "q": "what is the average cost of home painting services in Dubai",
+            "answer_angle": "Provide a per-sqft rate table covering studio, 1BHK, 2BHK, and villa for quick comparison.",
+            "type": "paa"
+          },
+          {
+            "q": "who does interior painting for apartments in Dubai",
+            "answer_angle": "Name the service directly and list interior painting as a core offering with same-day quotes.",
+            "type": "conversational"
+          },
+          {
+            "q": "how do I book a house painter near me in Dubai",
+            "answer_angle": "Include a simple 3-step booking process (call/WhatsApp, inspection, paint) for voice assistants.",
+            "type": "voice"
+          },
+          {
+            "q": "does home painting include furniture covering and cleanup",
+            "answer_angle": "Explicitly confirm furniture protection and post-job cleanup are included in the package.",
+            "type": "conversational"
+          }
+        ],
+        "entities_to_mention": [
+          "1BHK/2BHK/3BHK painting cost",
+          "Low-VOC paint",
+          "Furniture protection",
+          "Same-day painting service",
+          "Emulsion paint"
+        ]
+      },
+      {
+        "cluster_name": "Epoxy Flooring Solutions",
+        "funnel": "MOFU",
+        "primary_keyword": {
+          "keyword": "epoxy flooring dubai",
+          "volume": 480,
+          "kd": 73,
+          "cpc_low": 312.08,
+          "cpc_high": 973.79,
+          "funnel": "MOFU",
+          "intent": "commercial",
+          "trend": "STABLE",
+          "peak_months": "Jul/Aug/Oct/Dec/Jan/Feb/Apr/May",
+          "ai_overview_prone": false,
+          "flags": [
+            "local"
+          ]
+        },
+        "keywords": [
+          {
+            "keyword": "epoxy flooring dubai",
+            "volume": 480,
+            "kd": 73,
+            "cpc_low": 312.08,
+            "cpc_high": 973.79,
+            "funnel": "MOFU",
+            "intent": "commercial",
+            "trend": "STABLE",
+            "peak_months": "Jul/Aug/Oct/Dec/Jan/Feb/Apr/May",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "epoxy flooring price in dubai",
+            "volume": 70,
+            "kd": 90,
+            "cpc_low": 277.06,
+            "cpc_high": 908.96,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "SEASONAL",
+            "peak_months": "Jan",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "epoxy resin flooring dubai",
+            "volume": 10,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "funnel": "MOFU",
+            "intent": "commercial",
+            "trend": "GROWING",
+            "peak_months": "Aug/Sep/Dec/Jan/Feb/Mar/Apr/May/Jun",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "resin flooring dubai",
+            "volume": 30,
+            "kd": 93,
+            "cpc_low": 482.46,
+            "cpc_high": 1113.01,
+            "funnel": "MOFU",
+            "intent": "commercial",
+            "trend": "GROWING",
+            "peak_months": "Jan",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "epoxy floor paint dubai",
+            "volume": 20,
+            "kd": 60,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "funnel": "MOFU",
+            "intent": "commercial",
+            "trend": "GROWING",
+            "peak_months": "Jan/Apr/May",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "epoxy floor dubai",
+            "volume": 20,
+            "kd": 87,
+            "cpc_low": 380.76,
+            "cpc_high": 1316.62,
+            "funnel": "MOFU",
+            "intent": "commercial",
+            "trend": "SEASONAL",
+            "peak_months": "Dec",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "epoxy coating dubai",
+            "volume": 10,
+            "kd": 26,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "funnel": "MOFU",
+            "intent": "commercial",
+            "trend": "SEASONAL",
+            "peak_months": "Jul/Sep/Nov/Dec/Jan/Feb/May/Jun",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "industrial flooring dubai",
+            "volume": 10,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "funnel": "MOFU",
+            "intent": "commercial",
+            "trend": "SEASONAL",
+            "peak_months": "Jul/Oct/Nov/Jan/Apr",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "epoxy dubai",
+            "volume": 20,
+            "kd": 100,
+            "cpc_low": 273.86,
+            "cpc_high": 973.79,
+            "funnel": "MOFU",
+            "intent": "commercial",
+            "trend": "SEASONAL",
+            "peak_months": "Apr",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          }
+        ],
+        "total_volume": 670,
+        "questions": [
+          {
+            "q": "how much does epoxy flooring cost per square foot in Dubai",
+            "answer_angle": "State a clear AED per sqft range upfront and note factors like garage vs industrial use.",
+            "type": "conversational"
+          },
+          {
+            "q": "what is the difference between epoxy flooring and resin flooring",
+            "answer_angle": "Explain the material difference in one sentence, then link to relevant use cases.",
+            "type": "paa"
+          },
+          {
+            "q": "how long does epoxy floor coating last in Dubai's climate",
+            "answer_angle": "Give a lifespan estimate in years and mention UV/heat resistance as the key differentiator.",
+            "type": "voice"
+          },
+          {
+            "q": "is epoxy flooring good for garages and warehouses in Dubai",
+            "answer_angle": "Confirm suitability with load-bearing and chemical-resistance specs cited directly.",
+            "type": "conversational"
+          },
+          {
+            "q": "how many days does epoxy flooring installation take",
+            "answer_angle": "Provide a curing-time and installation-time breakdown (e.g., 2-3 days including cure).",
+            "type": "voice"
+          }
+        ],
+        "entities_to_mention": [
+          "Self-leveling epoxy",
+          "Industrial flooring",
+          "Resin flooring",
+          "UV-resistant coating",
+          "Anti-slip epoxy coating",
+          "Curing time"
+        ]
+      },
+      {
+        "cluster_name": "Villa Painting Packages",
+        "funnel": "BOFU",
+        "primary_keyword": {
+          "keyword": "villa painting services dubai",
+          "volume": 480,
+          "kd": 55,
+          "cpc_low": 1033.87,
+          "cpc_high": 2670.07,
+          "funnel": "BOFU",
+          "intent": "transactional",
+          "trend": "GROWING",
+          "peak_months": "Jul/Nov/Mar/May/Jun",
+          "ai_overview_prone": false,
+          "flags": [
+            "local"
+          ]
+        },
+        "keywords": [
+          {
+            "keyword": "villa painting services dubai",
+            "volume": 480,
+            "kd": 55,
+            "cpc_low": 1033.87,
+            "cpc_high": 2670.07,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "GROWING",
+            "peak_months": "Jul/Nov/Mar/May/Jun",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "villa painting dubai",
+            "volume": 140,
+            "kd": 53,
+            "cpc_low": 973.12,
+            "cpc_high": 2481.58,
+            "funnel": "MOFU",
+            "intent": "commercial",
+            "trend": "SEASONAL",
+            "peak_months": "Jun",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "villa painters in dubai",
+            "volume": 10,
+            "kd": 30,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "funnel": "MOFU",
+            "intent": "commercial",
+            "trend": "SEASONAL",
+            "peak_months": "Jul/Aug/Sep/Jan/Mar/Apr/May/Jun",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "villa painting cost dubai",
+            "volume": 10,
+            "kd": 89,
+            "cpc_low": 438.6,
+            "cpc_high": 1527.81,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "SEASONAL",
+            "peak_months": "Jul/Aug/Sep/Oct/Dec/Jan/Feb/Apr/May/Jun",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          }
+        ],
+        "total_volume": 640,
+        "questions": [
+          {
+            "q": "how much does villa painting cost in Dubai",
+            "answer_angle": "Lead with an AED per-sqft or per-villa price range and mention factors like villa size and paint quality.",
+            "type": "conversational"
+          },
+          {
+            "q": "who is the best villa painter in Dubai",
+            "answer_angle": "Highlight review count, years of experience, and free site visit as trust signals for ranking as best.",
+            "type": "paa"
+          },
+          {
+            "q": "how long does it take to paint a villa in Dubai",
+            "answer_angle": "State a clear day-range (e.g., 3-5 days) based on villa size to satisfy voice search speed.",
+            "type": "voice"
+          },
+          {
+            "q": "do villa painters in Dubai provide free quotes",
+            "answer_angle": "Confirm free inspection/quote policy explicitly in the first sentence.",
+            "type": "conversational"
+          }
+        ],
+        "entities_to_mention": [
+          "Villa exterior painting",
+          "Weatherproof paint",
+          "Dubai Municipality approved contractor",
+          "Dulux/Jotun paint brands",
+          "Free site inspection"
+        ]
+      },
+      {
+        "cluster_name": "Wallpaper Installation and Fixing",
+        "funnel": "BOFU",
+        "primary_keyword": {
+          "keyword": "wallpaper installation dubai",
+          "volume": 260,
+          "kd": 68,
+          "cpc_low": 403.94,
+          "cpc_high": 1408.11,
+          "funnel": "BOFU",
+          "intent": "transactional",
+          "trend": "SEASONAL",
+          "peak_months": "Mar",
+          "ai_overview_prone": false,
+          "flags": [
+            "local"
+          ]
+        },
+        "keywords": [
+          {
+            "keyword": "wallpaper installation services dubai",
+            "volume": 50,
+            "kd": 49,
+            "cpc_low": 452.16,
+            "cpc_high": 750.07,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "GROWING",
+            "peak_months": "Dec/Jan/Mar/Apr/May",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "wallpaper installation dubai",
+            "volume": 260,
+            "kd": 68,
+            "cpc_low": 403.94,
+            "cpc_high": 1408.11,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "SEASONAL",
+            "peak_months": "Mar",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "wallpaper fixing in dubai",
+            "volume": 170,
+            "kd": 55,
+            "cpc_low": 305.54,
+            "cpc_high": 893.65,
+            "funnel": "MOFU",
+            "intent": "commercial",
+            "trend": "DECLINING",
+            "peak_months": "Aug",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "wallpaper fixing price in dubai",
+            "volume": 10,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "SEASONAL",
+            "peak_months": "Jul/Aug/Oct/Nov/Dec/Jan/May",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          }
+        ],
+        "total_volume": 490,
+        "questions": [
+          {
+            "q": "how much does wallpaper installation cost in Dubai",
+            "answer_angle": "Lead with AED per roll/per sqm installation price range including material cost separation.",
+            "type": "conversational"
+          },
+          {
+            "q": "who fixes wallpaper in Dubai apartments",
+            "answer_angle": "Confirm the service covers apartments, villas, and offices with same-week scheduling.",
+            "type": "paa"
+          },
+          {
+            "q": "how long does wallpaper installation take",
+            "answer_angle": "Give a room-count based time estimate (e.g., 1 room in half a day) for voice search.",
+            "type": "voice"
+          },
+          {
+            "q": "can you remove old wallpaper before installing new one in Dubai",
+            "answer_angle": "State removal service is included or priced separately, answered directly.",
+            "type": "conversational"
+          }
+        ],
+        "entities_to_mention": [
+          "3D wallpaper",
+          "Textured wallpaper",
+          "Wallpaper adhesive",
+          "Wall surface preparation",
+          "Peel and stick wallpaper"
+        ]
+      },
+      {
+        "cluster_name": "Wall and Door Painting",
+        "funnel": "MOFU",
+        "primary_keyword": {
+          "keyword": "wall painting dubai",
+          "volume": 320,
+          "kd": 86,
+          "cpc_low": 984.13,
+          "cpc_high": 2245.17,
+          "funnel": "MOFU",
+          "intent": "commercial",
+          "trend": "STABLE",
+          "peak_months": "Jul/Aug/Sep/Oct/Nov/May/Jun",
+          "ai_overview_prone": false,
+          "flags": [
+            "local"
+          ]
+        },
+        "keywords": [
+          {
+            "keyword": "wall painting dubai",
+            "volume": 320,
+            "kd": 86,
+            "cpc_low": 984.13,
+            "cpc_high": 2245.17,
+            "funnel": "MOFU",
+            "intent": "commercial",
+            "trend": "STABLE",
+            "peak_months": "Jul/Aug/Sep/Oct/Nov/May/Jun",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "wall paint price in dubai",
+            "volume": 10,
+            "kd": 56,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "GROWING",
+            "peak_months": "Jul/Sep/Oct/Nov/Dec/Feb/Apr/May/Jun",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "door painting dubai",
+            "volume": 90,
+            "kd": 64,
+            "cpc_low": 456.75,
+            "cpc_high": 1742.22,
+            "funnel": "MOFU",
+            "intent": "commercial",
+            "trend": "GROWING",
+            "peak_months": "Jun",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "decorative painting in dubai",
+            "volume": 10,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "funnel": "MOFU",
+            "intent": "commercial",
+            "trend": "UNKNOWN",
+            "peak_months": "Jul/Nov",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          }
+        ],
+        "total_volume": 430,
+        "questions": [
+          {
+            "q": "how much does wall painting cost per square meter in Dubai",
+            "answer_angle": "Lead with AED per sqm rate and mention 1-2 coat difference in pricing.",
+            "type": "conversational"
+          },
+          {
+            "q": "how much does door painting cost in Dubai",
+            "answer_angle": "Give a flat per-door price range distinct from wall painting.",
+            "type": "conversational"
+          },
+          {
+            "q": "what type of paint is best for decorative walls in Dubai homes",
+            "answer_angle": "Recommend a specific paint finish (e.g., textured/decorative) and explain why it suits Dubai interiors.",
+            "type": "paa"
+          },
+          {
+            "q": "can you paint just one accent wall in my apartment",
+            "answer_angle": "Confirm single-wall/accent painting is offered with a minimum charge stated.",
+            "type": "conversational"
+          }
+        ],
+        "entities_to_mention": [
+          "Emulsion paint",
+          "Textured/decorative finish",
+          "Primer coat",
+          "Door enamel paint",
+          "Accent wall"
+        ]
+      },
+      {
+        "cluster_name": "Commercial and Office Painting",
+        "funnel": "BOFU",
+        "primary_keyword": {
+          "keyword": "commercial painting services in dubai",
+          "volume": 10,
+          "kd": 5,
+          "cpc_low": 0.0,
+          "cpc_high": 0.0,
+          "funnel": "BOFU",
+          "intent": "transactional",
+          "trend": "GROWING",
+          "peak_months": "Nov/Apr",
+          "ai_overview_prone": false,
+          "flags": [
+            "local"
+          ]
+        },
+        "keywords": [
+          {
+            "keyword": "commercial painting services in dubai",
+            "volume": 10,
+            "kd": 5,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "GROWING",
+            "peak_months": "Nov/Apr",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "office painting services in dubai",
+            "volume": 40,
+            "kd": 69,
+            "cpc_low": 1179.24,
+            "cpc_high": 2670.22,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "DECLINING",
+            "peak_months": "Sep",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "office painting dubai",
+            "volume": 20,
+            "kd": 55,
+            "cpc_low": 1360.45,
+            "cpc_high": 2670.15,
+            "funnel": "MOFU",
+            "intent": "commercial",
+            "trend": "DECLINING",
+            "peak_months": "Sep",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          }
+        ],
+        "total_volume": 70,
+        "questions": [
+          {
+            "q": "how much does office painting cost in Dubai",
+            "answer_angle": "State AED per sqft commercial rate and mention after-hours scheduling to avoid business disruption.",
+            "type": "conversational"
+          },
+          {
+            "q": "do commercial painters work after office hours in Dubai",
+            "answer_angle": "Confirm night/weekend painting availability directly for minimal downtime.",
+            "type": "paa"
+          },
+          {
+            "q": "which company does commercial painting contracts in Dubai",
+            "answer_angle": "Name the company as a licensed commercial painting contractor with portfolio proof.",
+            "type": "conversational"
+          }
+        ],
+        "entities_to_mention": [
+          "Commercial painting contract",
+          "Low-odor paint",
+          "After-hours service",
+          "Fire-rated paint",
+          "Office fit-out"
+        ]
+      }
+    ]
+  },
+  "mode3_full_website": {
+    "workflow_inputs": {
+      "industry": "Painting and Handyman Services",
+      "services_mode3": "Painting Services Dubai, Villa Painting Services, Apartment and Home Painting, Epoxy Flooring Services, Wall Painting Services, Wallpaper Installation Services, Commercial and Office Painting, Door Painting Services"
+    },
+    "services": [
+      "Painting Services Dubai",
+      "Villa Painting Services",
+      "Apartment and Home Painting",
+      "Epoxy Flooring Services",
+      "Wall Painting Services",
+      "Wallpaper Installation Services",
+      "Commercial and Office Painting",
+      "Door Painting Services"
+    ]
+  },
+  "mode2_services_hub": {
+    "workflow_inputs": {
+      "main_service": "Painting Services",
+      "sub_services": "Villa Painting, Apartment Painting, House Painting, Wall Painting, Door Painting, Wallpaper Installation, Epoxy Flooring, Commercial Painting, Office Painting, Decorative Painting"
+    }
+  },
+  "mode5_pseo": {
+    "cities_in_data": [
+      {
+        "city": "Dubai Marina",
+        "keywords": [
+          {
+            "keyword": "painting services in dubai marina",
+            "volume": 170,
+            "kd": 48,
+            "cpc_low": 1258.19,
+            "cpc_high": 2670.11,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "SEASONAL",
+            "peak_months": "Apr",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          }
+        ],
+        "total_volume": 170
+      }
+    ],
+    "recommended_city_targets": [
+      "Dubai Marina",
+      "Business Bay",
+      "Jumeirah Village Circle",
+      "Al Barsha 1",
+      "Al Quoz",
+      "Mirdif",
+      "Arabian Ranches",
+      "Damac Hills"
+    ],
+    "notes": "Only Dubai Marina appears explicitly in the keyword data; other targets are recommended based on typical villa/apartment density in Dubai's geo list for future pSEO expansion once demand data confirms interest.",
+    "geo_area_candidates": [
+      "Dubai",
+      "Palm Islands",
+      "Jabal Ali Second",
+      "Dubai Sports City",
+      "Al Quoz Industrial Area 4",
+      "Dubai Production City",
+      "Dubai Creek Harbour",
+      "Nadd Al Hamar",
+      "Dubai Investment Park - 2",
+      "Al Barsha 2",
+      "Al Sufouh 1",
+      "Jumeirah Park",
+      "Damac Hills",
+      "Dubai Investment Park First",
+      "International City Phase(2)",
+      "Al Twar",
+      "Ras Al Khor Industrial Area 3",
+      "Al Warqa 3",
+      "Al Safa",
+      "Dubai Festival City",
+      "The Villa",
+      "Jabal Ali Industrial Second",
+      "Mudon",
+      "Green Community Village",
+      "Dubai Industrial City",
+      "Academic City",
+      "Jebel Ali Freezone",
+      "Arabian Ranches",
+      "Al Quoz 1",
+      "Motor City",
+      "Front",
+      "Za'abeel 2",
+      "Nad Al Sheba 1",
+      "Al Barsha 3",
+      "Al Khawaneej 1",
+      "Al Rashidiya",
+      "Dubai Marina",
+      "Jumeirah",
+      "Al Quoz",
+      "Al Wasl",
+      "Al Nahda",
+      "Dubai Silicon Oasis",
+      "Mirdif",
+      "Za'abeel",
+      "Al Quoz Industrial Area 3",
+      "Umm Suqeim",
+      "Dubai International City",
+      "Jumeirah Village Circle",
+      "Al Sufouh 2",
+      "Business Bay",
+      "Jumeirah 1",
+      "Jebel Ali Village",
+      "Umm Hurair Second",
+      "Al Garhoud",
+      "Nad Al Sheba",
+      "Al Qusais 1",
+      "Al Qusais",
+      "Al Barsha 1",
+      "Al Quoz Industrial Area 2",
+      "Jumeirah Village",
+      "Muhaisanah 2",
+      "Al Khawaneej 2",
+      "Jumeirah Golf Estates",
+      "Al Warqa 2",
+      "Nad Al Sheba 3",
+      "Ghadeer Al Tair",
+      "Za'abeel 1",
+      "Al Mizhar 1",
+      "Dubai South",
+      "Nad Al Sheba 4",
+      "Muhaisnah 1",
+      "Golf City",
+      "Hatta",
+      "Al Mamzar",
+      "Falconcity of Wonders",
+      "Port Rashid",
+      "Ras Al Khor Industrial Area 2",
+      "Nad Al Sheba 2",
+      "Jumeirah 2",
+      "Umm Ramool"
+    ]
+  },
+  "keyword_metrics": [
+    {
+      "keyword": "painting services dubai",
+      "volume": 2900,
+      "kd": 66,
+      "cpc_low": 1169.83,
+      "cpc_high": 2434.57,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "DECLINING",
+      "peak_months": "Jul",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "villa painting services dubai",
+      "volume": 480,
+      "kd": 55,
+      "cpc_low": 1033.87,
+      "cpc_high": 2670.07,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "GROWING",
+      "peak_months": "Jul/Nov/Mar/May/Jun",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "epoxy flooring dubai",
+      "volume": 480,
+      "kd": 73,
+      "cpc_low": 312.08,
+      "cpc_high": 973.79,
+      "funnel": "MOFU",
+      "intent": "commercial",
+      "trend": "STABLE",
+      "peak_months": "Jul/Aug/Oct/Dec/Jan/Feb/Apr/May",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "wall painting services in dubai",
+      "volume": 480,
+      "kd": 60,
+      "cpc_low": 1168.47,
+      "cpc_high": 2651.14,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "DECLINING",
+      "peak_months": "Jul/Aug/Sep",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "walls paint services dubai",
+      "volume": 480,
+      "kd": 60,
+      "cpc_low": 1168.47,
+      "cpc_high": 2651.14,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "DECLINING",
+      "peak_months": "Jul/Aug/Sep",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "house painting services dubai",
+      "volume": 390,
+      "kd": 81,
+      "cpc_low": 1287.24,
+      "cpc_high": 2682.61,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "DECLINING",
+      "peak_months": "Aug/Sep/Nov/Feb",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "home painting services in dubai",
+      "volume": 390,
+      "kd": 81,
+      "cpc_low": 1287.24,
+      "cpc_high": 2682.61,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "DECLINING",
+      "peak_months": "Aug/Sep/Nov/Feb",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "wall painting dubai",
+      "volume": 320,
+      "kd": 86,
+      "cpc_low": 984.13,
+      "cpc_high": 2245.17,
+      "funnel": "MOFU",
+      "intent": "commercial",
+      "trend": "STABLE",
+      "peak_months": "Jul/Aug/Sep/Oct/Nov/May/Jun",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "apartment painting services in dubai",
+      "volume": 320,
+      "kd": 71,
+      "cpc_low": 1169.71,
+      "cpc_high": 2428.94,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "DECLINING",
+      "peak_months": "Jul/Aug",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "wallpaper installation dubai",
+      "volume": 260,
+      "kd": 68,
+      "cpc_low": 403.94,
+      "cpc_high": 1408.11,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "SEASONAL",
+      "peak_months": "Mar",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "painter in dubai",
+      "volume": 260,
+      "kd": 80,
+      "cpc_low": 1287.73,
+      "cpc_high": 2221.2,
+      "funnel": "MOFU",
+      "intent": "commercial",
+      "trend": "DECLINING",
+      "peak_months": "Jul",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "professional painting services in dubai",
+      "volume": 210,
+      "kd": 61,
+      "cpc_low": 1391.13,
+      "cpc_high": 2670.07,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "DECLINING",
+      "peak_months": "Sep",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "painting company in dubai",
+      "volume": 210,
+      "kd": 89,
+      "cpc_low": 964.63,
+      "cpc_high": 2301.51,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "DECLINING",
+      "peak_months": "Jul/Sep",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "painting services in dubai marina",
+      "volume": 170,
+      "kd": 48,
+      "cpc_low": 1258.19,
+      "cpc_high": 2670.11,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "SEASONAL",
+      "peak_months": "Apr",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "wallpaper fixing in dubai",
+      "volume": 170,
+      "kd": 55,
+      "cpc_low": 305.54,
+      "cpc_high": 893.65,
+      "funnel": "MOFU",
+      "intent": "commercial",
+      "trend": "DECLINING",
+      "peak_months": "Aug",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "best painting services in dubai",
+      "volume": 170,
+      "kd": 74,
+      "cpc_low": 1168.38,
+      "cpc_high": 2233.77,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "DECLINING",
+      "peak_months": "Aug/Sep",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "villa painting dubai",
+      "volume": 140,
+      "kd": 53,
+      "cpc_low": 973.12,
+      "cpc_high": 2481.58,
+      "funnel": "MOFU",
+      "intent": "commercial",
+      "trend": "SEASONAL",
+      "peak_months": "Jun",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "apartment painting dubai",
+      "volume": 140,
+      "kd": 79,
+      "cpc_low": 1391.13,
+      "cpc_high": 2670.07,
+      "funnel": "MOFU",
+      "intent": "commercial",
+      "trend": "DECLINING",
+      "peak_months": "Jul/Oct",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "door painting dubai",
+      "volume": 90,
+      "kd": 64,
+      "cpc_low": 456.75,
+      "cpc_high": 1742.22,
+      "funnel": "MOFU",
+      "intent": "commercial",
+      "trend": "GROWING",
+      "peak_months": "Jun",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "home painting dubai",
+      "volume": 90,
+      "kd": 63,
+      "cpc_low": 630.99,
+      "cpc_high": 2286.13,
+      "funnel": "MOFU",
+      "intent": "commercial",
+      "trend": "DECLINING",
+      "peak_months": "Jul/Aug/Oct/Dec/Jan/Feb/Jun",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "epoxy flooring price in dubai",
+      "volume": 70,
+      "kd": 90,
+      "cpc_low": 277.06,
+      "cpc_high": 908.96,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "SEASONAL",
+      "peak_months": "Jan",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "wallpaper installation services dubai",
+      "volume": 50,
+      "kd": 49,
+      "cpc_low": 452.16,
+      "cpc_high": 750.07,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "GROWING",
+      "peak_months": "Dec/Jan/Mar/Apr/May",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "office painting services in dubai",
+      "volume": 40,
+      "kd": 69,
+      "cpc_low": 1179.24,
+      "cpc_high": 2670.22,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "DECLINING",
+      "peak_months": "Sep",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "best painter in dubai",
+      "volume": 40,
+      "kd": 63,
+      "cpc_low": 1530.84,
+      "cpc_high": 2670.15,
+      "funnel": "MOFU",
+      "intent": "commercial",
+      "trend": "DECLINING",
+      "peak_months": "Sep/Dec",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "1 bhk painting cost in dubai",
+      "volume": 30,
+      "kd": 84,
+      "cpc_low": 591.26,
+      "cpc_high": 1881.55,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "SEASONAL",
+      "peak_months": "May/Jun",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "resin flooring dubai",
+      "volume": 30,
+      "kd": 93,
+      "cpc_low": 482.46,
+      "cpc_high": 1113.01,
+      "funnel": "MOFU",
+      "intent": "commercial",
+      "trend": "GROWING",
+      "peak_months": "Jan",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "interior painting dubai",
+      "volume": 20,
+      "kd": 45,
+      "cpc_low": 1170.29,
+      "cpc_high": 2434.5,
+      "funnel": "MOFU",
+      "intent": "commercial",
+      "trend": "GROWING",
+      "peak_months": "Jun",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "painting contracting company in dubai",
+      "volume": 20,
+      "kd": 47,
+      "cpc_low": 1064.75,
+      "cpc_high": 2025.47,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "SEASONAL",
+      "peak_months": "Sep",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "cheap painter dubai",
+      "volume": 20,
+      "kd": 80,
+      "cpc_low": 862.5,
+      "cpc_high": 1708.08,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "SEASONAL",
+      "peak_months": "Nov",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "epoxy floor paint dubai",
+      "volume": 20,
+      "kd": 60,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "MOFU",
+      "intent": "commercial",
+      "trend": "GROWING",
+      "peak_months": "Jan/Apr/May",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "epoxy floor dubai",
+      "volume": 20,
+      "kd": 87,
+      "cpc_low": 380.76,
+      "cpc_high": 1316.62,
+      "funnel": "MOFU",
+      "intent": "commercial",
+      "trend": "SEASONAL",
+      "peak_months": "Dec",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "epoxy dubai",
+      "volume": 20,
+      "kd": 100,
+      "cpc_low": 273.86,
+      "cpc_high": 973.79,
+      "funnel": "MOFU",
+      "intent": "commercial",
+      "trend": "SEASONAL",
+      "peak_months": "Apr",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "office painting dubai",
+      "volume": 20,
+      "kd": 55,
+      "cpc_low": 1360.45,
+      "cpc_high": 2670.15,
+      "funnel": "MOFU",
+      "intent": "commercial",
+      "trend": "DECLINING",
+      "peak_months": "Sep",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "commercial painting services in dubai",
+      "volume": 10,
+      "kd": 5,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "GROWING",
+      "peak_months": "Nov/Apr",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "epoxy resin flooring dubai",
+      "volume": 10,
+      "kd": 0,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "MOFU",
+      "intent": "commercial",
+      "trend": "GROWING",
+      "peak_months": "Aug/Sep/Dec/Jan/Feb/Mar/Apr/May/Jun",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "interior painting services in dubai",
+      "volume": 10,
+      "kd": 54,
+      "cpc_low": 1007.62,
+      "cpc_high": 2380.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "SEASONAL",
+      "peak_months": "Jun",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "wallpaper fixing price in dubai",
+      "volume": 10,
+      "kd": 0,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "SEASONAL",
+      "peak_months": "Jul/Aug/Oct/Nov/Dec/Jan/May",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "sky painting services dubai",
+      "volume": 10,
+      "kd": 0,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "UNKNOWN",
+      "peak_months": "Sep/Oct",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "good painter in dubai",
+      "volume": 10,
+      "kd": 43,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "MOFU",
+      "intent": "commercial",
+      "trend": "GROWING",
+      "peak_months": "Jul/Nov/Jan/Feb/Mar/May/Jun",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "epoxy coating dubai",
+      "volume": 10,
+      "kd": 26,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "MOFU",
+      "intent": "commercial",
+      "trend": "SEASONAL",
+      "peak_months": "Jul/Sep/Nov/Dec/Jan/Feb/May/Jun",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "wall paint price in dubai",
+      "volume": 10,
+      "kd": 56,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "GROWING",
+      "peak_months": "Jul/Sep/Oct/Nov/Dec/Feb/Apr/May/Jun",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "villa painters in dubai",
+      "volume": 10,
+      "kd": 30,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "MOFU",
+      "intent": "commercial",
+      "trend": "SEASONAL",
+      "peak_months": "Jul/Aug/Sep/Jan/Mar/Apr/May/Jun",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "industrial flooring dubai",
+      "volume": 10,
+      "kd": 0,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "MOFU",
+      "intent": "commercial",
+      "trend": "SEASONAL",
+      "peak_months": "Jul/Oct/Nov/Jan/Apr",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "wall painting company in dubai",
+      "volume": 10,
+      "kd": 60,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "GROWING",
+      "peak_months": "Jul/Aug/Oct/Nov/Dec/Jan/Feb/Apr/May/Jun",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "professional painters dubai",
+      "volume": 10,
+      "kd": 60,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "GROWING",
+      "peak_months": "Apr",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "professional painting in dubai",
+      "volume": 10,
+      "kd": 60,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "GROWING",
+      "peak_months": "May",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "decorative painting in dubai",
+      "volume": 10,
+      "kd": 0,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "MOFU",
+      "intent": "commercial",
+      "trend": "UNKNOWN",
+      "peak_months": "Jul/Nov",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "villa painting cost dubai",
+      "volume": 10,
+      "kd": 89,
+      "cpc_low": 438.6,
+      "cpc_high": 1527.81,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "SEASONAL",
+      "peak_months": "Jul/Aug/Sep/Oct/Dec/Jan/Feb/Apr/May/Jun",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    }
+  ]
+}
