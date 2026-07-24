@@ -1,0 +1,127 @@
+[
+  {
+    "page_name": "Local Services Ads Management",
+    "url_slug": "google-local-services-ads-management",
+    "service_name": "Local Services Ads Management",
+    "industry": "PPC Advertising Agency",
+    "sub_services": [
+      "LSA Profile Setup",
+      "Google Screened Verification",
+      "Lead Quality Optimization",
+      "Budget Management",
+      "Review Growth Strategy",
+      "Local Ranking Boost"
+    ],
+    "ad_groups_covered": [
+      "Google Local Services Ads (LSA)"
+    ],
+    "keywords_covered": 13,
+    "monthly_volume_covered": 270,
+    "mode1_config": {
+      "main_service": "Local Services Ads Management",
+      "sub_services": "LSA Profile Setup, Google Screened Verification, Lead Quality Optimization, Budget Management, Review Growth Strategy, Local Ranking Boost",
+      "industry": "PPC Advertising Agency"
+    },
+    "google_ads_tracking_tip": "Final URL suffix: kw={keyword} — enables the landing page's Dynamic Keyword Insertion (DKI)."
+  },
+  {
+    "page_name": "Google Ads Campaign Management",
+    "url_slug": "google-ads-campaign-management-uae",
+    "service_name": "Google Ads Campaign Management",
+    "industry": "PPC Advertising Agency",
+    "sub_services": [
+      "Keyword Research",
+      "RSA Ad Copywriting",
+      "Negative Keyword Protection",
+      "Landing Page Matching",
+      "Conversion Tracking Setup",
+      "Monthly Performance Reporting"
+    ],
+    "ad_groups_covered": [
+      "Hire a Google Ads / PPC Agency"
+    ],
+    "keywords_covered": 26,
+    "monthly_volume_covered": 370,
+    "mode1_config": {
+      "main_service": "Google Ads Campaign Management",
+      "sub_services": "Keyword Research, RSA Ad Copywriting, Negative Keyword Protection, Landing Page Matching, Conversion Tracking Setup, Monthly Performance Reporting",
+      "industry": "PPC Advertising Agency"
+    },
+    "google_ads_tracking_tip": "Final URL suffix: kw={keyword} — enables the landing page's Dynamic Keyword Insertion (DKI)."
+  },
+  {
+    "page_name": "Industry-Specific Google Ads",
+    "url_slug": "google-ads-for-service-businesses",
+    "service_name": "Industry-Specific Google Ads Campaigns",
+    "industry": "Service Business Marketing",
+    "sub_services": [
+      "Real Estate Ads",
+      "Construction Ads",
+      "Cleaning Business Ads",
+      "Moving Company Ads",
+      "Law Firm Ads",
+      "Junk Removal Ads"
+    ],
+    "ad_groups_covered": [
+      "Industry-Specific Google Ads"
+    ],
+    "keywords_covered": 9,
+    "monthly_volume_covered": 90,
+    "mode1_config": {
+      "main_service": "Industry-Specific Google Ads Campaigns",
+      "sub_services": "Real Estate Ads, Construction Ads, Cleaning Business Ads, Moving Company Ads, Law Firm Ads, Junk Removal Ads",
+      "industry": "Service Business Marketing"
+    },
+    "google_ads_tracking_tip": "Final URL suffix: kw={keyword} — enables the landing page's Dynamic Keyword Insertion (DKI)."
+  },
+  {
+    "page_name": "Google Guaranteed Setup Service",
+    "url_slug": "google-guaranteed-setup-service",
+    "service_name": "Google Guaranteed Program Setup",
+    "industry": "PPC Advertising Agency",
+    "sub_services": [
+      "Eligibility Assessment",
+      "Background Screening Support",
+      "Badge Application Filing",
+      "Profile Optimization",
+      "Review Collection Setup",
+      "Ongoing Compliance Management"
+    ],
+    "ad_groups_covered": [
+      "Google Guaranteed Program Setup"
+    ],
+    "keywords_covered": 3,
+    "monthly_volume_covered": 30,
+    "mode1_config": {
+      "main_service": "Google Guaranteed Program Setup",
+      "sub_services": "Eligibility Assessment, Background Screening Support, Badge Application Filing, Profile Optimization, Review Collection Setup, Ongoing Compliance Management",
+      "industry": "PPC Advertising Agency"
+    },
+    "google_ads_tracking_tip": "Final URL suffix: kw={keyword} — enables the landing page's Dynamic Keyword Insertion (DKI)."
+  },
+  {
+    "page_name": "Shopping & Display Ads Management",
+    "url_slug": "google-shopping-display-ads-management",
+    "service_name": "Shopping & Display Ads Management",
+    "industry": "Ecommerce PPC Advertising",
+    "sub_services": [
+      "Product Feed Optimization",
+      "Shopping Campaign Setup",
+      "Display Banner Creative",
+      "Remarketing Campaigns",
+      "Audience Targeting",
+      "Performance Bid Management"
+    ],
+    "ad_groups_covered": [
+      "Shopping & Display Ads Management"
+    ],
+    "keywords_covered": 4,
+    "monthly_volume_covered": 100,
+    "mode1_config": {
+      "main_service": "Shopping & Display Ads Management",
+      "sub_services": "Product Feed Optimization, Shopping Campaign Setup, Display Banner Creative, Remarketing Campaigns, Audience Targeting, Performance Bid Management",
+      "industry": "Ecommerce PPC Advertising"
+    },
+    "google_ads_tracking_tip": "Final URL suffix: kw={keyword} — enables the landing page's Dynamic Keyword Insertion (DKI)."
+  }
+]
