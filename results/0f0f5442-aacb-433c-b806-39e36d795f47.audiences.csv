@@ -1,0 +1,15 @@
+﻿Campaign,Ad Group,Audience,Bid Modifier,Flexible Reach,Comment
+Core Plumbing & Emergency Services,,Plumbing Services,30%,,IN_MARKET | observation | Direct match to core service intent
+Core Plumbing & Emergency Services,,Home Improvement,20%,,IN_MARKET | observation | Homeowners investing in property upgrades
+Core Plumbing & Emergency Services,,Home Security,15%,,IN_MARKET | observation | Emergency-minded homeowners overlap
+Core Plumbing & Emergency Services,,Water Purifiers,20%,,IN_MARKET | observation | Water system-focused homeowners
+Core Plumbing & Emergency Services,,Home Appliances,20%,,IN_MARKET | observation | Water heaters are appliance purchases
+Core Plumbing & Emergency Services,,Plumbing Fixtures,25%,,IN_MARKET | observation | Direct fixture repair/install intent
+Core Plumbing & Emergency Services,,Plumbing Fixture Hardware & Parts,15%,,IN_MARKET | observation | Parts buyers signal DIY-to-pro conversion
+Core Plumbing & Emergency Services,,Residential Properties (For Rent),15%,,IN_MARKET | observation | Renters/landlords need urgent repairs
+Core Plumbing & Emergency Services,,Residential Properties (For Sale),15%,,IN_MARKET | observation | New homeowners needing plumbing checks
+Core Plumbing & Emergency Services,,Home Insurance,15%,,IN_MARKET | observation | Leak claims correlate with insurance interest
+Core Plumbing & Emergency Services,,Pest Control Services,10%,,IN_MARKET | observation | Overlaps with sewage/drain problem homeowners
+Core Plumbing & Emergency Services,,Home & Garden Services,15%,,IN_MARKET | observation | Broad home-service intent audience
+Core Plumbing & Emergency Services,,Home Decor Enthusiasts,10%,,AFFINITY | observation | Home-improvement minded audience
+Core Plumbing & Emergency Services,,Do-It-Yourselfers,10%,,"AFFINITY | observation | Home maintenance-focused, upgrade to pro"
