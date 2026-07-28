@@ -1,0 +1,127 @@
+[
+  {
+    "page_name": "Water Pump Services",
+    "url_slug": "water-pump-repair-installation-maintenance",
+    "service_name": "Water Pump Repair & Installation",
+    "industry": "Plumbing Services",
+    "sub_services": [
+      "Submersible Pump Repair",
+      "Booster Pump Installation",
+      "Water Pump Maintenance",
+      "Borewell Pump Service",
+      "Pressure Pump Repair",
+      "Emergency Pump Repair"
+    ],
+    "ad_groups_covered": [
+      "Water Pump Repair, Installation & Maintenance"
+    ],
+    "keywords_covered": 40,
+    "monthly_volume_covered": 570,
+    "mode1_config": {
+      "main_service": "Water Pump Repair & Installation",
+      "sub_services": "Submersible Pump Repair, Booster Pump Installation, Water Pump Maintenance, Borewell Pump Service, Pressure Pump Repair, Emergency Pump Repair",
+      "industry": "Plumbing Services"
+    },
+    "google_ads_tracking_tip": "Final URL suffix: kw={keyword} — enables the landing page's Dynamic Keyword Insertion (DKI)."
+  },
+  {
+    "page_name": "Water Heater Services",
+    "url_slug": "water-heater-repair-installation-replacement",
+    "service_name": "Water Heater Repair & Installation",
+    "industry": "Plumbing Services",
+    "sub_services": [
+      "Water Heater Repair",
+      "Water Heater Installation",
+      "Water Heater Replacement",
+      "Solar Water Heater Service",
+      "Gas Geyser Repair",
+      "Emergency Heater Repair"
+    ],
+    "ad_groups_covered": [
+      "Water Heater Repair & Installation"
+    ],
+    "keywords_covered": 40,
+    "monthly_volume_covered": 2170,
+    "mode1_config": {
+      "main_service": "Water Heater Repair & Installation",
+      "sub_services": "Water Heater Repair, Water Heater Installation, Water Heater Replacement, Solar Water Heater Service, Gas Geyser Repair, Emergency Heater Repair",
+      "industry": "Plumbing Services"
+    },
+    "google_ads_tracking_tip": "Final URL suffix: kw={keyword} — enables the landing page's Dynamic Keyword Insertion (DKI)."
+  },
+  {
+    "page_name": "Drain & Sewage Cleaning Services",
+    "url_slug": "drain-cleaning-sewage-unblocking-dubai",
+    "service_name": "Drain Cleaning & Unblocking",
+    "industry": "Plumbing Services",
+    "sub_services": [
+      "Drain Unblocking",
+      "Sewer Line Cleaning",
+      "Septic Tank Cleaning",
+      "Grease Trap Cleaning",
+      "Hydro Jetting Service",
+      "Kitchen Drain Cleaning"
+    ],
+    "ad_groups_covered": [
+      "Drain Cleaning & Sewage Unblocking"
+    ],
+    "keywords_covered": 40,
+    "monthly_volume_covered": 3390,
+    "mode1_config": {
+      "main_service": "Drain Cleaning & Unblocking",
+      "sub_services": "Drain Unblocking, Sewer Line Cleaning, Septic Tank Cleaning, Grease Trap Cleaning, Hydro Jetting Service, Kitchen Drain Cleaning",
+      "industry": "Plumbing Services"
+    },
+    "google_ads_tracking_tip": "Final URL suffix: kw={keyword} — enables the landing page's Dynamic Keyword Insertion (DKI)."
+  },
+  {
+    "page_name": "Water Leak Detection & Repair",
+    "url_slug": "water-leak-detection-repair-dubai",
+    "service_name": "Water Leak Detection & Repair",
+    "industry": "Plumbing Services",
+    "sub_services": [
+      "Leak Detection Service",
+      "Pipe Leak Repair",
+      "Slab Leak Repair",
+      "Ceiling Leak Repair",
+      "Burst Pipe Repair",
+      "Hidden Leak Detection"
+    ],
+    "ad_groups_covered": [
+      "Water Leak Detection & Repair"
+    ],
+    "keywords_covered": 12,
+    "monthly_volume_covered": 450,
+    "mode1_config": {
+      "main_service": "Water Leak Detection & Repair",
+      "sub_services": "Leak Detection Service, Pipe Leak Repair, Slab Leak Repair, Ceiling Leak Repair, Burst Pipe Repair, Hidden Leak Detection",
+      "industry": "Plumbing Services"
+    },
+    "google_ads_tracking_tip": "Final URL suffix: kw={keyword} — enables the landing page's Dynamic Keyword Insertion (DKI)."
+  },
+  {
+    "page_name": "General & Emergency Plumbing",
+    "url_slug": "emergency-plumber-general-plumbing-dubai",
+    "service_name": "Emergency & General Plumbing Services",
+    "industry": "Plumbing Services",
+    "sub_services": [
+      "Emergency Plumber Service",
+      "Toilet Repair",
+      "Faucet Repair",
+      "Pipe Installation",
+      "Gas Line Installation",
+      "Plumbing Maintenance"
+    ],
+    "ad_groups_covered": [
+      "General & Emergency Plumbing"
+    ],
+    "keywords_covered": 40,
+    "monthly_volume_covered": 10860,
+    "mode1_config": {
+      "main_service": "Emergency & General Plumbing Services",
+      "sub_services": "Emergency Plumber Service, Toilet Repair, Faucet Repair, Pipe Installation, Gas Line Installation, Plumbing Maintenance",
+      "industry": "Plumbing Services"
+    },
+    "google_ads_tracking_tip": "Final URL suffix: kw={keyword} — enables the landing page's Dynamic Keyword Insertion (DKI)."
+  }
+]
