@@ -366,6 +366,34 @@ _SCRIPT_RANGES = [
 ]
 
 
+_AR_TRANSLIT = {
+    "ا": "a", "أ": "a", "إ": "i", "آ": "a", "ب": "b", "ت": "t", "ث": "th",
+    "ج": "j", "ح": "h", "خ": "kh", "د": "d", "ذ": "dh", "ر": "r", "ز": "z",
+    "س": "s", "ش": "sh", "ص": "s", "ض": "d", "ط": "t", "ظ": "z", "ع": "a",
+    "غ": "gh", "ف": "f", "ق": "q", "ك": "k", "ل": "l", "م": "m", "ن": "n",
+    "ه": "h", "و": "w", "ي": "y", "ى": "a", "ة": "a", "ء": "", "ؤ": "u",
+    "ئ": "i", "َ": "", "ُ": "", "ِ": "", "ّ": "", "ْ": "", "ً": "", "ٌ": "", "ٍ": "",
+}
+
+
+def slugify_any(text, fallback=""):
+    """URL slug that survives ANY script. The old one was
+    `re.sub(r"[^a-z0-9-]", "", ...)`, which turns "إصلاح الغسالات" into "-" —
+    a garbage slug that then became the RSA Final URL and every sitelink URL
+    for that ad group. Arabic is transliterated so the slug still reads as the
+    service; anything else falls back to the caller's English label."""
+    s = str(text or "").strip().lower()
+    if re.search(r"[؀-ۿ]", s):
+        s = "".join(_AR_TRANSLIT.get(ch, ch) for ch in s)
+    s = re.sub(r"\s+", "-", s.strip())
+    s = re.sub(r"[^a-z0-9-]", "", s)
+    s = re.sub(r"-{2,}", "-", s).strip("-")
+    if not s:
+        s = re.sub(r"[^a-z0-9-]", "", re.sub(r"\s+", "-", str(fallback or "").strip().lower()))
+        s = re.sub(r"-{2,}", "-", s).strip("-")
+    return s[:60]
+
+
 def keyword_script(text):
     """Which script is this keyword written in? Non-Latin wins when mixed —
     "تصليح غسالات dubai" is an Arabic query with a Latin place name in it."""
@@ -669,15 +697,24 @@ def validate_strategy(raw, kept):
     # Landing pages: validate coverage, force exactly 6 sub_services
     pages = []
     covered = set()
-    for p in raw.get("landing_pages", [])[:6]:
+    _slug_seen = set()
+    for _pi, p in enumerate(raw.get("landing_pages", [])[:6], 1):
         ag = [a for a in p.get("ad_groups_covered", []) if a in group_names]
         subs = [str(s).strip() for s in p.get("sub_services", []) if str(s).strip()][:6]
         if not p.get("service_name") or not subs:
             continue
         covered.update(ag)
+        # slug: model value → service name → page name → numbered fallback, and
+        # never a duplicate (two pages on one URL would overwrite each other)
+        _slug = (slugify_any(p.get("url_slug", ""), p.get("service_name", ""))
+                 or slugify_any(p.get("service_name", ""), p.get("page_name", ""))
+                 or f"service-{_pi}")
+        if _slug in _slug_seen:
+            _slug = f"{_slug}-{_pi}"
+        _slug_seen.add(_slug)
         pages.append({
             "page_name": str(p.get("page_name", p.get("service_name", ""))).strip()[:80],
-            "url_slug": re.sub(r"[^a-z0-9-]", "", str(p.get("url_slug", "")).strip().lower().replace(" ", "-"))[:60],
+            "url_slug": _slug,
             "service_name": str(p.get("service_name", "")).strip(),
             "industry": str(p.get("industry", NICHE_DESCRIPTION[:40])).strip(),
             "sub_services": subs,

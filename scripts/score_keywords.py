@@ -73,7 +73,37 @@ URGENT_MARKERS = {"emergency", "urgent", "24", "247", "same", "now", "today"}
 GENERIC_STOPWORDS = {
     "a", "an", "the", "in", "of", "and", "&", "to", "is", "my", "for",
     "on", "at", "with",
+    # Arabic function words — same job as the English list above
+    "في", "من", "على", "الى", "إلى", "عن", "مع", "و",
 }
+
+# ── Arabic intent vocabularies ─────────────────────────────────────────────
+# The sets above are English-only, so an Arabic keyword matched nothing and
+# fell through to the "commercial" default: "إصلاح الغسالات" (washing machine
+# repair) scored 1.10 where its English twin scored 1.25, and never earned the
+# local/urgent flags. In a mixed Arabic+English run that systematically pushed
+# Arabic keywords down the ranking that decides `kept_for_ai`.
+AR_TRANSACTIONAL = {
+    "اصلاح", "إصلاح", "تصليح", "صيانة", "تركيب", "تنظيف", "استبدال", "تبديل",
+    "سعر", "اسعار", "أسعار", "تكلفة", "رخيص", "ارخص", "أرخص", "شركة", "شركه",
+    "فني", "فنيين", "خدمة", "خدمه", "خدمات", "حجز", "طلب", "عرض", "محل",
+    "ورشة", "ورشه", "متخصص", "مختص", "محترف",
+}
+AR_COMMERCIAL = {"افضل", "أفضل", "احسن", "أحسن", "مقارنة", "تقييم", "تقييمات",
+                 "شركات", "مراجعة", "توصية"}
+AR_INFORMATIONAL = {"كيف", "كيفية", "طريقة", "طريقه", "دليل", "اسباب", "أسباب",
+                    "الفرق", "انواع", "أنواع", "معنى", "نصائح"}
+AR_QUESTION_STARTERS = {"كيف", "كيفية", "ما", "ماذا", "لماذا", "متى", "اين",
+                        "أين", "هل", "كم", "من", "أي", "اي"}
+AR_LOCAL = {"قريب", "قريبة", "قريبه", "بالقرب", "قربي", "محلي", "محلية"}
+AR_URGENT = {"طوارئ", "طوارىء", "عاجل", "فوري", "فورية", "اليوم", "الان", "الآن", "سريع"}
+
+TRANSACTIONAL |= AR_TRANSACTIONAL
+COMMERCIAL |= AR_COMMERCIAL
+INFORMATIONAL |= AR_INFORMATIONAL
+QUESTION_STARTERS |= AR_QUESTION_STARTERS
+LOCAL_MARKERS |= AR_LOCAL
+URGENT_MARKERS |= AR_URGENT
 
 TREND_MULT = {
     "GROWING": 1.15, "STABLE": 1.0, "SEASONAL": 0.95,
@@ -89,14 +119,24 @@ def tokens_of(kw):
     return re.findall(r"[^\W_]+", str(kw).lower(), re.UNICODE)
 
 
+def _ar_strip_al(tok):
+    """Arabic glues the definite article onto the word — "الغسالات" is
+    "الـ + غسالات". Vocabulary lookups need the bare stem, so match both forms.
+    Applied for CLASSIFICATION ONLY; dedupe signatures stay untouched."""
+    if len(tok) > 4 and tok.startswith("ال"):
+        return tok[2:]
+    return tok
+
+
 def classify(kw):
     """Returns (intent, flags). Intent: transactional/commercial/informational/question.
     Flags: local, voice, urgent."""
     toks = tokens_of(kw)
-    tokset = set(toks)
+    tokset = set(toks) | {_ar_strip_al(t) for t in toks}
     flags = []
 
-    is_question = bool(toks) and toks[0] in QUESTION_STARTERS
+    is_question = bool(toks) and (toks[0] in QUESTION_STARTERS
+                                  or _ar_strip_al(toks[0]) in QUESTION_STARTERS)
     # voice-search style: real questions, or very long conversational phrases
     # that contain a question word somewhere ("carpenter who can fix my door")
     if is_question or (len(toks) >= 7 and tokset & QUESTION_STARTERS):
@@ -106,7 +146,9 @@ def classify(kw):
     # "near me" / "nearby" / "local" each signal local intent on their own —
     # the old check required the literal token "near", so "plumber nearby"
     # and "local electrician" never got the local flag (scoring undervalued).
-    if ({"near", "nearby", "local"} & tokset) or (loc_words and tokset & loc_words):
+    # (the literal set here used to shadow LOCAL_MARKERS, so the Arabic
+    # near-me words never earned the flag even after being added to it)
+    if (({"near", "nearby", "local"} | AR_LOCAL) & tokset) or (loc_words and tokset & loc_words):
         flags.append("local")
     if tokset & URGENT_MARKERS:
         flags.append("urgent")

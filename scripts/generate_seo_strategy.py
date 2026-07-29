@@ -251,6 +251,12 @@ HARD RULES:
 6. EXCLUDE ids that are pure junk/competitor brands/irrelevant.
 7. Reference provided keywords ONLY by numeric id. Questions/services/names
    are new text — write them fully.
+8b. ONE LANGUAGE PER CLUSTER. If the keyword list contains more than one
+   script (e.g. Arabic + English), never put both in the same cluster — the
+   website builder turns one cluster into ONE page written in ONE language, so
+   a mixed cluster produces a page that targets keywords it cannot rank for.
+   Build separate clusters per language, and write each cluster's questions,
+   entities and cluster_name in THAT cluster's language.
 8. Match the searchers' language(s): if keywords are Arabic/mixed, questions
    and services must cover those languages too.
 9. cluster_name: plain text ONLY — NEVER use commas, colons, pipes or
@@ -394,6 +400,19 @@ def validate(raw, by_id):
                     "answer_angle": str(q.get("answer_angle", "")).strip(),
                     "type": q.get("type", "conversational"),
                 })
+        # LANGUAGE OF THE CLUSTER. A cluster that mixes scripts is unbuildable:
+        # the website builder writes ONE page per cluster in ONE language, so an
+        # English page ends up targeting Arabic keywords (or vice versa). Tag it
+        # from the keywords themselves so the builder can route or skip.
+        _kw_texts = [by_id[i]["keyword"] for i in ids]
+        _ar = sum(1 for t in _kw_texts if re.search(r"[؀-ۿ]", str(t)))
+        _hi = sum(1 for t in _kw_texts if re.search(r"[ऀ-ॿ]", str(t)))
+        _la = sum(1 for t in _kw_texts if re.search(r"[A-Za-z]", str(t)) and
+                  not re.search(r"[؀-ۿऀ-ॿ]", str(t)))
+        cluster_lang = ("ar" if _ar >= max(_la, _hi) and _ar else
+                        "hi" if _hi >= max(_la, _ar) and _hi else "en")
+        cluster_mixed = sum(1 for n in (_ar, _hi, _la) if n) > 1
+
         # Cluster-level AI-Overview signal. The per-keyword flag only fires for
         # question/informational INTENT, so a local-service plan comes back with
         # it off on every keyword (painting run: 0 of 48) even though the page
@@ -411,6 +430,8 @@ def validate(raw, by_id):
             "primary_keyword": expand_kw(by_id[prim]),
             "keywords": [expand_kw(by_id[i]) for i in ids],
             "total_volume": sum(by_id[i]["avg_monthly_searches"] for i in ids),
+            "language": cluster_lang,
+            "language_mixed": bool(cluster_mixed),
             "ai_overview_prone": bool(cluster_aio),
             "questions": questions,
             "entities_to_mention": [str(e).strip() for e in c.get("entities_to_mention", []) if str(e).strip()],
