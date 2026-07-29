@@ -1,0 +1,1227 @@
+{
+  "business": {
+    "name": "Bin Technical Washing Machine Repair",
+    "niche": "Washing machine and dryer repair service in Dubai — all brands,\n                   same-day and emergency callouts, transparent pricing",
+    "location": "United Arab Emirates"
+  },
+  "model_used": "claude-sonnet-5",
+  "language": "",
+  "notes": "The keyword set is dominated by brand- and part-specific repair-cost queries, so clusters are built around distinct failure points (motor, belt, heating element, drum) plus a general dryer-repair-cost catch-all and a maintenance-service cluster, keeping the Dubai cost pillar as the umbrella page. Id 9 (Dyson hair dryer) was excluded as it targets a different product category (personal hair dryers, not laundry appliances) and would dilute topical relevance.",
+  "mode4_cluster": {
+    "workflow_inputs": {
+      "main_topic": "Washing Machine and Dryer Repair Cost in Dubai",
+      "problem_clusters": "Washing Machine and Dryer Repair Cost in Dubai :: Dryer Repair Cost General, Washing Machine Motor Replacement, Dryer Heating Element and Thermal Fuse Repair, Dryer Belt Replacement, Washer and Dryer Maintenance Service, Dryer Drum and Motor Replacement"
+    },
+    "pillar_keyword": {
+      "keyword": "washing machine repair dubai cost",
+      "volume": 10,
+      "kd": 38,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "DECLINING",
+      "peak_months": "Jul/Aug/Sep/Oct/Dec/Feb/Mar/May/Jun",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    "clusters": [
+      {
+        "cluster_name": "Dryer Repair Cost General",
+        "funnel": "BOFU",
+        "primary_keyword": {
+          "keyword": "dryer repair cost",
+          "volume": 10,
+          "kd": 60,
+          "cpc_low": 0.0,
+          "cpc_high": 0.0,
+          "funnel": "BOFU",
+          "intent": "transactional",
+          "trend": "SEASONAL",
+          "peak_months": "Oct/Feb/Apr/Jun",
+          "ai_overview_prone": false,
+          "flags": []
+        },
+        "keywords": [
+          {
+            "keyword": "tumble dryer repair cost",
+            "volume": 10,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "UNKNOWN",
+            "peak_months": "Jan/Apr",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "hotpoint tumble dryer repair cost",
+            "volume": 10,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "UNKNOWN",
+            "peak_months": "Dec",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "dryer repair cost",
+            "volume": 10,
+            "kd": 60,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "SEASONAL",
+            "peak_months": "Oct/Feb/Apr/Jun",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "clothes dryer repair cost",
+            "volume": 10,
+            "kd": 60,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "SEASONAL",
+            "peak_months": "Oct/Feb/Apr/Jun",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "washer dryer repair cost",
+            "volume": 10,
+            "kd": 60,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "SEASONAL",
+            "peak_months": "Oct/Feb/Apr/Jun",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "cost to fix dryer",
+            "volume": 10,
+            "kd": 60,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "SEASONAL",
+            "peak_months": "Oct/Feb/Apr/Jun",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "dryer repair service cost",
+            "volume": 10,
+            "kd": 60,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "SEASONAL",
+            "peak_months": "Oct/Feb/Apr/Jun",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "dryer repair price",
+            "volume": 10,
+            "kd": 60,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "SEASONAL",
+            "peak_months": "Oct/Feb/Apr/Jun",
+            "ai_overview_prone": false,
+            "flags": []
+          }
+        ],
+        "total_volume": 80,
+        "language": "en",
+        "language_mixed": false,
+        "ai_overview_prone": true,
+        "questions": [
+          {
+            "q": "How much does dryer repair cost in Dubai?",
+            "answer_angle": "Lead with an average AED callout + repair range covering the most common faults.",
+            "type": "conversational"
+          },
+          {
+            "q": "What is the average price to fix a tumble dryer?",
+            "answer_angle": "State a clear low-to-high AED range and mention factors (brand, fault type) that shift the price.",
+            "type": "paa"
+          },
+          {
+            "q": "How much does Hotpoint tumble dryer repair cost?",
+            "answer_angle": "Give brand-specific AED figure distinct from the general average to satisfy brand searches.",
+            "type": "conversational"
+          },
+          {
+            "q": "Is it cheaper to repair or replace a washer dryer combo?",
+            "answer_angle": "Compare average repair cost vs new unit cost with a simple decision threshold.",
+            "type": "paa"
+          },
+          {
+            "q": "How much do dryer repair technicians charge per visit in Dubai?",
+            "answer_angle": "State the transparent flat callout fee upfront to match 'transparent pricing' positioning.",
+            "type": "local"
+          },
+          {
+            "q": "Do dryer repair companies in Dubai offer same-day service?",
+            "answer_angle": "Confirm same-day/emergency callout availability with response-time promise.",
+            "type": "local"
+          }
+        ],
+        "entities_to_mention": [
+          "tumble dryer",
+          "Hotpoint",
+          "washer dryer combo",
+          "callout fee",
+          "same-day service",
+          "transparent pricing"
+        ]
+      },
+      {
+        "cluster_name": "Washing Machine Motor Replacement",
+        "funnel": "BOFU",
+        "primary_keyword": {
+          "keyword": "washing machine motor replacement cost",
+          "volume": 10,
+          "kd": 0,
+          "cpc_low": 0.0,
+          "cpc_high": 0.0,
+          "funnel": "BOFU",
+          "intent": "transactional",
+          "trend": "DECLINING",
+          "peak_months": "Jul/Aug/Sep/Nov/Dec/Feb/Mar/Apr/May",
+          "ai_overview_prone": false,
+          "flags": []
+        },
+        "keywords": [
+          {
+            "keyword": "lg washer motor replacement cost",
+            "volume": 10,
+            "kd": 8,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "SEASONAL",
+            "peak_months": "Oct/Dec/Mar/Apr/Jun",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "samsung washer motor replacement cost",
+            "volume": 10,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "UNKNOWN",
+            "peak_months": "Aug/Nov",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "maytag washer motor replacement cost",
+            "volume": 10,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "UNKNOWN",
+            "peak_months": "May",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "whirlpool washer motor replacement cost",
+            "volume": 10,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "UNKNOWN",
+            "peak_months": "Dec",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "new motor for washing machine",
+            "volume": 10,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "funnel": "MOFU",
+            "intent": "commercial",
+            "trend": "UNKNOWN",
+            "peak_months": "Jul/Jan",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "washing machine motor replacement cost",
+            "volume": 10,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "DECLINING",
+            "peak_months": "Jul/Aug/Sep/Nov/Dec/Feb/Mar/Apr/May",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "washer motor replacement cost",
+            "volume": 10,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "DECLINING",
+            "peak_months": "Jul/Aug/Sep/Nov/Dec/Feb/Mar/Apr/May",
+            "ai_overview_prone": false,
+            "flags": []
+          }
+        ],
+        "total_volume": 70,
+        "language": "en",
+        "language_mixed": false,
+        "ai_overview_prone": true,
+        "questions": [
+          {
+            "q": "How much does it cost to replace a washing machine motor in Dubai?",
+            "answer_angle": "Lead with an AED price range for standard motor replacement, then break it down by brand (LG, Samsung, Whirlpool, Maytag).",
+            "type": "conversational"
+          },
+          {
+            "q": "Is it worth replacing the motor or buying a new washing machine?",
+            "answer_angle": "Give a cost-comparison rule of thumb (e.g. if repair exceeds 50% of new unit price, replace) with actual AED figures.",
+            "type": "paa"
+          },
+          {
+            "q": "How do I know my washing machine motor is broken?",
+            "answer_angle": "List 3-4 clear symptoms (burning smell, humming with no spin, tripped breaker) so the AI overview can quote them directly.",
+            "type": "voice"
+          },
+          {
+            "q": "Which washing machine motor replacement is most expensive, LG or Samsung?",
+            "answer_angle": "Present a short comparison table of brand-specific motor prices to win the comparison snippet.",
+            "type": "paa"
+          },
+          {
+            "q": "Where can I get a Whirlpool washer motor replaced same day in Dubai?",
+            "answer_angle": "State the same-day callout guarantee and coverage area explicitly near the top of the page.",
+            "type": "local"
+          }
+        ],
+        "entities_to_mention": [
+          "LG",
+          "Samsung",
+          "Whirlpool",
+          "Maytag",
+          "drive motor",
+          "inverter motor",
+          "AED pricing",
+          "same-day callout"
+        ]
+      },
+      {
+        "cluster_name": "Dryer Heating Element and Thermal Fuse Repair",
+        "funnel": "BOFU",
+        "primary_keyword": {
+          "keyword": "cost to replace heating element dryer",
+          "volume": 10,
+          "kd": 0,
+          "cpc_low": 0.0,
+          "cpc_high": 0.0,
+          "funnel": "BOFU",
+          "intent": "transactional",
+          "trend": "UNKNOWN",
+          "peak_months": "Dec",
+          "ai_overview_prone": false,
+          "flags": []
+        },
+        "keywords": [
+          {
+            "keyword": "dryer heating element replacement cost",
+            "volume": 10,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "UNKNOWN",
+            "peak_months": "Dec",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "lg dryer heating element replacement cost",
+            "volume": 10,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "UNKNOWN",
+            "peak_months": "May",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "cost to replace heating element dryer",
+            "volume": 10,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "UNKNOWN",
+            "peak_months": "Dec",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "dryer heating coil replacement cost",
+            "volume": 10,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "UNKNOWN",
+            "peak_months": "Dec",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "thermal fuse replacement cost",
+            "volume": 10,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "UNKNOWN",
+            "peak_months": "Jan",
+            "ai_overview_prone": false,
+            "flags": []
+          }
+        ],
+        "total_volume": 50,
+        "language": "en",
+        "language_mixed": false,
+        "ai_overview_prone": true,
+        "questions": [
+          {
+            "q": "How much does it cost to replace a dryer heating element?",
+            "answer_angle": "Open with the AED price bracket, then note LG-specific pricing separately for accuracy.",
+            "type": "conversational"
+          },
+          {
+            "q": "Why is my dryer running but not producing heat?",
+            "answer_angle": "List burned-out heating element and blown thermal fuse as the two most common causes, in that order.",
+            "type": "paa"
+          },
+          {
+            "q": "How much does a thermal fuse replacement cost?",
+            "answer_angle": "Give the exact low-cost AED figure since thermal fuse fixes are cheap and quick, to win the snippet.",
+            "type": "conversational"
+          },
+          {
+            "q": "Is a dryer heating coil the same as a heating element?",
+            "answer_angle": "Clarify terminology directly (coil is a component of the element assembly) before pricing.",
+            "type": "voice"
+          },
+          {
+            "q": "Can a broken thermal fuse cause a fire risk in my dryer?",
+            "answer_angle": "Address safety concern first with a clear yes/no and urgency note, then offer emergency callout.",
+            "type": "voice"
+          }
+        ],
+        "entities_to_mention": [
+          "heating element",
+          "heating coil",
+          "thermal fuse",
+          "thermostat",
+          "LG dryer",
+          "fire safety"
+        ]
+      },
+      {
+        "cluster_name": "Dryer Belt Replacement",
+        "funnel": "BOFU",
+        "primary_keyword": {
+          "keyword": "tumble dryer belt replacement cost",
+          "volume": 10,
+          "kd": 0,
+          "cpc_low": 0.0,
+          "cpc_high": 0.0,
+          "funnel": "BOFU",
+          "intent": "transactional",
+          "trend": "UNKNOWN",
+          "peak_months": "May",
+          "ai_overview_prone": false,
+          "flags": []
+        },
+        "keywords": [
+          {
+            "keyword": "dryer belt replacement cost",
+            "volume": 10,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "UNKNOWN",
+            "peak_months": "Aug",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "lg dryer belt replacement cost",
+            "volume": 10,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "UNKNOWN",
+            "peak_months": "Mar",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "samsung dryer belt replacement cost",
+            "volume": 10,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "UNKNOWN",
+            "peak_months": "Nov",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "tumble dryer belt replacement cost",
+            "volume": 10,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "UNKNOWN",
+            "peak_months": "May",
+            "ai_overview_prone": false,
+            "flags": []
+          }
+        ],
+        "total_volume": 40,
+        "language": "en",
+        "language_mixed": false,
+        "ai_overview_prone": true,
+        "questions": [
+          {
+            "q": "How much does it cost to replace a dryer belt in Dubai?",
+            "answer_angle": "State the flat-rate AED range for belt replacement upfront, including parts vs labor split.",
+            "type": "conversational"
+          },
+          {
+            "q": "Why is my dryer drum not turning but the motor runs?",
+            "answer_angle": "Explain a snapped or worn belt is the top cause and link this diagnosis to the repair cost table.",
+            "type": "paa"
+          },
+          {
+            "q": "Is an LG dryer belt more expensive to replace than a Samsung one?",
+            "answer_angle": "Give a brand-by-brand price comparison so the AI overview can cite exact numbers.",
+            "type": "paa"
+          },
+          {
+            "q": "Can I replace a dryer belt myself or do I need a technician?",
+            "answer_angle": "Answer directly: DIY risk voids warranty, recommend certified technician, then state callout price.",
+            "type": "voice"
+          }
+        ],
+        "entities_to_mention": [
+          "drive belt",
+          "idler pulley",
+          "LG",
+          "Samsung",
+          "tumble dryer",
+          "warranty"
+        ]
+      },
+      {
+        "cluster_name": "Washer and Dryer Maintenance Service",
+        "funnel": "BOFU",
+        "primary_keyword": {
+          "keyword": "samsung dryer maintenance",
+          "volume": 10,
+          "kd": 52,
+          "cpc_low": 0.0,
+          "cpc_high": 0.0,
+          "funnel": "BOFU",
+          "intent": "transactional",
+          "trend": "SEASONAL",
+          "peak_months": "Nov/Dec/Jan/Feb/Mar/May/Jun",
+          "ai_overview_prone": false,
+          "flags": []
+        },
+        "keywords": [
+          {
+            "keyword": "dryer maintenance near me",
+            "volume": 10,
+            "kd": 43,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "GROWING",
+            "peak_months": "Jul/Sep/Oct/Nov/Dec/Jan/Feb/Mar/Apr/May/Jun",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "samsung washer and dryer maintenance service",
+            "volume": 10,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "UNKNOWN",
+            "peak_months": "Mar",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "samsung dryer maintenance",
+            "volume": 10,
+            "kd": 52,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "SEASONAL",
+            "peak_months": "Nov/Dec/Jan/Feb/Mar/May/Jun",
+            "ai_overview_prone": false,
+            "flags": []
+          }
+        ],
+        "total_volume": 30,
+        "language": "en",
+        "language_mixed": false,
+        "ai_overview_prone": true,
+        "questions": [
+          {
+            "q": "How much does washing machine and dryer maintenance cost near me?",
+            "answer_angle": "Give a flat AED maintenance package price and what it includes (inspection, cleaning, filter check).",
+            "type": "local"
+          },
+          {
+            "q": "How often should I service my Samsung dryer?",
+            "answer_angle": "State a recommended frequency (e.g. every 12 months) sourced from manufacturer guidance.",
+            "type": "conversational"
+          },
+          {
+            "q": "What does a washing machine maintenance service include?",
+            "answer_angle": "List the checklist items directly (hose check, drum clean, seal inspection) to win the PAA box.",
+            "type": "paa"
+          },
+          {
+            "q": "Does regular maintenance prevent washing machine breakdowns?",
+            "answer_angle": "Answer yes with a short stat/claim on reduced failure rate, then link to booking.",
+            "type": "voice"
+          }
+        ],
+        "entities_to_mention": [
+          "preventive maintenance",
+          "Samsung",
+          "filter cleaning",
+          "hose inspection",
+          "annual service plan"
+        ]
+      },
+      {
+        "cluster_name": "Dryer Drum and Motor Replacement",
+        "funnel": "BOFU",
+        "primary_keyword": {
+          "keyword": "samsung dryer drum replacement cost",
+          "volume": 10,
+          "kd": 0,
+          "cpc_low": 0.0,
+          "cpc_high": 0.0,
+          "funnel": "BOFU",
+          "intent": "transactional",
+          "trend": "UNKNOWN",
+          "peak_months": "Sep",
+          "ai_overview_prone": false,
+          "flags": []
+        },
+        "keywords": [
+          {
+            "keyword": "samsung dryer drum replacement cost",
+            "volume": 10,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "UNKNOWN",
+            "peak_months": "Sep",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "electrolux dryer motor replacement cost",
+            "volume": 10,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "UNKNOWN",
+            "peak_months": "Apr",
+            "ai_overview_prone": false,
+            "flags": []
+          }
+        ],
+        "total_volume": 20,
+        "language": "en",
+        "language_mixed": false,
+        "ai_overview_prone": true,
+        "questions": [
+          {
+            "q": "How much does it cost to replace a Samsung dryer drum?",
+            "answer_angle": "State the exact AED range for drum replacement including labor.",
+            "type": "conversational"
+          },
+          {
+            "q": "How much does an Electrolux dryer motor replacement cost?",
+            "answer_angle": "Give brand-specific AED figure separate from generic dryer motor pricing.",
+            "type": "conversational"
+          },
+          {
+            "q": "What causes a dryer drum to crack or wobble?",
+            "answer_angle": "List overloading and worn support rollers as top causes before pricing the fix.",
+            "type": "paa"
+          }
+        ],
+        "entities_to_mention": [
+          "Samsung",
+          "Electrolux",
+          "dryer drum",
+          "drum support rollers",
+          "dryer motor"
+        ]
+      }
+    ]
+  },
+  "mode3_full_website": {
+    "workflow_inputs": {
+      "industry": "Appliance Repair Service",
+      "services_mode3": "Dryer Repair, Washing Machine Motor Replacement, Dryer Belt Replacement, Dryer Heating Element Repair, Washer and Dryer Maintenance Service, Dryer Drum Replacement, Washing Machine Repair Dubai"
+    },
+    "services": [
+      "Dryer Repair",
+      "Washing Machine Motor Replacement",
+      "Dryer Belt Replacement",
+      "Dryer Heating Element Repair",
+      "Washer and Dryer Maintenance Service",
+      "Dryer Drum Replacement",
+      "Washing Machine Repair Dubai"
+    ]
+  },
+  "mode2_services_hub": {
+    "workflow_inputs": {
+      "main_service": "Washing Machine and Dryer Repair",
+      "sub_services": "Washer Motor Replacement, Dryer Belt Replacement, Dryer Heating Element Replacement, Thermal Fuse Replacement, Dryer Drum Replacement, Tumble Dryer Repair, Washer and Dryer Maintenance Plans, Same-Day Emergency Callout"
+    }
+  },
+  "mode5_pseo": {
+    "cities_in_data": [
+      {
+        "city": "Dubai",
+        "keywords": [
+          {
+            "keyword": "washing machine repair dubai cost",
+            "volume": 10,
+            "kd": 38,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "DECLINING",
+            "peak_months": "Jul/Aug/Sep/Oct/Dec/Feb/Mar/May/Jun",
+            "ai_overview_prone": false,
+            "flags": []
+          }
+        ],
+        "total_volume": 10
+      }
+    ],
+    "recommended_city_targets": [
+      "Dubai",
+      "Sharjah",
+      "Abu Dhabi",
+      "Ajman",
+      "Ras Al Khaimah",
+      "Fujairah",
+      "Emirate of Umm Al Quwain"
+    ],
+    "notes": "Only Dubai appears explicitly in the keyword data, matching the business's home base; other Emirates are recommended as expansion pSEO targets based on the provided geo list rather than search evidence.",
+    "geo_area_candidates": [
+      "United Arab Emirates",
+      "Abu Dhabi",
+      "Ajman",
+      "Dubai",
+      "Emirate of Umm Al Quwain",
+      "Fujairah",
+      "Ras Al Khaimah",
+      "Sharjah"
+    ]
+  },
+  "keyword_metrics": [
+    {
+      "keyword": "lg washer motor replacement cost",
+      "volume": 10,
+      "kd": 8,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "SEASONAL",
+      "peak_months": "Oct/Dec/Mar/Apr/Jun",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "dryer maintenance near me",
+      "volume": 10,
+      "kd": 43,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "GROWING",
+      "peak_months": "Jul/Sep/Oct/Nov/Dec/Jan/Feb/Mar/Apr/May/Jun",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "dryer belt replacement cost",
+      "volume": 10,
+      "kd": 0,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "UNKNOWN",
+      "peak_months": "Aug",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "dryer vent repair cost",
+      "volume": 10,
+      "kd": 0,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "UNKNOWN",
+      "peak_months": "Mar",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "samsung washer and dryer maintenance service",
+      "volume": 10,
+      "kd": 0,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "UNKNOWN",
+      "peak_months": "Mar",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "lg dryer belt replacement cost",
+      "volume": 10,
+      "kd": 0,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "UNKNOWN",
+      "peak_months": "Mar",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "dryer heating element replacement cost",
+      "volume": 10,
+      "kd": 0,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "UNKNOWN",
+      "peak_months": "Dec",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "samsung dryer belt replacement cost",
+      "volume": 10,
+      "kd": 0,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "UNKNOWN",
+      "peak_months": "Nov",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "dyson hair dryer repair cost",
+      "volume": 10,
+      "kd": 0,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "UNKNOWN",
+      "peak_months": "Feb/Apr",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "tumble dryer repair cost",
+      "volume": 10,
+      "kd": 0,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "UNKNOWN",
+      "peak_months": "Jan/Apr",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "lg dryer heating element replacement cost",
+      "volume": 10,
+      "kd": 0,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "UNKNOWN",
+      "peak_months": "May",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "samsung dryer drum replacement cost",
+      "volume": 10,
+      "kd": 0,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "UNKNOWN",
+      "peak_months": "Sep",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "hotpoint tumble dryer repair cost",
+      "volume": 10,
+      "kd": 0,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "UNKNOWN",
+      "peak_months": "Dec",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "cost to replace heating element dryer",
+      "volume": 10,
+      "kd": 0,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "UNKNOWN",
+      "peak_months": "Dec",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "dryer heating coil replacement cost",
+      "volume": 10,
+      "kd": 0,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "UNKNOWN",
+      "peak_months": "Dec",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "electrolux dryer motor replacement cost",
+      "volume": 10,
+      "kd": 0,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "UNKNOWN",
+      "peak_months": "Apr",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "thermal fuse replacement cost",
+      "volume": 10,
+      "kd": 0,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "UNKNOWN",
+      "peak_months": "Jan",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "tumble dryer belt replacement cost",
+      "volume": 10,
+      "kd": 0,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "UNKNOWN",
+      "peak_months": "May",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "samsung washer motor replacement cost",
+      "volume": 10,
+      "kd": 0,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "UNKNOWN",
+      "peak_months": "Aug/Nov",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "maytag washer motor replacement cost",
+      "volume": 10,
+      "kd": 0,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "UNKNOWN",
+      "peak_months": "May",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "whirlpool washer motor replacement cost",
+      "volume": 10,
+      "kd": 0,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "UNKNOWN",
+      "peak_months": "Dec",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "new motor for washing machine",
+      "volume": 10,
+      "kd": 0,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "MOFU",
+      "intent": "commercial",
+      "trend": "UNKNOWN",
+      "peak_months": "Jul/Jan",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "samsung dryer maintenance",
+      "volume": 10,
+      "kd": 52,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "SEASONAL",
+      "peak_months": "Nov/Dec/Jan/Feb/Mar/May/Jun",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "dryer repair cost",
+      "volume": 10,
+      "kd": 60,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "SEASONAL",
+      "peak_months": "Oct/Feb/Apr/Jun",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "clothes dryer repair cost",
+      "volume": 10,
+      "kd": 60,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "SEASONAL",
+      "peak_months": "Oct/Feb/Apr/Jun",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "washer dryer repair cost",
+      "volume": 10,
+      "kd": 60,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "SEASONAL",
+      "peak_months": "Oct/Feb/Apr/Jun",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "cost to fix dryer",
+      "volume": 10,
+      "kd": 60,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "SEASONAL",
+      "peak_months": "Oct/Feb/Apr/Jun",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "dryer repair service cost",
+      "volume": 10,
+      "kd": 60,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "SEASONAL",
+      "peak_months": "Oct/Feb/Apr/Jun",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "dryer repair price",
+      "volume": 10,
+      "kd": 60,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "SEASONAL",
+      "peak_months": "Oct/Feb/Apr/Jun",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "washing machine motor replacement cost",
+      "volume": 10,
+      "kd": 0,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "DECLINING",
+      "peak_months": "Jul/Aug/Sep/Nov/Dec/Feb/Mar/Apr/May",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "washer motor replacement cost",
+      "volume": 10,
+      "kd": 0,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "DECLINING",
+      "peak_months": "Jul/Aug/Sep/Nov/Dec/Feb/Mar/Apr/May",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "washing machine repair dubai cost",
+      "volume": 10,
+      "kd": 38,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "DECLINING",
+      "peak_months": "Jul/Aug/Sep/Oct/Dec/Feb/Mar/May/Jun",
+      "ai_overview_prone": false,
+      "flags": []
+    }
+  ]
+}
