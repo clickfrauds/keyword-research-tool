@@ -492,6 +492,69 @@ def validate(raw, by_id):
         },
     }
 
+    # ── AREA-LEVEL DEMAND (what Mode 5 pSEO actually builds pages from) ──────
+    # cities_in_data buckets every location keyword under one city: a Dubai run
+    # returned ONE entry holding "…al qusais 260", "…silicon oasis 170",
+    # "…marina 140" together, so the builder had no per-area volume to rank or
+    # target with. The area names are already sitting in the keyword text and in
+    # the real Google Ads geo list — group by them here, in Python, no API cost.
+    def _norm_area(s):
+        return re.sub(r"[^a-z0-9 ]", "", str(s).lower()).strip()
+
+    # longest name first so "Palm Jumeirah" claims the keyword before "Jumeirah"
+    _geo_names = sorted([g for g in (geo_areas or []) if len(str(g)) > 3],
+                        key=lambda g: -len(str(g)))
+
+    def _area_aliases(area):
+        """"Dubai Silicon Oasis" must also match "…repair silicon oasis"."""
+        a = _norm_area(area)
+        out = {a}
+        parts = a.split()
+        if len(parts) > 2:
+            out.add(" ".join(parts[1:]))       # drop a leading city word
+        return {x for x in out if len(x) >= 4}
+
+    def _is_location_qualified(kw_norm, alias):
+        """The area must read as the LOCATION of the query, not a product word.
+
+        "front load washing machine repair" contains the Dubai area "Front" —
+        matching on presence alone put 22 product keywords under an area page.
+        A real location sits at the end of the phrase or behind in/near/at.
+        """
+        words = kw_norm.split()
+        a_words = alias.split()
+        n = len(a_words)
+        for i in range(len(words) - n + 1):
+            if words[i:i + n] != a_words:
+                continue
+            tail_start = len(words) - n
+            if i >= tail_start - 1:            # at/near the end of the query
+                return True
+            if i > 0 and words[i - 1] in ("in", "near", "at", "around"):
+                return True
+        return False
+
+    _area_hits = {}
+    for k in keywords:
+        kw_n = _norm_area(k["keyword"])
+        for area in _geo_names:
+            if any(_is_location_qualified(kw_n, al) for al in _area_aliases(area)):
+                _area_hits.setdefault(area, []).append(k)
+                break
+    areas = []
+    for name, kws in _area_hits.items():
+        kws = sorted(kws, key=lambda x: -x["avg_monthly_searches"])
+        areas.append({
+            "area": name,
+            "keywords": [expand_kw(k) for k in kws[:25]],
+            "total_volume": sum(k["avg_monthly_searches"] for k in kws),
+            "primary_keyword": expand_kw(kws[0]),
+        })
+    areas.sort(key=lambda a: -a["total_volume"])
+    if areas:
+        print(f"📍 Area demand: {len(areas)} areas with their own keywords "
+              f"(top: {', '.join(a['area'] for a in areas[:5])})")
+
     m5 = raw.get("mode5_pseo") or {}
     cities = []
     for c in m5.get("cities_in_data", []):
@@ -506,6 +569,9 @@ def validate(raw, by_id):
     cities.sort(key=lambda c: -c["total_volume"])
     mode5 = {
         "cities_in_data": cities,
+        # per-area demand — one entry per real geo area that has its own
+        # keywords, ready for one pSEO page each
+        "areas": areas,
         "recommended_city_targets": [str(x).strip() for x in m5.get("recommended_city_targets", [])],
         "notes": str(m5.get("notes", "")).strip(),
     }
