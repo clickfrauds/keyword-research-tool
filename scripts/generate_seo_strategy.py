@@ -550,10 +550,32 @@ def validate(raw, by_id):
             "total_volume": sum(k["avg_monthly_searches"] for k in kws),
             "primary_keyword": expand_kw(kws[0]),
         })
-    areas.sort(key=lambda a: -a["total_volume"])
+    for a in areas:
+        a["demand"] = "measured"          # this area has its own Planner volume
+
+    # EVERY real area of the target city, not only the ones that happened to
+    # show up in the keyword data. A Dubai run measured 6 areas out of 103 real
+    # ones — the other 97 are legitimate pSEO targets, they simply have no
+    # standalone volume. Mode 5 builds the measured ones first and can extend
+    # into the rest; each is labelled so nobody mistakes a candidate for
+    # measured demand.
+    _measured = {_norm_area(a["area"]) for a in areas}
+    for name in _geo_names:
+        if _norm_area(name) in _measured:
+            continue
+        areas.append({
+            "area": name,
+            "keywords": [],
+            "total_volume": 0,
+            "primary_keyword": {},
+            "demand": "candidate",        # real geo target, no measured volume
+        })
+    areas.sort(key=lambda a: (-a["total_volume"], a["area"]))
+    _n_measured = sum(1 for a in areas if a["demand"] == "measured")
     if areas:
-        print(f"📍 Area demand: {len(areas)} areas with their own keywords "
-              f"(top: {', '.join(a['area'] for a in areas[:5])})")
+        print(f"📍 Areas: {_n_measured} with measured demand "
+              f"({', '.join(a['area'] for a in areas[:5] if a['demand'] == 'measured')}), "
+              f"{len(areas) - _n_measured} more real geo areas as candidates")
 
     m5 = raw.get("mode5_pseo") or {}
     cities = []
