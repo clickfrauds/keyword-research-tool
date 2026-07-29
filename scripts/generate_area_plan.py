@@ -209,6 +209,7 @@ def main():
         return svc.generate_keyword_ideas(request=req)
 
     results, skipped, api_errors = [], [], []
+    quota_hit = False
     for i, area in enumerate(areas, 1):
         seed = f"{PRIMARY_SERVICE} {area}"
         resp = None
@@ -221,10 +222,26 @@ def main():
                 print(f"   ⏳ rate limit — waiting {wait}s ({attempt}/3)")
                 time.sleep(wait)
             except GoogleAdsException as e:
-                msg = e.failure.errors[0].message
+                err = e.failure.errors[0]
+                msg = err.message
+                # Daily quota gone (QuotaError.RESOURCE_EXHAUSTED). Every
+                # remaining area would fail the same way, so stop rather than
+                # firing another hundred doomed requests — and keep what we
+                # already measured instead of throwing the run away.
+                if "RESOURCE_EXHAUSTED" in str(err.error_code) or "quota" in msg.lower():
+                    print(f"   🛑 [{i}/{len(areas)}] daily API quota exhausted — stopping here.")
+                    quota_hit = True
+                    break
                 print(f"   ⚠️ [{i}/{len(areas)}] {area}: {msg[:70]}")
                 api_errors.append(msg)
                 break
+        if quota_hit:
+            unmeasured = areas[i - 1:]
+            print(f"   ↳ {len(results)} areas measured before the limit; "
+                  f"{len(unmeasured)} not reached ({', '.join(unmeasured[:4])}…).")
+            print("   ↳ The plan below is real but PARTIAL — re-run tomorrow, or "
+                  "lower MAX_AREAS, to cover the rest.")
+            break
         if resp is None:
             skipped.append(area)
             time.sleep(CALL_DELAY)
@@ -267,6 +284,12 @@ def main():
     # demand. The first version printed "written ✅" over 60 auth failures and
     # exited 0, which would have handed the builder an empty plan as if the
     # research had succeeded.
+    if quota_hit and not results:
+        print("\n❌ The daily Google Ads API quota was already exhausted — not one "
+              "area could be measured, so there is no plan to write.")
+        print("   Re-run tomorrow, or check today's usage in the Ads UI: "
+              "Tools & Settings → Setup → API Center.")
+        sys.exit(1)
     if api_errors and not results:
         print(f"\n❌ Every one of the {len(api_errors)} requests was rejected by the Google Ads "
               f"API — no research happened.")
@@ -302,7 +325,8 @@ def main():
             "cities_in_data": [],
             "recommended_city_targets": [TARGET_LOCATION] if results else [],
             "geo_area_candidates": areas,
-            "notes": (f"{len(results)} of {len(areas)} areas in {TARGET_LOCATION} have their own "
+            "partial": quota_hit,
+        "notes": (f"{len(results)} of {len(areas)} areas in {TARGET_LOCATION} have their own "
                       f"measured demand for '{PRIMARY_SERVICE}'."),
         },
     }
