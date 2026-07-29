@@ -144,6 +144,7 @@
       <option value="seo">SEO — website content plan (clusters, services, questions)</option>
       <option value="both">Both — Ads package + SEO package</option>
       <option value="mode3">Mode 3 Site Plan — full website (services list → per-page keywords)</option>
+      <option value="mode5">Mode 5 Area Plan — pSEO (every area of the city, measured one by one)</option>
       <option value="locations">Locations only — instant Editor CSV (no pipeline run)</option>
     </select>
 
@@ -196,13 +197,20 @@
       }
       document.getElementById("research_type").addEventListener("change", function () {
         var m3 = this.value === "mode3";
+        var m5 = this.value === "mode5";
         setLocationsOnly(this.value === "locations");
-        document.getElementById("seed-label").textContent = m3 ? "Services list (same as builder Mode 3)" : "Seed keywords";
+        document.getElementById("seed-label").textContent =
+          m3 ? "Services list (same as builder Mode 3)"
+             : m5 ? "The ONE service these area pages sell"
+             : "Seed keywords";
         document.getElementById("seed_keywords").placeholder = m3
           ? "AC Repair, Fridge Repair, Washing Machine Repair, Oven Repair, ..."
+          : m5 ? "washing machine repair"
           : "ac repair dubai, ac not cooling, ac service dubai";
         document.getElementById("seed-hint").textContent = m3
           ? "Comma-separated SERVICES — paste the exact same list you give the website builder's Mode 3 (up to 100+). The result is one JSON link for the builder's seo_inputs_url field."
+          : m5
+          ? "ONE service. Every real area of the city is then measured separately (\"{service} {area}\") and only areas with their own demand are kept — that is what stops pSEO turning into doorway pages. Set Target location as CITY, COUNTRY (e.g. Dubai, UAE): the country is required. ~3 minutes for 60 areas. Paste the resulting .mode5.json link into the builder's Mode 5."
           : "Comma-separated. 3–6 seed terms works well. Tip: include your city in a few seeds for local data.";
       });
     </script>

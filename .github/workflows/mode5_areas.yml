@@ -1,0 +1,79 @@
+name: Mode 5 Area Plan (pSEO area-wise keyword research)
+
+on:
+  workflow_dispatch:
+    inputs:
+      request_id:
+        description: "Request id (the frontend fills this)"
+        default: ''
+      business_name:
+        default: ''
+      niche_description:
+        default: ''
+      target_location:
+        description: "CITY, COUNTRY — e.g. 'Dubai, UAE'. The country is required: the geo list is per-country."
+        default: ''
+      primary_service:
+        description: "The one service these area pages sell — e.g. 'washing machine repair'"
+        default: ''
+      min_area_volume:
+        description: "Keep an area only at/above this monthly volume. Planner's lowest bucket is 10, so 20 is the first number that means real demand."
+        default: '20'
+      max_areas:
+        description: "How many areas to research (3s pacing each — 60 areas ≈ 3 minutes)"
+        default: '60'
+      language:
+        default: ''
+
+jobs:
+  area-plan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Resolve request id (fallback for manual runs)
+        id: reqid
+        run: |
+          RID="${{ github.event.inputs.request_id }}"
+          if [ -z "$RID" ]; then RID="manual-${{ github.run_id }}"; fi
+          echo "value=$RID" >> $GITHUB_OUTPUT
+
+      - name: Research every area of the city (Google Ads Planner)
+        env:
+          GOOGLE_ADS_DEVELOPER_TOKEN: ${{ secrets.GOOGLE_ADS_DEVELOPER_TOKEN }}
+          GOOGLE_ADS_CLIENT_ID: ${{ secrets.GOOGLE_ADS_CLIENT_ID }}
+          GOOGLE_ADS_CLIENT_SECRET: ${{ secrets.GOOGLE_ADS_CLIENT_SECRET }}
+          GOOGLE_ADS_REFRESH_TOKEN: ${{ secrets.GOOGLE_ADS_REFRESH_TOKEN }}
+          GOOGLE_ADS_LOGIN_CUSTOMER_ID: ${{ secrets.GOOGLE_ADS_LOGIN_CUSTOMER_ID }}
+          GOOGLE_ADS_CUSTOMER_ID: ${{ secrets.GOOGLE_ADS_CUSTOMER_ID }}
+          GOOGLE_ADS_USE_PROTO_PLUS: "true"
+          BUSINESS_NAME: ${{ github.event.inputs.business_name }}
+          NICHE_DESCRIPTION: ${{ github.event.inputs.niche_description }}
+          TARGET_LOCATION: ${{ github.event.inputs.target_location }}
+          PRIMARY_SERVICE: ${{ github.event.inputs.primary_service }}
+          MIN_AREA_VOLUME: ${{ github.event.inputs.min_area_volume }}
+          MAX_AREAS: ${{ github.event.inputs.max_areas }}
+          LANGUAGE: ${{ github.event.inputs.language }}
+        run: python scripts/generate_area_plan.py
+
+      - name: Publish result JSON (raw link for the builder)
+        env:
+          RESULTS_TOKEN: ${{ secrets.RESULTS_TOKEN || secrets.GITHUB_TOKEN }}
+          REQUEST_ID: ${{ steps.reqid.outputs.value }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: python scripts/push_results.py
+
+      - name: Upload artifact (backup copy)
+        uses: actions/upload-artifact@v4
+        with:
+          name: area-plan-${{ steps.reqid.outputs.value }}
+          path: area_plan.json
+          retention-days: 30

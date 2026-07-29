@@ -61,6 +61,10 @@ FILES_TO_PUSH = [
     # Mode 1 "Landing pages JSON URL" field — one page per ad-group theme,
     # exact RSA url_slugs, internally linked.
     ("landing_pages.json", "pages.json"),
+    # Mode 5 pSEO: one entry per area that has its OWN measured demand, in the
+    # exact shape the builder's Mode 5 reads. Paste this link into the builder's
+    # "Keyword-tool plan URL" field — no Google Sheets involved.
+    ("area_plan.json", "mode5.json"),
     # API push outcome (validate errors or live-push summary) — shown as a
     # download so the user sees exactly what landed / what to fix.
     ("google_ads_push_report.md", "push.md"),

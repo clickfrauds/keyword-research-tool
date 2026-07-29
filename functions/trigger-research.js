@@ -70,7 +70,13 @@ export async function onRequestPost(context) {
   // a stub html so the same polling flow works. Everything else goes to the
   // normal keyword pipeline.
   const isMode3 = body.research_type === "mode3";
-  const workflowFile = isMode3 ? "mode3_plan.yml" : "keyword_pipeline.yml";
+  // mode5 = the dedicated pSEO area-research workflow: one Planner request per real
+  // geo area of the city, so each area page is built on its own measured
+  // demand instead of whatever the seed run happened to return.
+  const isMode5 = body.research_type === "mode5";
+  const workflowFile = isMode3 ? "mode3_plan.yml"
+                     : isMode5 ? "mode5_areas.yml"
+                     : "keyword_pipeline.yml";
   const dispatchUrl = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/actions/workflows/${workflowFile}/dispatches`;
 
   // Content language CODE (es/fr/de/ar/...). "no"/blank = English (unchanged).
@@ -81,7 +87,20 @@ export async function onRequestPost(context) {
   const language = LANG_CODES.includes(String(body.language || "").toLowerCase())
     ? String(body.language).toLowerCase() : "no";
 
-  const inputs = isMode3
+  const inputs = isMode5
+    ? {
+        business_name: String(business_name).slice(0, 200),
+        niche_description: String(niche_description).slice(0, 500),
+        target_location: String(target_location).slice(0, 200),
+        // the ONE service these area pages sell; falls back to the first seed
+        primary_service: String(body.primary_service || seed_keywords)
+                           .split(",")[0].trim().slice(0, 120),
+        min_area_volume: String(body.min_area_volume || "20").slice(0, 5),
+        max_areas: String(body.max_areas || "60").slice(0, 4),
+        language,
+        request_id,
+      }
+    : isMode3
     ? {
         business_name: String(business_name).slice(0, 200),
         niche_description: String(niche_description).slice(0, 500),
