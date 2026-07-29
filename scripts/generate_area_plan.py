@@ -179,7 +179,7 @@ def main():
         req.historical_metrics_options.include_average_cpc = True
         return svc.generate_keyword_ideas(request=req)
 
-    results, skipped = [], []
+    results, skipped, api_errors = [], [], []
     for i, area in enumerate(areas, 1):
         seed = f"{PRIMARY_SERVICE} {area}"
         resp = None
@@ -192,7 +192,9 @@ def main():
                 print(f"   ⏳ rate limit — waiting {wait}s ({attempt}/3)")
                 time.sleep(wait)
             except GoogleAdsException as e:
-                print(f"   ⚠️ [{i}/{len(areas)}] {area}: {e.failure.errors[0].message[:70]}")
+                msg = e.failure.errors[0].message
+                print(f"   ⚠️ [{i}/{len(areas)}] {area}: {msg[:70]}")
+                api_errors.append(msg)
                 break
         if resp is None:
             skipped.append(area)
@@ -231,6 +233,23 @@ def main():
             skipped.append(area)
             print(f"   ·  [{i}/{len(areas)}] {area:<28} {total or 0:>5}/mo  — below threshold")
         time.sleep(CALL_DELAY)
+
+    # An API that rejected EVERY request is a broken run, not a city without
+    # demand. The first version printed "written ✅" over 60 auth failures and
+    # exited 0, which would have handed the builder an empty plan as if the
+    # research had succeeded.
+    if api_errors and not results:
+        print(f"\n❌ Every one of the {len(api_errors)} requests was rejected by the Google Ads "
+              f"API — no research happened.")
+        print(f"   First error: {api_errors[0][:160]}")
+        if "permission to access customer" in api_errors[0]:
+            print("   This is a credentials problem, not a data problem: check "
+                  "GOOGLE_ADS_CUSTOMER_ID, and set GOOGLE_ADS_LOGIN_CUSTOMER_ID only if the "
+                  "account really sits under an MCC (an empty value breaks the header).")
+        sys.exit(1)
+    if api_errors:
+        print(f"\n⚠️ {len(api_errors)} of {len(areas)} requests failed at the API — "
+              f"those areas are unmeasured, not proven empty.")
 
     results.sort(key=lambda a: -a["total_volume"])
     print(f"\n📊 {len(results)} areas worth a page, {len(skipped)} below {MIN_AREA_VOLUME}/mo")

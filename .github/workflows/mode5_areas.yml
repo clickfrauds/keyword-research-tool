@@ -25,6 +25,9 @@ on:
       language:
         default: ''
 
+permissions:
+  contents: write
+
 jobs:
   area-plan:
     runs-on: ubuntu-latest
@@ -52,7 +55,6 @@ jobs:
           GOOGLE_ADS_CLIENT_ID: ${{ secrets.GOOGLE_ADS_CLIENT_ID }}
           GOOGLE_ADS_CLIENT_SECRET: ${{ secrets.GOOGLE_ADS_CLIENT_SECRET }}
           GOOGLE_ADS_REFRESH_TOKEN: ${{ secrets.GOOGLE_ADS_REFRESH_TOKEN }}
-          GOOGLE_ADS_LOGIN_CUSTOMER_ID: ${{ secrets.GOOGLE_ADS_LOGIN_CUSTOMER_ID }}
           GOOGLE_ADS_CUSTOMER_ID: ${{ secrets.GOOGLE_ADS_CUSTOMER_ID }}
           GOOGLE_ADS_USE_PROTO_PLUS: "true"
           BUSINESS_NAME: ${{ github.event.inputs.business_name }}
@@ -66,7 +68,7 @@ jobs:
 
       - name: Publish result JSON (raw link for the builder)
         env:
-          RESULTS_TOKEN: ${{ secrets.RESULTS_TOKEN || secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REQUEST_ID: ${{ steps.reqid.outputs.value }}
           GITHUB_REPOSITORY: ${{ github.repository }}
         run: python scripts/push_results.py
