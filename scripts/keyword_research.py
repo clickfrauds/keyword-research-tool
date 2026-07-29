@@ -291,7 +291,23 @@ def main():
     for i, seed in enumerate(SEED_KEYWORDS):
         if i:
             time.sleep(3)
-        seed_lang = LANGUAGE_ID or resolved_lang_id or detect_language_id([seed])[0]
+        # SCRIPT WINS OVER THE RUN-WIDE CODE (mixed-list fix): the per-seed
+        # detector was only consulted when no LANGUAGE/LANGUAGE_ID was set. Set
+        # LANGUAGE=en (or ar) on a MIXED Arabic+English seed list and every seed
+        # went to the Planner under that one language — the other script's seeds
+        # came back nearly empty, which is why Arabic keywords "disappeared"
+        # from mixed runs. A seed written in Arabic/Devanagari script is
+        # unambiguous, so its own script always decides its Planner language;
+        # Latin-script seeds still follow the explicit code (es/fr/de… cannot be
+        # told apart by script).
+        _script_lang, _script_why = detect_language_id([seed])
+        _forced = LANGUAGE_ID or resolved_lang_id
+        if _forced and _script_lang != "1000" and _script_lang != _forced:
+            seed_lang = _script_lang
+            print(f"   🔤 '{seed[:40]}' is {_script_why.split(' (')[0]} script — "
+                  f"pulled as {_script_lang}, not the run-wide {_forced}")
+        else:
+            seed_lang = _forced or _script_lang
         response = None
         for attempt in range(1, 6):
             try:

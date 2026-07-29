@@ -89,6 +89,24 @@ def main():
     camp_name = campaigns[0]  # single-campaign mode is the default
     validate = PUSH_MODE != "live"
 
+    # NAME COLLISION: the mutate is atomic and partial_failure is off, so a
+    # campaign whose name already exists in the account fails the ENTIRE push
+    # (DUPLICATE_CAMPAIGN_NAME) — every re-run of the same client hit this.
+    # Suffix a counter instead of dying.
+    try:
+        existing = {row.campaign.name for row in svc.search(
+            customer_id=PUSH_CUSTOMER_ID,
+            query="SELECT campaign.name FROM campaign "
+                  "WHERE campaign.status != 'REMOVED'")}
+        if camp_name in existing:
+            base_name, n = camp_name, 2
+            while f"{base_name} v{n}" in existing and n < 50:
+                n += 1
+            camp_name = f"{base_name} v{n}"
+            log(f"ℹ️ '{base_name}' already exists in the account — pushing as '{camp_name}'.")
+    except Exception as _e:
+        log(f"ℹ️ Could not list existing campaign names ({str(_e)[:60]}) — continuing.")
+
     log(f"# Google Ads API push — {camp_name}")
     log(f"Target account: {PUSH_CUSTOMER_ID} | mode: "
         f"{'VALIDATE (dry-run, nothing created)' if validate else 'LIVE (atomic, campaign lands Paused)'}")
@@ -172,11 +190,34 @@ def main():
 
         mt = client.enums.KeywordMatchTypeEnum.EXACT \
             if g.get("match_type") == "exact" else client.enums.KeywordMatchTypeEnum.PHRASE
+
+        # Google rejects a keyword over 80 chars or 10 words, and rejects the
+        # SAME text+match type twice in one ad group. Either one fails the whole
+        # atomic push, so filter here instead of losing the campaign.
+        seen_texts = set()
+
+        def _kw_ok(text, label):
+            t = " ".join(str(text or "").split())
+            if not t:
+                return None
+            if len(t) > 80 or len(t.split()) > 10:
+                log(f"⚠️ {label} skipped (Google limit: 80 chars / 10 words): {t[:60]}")
+                return None
+            key = t.lower()
+            if key in seen_texts:
+                log(f"⚠️ duplicate {label} skipped in '{g.get('name', '')}': {t[:60]}")
+                return None
+            seen_texts.add(key)
+            return t
+
         for k in g.get("keywords", []):
+            t = _kw_ok(k.get("keyword", ""), "keyword")
+            if not t:
+                continue
             o = op()
             cr = o.ad_group_criterion_operation.create
             cr.ad_group = ag_res
-            cr.keyword.text = k.get("keyword", "")
+            cr.keyword.text = t
             cr.keyword.match_type = mt
             bid = k.get("suggested_bid") or median
             if bid:
@@ -184,21 +225,29 @@ def main():
             ops.append(o)
             n_kw += 1
         for e in g.get("intent_expansion_keywords", []):
+            t = _kw_ok(e, "expansion keyword")
+            if not t:
+                continue
             o = op()
             cr = o.ad_group_criterion_operation.create
             cr.ad_group = ag_res
-            cr.keyword.text = e
+            cr.keyword.text = t
             cr.keyword.match_type = client.enums.KeywordMatchTypeEnum.PHRASE
             if median:
                 cr.cpc_bid_micros = int(median * 1_000_000)
             ops.append(o)
             n_kw += 1
+        seen_negs = set()
         for n in g.get("negative_keywords", []):
+            t = " ".join(str(n or "").split())
+            if not t or len(t) > 80 or len(t.split()) > 10 or t.lower() in seen_negs:
+                continue
+            seen_negs.add(t.lower())
             o = op()
             cr = o.ad_group_criterion_operation.create
             cr.ad_group = ag_res
             cr.negative = True
-            cr.keyword.text = n
+            cr.keyword.text = t
             cr.keyword.match_type = client.enums.KeywordMatchTypeEnum.PHRASE
             ops.append(o)
             n_neg += 1
@@ -241,8 +290,63 @@ def main():
             rsa.path2 = r["Path 2"][:15]
         if r.get("Final URL"):
             ad.ad.final_urls.append(r["Final URL"])
+        # Google requires >=3 headlines and >=2 descriptions on an RSA, and a
+        # Final URL. One short row would fail the whole atomic push, so drop the
+        # row instead and say so.
+        if len(rsa.headlines) < 3 or len(rsa.descriptions) < 2 or not ad.ad.final_urls:
+            log(f"⚠️ RSA skipped for '{r.get('Ad Group')}' — needs 3+ headlines, "
+                f"2+ descriptions and a Final URL "
+                f"(got {len(rsa.headlines)}/{len(rsa.descriptions)}"
+                f"{', no URL' if not ad.ad.final_urls else ''})")
+            continue
         ops.append(o)
         n_rsa += 1
+
+    # ── sitelinks: one set PER AD GROUP, pointing at that page's anchors ──
+    # Ad-group level so a Washing Machine group shows "Washer Repair Pricing",
+    # not a campaign-wide generic "Pricing". Asset + AdGroupAsset link ride in
+    # the same atomic mutate as everything else.
+    n_sl = 0
+    if os.path.exists("sitelinks.json"):
+        with open("sitelinks.json", encoding="utf-8") as f:
+            sl_data = json.load(f)
+        asset_i = -1000
+        for s in sl_data.get("sitelink_sets", []):
+            ag_res = ag_res_by_name.get(s.get("ad_group"))
+            if not ag_res:
+                log(f"⚠️ Sitelinks skipped — unknown ad group '{s.get('ad_group')}'")
+                continue
+            for l in (s.get("sitelinks") or []):
+                text = (l.get("text") or "").strip()
+                d1 = (l.get("desc1") or "").strip()
+                d2 = (l.get("desc2") or "").strip()
+                url = (l.get("url") or "").strip()
+                # Google's limits — an over-long asset fails the whole mutate.
+                # Descriptions are all-or-nothing: send both lines or neither.
+                if not text or not url or len(text) > 25:
+                    log(f"⚠️ Sitelink dropped ({s.get('ad_group')}): "
+                        f"text {len(text)}/25 chars or missing URL — '{text[:30]}'")
+                    continue
+                asset_res = temp(f"assets/{asset_i}")
+                asset_i -= 1
+                o = op()
+                a = o.asset_operation.create
+                a.resource_name = asset_res
+                a.name = f"{s.get('ad_group','')} — {text}"[:120]
+                a.sitelink_asset.link_text = text
+                if len(d1) <= 35 and len(d2) <= 35 and d1 and d2:
+                    a.sitelink_asset.description1 = d1
+                    a.sitelink_asset.description2 = d2
+                a.final_urls.append(url)
+                ops.append(o)
+
+                o = op()
+                aga = o.ad_group_asset_operation.create
+                aga.ad_group = ag_res
+                aga.asset = asset_res
+                aga.field_type = client.enums.AssetFieldTypeEnum.SITELINK
+                ops.append(o)
+                n_sl += 1
 
     # ── locations: targets with bid modifiers + exclusions ─────────────
     n_loc = n_loc_neg = 0
@@ -279,6 +383,7 @@ def main():
 
     log(f"Core operations: 1 budget + 1 campaign + {len(groups)} ad groups + "
         f"{n_kw} keywords + {n_neg} negatives + {n_rsa} RSAs + "
+        f"{n_sl} ad-group sitelinks + "
         f"{n_loc} locations + {n_loc_neg} excluded locations = {len(ops)}")
 
     # ── the atomic core mutate ──────────────────────────────────────────
@@ -334,8 +439,12 @@ def main():
             pass
         n_ok = n_skip = 0
         if camp_res:
-            for a in plan.get("positive", []) + plan.get("negative", []):
-                is_neg = a in plan.get("negative", [])
+            # (was: `a in plan["negative"]` — a dict-equality scan that
+            # mislabels an audience appearing in both lists, and silently
+            # depends on dict ordering. Tag each entry once instead.)
+            tagged = ([(a, False) for a in plan.get("positive", [])]
+                      + [(a, True) for a in plan.get("negative", [])])
+            for a, is_neg in tagged:
                 uid = lookup.get(a["name"])
                 if not uid:
                     log(f"   ⚠️ audience not matched via API: {a['name']} "

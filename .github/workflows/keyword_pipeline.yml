@@ -187,6 +187,15 @@ jobs:
           LANGUAGE: ${{ github.event.inputs.language }}
         run: python scripts/generate_rsa_ads.py
 
+      - name: Stage 3.85 - Ad-group sitelinks from the landing-page anchors (~$0.02)
+        if: ${{ github.event.inputs.research_type != 'seo' }}
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          MODEL: claude-sonnet-5
+          WEBSITE_URL: ${{ github.event.inputs.website_url }}
+          LANGUAGE: ${{ github.event.inputs.language }}
+        run: python scripts/generate_sitelinks.py
+
       - name: Stage 3.9 - Location targeting CSV + Claude bid tiers + negative locations (~$0.02)
         if: ${{ github.event.inputs.research_type != 'seo' }}
         env:

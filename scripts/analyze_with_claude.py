@@ -357,6 +357,33 @@ OUTPUT LANGUAGE — this account targets a {CONTENT_LANG_NAME}-speaking market:
 """
 
 
+_SCRIPT_RANGES = [
+    ("Arabic",     r"[؀-ۿݐ-ݿ]"),
+    ("Devanagari", r"[ऀ-ॿ]"),
+    ("Cyrillic",   r"[Ѐ-ӿ]"),
+    ("CJK",        r"[一-鿿]"),
+    ("Latin",      r"[A-Za-z]"),
+]
+
+
+def keyword_script(text):
+    """Which script is this keyword written in? Non-Latin wins when mixed —
+    "تصليح غسالات dubai" is an Arabic query with a Latin place name in it."""
+    t = str(text or "")
+    for name, pattern in _SCRIPT_RANGES:
+        if name != "Latin" and re.search(pattern, t):
+            return name
+    return "Latin" if re.search(r"[A-Za-z]", t) else "Other"
+
+
+def script_breakdown(keywords):
+    counts = {}
+    for k in keywords:
+        s = keyword_script(k.get("keyword", ""))
+        counts[s] = counts.get(s, 0) + 1
+    return counts
+
+
 def build_user_prompt(data):
     kept = [k for k in data["keywords"] if k.get("kept_for_ai")]
     lines = []
@@ -368,10 +395,31 @@ def build_user_prompt(data):
             f"|comp:{k.get('competition_index', 0)}|cpc:{cpc}"
             f"|{k.get('trend', 'UNKNOWN')}|{k.get('intent', '?')}|{flags}|score:{k.get('score', 0)}"
         )
+    # MIXED-SCRIPT ACCOUNTS (the Arabic+English case): with no instruction the
+    # model quietly builds groups for the dominant script and leaves the rest in
+    # `unassigned` — where nothing downstream picks them up, so those keywords
+    # never reach the campaign. Name the split and demand coverage.
+    scripts = script_breakdown(kept)
+    mixed_block = ""
+    if len([s for s, n in scripts.items() if n]) > 1 and "Other" not in scripts:
+        parts = ", ".join(f"{n} {s}" for s, n in
+                          sorted(scripts.items(), key=lambda x: -x[1]))
+        mixed_block = (
+            f"\n⚠️ MIXED-LANGUAGE ACCOUNT — the keyword list below is {parts}.\n"
+            "- EVERY script must end up in ad groups. Do NOT drop, translate or\n"
+            "  exclude a keyword because it is not in the majority language.\n"
+            "- Keep scripts in SEPARATE ad groups (one language per ad group) —\n"
+            "  ad copy is written per ad group and cannot be bilingual.\n"
+            "- Name each non-majority group so the language is obvious, and write\n"
+            "  its `theme`, `intent_expansion_keywords` and `negative_keywords` in\n"
+            "  THAT group's language.\n"
+        )
+
     header = (
         f"BUSINESS: {BUSINESS_NAME or '(not provided)'}\n"
         f"NICHE: {NICHE_DESCRIPTION or '(infer from keywords)'}\n"
-        f"TARGET LOCATION: {TARGET_LOCATION or '(not local)'}\n\n"
+        f"TARGET LOCATION: {TARGET_LOCATION or '(not local)'}\n"
+        f"{mixed_block}\n"
         f"KEYWORDS ({len(kept)} rows — format: id|keyword|volume|competition_index"
         f"|cpc_range|trend|intent|flags|opportunity_score):\n"
     )
@@ -645,6 +693,30 @@ def validate_strategy(raw, kept):
             pass
     unassigned = [by_id[i]["keyword"] for i in by_id
                   if i not in seen_ids and i not in excluded]
+
+    # SCRIPT-COVERAGE GUARD: unassigned keywords are reported and then dropped —
+    # nothing downstream (CSV, master CSV, API push) ever picks them up. When a
+    # whole script goes unassigned that is not a judgement call, it is the
+    # mixed-language failure: the Arabic half of an Arabic+English account
+    # silently never reaches the campaign. Make it impossible to miss.
+    _grouped_scripts = script_breakdown(
+        [{"keyword": k} for g in groups for k in
+         ([kw["keyword"] for kw in g.get("keywords", [])] + g.get("intent_expansion_keywords", []))])
+    _input_scripts = script_breakdown([{"keyword": by_id[i]["keyword"]} for i in by_id])
+    for _s, _n in sorted(_input_scripts.items(), key=lambda x: -x[1]):
+        if _s in ("Other",) or _n < 3:
+            continue
+        if _grouped_scripts.get(_s, 0) == 0:
+            _lost = [by_id[i]["keyword"] for i in by_id
+                     if keyword_script(by_id[i]["keyword"]) == _s and i not in seen_ids]
+            print(f"❗ {_s} KEYWORDS DROPPED: {_n} {_s}-script keywords were in the data "
+                  f"but ZERO reached an ad group — they will NOT be in the campaign.")
+            print(f"   examples: {', '.join(_lost[:5])}")
+            print(f"   fix: re-run this stage, or set LANGUAGE to the majority market and "
+                  f"run the minority language as its own campaign.")
+        elif _grouped_scripts.get(_s, 0) < _n * 0.3:
+            print(f"⚠️ Only {_grouped_scripts.get(_s, 0)} of {_n} {_s}-script keywords "
+                  f"landed in ad groups — check `unassigned_keywords` in the strategy JSON.")
 
     if (SINGLE_CAMPAIGN and not EXISTING_CAMPAIGN
             and SINGLE_CAMPAIGN.lower() not in ("false", "0", "no", "off")):
