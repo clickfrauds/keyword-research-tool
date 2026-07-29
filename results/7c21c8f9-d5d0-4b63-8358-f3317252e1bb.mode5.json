@@ -1,0 +1,254 @@
+{
+  "business": {
+    "name": "Bin Technical Washing Machine Repair",
+    "niche": "Washing machine and dryer repair service in Dubai — all brands, same-day and emergency callouts",
+    "location": "Dubai, United Arab Emirates"
+  },
+  "language": "no",
+  "primary_service": "washing machine repair",
+  "research": {
+    "areas_checked": 60,
+    "areas_kept": 6,
+    "min_volume": 20,
+    "note": "Google Keyword Planner reports no value between 1 and 9 — its lowest bucket is 10. Areas below the threshold were measured and found without demand; building pages for them would be doorway pages."
+  },
+  "mode5_pseo": {
+    "areas": [
+      {
+        "area": "Al Qusais",
+        "keywords": [
+          {
+            "keyword": "washing machine repair al qusais",
+            "volume": 260,
+            "kd": 17,
+            "cpc_low": 1144.02,
+            "cpc_high": 2938.04,
+            "trend": "DECLINING",
+            "peak_months": "Aug/Sep/Nov/Mar"
+          },
+          {
+            "keyword": "washing machine repair dubai al qusais",
+            "volume": 10,
+            "kd": 50,
+            "cpc_low": 418.05,
+            "cpc_high": 1175.14,
+            "trend": "STABLE",
+            "peak_months": ""
+          }
+        ],
+        "total_volume": 270,
+        "primary_keyword": {
+          "keyword": "washing machine repair al qusais",
+          "volume": 260,
+          "kd": 17,
+          "cpc_low": 1144.02,
+          "cpc_high": 2938.04,
+          "trend": "DECLINING",
+          "peak_months": "Aug/Sep/Nov/Mar"
+        },
+        "demand": "measured"
+      },
+      {
+        "area": "Dubai Silicon Oasis",
+        "keywords": [
+          {
+            "keyword": "washing machine repair silicon oasis",
+            "volume": 140,
+            "kd": 21,
+            "cpc_low": 1029.28,
+            "cpc_high": 3605.33,
+            "trend": "GROWING",
+            "peak_months": "/Mar/Apr"
+          }
+        ],
+        "total_volume": 140,
+        "primary_keyword": {
+          "keyword": "washing machine repair silicon oasis",
+          "volume": 140,
+          "kd": 21,
+          "cpc_low": 1029.28,
+          "cpc_high": 3605.33,
+          "trend": "GROWING",
+          "peak_months": "/Mar/Apr"
+        },
+        "demand": "measured"
+      },
+      {
+        "area": "Dubai Marina",
+        "keywords": [
+          {
+            "keyword": "washing machine repair dubai marina",
+            "volume": 110,
+            "kd": 40,
+            "cpc_low": 1203.75,
+            "cpc_high": 3277.9,
+            "trend": "DECLINING",
+            "peak_months": "Aug/Sep/Feb"
+          }
+        ],
+        "total_volume": 110,
+        "primary_keyword": {
+          "keyword": "washing machine repair dubai marina",
+          "volume": 110,
+          "kd": 40,
+          "cpc_low": 1203.75,
+          "cpc_high": 3277.9,
+          "trend": "DECLINING",
+          "peak_months": "Aug/Sep/Feb"
+        },
+        "demand": "measured"
+      },
+      {
+        "area": "Business Bay",
+        "keywords": [
+          {
+            "keyword": "washing machine repair business bay",
+            "volume": 110,
+            "kd": 55,
+            "cpc_low": 973.44,
+            "cpc_high": 4230.05,
+            "trend": "DECLINING",
+            "peak_months": "Sep//Feb"
+          }
+        ],
+        "total_volume": 110,
+        "primary_keyword": {
+          "keyword": "washing machine repair business bay",
+          "volume": 110,
+          "kd": 55,
+          "cpc_low": 973.44,
+          "cpc_high": 4230.05,
+          "trend": "DECLINING",
+          "peak_months": "Sep//Feb"
+        },
+        "demand": "measured"
+      },
+      {
+        "area": "Al Quoz",
+        "keywords": [
+          {
+            "keyword": "washing machine repair al quoz",
+            "volume": 50,
+            "kd": 91,
+            "cpc_low": 1029.73,
+            "cpc_high": 3246.15,
+            "trend": "DECLINING",
+            "peak_months": "Sep/Nov/Apr"
+          },
+          {
+            "keyword": "washing machine repair dubai al quoz",
+            "volume": 10,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "DECLINING",
+            "peak_months": "Mar"
+          }
+        ],
+        "total_volume": 60,
+        "primary_keyword": {
+          "keyword": "washing machine repair al quoz",
+          "volume": 50,
+          "kd": 91,
+          "cpc_low": 1029.73,
+          "cpc_high": 3246.15,
+          "trend": "DECLINING",
+          "peak_months": "Sep/Nov/Apr"
+        },
+        "demand": "measured"
+      },
+      {
+        "area": "Dubai International City",
+        "keywords": [
+          {
+            "keyword": "washing machine repair dubai international city",
+            "volume": 20,
+            "kd": 30,
+            "cpc_low": 1150.38,
+            "cpc_high": 3016.5,
+            "trend": "GROWING",
+            "peak_months": "Dec/Jul"
+          }
+        ],
+        "total_volume": 20,
+        "primary_keyword": {
+          "keyword": "washing machine repair dubai international city",
+          "volume": 20,
+          "kd": 30,
+          "cpc_low": 1150.38,
+          "cpc_high": 3016.5,
+          "trend": "GROWING",
+          "peak_months": "Dec/Jul"
+        },
+        "demand": "measured"
+      }
+    ],
+    "cities_in_data": [],
+    "recommended_city_targets": [
+      "Dubai, United Arab Emirates"
+    ],
+    "geo_area_candidates": [
+      "Palm Islands",
+      "Jabal Ali Second",
+      "Dubai Sports City",
+      "Al Quoz Industrial Area 4",
+      "Dubai Production City",
+      "Dubai Creek Harbour",
+      "Nadd Al Hamar",
+      "Dubai Investment Park - 2",
+      "Al Barsha 2",
+      "Al Sufouh 1",
+      "Jumeirah Park",
+      "Damac Hills",
+      "Dubai Investment Park First",
+      "International City Phase(2)",
+      "Al Twar",
+      "Ras Al Khor Industrial Area 3",
+      "Al Warqa 3",
+      "Al Safa",
+      "Dubai Festival City",
+      "The Villa",
+      "Jabal Ali Industrial Second",
+      "Mudon",
+      "Green Community Village",
+      "Dubai Industrial City",
+      "Academic City",
+      "Jebel Ali Freezone",
+      "Arabian Ranches",
+      "Al Quoz 1",
+      "Motor City",
+      "Front",
+      "Za'abeel 2",
+      "Nad Al Sheba 1",
+      "Al Barsha 3",
+      "Al Khawaneej 1",
+      "Al Rashidiya",
+      "Dubai Marina",
+      "Jumeirah",
+      "Al Quoz",
+      "Al Wasl",
+      "Al Nahda",
+      "Dubai Silicon Oasis",
+      "Mirdif",
+      "Za'abeel",
+      "Al Quoz Industrial Area 3",
+      "Umm Suqeim",
+      "Dubai International City",
+      "Jumeirah Village Circle",
+      "Al Sufouh 2",
+      "Business Bay",
+      "Jumeirah 1",
+      "Jebel Ali Village",
+      "Umm Hurair Second",
+      "Al Garhoud",
+      "Nad Al Sheba",
+      "Al Qusais 1",
+      "Al Qusais",
+      "Al Barsha 1",
+      "Al Quoz Industrial Area 2",
+      "Jumeirah Village",
+      "Muhaisanah 2"
+    ],
+    "notes": "6 of 60 areas in Dubai, United Arab Emirates have their own measured demand for 'washing machine repair'."
+  }
+}
