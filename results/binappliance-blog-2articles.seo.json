@@ -1,0 +1,1803 @@
+{
+ "business": {
+  "name": "Bin Technical Washing Machine Repair",
+  "niche": "In-home washing machine and dryer repair across Dubai — diagnosis, parts replacement (motor, drum bearing, belt, heating element, pump, PCB), same-day and emergency callouts, and routine servicing for all major brands including LG, Samsung, Bosch, Siemens, Beko, AEG and Whirlpool. Transparent callout and repair pricing.",
+  "location": "United Arab Emirates"
+ },
+ "model_used": "claude-sonnet-5",
+ "language": "",
+ "notes": "Trimmed from run c81c814a to the two clusters that are genuine content gaps on binappliancerepair.com. The other five clusters duplicate existing service/problem pages and were removed to avoid self-cannibalisation; their cost- and emergency-intent keywords were merged into these two.",
+ "mode4_cluster": {
+  "workflow_inputs": {
+   "main_topic": "Washing Machine Repair Dubai",
+   "problem_clusters": "Washing Machine Repair Dubai :: Washing Machine Not Spinning Troubleshooting, Dubai Neighborhood Repair Services, Brand Specific Repair and Maintenance, Routine Maintenance and Service Plans, Repair and Part Replacement Costs, Emergency and Near Me Technician Search, Dryer Repair Dubai"
+  },
+  "pillar_keyword": {
+   "keyword": "washing machine repair dubai",
+   "volume": 2900,
+   "kd": 71,
+   "cpc_low": 1034.0,
+   "cpc_high": 4080.25,
+   "funnel": "BOFU",
+   "intent": "transactional",
+   "trend": "STABLE",
+   "peak_months": "Aug/Sep/Oct/Dec/Jan/Apr/May/Jun",
+   "ai_overview_prone": false,
+   "flags": []
+  },
+  "clusters": [
+   {
+    "cluster_name": "Washing Machine Repair Cost Dubai",
+    "funnel": "BOFU",
+    "article_type": "cost",
+    "language": "en",
+    "language_mixed": false,
+    "ai_overview_prone": true,
+    "primary_keyword": {
+     "keyword": "washing machine repair cost",
+     "volume": 10,
+     "kd": 75,
+     "cpc_low": 439.58,
+     "cpc_high": 1899.54,
+     "funnel": "BOFU",
+     "intent": "transactional",
+     "trend": "GROWING",
+     "peak_months": "Nov/Dec/Jan/Apr",
+     "ai_overview_prone": false,
+     "flags": []
+    },
+    "keywords": [
+     {
+      "keyword": "washing machine bearing replacement cost",
+      "volume": 20,
+      "kd": 65,
+      "cpc_low": 295.32,
+      "cpc_high": 2813.15,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "GROWING",
+      "peak_months": "Jan",
+      "ai_overview_prone": false,
+      "flags": []
+     },
+     {
+      "keyword": "washing machine drum repair cost",
+      "volume": 20,
+      "kd": 76,
+      "cpc_low": 580.79,
+      "cpc_high": 2615.28,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "STABLE",
+      "peak_months": "Aug/Sep/Oct/Mar/May/Jun",
+      "ai_overview_prone": false,
+      "flags": []
+     },
+     {
+      "keyword": "cost to fix washing machine drum",
+      "volume": 20,
+      "kd": 76,
+      "cpc_low": 580.79,
+      "cpc_high": 2615.28,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "STABLE",
+      "peak_months": "Aug/Sep/Oct/Mar/May/Jun",
+      "ai_overview_prone": false,
+      "flags": []
+     },
+     {
+      "keyword": "washing machine pcb repair cost",
+      "volume": 10,
+      "kd": 0,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "STABLE",
+      "peak_months": "Jul/Aug/Sep/Oct/Nov/Dec/Jan/Feb/Mar/Apr/May/Jun",
+      "ai_overview_prone": false,
+      "flags": []
+     },
+     {
+      "keyword": "samsung washing machine drum replacement cost",
+      "volume": 10,
+      "kd": 19,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "STABLE",
+      "peak_months": "Jul/Aug/Sep/Oct/Nov/Dec/Jan/Feb/Mar/Apr/May/Jun",
+      "ai_overview_prone": false,
+      "flags": []
+     },
+     {
+      "keyword": "bosch washing machine drum replacement cost",
+      "volume": 10,
+      "kd": 34,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "GROWING",
+      "peak_months": "Jul/Nov/Mar/Apr/Jun",
+      "ai_overview_prone": false,
+      "flags": []
+     },
+     {
+      "keyword": "washing machine repair cost",
+      "volume": 10,
+      "kd": 75,
+      "cpc_low": 439.58,
+      "cpc_high": 1899.54,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "GROWING",
+      "peak_months": "Nov/Dec/Jan/Apr",
+      "ai_overview_prone": false,
+      "flags": []
+     },
+     {
+      "keyword": "washer repair cost",
+      "volume": 10,
+      "kd": 75,
+      "cpc_low": 439.58,
+      "cpc_high": 1899.54,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "GROWING",
+      "peak_months": "Nov/Dec/Jan/Apr",
+      "ai_overview_prone": false,
+      "flags": []
+     },
+     {
+      "keyword": "washing machine repair price",
+      "volume": 10,
+      "kd": 75,
+      "cpc_low": 439.58,
+      "cpc_high": 1899.54,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "GROWING",
+      "peak_months": "Nov/Dec/Jan/Apr",
+      "ai_overview_prone": false,
+      "flags": []
+     },
+     {
+      "keyword": "cost to fix washing machine",
+      "volume": 10,
+      "kd": 75,
+      "cpc_low": 439.58,
+      "cpc_high": 1899.54,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "GROWING",
+      "peak_months": "Nov/Dec/Jan/Apr",
+      "ai_overview_prone": false,
+      "flags": []
+     },
+     {
+      "keyword": "washer repair price",
+      "volume": 10,
+      "kd": 75,
+      "cpc_low": 439.58,
+      "cpc_high": 1899.54,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "GROWING",
+      "peak_months": "Nov/Dec/Jan/Apr",
+      "ai_overview_prone": false,
+      "flags": []
+     },
+     {
+      "keyword": "cost to repair washing machine bearings",
+      "volume": 10,
+      "kd": 0,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "UNKNOWN",
+      "peak_months": "Jun",
+      "ai_overview_prone": false,
+      "flags": []
+     },
+     {
+      "keyword": "samsung washing machine motherboard repair cost",
+      "volume": 10,
+      "kd": 26,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "SEASONAL",
+      "peak_months": "Nov/Feb/Apr/Jun",
+      "ai_overview_prone": false,
+      "flags": []
+     },
+     {
+      "keyword": "washing machine seal replacement cost",
+      "volume": 10,
+      "kd": 69,
+      "cpc_low": 98.4,
+      "cpc_high": 1665.7,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "SEASONAL",
+      "peak_months": "Jul/Aug/Sep/Oct/Dec/Jan/Feb/Mar/Apr/May/Jun",
+      "ai_overview_prone": false,
+      "flags": []
+     },
+     {
+      "keyword": "washing machine door lock repair cost",
+      "volume": 10,
+      "kd": 0,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "SEASONAL",
+      "peak_months": "Jul/Sep/Oct/Nov/Dec/Jan/Feb/Mar/Apr/May",
+      "ai_overview_prone": false,
+      "flags": []
+     },
+     {
+      "keyword": "lg washing machine pcb repair cost",
+      "volume": 10,
+      "kd": 0,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "SEASONAL",
+      "peak_months": "Jul/Sep/Jan/Apr/May",
+      "ai_overview_prone": false,
+      "flags": []
+     },
+     {
+      "keyword": "samsung washing machine door seal replacement cost",
+      "volume": 10,
+      "kd": 0,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "SEASONAL",
+      "peak_months": "Jul/Aug/Jan/Mar/Apr/May",
+      "ai_overview_prone": false,
+      "flags": []
+     },
+     {
+      "keyword": "lg washing machine repair cost",
+      "volume": 10,
+      "kd": 0,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "SEASONAL",
+      "peak_months": "Oct/Nov/Jan/Mar",
+      "ai_overview_prone": false,
+      "flags": []
+     },
+     {
+      "keyword": "washing machine door replacement cost",
+      "volume": 10,
+      "kd": 0,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "SEASONAL",
+      "peak_months": "Oct/Mar/Apr",
+      "ai_overview_prone": false,
+      "flags": []
+     },
+     {
+      "keyword": "washing machine valve replacement cost",
+      "volume": 10,
+      "kd": 0,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "SEASONAL",
+      "peak_months": "Oct/Dec/Jan",
+      "ai_overview_prone": false,
+      "flags": []
+     },
+     {
+      "keyword": "washing machine door seal replacement cost",
+      "volume": 10,
+      "kd": 0,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "SEASONAL",
+      "peak_months": "Aug/Sep/Oct/Dec/Apr/May",
+      "ai_overview_prone": false,
+      "flags": []
+     },
+     {
+      "keyword": "front load washing machine bearing replacement cost",
+      "volume": 10,
+      "kd": 0,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "SEASONAL",
+      "peak_months": "Sep/Oct/May",
+      "ai_overview_prone": false,
+      "flags": []
+     },
+     {
+      "keyword": "washing machine repair charges",
+      "volume": 10,
+      "kd": 92,
+      "cpc_low": 302.28,
+      "cpc_high": 704.97,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "GROWING",
+      "peak_months": "Jul/Sep/Oct/Nov/Jan/Feb/Mar/Apr/May/Jun",
+      "ai_overview_prone": false,
+      "flags": []
+     },
+     {
+      "keyword": "washing machine gasket replacement cost",
+      "volume": 10,
+      "kd": 92,
+      "cpc_low": 120.77,
+      "cpc_high": 1060.62,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "GROWING",
+      "peak_months": "Aug/Nov/Dec/Jan/Feb/May/Jun",
+      "ai_overview_prone": false,
+      "flags": []
+     },
+     {
+      "keyword": "lg washing machine drum replacement cost",
+      "volume": 10,
+      "kd": 40,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "STABLE",
+      "peak_months": "Jul/Aug/Sep/Oct/Nov/Dec/Jan/Feb/Mar/Apr/May/Jun",
+      "ai_overview_prone": false,
+      "flags": []
+     },
+     {
+      "keyword": "hoover washing machine repair cost",
+      "volume": 10,
+      "kd": 0,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "UNKNOWN",
+      "peak_months": "Jul/Aug",
+      "ai_overview_prone": false,
+      "flags": []
+     },
+     {
+      "keyword": "samsung washing machine pcb repair cost",
+      "volume": 10,
+      "kd": 0,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "UNKNOWN",
+      "peak_months": "Mar",
+      "ai_overview_prone": false,
+      "flags": []
+     },
+     {
+      "keyword": "bosch washing machine repair cost",
+      "volume": 10,
+      "kd": 0,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "UNKNOWN",
+      "peak_months": "Jul/Feb",
+      "ai_overview_prone": false,
+      "flags": []
+     },
+     {
+      "keyword": "samsung washer motor replacement cost",
+      "volume": 10,
+      "kd": 0,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "UNKNOWN",
+      "peak_months": "Aug/Nov",
+      "ai_overview_prone": false,
+      "flags": []
+     },
+     {
+      "keyword": "washing machine clutch repair cost",
+      "volume": 10,
+      "kd": 0,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "UNKNOWN",
+      "peak_months": "Sep",
+      "ai_overview_prone": false,
+      "flags": []
+     }
+    ],
+    "total_volume": 330,
+    "questions": [
+     {
+      "q": "is it worth repairing a washing machine that won't spin",
+      "answer_angle": "Give a rule-of-thumb: repair if cost is under 50% of a new unit's price, referencing typical AED part+labour ranges.",
+      "type": "conversational"
+     },
+     {
+      "q": "washing machine maintenance service dubai price",
+      "answer_angle": "Quote a flat AED maintenance visit price and compare it to average repair cost avoided.",
+      "type": "local"
+     },
+     {
+      "q": "how much does it cost to repair a washing machine in Dubai",
+      "answer_angle": "Lead with an AED price range for a standard callout plus a table breaking down common part costs (bearing, belt, PCB, pump).",
+      "type": "conversational"
+     },
+     {
+      "q": "how much is a washing machine drum bearing replacement",
+      "answer_angle": "State the exact AED range for parts + labour for bearing replacement upfront, then note brand variance (LG vs Samsung).",
+      "type": "paa"
+     },
+     {
+      "q": "is it cheaper to repair or replace a washing machine",
+      "answer_angle": "Give the 50% rule with an AED threshold example and link to the specific part-cost table.",
+      "type": "voice"
+     },
+     {
+      "q": "how much does a PCB board repair cost for a washing machine",
+      "answer_angle": "Quote the typical AED range for control board diagnosis/replacement and mention brand-specific board price differences.",
+      "type": "conversational"
+     },
+     {
+      "q": "what is the average washing machine repair charge in UAE",
+      "answer_angle": "Open with a callout fee number, then a repair-range number, citing transparent no-hidden-fee pricing.",
+      "type": "local"
+     },
+     {
+      "q": "how much to replace a washing machine belt or pump",
+      "answer_angle": "Give two separate AED ranges side by side for belt vs pump replacement with typical repair time.",
+      "type": "paa"
+     }
+    ],
+    "entities_to_mention": [
+     "drum bearing",
+     "drive belt",
+     "door lock switch",
+     "motor coupler",
+     "PCB control board",
+     "overload sensor",
+     "spin cycle",
+     "diagnostic fee",
+     "callout fee",
+     "PCB/control board",
+     "water pump",
+     "door seal/gasket"
+    ],
+    "_built_from": [
+     "Repair and Part Replacement Costs",
+     "+ cost/part keywords from all clusters"
+    ]
+   },
+   {
+    "cluster_name": "Emergency Washing Machine Repair Near Me",
+    "funnel": "BOFU",
+    "article_type": "local",
+    "language": "en",
+    "language_mixed": false,
+    "ai_overview_prone": true,
+    "primary_keyword": {
+     "keyword": "washing machine repair dubai near me",
+     "volume": 210,
+     "kd": 82,
+     "cpc_low": 973.44,
+     "cpc_high": 3248.51,
+     "funnel": "BOFU",
+     "intent": "transactional",
+     "trend": "STABLE",
+     "peak_months": "Aug/Dec/Jan/Apr",
+     "ai_overview_prone": false,
+     "flags": [
+      "local"
+     ]
+    },
+    "keywords": [
+     {
+      "keyword": "washing machine repair dubai near me",
+      "volume": 210,
+      "kd": 82,
+      "cpc_low": 973.44,
+      "cpc_high": 3248.51,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "STABLE",
+      "peak_months": "Aug/Dec/Jan/Apr",
+      "ai_overview_prone": false,
+      "flags": [
+       "local"
+      ]
+     },
+     {
+      "keyword": "washer maintenance near me",
+      "volume": 170,
+      "kd": 77,
+      "cpc_low": 711.46,
+      "cpc_high": 2946.93,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "STABLE",
+      "peak_months": "Jul/Aug/Sep/Oct/Dec/Feb/Mar/Apr/May/Jun",
+      "ai_overview_prone": false,
+      "flags": [
+       "local"
+      ]
+     },
+     {
+      "keyword": "siemens washing machine repair near me",
+      "volume": 10,
+      "kd": 8,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "SEASONAL",
+      "peak_months": "Jan",
+      "ai_overview_prone": false,
+      "flags": [
+       "local"
+      ]
+     },
+     {
+      "keyword": "washing machine maintenance service near me",
+      "volume": 10,
+      "kd": 23,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "GROWING",
+      "peak_months": "May",
+      "ai_overview_prone": false,
+      "flags": [
+       "local"
+      ]
+     },
+     {
+      "keyword": "washing machine repair technician near me",
+      "volume": 10,
+      "kd": 29,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "SEASONAL",
+      "peak_months": "Jul/Aug/Sep/Oct/Nov/Jan/Feb/Mar/Apr/May/Jun",
+      "ai_overview_prone": false,
+      "flags": [
+       "local"
+      ]
+     },
+     {
+      "keyword": "washer maintenance service near me",
+      "volume": 10,
+      "kd": 0,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "UNKNOWN",
+      "peak_months": "Sep/Feb",
+      "ai_overview_prone": false,
+      "flags": [
+       "local"
+      ]
+     },
+     {
+      "keyword": "automatic washing machine mechanic near me",
+      "volume": 10,
+      "kd": 26,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "commercial",
+      "trend": "SEASONAL",
+      "peak_months": "Jul/Aug/Dec/Feb/Apr/May/Jun",
+      "ai_overview_prone": false,
+      "flags": [
+       "local"
+      ]
+     },
+     {
+      "keyword": "washer mechanic near me",
+      "volume": 10,
+      "kd": 0,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "commercial",
+      "trend": "UNKNOWN",
+      "peak_months": "Apr",
+      "ai_overview_prone": false,
+      "flags": [
+       "local"
+      ]
+     },
+     {
+      "keyword": "washing mechanic near me",
+      "volume": 10,
+      "kd": 0,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "commercial",
+      "trend": "UNKNOWN",
+      "peak_months": "Oct",
+      "ai_overview_prone": false,
+      "flags": [
+       "local"
+      ]
+     }
+    ],
+    "total_volume": 450,
+    "questions": [
+     {
+      "q": "washing machine not spinning repair near me dubai",
+      "answer_angle": "Confirm same-day callout availability across Dubai and mention transparent diagnostic fee upfront.",
+      "type": "local"
+     },
+     {
+      "q": "washing machine repair in Dubai Marina same day",
+      "answer_angle": "State same-day slot availability for Dubai Marina residents and mention no call-out charge if repaired.",
+      "type": "local"
+     },
+     {
+      "q": "whirlpool washing machine repair near me dubai",
+      "answer_angle": "Confirm coverage area and same-day slots for Whirlpool models with a callout price mention.",
+      "type": "local"
+     },
+     {
+      "q": "is there a washing machine repair technician near me right now",
+      "answer_angle": "Confirm live availability, average response time, and a direct call/WhatsApp booking option.",
+      "type": "conversational"
+     },
+     {
+      "q": "how fast can a washing machine mechanic come to my house",
+      "answer_angle": "Give a specific arrival-time window (e.g. within 60-90 minutes) for Dubai-wide emergency calls.",
+      "type": "local"
+     },
+     {
+      "q": "emergency washing machine repair dubai",
+      "answer_angle": "Lead with 24/7 or same-day emergency service availability and mention upfront diagnostic pricing.",
+      "type": "conversational"
+     }
+    ],
+    "entities_to_mention": [
+     "filter cleaning",
+     "door seal inspection",
+     "hose check",
+     "drum balance check",
+     "annual service plan",
+     "preventive maintenance",
+     "emergency callout",
+     "same-day service",
+     "response time",
+     "WhatsApp booking",
+     "diagnostic fee"
+    ],
+    "_built_from": [
+     "Emergency and Near Me Technician Search"
+    ]
+   }
+  ]
+ },
+ "mode3_full_website": {
+  "workflow_inputs": {
+   "industry": "Appliance Repair Services",
+   "services_mode3": "Washing Machine Repair, Washing Machine Not Spinning Repair, Washing Machine Drum Bearing Replacement, Washing Machine Motor Replacement, Washing Machine PCB and Control Board Repair, Washing Machine Belt Replacement, Washing Machine Pump Replacement, Washing Machine Door Seal and Gasket Replacement, Routine Washing Machine Maintenance, LG Washing Machine Repair, Samsung Washing Machine Repair, Bosch and Siemens Washing Machine Repair, Whirlpool Washing Machine Repair, Dryer Repair, Emergency Same-Day Washing Machine Repair"
+  },
+  "services": [
+   "Washing Machine Repair",
+   "Washing Machine Not Spinning Repair",
+   "Washing Machine Drum Bearing Replacement",
+   "Washing Machine Motor Replacement",
+   "Washing Machine PCB and Control Board Repair",
+   "Washing Machine Belt Replacement",
+   "Washing Machine Pump Replacement",
+   "Washing Machine Door Seal and Gasket Replacement",
+   "Routine Washing Machine Maintenance",
+   "LG Washing Machine Repair",
+   "Samsung Washing Machine Repair",
+   "Bosch and Siemens Washing Machine Repair",
+   "Whirlpool Washing Machine Repair",
+   "Dryer Repair",
+   "Emergency Same-Day Washing Machine Repair"
+  ]
+ },
+ "mode2_services_hub": {
+  "workflow_inputs": {
+   "main_service": "Washing Machine and Dryer Repair",
+   "sub_services": "Diagnosis and Troubleshooting, Drum Bearing Replacement, Motor Replacement, Belt Replacement, Heating Element Replacement, Water Pump Replacement, PCB and Control Board Repair, Door Seal and Gasket Replacement, Routine Maintenance Service, Dryer Repair"
+  }
+ },
+ "mode5_pseo": {
+  "cities_in_data": [
+   {
+    "city": "Dubai",
+    "keywords": [
+     {
+      "keyword": "washing machine repair silicon oasis",
+      "volume": 170,
+      "kd": 53,
+      "cpc_low": 1029.28,
+      "cpc_high": 3605.33,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "GROWING",
+      "peak_months": "Feb/Mar",
+      "ai_overview_prone": false,
+      "flags": []
+     },
+     {
+      "keyword": "lg washing machine repair dubai",
+      "volume": 170,
+      "kd": 66,
+      "cpc_low": 915.18,
+      "cpc_high": 3529.42,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "GROWING",
+      "peak_months": "Apr",
+      "ai_overview_prone": false,
+      "flags": []
+     },
+     {
+      "keyword": "siemens washing machine repair dubai",
+      "volume": 140,
+      "kd": 68,
+      "cpc_low": 753.72,
+      "cpc_high": 3028.87,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "GROWING",
+      "peak_months": "Apr",
+      "ai_overview_prone": false,
+      "flags": []
+     },
+     {
+      "keyword": "bosch washing machine repair dubai",
+      "volume": 90,
+      "kd": 67,
+      "cpc_low": 695.31,
+      "cpc_high": 2650.26,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "GROWING",
+      "peak_months": "Apr",
+      "ai_overview_prone": false,
+      "flags": []
+     },
+     {
+      "keyword": "washing machine repair dubai",
+      "volume": 2900,
+      "kd": 71,
+      "cpc_low": 1034.0,
+      "cpc_high": 4080.25,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "STABLE",
+      "peak_months": "Aug/Sep/Oct/Dec/Jan/Apr/May/Jun",
+      "ai_overview_prone": false,
+      "flags": []
+     },
+     {
+      "keyword": "fix washing machine dubai",
+      "volume": 2900,
+      "kd": 71,
+      "cpc_low": 1034.0,
+      "cpc_high": 4080.25,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "STABLE",
+      "peak_months": "Aug/Sep/Oct/Dec/Jan/Apr/May/Jun",
+      "ai_overview_prone": false,
+      "flags": []
+     },
+     {
+      "keyword": "washer dryer repair dubai",
+      "volume": 2900,
+      "kd": 71,
+      "cpc_low": 1034.0,
+      "cpc_high": 4080.25,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "STABLE",
+      "peak_months": "Aug/Sep/Oct/Dec/Jan/Apr/May/Jun",
+      "ai_overview_prone": false,
+      "flags": []
+     },
+     {
+      "keyword": "washing machine repair al warqa",
+      "volume": 110,
+      "kd": 48,
+      "cpc_low": 1067.38,
+      "cpc_high": 3270.57,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "SEASONAL",
+      "peak_months": "Jul/Aug/May/Jun",
+      "ai_overview_prone": false,
+      "flags": []
+     },
+     {
+      "keyword": "washing machine repair in palm jumeirah",
+      "volume": 90,
+      "kd": 9,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "SEASONAL",
+      "peak_months": "Nov",
+      "ai_overview_prone": false,
+      "flags": []
+     },
+     {
+      "keyword": "washing machine repair bur dubai",
+      "volume": 70,
+      "kd": 47,
+      "cpc_low": 973.44,
+      "cpc_high": 2650.65,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "SEASONAL",
+      "peak_months": "Jun",
+      "ai_overview_prone": false,
+      "flags": []
+     },
+     {
+      "keyword": "washing machine repair jlt",
+      "volume": 70,
+      "kd": 53,
+      "cpc_low": 752.31,
+      "cpc_high": 1347.64,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "SEASONAL",
+      "peak_months": "Dec",
+      "ai_overview_prone": false,
+      "flags": []
+     },
+     {
+      "keyword": "washing machine repair dubai near me",
+      "volume": 210,
+      "kd": 82,
+      "cpc_low": 973.44,
+      "cpc_high": 3248.51,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "STABLE",
+      "peak_months": "Aug/Dec/Jan/Apr",
+      "ai_overview_prone": false,
+      "flags": [
+       "local"
+      ]
+     },
+     {
+      "keyword": "washing machine repair al barsha",
+      "volume": 40,
+      "kd": 79,
+      "cpc_low": 1655.03,
+      "cpc_high": 3444.74,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "GROWING",
+      "peak_months": "Jan",
+      "ai_overview_prone": false,
+      "flags": []
+     },
+     {
+      "keyword": "samsung washing machine repair dubai",
+      "volume": 110,
+      "kd": 69,
+      "cpc_low": 780.65,
+      "cpc_high": 3346.06,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "SEASONAL",
+      "peak_months": "Apr/May/Jun",
+      "ai_overview_prone": false,
+      "flags": []
+     },
+     {
+      "keyword": "washing machine repair karama",
+      "volume": 40,
+      "kd": 66,
+      "cpc_low": 1221.82,
+      "cpc_high": 3143.92,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "SEASONAL",
+      "peak_months": "Dec",
+      "ai_overview_prone": false,
+      "flags": []
+     },
+     {
+      "keyword": "whirlpool washing machine repair dubai",
+      "volume": 10,
+      "kd": 16,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "GROWING",
+      "peak_months": "Apr",
+      "ai_overview_prone": false,
+      "flags": []
+     },
+     {
+      "keyword": "siemens washing machine repair near me",
+      "volume": 10,
+      "kd": 8,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "SEASONAL",
+      "peak_months": "Jan",
+      "ai_overview_prone": false,
+      "flags": [
+       "local"
+      ]
+     },
+     {
+      "keyword": "teka washing machine repair dubai",
+      "volume": 10,
+      "kd": 22,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "GROWING",
+      "peak_months": "Apr",
+      "ai_overview_prone": false,
+      "flags": []
+     },
+     {
+      "keyword": "lg washing machine service dubai",
+      "volume": 20,
+      "kd": 96,
+      "cpc_low": 1514.43,
+      "cpc_high": 4237.23,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "GROWING",
+      "peak_months": "Jan/Apr",
+      "ai_overview_prone": false,
+      "flags": []
+     },
+     {
+      "keyword": "washing machine repair service in dubai",
+      "volume": 10,
+      "kd": 13,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "STABLE",
+      "peak_months": "Mar",
+      "ai_overview_prone": false,
+      "flags": []
+     },
+     {
+      "keyword": "washing machine service dubai",
+      "volume": 50,
+      "kd": 88,
+      "cpc_low": 973.44,
+      "cpc_high": 3683.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "SEASONAL",
+      "peak_months": "Jun",
+      "ai_overview_prone": false,
+      "flags": []
+     },
+     {
+      "keyword": "best washing machine repair dubai",
+      "volume": 10,
+      "kd": 0,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "SEASONAL",
+      "peak_months": "Apr",
+      "ai_overview_prone": false,
+      "flags": []
+     },
+     {
+      "keyword": "washing machine repair dubai al nahda",
+      "volume": 10,
+      "kd": 14,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "SEASONAL",
+      "peak_months": "Jun",
+      "ai_overview_prone": false,
+      "flags": []
+     },
+     {
+      "keyword": "washing machine repair al qusais",
+      "volume": 260,
+      "kd": 48,
+      "cpc_low": 973.44,
+      "cpc_high": 2634.6,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "DECLINING",
+      "peak_months": "Jul/Aug",
+      "ai_overview_prone": false,
+      "flags": []
+     },
+     {
+      "keyword": "washing machine repair technician near me",
+      "volume": 10,
+      "kd": 29,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "SEASONAL",
+      "peak_months": "Jul/Aug/Sep/Oct/Nov/Jan/Feb/Mar/Apr/May/Jun",
+      "ai_overview_prone": false,
+      "flags": [
+       "local"
+      ]
+     },
+     {
+      "keyword": "washing machine repair dubai al qusais",
+      "volume": 10,
+      "kd": 70,
+      "cpc_low": 418.05,
+      "cpc_high": 1175.14,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "STABLE",
+      "peak_months": "Jan",
+      "ai_overview_prone": false,
+      "flags": []
+     },
+     {
+      "keyword": "washing machine repair dubai marina",
+      "volume": 140,
+      "kd": 59,
+      "cpc_low": 1225.31,
+      "cpc_high": 3277.9,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "DECLINING",
+      "peak_months": "Jul/Aug/Jan",
+      "ai_overview_prone": false,
+      "flags": []
+     },
+     {
+      "keyword": "automatic washing machine mechanic near me",
+      "volume": 10,
+      "kd": 26,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "commercial",
+      "trend": "SEASONAL",
+      "peak_months": "Jul/Aug/Dec/Feb/Apr/May/Jun",
+      "ai_overview_prone": false,
+      "flags": [
+       "local"
+      ]
+     },
+     {
+      "keyword": "bompani washing machine repair dubai",
+      "volume": 10,
+      "kd": 0,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "SEASONAL",
+      "peak_months": "Jul/Nov/Dec/Mar",
+      "ai_overview_prone": false,
+      "flags": []
+     },
+     {
+      "keyword": "washing machine repair satwa",
+      "volume": 20,
+      "kd": 100,
+      "cpc_low": 1475.12,
+      "cpc_high": 2853.05,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "SEASONAL",
+      "peak_months": "Nov/Mar",
+      "ai_overview_prone": false,
+      "flags": []
+     },
+     {
+      "keyword": "dryer repair dubai",
+      "volume": 70,
+      "kd": 59,
+      "cpc_low": 620.63,
+      "cpc_high": 2706.7,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "DECLINING",
+      "peak_months": "Aug",
+      "ai_overview_prone": false,
+      "flags": []
+     },
+     {
+      "keyword": "washing machine repair dubai al barsha",
+      "volume": 10,
+      "kd": 0,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "UNKNOWN",
+      "peak_months": "Oct/Jan",
+      "ai_overview_prone": false,
+      "flags": []
+     },
+     {
+      "keyword": "washer mechanic near me",
+      "volume": 10,
+      "kd": 0,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "commercial",
+      "trend": "UNKNOWN",
+      "peak_months": "Apr",
+      "ai_overview_prone": false,
+      "flags": [
+       "local"
+      ]
+     },
+     {
+      "keyword": "washing mechanic near me",
+      "volume": 10,
+      "kd": 0,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "commercial",
+      "trend": "UNKNOWN",
+      "peak_months": "Oct",
+      "ai_overview_prone": false,
+      "flags": [
+       "local"
+      ]
+     },
+     {
+      "keyword": "washing machine repair deira dubai",
+      "volume": 20,
+      "kd": 17,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "DECLINING",
+      "peak_months": "Jul",
+      "ai_overview_prone": false,
+      "flags": []
+     },
+     {
+      "keyword": "samsung washing machine service centre dubai",
+      "volume": 10,
+      "kd": 47,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "STABLE",
+      "peak_months": "Jul/Aug/Sep/Oct/Nov/Dec/Jan/Feb/Mar/Apr/May/Jun",
+      "ai_overview_prone": false,
+      "flags": []
+     },
+     {
+      "keyword": "washing machine technician dubai",
+      "volume": 10,
+      "kd": 90,
+      "cpc_low": 1272.82,
+      "cpc_high": 3714.45,
+      "funnel": "MOFU",
+      "intent": "commercial",
+      "trend": "GROWING",
+      "peak_months": "Jul/Sep/Oct/Nov/Dec/Jan/Feb/Mar/Apr/May/Jun",
+      "ai_overview_prone": false,
+      "flags": []
+     },
+     {
+      "keyword": "dryer machine repair dubai",
+      "volume": 10,
+      "kd": 60,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "GROWING",
+      "peak_months": "Jul/Aug/Nov/Jan/Feb/Mar/Apr/May/Jun",
+      "ai_overview_prone": false,
+      "flags": []
+     }
+    ],
+    "total_volume": 10750
+   }
+  ],
+  "recommended_city_targets": [
+   "Dubai",
+   "Sharjah",
+   "Abu Dhabi",
+   "Ajman"
+  ],
+  "notes": "Nearly all location-qualified search demand in this dataset is concentrated in Dubai neighborhoods (Al Qusais, Marina, Silicon Oasis, Bur Dubai, JLT, Al Barsha, Karama, Al Nahda, Deira, Satwa); no other emirate appears in the keyword data, so pSEO expansion beyond Dubai should be treated as a demand hypothesis, not confirmed search volume.",
+  "geo_area_candidates": [
+   "United Arab Emirates",
+   "Abu Dhabi",
+   "Ajman",
+   "Dubai",
+   "Emirate of Umm Al Quwain",
+   "Fujairah",
+   "Ras Al Khaimah",
+   "Sharjah"
+  ]
+ },
+ "keyword_metrics": [
+  {
+   "keyword": "washing machine repair dubai near me",
+   "volume": 210,
+   "kd": 82,
+   "cpc_low": 973.44,
+   "cpc_high": 3248.51,
+   "funnel": "BOFU",
+   "intent": "transactional",
+   "trend": "STABLE",
+   "peak_months": "Aug/Dec/Jan/Apr",
+   "ai_overview_prone": false,
+   "flags": [
+    "local"
+   ]
+  },
+  {
+   "keyword": "washer maintenance near me",
+   "volume": 170,
+   "kd": 77,
+   "cpc_low": 711.46,
+   "cpc_high": 2946.93,
+   "funnel": "BOFU",
+   "intent": "transactional",
+   "trend": "STABLE",
+   "peak_months": "Jul/Aug/Sep/Oct/Dec/Feb/Mar/Apr/May/Jun",
+   "ai_overview_prone": false,
+   "flags": [
+    "local"
+   ]
+  },
+  {
+   "keyword": "washing machine bearing replacement cost",
+   "volume": 20,
+   "kd": 65,
+   "cpc_low": 295.32,
+   "cpc_high": 2813.15,
+   "funnel": "BOFU",
+   "intent": "transactional",
+   "trend": "GROWING",
+   "peak_months": "Jan",
+   "ai_overview_prone": false,
+   "flags": []
+  },
+  {
+   "keyword": "washing machine drum repair cost",
+   "volume": 20,
+   "kd": 76,
+   "cpc_low": 580.79,
+   "cpc_high": 2615.28,
+   "funnel": "BOFU",
+   "intent": "transactional",
+   "trend": "STABLE",
+   "peak_months": "Aug/Sep/Oct/Mar/May/Jun",
+   "ai_overview_prone": false,
+   "flags": []
+  },
+  {
+   "keyword": "cost to fix washing machine drum",
+   "volume": 20,
+   "kd": 76,
+   "cpc_low": 580.79,
+   "cpc_high": 2615.28,
+   "funnel": "BOFU",
+   "intent": "transactional",
+   "trend": "STABLE",
+   "peak_months": "Aug/Sep/Oct/Mar/May/Jun",
+   "ai_overview_prone": false,
+   "flags": []
+  },
+  {
+   "keyword": "washing machine maintenance service near me",
+   "volume": 10,
+   "kd": 23,
+   "cpc_low": 0.0,
+   "cpc_high": 0.0,
+   "funnel": "BOFU",
+   "intent": "transactional",
+   "trend": "GROWING",
+   "peak_months": "May",
+   "ai_overview_prone": false,
+   "flags": [
+    "local"
+   ]
+  },
+  {
+   "keyword": "siemens washing machine repair near me",
+   "volume": 10,
+   "kd": 8,
+   "cpc_low": 0.0,
+   "cpc_high": 0.0,
+   "funnel": "BOFU",
+   "intent": "transactional",
+   "trend": "SEASONAL",
+   "peak_months": "Jan",
+   "ai_overview_prone": false,
+   "flags": [
+    "local"
+   ]
+  },
+  {
+   "keyword": "washing machine pcb repair cost",
+   "volume": 10,
+   "kd": 0,
+   "cpc_low": 0.0,
+   "cpc_high": 0.0,
+   "funnel": "BOFU",
+   "intent": "transactional",
+   "trend": "STABLE",
+   "peak_months": "Jul/Aug/Sep/Oct/Nov/Dec/Jan/Feb/Mar/Apr/May/Jun",
+   "ai_overview_prone": false,
+   "flags": []
+  },
+  {
+   "keyword": "samsung washing machine drum replacement cost",
+   "volume": 10,
+   "kd": 19,
+   "cpc_low": 0.0,
+   "cpc_high": 0.0,
+   "funnel": "BOFU",
+   "intent": "transactional",
+   "trend": "STABLE",
+   "peak_months": "Jul/Aug/Sep/Oct/Nov/Dec/Jan/Feb/Mar/Apr/May/Jun",
+   "ai_overview_prone": false,
+   "flags": []
+  },
+  {
+   "keyword": "bosch washing machine drum replacement cost",
+   "volume": 10,
+   "kd": 34,
+   "cpc_low": 0.0,
+   "cpc_high": 0.0,
+   "funnel": "BOFU",
+   "intent": "transactional",
+   "trend": "GROWING",
+   "peak_months": "Jul/Nov/Mar/Apr/Jun",
+   "ai_overview_prone": false,
+   "flags": []
+  },
+  {
+   "keyword": "washing machine repair cost",
+   "volume": 10,
+   "kd": 75,
+   "cpc_low": 439.58,
+   "cpc_high": 1899.54,
+   "funnel": "BOFU",
+   "intent": "transactional",
+   "trend": "GROWING",
+   "peak_months": "Nov/Dec/Jan/Apr",
+   "ai_overview_prone": false,
+   "flags": []
+  },
+  {
+   "keyword": "washer repair cost",
+   "volume": 10,
+   "kd": 75,
+   "cpc_low": 439.58,
+   "cpc_high": 1899.54,
+   "funnel": "BOFU",
+   "intent": "transactional",
+   "trend": "GROWING",
+   "peak_months": "Nov/Dec/Jan/Apr",
+   "ai_overview_prone": false,
+   "flags": []
+  },
+  {
+   "keyword": "washing machine repair price",
+   "volume": 10,
+   "kd": 75,
+   "cpc_low": 439.58,
+   "cpc_high": 1899.54,
+   "funnel": "BOFU",
+   "intent": "transactional",
+   "trend": "GROWING",
+   "peak_months": "Nov/Dec/Jan/Apr",
+   "ai_overview_prone": false,
+   "flags": []
+  },
+  {
+   "keyword": "cost to fix washing machine",
+   "volume": 10,
+   "kd": 75,
+   "cpc_low": 439.58,
+   "cpc_high": 1899.54,
+   "funnel": "BOFU",
+   "intent": "transactional",
+   "trend": "GROWING",
+   "peak_months": "Nov/Dec/Jan/Apr",
+   "ai_overview_prone": false,
+   "flags": []
+  },
+  {
+   "keyword": "washer repair price",
+   "volume": 10,
+   "kd": 75,
+   "cpc_low": 439.58,
+   "cpc_high": 1899.54,
+   "funnel": "BOFU",
+   "intent": "transactional",
+   "trend": "GROWING",
+   "peak_months": "Nov/Dec/Jan/Apr",
+   "ai_overview_prone": false,
+   "flags": []
+  },
+  {
+   "keyword": "cost to repair washing machine bearings",
+   "volume": 10,
+   "kd": 0,
+   "cpc_low": 0.0,
+   "cpc_high": 0.0,
+   "funnel": "BOFU",
+   "intent": "transactional",
+   "trend": "UNKNOWN",
+   "peak_months": "Jun",
+   "ai_overview_prone": false,
+   "flags": []
+  },
+  {
+   "keyword": "washing machine repair technician near me",
+   "volume": 10,
+   "kd": 29,
+   "cpc_low": 0.0,
+   "cpc_high": 0.0,
+   "funnel": "BOFU",
+   "intent": "transactional",
+   "trend": "SEASONAL",
+   "peak_months": "Jul/Aug/Sep/Oct/Nov/Jan/Feb/Mar/Apr/May/Jun",
+   "ai_overview_prone": false,
+   "flags": [
+    "local"
+   ]
+  },
+  {
+   "keyword": "washer maintenance service near me",
+   "volume": 10,
+   "kd": 0,
+   "cpc_low": 0.0,
+   "cpc_high": 0.0,
+   "funnel": "BOFU",
+   "intent": "transactional",
+   "trend": "UNKNOWN",
+   "peak_months": "Sep/Feb",
+   "ai_overview_prone": false,
+   "flags": [
+    "local"
+   ]
+  },
+  {
+   "keyword": "samsung washing machine motherboard repair cost",
+   "volume": 10,
+   "kd": 26,
+   "cpc_low": 0.0,
+   "cpc_high": 0.0,
+   "funnel": "BOFU",
+   "intent": "transactional",
+   "trend": "SEASONAL",
+   "peak_months": "Nov/Feb/Apr/Jun",
+   "ai_overview_prone": false,
+   "flags": []
+  },
+  {
+   "keyword": "washing machine seal replacement cost",
+   "volume": 10,
+   "kd": 69,
+   "cpc_low": 98.4,
+   "cpc_high": 1665.7,
+   "funnel": "BOFU",
+   "intent": "transactional",
+   "trend": "SEASONAL",
+   "peak_months": "Jul/Aug/Sep/Oct/Dec/Jan/Feb/Mar/Apr/May/Jun",
+   "ai_overview_prone": false,
+   "flags": []
+  },
+  {
+   "keyword": "automatic washing machine mechanic near me",
+   "volume": 10,
+   "kd": 26,
+   "cpc_low": 0.0,
+   "cpc_high": 0.0,
+   "funnel": "BOFU",
+   "intent": "commercial",
+   "trend": "SEASONAL",
+   "peak_months": "Jul/Aug/Dec/Feb/Apr/May/Jun",
+   "ai_overview_prone": false,
+   "flags": [
+    "local"
+   ]
+  },
+  {
+   "keyword": "washing machine door lock repair cost",
+   "volume": 10,
+   "kd": 0,
+   "cpc_low": 0.0,
+   "cpc_high": 0.0,
+   "funnel": "BOFU",
+   "intent": "transactional",
+   "trend": "SEASONAL",
+   "peak_months": "Jul/Sep/Oct/Nov/Dec/Jan/Feb/Mar/Apr/May",
+   "ai_overview_prone": false,
+   "flags": []
+  },
+  {
+   "keyword": "lg washing machine pcb repair cost",
+   "volume": 10,
+   "kd": 0,
+   "cpc_low": 0.0,
+   "cpc_high": 0.0,
+   "funnel": "BOFU",
+   "intent": "transactional",
+   "trend": "SEASONAL",
+   "peak_months": "Jul/Sep/Jan/Apr/May",
+   "ai_overview_prone": false,
+   "flags": []
+  },
+  {
+   "keyword": "samsung washing machine door seal replacement cost",
+   "volume": 10,
+   "kd": 0,
+   "cpc_low": 0.0,
+   "cpc_high": 0.0,
+   "funnel": "BOFU",
+   "intent": "transactional",
+   "trend": "SEASONAL",
+   "peak_months": "Jul/Aug/Jan/Mar/Apr/May",
+   "ai_overview_prone": false,
+   "flags": []
+  },
+  {
+   "keyword": "lg washing machine repair cost",
+   "volume": 10,
+   "kd": 0,
+   "cpc_low": 0.0,
+   "cpc_high": 0.0,
+   "funnel": "BOFU",
+   "intent": "transactional",
+   "trend": "SEASONAL",
+   "peak_months": "Oct/Nov/Jan/Mar",
+   "ai_overview_prone": false,
+   "flags": []
+  },
+  {
+   "keyword": "washing machine door replacement cost",
+   "volume": 10,
+   "kd": 0,
+   "cpc_low": 0.0,
+   "cpc_high": 0.0,
+   "funnel": "BOFU",
+   "intent": "transactional",
+   "trend": "SEASONAL",
+   "peak_months": "Oct/Mar/Apr",
+   "ai_overview_prone": false,
+   "flags": []
+  },
+  {
+   "keyword": "washing machine valve replacement cost",
+   "volume": 10,
+   "kd": 0,
+   "cpc_low": 0.0,
+   "cpc_high": 0.0,
+   "funnel": "BOFU",
+   "intent": "transactional",
+   "trend": "SEASONAL",
+   "peak_months": "Oct/Dec/Jan",
+   "ai_overview_prone": false,
+   "flags": []
+  },
+  {
+   "keyword": "washing machine door seal replacement cost",
+   "volume": 10,
+   "kd": 0,
+   "cpc_low": 0.0,
+   "cpc_high": 0.0,
+   "funnel": "BOFU",
+   "intent": "transactional",
+   "trend": "SEASONAL",
+   "peak_months": "Aug/Sep/Oct/Dec/Apr/May",
+   "ai_overview_prone": false,
+   "flags": []
+  },
+  {
+   "keyword": "front load washing machine bearing replacement cost",
+   "volume": 10,
+   "kd": 0,
+   "cpc_low": 0.0,
+   "cpc_high": 0.0,
+   "funnel": "BOFU",
+   "intent": "transactional",
+   "trend": "SEASONAL",
+   "peak_months": "Sep/Oct/May",
+   "ai_overview_prone": false,
+   "flags": []
+  },
+  {
+   "keyword": "washing machine repair charges",
+   "volume": 10,
+   "kd": 92,
+   "cpc_low": 302.28,
+   "cpc_high": 704.97,
+   "funnel": "BOFU",
+   "intent": "transactional",
+   "trend": "GROWING",
+   "peak_months": "Jul/Sep/Oct/Nov/Jan/Feb/Mar/Apr/May/Jun",
+   "ai_overview_prone": false,
+   "flags": []
+  },
+  {
+   "keyword": "washing machine gasket replacement cost",
+   "volume": 10,
+   "kd": 92,
+   "cpc_low": 120.77,
+   "cpc_high": 1060.62,
+   "funnel": "BOFU",
+   "intent": "transactional",
+   "trend": "GROWING",
+   "peak_months": "Aug/Nov/Dec/Jan/Feb/May/Jun",
+   "ai_overview_prone": false,
+   "flags": []
+  },
+  {
+   "keyword": "lg washing machine drum replacement cost",
+   "volume": 10,
+   "kd": 40,
+   "cpc_low": 0.0,
+   "cpc_high": 0.0,
+   "funnel": "BOFU",
+   "intent": "transactional",
+   "trend": "STABLE",
+   "peak_months": "Jul/Aug/Sep/Oct/Nov/Dec/Jan/Feb/Mar/Apr/May/Jun",
+   "ai_overview_prone": false,
+   "flags": []
+  },
+  {
+   "keyword": "hoover washing machine repair cost",
+   "volume": 10,
+   "kd": 0,
+   "cpc_low": 0.0,
+   "cpc_high": 0.0,
+   "funnel": "BOFU",
+   "intent": "transactional",
+   "trend": "UNKNOWN",
+   "peak_months": "Jul/Aug",
+   "ai_overview_prone": false,
+   "flags": []
+  },
+  {
+   "keyword": "samsung washing machine pcb repair cost",
+   "volume": 10,
+   "kd": 0,
+   "cpc_low": 0.0,
+   "cpc_high": 0.0,
+   "funnel": "BOFU",
+   "intent": "transactional",
+   "trend": "UNKNOWN",
+   "peak_months": "Mar",
+   "ai_overview_prone": false,
+   "flags": []
+  },
+  {
+   "keyword": "bosch washing machine repair cost",
+   "volume": 10,
+   "kd": 0,
+   "cpc_low": 0.0,
+   "cpc_high": 0.0,
+   "funnel": "BOFU",
+   "intent": "transactional",
+   "trend": "UNKNOWN",
+   "peak_months": "Jul/Feb",
+   "ai_overview_prone": false,
+   "flags": []
+  },
+  {
+   "keyword": "samsung washer motor replacement cost",
+   "volume": 10,
+   "kd": 0,
+   "cpc_low": 0.0,
+   "cpc_high": 0.0,
+   "funnel": "BOFU",
+   "intent": "transactional",
+   "trend": "UNKNOWN",
+   "peak_months": "Aug/Nov",
+   "ai_overview_prone": false,
+   "flags": []
+  },
+  {
+   "keyword": "washing machine clutch repair cost",
+   "volume": 10,
+   "kd": 0,
+   "cpc_low": 0.0,
+   "cpc_high": 0.0,
+   "funnel": "BOFU",
+   "intent": "transactional",
+   "trend": "UNKNOWN",
+   "peak_months": "Sep",
+   "ai_overview_prone": false,
+   "flags": []
+  },
+  {
+   "keyword": "washer mechanic near me",
+   "volume": 10,
+   "kd": 0,
+   "cpc_low": 0.0,
+   "cpc_high": 0.0,
+   "funnel": "BOFU",
+   "intent": "commercial",
+   "trend": "UNKNOWN",
+   "peak_months": "Apr",
+   "ai_overview_prone": false,
+   "flags": [
+    "local"
+   ]
+  },
+  {
+   "keyword": "washing mechanic near me",
+   "volume": 10,
+   "kd": 0,
+   "cpc_low": 0.0,
+   "cpc_high": 0.0,
+   "funnel": "BOFU",
+   "intent": "commercial",
+   "trend": "UNKNOWN",
+   "peak_months": "Oct",
+   "ai_overview_prone": false,
+   "flags": [
+    "local"
+   ]
+  }
+ ]
+}
