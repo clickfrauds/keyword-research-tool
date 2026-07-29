@@ -187,6 +187,49 @@ and PAA questions instead of AI guesses.</p>
             f.write(stub)
         push_file("mode3_stub_report.html", "html")
 
+    # Same problem for a Mode 5 area run: it produces ONLY area_plan.json, so
+    # without a report html check-status.js never flips to "ready" and the
+    # frontend polls forever — the first successful area run published its JSON
+    # and still showed the user nothing.
+    if (not os.path.exists("keyword_strategy_report.html")
+            and not os.path.exists("website_builder_inputs.json")
+            and os.path.exists("area_plan.json")):
+        raw_link = (f"https://raw.githubusercontent.com/{GITHUB_REPOSITORY}"
+                    f"/{RESULTS_BRANCH}/results/{REQUEST_ID}.mode5.json")
+        rows = ""
+        try:
+            with open("area_plan.json", encoding="utf-8") as f:
+                areas = (json.load(f).get("mode5_pseo") or {}).get("areas") or []
+            rows = "".join(
+                f"<tr><td>{a.get('area','')}</td><td>{a.get('total_volume',0)}/mo</td>"
+                f"<td>{(a.get('primary_keyword') or {}).get('keyword','')}</td></tr>"
+                for a in areas)
+        except Exception:
+            pass
+        stub = f"""<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mode 5 Area Plan — ready</title>
+<style>body{{font-family:-apple-system,Segoe UI,Roboto,sans-serif;background:#f6f5f2;color:#14181c;
+margin:0;padding:40px 20px}}.card{{max-width:720px;margin:0 auto;background:#fdfcfa;border:1px solid #dcdad3;
+border-radius:10px;padding:28px}}h1{{font-size:20px;margin:0 0 10px}}p{{font-size:14px;color:#6b6560;line-height:1.6}}
+code{{display:block;background:#eef2f1;border:1px solid #dcdad3;border-radius:6px;padding:12px;
+font-size:12px;word-break:break-all;margin-top:14px}}table{{width:100%;border-collapse:collapse;margin-top:18px;
+font-size:13px}}td{{border-bottom:1px solid #e6e4dd;padding:7px 6px}}td:nth-child(2){{text-align:right;
+white-space:nowrap;color:#2f6f4f;font-weight:600}}td:nth-child(3){{color:#6b6560}}</style></head><body>
+<div class="card"><h1>✅ Mode 5 Area Plan is ready</h1>
+<p>Every area below has its <strong>own measured search demand</strong> — these are the only ones that
+earn a page. Paste the link into the website builder's <strong>Mode 5</strong> plan URL field; no Google
+Sheets needed. Coordinates are geocoded at build time.</p>
+<code>{raw_link}</code>
+<table>{rows}</table></div></body></html>"""
+        with open("mode5_stub_report.html", "w", encoding="utf-8") as f:
+            f.write(stub)
+        push_file("mode5_stub_report.html", "html")
+        print("")
+        print("🔗 Mode 5 area plan — builder ke Mode 5 plan URL field mein paste karein:")
+        print(f"   {raw_link}")
+
     if os.path.exists("website_builder_inputs.json"):
         raw_link = (f"https://raw.githubusercontent.com/{GITHUB_REPOSITORY}"
                     f"/{RESULTS_BRANCH}/results/{REQUEST_ID}.seo.json")

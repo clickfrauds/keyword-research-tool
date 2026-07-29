@@ -69,6 +69,7 @@ export async function onRequestGet(context) {
   //   {id}.negatives.csv → ad-group negatives (separate file — the Editor's
   //                        Keywords grid can't take mixed positive/negative)
   //   {id}.guard.js      → negative-guard Google Ads Script
+  //   {id}.mode5.json    → Mode 5 area plan (pSEO area-wise demand)
   // Probe each; return its raw link only if it exists. (Raw links need a
   // public repo; for a private repo these fetches would need a token.)
   const probe = async (ext) => {
@@ -89,12 +90,12 @@ export async function onRequestGet(context) {
     } catch (e) { /* non-fatal — the link just stays hidden */ }
     return null;
   };
-  const [seo_json_url, master_csv_url, push_report_url, pages_json_url, ads_csv_url, negatives_csv_url, guard_js_url, audiences_csv_url, audiences_negatives_csv_url, rsa_csv_url, locations_csv_url, locations_negative_csv_url] = await Promise.all([
-    probe("seo.json"), probe("master.csv"), probe("push.md"), probe("pages.json"), probe("editor.csv"), probe("negatives.csv"), probe("guard.js"), probe("audiences.csv"), probe("audiences_negatives.csv"), probe("rsa.csv"), probe("locations.csv"), probe("locations_negative.csv"),
+  const [seo_json_url, master_csv_url, push_report_url, pages_json_url, ads_csv_url, negatives_csv_url, guard_js_url, audiences_csv_url, audiences_negatives_csv_url, rsa_csv_url, locations_csv_url, locations_negative_csv_url, mode5_json_url] = await Promise.all([
+    probe("seo.json"), probe("master.csv"), probe("push.md"), probe("pages.json"), probe("editor.csv"), probe("negatives.csv"), probe("guard.js"), probe("audiences.csv"), probe("audiences_negatives.csv"), probe("rsa.csv"), probe("locations.csv"), probe("locations_negative.csv"), probe("mode5.json"),
   ]);
 
   return new Response(
-    JSON.stringify({ status: "ready", html: htmlContent, seo_json_url, master_csv_url, push_report_url, pages_json_url, ads_csv_url, negatives_csv_url, guard_js_url, audiences_csv_url, audiences_negatives_csv_url, rsa_csv_url, locations_csv_url, locations_negative_csv_url }),
+    JSON.stringify({ status: "ready", html: htmlContent, seo_json_url, master_csv_url, push_report_url, pages_json_url, ads_csv_url, negatives_csv_url, guard_js_url, audiences_csv_url, audiences_negatives_csv_url, rsa_csv_url, locations_csv_url, locations_negative_csv_url, mode5_json_url }),
     { status: 200, headers: { "Content-Type": "application/json" } }
   );
 }

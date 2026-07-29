@@ -68,6 +68,27 @@ MAX_AREAS       = int(os.environ.get("MAX_AREAS", "60") or 60)
 CALL_DELAY      = float(os.environ.get("ADS_CALL_DELAY", "3") or 3)
 
 
+def names_area(k_norm, a_norm):
+    """Is the area named as a PLACE in this keyword, or is the word just part
+    of the product?
+
+    A plain substring test credited Dubai's "Front" district with 490/mo from
+    'lg front load washer repair' — a machine type, not a location. Real local
+    intent puts the place at the end ('...repair al quoz') or behind a
+    preposition ('...repair in al quoz'). Anything else is a coincidence.
+    """
+    for name in (a_norm, " ".join(a_norm.split()[1:])):   # 'al quoz' / 'quoz'
+        if not name:
+            continue
+        for m in re.finditer(rf"(?<![a-z0-9]){re.escape(name)}(?![a-z0-9])", k_norm):
+            before, after = k_norm[:m.start()].split(), k_norm[m.end():].split()
+            if not after:                                  # at the end
+                return True
+            if before and before[-1] in ("in", "near", "at", "around", "of"):
+                return True
+    return False
+
+
 def resolve_areas():
     """Every real Google Ads geo area for TARGET_LOCATION (city → its
     neighbourhoods/districts; country → its cities)."""
@@ -84,10 +105,18 @@ def resolve_areas():
                       f"geo list is used.")
             return []
         geo = fetch_json(f"{GEO_BASE}/{cc}.json")
+        # The city itself comes back in its own area list, and it out-ranks every
+        # district (Dubai: 9290/mo vs Al Qusais 270). But a "washing machine
+        # repair Dubai" area page competes with the site's own homepage and main
+        # service page for the same term — the one thing pSEO must not do. Areas
+        # are the parts of the city, never the city.
+        city_norm = re.sub(r"[^a-z]", "", (city or TARGET_LOCATION.split(",")[0]).lower())
         names, seen = [], []
         for g in pick_locations(geo, city):
             n = str(g.get("n", "")).strip()
             if n and n.lower() not in seen:
+                if re.sub(r"[^a-z]", "", n.lower()) == city_norm:
+                    continue
                 seen.append(n.lower())
                 names.append(n)
         return names
@@ -210,7 +239,7 @@ def main():
             # only keywords that actually name THIS area — an idea list for
             # "washing machine repair al barsha" is full of city-wide terms
             k_norm = re.sub(r"[^a-z0-9 ]", "", idea.text.lower())
-            if a_norm not in k_norm and " ".join(a_norm.split()[1:]) not in k_norm:
+            if not names_area(k_norm, a_norm):
                 continue
             monthly = sorted(list(m.monthly_search_volumes), key=lambda x: (x.year, x.month))
             rows.append({

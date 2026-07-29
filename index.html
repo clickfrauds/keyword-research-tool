@@ -314,6 +314,17 @@
   </div>
 
   <!-- Mode 4 feed: auto-generated raw link of website_builder_inputs.json -->
+  <div id="mode5-link-row" hidden style="margin-top:14px; padding:12px 14px; border:1px solid var(--line); border-radius:8px; background:var(--paper);">
+    <div style="font-size:12px; font-weight:600; margin-bottom:6px;">
+      Mode 5 area plan link
+      <span style="opacity:.6; font-weight:400">(website builder ke Mode 5 "plan URL" field mein paste karein — koi Google Sheet nahi)</span>
+    </div>
+    <div style="display:flex; gap:8px;">
+      <input id="mode5-link-input" readonly style="font-family:var(--mono); font-size:12px;">
+      <button id="mode5-copy-btn" type="button" style="margin-top:0; width:auto; background:var(--paper); color:var(--accent); border:1px solid var(--accent); white-space:nowrap;">Copy</button>
+    </div>
+  </div>
+
   <div id="seo-link-row" hidden style="margin-top:14px; padding:12px 14px; border:1px solid var(--line); border-radius:8px; background:var(--paper);">
     <div style="font-size:12px; font-weight:600; margin-bottom:6px;">
       Mode 4 SEO data link
@@ -718,6 +729,12 @@
           document.getElementById("seo-link-row").hidden = false;
         }
 
+        // Mode 5 area runs: the area plan link (area_plan.json)
+        if (json.mode5_json_url) {
+          document.getElementById("mode5-link-input").value = json.mode5_json_url;
+          document.getElementById("mode5-link-row").hidden = false;
+        }
+
         // Ads runs: Mode 1 batch landing pages link (landing_pages.json)
         if (json.pages_json_url) {
           document.getElementById("pages-link-input").value = json.pages_json_url;
@@ -804,6 +821,16 @@
   document.getElementById("seo-copy-btn").addEventListener("click", () => {
     const inp = document.getElementById("seo-link-input");
     const btn = document.getElementById("seo-copy-btn");
+    inp.select();
+    navigator.clipboard.writeText(inp.value).then(() => {
+      btn.textContent = "Copied ✓";
+      setTimeout(() => { btn.textContent = "Copy"; }, 1500);
+    }).catch(() => { document.execCommand("copy"); });
+  });
+
+  document.getElementById("mode5-copy-btn").addEventListener("click", () => {
+    const inp = document.getElementById("mode5-link-input");
+    const btn = document.getElementById("mode5-copy-btn");
     inp.select();
     navigator.clipboard.writeText(inp.value).then(() => {
       btn.textContent = "Copied ✓";
