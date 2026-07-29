@@ -107,6 +107,18 @@ def slug_for(group_name, pages):
     return ""
 
 
+def lang_prefix_for(group):
+    """Non-English ad groups point at /{lang}/{slug}/ — the folder the website
+    builder actually publishes that language into. Only used when the RSA stage
+    did not already resolve a Final URL for this group."""
+    code = str(group.get("language") or "").strip().lower()
+    if not code:
+        code = "ar" if re.search(r"[؀-ۿ]", str(group.get("name", "")) + str(group.get("theme", ""))) else "en"
+    if code in ("", "en") or code == _LANG:
+        return ""
+    return f"/{code}"
+
+
 def _short_label(group_name, budget):
     """A prefix that still leaves room for the suffix word. Whole words only —
     a mid-word cut ("Washing Mach Pricing") reads like a bug in the ad."""
@@ -258,10 +270,15 @@ def main():
     n_model = n_fixed = 0
     for g in groups:
         name = g.get("name", "")
-        base = urls.get(name) or (f"{base_site}/{slug_for(name, pages)}/".replace("//", "/")
-                                  .replace("https:/", "https://").replace("http:/", "http://")
-                                  if slug_for(name, pages) else f"{base_site}/")
+        _slug = slug_for(name, pages)
+        _pfx = lang_prefix_for(g)
+        base = urls.get(name) or (f"{base_site}{_pfx}/{_slug}/" if _slug else f"{base_site}{_pfx}/")
         base = base.rstrip("/")
+        # an ad group with no landing page falls back to the site root — keep the
+        # trailing slash so the anchor reads "https://site.com/#pricing", not
+        # "https://site.com#pricing"
+        if re.match(r"^https?://[^/]+$", base):
+            base += "/"
         proposed = copy_by_group.get(name) or []
         fallback = fallback_set(name, g.get("theme", ""), base)
 

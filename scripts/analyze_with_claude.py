@@ -627,9 +627,19 @@ def validate_strategy(raw, kept):
                 entry["bid_currency"] = BID_CURRENCY
             return entry
 
+        # LANGUAGE OF THIS AD GROUP, from its own keywords. Everything
+        # downstream needs it: the RSA copy must be in it, the landing page
+        # lives under /{lang}/, and the campaign must target it. Detecting it
+        # once here beats three stages re-guessing from the group name.
+        _g_script = script_breakdown([{"keyword": k["keyword"]} for k in kws] or
+                                     [{"keyword": g.get("name", "")}])
+        _g_lang = {"Arabic": "ar", "Devanagari": "hi", "Cyrillic": "ru",
+                   "CJK": "zh"}.get(max(_g_script, key=_g_script.get) if _g_script else "Latin", "en")
+
         groups.append({
             "name": str(g.get("name", "Ad Group")).strip()[:60],
             "campaign": camp,
+            "language": _g_lang,
             "theme": str(g.get("theme", "")).strip(),
             "match_type": group_match,
             "priority": g.get("priority", "medium"),
@@ -712,9 +722,14 @@ def validate_strategy(raw, kept):
         if _slug in _slug_seen:
             _slug = f"{_slug}-{_pi}"
         _slug_seen.add(_slug)
+        # The page inherits the language of the ad groups it serves — Mode 1 in
+        # the website builder reads this to publish it under /{lang}/ and to
+        # write it in the right language instead of the run default.
+        _p_langs = {g["language"] for g in groups if g["name"] in ag} or {"en"}
         pages.append({
             "page_name": str(p.get("page_name", p.get("service_name", ""))).strip()[:80],
             "url_slug": _slug,
+            "language": sorted(_p_langs)[0] if len(_p_langs) == 1 else "mixed",
             "service_name": str(p.get("service_name", "")).strip(),
             "industry": str(p.get("industry", NICHE_DESCRIPTION[:40])).strip(),
             "sub_services": subs,

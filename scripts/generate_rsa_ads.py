@@ -306,10 +306,52 @@ if RSA_LANG_NAME:
                f"{RSA_LANG_NAME} text. Brand names keep official casing.")
 
 
+_SCRIPT_LANG = [("ar", "Arabic", r"[؀-ۿ]"), ("hi", "Hindi", r"[ऀ-ॿ]"),
+                ("ru", "Russian", r"[Ѐ-ӿ]"), ("zh", "Chinese", r"[一-鿿]")]
+
+
+def group_language(group):
+    """(code, language name) for THIS ad group — its own `language` field when
+    the strategy carries one, else detected from its keywords.
+
+    RSA_LANG_NAME is the RUN-WIDE language, so a mixed Arabic+English account
+    run on the English default handed the Arabic ad groups ENGLISH ad copy:
+    Arabic keywords with English headlines cannot serve and destroy Quality
+    Score. Ad copy follows the ad group, never the run."""
+    code = str(group.get("language") or "").strip().lower()
+    if code and code != "en":
+        return code, _RSA_LANG_NAMES.get(code, code)
+    if code == "en":
+        return "en", RSA_LANG_NAME or ""
+    blob = " ".join([str(group.get("name", "")), str(group.get("theme", ""))]
+                    + [str(k.get("keyword", "")) for k in (group.get("keywords") or [])])
+    for c, name, pattern in _SCRIPT_LANG:
+        if re.search(pattern, blob):
+            return c, name
+    return "en", RSA_LANG_NAME or ""
+
+
+def lang_url_prefix(lang_code):
+    """The website builder publishes non-English content under /{lang}/
+    (lang_mode folder). An Arabic ad group whose Final URL skipped that folder
+    pointed at a 404 while the real page sat at /ar/{slug}/."""
+    code = (lang_code or "en").strip().lower()
+    if not code or code == "en" or code == (_rsa_lang or "en"):
+        return ""
+    return f"/{code}"
+
+
 def ask_claude(client, group, kw_lines, retry_note=""):
+    _code, _lang_name = group_language(group)
+    # The per-group rule rides in the USER message so the cached SYSTEM prompt
+    # stays byte-identical across ad groups (prompt-cache discount preserved).
+    lang_rule = (f"\nLANGUAGE FOR THIS AD GROUP: write EVERY headline and description in "
+                 f"{_lang_name}. Its keywords are in {_lang_name}, so an ad in any other "
+                 f"language cannot serve for them. The 30/90 character limits are counted "
+                 f"in {_lang_name} characters.\n" if _lang_name else "")
     user = f"""AD GROUP: {group['name']}
 THEME (the single user intent): {group.get('theme', '')}
-TARGET KEYWORDS (with monthly volume):
+{lang_rule}TARGET KEYWORDS (with monthly volume):
 {kw_lines}
 {retry_note}
 Write the RSA JSON now."""
@@ -478,7 +520,9 @@ def main():
             descriptions.append(d)
 
         slug = slug_by_group.get(group["name"], "")
-        final_url = f"{base}/{slug}/" if slug else f"{base}/"
+        _g_code, _ = group_language(group)
+        _pfx = lang_url_prefix(_g_code)
+        final_url = f"{base}{_pfx}/{slug}/" if slug else f"{base}{_pfx}/"
         p1, p2 = make_paths(slug or group["name"])
         pins = pin_plan(headlines, kws)
 

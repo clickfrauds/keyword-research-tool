@@ -170,6 +170,32 @@ def main():
         pass  # older google-ads lib without the field
     ops.append(o)
 
+    # ── campaign language targeting ─────────────────────────────────────
+    # One campaign can hold English AND Arabic ad groups — that part is
+    # standard. What is NOT optional is the campaign's language criteria: they
+    # filter on the user's Google interface language, so a campaign that never
+    # targeted Arabic under-serves its Arabic ad groups. Target exactly the
+    # languages the ad groups are actually written in.
+    _LANG_CONSTANTS = {"en": 1000, "ar": 1019, "hi": 1023, "ur": 1056, "fr": 1002,
+                       "de": 1001, "es": 1003, "it": 1004, "nl": 1010, "pt": 1014,
+                       "ru": 1031, "tr": 1037, "zh": 1017, "ja": 1005, "ko": 1012}
+    _langs = set()
+    for g in groups:
+        code = str(g.get("language") or "").strip().lower()
+        if not code:
+            blob = str(g.get("name", "")) + " ".join(
+                str(k.get("keyword", "")) for k in (g.get("keywords") or []))
+            code = "ar" if any("؀" <= ch <= "ۿ" for ch in blob) else "en"
+        if code in _LANG_CONSTANTS:
+            _langs.add(code)
+    for code in sorted(_langs or {"en"}):
+        o = op()
+        cc = o.campaign_criterion_operation.create
+        cc.campaign = temp("campaigns/-2")
+        cc.language.language_constant = f"languageConstants/{_LANG_CONSTANTS[code]}"
+        ops.append(o)
+    log(f"Campaign languages targeted: {', '.join(sorted(_langs or {'en'}))}")
+
     # ── ad groups + keywords + negatives ────────────────────────────────
     n_kw = n_neg = 0
     for gi, g in enumerate(groups):
