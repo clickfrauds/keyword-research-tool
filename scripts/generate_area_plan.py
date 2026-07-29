@@ -178,7 +178,19 @@ def main():
     client = GoogleAdsClient.load_from_env()
     svc = client.get_service("KeywordPlanIdeaService")
 
-    lang_id = LANGUAGE_ID or {"ar": "1019", "hi": "1023"}.get(LANGUAGE, "1000")
+    # Planner language ids. Anything not listed researches in English.
+    LANG_IDS = {"en": "1000", "ar": "1019", "hi": "1023", "es": "1003", "fr": "1002",
+                "de": "1001", "tr": "1037", "ur": "1041", "ru": "1031", "zh": "1017"}
+    lang_code = LANGUAGE if LANGUAGE in LANG_IDS else ""
+    if LANGUAGE and not lang_code:
+        # "no" is a real ISO code (Norwegian). Someone answering the form's
+        # language field with "no" meaning "none" would otherwise stamp the plan
+        # with a language the site is not in, so an unrecognised code is dropped
+        # rather than carried forward.
+        print(f"   ⚠️ language '{LANGUAGE}' not recognised — researching in English "
+              f"and leaving the plan's language blank. Use one of: "
+              f"{', '.join(sorted(LANG_IDS))}.")
+    lang_id = LANGUAGE_ID or LANG_IDS.get(lang_code, "1000")
 
     # geo target for the CITY itself — every request is scoped to it, so an
     # area's volume is its share of that city's demand, not the country's
@@ -309,7 +321,7 @@ def main():
     out = {
         "business": {"name": BUSINESS_NAME, "niche": NICHE_DESCRIPTION,
                      "location": TARGET_LOCATION},
-        "language": LANGUAGE or "",
+        "language": lang_code,
         "primary_service": PRIMARY_SERVICE,
         "research": {
             "areas_checked": len(areas),
