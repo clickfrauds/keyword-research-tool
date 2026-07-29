@@ -394,12 +394,24 @@ def validate(raw, by_id):
                     "answer_angle": str(q.get("answer_angle", "")).strip(),
                     "type": q.get("type", "conversational"),
                 })
+        # Cluster-level AI-Overview signal. The per-keyword flag only fires for
+        # question/informational INTENT, so a local-service plan comes back with
+        # it off on every keyword (painting run: 0 of 48) even though the page
+        # will absolutely face an AI Overview. The questions we just wrote are
+        # the real signal: conversational / voice / PAA phrasing IS what Google
+        # answers inline. Two or more of those turn the flag on, and the website
+        # builder uses it to open the page with a snippet-ready direct answer.
+        _q_signal = sum(1 for q in questions
+                        if q["type"] in ("conversational", "voice", "paa"))
+        cluster_aio = (any(by_id[i].get("ai_overview_prone") for i in ids)
+                       or _q_signal >= 2)
         clusters.append({
             "cluster_name": str(c.get("cluster_name", "Cluster")).strip()[:80],
             "funnel": c.get("funnel", "MOFU"),
             "primary_keyword": expand_kw(by_id[prim]),
             "keywords": [expand_kw(by_id[i]) for i in ids],
             "total_volume": sum(by_id[i]["avg_monthly_searches"] for i in ids),
+            "ai_overview_prone": bool(cluster_aio),
             "questions": questions,
             "entities_to_mention": [str(e).strip() for e in c.get("entities_to_mention", []) if str(e).strip()],
         })
