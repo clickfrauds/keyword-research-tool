@@ -521,6 +521,47 @@ def resolve_areas():
         return []
 
 
+def _add_proximity(results):
+    """Which measured areas neighbour each other, with real distances.
+
+    A page for Al Qusais that can say "we also cover Al Nahda, 2 km away" and
+    link to it is doing local SEO; one that lists a model's idea of nearby
+    places is guessing. So the qualifying areas — a dozen or so, not the whole
+    city — are geocoded and the distances computed. Straight-line km, which is
+    honest: it is a proximity signal, never presented as drive time.
+    """
+    import math
+    pts = {}
+    for a in results:
+        time.sleep(1.2)                       # OSM asks for max 1 req/sec
+        try:
+            d = _nominatim(f"{a['area']}, {TARGET_LOCATION}")
+            if d:
+                pts[a["area"]] = (float(d[0]["lat"]), float(d[0]["lon"]))
+                a["coordinates"] = {"lat": pts[a["area"]][0], "lng": pts[a["area"]][1]}
+        except Exception:
+            pass
+    if len(pts) < 2:
+        print("   ℹ️ Not enough areas could be located to work out proximity.")
+        return
+
+    def km(p, q):
+        r = 6371.0
+        dlat, dlon = math.radians(q[0] - p[0]), math.radians(q[1] - p[1])
+        h = (math.sin(dlat / 2) ** 2
+             + math.cos(math.radians(p[0])) * math.cos(math.radians(q[0]))
+             * math.sin(dlon / 2) ** 2)
+        return 2 * r * math.asin(math.sqrt(h))
+
+    for a in results:
+        me = pts.get(a["area"])
+        if not me:
+            continue
+        near = sorted(((round(km(me, p), 1), n) for n, p in pts.items() if n != a["area"]))
+        a["nearby_areas"] = [{"area": n, "km": d} for d, n in near[:4]]
+    print(f"   📍 Proximity mapped for {len(pts)}/{len(results)} areas")
+
+
 def _enrich_areas(results):
     """Questions and entities per area, in ONE Claude call for the whole run.
 
@@ -583,9 +624,11 @@ def _enrich_areas(results):
             got = data.get(a["area"]) or {}
             qs = [q for q in (got.get("questions") or []) if q.get("q")]
             ents = [str(e).strip() for e in (got.get("entities") or []) if str(e).strip()]
-            if qs or ents:
+            heads = [str(h).strip() for h in (got.get("headings") or []) if str(h).strip()]
+            if qs or ents or heads:
                 a["questions"] = qs[:6]
                 a["entities"] = ents[:14]
+                a["headings"] = heads[:7]
                 added += 1
         print(f"   ✨ Questions and entities added for {added}/{len(results)} areas")
     except Exception as e:
@@ -849,6 +892,7 @@ def main():
     results.sort(key=lambda a: -a["total_volume"])
     print(f"\n📊 {len(results)} areas worth a page, {len(skipped)} below {MIN_AREA_VOLUME}/mo")
 
+    _add_proximity(results)
     _enrich_areas(results)
 
     out = {
