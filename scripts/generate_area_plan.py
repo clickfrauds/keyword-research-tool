@@ -702,19 +702,15 @@ def main():
             time.sleep(CALL_DELAY)
             continue
 
-        rows, a_norm = [], re.sub(r"[^a-z0-9 ]", "", area.lower())
+        rows, related = [], []
+        a_norm = re.sub(r"[^a-z0-9 ]", "", area.lower())
         for idea in resp:
             m = idea.keyword_idea_metrics
             vol = m.avg_monthly_searches or 0
             if vol <= 0:
                 continue
-            # only keywords that actually name THIS area — an idea list for
-            # "washing machine repair al barsha" is full of city-wide terms
-            k_norm = re.sub(r"[^a-z0-9 ]", "", idea.text.lower())
-            if not names_area(k_norm, a_norm, area_names_norm):
-                continue
             monthly = sorted(list(m.monthly_search_volumes), key=lambda x: (x.year, x.month))
-            rows.append({
+            row = {
                 "keyword": idea.text,
                 "volume": vol,
                 "kd": m.competition_index or 0,
@@ -722,14 +718,34 @@ def main():
                 "cpc_high": round((m.high_top_of_page_bid_micros or 0) / 1_000_000, 2),
                 "trend": classify_trend([x.monthly_searches for x in monthly]),
                 "peak_months": peak_months(monthly),
-            })
+            }
+            # only keywords that actually name THIS area decide whether it has
+            # demand — an idea list for "washing machine repair al barsha" is
+            # full of city-wide terms, and counting those is what once gave a
+            # non-place called "Front" 490/mo.
+            k_norm = re.sub(r"[^a-z0-9 ]", "", idea.text.lower())
+            if names_area(k_norm, a_norm, area_names_norm):
+                rows.append(row)
+            else:
+                # Still the right terms for the PAGE, though: "front load washer
+                # repair", "samsung washing machine repair near me". Most areas
+                # name-match only one keyword, so without these the builder had a
+                # single phrase to write a whole page around. Kept apart, and
+                # never added to the area's volume.
+                related.append(row)
         rows.sort(key=lambda r: -r["volume"])
+        related.sort(key=lambda r: -r["volume"])
         total = sum(r["volume"] for r in rows)
         if rows and total >= MIN_AREA_VOLUME:
             results.append({"area": area, "keywords": rows[:25],
+                            # supporting terms for the page body — real demand,
+                            # just not area-specific, so deliberately outside
+                            # total_volume
+                            "related_keywords": related[:20],
                             "total_volume": total, "primary_keyword": rows[0],
                             "demand": "measured"})
-            print(f"   ✅ [{i}/{len(areas)}] {area:<28} {total:>5}/mo  «{rows[0]['keyword'][:44]}»")
+            print(f"   ✅ [{i}/{len(areas)}] {area:<28} {total:>5}/mo  "
+                  f"«{rows[0]['keyword'][:44]}»  +{len(related[:20])} supporting")
         else:
             skipped.append(area)
             print(f"   ·  [{i}/{len(areas)}] {area:<28} {total or 0:>5}/mo  — below threshold")
