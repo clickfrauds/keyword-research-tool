@@ -588,6 +588,21 @@ def main():
     client = GoogleAdsClient.load_from_env()
     svc = client.get_service("KeywordPlanIdeaService")
 
+    def drop_manager_and_retry():
+        """Rebuild the client without the manager header.
+
+        Research and campaign pushes need opposite things from this secret. A
+        push into a client account REQUIRES the manager id; research only needs
+        an account the OAuth user can reach, and naming a manager that does not
+        hold this customer makes Google refuse every request. Deleting the
+        secret to fix research would then break the push, so instead the run
+        falls back by itself and the secret stays correct for the push.
+        """
+        nonlocal client, svc
+        os.environ.pop("GOOGLE_ADS_LOGIN_CUSTOMER_ID", None)
+        client = GoogleAdsClient.load_from_env()
+        svc = client.get_service("KeywordPlanIdeaService")
+
     # Planner language ids. Anything not listed researches in English.
     LANG_IDS = {"en": "1000", "ar": "1019", "hi": "1023", "es": "1003", "fr": "1002",
                 "de": "1001", "tr": "1037", "ur": "1041", "ru": "1031", "zh": "1017"}
@@ -634,6 +649,7 @@ def main():
     area_names_norm = {re.sub(r"[^a-z0-9 ]", "", a.lower()) for a in areas}
     results, skipped, api_errors = [], [], []
     quota_hit = False
+    manager_dropped = False
     for i, area in enumerate(areas, 1):
         seed = f"{PRIMARY_SERVICE} {area}"
         resp = None
@@ -652,6 +668,21 @@ def main():
                 # remaining area would fail the same way, so stop rather than
                 # firing another hundred doomed requests — and keep what we
                 # already measured instead of throwing the run away.
+                # The manager named in GOOGLE_ADS_LOGIN_CUSTOMER_ID does not hold
+                # this customer. Research does not need a manager at all, so drop
+                # the header and try again rather than failing 108 times — the
+                # secret stays intact for the campaign push, which does need it.
+                if ("permission to access customer" in msg
+                        and not manager_dropped
+                        and os.environ.get("GOOGLE_ADS_LOGIN_CUSTOMER_ID", "").strip()):
+                    mgr = os.environ["GOOGLE_ADS_LOGIN_CUSTOMER_ID"]
+                    print(f"   ↩️ Manager {mgr} does not manage customer {CUSTOMER_ID} — "
+                          f"retrying with direct access.")
+                    print(f"      (the secret is left alone: a campaign push into a "
+                          f"client account still needs it)")
+                    drop_manager_and_retry()
+                    manager_dropped = True
+                    continue
                 if "RESOURCE_EXHAUSTED" in str(err.error_code) or "quota" in msg.lower():
                     print(f"   🛑 [{i}/{len(areas)}] daily API quota exhausted — stopping here.")
                     quota_hit = True
