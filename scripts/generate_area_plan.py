@@ -343,15 +343,23 @@ def _wellknown_districts(city, country, already):
         return []
     try:
         import anthropic
-        have = ", ".join(sorted(already)[:120])
+        have = ", ".join(sorted(already)[:150])
         prompt = (
-            f"List the well-known residential and commercial districts of "
-            f"{city}, {country} that people would name when searching for a local "
-            f"service — the neighbourhoods locals actually say.\n\n"
-            f"These are already covered, so EXCLUDE them and anything that is the "
-            f"same place under another spelling:\n{have}\n\n"
+            f"Name the districts of {city}, {country} that residents would type when "
+            f"searching for a local home service.\n\n"
+            "Cover ALL of these, and do not skip a category:\n"
+            "  - the affluent residential communities and villa districts\n"
+            "  - the towered/apartment communities where most tenants live\n"
+            "  - the central business and downtown districts\n"
+            "  - the older, dense, working-class neighbourhoods\n"
+            "  - large master-planned or gated developments\n\n"
+            "The high-end and the working-class areas matter equally here: an "
+            "affluent district converts at a higher value, a dense one has more "
+            "households. Aim for 40-60 names, ordered with the best-known first.\n\n"
+            f"EXCLUDE these, already covered, and anything that is the same place "
+            f"under another spelling:\n{have}\n\n"
             "Reply with a JSON array of names only, no commentary. Use the common "
-            "English spelling a person would type."
+            "English spelling a person would type into Google."
         )
         msg = anthropic.Anthropic().messages.create(
             model="claude-sonnet-5", max_tokens=2000,
