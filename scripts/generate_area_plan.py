@@ -95,11 +95,91 @@ def names_area(k_norm, a_norm):
     return False
 
 
-def resolve_areas():
-    """Every real Google Ads geo area for TARGET_LOCATION (city → its
-    neighbourhoods/districts; country → its cities)."""
+# Google models a city's parts in three different shapes, and which one you get
+# depends on the country:
+#   parent = the city      Dubai:     "Al Quoz,Dubai,United Arab Emirates"
+#   parent = the country   Singapore: "Jurong West,Singapore"          (city-state)
+#   parent = the province  Karachi:   "Gulshan-e-Iqbal,Sindh,Pakistan" (no city!)
+# The first two can be read straight off the canonical path. The third cannot —
+# the data does not record which city a Sindh neighbourhood belongs to.
+CONTAINER_TYPES = {"Province", "County", "State", "Region", "Territory", "Governorate",
+                   "Prefecture", "Department", "Division", "Municipality", "City Region"}
+AREA_TYPES = {"Neighborhood", "District", "Borough", "Suburb", "City",
+              "Municipality", "Post town", "Ward", "City Region"}
+# Fewer linked areas than this means the country uses the province shape.
+DIRECT_AREAS_FLOOR = 15
+# Postal Code ("washing machine repair SW1A 1AA") and TV Region are real geo
+# targets that nobody searches by name, so they never earn a page.
+
+
+def _nrm(s):
+    return re.sub(r"[^a-z0-9 ]", " ", (s or "").lower()).strip()
+
+
+def _areas_under(geo, containers, city_n):
+    """Every area whose canonical path passes through one of `containers`."""
+    out, seen = [], set()
+    for g in geo:
+        if g.get("t") not in AREA_TYPES:
+            continue
+        name = str(g.get("n", "")).strip()
+        n = _nrm(name)
+        # The city itself is never one of its own areas: that page would compete
+        # with the site's homepage and main service page for a single term.
+        if not name or n == city_n or n in seen:
+            continue
+        parents = {_nrm(p) for p in str(g.get("c", "")).split(",")[1:]}
+        if parents & containers:
+            seen.add(n)
+            out.append(name)
+    return out
+
+
+def _keep_inside_city(names, city, country):
+    """Which of a province's areas actually lie in this city?
+
+    Only reached for countries of the third shape above. This is place
+    knowledge, not keyword data, so Claude answers it — the same division of
+    labour the rest of Mode 5 uses. No key, no guess: building pages for another
+    city's neighbourhoods is worse than building none.
+    """
+    if not names:
+        return []
+    if not os.environ.get("ANTHROPIC_API_KEY"):
+        print(f"   ⚠️ ANTHROPIC_API_KEY not set — cannot tell which of these areas are in "
+              f"{city}, and guessing would build pages for other cities. Set the secret.")
+        return []
     try:
-        from generate_locations import fetch_json, resolve_country, pick_locations, GEO_BASE
+        import anthropic
+        listed = "\n".join("- " + n for n in names)
+        prompt = (
+            f"Here are geo areas from the province containing {city}, {country}.\n"
+            f"Return ONLY those that are genuinely neighbourhoods, districts or suburbs "
+            f"OF {city} itself — not other cities in the province, not the province, "
+            f"not rural areas.\n\n{listed}\n\n"
+            "Reply with a JSON array of the exact names to keep, nothing else."
+        )
+        msg = anthropic.Anthropic().messages.create(
+            model="claude-sonnet-5", max_tokens=4000,
+            messages=[{"role": "user", "content": prompt}],
+        )
+        m = re.search(r"\[.*\]", msg.content[0].text.strip(), re.S)
+        keep = set(json.loads(m.group(0))) if m else set()
+        return [n for n in names if n in keep]
+    except Exception as e:
+        print(f"   ⚠️ Could not narrow the province's areas to {city}: {str(e)[:90]}")
+        return []
+
+
+def resolve_areas():
+    """Every Google Ads geo area that is a PART of TARGET_LOCATION's city.
+
+    Same geo source the Ads locations mode targets with — these are Google Ads
+    geo target constants, so every area returned is a place Google itself
+    recognises and can target.
+    """
+    try:
+        from generate_locations import fetch_json, resolve_country, GEO_BASE
         index = fetch_json(f"{GEO_BASE}/index.json")
         cc, city = resolve_country(TARGET_LOCATION, index)
         if not cc:
@@ -110,24 +190,74 @@ def resolve_areas():
                       f"CITY, COUNTRY — e.g. '{TARGET_LOCATION}, UAE' — so the right country's "
                       f"geo list is used.")
             return []
+        country_name = next((e.get("name", "") for e in index if e.get("cc") == cc), cc)
         geo = fetch_json(f"{GEO_BASE}/{cc}.json")
-        # The city itself comes back in its own area list, and it out-ranks every
-        # district (Dubai: 9290/mo vs Al Qusais 270). But a "washing machine
-        # repair Dubai" area page competes with the site's own homepage and main
-        # service page for the same term — the one thing pSEO must not do. Areas
-        # are the parts of the city, never the city.
-        city_norm = re.sub(r"[^a-z]", "", (city or TARGET_LOCATION.split(",")[0]).lower())
-        names, seen = [], []
-        for g in pick_locations(geo, city):
-            n = str(g.get("n", "")).strip()
-            if n and n.lower() not in seen:
-                if re.sub(r"[^a-z]", "", n.lower()) == city_norm:
-                    continue
-                seen.append(n.lower())
-                names.append(n)
-        return names
+
+        # A city-state ("Singapore, Singapore") leaves no city text once the
+        # country alias is stripped — its areas hang off the country row.
+        city_n = _nrm(city) or _nrm(country_name)
+        city_label = (city or country_name).title()
+
+        # Containers = the city, plus anything shaped like a bigger version of it
+        # ("Greater London", "City of London", "London Borough of Ealing").
+        containers = {city_n}
+        for g in geo:
+            if g.get("t") in CONTAINER_TYPES:
+                n = _nrm(g.get("n", ""))
+                if n and re.search(rf"(^| ){re.escape(city_n)}( |$)", n):
+                    containers.add(n)
+
+        names = _areas_under(geo, containers, city_n)
+        # A handful of hits is not a real enumeration, it is a near-miss: Toronto
+        # returns exactly one ("York") and London ten, because most of their
+        # districts are recorded against the province instead. Any city worth
+        # doing pSEO for has more parts than this, so below the floor the
+        # canonical path is not the answer — try the province route and merge.
+        if len(names) >= DIRECT_AREAS_FLOOR:
+            print(f"📍 {city_label}: {len(names)} Google Ads geo areas under "
+                  f"{', '.join(sorted(containers)[:3])}")
+            return names
+        if names:
+            print(f"ℹ️ Only {len(names)} area(s) hang off {city_label} directly "
+                  f"({', '.join(names)}) — checking the province too.")
+
+        # Third shape: little or nothing hangs off the city. Fall back to its
+        # province and ask which of those areas are actually in the city.
+        # The city's province. Toronto's own row reads
+        # "Toronto,Toronto,Ontario,Canada", so parts[1] is not reliably the
+        # province — take the first parent that is neither the city again nor the
+        # country.
+        prov = ""
+        prov_names = {_nrm(g.get("n", "")) for g in geo if g.get("t") in CONTAINER_TYPES}
+        for g in geo:
+            if _nrm(g.get("n", "")) == city_n and g.get("t") in ("City", "Municipality", "District"):
+                parts = [p.strip() for p in str(g.get("c", "")).split(",")]
+                for p in parts[1:-1]:
+                    if _nrm(p) != city_n and _nrm(p) in prov_names:
+                        prov = p
+                        break
+            if prov:
+                break
+        if not prov:
+            if names:
+                print(f"📍 {city_label}: {len(names)} Google Ads geo areas")
+                return names
+            print(f"❌ Google's geo data for {country_name} records no areas under "
+                  f"{city_label}, and no province to fall back to.")
+            return []
+        print(f"ℹ️ {country_name}'s geo data hangs areas off the province, not the city — "
+              f"reading {prov} and narrowing it to {city_label}.")
+        candidates = [c for c in _areas_under(geo, {_nrm(prov)}, city_n) if c not in names]
+        inside = _keep_inside_city(candidates, city_label, country_name)
+        # Areas linked directly to the city are certain; the province ones passed
+        # a judgement call. Keep both, certain first.
+        merged = names + [n for n in inside if n not in names]
+        print(f"📍 {city_label}: {len(merged)} areas "
+              f"({len(names)} linked to the city, {len(inside)} of {prov}'s "
+              f"{len(candidates)} identified as being in it)")
+        return merged
     except Exception as e:
-        print(f"❌ Could not resolve areas for '{TARGET_LOCATION}': {str(e)[:100]}")
+        print(f"❌ Could not resolve areas for '{TARGET_LOCATION}': {str(e)[:120]}")
         return []
 
 
@@ -174,7 +304,6 @@ def main():
         print(f"ℹ️ Researching all {len(areas)} areas "
               f"(~{int(len(areas) * CALL_DELAY / 60) + 1} min).")
 
-    print(f"📍 {TARGET_LOCATION}: {len(areas)} real geo areas")
     print(f"🔎 Service: '{PRIMARY_SERVICE}' | keeping areas with >= {MIN_AREA_VOLUME}/mo")
 
     from google.ads.googleads.client import GoogleAdsClient
