@@ -29,11 +29,18 @@ WHAT THIS FILE DOES *NOT* CARRY (by design):
   - header/footer/brand                       → adopted from the live site
   - internal links                            → the live site's sitemap
 
-Env : GOOGLE_ADS_* (same secrets Stage 1 uses), ANTHROPIC_API_KEY (optional,
-      for per-area angles), BUSINESS_NAME, NICHE_DESCRIPTION,
-      TARGET_LOCATION (a CITY — that is what returns sub-areas),
-      PRIMARY_SERVICE, MIN_AREA_VOLUME (default 20), MAX_AREAS (default 60),
-      LANGUAGE / LANGUAGE_ID
+Which areas a city HAS comes from the worldwide Google Ads geo target database
+(clickadsprotector.com/geo, 246 countries) — the very same source the Ads
+locations mode targets with, so every area here is a place Google recognises.
+Whether an area is really IN the city is settled by OpenStreetMap geometry, not
+by a model's opinion: see _keep_inside_city.
+
+Env : GOOGLE_ADS_* (same secrets Stage 1 uses), BUSINESS_NAME,
+      NICHE_DESCRIPTION, TARGET_LOCATION (a CITY — that is what returns
+      sub-areas), PRIMARY_SERVICE, MIN_AREA_VOLUME (default 20),
+      MAX_AREAS (blank = the whole city), LANGUAGE / LANGUAGE_ID,
+      ANTHROPIC_API_KEY (only for provinces with more areas than
+      GEO_VERIFY_MAX, to shortlist before the boundary check)
 Out : area_plan.json
 """
 
@@ -108,6 +115,10 @@ AREA_TYPES = {"Neighborhood", "District", "Borough", "Suburb", "City",
               "Municipality", "Post town", "Ward", "City Region"}
 # Fewer linked areas than this means the country uses the province shape.
 DIRECT_AREAS_FLOOR = 15
+# OpenStreetMap asks for at most 1 request/second, so this is how many province
+# candidates can be boundary-checked inside a CI run (~3 min). Above it, Claude
+# proposes a shortlist first and the boundary check still has the final word.
+GEO_VERIFY_MAX = int(os.environ.get("GEO_VERIFY_MAX", "150") or 150)
 # Postal Code ("washing machine repair SW1A 1AA") and TV Region are real geo
 # targets that nobody searches by name, so they never earn a page.
 
@@ -135,40 +146,106 @@ def _areas_under(geo, containers, city_n):
     return out
 
 
-def _keep_inside_city(names, city, country):
-    """Which of a province's areas actually lie in this city?
+def _nominatim(query):
+    """One OpenStreetMap lookup. English results so the caller can read them."""
+    import urllib.request
+    import urllib.parse
+    url = "https://nominatim.openstreetmap.org/search?" + urllib.parse.urlencode(
+        {"q": query, "format": "json", "limit": 1, "accept-language": "en"})
+    req = urllib.request.Request(url, headers={"User-Agent": "keyword-research-tool/1.0"})
+    with urllib.request.urlopen(req, timeout=25) as resp:
+        return json.loads(resp.read().decode("utf-8"))
 
-    Only reached for countries of the third shape above. This is place
-    knowledge, not keyword data, so Claude answers it — the same division of
-    labour the rest of Mode 5 uses. No key, no guess: building pages for another
-    city's neighbourhoods is worse than building none.
-    """
-    if not names:
-        return []
+
+def _city_box(city, country):
+    """The city's bounding box as (south, north, west, east)."""
+    try:
+        d = _nominatim(f"{city}, {country}")
+        if d and d[0].get("boundingbox"):
+            s, n, w, e = (float(x) for x in d[0]["boundingbox"])
+            return s, n, w, e
+    except Exception as ex:
+        print(f"   ⚠️ Could not get {city}'s bounding box: {str(ex)[:70]}")
+    return None
+
+
+def _shortlist(names, city, country, limit):
+    """Too many candidates to geocode one by one — let Claude propose which are
+    plausibly in the city. Only a proposal: every name it returns is still
+    verified against the city's real boundary afterwards."""
     if not os.environ.get("ANTHROPIC_API_KEY"):
-        print(f"   ⚠️ ANTHROPIC_API_KEY not set — cannot tell which of these areas are in "
-              f"{city}, and guessing would build pages for other cities. Set the secret.")
+        print(f"   ⚠️ {len(names)} candidates is too many to geocode and "
+              f"ANTHROPIC_API_KEY is not set to narrow them first.")
         return []
     try:
         import anthropic
-        listed = "\n".join("- " + n for n in names)
         prompt = (
-            f"Here are geo areas from the province containing {city}, {country}.\n"
-            f"Return ONLY those that are genuinely neighbourhoods, districts or suburbs "
-            f"OF {city} itself — not other cities in the province, not the province, "
-            f"not rural areas.\n\n{listed}\n\n"
-            "Reply with a JSON array of the exact names to keep, nothing else."
+            f"Below are geo areas from the province containing {city}, {country}.\n"
+            f"List the ones that are neighbourhoods, districts, boroughs or suburbs "
+            f"OF {city} itself — not other cities in the province, not rural areas.\n\n"
+            + "\n".join("- " + n for n in names)
+            + "\n\nReply with a JSON array of the exact names, nothing else."
         )
         msg = anthropic.Anthropic().messages.create(
-            model="claude-sonnet-5", max_tokens=4000,
+            model="claude-sonnet-5", max_tokens=8000,
             messages=[{"role": "user", "content": prompt}],
         )
         m = re.search(r"\[.*\]", msg.content[0].text.strip(), re.S)
         keep = set(json.loads(m.group(0))) if m else set()
-        return [n for n in names if n in keep]
+        out = [n for n in names if n in keep][:limit]
+        print(f"   ↳ narrowed {len(names)} province areas to {len(out)} candidates "
+              f"for boundary checking")
+        return out
     except Exception as e:
-        print(f"   ⚠️ Could not narrow the province's areas to {city}: {str(e)[:90]}")
+        print(f"   ⚠️ Could not narrow the province's areas: {str(e)[:90]}")
         return []
+
+
+def _keep_inside_city(names, city, country):
+    """Which of a province's areas actually lie in this city?
+
+    Google's data cannot answer this — "Gulshan-e-Iqbal,Sindh,Pakistan" records
+    the province and stops, and its Parent ID would say Sindh too, because the
+    canonical path IS the parent chain. So the question is settled the same way
+    Mode 5 settles coordinates: OpenStreetMap. Geocode the area, test whether it
+    falls inside the city's bounding box. Geometry, not opinion — Hyderabad and
+    Sukkur are rejected because they are 100km outside the box, not because a
+    model believed so.
+    """
+    if not names:
+        return []
+    box = _city_box(city, country)
+    if not box:
+        print(f"   ⚠️ Without {city}'s boundary these areas cannot be verified, and "
+              f"guessing would build pages for other cities.")
+        return []
+    south, north, west, east = box
+    print(f"   📐 {city} boundary: lat {south:.3f}..{north:.3f}, lon {west:.3f}..{east:.3f}")
+
+    # Nominatim's usage policy is 1 request/second, so a 3000-name province is
+    # not geocodable inside a CI run. Shortlist first, then verify.
+    if len(names) > GEO_VERIFY_MAX:
+        names = _shortlist(names, city, country, GEO_VERIFY_MAX)
+
+    inside, rejected = [], 0
+    for n in names:
+        time.sleep(1.2)                        # OSM asks for max 1 req/sec
+        try:
+            d = _nominatim(f"{n}, {country}")
+            if not d:
+                rejected += 1
+                continue
+            lat, lon = float(d[0]["lat"]), float(d[0]["lon"])
+            if south <= lat <= north and west <= lon <= east:
+                inside.append(n)
+            else:
+                rejected += 1
+        except Exception:
+            rejected += 1
+    if rejected:
+        print(f"   ↳ {rejected} area(s) fell outside {city}'s boundary (or could not be "
+              f"located) and were dropped")
+    return inside
 
 
 def resolve_areas():
