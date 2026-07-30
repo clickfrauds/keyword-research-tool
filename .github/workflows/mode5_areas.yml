@@ -22,6 +22,9 @@ on:
       max_areas:
         description: "LEAVE BLANK to research the whole city (recommended — 103 areas ≈ 5 min). A number here caps the run and leaves the rest unmeasured."
         default: ''
+      extra_areas:
+        description: "Extra area names to measure, comma-separated. Google cannot target Deira, Bur Dubai, Al Karama or JLT, but people search them — list any the plan is missing."
+        default: ''
       language:
         default: ''
 
@@ -67,6 +70,7 @@ jobs:
           PRIMARY_SERVICE: ${{ github.event.inputs.primary_service }}
           MIN_AREA_VOLUME: ${{ github.event.inputs.min_area_volume }}
           MAX_AREAS: ${{ github.event.inputs.max_areas }}
+          EXTRA_AREAS: ${{ github.event.inputs.extra_areas }}
           LANGUAGE: ${{ github.event.inputs.language }}
         run: python scripts/generate_area_plan.py
 

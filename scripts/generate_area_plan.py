@@ -64,6 +64,9 @@ PRIMARY_SERVICE   = (os.environ.get("PRIMARY_SERVICE", "").strip()
 CUSTOMER_ID       = os.environ.get("GOOGLE_ADS_CUSTOMER_ID", "").replace("-", "")
 LANGUAGE_ID       = os.environ.get("LANGUAGE_ID", "").strip()
 LANGUAGE          = os.environ.get("LANGUAGE", "").strip().lower()
+# Comma-separated area names to measure on top of whatever the geo database has —
+# for districts Google cannot target but people still search ("Deira").
+EXTRA_AREAS       = os.environ.get("EXTRA_AREAS", "").strip()
 OUT_FILE          = "area_plan.json"
 
 # Planner's lowest reported bucket IS 10 — there is no 1..9. A run of 402
@@ -311,12 +314,91 @@ def _keep_inside_city(names, city, country):
     return inside
 
 
-def resolve_areas():
-    """Every Google Ads geo area that is a PART of TARGET_LOCATION's city.
+def _wellknown_districts(city, country, already):
+    """The city's famous districts that are NOT Google Ads geo targets.
 
-    Same geo source the Ads locations mode targets with — these are Google Ads
-    geo target constants, so every area returned is a place Google itself
-    recognises and can target.
+    Google's own geotargets file (273,666 rows, verified against it directly)
+    lists 291 places for the UAE and does not contain Deira, Bur Dubai, Al
+    Karama, Satwa, JLT, Discovery Gardens or Downtown Dubai — some of the
+    densest neighbourhoods in the city. OSM's suburb tagging there is mostly
+    Arabic-script and covers small compounds, so it does not fill the gap
+    either.
+
+    But being un-targetable does not make a place un-searchable: people do type
+    "washing machine repair deira". Seeding only from geo targets meant those
+    names were never ASKED about, and a plan then showed them as absent rather
+    than unmeasured. So the names are proposed here and the Planner still
+    decides — a name with no volume earns no page, exactly like a geo target
+    with no volume.
+    """
+    if not os.environ.get("ANTHROPIC_API_KEY"):
+        return []
+    try:
+        import anthropic
+        have = ", ".join(sorted(already)[:120])
+        prompt = (
+            f"List the well-known residential and commercial districts of "
+            f"{city}, {country} that people would name when searching for a local "
+            f"service — the neighbourhoods locals actually say.\n\n"
+            f"These are already covered, so EXCLUDE them and anything that is the "
+            f"same place under another spelling:\n{have}\n\n"
+            "Reply with a JSON array of names only, no commentary. Use the common "
+            "English spelling a person would type."
+        )
+        msg = anthropic.Anthropic().messages.create(
+            model="claude-sonnet-5", max_tokens=2000,
+            messages=[{"role": "user", "content": prompt}],
+        )
+        m = re.search(r"\[.*\]", msg.content[0].text.strip(), re.S)
+        if not m:
+            return []
+        seen = {_nrm(a) for a in already}
+        out = []
+        for n in json.loads(m.group(0)):
+            n = str(n).strip()
+            if n and _nrm(n) not in seen:
+                seen.add(_nrm(n))
+                out.append(n)
+        return out
+    except Exception as e:
+        print(f"   ⚠️ Could not look up {city}'s other districts: {str(e)[:80]}")
+        return []
+
+
+def _plus_districts(geo_names, city, country):
+    """Geo-target areas plus the city's other well-known districts, and any the
+    user typed in EXTRA_AREAS. Order matters only for logging — every name is
+    measured the same way."""
+    manual = [a.strip() for a in EXTRA_AREAS.split(",") if a.strip()]
+    have = {_nrm(n) for n in geo_names}
+    manual = [m for m in manual if _nrm(m) not in have]
+    if manual:
+        print(f"   ➕ {len(manual)} area(s) you listed: {', '.join(manual[:8])}")
+        have |= {_nrm(m) for m in manual}
+    extra = _wellknown_districts(city, country, geo_names + manual)
+    if extra:
+        print(f"   ➕ {len(extra)} district(s) that are not Google geo targets but are "
+              f"searched by name: {', '.join(extra[:8])}"
+              + (" …" if len(extra) > 8 else ""))
+    total = geo_names + manual + extra
+    if len(total) != len(geo_names):
+        print(f"   ℹ️ {len(total)} areas to measure "
+              f"({len(geo_names)} targetable + {len(manual) + len(extra)} name-only). "
+              f"None becomes a page without its own volume.")
+    return total
+
+
+def resolve_areas():
+    """Every area of TARGET_LOCATION's city worth asking the Planner about.
+
+    Two sources, because neither is complete on its own:
+      - Google Ads geo targets (the same source the Ads locations mode targets
+        with) — every one of these is a place Google can target
+      - the city's well-known districts, which are often missing from that list
+        entirely; they cannot be TARGETED but they are certainly SEARCHED
+
+    Demand decides in both cases. Nothing here becomes a page without its own
+    measured volume.
     """
     try:
         from generate_locations import fetch_json, resolve_country, GEO_BASE
@@ -356,7 +438,7 @@ def resolve_areas():
         if len(names) >= DIRECT_AREAS_FLOOR:
             print(f"📍 {city_label}: {len(names)} Google Ads geo areas under "
                   f"{', '.join(sorted(containers)[:3])}")
-            return names
+            return _plus_districts(names, city_label, country_name)
         if names:
             print(f"ℹ️ Only {len(names)} area(s) hang off {city_label} directly "
                   f"({', '.join(names)}) — checking the province too.")
@@ -381,10 +463,11 @@ def resolve_areas():
         if not prov:
             if names:
                 print(f"📍 {city_label}: {len(names)} Google Ads geo areas")
-                return names
-            print(f"❌ Google's geo data for {country_name} records no areas under "
-                  f"{city_label}, and no province to fall back to.")
-            return []
+                return _plus_districts(names, city_label, country_name)
+            print(f"ℹ️ Google's geo data for {country_name} records no areas under "
+                  f"{city_label}, and no province to fall back to — going on the "
+                  f"city's district names alone.")
+            return _plus_districts([], city_label, country_name)
         print(f"ℹ️ {country_name}'s geo data hangs areas off the province, not the city — "
               f"reading {prov} and narrowing it to {city_label}.")
         candidates = [c for c in _areas_under(geo, {_nrm(prov)}, city_n) if c not in names]
@@ -395,7 +478,7 @@ def resolve_areas():
         print(f"📍 {city_label}: {len(merged)} areas "
               f"({len(names)} linked to the city, {len(inside)} of {prov}'s "
               f"{len(candidates)} identified as being in it)")
-        return merged
+        return _plus_districts(merged, city_label, country_name)
     except Exception as e:
         print(f"❌ Could not resolve areas for '{TARGET_LOCATION}': {str(e)[:120]}")
         return []

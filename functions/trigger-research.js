@@ -99,6 +99,8 @@ export async function onRequestPost(context) {
         // blank = the whole city. Defaulting to 60 here silently left 43 of
         // Dubai's 103 areas unmeasured, and the plan gave no sign of it.
         max_areas: String(body.max_areas || "").slice(0, 4),
+        // districts that are not Google geo targets but are searched by name
+        extra_areas: String(body.extra_areas || "").slice(0, 900),
         language,
         request_id,
       }
