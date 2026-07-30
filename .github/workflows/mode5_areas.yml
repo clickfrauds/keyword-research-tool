@@ -59,6 +59,10 @@ jobs:
           GOOGLE_ADS_CLIENT_SECRET: ${{ secrets.GOOGLE_ADS_CLIENT_SECRET }}
           GOOGLE_ADS_REFRESH_TOKEN: ${{ secrets.GOOGLE_ADS_REFRESH_TOKEN }}
           GOOGLE_ADS_CUSTOMER_ID: ${{ secrets.GOOGLE_ADS_CUSTOMER_ID }}
+          # Only needed when the customer id above is a CLIENT account under a
+          # manager. The script drops this when blank, so an unset secret cannot
+          # send an empty header — the failure that killed the first run here.
+          GOOGLE_ADS_LOGIN_CUSTOMER_ID: ${{ secrets.GOOGLE_ADS_LOGIN_CUSTOMER_ID }}
           GOOGLE_ADS_USE_PROTO_PLUS: "true"
           # Needed only for countries whose geo data hangs areas off the province
           # instead of the city (Pakistan, much of the UK) — Claude decides which

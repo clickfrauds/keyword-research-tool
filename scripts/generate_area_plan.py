@@ -558,6 +558,17 @@ def main():
         class ResourceExhausted(Exception):
             pass
 
+    # An EMPTY login-customer-id is worse than none: the client still sends the
+    # header and Google rejects every request with "User doesn't have permission
+    # to access customer" — which is exactly how this workflow's first run failed
+    # 60 times. Dropping it when blank lets the same workflow serve both a direct
+    # account and a client account under an MCC, where the header is required.
+    if not os.environ.get("GOOGLE_ADS_LOGIN_CUSTOMER_ID", "").strip():
+        os.environ.pop("GOOGLE_ADS_LOGIN_CUSTOMER_ID", None)
+    else:
+        print(f"   🔑 Using manager account "
+              f"{os.environ['GOOGLE_ADS_LOGIN_CUSTOMER_ID']} to reach {CUSTOMER_ID}")
+
     client = GoogleAdsClient.load_from_env()
     svc = client.get_service("KeywordPlanIdeaService")
 
