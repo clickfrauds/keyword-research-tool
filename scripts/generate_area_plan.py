@@ -521,6 +521,78 @@ def resolve_areas():
         return []
 
 
+def _enrich_areas(results):
+    """Questions and entities per area, in ONE Claude call for the whole run.
+
+    The plan measures demand well but says nothing about what a page should
+    ANSWER or MENTION. Every area arrived with one keyword and no questions and
+    no entities, so the builder had a phrase and a place name to write a page
+    around. generate_seo_strategy.py already solves this shape for clusters —
+    questions with an answer_angle, plus entities_to_mention — so the area plan
+    now carries the same two fields.
+
+    The Planner's own discarded ideas are the raw material: "samsung front load
+    washer bearing replacement" names the brands and parts a repair page has to
+    mention. One call for all areas, not one per area.
+    """
+    if not results:
+        return
+    if not os.environ.get("ANTHROPIC_API_KEY"):
+        print("   ⚠️ ANTHROPIC_API_KEY not set — no questions or entities added. The "
+              "builder will fall back to writing its own.")
+        return
+    try:
+        import anthropic
+        brief = []
+        for a in results:
+            kws = [k["keyword"] for k in a.get("keywords", [])][:4]
+            rel = [k["keyword"] for k in a.get("related_keywords", [])][:12]
+            brief.append(f'- {a["area"]} ({a["total_volume"]}/mo)\n'
+                         f'    ranks for: {", ".join(kws)}\n'
+                         f'    demand nearby: {", ".join(rel) or "none recorded"}')
+        prompt = (
+            f"A local business sells {PRIMARY_SERVICE} in {TARGET_LOCATION}.\n"
+            f"{NICHE_DESCRIPTION}\n\n"
+            "Below is every area that has its own measured search demand, with the "
+            "keywords it ranks for and the related demand Google returned for the "
+            "same seed.\n\n" + "\n".join(brief) + "\n\n"
+            "For EACH area return:\n"
+            '  "questions": 4-6 real questions a resident of THAT area would ask '
+            'before booking, each with an "answer_angle" naming exactly what the '
+            'answer must say to win the AI Overview. Ground them in the area '
+            "itself where it matters (building type, access, travel time) — not "
+            "generic questions that would suit any area.\n"
+            '  "entities": 8-14 concrete things the page must mention for topical '
+            "authority — brands, parts, fault codes, standards, appliance types. "
+            "Take them from the demand shown above; do not invent products.\n\n"
+            'Reply with ONLY a JSON object keyed by the exact area names:\n'
+            '{"Al Qusais": {"questions": [{"q": "...", "answer_angle": "..."}], '
+            '"entities": ["..."]}}'
+        )
+        msg = anthropic.Anthropic().messages.create(
+            model="claude-sonnet-5", max_tokens=8000,
+            messages=[{"role": "user", "content": prompt}],
+        )
+        m = re.search(r"\{.*\}", _reply_text(msg), re.S)
+        if not m:
+            print("   ⚠️ No questions/entities came back — the builder will write its own.")
+            return
+        data = json.loads(m.group(0))
+        added = 0
+        for a in results:
+            got = data.get(a["area"]) or {}
+            qs = [q for q in (got.get("questions") or []) if q.get("q")]
+            ents = [str(e).strip() for e in (got.get("entities") or []) if str(e).strip()]
+            if qs or ents:
+                a["questions"] = qs[:6]
+                a["entities"] = ents[:14]
+                added += 1
+        print(f"   ✨ Questions and entities added for {added}/{len(results)} areas")
+    except Exception as e:
+        print(f"   ⚠️ Could not add questions/entities ({str(e)[:80]}) — the builder "
+              f"will write its own.")
+
+
 def classify_trend(vols):
     if len(vols) < 6:
         return "UNKNOWN"
@@ -776,6 +848,8 @@ def main():
 
     results.sort(key=lambda a: -a["total_volume"])
     print(f"\n📊 {len(results)} areas worth a page, {len(skipped)} below {MIN_AREA_VOLUME}/mo")
+
+    _enrich_areas(results)
 
     out = {
         "business": {"name": BUSINESS_NAME, "niche": NICHE_DESCRIPTION,
