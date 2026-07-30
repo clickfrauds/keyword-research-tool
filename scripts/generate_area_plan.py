@@ -84,7 +84,7 @@ MAX_AREAS       = int(os.environ.get("MAX_AREAS", "0") or 0)
 CALL_DELAY      = float(os.environ.get("ADS_CALL_DELAY", "3") or 3)
 
 
-def names_area(k_norm, a_norm):
+def names_area(k_norm, a_norm, other_areas=()):
     """Is the area named as a PLACE in this keyword, or is the word just part
     of the product?
 
@@ -92,8 +92,16 @@ def names_area(k_norm, a_norm):
     'lg front load washer repair' — a machine type, not a location. Real local
     intent puts the place at the end ('...repair al quoz') or behind a
     preposition ('...repair in al quoz'). Anything else is a coincidence.
+
+    The trailing-word match ('al quoz' also answering to 'quoz') is dropped when
+    that word is another area's whole name: otherwise "Palm Jumeirah" would
+    quietly collect every search for plain "Jumeirah", and two pages would be
+    built on one area's demand.
     """
-    for name in (a_norm, " ".join(a_norm.split()[1:])):   # 'al quoz' / 'quoz'
+    tail = " ".join(a_norm.split()[1:])
+    if tail and tail in other_areas:
+        tail = ""
+    for name in (a_norm, tail):
         if not name:
             continue
         for m in re.finditer(rf"(?<![a-z0-9]){re.escape(name)}(?![a-z0-9])", k_norm):
@@ -582,6 +590,8 @@ def main():
         req.historical_metrics_options.include_average_cpc = True
         return svc.generate_keyword_ideas(request=req)
 
+    # every area's own name, so one area cannot claim another's searches
+    area_names_norm = {re.sub(r"[^a-z0-9 ]", "", a.lower()) for a in areas}
     results, skipped, api_errors = [], [], []
     quota_hit = False
     for i, area in enumerate(areas, 1):
@@ -630,7 +640,7 @@ def main():
             # only keywords that actually name THIS area — an idea list for
             # "washing machine repair al barsha" is full of city-wide terms
             k_norm = re.sub(r"[^a-z0-9 ]", "", idea.text.lower())
-            if not names_area(k_norm, a_norm):
+            if not names_area(k_norm, a_norm, area_names_norm):
                 continue
             monthly = sorted(list(m.monthly_search_volumes), key=lambda x: (x.year, x.month))
             rows.append({
