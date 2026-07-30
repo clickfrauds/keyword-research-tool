@@ -138,6 +138,22 @@ def _nrm(s):
     return re.sub(r"[^a-z0-9 ]", " ", (s or "").lower()).strip()
 
 
+def _reply_text(msg):
+    """The text of a Claude reply.
+
+    content[0] is not reliably the answer: when the model thinks first, the
+    first block is a ThinkingBlock with no .text, and reading it raised
+    "'ThinkingBlock' object has no attribute 'text'" — which silently cost a
+    whole run its district lookup. Take the first block that actually carries
+    text, whatever position it is in.
+    """
+    for block in getattr(msg, "content", []) or []:
+        text = getattr(block, "text", None)
+        if text:
+            return text.strip()
+    return ""
+
+
 def _areas_under(geo, containers, city_n):
     """Every area whose canonical path passes through one of `containers`."""
     out, seen = [], set()
@@ -237,7 +253,7 @@ def _shortlist(names, city, country, limit):
             model="claude-sonnet-5", max_tokens=8000,
             messages=[{"role": "user", "content": prompt}],
         )
-        m = re.search(r"\[.*\]", msg.content[0].text.strip(), re.S)
+        m = re.search(r"\[.*\]", _reply_text(msg), re.S)
         keep = set(json.loads(m.group(0))) if m else set()
         out = [n for n in names if n in keep][:limit]
         print(f"   ↳ narrowed {len(names)} province areas to {len(out)} candidates "
@@ -367,7 +383,7 @@ def _wellknown_districts(city, country, already):
             model="claude-sonnet-5", max_tokens=2000,
             messages=[{"role": "user", "content": prompt}],
         )
-        m = re.search(r"\[.*\]", msg.content[0].text.strip(), re.S)
+        m = re.search(r"\[.*\]", _reply_text(msg), re.S)
         if not m:
             print(f"   ⚠️ No district list came back for {city} — measuring the geo areas only.")
             return []
