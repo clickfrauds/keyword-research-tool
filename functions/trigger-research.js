@@ -96,7 +96,9 @@ export async function onRequestPost(context) {
         primary_service: String(body.primary_service || seed_keywords)
                            .split(",")[0].trim().slice(0, 120),
         min_area_volume: String(body.min_area_volume || "20").slice(0, 5),
-        max_areas: String(body.max_areas || "60").slice(0, 4),
+        // blank = the whole city. Defaulting to 60 here silently left 43 of
+        // Dubai's 103 areas unmeasured, and the plan gave no sign of it.
+        max_areas: String(body.max_areas || "").slice(0, 4),
         language,
         request_id,
       }

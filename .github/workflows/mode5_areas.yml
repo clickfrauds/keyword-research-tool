@@ -20,8 +20,8 @@ on:
         description: "Keep an area only at/above this monthly volume. Planner's lowest bucket is 10, so 20 is the first number that means real demand."
         default: '20'
       max_areas:
-        description: "How many areas to research (3s pacing each — 60 areas ≈ 3 minutes)"
-        default: '60'
+        description: "LEAVE BLANK to research the whole city (recommended — 103 areas ≈ 5 min). A number here caps the run and leaves the rest unmeasured."
+        default: ''
       language:
         default: ''
 

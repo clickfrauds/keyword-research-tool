@@ -64,7 +64,13 @@ OUT_FILE          = "area_plan.json"
 # 20 is the first number that means measurable demand, so that is the default
 # for deciding an area deserves its own page.
 MIN_AREA_VOLUME = int(os.environ.get("MIN_AREA_VOLUME", "20") or 20)
-MAX_AREAS       = int(os.environ.get("MAX_AREAS", "60") or 60)
+# 0 / blank = every area of the city, which is the only sensible default: a cap
+# does not mean "the 60 most important areas", it means "the first 60 in the geo
+# file's own arbitrary order". A Dubai run capped at 60 silently left Al Mizhar,
+# Al Warqa, Muhaisnah and 40 others UNMEASURED — indistinguishable, in the
+# output, from areas that were measured and found empty. At 3s pacing the full
+# 103 takes ~5 minutes against a 45-minute timeout, so there was nothing to save.
+MAX_AREAS       = int(os.environ.get("MAX_AREAS", "0") or 0)
 CALL_DELAY      = float(os.environ.get("ADS_CALL_DELAY", "3") or 3)
 
 
@@ -159,10 +165,14 @@ def main():
     if not areas:
         print("❌ No geo areas resolved — nothing to research.")
         sys.exit(1)
-    if len(areas) > MAX_AREAS:
-        print(f"ℹ️ {len(areas)} areas found — researching the first {MAX_AREAS} "
-              f"(raise MAX_AREAS to cover more).")
+    if MAX_AREAS and len(areas) > MAX_AREAS:
+        print(f"⚠️ {len(areas)} areas found but MAX_AREAS caps this run at {MAX_AREAS}. "
+              f"The other {len(areas) - MAX_AREAS} will be UNMEASURED, not proven empty "
+              f"— clear MAX_AREAS to cover the whole city.")
         areas = areas[:MAX_AREAS]
+    else:
+        print(f"ℹ️ Researching all {len(areas)} areas "
+              f"(~{int(len(areas) * CALL_DELAY / 60) + 1} min).")
 
     print(f"📍 {TARGET_LOCATION}: {len(areas)} real geo areas")
     print(f"🔎 Service: '{PRIMARY_SERVICE}' | keeping areas with >= {MIN_AREA_VOLUME}/mo")
