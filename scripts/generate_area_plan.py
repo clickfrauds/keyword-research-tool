@@ -146,27 +146,63 @@ def _areas_under(geo, containers, city_n):
     return out
 
 
-def _nominatim(query):
-    """One OpenStreetMap lookup. English results so the caller can read them."""
+def _nominatim(query, limit=1):
+    """OpenStreetMap lookup. English results so the caller can read them."""
     import urllib.request
     import urllib.parse
     url = "https://nominatim.openstreetmap.org/search?" + urllib.parse.urlencode(
-        {"q": query, "format": "json", "limit": 1, "accept-language": "en"})
+        {"q": query, "format": "json", "limit": limit, "accept-language": "en"})
     req = urllib.request.Request(url, headers={"User-Agent": "keyword-research-tool/1.0"})
     with urllib.request.urlopen(req, timeout=25) as resp:
         return json.loads(resp.read().decode("utf-8"))
 
 
-def _city_box(city, country):
-    """The city's bounding box as (south, north, west, east)."""
+def _city_osm(city, country):
+    """The city's OSM identity: its administrative relation (for exact
+    containment) and its bounding box (for the cheaper fallback)."""
     try:
-        d = _nominatim(f"{city}, {country}")
-        if d and d[0].get("boundingbox"):
-            s, n, w, e = (float(x) for x in d[0]["boundingbox"])
-            return s, n, w, e
+        results = _nominatim(f"{city}, {country}", limit=5)
     except Exception as ex:
-        print(f"   ⚠️ Could not get {city}'s bounding box: {str(ex)[:70]}")
-    return None
+        print(f"   ⚠️ Could not look up {city} on OpenStreetMap: {str(ex)[:70]}")
+        return None, None
+    area_id, box = None, None
+    for r in results:
+        if box is None and r.get("boundingbox"):
+            s, n, w, e = (float(x) for x in r["boundingbox"])
+            box = (s, n, w, e)
+        if area_id is None and r.get("osm_type") == "relation":
+            # Overpass addresses a boundary relation as 3600000000 + its id
+            area_id = 3600000000 + int(r["osm_id"])
+        if area_id and box:
+            break
+    return area_id, box
+
+
+def _areas_inside_boundary(area_id):
+    """Every place OSM records INSIDE the city's administrative boundary, in one
+    request. Far better than geocoding candidates one at a time — it asks the
+    question the right way round — but Overpass is a shared free service that
+    answers 429/504 under load, so the caller must be able to live without it.
+    """
+    import urllib.request
+    import urllib.parse
+    query = (f'[out:json][timeout:90];area({area_id})->.a;'
+             f'node["place"~"^(suburb|neighbourhood|quarter|city_district|borough)$"]'
+             f'(area.a);out tags;')
+    for attempt in range(1, 4):
+        try:
+            req = urllib.request.Request(
+                "https://overpass-api.de/api/interpreter",
+                data=urllib.parse.urlencode({"data": query}).encode(),
+                headers={"User-Agent": "keyword-research-tool/1.0"})
+            with urllib.request.urlopen(req, timeout=120) as resp:
+                data = json.loads(resp.read().decode("utf-8"))
+            return {_nrm(e["tags"]["name"]) for e in data.get("elements", [])
+                    if e.get("tags", {}).get("name")}
+        except Exception as ex:
+            print(f"      OpenStreetMap boundary query attempt {attempt}/3: {str(ex)[:46]}")
+            time.sleep(6 * attempt)
+    return set()
 
 
 def _shortlist(names, city, country, limit):
@@ -207,20 +243,47 @@ def _keep_inside_city(names, city, country):
     Google's data cannot answer this — "Gulshan-e-Iqbal,Sindh,Pakistan" records
     the province and stops, and its Parent ID would say Sindh too, because the
     canonical path IS the parent chain. So the question is settled the same way
-    Mode 5 settles coordinates: OpenStreetMap. Geocode the area, test whether it
-    falls inside the city's bounding box. Geometry, not opinion — Hyderabad and
-    Sukkur are rejected because they are 100km outside the box, not because a
-    model believed so.
+    Mode 5 settles coordinates: OpenStreetMap geometry, not a model's opinion.
+
+    Two ways, and which is better depends on how many candidates there are:
+
+      Geocoding each candidate and testing it against the city's box is the
+      ACCURATE method — Nominatim's search absorbs the naming differences between
+      the two datasets ("North Nazimabad Town" vs "North Nazimabad"). It is also
+      rate-limited to 1/sec, so it only fits when the province is small.
+
+      Asking OSM what lies inside the city's administrative boundary is the
+      SCALABLE method: one request for any size of province. But it can only
+      match the two datasets by name, and names disagree often enough that on
+      Sindh it recognised 5 of 102 areas where geocoding found 62. Matching more
+      loosely was tried and is not an option — subset matching handed Karachi
+      "Sukkur" and "Hyderabad", and London "Manchester".
+
+    So: geocode when the province is small enough to afford it, use the boundary
+    when it is not, and let Claude shortlist only if neither is available.
     """
     if not names:
         return []
-    box = _city_box(city, country)
+    area_id, box = _city_osm(city, country)
+
+    # Big province — per-area geocoding would take an hour. One boundary query.
+    if len(names) > GEO_VERIFY_MAX and area_id:
+        inside_names = _areas_inside_boundary(area_id)
+        if inside_names:
+            kept = [n for n in names if _nrm(n) in inside_names]
+            print(f"   📐 {len(names)} candidates is too many to geocode; OSM lists "
+                  f"{len(inside_names)} places inside {city}'s boundary and {len(kept)} "
+                  f"of the Google areas are among them")
+            if kept:
+                return kept
+
     if not box:
         print(f"   ⚠️ Without {city}'s boundary these areas cannot be verified, and "
               f"guessing would build pages for other cities.")
         return []
     south, north, west, east = box
-    print(f"   📐 {city} boundary: lat {south:.3f}..{north:.3f}, lon {west:.3f}..{east:.3f}")
+    print(f"   📐 Geocoding {len(names)} candidates against {city}'s box: "
+          f"lat {south:.3f}..{north:.3f}, lon {west:.3f}..{east:.3f}")
 
     # Nominatim's usage policy is 1 request/second, so a 3000-name province is
     # not geocodable inside a CI run. Shortlist first, then verify.
