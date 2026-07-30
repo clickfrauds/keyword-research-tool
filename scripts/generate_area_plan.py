@@ -340,6 +340,8 @@ def _wellknown_districts(city, country, already):
     with no volume.
     """
     if not os.environ.get("ANTHROPIC_API_KEY"):
+        print(f"   ⚠️ ANTHROPIC_API_KEY not set, so {city}'s districts that Google cannot "
+              f"target were not looked up. List them in EXTRA_AREAS instead.")
         return []
     try:
         import anthropic
@@ -367,6 +369,7 @@ def _wellknown_districts(city, country, already):
         )
         m = re.search(r"\[.*\]", msg.content[0].text.strip(), re.S)
         if not m:
+            print(f"   ⚠️ No district list came back for {city} — measuring the geo areas only.")
             return []
         seen = {_nrm(a) for a in already}
         out = []
@@ -375,6 +378,8 @@ def _wellknown_districts(city, country, already):
             if n and _nrm(n) not in seen:
                 seen.add(_nrm(n))
                 out.append(n)
+        if not out:
+            print(f"   ℹ️ Every district named for {city} was already in the geo list.")
         return out
     except Exception as e:
         print(f"   ⚠️ Could not look up {city}'s other districts: {str(e)[:80]}")

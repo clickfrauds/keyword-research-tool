@@ -168,6 +168,12 @@
     <label for="seed_keywords" id="seed-label">Seed keywords</label>
     <textarea id="seed_keywords" name="seed_keywords" required placeholder="ac repair dubai, ac not cooling, ac service dubai"></textarea>
     <div class="hint" id="seed-hint">Comma-separated. 3–6 seed terms works well. Tip: include your city in a few seeds for local data.</div>
+
+    <div id="extra-areas-block" style="display:none">
+      <label for="extra_areas">Extra areas to measure <span style="opacity:.6">(optional, comma-separated)</span></label>
+      <textarea id="extra_areas" name="extra_areas" placeholder="Discovery Gardens, Bur Dubai, JLT, Downtown Dubai, Palm Jumeirah, Deira, Satwa"></textarea>
+      <div class="hint">Google cannot TARGET every district it can measure: Discovery Gardens, Bur Dubai, JLT, Downtown Dubai and Palm Jumeirah are in no Ads location list, yet all of them carry real search volume. Anything you name here is measured exactly like a geo area and still has to clear the volume threshold. Leave blank and the run proposes them itself.</div>
+    </div>
     <script>
       // Mode 3 reuses the same box, but its meaning changes: it carries the
       // SERVICES list (the exact list you give the builder's Mode 3), not
@@ -199,6 +205,7 @@
         var m3 = this.value === "mode3";
         var m5 = this.value === "mode5";
         setLocationsOnly(this.value === "locations");
+        document.getElementById("extra-areas-block").style.display = m5 ? "" : "none";
         document.getElementById("seed-label").textContent =
           m3 ? "Services list (same as builder Mode 3)"
              : m5 ? "The ONE service these area pages sell"
