@@ -1,0 +1,1562 @@
+{
+  "business": {
+    "name": "Bin Technical Washing Machine Repair",
+    "niche": "Washing machine and dryer repair service in Dubai — all brands, same-day and emergency callouts",
+    "location": "Dubai, United Arab Emirates"
+  },
+  "language": "",
+  "primary_service": "washing machine repair",
+  "research": {
+    "areas_checked": 107,
+    "areas_kept": 12,
+    "min_volume": 20,
+    "note": "Google Keyword Planner reports no value between 1 and 9 — its lowest bucket is 10. Areas below the threshold were measured and found without demand; building pages for them would be doorway pages."
+  },
+  "mode5_pseo": {
+    "areas": [
+      {
+        "area": "Al Qusais",
+        "keywords": [
+          {
+            "keyword": "washing machine repair al qusais",
+            "volume": 260,
+            "kd": 17,
+            "cpc_low": 1143.22,
+            "cpc_high": 2935.97,
+            "trend": "DECLINING",
+            "peak_months": "Aug/Sep/Nov/Mar"
+          },
+          {
+            "keyword": "washing machine repair dubai al qusais",
+            "volume": 10,
+            "kd": 50,
+            "cpc_low": 417.76,
+            "cpc_high": 1174.31,
+            "trend": "STABLE",
+            "peak_months": ""
+          }
+        ],
+        "related_keywords": [],
+        "total_volume": 270,
+        "primary_keyword": {
+          "keyword": "washing machine repair al qusais",
+          "volume": 260,
+          "kd": 17,
+          "cpc_low": 1143.22,
+          "cpc_high": 2935.97,
+          "trend": "DECLINING",
+          "peak_months": "Aug/Sep/Nov/Mar"
+        },
+        "demand": "measured",
+        "coordinates": {
+          "lat": 25.2701436,
+          "lng": 55.3859389
+        },
+        "nearby_areas": [],
+        "questions": [
+          {
+            "q": "How quickly can a technician reach my villa in Al Qusais for a same-day repair?",
+            "answer_angle": "State the typical arrival window (e.g. 60-90 minutes) covering Al Qusais 1, 2, 3 and the industrial area."
+          },
+          {
+            "q": "Do you repair both washing machines and dryers in Al Qusais homes?",
+            "answer_angle": "Confirm combo washer-dryer units and separate dryers are fixed in the same visit by one technician."
+          },
+          {
+            "q": "Which washing machine brands do you fix in Al Qusais - Samsung, LG, Bosch, Siemens?",
+            "answer_angle": "List the specific brands serviced with genuine parts stocked for Al Qusais callouts."
+          },
+          {
+            "q": "Is there an emergency or after-hours callout for a washing machine breakdown in Al Qusais?",
+            "answer_angle": "State emergency service hours and any after-hours surcharge for Al Qusais residents."
+          },
+          {
+            "q": "Do you carry spare parts for common washing machine faults on the first visit?",
+            "answer_angle": "Confirm van-stocked parts for common faults to avoid a second trip in Al Qusais."
+          },
+          {
+            "q": "How much does washing machine repair cost in Al Qusais?",
+            "answer_angle": "Give a clear callout fee and typical repair price range for Al Qusais bookings."
+          }
+        ],
+        "entities": [
+          "washing machine repair",
+          "fix washing machine",
+          "laundry machine repair",
+          "washer fixer",
+          "clothes washer repair",
+          "laundry washer repair",
+          "fix laundry machine",
+          "washing machine repair near me",
+          "samsung washing machine repair",
+          "lg washing machine repair",
+          "bosch washing machine repair",
+          "siemens washing machine repair"
+        ],
+        "headings": [
+          "Washing Machine Repair Near Me in Al Qusais",
+          "Same-Day Fix Washing Machine Callouts",
+          "Laundry Machine Repair for Villas & Apartments",
+          "Samsung Washing Machine Repair & LG Washer Fixes",
+          "Bosch and Siemens Washing Machine Repair",
+          "Clothes Washer Repair Costs in Al Qusais"
+        ]
+      },
+      {
+        "area": "Dubai Silicon Oasis",
+        "keywords": [
+          {
+            "keyword": "washing machine repair silicon oasis",
+            "volume": 140,
+            "kd": 21,
+            "cpc_low": 1028.56,
+            "cpc_high": 3602.79,
+            "trend": "GROWING",
+            "peak_months": "/Mar/Apr"
+          }
+        ],
+        "related_keywords": [],
+        "total_volume": 140,
+        "primary_keyword": {
+          "keyword": "washing machine repair silicon oasis",
+          "volume": 140,
+          "kd": 21,
+          "cpc_low": 1028.56,
+          "cpc_high": 3602.79,
+          "trend": "GROWING",
+          "peak_months": "/Mar/Apr"
+        },
+        "demand": "measured",
+        "coordinates": {
+          "lat": 25.1217058,
+          "lng": 55.3855055
+        },
+        "nearby_areas": [
+          {
+            "area": "Dubai International City",
+            "km": 0.0
+          }
+        ],
+        "questions": [
+          {
+            "q": "Do you cover both Dubai Silicon Oasis and Dubai International City with the same technician?",
+            "answer_angle": "Confirm combined coverage since the two areas are 0km apart, with one technician handling same-day jobs across both."
+          },
+          {
+            "q": "Can you fix built-in or integrated washing machines in Silicon Oasis apartments?",
+            "answer_angle": "Confirm built-in unit repair experience for towers like Silicon Gates and Sapphire."
+          },
+          {
+            "q": "What is the average response time for emergency washing machine repair in Silicon Oasis?",
+            "answer_angle": "Give a specific time estimate for emergency dispatch to Silicon Oasis."
+          },
+          {
+            "q": "Do you repair Samsung and LG washing machines showing error codes in Silicon Oasis?",
+            "answer_angle": "Mention fault-code diagnostics for Samsung and LG models handled on-site."
+          },
+          {
+            "q": "Is same-day or weekend appointment available for Silicon Oasis residents?",
+            "answer_angle": "Confirm weekend and same-day scheduling availability."
+          },
+          {
+            "q": "Do you service villas in Silicon Oasis as well as apartment towers?",
+            "answer_angle": "Confirm both villa clusters and apartment towers are covered by the same team."
+          }
+        ],
+        "entities": [
+          "washing machine repair",
+          "fix washing machine",
+          "laundry machine repair",
+          "washer fixer",
+          "clothes washer repair",
+          "laundry washer repair",
+          "washing machine machine repair",
+          "washing machine repair near me",
+          "samsung washing machine repair",
+          "samsung washer repair",
+          "lg washing machine repair",
+          "bosch washing machine repair",
+          "siemens washing machine repair"
+        ],
+        "headings": [
+          "Washing Machine Repair Silicon Oasis & Dubai International City",
+          "Fix Washing Machine Same Day in Silicon Oasis",
+          "Laundry Machine Repair for Apartments & Villas",
+          "Samsung Washer Repair & LG Fault Code Fixes",
+          "Bosch and Siemens Washing Machine Repair",
+          "Washing Machine Repair Near Me in Silicon Oasis"
+        ]
+      },
+      {
+        "area": "Palm Jumeirah",
+        "keywords": [
+          {
+            "keyword": "washing machine repair in palm jumeirah",
+            "volume": 90,
+            "kd": 15,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "DECLINING",
+            "peak_months": "Sep/Nov/Dec/"
+          },
+          {
+            "keyword": "washing machine repair palm jumeirah",
+            "volume": 40,
+            "kd": 18,
+            "cpc_low": 1828.85,
+            "cpc_high": 4855.86,
+            "trend": "DECLINING",
+            "peak_months": "Aug/Sep/Oct"
+          }
+        ],
+        "related_keywords": [],
+        "total_volume": 130,
+        "primary_keyword": {
+          "keyword": "washing machine repair in palm jumeirah",
+          "volume": 90,
+          "kd": 15,
+          "cpc_low": 0.0,
+          "cpc_high": 0.0,
+          "trend": "DECLINING",
+          "peak_months": "Sep/Nov/Dec/"
+        },
+        "demand": "measured",
+        "coordinates": {
+          "lat": 25.1173273,
+          "lng": 55.1350965
+        },
+        "nearby_areas": [
+          {
+            "area": "Dubai Marina",
+            "km": 4.3
+          },
+          {
+            "area": "JLT",
+            "km": 5.1
+          }
+        ],
+        "questions": [
+          {
+            "q": "Can technicians get through Palm Jumeirah building security and villa gate access quickly?",
+            "answer_angle": "Explain the concierge/security clearance process so repairs aren't delayed on arrival."
+          },
+          {
+            "q": "Do you repair washing machines in Palm Jumeirah villas and apartment towers like Shoreline or Marina Residences?",
+            "answer_angle": "Confirm coverage across both fronds villas and tower buildings."
+          },
+          {
+            "q": "Is emergency same-day repair available for Palm Jumeirah residents given the distance from central Dubai?",
+            "answer_angle": "State the coverage radius and that technicians based near Dubai Marina and JLT reach Palm Jumeirah same day."
+          },
+          {
+            "q": "Which premium washing machine brands like Bosch and Siemens do you service in Palm Jumeirah?",
+            "answer_angle": "Confirm expertise with premium European brands common in Palm Jumeirah villas."
+          },
+          {
+            "q": "Do you also cover Dubai Marina and JLT for faster response when booking from Palm Jumeirah?",
+            "answer_angle": "Mention shared technician coverage across Palm Jumeirah, Dubai Marina and JLT for quicker dispatch."
+          },
+          {
+            "q": "What is the cost of a same-day washing machine repair callout to Palm Jumeirah?",
+            "answer_angle": "Give a transparent callout fee and typical repair cost for Palm Jumeirah bookings."
+          }
+        ],
+        "entities": [
+          "washing machine repair",
+          "fix washing machine",
+          "laundry machine repair",
+          "washer fixer",
+          "clothes washer repair",
+          "laundry washer repair",
+          "washing machine repair near me",
+          "samsung washing machine repair",
+          "samsung washer repair",
+          "lg washing machine repair",
+          "bosch washing machine repair",
+          "siemens washing machine repair"
+        ],
+        "headings": [
+          "Washing Machine Repair in Palm Jumeirah Villas & Towers",
+          "Fix Washing Machine Same Day on the Palm",
+          "Laundry Machine Repair for Shoreline & Marina Residences",
+          "Bosch and Siemens Washing Machine Repair Specialists",
+          "Serving Dubai Marina and JLT Alongside Palm Jumeirah",
+          "Samsung Washer Repair & LG Washing Machine Fixes"
+        ]
+      },
+      {
+        "area": "Dubai Marina",
+        "keywords": [
+          {
+            "keyword": "washing machine repair dubai marina",
+            "volume": 110,
+            "kd": 40,
+            "cpc_low": 1202.91,
+            "cpc_high": 3275.6,
+            "trend": "DECLINING",
+            "peak_months": "Aug/Sep/Feb"
+          }
+        ],
+        "related_keywords": [],
+        "total_volume": 110,
+        "primary_keyword": {
+          "keyword": "washing machine repair dubai marina",
+          "volume": 110,
+          "kd": 40,
+          "cpc_low": 1202.91,
+          "cpc_high": 3275.6,
+          "trend": "DECLINING",
+          "peak_months": "Aug/Sep/Feb"
+        },
+        "demand": "measured",
+        "coordinates": {
+          "lat": 25.0786415,
+          "lng": 55.1352524
+        },
+        "nearby_areas": [
+          {
+            "area": "JLT",
+            "km": 1.1
+          },
+          {
+            "area": "Palm Jumeirah",
+            "km": 4.3
+          },
+          {
+            "area": "Discovery Gardens",
+            "km": 4.9
+          }
+        ],
+        "questions": [
+          {
+            "q": "How do technicians handle parking and building access in Dubai Marina towers for repairs?",
+            "answer_angle": "Describe the visitor parking and lobby access process used for Marina tower callouts."
+          },
+          {
+            "q": "Do you offer same-day washing machine repair for Dubai Marina apartments?",
+            "answer_angle": "Confirm same-day appointment slots for Marina residents."
+          },
+          {
+            "q": "Can you fix stacked washer-dryer units common in Dubai Marina apartments?",
+            "answer_angle": "Confirm repair experience with stacked combo units typical in Marina towers."
+          },
+          {
+            "q": "Do you cover JLT and Discovery Gardens too when booking from Dubai Marina?",
+            "answer_angle": "Mention shared technician coverage across Dubai Marina, JLT and Discovery Gardens."
+          },
+          {
+            "q": "Which brands do you repair in Dubai Marina - Samsung, LG, Bosch, Siemens?",
+            "answer_angle": "List the brands serviced with parts stocked for Marina callouts."
+          },
+          {
+            "q": "What is the typical turnaround time for a broken washing machine repair in a Marina tower?",
+            "answer_angle": "Give a clear same-day or next-day repair timeframe for Marina bookings."
+          }
+        ],
+        "entities": [
+          "washing machine repair",
+          "fix washing machine",
+          "laundry machine repair",
+          "washer fixer",
+          "clothes washer repair",
+          "laundry washer repair",
+          "washing machine machine repair",
+          "washing machine repair near me",
+          "samsung washing machine repair",
+          "lg washing machine repair",
+          "bosch washing machine repair",
+          "siemens washing machine repair"
+        ],
+        "headings": [
+          "Washing Machine Repair Near Me in Dubai Marina",
+          "Fix Washing Machine Same Day in Marina Towers",
+          "Laundry Machine Repair for Stacked Washer-Dryer Units",
+          "Covering JLT, Palm Jumeirah and Discovery Gardens Too",
+          "Samsung Washer Repair & LG Washing Machine Fixes",
+          "Bosch and Siemens Washing Machine Repair"
+        ]
+      },
+      {
+        "area": "Business Bay",
+        "keywords": [
+          {
+            "keyword": "washing machine repair business bay",
+            "volume": 110,
+            "kd": 55,
+            "cpc_low": 972.75,
+            "cpc_high": 4227.07,
+            "trend": "DECLINING",
+            "peak_months": "Sep//Feb"
+          }
+        ],
+        "related_keywords": [],
+        "total_volume": 110,
+        "primary_keyword": {
+          "keyword": "washing machine repair business bay",
+          "volume": 110,
+          "kd": 55,
+          "cpc_low": 972.75,
+          "cpc_high": 4227.07,
+          "trend": "DECLINING",
+          "peak_months": "Sep//Feb"
+        },
+        "demand": "measured",
+        "coordinates": {
+          "lat": 25.1794564,
+          "lng": 55.2683707
+        },
+        "nearby_areas": [
+          {
+            "area": "Downtown Dubai",
+            "km": 2.0
+          },
+          {
+            "area": "Al Quoz",
+            "km": 2.6
+          },
+          {
+            "area": "Bur Dubai",
+            "km": 6.9
+          }
+        ],
+        "questions": [
+          {
+            "q": "How quickly can a technician reach my tower in Business Bay for a same-day repair?",
+            "answer_angle": "State a typical 60-90 minute arrival window for Business Bay towers, factoring in security check-in and elevator access."
+          },
+          {
+            "q": "Do technicians handle building security and freight elevator access in Business Bay's high-rise towers?",
+            "answer_angle": "Confirm technicians coordinate directly with concierge/security desks and use service elevators so residents don't need to escort them."
+          },
+          {
+            "q": "Can you repair Samsung, LG, Bosch or Siemens washing machines in my apartment without removing the unit?",
+            "answer_angle": "Confirm on-site in-apartment repair for these named brands without needing to remove or transport the machine."
+          },
+          {
+            "q": "Is emergency after-hours callout available for a leaking washing machine in a high-rise unit?",
+            "answer_angle": "Confirm 24/7 emergency callout specifically for leak issues in Business Bay towers."
+          },
+          {
+            "q": "How much does washing machine repair cost in Business Bay compared to nearby Downtown Dubai?",
+            "answer_angle": "Give an AED price range and state rates are consistent across Business Bay and Downtown Dubai."
+          },
+          {
+            "q": "Do you also service areas near Business Bay like Downtown Dubai, Al Quoz and Bur Dubai on the same visit?",
+            "answer_angle": "Confirm coverage of Downtown Dubai, Al Quoz and Bur Dubai with approximate travel times from Business Bay."
+          }
+        ],
+        "entities": [
+          "washing machine repair",
+          "fix washing machine",
+          "laundry machine repair",
+          "washer fixer",
+          "clothes washer repair",
+          "samsung washing machine repair",
+          "lg washing machine repair",
+          "bosch washing machine repair",
+          "siemens washing machine repair",
+          "washing machine repair near me"
+        ],
+        "headings": [
+          "Washing Machine Repair in Business Bay: What to Expect",
+          "Fix Washing Machine Issues the Same Day in Your Tower",
+          "Samsung Washing Machine Repair for Business Bay Apartments",
+          "LG, Bosch & Siemens Washing Machine Repair Options",
+          "Laundry Machine Repair Near Me: Downtown Dubai, Al Quoz & Bur Dubai",
+          "Clothes Washer Repair Cost in Business Bay"
+        ]
+      },
+      {
+        "area": "Discovery Gardens",
+        "keywords": [
+          {
+            "keyword": "washing machine repair discovery gardens",
+            "volume": 90,
+            "kd": 91,
+            "cpc_low": 1797.8,
+            "cpc_high": 4008.7,
+            "trend": "DECLINING",
+            "peak_months": "Aug/Sep/Oct/Dec"
+          }
+        ],
+        "related_keywords": [],
+        "total_volume": 90,
+        "primary_keyword": {
+          "keyword": "washing machine repair discovery gardens",
+          "volume": 90,
+          "kd": 91,
+          "cpc_low": 1797.8,
+          "cpc_high": 4008.7,
+          "trend": "DECLINING",
+          "peak_months": "Aug/Sep/Oct/Dec"
+        },
+        "demand": "measured",
+        "coordinates": {
+          "lat": 25.0352571,
+          "lng": 55.1454134
+        },
+        "nearby_areas": [
+          {
+            "area": "JLT",
+            "km": 4.1
+          },
+          {
+            "area": "Dubai Marina",
+            "km": 4.9
+          }
+        ],
+        "questions": [
+          {
+            "q": "Can technicians find and access my cluster building quickly in Discovery Gardens?",
+            "answer_angle": "Confirm technicians know the cluster lettering/numbering system and can locate buildings without delay."
+          },
+          {
+            "q": "Is same-day washing machine repair available for Discovery Gardens apartments?",
+            "answer_angle": "Confirm same-day appointment slots and typical response time for cluster flats."
+          },
+          {
+            "q": "Do you repair Samsung, LG, Bosch and Siemens washers common in Discovery Gardens flats?",
+            "answer_angle": "List these named brands as regularly serviced in Discovery Gardens."
+          },
+          {
+            "q": "What does a laundry machine repair visit cost in Discovery Gardens?",
+            "answer_angle": "Give an AED price range for a standard callout in the area."
+          },
+          {
+            "q": "Do you also cover nearby JLT and Dubai Marina if I'm moving between homes?",
+            "answer_angle": "Confirm coverage of JLT and Dubai Marina with travel times from Discovery Gardens."
+          },
+          {
+            "q": "Can you fix a washing machine that won't drain or spin in a Discovery Gardens cluster flat same day?",
+            "answer_angle": "Confirm same-day fixes for drainage and spin faults common in cluster building plumbing."
+          }
+        ],
+        "entities": [
+          "washing machine repair",
+          "fix washing machine",
+          "laundry machine repair",
+          "washer fixer",
+          "clothes washer repair",
+          "laundry washer repair",
+          "samsung washing machine repair",
+          "lg washing machine repair",
+          "bosch washing machine repair",
+          "siemens washing machine repair",
+          "washing machine repair near me"
+        ],
+        "headings": [
+          "Washing Machine Repair in Discovery Gardens Clusters",
+          "Fix Washing Machine Issues the Same Day",
+          "Washer Fixer Service for Samsung, LG, Bosch & Siemens Machines",
+          "Clothes Washer Repair Cost & Booking",
+          "Laundry Machine Repair Near Me: JLT & Dubai Marina Coverage",
+          "Laundry Washer Repair for Common Cluster Building Faults"
+        ]
+      },
+      {
+        "area": "Al Warqa",
+        "keywords": [
+          {
+            "keyword": "washing machine repair al warqa",
+            "volume": 70,
+            "kd": 24,
+            "cpc_low": 1404.47,
+            "cpc_high": 3430.99,
+            "trend": "GROWING",
+            "peak_months": "Feb/Mar/Apr/May/Jul"
+          }
+        ],
+        "related_keywords": [],
+        "total_volume": 70,
+        "primary_keyword": {
+          "keyword": "washing machine repair al warqa",
+          "volume": 70,
+          "kd": 24,
+          "cpc_low": 1404.47,
+          "cpc_high": 3430.99,
+          "trend": "GROWING",
+          "peak_months": "Feb/Mar/Apr/May/Jul"
+        },
+        "demand": "measured",
+        "coordinates": {
+          "lat": 25.1890201,
+          "lng": 55.4308318
+        },
+        "nearby_areas": [],
+        "questions": [
+          {
+            "q": "Do technicians come directly to villas in Al Warqa or is a service center drop-off needed?",
+            "answer_angle": "Confirm mobile in-villa repair with no drop-off required, technician arrives with parts and tools."
+          },
+          {
+            "q": "How fast can a technician reach my villa in Al Warqa for an emergency washing machine repair?",
+            "answer_angle": "Give a typical response time for villa callouts in Al Warqa given its distance from central Dubai."
+          },
+          {
+            "q": "Can you repair Samsung, LG, Bosch and Siemens washing machines installed in villa laundry rooms?",
+            "answer_angle": "Confirm these named brands are serviced in villa laundry room setups."
+          },
+          {
+            "q": "What is the cost of fixing a washing machine or dryer in an Al Warqa villa?",
+            "answer_angle": "Give an AED price range specific to villa callouts including any travel surcharge."
+          },
+          {
+            "q": "Do you offer same-day repair for villas with large-capacity washing machines?",
+            "answer_angle": "Confirm same-day service and capability to handle large-capacity villa units."
+          },
+          {
+            "q": "Can you fix a washing machine that's leaking onto villa flooring immediately?",
+            "answer_angle": "Confirm emergency same-day leak repair to prevent flooring damage in villas."
+          }
+        ],
+        "entities": [
+          "washing machine repair",
+          "fix washing machine",
+          "laundry machine repair",
+          "washer fixer",
+          "clothes washer repair",
+          "laundry washer repair",
+          "fix laundry machine",
+          "samsung washing machine repair",
+          "lg washing machine repair",
+          "bosch washing machine repair",
+          "siemens washing machine repair",
+          "washing machine repair near me"
+        ],
+        "headings": [
+          "Washing Machine Repair for Al Warqa Villas",
+          "Fix Washing Machine Problems at Home Same Day",
+          "Laundry Machine Repair for Villa Laundry Rooms",
+          "Samsung, LG, Bosch & Siemens Washing Machine Repair",
+          "Fix Laundry Machine Emergencies Fast in Al Warqa",
+          "Clothes Washer Repair Cost for Villas"
+        ]
+      },
+      {
+        "area": "Bur Dubai",
+        "keywords": [
+          {
+            "keyword": "washing machine repair bur dubai",
+            "volume": 70,
+            "kd": 12,
+            "cpc_low": 972.75,
+            "cpc_high": 2648.79,
+            "trend": "GROWING",
+            "peak_months": "Jun/Jul"
+          }
+        ],
+        "related_keywords": [],
+        "total_volume": 70,
+        "primary_keyword": {
+          "keyword": "washing machine repair bur dubai",
+          "volume": 70,
+          "kd": 12,
+          "cpc_low": 972.75,
+          "cpc_high": 2648.79,
+          "trend": "GROWING",
+          "peak_months": "Jun/Jul"
+        },
+        "demand": "measured",
+        "coordinates": {
+          "lat": 25.2355905,
+          "lng": 55.2967203
+        },
+        "nearby_areas": [
+          {
+            "area": "Downtown Dubai",
+            "km": 4.9
+          },
+          {
+            "area": "Business Bay",
+            "km": 6.9
+          }
+        ],
+        "questions": [
+          {
+            "q": "Can technicians navigate Bur Dubai's narrow streets and older buildings for quick access?",
+            "answer_angle": "Confirm technicians are familiar with Bur Dubai's older low-rise layout and parking workarounds for fast arrival."
+          },
+          {
+            "q": "Is same-day washing machine repair available in Bur Dubai's older apartment blocks?",
+            "answer_angle": "Confirm same-day response times suited to Bur Dubai's building stock."
+          },
+          {
+            "q": "Do you repair Samsung, LG, Bosch and Siemens washing machines common in Bur Dubai flats?",
+            "answer_angle": "List these named brands as regularly serviced in Bur Dubai."
+          },
+          {
+            "q": "What's the typical cost for laundry machine repair in Bur Dubai?",
+            "answer_angle": "Give an AED price range for a standard Bur Dubai callout."
+          },
+          {
+            "q": "Do you also serve nearby Downtown Dubai and Business Bay on the same trip?",
+            "answer_angle": "Confirm coverage of Downtown Dubai and Business Bay with distances from Bur Dubai."
+          },
+          {
+            "q": "Can you fix an old washing machine that keeps stopping mid-cycle in Bur Dubai?",
+            "answer_angle": "Confirm repair capability for older machines with mid-cycle stoppage faults common in aging units."
+          }
+        ],
+        "entities": [
+          "washing machine repair",
+          "fix washing machine",
+          "laundry machine repair",
+          "washer fixer",
+          "clothes washer repair",
+          "laundry washer repair",
+          "samsung washing machine repair",
+          "lg washing machine repair",
+          "bosch washing machine repair",
+          "siemens washing machine repair",
+          "washing machine repair near me"
+        ],
+        "headings": [
+          "Washing Machine Repair in Bur Dubai's Older Buildings",
+          "Fix Washing Machine Faults Same Day",
+          "Laundry Machine Repair Cost & Timing",
+          "Samsung, LG, Bosch & Siemens Washer Repair Options",
+          "Washer Fixer Coverage: Downtown Dubai & Business Bay",
+          "Clothes Washer Repair for Common Bur Dubai Faults"
+        ]
+      },
+      {
+        "area": "JLT",
+        "keywords": [
+          {
+            "keyword": "washing machine repair jlt",
+            "volume": 70,
+            "kd": 22,
+            "cpc_low": 751.78,
+            "cpc_high": 1346.69,
+            "trend": "DECLINING",
+            "peak_months": "Oct/Nov/Dec/"
+          }
+        ],
+        "related_keywords": [],
+        "total_volume": 70,
+        "primary_keyword": {
+          "keyword": "washing machine repair jlt",
+          "volume": 70,
+          "kd": 22,
+          "cpc_low": 751.78,
+          "cpc_high": 1346.69,
+          "trend": "DECLINING",
+          "peak_months": "Oct/Nov/Dec/"
+        },
+        "demand": "measured",
+        "coordinates": {
+          "lat": 25.0723832,
+          "lng": 55.1437432
+        },
+        "nearby_areas": [
+          {
+            "area": "Dubai Marina",
+            "km": 1.1
+          },
+          {
+            "area": "Discovery Gardens",
+            "km": 4.1
+          },
+          {
+            "area": "Palm Jumeirah",
+            "km": 5.1
+          }
+        ],
+        "questions": [
+          {
+            "q": "Can you repair washing machines in JLT high-rise towers with restricted service elevator access?",
+            "answer_angle": "State that technicians pre-book service elevator slots with JLT tower security/concierge and arrive with ID and appointment confirmation so no delay at entry."
+          },
+          {
+            "q": "Do you offer same-day washing machine repair across JLT clusters (Cluster A to Y)?",
+            "answer_angle": "Confirm same-day and emergency callouts to all JLT clusters with a typical 60-90 minute arrival window."
+          },
+          {
+            "q": "Can you fix Samsung and LG washing machines in JLT apartments?",
+            "answer_angle": "List Samsung, LG, Bosch and Siemens as covered brands with spare parts carried on the van for common JLT apartment models."
+          },
+          {
+            "q": "Do you also cover Dubai Marina, Discovery Gardens and Palm Jumeirah from your JLT team?",
+            "answer_angle": "State the JLT-based team also services Dubai Marina (1.1km), Discovery Gardens (4.1km) and Palm Jumeirah (5.1km) same day."
+          },
+          {
+            "q": "What does washing machine repair cost in JLT for common faults like drainage or spin errors?",
+            "answer_angle": "Give an indicative AED price range tied to typical JLT faults such as drainage blockage or spin cycle failure."
+          },
+          {
+            "q": "Do you fix dryers as well as washing machines in JLT towers?",
+            "answer_angle": "Confirm combined washer and dryer repair for all brands in one callout."
+          }
+        ],
+        "entities": [
+          "washing machine repair",
+          "fix washing machine",
+          "laundry machine repair",
+          "washer fixer",
+          "clothes washer repair",
+          "laundry washer repair",
+          "fix laundry machine",
+          "samsung washing machine",
+          "lg washing machine",
+          "bosch washing machine",
+          "siemens washing machine",
+          "washing machine repair near me"
+        ],
+        "headings": [
+          "Washing Machine Repair in JLT",
+          "Same-Day Washer Fixer for JLT Towers",
+          "Samsung & LG Washing Machine Repair",
+          "Bosch and Siemens Washing Machine Repair",
+          "Laundry Machine Repair for Dubai Marina, Discovery Gardens & Palm Jumeirah",
+          "Fix Washing Machine Issues Fast"
+        ]
+      },
+      {
+        "area": "Al Quoz",
+        "keywords": [
+          {
+            "keyword": "washing machine repair al quoz",
+            "volume": 50,
+            "kd": 91,
+            "cpc_low": 1029.01,
+            "cpc_high": 3243.87,
+            "trend": "DECLINING",
+            "peak_months": "Sep/Nov/Apr"
+          },
+          {
+            "keyword": "washing machine repair dubai al quoz",
+            "volume": 10,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "DECLINING",
+            "peak_months": "Mar"
+          }
+        ],
+        "related_keywords": [],
+        "total_volume": 60,
+        "primary_keyword": {
+          "keyword": "washing machine repair al quoz",
+          "volume": 50,
+          "kd": 91,
+          "cpc_low": 1029.01,
+          "cpc_high": 3243.87,
+          "trend": "DECLINING",
+          "peak_months": "Sep/Nov/Apr"
+        },
+        "demand": "measured",
+        "coordinates": {
+          "lat": 25.1595803,
+          "lng": 55.2540203
+        },
+        "nearby_areas": [
+          {
+            "area": "Business Bay",
+            "km": 2.6
+          },
+          {
+            "area": "Downtown Dubai",
+            "km": 4.6
+          }
+        ],
+        "questions": [
+          {
+            "q": "Do you repair washing machines at Al Quoz warehouses and labour accommodation, not just villas?",
+            "answer_angle": "Confirm coverage of industrial units, warehouses and staff accommodation across Al Quoz 1-4 alongside residential villas."
+          },
+          {
+            "q": "Can you handle commercial laundry machine repair for businesses in Al Quoz?",
+            "answer_angle": "State a dedicated commercial and laundry machine repair service for Al Quoz businesses and industrial clients."
+          },
+          {
+            "q": "How fast can a technician reach Al Quoz for a same-day callout?",
+            "answer_angle": "Give arrival time based on proximity to Business Bay (2.6km) with same-day slots confirmed on booking."
+          },
+          {
+            "q": "Do you repair Bosch and Siemens machines common in Al Quoz villas?",
+            "answer_angle": "Confirm Bosch and Siemens repair expertise alongside Samsung and LG for Al Quoz villa residents."
+          },
+          {
+            "q": "Do you also serve Downtown Dubai customers from your Al Quoz base?",
+            "answer_angle": "State coverage extends to Downtown Dubai (4.6km) with same-day scheduling."
+          },
+          {
+            "q": "What faults most commonly need fixing on washing machines in Al Quoz?",
+            "answer_angle": "List typical faults such as drainage blockage, spin cycle errors and door seal failure seen in the area."
+          }
+        ],
+        "entities": [
+          "washing machine repair",
+          "fix washing machine",
+          "laundry machine repair",
+          "washer fixer",
+          "clothes washer repair",
+          "laundry washer repair",
+          "fix laundry machine",
+          "samsung washing machine",
+          "lg washing machine",
+          "bosch washing machine",
+          "siemens washing machine",
+          "washing machine repair near me"
+        ],
+        "headings": [
+          "Washing Machine Repair in Al Quoz",
+          "Laundry Machine Repair for Al Quoz Businesses",
+          "Samsung & LG Washer Repair",
+          "Bosch and Siemens Washing Machine Repair",
+          "Fix Washing Machine Issues Near Business Bay & Downtown Dubai",
+          "Clothes Washer Repair for Villas and Warehouses"
+        ]
+      },
+      {
+        "area": "Downtown Dubai",
+        "keywords": [
+          {
+            "keyword": "washing machine repair downtown dubai",
+            "volume": 50,
+            "kd": 11,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "GROWING",
+            "peak_months": "/Feb/Jul"
+          }
+        ],
+        "related_keywords": [],
+        "total_volume": 50,
+        "primary_keyword": {
+          "keyword": "washing machine repair downtown dubai",
+          "volume": 50,
+          "kd": 11,
+          "cpc_low": 0.0,
+          "cpc_high": 0.0,
+          "trend": "GROWING",
+          "peak_months": "/Feb/Jul"
+        },
+        "demand": "measured",
+        "coordinates": {
+          "lat": 25.1948428,
+          "lng": 55.278195
+        },
+        "nearby_areas": [
+          {
+            "area": "Business Bay",
+            "km": 2.0
+          },
+          {
+            "area": "Al Quoz",
+            "km": 4.6
+          },
+          {
+            "area": "Bur Dubai",
+            "km": 4.9
+          }
+        ],
+        "questions": [
+          {
+            "q": "Can you get repair technicians past Downtown Dubai tower security and concierge quickly?",
+            "answer_angle": "Describe the process of pre-clearing technician ID with concierge/security so entry to Downtown Dubai towers is fast on the booked slot."
+          },
+          {
+            "q": "Do you offer emergency washing machine repair near Burj Khalifa apartments?",
+            "answer_angle": "Confirm 24/7 emergency callout availability for Downtown Dubai high-rise apartments including near Burj Khalifa."
+          },
+          {
+            "q": "Can you repair premium brand washing machines like Siemens and Bosch in Downtown Dubai?",
+            "answer_angle": "State specialism in premium brands Siemens and Bosch alongside Samsung and LG for Downtown Dubai residences."
+          },
+          {
+            "q": "How quickly can you reach Downtown Dubai from Business Bay or Al Quoz?",
+            "answer_angle": "Give travel times of roughly 2.0km from Business Bay and 4.6km from Al Quoz with matching arrival estimates."
+          },
+          {
+            "q": "Do you cover Bur Dubai too if I live near the Downtown Dubai border?",
+            "answer_angle": "Confirm Bur Dubai coverage (4.9km) from the same Downtown Dubai-based team."
+          },
+          {
+            "q": "What does same-day washing machine repair cost in Downtown Dubai?",
+            "answer_angle": "Give an indicative AED price range reflecting premium tower access and same-day service."
+          }
+        ],
+        "entities": [
+          "washing machine repair",
+          "fix washing machine",
+          "laundry machine repair",
+          "washer fixer",
+          "clothes washer repair",
+          "laundry washer repair",
+          "fix laundry machine",
+          "samsung washing machine",
+          "lg washing machine",
+          "bosch washing machine",
+          "siemens washing machine",
+          "washing machine repair near me"
+        ],
+        "headings": [
+          "Washing Machine Repair in Downtown Dubai",
+          "Emergency Washer Fixer Near Burj Khalifa",
+          "Samsung & LG Washing Machine Repair",
+          "Bosch and Siemens Washing Machine Repair for Premium Towers",
+          "Laundry Machine Repair for Business Bay, Al Quoz & Bur Dubai",
+          "Fix Washing Machine Same Day"
+        ]
+      },
+      {
+        "area": "Dubai International City",
+        "keywords": [
+          {
+            "keyword": "washing machine repair dubai international city",
+            "volume": 20,
+            "kd": 30,
+            "cpc_low": 1149.57,
+            "cpc_high": 3014.38,
+            "trend": "GROWING",
+            "peak_months": "Dec/Jul"
+          }
+        ],
+        "related_keywords": [],
+        "total_volume": 20,
+        "primary_keyword": {
+          "keyword": "washing machine repair dubai international city",
+          "volume": 20,
+          "kd": 30,
+          "cpc_low": 1149.57,
+          "cpc_high": 3014.38,
+          "trend": "GROWING",
+          "peak_months": "Dec/Jul"
+        },
+        "demand": "measured",
+        "coordinates": {
+          "lat": 25.1217058,
+          "lng": 55.3855055
+        },
+        "nearby_areas": [
+          {
+            "area": "Dubai Silicon Oasis",
+            "km": 0.0
+          }
+        ],
+        "questions": [
+          {
+            "q": "Do you repair washing machines in all International City clusters like China, England and Persia Cluster?",
+            "answer_angle": "Confirm technicians cover all named International City clusters by name, not just a generic area radius."
+          },
+          {
+            "q": "Since Dubai Silicon Oasis is right next door, do you cover both areas the same day?",
+            "answer_angle": "State the near-zero 0.0km distance to Dubai Silicon Oasis means both areas get combined same-day coverage."
+          },
+          {
+            "q": "Can you fix budget brand washing machines common in International City apartments?",
+            "answer_angle": "Confirm all brands are handled, including Samsung and LG, at rates suited to International City households."
+          },
+          {
+            "q": "Do you provide laundry machine repair for shared laundry rooms in International City buildings?",
+            "answer_angle": "Confirm shared and communal laundry machine repair service for building management and residents."
+          },
+          {
+            "q": "How fast is emergency washer fixer service to International City?",
+            "answer_angle": "Give an arrival time estimate for emergency callouts given the distance from central Dubai."
+          }
+        ],
+        "entities": [
+          "washing machine repair",
+          "fix washing machine",
+          "laundry machine repair",
+          "washer fixer",
+          "clothes washer repair",
+          "laundry washer repair",
+          "fix laundry machine",
+          "samsung washing machine",
+          "lg washing machine",
+          "bosch washing machine",
+          "siemens washing machine",
+          "washing machine repair near me"
+        ],
+        "headings": [
+          "Washing Machine Repair in Dubai International City",
+          "Laundry Machine Repair Across All Clusters",
+          "Samsung & LG Washer Repair",
+          "Bosch and Siemens Washing Machine Repair",
+          "Washer Fixer Service for Dubai Silicon Oasis & International City",
+          "Fix Washing Machine Issues Near Me"
+        ]
+      }
+    ],
+    "cities_in_data": [],
+    "recommended_city_targets": [
+      "Dubai, United Arab Emirates"
+    ],
+    "geo_area_candidates": [
+      "Palm Islands",
+      "Jabal Ali Second",
+      "Dubai Sports City",
+      "Al Quoz Industrial Area 4",
+      "Dubai Production City",
+      "Dubai Creek Harbour",
+      "Nadd Al Hamar",
+      "Dubai Investment Park - 2",
+      "Al Barsha 2",
+      "Al Sufouh 1",
+      "Jumeirah Park",
+      "Damac Hills",
+      "Dubai Investment Park First",
+      "International City Phase(2)",
+      "Al Twar",
+      "Ras Al Khor Industrial Area 3",
+      "Al Warqa 3",
+      "Al Safa",
+      "Dubai Festival City",
+      "The Villa",
+      "Jabal Ali Industrial Second",
+      "Mudon",
+      "Green Community Village",
+      "Dubai Industrial City",
+      "Academic City",
+      "Jebel Ali Freezone",
+      "Arabian Ranches",
+      "Al Quoz 1",
+      "Motor City",
+      "Front",
+      "Za'abeel 2",
+      "Nad Al Sheba 1",
+      "Al Barsha 3",
+      "Al Khawaneej 1",
+      "Al Rashidiya",
+      "Dubai Marina",
+      "Jumeirah",
+      "Al Quoz",
+      "Al Wasl",
+      "Al Nahda",
+      "Dubai Silicon Oasis",
+      "Mirdif",
+      "Za'abeel",
+      "Al Quoz Industrial Area 3",
+      "Umm Suqeim",
+      "Dubai International City",
+      "Jumeirah Village Circle",
+      "Al Sufouh 2",
+      "Business Bay",
+      "Jumeirah 1",
+      "Jebel Ali Village",
+      "Umm Hurair Second",
+      "Al Garhoud",
+      "Nad Al Sheba",
+      "Al Qusais 1",
+      "Al Qusais",
+      "Al Barsha 1",
+      "Al Quoz Industrial Area 2",
+      "Jumeirah Village",
+      "Muhaisanah 2",
+      "Al Khawaneej 2",
+      "Jumeirah Golf Estates",
+      "Al Warqa 2",
+      "Nad Al Sheba 3",
+      "Ghadeer Al Tair",
+      "Za'abeel 1",
+      "Al Mizhar 1",
+      "Dubai South",
+      "Nad Al Sheba 4",
+      "Muhaisnah 1",
+      "Golf City",
+      "Hatta",
+      "Al Mamzar",
+      "Falconcity of Wonders",
+      "Port Rashid",
+      "Ras Al Khor Industrial Area 2",
+      "Nad Al Sheba 2",
+      "Jumeirah 2",
+      "Umm Ramool",
+      "Warsan 3",
+      "Warsan 2",
+      "Jabal Ali Third",
+      "National Industries Park",
+      "Al Warqa",
+      "Muhaisnah",
+      "Emirates Hills",
+      "Al Warqa 4",
+      "Al Warqa 5",
+      "Al Mizhar 2",
+      "Oud Al Muteena",
+      "Wadi Alamardi",
+      "World Islands",
+      "Al Khawaneej",
+      "Al Barsha South",
+      "Madinat Hind 3",
+      "Madinat Hind 4",
+      "Madinat Dubai Al Melaheyah",
+      "Madinat Hind 1",
+      "Al Aweer",
+      "Saih Shuaib 2",
+      "Al Mizhar",
+      "Mushraif",
+      "Discovery Gardens",
+      "Bur Dubai",
+      "JLT",
+      "Downtown Dubai",
+      "Palm Jumeirah"
+    ],
+    "service_keywords": [
+      {
+        "keyword": "washing machine repair",
+        "volume": 6600,
+        "kd": 32,
+        "trend": "GROWING"
+      },
+      {
+        "keyword": "fix washing machine",
+        "volume": 6600,
+        "kd": 32,
+        "trend": "GROWING"
+      },
+      {
+        "keyword": "laundry machine repair",
+        "volume": 6600,
+        "kd": 32,
+        "trend": "GROWING"
+      },
+      {
+        "keyword": "washer fixer",
+        "volume": 6600,
+        "kd": 32,
+        "trend": "GROWING"
+      },
+      {
+        "keyword": "clothes washer repair",
+        "volume": 6600,
+        "kd": 32,
+        "trend": "GROWING"
+      },
+      {
+        "keyword": "laundry washer repair",
+        "volume": 6600,
+        "kd": 32,
+        "trend": "GROWING"
+      },
+      {
+        "keyword": "fix laundry machine",
+        "volume": 6600,
+        "kd": 32,
+        "trend": "GROWING"
+      },
+      {
+        "keyword": "washing machine machine repair",
+        "volume": 6600,
+        "kd": 32,
+        "trend": "GROWING"
+      },
+      {
+        "keyword": "washing machine repair near me",
+        "volume": 2900,
+        "kd": 40,
+        "trend": "STABLE"
+      },
+      {
+        "keyword": "samsung washing machine repair",
+        "volume": 320,
+        "kd": 21,
+        "trend": "STABLE"
+      },
+      {
+        "keyword": "samsung washer repair",
+        "volume": 320,
+        "kd": 21,
+        "trend": "STABLE"
+      },
+      {
+        "keyword": "lg washing machine repair",
+        "volume": 320,
+        "kd": 13,
+        "trend": "DECLINING"
+      },
+      {
+        "keyword": "bosch washing machine repair",
+        "volume": 320,
+        "kd": 16,
+        "trend": "SEASONAL"
+      },
+      {
+        "keyword": "siemens washing machine repair",
+        "volume": 320,
+        "kd": 59,
+        "trend": "GROWING"
+      },
+      {
+        "keyword": "bosch washer repair",
+        "volume": 320,
+        "kd": 16,
+        "trend": "SEASONAL"
+      },
+      {
+        "keyword": "fix samsung washing machine",
+        "volume": 320,
+        "kd": 21,
+        "trend": "STABLE"
+      },
+      {
+        "keyword": "samsung washer fix",
+        "volume": 320,
+        "kd": 21,
+        "trend": "STABLE"
+      },
+      {
+        "keyword": "fix bosch washing machine",
+        "volume": 320,
+        "kd": 16,
+        "trend": "SEASONAL"
+      },
+      {
+        "keyword": "washer repair near me",
+        "volume": 260,
+        "kd": 32,
+        "trend": "GROWING"
+      },
+      {
+        "keyword": "washer repair service near me",
+        "volume": 260,
+        "kd": 32,
+        "trend": "GROWING"
+      },
+      {
+        "keyword": "fix washing machine near me",
+        "volume": 260,
+        "kd": 32,
+        "trend": "GROWING"
+      },
+      {
+        "keyword": "washer fixer near me",
+        "volume": 260,
+        "kd": 32,
+        "trend": "GROWING"
+      },
+      {
+        "keyword": "clothes washer repair near me",
+        "volume": 260,
+        "kd": 32,
+        "trend": "GROWING"
+      },
+      {
+        "keyword": "laundry machine repair near me",
+        "volume": 260,
+        "kd": 32,
+        "trend": "GROWING"
+      },
+      {
+        "keyword": "repair washer near me",
+        "volume": 260,
+        "kd": 32,
+        "trend": "GROWING"
+      },
+      {
+        "keyword": "near me washing machine repair",
+        "volume": 260,
+        "kd": 32,
+        "trend": "GROWING"
+      },
+      {
+        "keyword": "repair wash machine near me",
+        "volume": 260,
+        "kd": 32,
+        "trend": "GROWING"
+      },
+      {
+        "keyword": "washing machine repair service",
+        "volume": 140,
+        "kd": 36,
+        "trend": "SEASONAL"
+      },
+      {
+        "keyword": "washing machine service",
+        "volume": 110,
+        "kd": 85,
+        "trend": "GROWING"
+      },
+      {
+        "keyword": "washing machine service near me",
+        "volume": 90,
+        "kd": 74,
+        "trend": "STABLE"
+      },
+      {
+        "keyword": "washer maintenance near me",
+        "volume": 90,
+        "kd": 74,
+        "trend": "STABLE"
+      },
+      {
+        "keyword": "service washing machine near me",
+        "volume": 90,
+        "kd": 74,
+        "trend": "STABLE"
+      },
+      {
+        "keyword": "laundry machine service near me",
+        "volume": 90,
+        "kd": 74,
+        "trend": "STABLE"
+      },
+      {
+        "keyword": "washing machine repair service near me",
+        "volume": 70,
+        "kd": 45,
+        "trend": "GROWING"
+      },
+      {
+        "keyword": "washing machine repair shops near me",
+        "volume": 70,
+        "kd": 58,
+        "trend": "DECLINING"
+      },
+      {
+        "keyword": "washer repair shops near me",
+        "volume": 70,
+        "kd": 58,
+        "trend": "DECLINING"
+      },
+      {
+        "keyword": "lg washer repair near me",
+        "volume": 50,
+        "kd": 25,
+        "trend": "DECLINING"
+      },
+      {
+        "keyword": "lg washing machine repair near me",
+        "volume": 50,
+        "kd": 25,
+        "trend": "DECLINING"
+      },
+      {
+        "keyword": "washing machine maintenance",
+        "volume": 50,
+        "kd": 84,
+        "trend": "STABLE"
+      },
+      {
+        "keyword": "lg washer repairs near me",
+        "volume": 50,
+        "kd": 25,
+        "trend": "DECLINING"
+      },
+      {
+        "keyword": "bosch service washing machine",
+        "volume": 50,
+        "kd": 43,
+        "trend": "DECLINING"
+      },
+      {
+        "keyword": "laundry machine maintenance",
+        "volume": 50,
+        "kd": 84,
+        "trend": "STABLE"
+      },
+      {
+        "keyword": "washing machine maintenance wash",
+        "volume": 50,
+        "kd": 84,
+        "trend": "STABLE"
+      },
+      {
+        "keyword": "washing machine technician",
+        "volume": 40,
+        "kd": 86,
+        "trend": "DECLINING"
+      },
+      {
+        "keyword": "washing machine technician near me",
+        "volume": 40,
+        "kd": 84,
+        "trend": "STABLE"
+      },
+      {
+        "keyword": "washer technician near me",
+        "volume": 40,
+        "kd": 84,
+        "trend": "STABLE"
+      },
+      {
+        "keyword": "washer technician",
+        "volume": 40,
+        "kd": 86,
+        "trend": "DECLINING"
+      },
+      {
+        "keyword": "panasonic washing machine repair",
+        "volume": 40,
+        "kd": 73,
+        "trend": "DECLINING"
+      },
+      {
+        "keyword": "laundry machine technician",
+        "volume": 40,
+        "kd": 86,
+        "trend": "DECLINING"
+      },
+      {
+        "keyword": "washing machine technicians near me",
+        "volume": 40,
+        "kd": 84,
+        "trend": "STABLE"
+      },
+      {
+        "keyword": "motor in washing machine",
+        "volume": 40,
+        "kd": 100,
+        "trend": "STABLE"
+      },
+      {
+        "keyword": "samsung washing machine repairs near me",
+        "volume": 30,
+        "kd": 22,
+        "trend": "SEASONAL"
+      },
+      {
+        "keyword": "near washing machine repair",
+        "volume": 30,
+        "kd": 46,
+        "trend": "GROWING"
+      },
+      {
+        "keyword": "nearby washing machine repair",
+        "volume": 30,
+        "kd": 46,
+        "trend": "GROWING"
+      },
+      {
+        "keyword": "teka washing machine repair",
+        "volume": 30,
+        "kd": 48,
+        "trend": "DECLINING"
+      },
+      {
+        "keyword": "lg washer repair",
+        "volume": 20,
+        "kd": 23,
+        "trend": "DECLINING"
+      },
+      {
+        "keyword": "washing machine mechanic near me",
+        "volume": 20,
+        "kd": 74,
+        "trend": "DECLINING"
+      },
+      {
+        "keyword": "electrolux washing machine repair",
+        "volume": 20,
+        "kd": 84,
+        "trend": "DECLINING"
+      },
+      {
+        "keyword": "washing machine maintenance near me",
+        "volume": 20,
+        "kd": 94,
+        "trend": "DECLINING"
+      },
+      {
+        "keyword": "fix lg washing machine",
+        "volume": 20,
+        "kd": 23,
+        "trend": "DECLINING"
+      }
+    ],
+    "partial": false,
+    "notes": "12 of 107 areas in Dubai, United Arab Emirates have their own measured demand for 'washing machine repair'."
+  }
+}
