@@ -600,13 +600,47 @@ def _add_proximity(results):
     """
     import math
     pts = {}
+    claimed = {}                              # rounded point -> area that took it
     for a in results:
         time.sleep(1.2)                       # OSM asks for max 1 req/sec
         try:
-            d = _nominatim(f"{a['area']}, {TARGET_LOCATION}")
-            if d:
-                pts[a["area"]] = (float(d[0]["lat"]), float(d[0]["lon"]))
-                a["coordinates"] = {"lat": pts[a["area"]][0], "lng": pts[a["area"]][1]}
+            # Ask for a few and keep the first that is actually the place we
+            # asked about. Taking hit [0] blindly put Dubai International City
+            # on Dubai Silicon Oasis's exact coordinates, so the live page
+            # showed the wrong district's map.
+            # Google names some districts with the city in front ("Dubai
+            # International City"); OSM files them without it. Try the name as
+            # given, then again with the city prefix stripped.
+            city_first = TARGET_LOCATION.split(",")[0].strip()
+            queries = [a["area"]]
+            if city_first and _nrm(a["area"]).startswith(_nrm(city_first) + " "):
+                queries.append(a["area"][len(city_first):].strip())
+            best = None
+            for q in queries:
+                hits = _nominatim(f"{q}, {TARGET_LOCATION}", limit=5)
+                want = _nrm(q)
+                for h in hits or []:
+                    if want in _nrm(h.get("display_name", "")):
+                        best = h
+                        break
+                if best:
+                    break
+                time.sleep(1.2)
+            if not best:
+                print(f"   ⚠️ {a['area']}: no OpenStreetMap result names it — left unplaced.")
+                continue
+            lat, lng = float(best["lat"]), float(best["lon"])
+            key = (round(lat, 4), round(lng, 4))
+            if key in claimed:
+                # Two districts cannot share a point. Whoever matched first
+                # keeps it; the second is left unplaced rather than mapped
+                # to somewhere it is not.
+                print(f"   ⚠️ {a['area']}: OpenStreetMap returned {claimed[key]}'s "
+                      f"coordinates — left unplaced.")
+                continue
+            claimed[key] = a["area"]
+            pts[a["area"]] = (lat, lng)
+            a["coordinates"] = {"lat": lat, "lng": lng}
         except Exception:
             pass
     if len(pts) < 2:
