@@ -126,6 +126,13 @@ AREA_TYPES = {"Neighborhood", "District", "Borough", "Suburb", "City",
               "Municipality", "Post town", "Ward", "City Region"}
 # Fewer linked areas than this means the country uses the province shape.
 DIRECT_AREAS_FLOOR = 15
+# An area 10km across the city is not a neighbour. Dubai's measured areas sat
+# 9.8-15.5km apart, and calling those "nearby" on a page is padding, not local SEO.
+NEARBY_MAX_KM = float(os.environ.get("NEARBY_MAX_KM", "8") or 8)
+# Areas per enrichment call. One call for all twelve produced 7kB of JSON and
+# died on a single malformed delimiter, losing every area's questions. Smaller
+# replies parse reliably, and a failure now costs one batch instead of the run.
+ENRICH_BATCH = int(os.environ.get("ENRICH_BATCH", "4") or 4)
 # OpenStreetMap asks for at most 1 request/second, so this is how many province
 # candidates can be boundary-checked inside a CI run (~3 min). Above it, Claude
 # proposes a shortlist first and the boundary check still has the final word.
@@ -558,8 +565,15 @@ def _add_proximity(results):
         if not me:
             continue
         near = sorted(((round(km(me, p), 1), n) for n, p in pts.items() if n != a["area"]))
-        a["nearby_areas"] = [{"area": n, "km": d} for d, n in near[:4]]
-    print(f"   📍 Proximity mapped for {len(pts)}/{len(results)} areas")
+        # Nearest is not the same as near. The first Dubai run offered Al Qusais
+        # its four closest measured areas at 9.8, 10.1, 13.7 and 15.5 km — right
+        # across the city. A page calling those "neighbouring" is not doing local
+        # SEO, it is padding. Beyond the radius there simply is no neighbour.
+        a["nearby_areas"] = [{"area": n, "km": d} for d, n in near[:4]
+                             if d <= NEARBY_MAX_KM]
+    _with = sum(1 for a in results if a.get("nearby_areas"))
+    print(f"   📍 Proximity mapped for {len(pts)}/{len(results)} areas; "
+          f"{_with} have a neighbour within {NEARBY_MAX_KM}km")
 
 
 def _enrich_areas(results):
@@ -582,21 +596,30 @@ def _enrich_areas(results):
         print("   ⚠️ ANTHROPIC_API_KEY not set — no questions or entities added. The "
               "builder will fall back to writing its own.")
         return
-    try:
-        import anthropic
+    import anthropic
+    added = 0
+    # Batched on purpose. One call covering all twelve areas produced 7kB of JSON
+    # and died on a single bad delimiter — "Expecting ',' delimiter: line 57" —
+    # so every area lost its questions at once. A short reply parses reliably,
+    # and a bad batch now costs four areas instead of the whole run.
+    for start in range(0, len(results), ENRICH_BATCH):
+        chunk = results[start:start + ENRICH_BATCH]
         brief = []
-        for a in results:
+        for a in chunk:
             kws = [k["keyword"] for k in a.get("keywords", [])][:4]
             rel = [k["keyword"] for k in a.get("related_keywords", [])][:12]
+            near = ", ".join(f'{n["area"]} ({n["km"]}km)'
+                             for n in (a.get("nearby_areas") or [])[:3])
             brief.append(f'- {a["area"]} ({a["total_volume"]}/mo)\n'
                          f'    ranks for: {", ".join(kws)}\n'
-                         f'    demand nearby: {", ".join(rel) or "none recorded"}')
+                         f'    related demand: {", ".join(rel) or "none recorded"}\n'
+                         f'    neighbouring areas: {near or "none within reach"}')
         prompt = (
             f"A local business sells {PRIMARY_SERVICE} in {TARGET_LOCATION}.\n"
             f"{NICHE_DESCRIPTION}\n\n"
-            "Below is every area that has its own measured search demand, with the "
-            "keywords it ranks for and the related demand Google returned for the "
-            "same seed.\n\n" + "\n".join(brief) + "\n\n"
+            "Below are areas with their own measured search demand, the keywords "
+            "they rank for, the related demand Google returned for the same seed, "
+            "and their real neighbouring areas.\n\n" + "\n".join(brief) + "\n\n"
             "For EACH area return:\n"
             '  "questions": 4-6 real questions a resident of THAT area would ask '
             'before booking, each with an "answer_angle" naming exactly what the '
@@ -605,22 +628,29 @@ def _enrich_areas(results):
             "generic questions that would suit any area.\n"
             '  "entities": 8-14 concrete things the page must mention for topical '
             "authority — brands, parts, fault codes, standards, appliance types. "
-            "Take them from the demand shown above; do not invent products.\n\n"
-            'Reply with ONLY a JSON object keyed by the exact area names:\n'
-            '{"Al Qusais": {"questions": [{"q": "...", "answer_angle": "..."}], '
-            '"entities": ["..."]}}'
+            "Take them from the related demand above; do not invent products.\n"
+            '  "headings": 5-7 H2s, each BUILT FROM one of the related keywords so '
+            "the section it opens answers a search someone actually makes. Readable, "
+            "not keyword-stuffed. If the area has neighbours, let one heading cover "
+            "them.\n\n"
+            "Reply with ONLY minified JSON — no line breaks inside strings, no "
+            "commentary, no code fence. Keys are the exact area names:\n"
+            '{"Al Qusais":{"questions":[{"q":"...","answer_angle":"..."}],'
+            '"entities":["..."],"headings":["..."]}}'
         )
-        msg = anthropic.Anthropic().messages.create(
-            model="claude-sonnet-5", max_tokens=8000,
-            messages=[{"role": "user", "content": prompt}],
-        )
-        m = re.search(r"\{.*\}", _reply_text(msg), re.S)
-        if not m:
-            print("   ⚠️ No questions/entities came back — the builder will write its own.")
-            return
-        data = json.loads(m.group(0))
-        added = 0
-        for a in results:
+        try:
+            msg = anthropic.Anthropic().messages.create(
+                model="claude-sonnet-5", max_tokens=8000,
+                messages=[{"role": "user", "content": prompt}],
+            )
+            m = re.search(r"\{.*\}", _reply_text(msg), re.S)
+            data = json.loads(m.group(0)) if m else {}
+        except Exception as e:
+            names = ", ".join(a["area"] for a in chunk)
+            print(f"   ⚠️ Batch failed ({str(e)[:70]}) — {names} keep the builder's "
+                  f"own questions.")
+            continue
+        for a in chunk:
             got = data.get(a["area"]) or {}
             qs = [q for q in (got.get("questions") or []) if q.get("q")]
             ents = [str(e).strip() for e in (got.get("entities") or []) if str(e).strip()]
@@ -630,10 +660,10 @@ def _enrich_areas(results):
                 a["entities"] = ents[:14]
                 a["headings"] = heads[:7]
                 added += 1
-        print(f"   ✨ Questions and entities added for {added}/{len(results)} areas")
-    except Exception as e:
-        print(f"   ⚠️ Could not add questions/entities ({str(e)[:80]}) — the builder "
-              f"will write its own.")
+    if added:
+        print(f"   ✨ Questions, entities and headings added for {added}/{len(results)} areas")
+    else:
+        print("   ⚠️ No area got questions or entities — the builder will write its own.")
 
 
 def classify_trend(vols):
@@ -822,8 +852,6 @@ def main():
         for idea in resp:
             m = idea.keyword_idea_metrics
             vol = m.avg_monthly_searches or 0
-            if vol <= 0:
-                continue
             monthly = sorted(list(m.monthly_search_volumes), key=lambda x: (x.year, x.month))
             row = {
                 "keyword": idea.text,
@@ -840,13 +868,20 @@ def main():
             # non-place called "Front" 490/mo.
             k_norm = re.sub(r"[^a-z0-9 ]", "", idea.text.lower())
             if names_area(k_norm, a_norm, area_names_norm):
-                rows.append(row)
+                # Zero-volume terms cannot argue that an area deserves a page.
+                if vol > 0:
+                    rows.append(row)
             else:
                 # Still the right terms for the PAGE, though: "front load washer
-                # repair", "samsung washing machine repair near me". Most areas
-                # name-match only one keyword, so without these the builder had a
-                # single phrase to write a whole page around. Kept apart, and
-                # never added to the area's volume.
+                # repair", "samsung washing machine repair near me". Kept apart,
+                # and never added to the area's volume.
+                #
+                # Volume is NOT required here, and that was the bug: the run
+                # skipped every zero-volume idea before this split, so all twelve
+                # areas came back "+0 supporting". Zero volume IN DUBAI does not
+                # make a phrase fake — "samsung washer door gasket" still names
+                # the parts and brands the page has to talk about. Demand decides
+                # pages; vocabulary does not need demand.
                 related.append(row)
         rows.sort(key=lambda r: -r["volume"])
         related.sort(key=lambda r: -r["volume"])
