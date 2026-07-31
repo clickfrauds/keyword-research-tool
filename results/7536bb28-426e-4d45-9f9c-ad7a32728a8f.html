@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>خدمات صيانة الأجهزة دبي</title>
+<style>
+  :root {
+    --ink: #14181c;
+    --muted: #6b6560;
+    --line: #dcdad3;
+    --paper: #fdfcfa;
+    --bg: #f6f5f2;
+    --accent: #0b5d5a;
+    --accent-soft: #e3f0ef;
+    --mono: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Menlo, Consolas, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    line-height: 1.55;
+  }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 36px 20px 70px; }
+  header {
+    position: relative;
+    border-bottom: 2px dashed var(--line);
+    padding-bottom: 22px;
+    margin-bottom: 30px;
+  }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  header h1 { font-size: 26px; margin: 0 0 6px; }
+  header .subtitle { color: var(--muted); font-size: 14px; }
+  header .generated { font-family: var(--mono); color: var(--muted); font-size: 11px; margin-top: 12px; }
+  .stamp {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    line-height: 1.3;
+    text-align: center;
+    color: var(--accent);
+    border: 2px solid var(--accent);
+    border-radius: 6px;
+    padding: 6px 10px;
+    transform: rotate(4deg);
+  }
+  .stat-bar { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 36px; }
+  .stat {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 12px 16px;
+    flex: 1;
+    min-width: 110px;
+    text-align: center;
+  }
+  .stat-num { font-family: var(--mono); font-size: 20px; font-weight: 700; color: var(--accent); }
+  .stat-label { font-size: 11px; color: var(--muted); margin-top: 3px; }
+  section { margin-bottom: 40px; }
+  section > h2 {
+    font-family: var(--mono);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 9px;
+    margin-bottom: 16px;
+  }
+  .card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    padding: 16px 18px;
+    margin-bottom: 12px;
+  }
+  .card-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; flex-wrap: wrap; }
+  .card h3 { margin: 0; font-size: 15px; }
+  .badges { display: flex; gap: 6px; flex-wrap: wrap; }
+  .badge { font-family: var(--mono); font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 4px; white-space: nowrap; }
+  .intent-badge { background: var(--accent-soft); color: var(--accent); }
+  .meta-line { font-size: 13px; color: var(--muted); margin-top: 7px; }
+  .reasoning { font-size: 14px; margin-top: 9px; margin-bottom: 0; }
+  .ad-preview { margin-top: 11px; background: var(--bg); border: 1px dashed var(--line); border-radius: 6px; padding: 10px 13px; }
+  .ad-headline { color: #1a0dab; font-size: 14px; font-weight: 600; }
+  .ad-description { color: #4d5156; font-size: 13px; margin-top: 3px; }
+  .faq { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 11px 15px; margin-bottom: 7px; }
+  .faq summary { cursor: pointer; font-weight: 600; font-size: 14px; }
+  .faq summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .faq p { font-size: 14px; color: var(--muted); margin: 9px 0 2px; }
+  .chip-wrap { display: flex; flex-wrap: wrap; gap: 7px; }
+  .chip { background: var(--accent-soft); color: var(--accent); font-size: 12px; padding: 5px 11px; border-radius: 999px; }
+  .empty { color: var(--muted); font-style: italic; font-size: 14px; }
+  .campaign-block { margin-bottom: 26px; }
+  .campaign-head { font-family: var(--mono); font-size: 13px; font-weight: 700; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+  .kw-vol { color: var(--muted); font-size: 11px; }
+  .neg-line { color: #9c2b1f; }
+  footer { text-align: center; font-family: var(--mono); color: var(--muted); font-size: 11px; margin-top: 56px; }
+  @media (max-width: 480px) {
+    .stamp { position: static; display: inline-block; margin-top: 12px; transform: rotate(-1deg); }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="eyebrow">Keyword Strategy Report</div>
+    <h1>خدمات صيانة الأجهزة دبي</h1>
+    <div class="subtitle">تصليح وصيانة الأجهزة المنزلية مثل الغسالات والثلاجات والنشافات وغسالات الصحون &middot; Dubai, United Arab Emirates</div>
+    <div class="generated">Generated 31 Jul 2026, 14:06 UTC</div>
+    <div class="stamp">2 HIGH<br>PRIORITY</div>
+  </header>
+
+  <div class="stat-bar"><div class="stat"><div class="stat-num">93</div><div class="stat-label">Keywords Analyzed</div></div><div class="stat"><div class="stat-num">1</div><div class="stat-label">Campaigns</div></div><div class="stat"><div class="stat-num">4</div><div class="stat-label">Ad Groups</div></div><div class="stat"><div class="stat-num">58</div><div class="stat-label">Keywords</div></div><div class="stat"><div class="stat-num">27</div><div class="stat-label">Intent Expansions</div></div><div class="stat"><div class="stat-num">4</div><div class="stat-label">Landing Pages</div></div></div>
+
+  
+  <section>
+    <h2>Campaign &amp; Ad Group Structure</h2>
+    
+    <div class="campaign-block">
+      <div class="campaign-head">📣 Campaign: صيانة الغسالات والثلاجات - الخدمات الأساسية <span class="badge" style="color:#92400e;background:#fef0dc">HIGH</span></div>
+      
+        <div class="card">
+          <div class="card-head">
+            <h3>تصليح غسالات الملابس</h3>
+            <div class="badges"><span class="badge" style="color:#92400e;background:#fef0dc">HIGH</span><span class="badge intent-badge">PHRASE</span></div>
+          </div>
+          <p class="reasoning">مستخدم يبحث عن فني لإصلاح غسالة ملابس معطلة (أوتوماتيك أو عادية) من أي ماركة في دبي.</p>
+          <div class="meta-line">Volume: <strong>720/mo</strong> &middot; Avg score: <strong>59.8</strong> &middot; 31 keywords</div>
+          <div class="meta-line">Keywords: تصليح غسالة <span class='kw-vol'>(210)</span>, تصليح الغسالة <span class='kw-vol'>(210)</span>, تصليح غسالة اتوماتيك <span class='kw-vol'>(20)</span>, تصليح غسالات ال جي <span class='kw-vol'>(10)</span>, تصليح غسالة ال جي اتوماتيك <span class='kw-vol'>(10)</span>, تصليح غسالة كوندور <span class='kw-vol'>(10)</span>, تصليح غسالات سامسونج <span class='kw-vol'>(10)</span>, اصلاح كارتة الغسالة الفول اتوماتيك <span class='kw-vol'>(10)</span>, مصلح غسالة <span class='kw-vol'>(10)</span>, صيانة الغسالة الاتوماتيك <span class='kw-vol'>(10)</span>, تصليح غسالة اتوماتيك lg <span class='kw-vol'>(10)</span>, تصليح غسالات اتوماتيك سامسونج <span class='kw-vol'>(10)</span>, اصلاح غسالة الملابس <span class='kw-vol'>(10)</span>, تصليح غسالة بوش <span class='kw-vol'>(10)</span>, اصلاح غسالات <span class='kw-vol'>(10)</span>, اصلاح الغسالة <span class='kw-vol'>(10)</span>, تصليح غسالات اتوماتيك زانوسى <span class='kw-vol'>(10)</span>, تصليح غسالات دايو <span class='kw-vol'>(10)</span>, اصلاح غسالة lg <span class='kw-vol'>(10)</span>, تصليح غسالة ويرلبول <span class='kw-vol'>(10)</span>, تصليح غسالات حوضين <span class='kw-vol'>(10)</span>, اصلاح تايمر الغسالة العادية <span class='kw-vol'>(10)</span>, اصلاح تايمر الغسالة العادية فريش <span class='kw-vol'>(10)</span>, تصليح الغسالة الفوق اتوماتيك <span class='kw-vol'>(10)</span>, تصليح باب الغساله <span class='kw-vol'>(10)</span>, تصليح غسالات اتوماتيك بيكو <span class='kw-vol'>(10)</span>, تصليح غسالة سامسونج 7 كيلو <span class='kw-vol'>(10)</span>, تصليح كارتة الغسالة الاتوماتيك <span class='kw-vol'>(10)</span>, تصليح لوك الغسالة الاتوماتيك <span class='kw-vol'>(10)</span>, تصليح مفتاح الغسالة الاتوماتيك <span class='kw-vol'>(10)</span>, صيانة الغسالات الفوق اتوماتيك <span class='kw-vol'>(10)</span></div>
+          <div class='meta-line'>🆕 Intent expansions:</div><div class='chip-wrap'><span class="chip">سعر تصليح غسالة في دبي</span><span class="chip">فني تصليح غسالة اتوماتيك دبي</span><span class="chip">صيانة غسالات منزلية دبي</span><span class="chip">رقم فني غسالات دبي</span><span class="chip">تصليح غسالة اليوم دبي</span><span class="chip">أفضل شركة صيانة غسالات دبي</span><span class="chip">تكلفة تصليح غسالة دبي</span><span class="chip">صيانة غسالات بالمنزل دبي</span></div>
+          <div class='meta-line neg-line'>🚫 Negatives (anti-cannibalization): ثلاجة, فريزر, كمبروسر, نشافة, غسالة صحون, جلاية, صحون, إصلاح, اريستون, الثلاجات, الثلاجة, الثلاجه, الصحون, براد, تبرد, تجفف, توشيبا, ثقب, ثلاجات, جلايات, جلايه, مروحة, ملابس, نشافات, نفس</div>
+        </div>
+        <div class="card">
+          <div class="card-head">
+            <h3>تصليح الثلاجات</h3>
+            <div class="badges"><span class="badge" style="color:#92400e;background:#fef0dc">HIGH</span><span class="badge intent-badge">PHRASE</span></div>
+          </div>
+          <p class="reasoning">مستخدم يبحث عن فني لإصلاح ثلاجة معطلة أو أحد أجزائها مثل الفريزر أو الكمبروسر في دبي.</p>
+          <div class="meta-line">Volume: <strong>400/mo</strong> &middot; Avg score: <strong>60.5</strong> &middot; 15 keywords</div>
+          <div class="meta-line">Keywords: تصليح براد <span class='kw-vol'>(10)</span>, تصليح ثلاجة <span class='kw-vol'>(260)</span>, اصلاح الثلاجة <span class='kw-vol'>(10)</span>, إصلاح الثلاجات <span class='kw-vol'>(10)</span>, اصلاح ثلاجة <span class='kw-vol'>(10)</span>, تصليح الثلاجه <span class='kw-vol'>(10)</span>, صيانة الثلاجات توشيبا <span class='kw-vol'>(10)</span>, اصلاح ثلاجة توشيبا <span class='kw-vol'>(10)</span>, تصليح فريزر الثلاجة <span class='kw-vol'>(10)</span>, إصلاح ثقب في فريزر الثلاجة <span class='kw-vol'>(10)</span>, تصليح باب ثلاجة <span class='kw-vol'>(10)</span>, تصليح تايمر ثلاجة توشيبا <span class='kw-vol'>(10)</span>, تصليح ثلاجة بيكو <span class='kw-vol'>(10)</span>, تصليح كمبروسر الثلاجه <span class='kw-vol'>(10)</span>, تصليح كمبروسر ثلاجة <span class='kw-vol'>(10)</span></div>
+          <div class='meta-line'>🆕 Intent expansions:</div><div class='chip-wrap'><span class="chip">سعر تصليح ثلاجة دبي</span><span class="chip">فني ثلاجات دبي</span><span class="chip">صيانة ثلاجات منزلية دبي</span><span class="chip">تصليح ثلاجة لا تبرد دبي</span><span class="chip">رقم فني ثلاجات دبي</span><span class="chip">تصليح ثلاجة سامسونج دبي</span><span class="chip">تصليح ثلاجة اليوم دبي</span></div>
+          <div class='meta-line neg-line'>🚫 Negatives (anti-cannibalization): غسالة, نشافة, صحون, جلاية, أوتوماتيك, اتوماتيك, اريستون, الاتوماتيك, الصحون, الغسالات, الغساله, الفوق, الفول, الملابس, بالمنزل, تجفف, تكلفة, جلايات, جلايه, حوضين, دايو, زانوسى, شركة, غسالات, فريش, كارتة, كوندور, كيلو, لوك, مروحة, مصلح, مفتاح, ملابس, نشافات, نفس, ويرلبول</div>
+        </div>
+        <div class="card">
+          <div class="card-head">
+            <h3>تصليح غسالات الصحون</h3>
+            <div class="badges"><span class="badge" style="color:#6b5a3a;background:#f2ede0">MEDIUM</span><span class="badge intent-badge">PHRASE</span></div>
+          </div>
+          <p class="reasoning">مستخدم يبحث عن فني لإصلاح غسالة أو جلاية صحون معطلة في دبي.</p>
+          <div class="meta-line">Volume: <strong>70/mo</strong> &middot; Avg score: <strong>57.3</strong> &middot; 7 keywords</div>
+          <div class="meta-line">Keywords: تصليح جلايات الصحون <span class='kw-vol'>(10)</span>, تصليح غسالة صحون <span class='kw-vol'>(10)</span>, فني تصليح غسالة صحون <span class='kw-vol'>(10)</span>, تصليح غسالة صحون اريستون <span class='kw-vol'>(10)</span>, تصليح جلايه <span class='kw-vol'>(10)</span>, تصليح غسالة الصحون ال جي <span class='kw-vol'>(10)</span>, اصلاح غسالة صحون <span class='kw-vol'>(10)</span></div>
+          <div class='meta-line'>🆕 Intent expansions:</div><div class='chip-wrap'><span class="chip">سعر تصليح غسالة صحون دبي</span><span class="chip">فني غسالة صحون دبي</span><span class="chip">صيانة غسالة صحون منزلية دبي</span><span class="chip">تصليح غسالة صحون بوش دبي</span><span class="chip">رقم فني جلايات صحون دبي</span><span class="chip">تصليح غسالة صحون في نفس اليوم</span></div>
+          <div class='meta-line neg-line'>🚫 Negatives (anti-cannibalization): غسالة ملابس, ثلاجة, نشافة, فريزر, كمبروسر, إصلاح, اتوماتيك, الاتوماتيك, الثلاجات, الثلاجة, الثلاجه, الغسالات, الغساله, الفوق, الفول, الملابس, بالمنزل, براد, تبرد, تجفف, تكلفة, توشيبا, ثقب, ثلاجات, حوضين, دايو, زانوسى, شركة, غسالات, فريش, كارتة, كوندور, كيلو, لوك, مروحة, مصلح, مفتاح, ملابس, نشافات, ويرلبول</div>
+        </div>
+        <div class="card">
+          <div class="card-head">
+            <h3>تصليح نشافات الملابس</h3>
+            <div class="badges"><span class="badge" style="color:#6b5a3a;background:#f2ede0">MEDIUM</span><span class="badge intent-badge">PHRASE</span></div>
+          </div>
+          <p class="reasoning">مستخدم يبحث عن فني لإصلاح نشافة ملابس لا تجفف أو معطلة في دبي.</p>
+          <div class="meta-line">Volume: <strong>50/mo</strong> &middot; Avg score: <strong>56.7</strong> &middot; 5 keywords</div>
+          <div class="meta-line">Keywords: تصليح نشافة الغسالة العادية <span class='kw-vol'>(10)</span>, تصليح نشافة ملابس <span class='kw-vol'>(10)</span>, اصلاح نشافة الغسالة العادية <span class='kw-vol'>(10)</span>, تصليح مروحة الغسالة العادية <span class='kw-vol'>(10)</span>, تصليح نشافة <span class='kw-vol'>(10)</span></div>
+          <div class='meta-line'>🆕 Intent expansions:</div><div class='chip-wrap'><span class="chip">سعر تصليح نشافة ملابس دبي</span><span class="chip">فني نشافات دبي</span><span class="chip">صيانة نشافة ملابس منزلية دبي</span><span class="chip">تصليح نشافة لا تجفف دبي</span><span class="chip">أفضل فني نشافات دبي</span><span class="chip">تصليح نشافة اليوم دبي</span></div>
+          <div class='meta-line neg-line'>🚫 Negatives (anti-cannibalization): غسالة, ثلاجة, صحون, جلاية, فريزر, إصلاح, اتوماتيك, اريستون, الاتوماتيك, الثلاجات, الثلاجة, الثلاجه, الصحون, الغسالات, الغساله, الفوق, الفول, الملابس, بالمنزل, براد, تبرد, تكلفة, توشيبا, ثقب, ثلاجات, جلايات, جلايه, حوضين, دايو, زانوسى, شركة, غسالات, فريش, كارتة, كمبروسر, كوندور, كيلو, لوك, مصلح, مفتاح, نفس, ويرلبول</div>
+        </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Landing Pages (website generator inputs)</h2>
+    
+        <div class="card">
+          <div class="card-head">
+            <h3>صفحة تصليح الغسالات</h3>
+            <span class="badge intent-badge">/washing-machine-repair/</span>
+          </div>
+          <div class="meta-line">Main service: <strong>تصليح غسالات منزلية</strong> &middot; Industry: صيانة أجهزة منزلية</div>
+          <div class="meta-line">Sub-services (page sections): تصليح غسالة أوتوماتيك, تصليح غسالة نصف أوتوماتيك, تصليح كارت الغسالة, تصليح موتور الغسالة, صيانة غسالات دورية, تصليح غسالات جميع الماركات</div>
+          <div class="meta-line">Covers ad groups: تصليح غسالات الملابس</div>
+        </div>
+        <div class="card">
+          <div class="card-head">
+            <h3>صفحة تصليح الثلاجات</h3>
+            <span class="badge intent-badge">/refrigerator-repair/</span>
+          </div>
+          <div class="meta-line">Main service: <strong>تصليح ثلاجات منزلية</strong> &middot; Industry: صيانة أجهزة منزلية</div>
+          <div class="meta-line">Sub-services (page sections): تصليح ثلاجة لا تبرد, تصليح كمبروسر الثلاجة, تصليح فريزر الثلاجة, تصليح باب الثلاجة, صيانة ثلاجات دورية, تصليح ثلاجات جميع الماركات</div>
+          <div class="meta-line">Covers ad groups: تصليح الثلاجات</div>
+        </div>
+        <div class="card">
+          <div class="card-head">
+            <h3>صفحة تصليح غسالات الصحون</h3>
+            <span class="badge intent-badge">/dishwasher-repair/</span>
+          </div>
+          <div class="meta-line">Main service: <strong>تصليح غسالات الصحون</strong> &middot; Industry: صيانة أجهزة منزلية</div>
+          <div class="meta-line">Sub-services (page sections): تصليح جلاية صحون, تصليح غسالة صحون لا تعمل, تصليح غسالة صحون بوش, تصليح غسالة صحون ال جي, صيانة غسالات صحون دورية, تصليح غسالات صحون جميع الماركات</div>
+          <div class="meta-line">Covers ad groups: تصليح غسالات الصحون</div>
+        </div>
+        <div class="card">
+          <div class="card-head">
+            <h3>صفحة تصليح النشافات</h3>
+            <span class="badge intent-badge">/dryer-repair/</span>
+          </div>
+          <div class="meta-line">Main service: <strong>تصليح نشافات الملابس</strong> &middot; Industry: صيانة أجهزة منزلية</div>
+          <div class="meta-line">Sub-services (page sections): تصليح نشافة لا تجفف, تصليح مروحة النشافة, تصليح تايمر النشافة, صيانة نشافات دورية, تصليح نشافات جميع الماركات, تصليح حساس حرارة النشافة</div>
+          <div class="meta-line">Covers ad groups: تصليح نشافات الملابس</div>
+        </div>
+  </section>
+
+  <section>
+    <h2>Voice-search / question keywords (SEO content, not ads)</h2>
+    <div class="chip-wrap"><span class="chip">كيفية تصليح براد الماء</span></div>
+  </section>
+
+  <section>
+    <h2>Strategy Notes</h2>
+    <p class="reasoning">تم تركيز الميزانية على الغسالات والثلاجات لأنهما الأعلى حجم بحث وفرصة، مع تخصيص حملة منفصلة منخفضة الأولوية لغسالات الصحون والنشافات كخدمات مكملة. الفصل الصارم بين المجموعات والكلمات السلبية يمنع تضارب الإعلانات ويحسّن جودة الإعلان لكل صفحة هبوط.</p>
+  </section>
+
+  <footer>SEOblogy &middot; Keyword Strategy Report</footer>
+
+</div>
+</body>
+</html>
