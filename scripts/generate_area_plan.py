@@ -528,6 +528,48 @@ def resolve_areas():
         return []
 
 
+def _service_vocabulary(ideas_for, area_names_norm):
+    """The service's own long-tail for this city — brands, parts, faults.
+
+    Two runs of related_keywords came back empty for every area and the
+    zero-volume theory was wrong. The real reason is the seed: ask Google for
+    "washing machine repair al qusais" and it returns that phrase and almost
+    nothing else, because the seed is already as specific as a query gets. There
+    is no supporting demand hiding in that response — the response IS the two
+    keywords.
+
+    The vocabulary lives one level up, in the service itself. keyword_research.py
+    has always known this: a broad seed returns hundreds of ideas where a narrow
+    one returns a handful. So it is pulled ONCE for the whole run, scoped to the
+    city, and shared by every area page — the parts and brands do not change from
+    one district to the next.
+    """
+    try:
+        resp = ideas_for(PRIMARY_SERVICE)
+    except Exception as e:
+        print(f"   ⚠️ Could not pull the service vocabulary ({str(e)[:60]}) — pages "
+              f"will rely on their own keywords only.")
+        return []
+    rows = []
+    for idea in resp:
+        m = idea.keyword_idea_metrics
+        k_norm = re.sub(r"[^a-z0-9 ]", "", idea.text.lower())
+        # Anything naming a specific area belongs to that area's page, not to the
+        # shared pool — otherwise every page would talk about Al Qusais.
+        if any(names_area(k_norm, n, area_names_norm) for n in area_names_norm):
+            continue
+        monthly = sorted(list(m.monthly_search_volumes), key=lambda x: (x.year, x.month))
+        rows.append({
+            "keyword": idea.text,
+            "volume": m.avg_monthly_searches or 0,
+            "kd": m.competition_index or 0,
+            "trend": classify_trend([x.monthly_searches for x in monthly]),
+        })
+    rows.sort(key=lambda r: -r["volume"])
+    print(f"   📚 Service vocabulary: {len(rows)} supporting keywords for every page")
+    return rows[:60]
+
+
 def _add_proximity(results):
     """Which measured areas neighbour each other, with real distances.
 
@@ -576,7 +618,7 @@ def _add_proximity(results):
           f"{_with} have a neighbour within {NEARBY_MAX_KM}km")
 
 
-def _enrich_areas(results):
+def _enrich_areas(results, vocab=None):
     """Questions and entities per area, in ONE Claude call for the whole run.
 
     The plan measures demand well but says nothing about what a page should
@@ -607,7 +649,8 @@ def _enrich_areas(results):
         brief = []
         for a in chunk:
             kws = [k["keyword"] for k in a.get("keywords", [])][:4]
-            rel = [k["keyword"] for k in a.get("related_keywords", [])][:12]
+            rel = [k["keyword"] for k in a.get("related_keywords", [])][:6]
+            rel += [k["keyword"] for k in (vocab or [])][:14]
             near = ", ".join(f'{n["area"]} ({n["km"]}km)'
                              for n in (a.get("nearby_areas") or [])[:3])
             brief.append(f'- {a["area"]} ({a["total_volume"]}/mo)\n'
@@ -927,8 +970,9 @@ def main():
     results.sort(key=lambda a: -a["total_volume"])
     print(f"\n📊 {len(results)} areas worth a page, {len(skipped)} below {MIN_AREA_VOLUME}/mo")
 
+    vocab = _service_vocabulary(ideas_for, area_names_norm)
     _add_proximity(results)
-    _enrich_areas(results)
+    _enrich_areas(results, vocab)
 
     out = {
         "business": {"name": BUSINESS_NAME, "niche": NICHE_DESCRIPTION,
@@ -949,6 +993,10 @@ def main():
             "cities_in_data": [],
             "recommended_city_targets": [TARGET_LOCATION] if results else [],
             "geo_area_candidates": areas,
+            # The service's own long-tail for this city, pulled once and shared by
+            # every area page: an area seed returns only its own phrase, so this
+            # is where the brands, parts and faults actually live.
+            "service_keywords": vocab,
             "partial": quota_hit,
         "notes": (f"{len(results)} of {len(areas)} areas in {TARGET_LOCATION} have their own "
                       f"measured demand for '{PRIMARY_SERVICE}'."),
