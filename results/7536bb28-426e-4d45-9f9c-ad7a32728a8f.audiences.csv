@@ -1,0 +1,15 @@
+﻿Campaign,Ad Group,Audience,Bid Modifier,Flexible Reach,Comment
+صيانة الغسالات والثلاجات - الخدمات الأساسية,,Home Appliances,30%,,IN_MARKET | observation | Direct match to appliance repair intent
+صيانة الغسالات والثلاجات - الخدمات الأساسية,,Washers & Dryers,25%,,IN_MARKET | observation | Exact washer product match
+صيانة الغسالات والثلاجات - الخدمات الأساسية,,Refrigerators,25%,,IN_MARKET | observation | Exact refrigerator repair match
+صيانة الغسالات والثلاجات - الخدمات الأساسية,,Dishwashers,25%,,IN_MARKET | observation | Exact dishwasher repair match
+صيانة الغسالات والثلاجات - الخدمات الأساسية,,Home & Garden Services,20%,,IN_MARKET | observation | Home service seekers relevant
+صيانة الغسالات والثلاجات - الخدمات الأساسية,,Home Improvement,15%,,IN_MARKET | observation | Home upkeep intent overlap
+صيانة الغسالات والثلاجات - الخدمات الأساسية,,Kitchen Appliance Accessories,15%,,IN_MARKET | observation | Kitchen appliance owners relevant
+صيانة الغسالات والثلاجات - الخدمات الأساسية,,Refrigerator Accessories,15%,,IN_MARKET | observation | Fridge owner relevance
+صيانة الغسالات والثلاجات - الخدمات الأساسية,,Home Cleaning Services,10%,,IN_MARKET | observation | Household service seekers overlap
+صيانة الغسالات والثلاجات - الخدمات الأساسية,,Plumbing Services,10%,,IN_MARKET | observation | Similar home repair service seekers
+صيانة الغسالات والثلاجات - الخدمات الأساسية,,Home Decor Enthusiasts,10%,,AFFINITY | observation | Homeowners caring about household setup
+صيانة الغسالات والثلاجات - الخدمات الأساسية,,Do-It-Yourselfers,10%,,AFFINITY | observation | Household maintenance-focused audience
+صيانة الغسالات والثلاجات - الخدمات الأساسية,,Value Shoppers,10%,,AFFINITY | observation | Cost-conscious repair vs replace mindset
+صيانة الغسالات والثلاجات - الخدمات الأساسية,,Family-Focused,10%,,AFFINITY | observation | Households needing appliance uptime
