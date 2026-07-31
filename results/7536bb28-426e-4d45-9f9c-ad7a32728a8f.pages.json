@@ -1,0 +1,106 @@
+[
+  {
+    "page_name": "صفحة تصليح الغسالات",
+    "url_slug": "washing-machine-repair",
+    "language": "ar",
+    "service_name": "تصليح غسالات منزلية",
+    "industry": "صيانة أجهزة منزلية",
+    "sub_services": [
+      "تصليح غسالة أوتوماتيك",
+      "تصليح غسالة نصف أوتوماتيك",
+      "تصليح كارت الغسالة",
+      "تصليح موتور الغسالة",
+      "صيانة غسالات دورية",
+      "تصليح غسالات جميع الماركات"
+    ],
+    "ad_groups_covered": [
+      "تصليح غسالات الملابس"
+    ],
+    "keywords_covered": 31,
+    "monthly_volume_covered": 720,
+    "mode1_config": {
+      "main_service": "تصليح غسالات منزلية",
+      "sub_services": "تصليح غسالة أوتوماتيك, تصليح غسالة نصف أوتوماتيك, تصليح كارت الغسالة, تصليح موتور الغسالة, صيانة غسالات دورية, تصليح غسالات جميع الماركات",
+      "industry": "صيانة أجهزة منزلية"
+    },
+    "google_ads_tracking_tip": "Final URL suffix: kw={keyword} — enables the landing page's Dynamic Keyword Insertion (DKI)."
+  },
+  {
+    "page_name": "صفحة تصليح الثلاجات",
+    "url_slug": "refrigerator-repair",
+    "language": "ar",
+    "service_name": "تصليح ثلاجات منزلية",
+    "industry": "صيانة أجهزة منزلية",
+    "sub_services": [
+      "تصليح ثلاجة لا تبرد",
+      "تصليح كمبروسر الثلاجة",
+      "تصليح فريزر الثلاجة",
+      "تصليح باب الثلاجة",
+      "صيانة ثلاجات دورية",
+      "تصليح ثلاجات جميع الماركات"
+    ],
+    "ad_groups_covered": [
+      "تصليح الثلاجات"
+    ],
+    "keywords_covered": 15,
+    "monthly_volume_covered": 400,
+    "mode1_config": {
+      "main_service": "تصليح ثلاجات منزلية",
+      "sub_services": "تصليح ثلاجة لا تبرد, تصليح كمبروسر الثلاجة, تصليح فريزر الثلاجة, تصليح باب الثلاجة, صيانة ثلاجات دورية, تصليح ثلاجات جميع الماركات",
+      "industry": "صيانة أجهزة منزلية"
+    },
+    "google_ads_tracking_tip": "Final URL suffix: kw={keyword} — enables the landing page's Dynamic Keyword Insertion (DKI)."
+  },
+  {
+    "page_name": "صفحة تصليح غسالات الصحون",
+    "url_slug": "dishwasher-repair",
+    "language": "ar",
+    "service_name": "تصليح غسالات الصحون",
+    "industry": "صيانة أجهزة منزلية",
+    "sub_services": [
+      "تصليح جلاية صحون",
+      "تصليح غسالة صحون لا تعمل",
+      "تصليح غسالة صحون بوش",
+      "تصليح غسالة صحون ال جي",
+      "صيانة غسالات صحون دورية",
+      "تصليح غسالات صحون جميع الماركات"
+    ],
+    "ad_groups_covered": [
+      "تصليح غسالات الصحون"
+    ],
+    "keywords_covered": 7,
+    "monthly_volume_covered": 70,
+    "mode1_config": {
+      "main_service": "تصليح غسالات الصحون",
+      "sub_services": "تصليح جلاية صحون, تصليح غسالة صحون لا تعمل, تصليح غسالة صحون بوش, تصليح غسالة صحون ال جي, صيانة غسالات صحون دورية, تصليح غسالات صحون جميع الماركات",
+      "industry": "صيانة أجهزة منزلية"
+    },
+    "google_ads_tracking_tip": "Final URL suffix: kw={keyword} — enables the landing page's Dynamic Keyword Insertion (DKI)."
+  },
+  {
+    "page_name": "صفحة تصليح النشافات",
+    "url_slug": "dryer-repair",
+    "language": "ar",
+    "service_name": "تصليح نشافات الملابس",
+    "industry": "صيانة أجهزة منزلية",
+    "sub_services": [
+      "تصليح نشافة لا تجفف",
+      "تصليح مروحة النشافة",
+      "تصليح تايمر النشافة",
+      "صيانة نشافات دورية",
+      "تصليح نشافات جميع الماركات",
+      "تصليح حساس حرارة النشافة"
+    ],
+    "ad_groups_covered": [
+      "تصليح نشافات الملابس"
+    ],
+    "keywords_covered": 5,
+    "monthly_volume_covered": 50,
+    "mode1_config": {
+      "main_service": "تصليح نشافات الملابس",
+      "sub_services": "تصليح نشافة لا تجفف, تصليح مروحة النشافة, تصليح تايمر النشافة, صيانة نشافات دورية, تصليح نشافات جميع الماركات, تصليح حساس حرارة النشافة",
+      "industry": "صيانة أجهزة منزلية"
+    },
+    "google_ads_tracking_tip": "Final URL suffix: kw={keyword} — enables the landing page's Dynamic Keyword Insertion (DKI)."
+  }
+]
