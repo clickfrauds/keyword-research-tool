@@ -566,27 +566,27 @@ def _service_vocabulary(ideas_for, area_names_norm):
             "trend": classify_trend([x.monthly_searches for x in monthly]),
         })
     # Google reports its close variants with IDENTICAL volume and competition,
-    # because to the Planner they are one keyword. The first Dubai pull returned
-    # 60 rows that were only 26 distinct ideas: "washing machine repair", "fix
-    # washing machine", "laundry machine repair", "washer fixer" — eight ways of
-    # saying the same thing, all 6600/mo kd 32. The builder takes the top 20, so
-    # most of its slots went to synonyms instead of the brands and parts below.
+    # because to the Planner they are one keyword: "washing machine repair",
+    # "fix washing machine", "laundry machine repair" and "washer fixer" all
+    # came back at 6600/mo kd 32.
     #
-    # Keep the FIRST of each group, in the order Google returned it. The API
-    # ranks by relevance to the seed, so the first variant is the canonical
-    # phrasing — "washing machine repair", not "washer fixer". Picking the
-    # shortest instead was tried and chose exactly those odd ones.
-    seen, deduped = set(), []
+    # They are NOT dropped. Every one is a real phrasing a person types, and a
+    # page that only ever says "washing machine repair" reads like a page written
+    # for a robot. Deleting 34 of 60 rows here was tried and was the wrong place
+    # to solve it: research collects, the builder chooses. The group is marked
+    # instead, so the builder can take one per group when it wants variety and
+    # still reach for the rest when it wants natural phrasing.
+    groups = {}
     for r in rows:
-        key = (r["volume"], r["kd"])
-        if key in seen:
-            continue
-        seen.add(key)
-        deduped.append(r)
-    deduped.sort(key=lambda r: -r["volume"])
-    print(f"   📚 Service vocabulary: {len(deduped)} distinct supporting keywords "
-          f"for every page ({len(rows)} before close variants were collapsed)")
-    return deduped[:60]
+        groups.setdefault((r["volume"], r["kd"]), []).append(r)
+    for members in groups.values():
+        for rank, r in enumerate(members):
+            r["variant_of"] = members[0]["keyword"]
+            r["is_canonical"] = (rank == 0)
+    rows.sort(key=lambda r: (-r["volume"], not r["is_canonical"]))
+    print(f"   📚 Service vocabulary: {len(rows)} supporting keywords for every page "
+          f"({len(groups)} distinct, the rest are Google's own close variants)")
+    return rows[:60]
 
 
 def _add_proximity(results):
