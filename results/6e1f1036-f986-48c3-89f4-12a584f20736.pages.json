@@ -1,0 +1,106 @@
+[
+  {
+    "page_name": "طلب سباك فوري في دبي",
+    "url_slug": "emergency-plumber-dubai",
+    "language": "ar",
+    "service_name": "خدمات السباكة العامة الطارئة",
+    "industry": "سباكة وصيانة منازل",
+    "sub_services": [
+      "إصلاح تسريب المياه",
+      "تركيب أدوات صحية",
+      "صيانة حمامات",
+      "سباكة طوارئ 24 ساعة",
+      "سباكة منازل وشقق",
+      "سباكة منشآت تجارية"
+    ],
+    "ad_groups_covered": [
+      "طلب سباك عام وفوري"
+    ],
+    "keywords_covered": 18,
+    "monthly_volume_covered": 380,
+    "mode1_config": {
+      "main_service": "خدمات السباكة العامة الطارئة",
+      "sub_services": "إصلاح تسريب المياه, تركيب أدوات صحية, صيانة حمامات, سباكة طوارئ 24 ساعة, سباكة منازل وشقق, سباكة منشآت تجارية",
+      "industry": "سباكة وصيانة منازل"
+    },
+    "google_ads_tracking_tip": "Final URL suffix: kw={keyword} — enables the landing page's Dynamic Keyword Insertion (DKI)."
+  },
+  {
+    "page_name": "تسليك المجاري والبالوعات",
+    "url_slug": "drain-unclogging-service-dubai",
+    "language": "ar",
+    "service_name": "تسليك المجاري والبالوعات المسدودة",
+    "industry": "سباكة وتسليك مجاري",
+    "sub_services": [
+      "تسليك مجاري المطبخ",
+      "تسليك بالوعات الحمام",
+      "فتح المواسير المسدودة",
+      "تسليك مجاري بالضغط",
+      "تسليك أحواض وبانيو",
+      "تسليك مجاري طوارئ"
+    ],
+    "ad_groups_covered": [
+      "تسليك المجاري والبالوعات المنزلية"
+    ],
+    "keywords_covered": 40,
+    "monthly_volume_covered": 530,
+    "mode1_config": {
+      "main_service": "تسليك المجاري والبالوعات المسدودة",
+      "sub_services": "تسليك مجاري المطبخ, تسليك بالوعات الحمام, فتح المواسير المسدودة, تسليك مجاري بالضغط, تسليك أحواض وبانيو, تسليك مجاري طوارئ",
+      "industry": "سباكة وتسليك مجاري"
+    },
+    "google_ads_tracking_tip": "Final URL suffix: kw={keyword} — enables the landing page's Dynamic Keyword Insertion (DKI)."
+  },
+  {
+    "page_name": "شفط وتنظيف الصرف الصحي",
+    "url_slug": "sewage-suction-cleaning-dubai",
+    "language": "ar",
+    "service_name": "شفط وتنظيف الصرف الصحي",
+    "industry": "خدمات صرف صحي وتنكرات",
+    "sub_services": [
+      "شفط بيارات منزلية",
+      "شفط بيارات تجارية",
+      "تنظيف خزانات الصرف الصحي",
+      "سحب مياه الصرف بالتنكر",
+      "معالجة روائح الصرف الصحي",
+      "صيانة شبكات الصرف الصحي"
+    ],
+    "ad_groups_covered": [
+      "شفط وتنظيف الصرف الصحي بالتنكر"
+    ],
+    "keywords_covered": 21,
+    "monthly_volume_covered": 210,
+    "mode1_config": {
+      "main_service": "شفط وتنظيف الصرف الصحي",
+      "sub_services": "شفط بيارات منزلية, شفط بيارات تجارية, تنظيف خزانات الصرف الصحي, سحب مياه الصرف بالتنكر, معالجة روائح الصرف الصحي, صيانة شبكات الصرف الصحي",
+      "industry": "خدمات صرف صحي وتنكرات"
+    },
+    "google_ads_tracking_tip": "Final URL suffix: kw={keyword} — enables the landing page's Dynamic Keyword Insertion (DKI)."
+  },
+  {
+    "page_name": "صيانة السخانات والمضخات",
+    "url_slug": "water-heater-pump-repair-dubai",
+    "language": "ar",
+    "service_name": "صيانة وإصلاح سخانات ومضخات المياه",
+    "industry": "صيانة أجهزة منزلية",
+    "sub_services": [
+      "إصلاح سخانات المياه",
+      "صيانة مضخات المياه",
+      "تركيب سخانات جديدة",
+      "تركيب مضخات جديدة",
+      "كشف أعطال السخانات",
+      "صيانة دورية للمضخات"
+    ],
+    "ad_groups_covered": [
+      "صيانة وإصلاح السخانات والمضخات"
+    ],
+    "keywords_covered": 2,
+    "monthly_volume_covered": 20,
+    "mode1_config": {
+      "main_service": "صيانة وإصلاح سخانات ومضخات المياه",
+      "sub_services": "إصلاح سخانات المياه, صيانة مضخات المياه, تركيب سخانات جديدة, تركيب مضخات جديدة, كشف أعطال السخانات, صيانة دورية للمضخات",
+      "industry": "صيانة أجهزة منزلية"
+    },
+    "google_ads_tracking_tip": "Final URL suffix: kw={keyword} — enables the landing page's Dynamic Keyword Insertion (DKI)."
+  }
+]
