@@ -1,0 +1,1508 @@
+{
+  "business": {
+    "name": "SEOBlogy",
+    "niche": "SEO and lead generation for roofing contractors — location pages, technical SEO, Google Business Profile, and automated content built from real keyword data",
+    "location": "United States"
+  },
+  "model_used": "claude-sonnet-5",
+  "language": "",
+  "notes": "The data centers on one dominant demand pool ('seo for roofers'/'seo roofing') split into hiring-an-agency, local, pricing, and educational intents — structured as a pillar plus six mutually exclusive clusters to avoid keyword overlap. PPC and gutter installation SEO are kept as standalone thin clusters since they represent distinct buyer intents with real but smaller volume. Keyword id 11 was excluded as a pure duplicate of the pillar keyword (id 10) to prevent cannibalization.",
+  "mode4_cluster": {
+    "workflow_inputs": {
+      "main_topic": "SEO for Roofing Companies",
+      "problem_clusters": "SEO for Roofing Companies :: Hiring a Roofing SEO Company, Roofing SEO Fundamentals Explained, Roofing SEO Services and Pricing, Local SEO for Roofing Companies, Roofer PPC Advertising, Gutter Installation SEO"
+    },
+    "pillar_keyword": {
+      "keyword": "seo for roofers",
+      "volume": 2400,
+      "kd": 52,
+      "cpc_low": 2779.2,
+      "cpc_high": 13895.99,
+      "funnel": "MOFU",
+      "intent": "commercial",
+      "trend": "DECLINING",
+      "peak_months": "Sep",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    "clusters": [
+      {
+        "cluster_name": "Hiring a Roofing SEO Company",
+        "funnel": "BOFU",
+        "primary_keyword": {
+          "keyword": "roofing seo company",
+          "volume": 1000,
+          "kd": 46,
+          "cpc_low": 2026.04,
+          "cpc_high": 13668.13,
+          "funnel": "BOFU",
+          "intent": "transactional",
+          "trend": "DECLINING",
+          "peak_months": "Sep",
+          "ai_overview_prone": false,
+          "flags": []
+        },
+        "keywords": [
+          {
+            "keyword": "roofing seo agency",
+            "volume": 260,
+            "kd": 48,
+            "cpc_low": 3221.09,
+            "cpc_high": 12675.92,
+            "funnel": "MOFU",
+            "intent": "commercial",
+            "trend": "SEASONAL",
+            "peak_months": "Sep",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "best roofing seo",
+            "volume": 110,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "funnel": "MOFU",
+            "intent": "commercial",
+            "trend": "SEASONAL",
+            "peak_months": "Oct",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "best roofing seo companies",
+            "volume": 90,
+            "kd": 50,
+            "cpc_low": 4958.74,
+            "cpc_high": 18954.98,
+            "funnel": "MOFU",
+            "intent": "commercial",
+            "trend": "SEASONAL",
+            "peak_months": "Oct",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "roofers seo marketing",
+            "volume": 90,
+            "kd": 13,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "funnel": "MOFU",
+            "intent": "commercial",
+            "trend": "SEASONAL",
+            "peak_months": "Oct",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "roofing seo company",
+            "volume": 1000,
+            "kd": 46,
+            "cpc_low": 2026.04,
+            "cpc_high": 13668.13,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "DECLINING",
+            "peak_months": "Sep",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "roofing contractor seo",
+            "volume": 260,
+            "kd": 44,
+            "cpc_low": 2843.12,
+            "cpc_high": 12506.39,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "DECLINING",
+            "peak_months": "Sep",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "roofing seo expert",
+            "volume": 110,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "DECLINING",
+            "peak_months": "Sep",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "roofing seo experts",
+            "volume": 110,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "funnel": "MOFU",
+            "intent": "commercial",
+            "trend": "DECLINING",
+            "peak_months": "Sep",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "roofing seo pros",
+            "volume": 90,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "funnel": "MOFU",
+            "intent": "commercial",
+            "trend": "DECLINING",
+            "peak_months": "Sep",
+            "ai_overview_prone": false,
+            "flags": []
+          }
+        ],
+        "total_volume": 2120,
+        "language": "en",
+        "language_mixed": false,
+        "ai_overview_prone": true,
+        "questions": [
+          {
+            "q": "What is the best SEO company for roofers?",
+            "answer_angle": "Give a criteria-based checklist (roofing niche experience, case studies, transparent reporting) instead of naming one winner, positioned to win comparison-style AI overviews.",
+            "type": "conversational"
+          },
+          {
+            "q": "How do I choose a roofing SEO agency?",
+            "answer_angle": "List 5 vetting questions to ask an agency before signing, formatted as a numbered list for snippet capture.",
+            "type": "paa"
+          },
+          {
+            "q": "Are roofing SEO experts worth the cost?",
+            "answer_angle": "Lead with average ROI stat/timeframe (e.g., ranking gains in 4-6 months) to directly answer value question.",
+            "type": "voice"
+          },
+          {
+            "q": "What does a roofing SEO company actually do?",
+            "answer_angle": "Break down services (keyword research, on-page, content, link building, local SEO) in a scannable list.",
+            "type": "conversational"
+          },
+          {
+            "q": "Which roofing contractor SEO company has the best results?",
+            "answer_angle": "Point to verifiable proof points (client rankings, review counts, years in roofing niche) rather than unverifiable claims.",
+            "type": "local"
+          },
+          {
+            "q": "How long does it take to see results from roofing SEO?",
+            "answer_angle": "State a specific timeframe range (3-6 months for local, 6-12 for competitive national terms) up front.",
+            "type": "conversational"
+          }
+        ],
+        "entities_to_mention": [
+          "roofing SEO agency",
+          "keyword research",
+          "link building",
+          "on-page SEO",
+          "case studies",
+          "ROI",
+          "SEO contract"
+        ]
+      },
+      {
+        "cluster_name": "Roofing SEO Fundamentals Explained",
+        "funnel": "TOFU",
+        "primary_keyword": {
+          "keyword": "search engine optimization for roofing companies",
+          "volume": 1000,
+          "kd": 46,
+          "cpc_low": 2026.04,
+          "cpc_high": 13668.13,
+          "funnel": "MOFU",
+          "intent": "commercial",
+          "trend": "DECLINING",
+          "peak_months": "Sep",
+          "ai_overview_prone": false,
+          "flags": []
+        },
+        "keywords": [
+          {
+            "keyword": "search engine optimization for roofing companies",
+            "volume": 1000,
+            "kd": 46,
+            "cpc_low": 2026.04,
+            "cpc_high": 13668.13,
+            "funnel": "MOFU",
+            "intent": "commercial",
+            "trend": "DECLINING",
+            "peak_months": "Sep",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "seo for roofing contractors",
+            "volume": 260,
+            "kd": 44,
+            "cpc_low": 2843.12,
+            "cpc_high": 12506.39,
+            "funnel": "MOFU",
+            "intent": "commercial",
+            "trend": "DECLINING",
+            "peak_months": "Sep",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "roofing seo pros digital marketing",
+            "volume": 20,
+            "kd": 3,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "funnel": "MOFU",
+            "intent": "commercial",
+            "trend": "SEASONAL",
+            "peak_months": "Mar",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "seo for roofing businesses",
+            "volume": 40,
+            "kd": 1,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "funnel": "MOFU",
+            "intent": "commercial",
+            "trend": "DECLINING",
+            "peak_months": "Mar",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "roofing search engine optimization",
+            "volume": 40,
+            "kd": 17,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "funnel": "MOFU",
+            "intent": "commercial",
+            "trend": "DECLINING",
+            "peak_months": "Sep",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "roofing website seo",
+            "volume": 10,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "funnel": "MOFU",
+            "intent": "commercial",
+            "trend": "DECLINING",
+            "peak_months": "Aug/Feb/Mar",
+            "ai_overview_prone": false,
+            "flags": []
+          }
+        ],
+        "total_volume": 1370,
+        "language": "en",
+        "language_mixed": false,
+        "ai_overview_prone": true,
+        "questions": [
+          {
+            "q": "What is SEO and why does a roofing company need it?",
+            "answer_angle": "Define SEO in one sentence, then state 2-3 stats on how homeowners search for roofers online.",
+            "type": "conversational"
+          },
+          {
+            "q": "How does search engine optimization help roofing contractors get leads?",
+            "answer_angle": "Explain the funnel from search visibility to phone calls/quote requests with a concrete example.",
+            "type": "voice"
+          },
+          {
+            "q": "What makes a roofing website SEO friendly?",
+            "answer_angle": "List technical basics (site speed, mobile-friendly, schema, service pages) in a scannable checklist.",
+            "type": "paa"
+          },
+          {
+            "q": "Do small roofing businesses really need SEO?",
+            "answer_angle": "Answer yes and cite that most roofing leads start with a Google search, referencing search volume trends.",
+            "type": "conversational"
+          },
+          {
+            "q": "What's the difference between SEO and marketing for roofers?",
+            "answer_angle": "Clarify SEO as one channel within broader roofing marketing, with a simple Venn-style explanation.",
+            "type": "voice"
+          }
+        ],
+        "entities_to_mention": [
+          "search engine optimization",
+          "organic traffic",
+          "site speed",
+          "mobile-friendly",
+          "schema markup",
+          "lead generation"
+        ]
+      },
+      {
+        "cluster_name": "Roofing SEO Services and Pricing",
+        "funnel": "BOFU",
+        "primary_keyword": {
+          "keyword": "roofing seo services",
+          "volume": 720,
+          "kd": 43,
+          "cpc_low": 2373.44,
+          "cpc_high": 14569.44,
+          "funnel": "BOFU",
+          "intent": "transactional",
+          "trend": "DECLINING",
+          "peak_months": "Sep",
+          "ai_overview_prone": false,
+          "flags": []
+        },
+        "keywords": [
+          {
+            "keyword": "roofing seo services",
+            "volume": 720,
+            "kd": 43,
+            "cpc_low": 2373.44,
+            "cpc_high": 14569.44,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "DECLINING",
+            "peak_months": "Sep",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "seo services for roofing company",
+            "volume": 70,
+            "kd": 2,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "DECLINING",
+            "peak_months": "Sep/Oct",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "seo services for roofers",
+            "volume": 40,
+            "kd": 24,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "DECLINING",
+            "peak_months": "Sep",
+            "ai_overview_prone": false,
+            "flags": []
+          },
+          {
+            "keyword": "roofing seo advertising company",
+            "volume": 20,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "DECLINING",
+            "peak_months": "Mar",
+            "ai_overview_prone": false,
+            "flags": []
+          }
+        ],
+        "total_volume": 850,
+        "language": "en",
+        "language_mixed": false,
+        "ai_overview_prone": true,
+        "questions": [
+          {
+            "q": "How much do SEO services cost for a roofing company?",
+            "answer_angle": "Lead with a specific monthly price range ($750-$5,000) broken down by service tier for the snippet.",
+            "type": "conversational"
+          },
+          {
+            "q": "What's included in roofing SEO services?",
+            "answer_angle": "List deliverables (technical audit, content calendar, backlinks, local listings, reporting) in a bulleted answer.",
+            "type": "paa"
+          },
+          {
+            "q": "Is there a cheap SEO service for small roofing companies?",
+            "answer_angle": "Address budget tiers honestly and recommend a starter package with a real price anchor.",
+            "type": "voice"
+          },
+          {
+            "q": "Do roofing SEO packages include content writing?",
+            "answer_angle": "Answer directly (yes/no) then explain typical content deliverables per month.",
+            "type": "conversational"
+          },
+          {
+            "q": "What is the ROI of SEO services for roofers?",
+            "answer_angle": "Cite average cost-per-lead comparison between SEO and PPC for roofing to justify investment.",
+            "type": "voice"
+          }
+        ],
+        "entities_to_mention": [
+          "SEO package",
+          "technical audit",
+          "content calendar",
+          "backlinks",
+          "monthly reporting",
+          "cost per lead"
+        ]
+      },
+      {
+        "cluster_name": "Local SEO for Roofing Companies",
+        "funnel": "MOFU",
+        "primary_keyword": {
+          "keyword": "local seo for roofing companies",
+          "volume": 260,
+          "kd": 45,
+          "cpc_low": 2517.95,
+          "cpc_high": 8490.45,
+          "funnel": "MOFU",
+          "intent": "commercial",
+          "trend": "SEASONAL",
+          "peak_months": "Jan",
+          "ai_overview_prone": false,
+          "flags": [
+            "local"
+          ]
+        },
+        "keywords": [
+          {
+            "keyword": "local seo for roofing companies",
+            "volume": 260,
+            "kd": 45,
+            "cpc_low": 2517.95,
+            "cpc_high": 8490.45,
+            "funnel": "MOFU",
+            "intent": "commercial",
+            "trend": "SEASONAL",
+            "peak_months": "Jan",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "local seo for roofers",
+            "volume": 110,
+            "kd": 56,
+            "cpc_low": 2312.29,
+            "cpc_high": 16067.85,
+            "funnel": "MOFU",
+            "intent": "commercial",
+            "trend": "GROWING",
+            "peak_months": "Oct/Dec/Jan",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          },
+          {
+            "keyword": "roofing local seo company",
+            "volume": 20,
+            "kd": 6,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "DECLINING",
+            "peak_months": "Mar",
+            "ai_overview_prone": false,
+            "flags": [
+              "local"
+            ]
+          }
+        ],
+        "total_volume": 390,
+        "language": "en",
+        "language_mixed": false,
+        "ai_overview_prone": true,
+        "questions": [
+          {
+            "q": "How do I get my roofing company to show up on Google Maps?",
+            "answer_angle": "Explain the 3 local ranking pillars (Google Business Profile completeness, local citations, and review volume) and lead with the fact GBP optimization is the single biggest lever.",
+            "type": "conversational"
+          },
+          {
+            "q": "What is local SEO for roofers?",
+            "answer_angle": "Define local SEO in one sentence, then list the 4 core components (GBP, NAP citations, local landing pages, reviews) for a definition-style snippet.",
+            "type": "voice"
+          },
+          {
+            "q": "Why is my roofing business not showing up in the map pack?",
+            "answer_angle": "Give the top 3 common causes (unverified GBP, missing service areas, inconsistent NAP) in a numbered list to win the featured snippet.",
+            "type": "paa"
+          },
+          {
+            "q": "Best local SEO company for roofers near me",
+            "answer_angle": "Include a comparison checklist of what to look for in a roofing-specific local SEO provider plus proof of local rankings.",
+            "type": "local"
+          },
+          {
+            "q": "How much does local SEO cost for a roofing company in the United States?",
+            "answer_angle": "Lead with a dollar range (e.g., $500-$2,500/month) sourced from typical U.S. agency pricing to win the AI overview.",
+            "type": "conversational"
+          },
+          {
+            "q": "Do I need a Google Business Profile for each city I roof in?",
+            "answer_angle": "Answer yes/no directly first, then explain service-area vs storefront GBP rules for multi-location roofers.",
+            "type": "voice"
+          }
+        ],
+        "entities_to_mention": [
+          "Google Business Profile",
+          "NAP consistency",
+          "local citations",
+          "map pack",
+          "service area business",
+          "online reviews"
+        ]
+      },
+      {
+        "cluster_name": "Roofer PPC Advertising",
+        "funnel": "MOFU",
+        "primary_keyword": {
+          "keyword": "roofer ppc",
+          "volume": 210,
+          "kd": 52,
+          "cpc_low": 1968.31,
+          "cpc_high": 8626.63,
+          "funnel": "MOFU",
+          "intent": "commercial",
+          "trend": "DECLINING",
+          "peak_months": "Sep",
+          "ai_overview_prone": false,
+          "flags": []
+        },
+        "keywords": [
+          {
+            "keyword": "roofer ppc",
+            "volume": 210,
+            "kd": 52,
+            "cpc_low": 1968.31,
+            "cpc_high": 8626.63,
+            "funnel": "MOFU",
+            "intent": "commercial",
+            "trend": "DECLINING",
+            "peak_months": "Sep",
+            "ai_overview_prone": false,
+            "flags": []
+          }
+        ],
+        "total_volume": 210,
+        "language": "en",
+        "language_mixed": false,
+        "ai_overview_prone": true,
+        "questions": [
+          {
+            "q": "Is PPC or SEO better for roofing companies?",
+            "answer_angle": "Give a direct comparison table on speed-to-lead vs long-term cost to answer the trade-off question.",
+            "type": "conversational"
+          },
+          {
+            "q": "How much does Google Ads cost for a roofer?",
+            "answer_angle": "Lead with average U.S. cost-per-click for roofing keywords ($15-$45) and typical monthly ad spend.",
+            "type": "voice"
+          },
+          {
+            "q": "What is a good click through rate for roofer PPC ads?",
+            "answer_angle": "State an industry-benchmark CTR percentage for home services PPC.",
+            "type": "paa"
+          },
+          {
+            "q": "Can PPC and SEO work together for a roofing business?",
+            "answer_angle": "Answer yes and explain how PPC data informs SEO keyword strategy.",
+            "type": "conversational"
+          }
+        ],
+        "entities_to_mention": [
+          "Google Ads",
+          "cost per click",
+          "quality score",
+          "landing page conversion",
+          "ad spend"
+        ]
+      },
+      {
+        "cluster_name": "Gutter Installation SEO",
+        "funnel": "BOFU",
+        "primary_keyword": {
+          "keyword": "gutter installation seo",
+          "volume": 10,
+          "kd": 0,
+          "cpc_low": 0.0,
+          "cpc_high": 0.0,
+          "funnel": "BOFU",
+          "intent": "transactional",
+          "trend": "GROWING",
+          "peak_months": "Aug/Oct/Jan/Feb/Mar/Apr/May/Jun",
+          "ai_overview_prone": false,
+          "flags": []
+        },
+        "keywords": [
+          {
+            "keyword": "gutter installation seo",
+            "volume": 10,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "funnel": "BOFU",
+            "intent": "transactional",
+            "trend": "GROWING",
+            "peak_months": "Aug/Oct/Jan/Feb/Mar/Apr/May/Jun",
+            "ai_overview_prone": false,
+            "flags": []
+          }
+        ],
+        "total_volume": 10,
+        "language": "en",
+        "language_mixed": false,
+        "ai_overview_prone": true,
+        "questions": [
+          {
+            "q": "How do gutter installation companies rank higher on Google?",
+            "answer_angle": "Explain building a dedicated gutter installation service page with local schema and reviews.",
+            "type": "conversational"
+          },
+          {
+            "q": "Should roofers have a separate page for gutter installation SEO?",
+            "answer_angle": "Answer yes directly, noting separate service pages rank for distinct buyer-intent keywords.",
+            "type": "voice"
+          },
+          {
+            "q": "What keywords should a gutter installation page target?",
+            "answer_angle": "List example long-tail keywords (seamless gutter installation cost, gutter guard installation near me) for the page.",
+            "type": "paa"
+          }
+        ],
+        "entities_to_mention": [
+          "seamless gutters",
+          "gutter guards",
+          "service page",
+          "schema markup"
+        ]
+      }
+    ]
+  },
+  "mode3_full_website": {
+    "workflow_inputs": {
+      "industry": "Roofing SEO Marketing",
+      "services_mode3": "Roofing SEO Services, Local SEO for Roofing Companies, Roofing SEO Agency Consulting, Roofer PPC Advertising, Gutter Installation SEO, Roofing Website SEO"
+    },
+    "services": [
+      "Roofing SEO Services",
+      "Local SEO for Roofing Companies",
+      "Roofing SEO Agency Consulting",
+      "Roofer PPC Advertising",
+      "Gutter Installation SEO",
+      "Roofing Website SEO"
+    ]
+  },
+  "mode2_services_hub": {
+    "workflow_inputs": {
+      "main_service": "Roofing SEO Services",
+      "sub_services": "Local SEO for Roofers, Roofing SEO Company Comparison, Roofing SEO Pricing Packages, Roofer PPC Management, Gutter Installation SEO, Technical SEO for Roofing Websites, Google Business Profile Optimization, Roofing Content Marketing"
+    }
+  },
+  "mode5_pseo": {
+    "cities_in_data": [],
+    "areas": [
+      {
+        "area": "Alabama",
+        "keywords": [],
+        "total_volume": 0,
+        "primary_keyword": {},
+        "demand": "candidate"
+      },
+      {
+        "area": "Alaska",
+        "keywords": [],
+        "total_volume": 0,
+        "primary_keyword": {},
+        "demand": "candidate"
+      },
+      {
+        "area": "Arizona",
+        "keywords": [],
+        "total_volume": 0,
+        "primary_keyword": {},
+        "demand": "candidate"
+      },
+      {
+        "area": "Arkansas",
+        "keywords": [],
+        "total_volume": 0,
+        "primary_keyword": {},
+        "demand": "candidate"
+      },
+      {
+        "area": "California",
+        "keywords": [],
+        "total_volume": 0,
+        "primary_keyword": {},
+        "demand": "candidate"
+      },
+      {
+        "area": "Colorado",
+        "keywords": [],
+        "total_volume": 0,
+        "primary_keyword": {},
+        "demand": "candidate"
+      },
+      {
+        "area": "Connecticut",
+        "keywords": [],
+        "total_volume": 0,
+        "primary_keyword": {},
+        "demand": "candidate"
+      },
+      {
+        "area": "Delaware",
+        "keywords": [],
+        "total_volume": 0,
+        "primary_keyword": {},
+        "demand": "candidate"
+      },
+      {
+        "area": "District of Columbia",
+        "keywords": [],
+        "total_volume": 0,
+        "primary_keyword": {},
+        "demand": "candidate"
+      },
+      {
+        "area": "Florida",
+        "keywords": [],
+        "total_volume": 0,
+        "primary_keyword": {},
+        "demand": "candidate"
+      },
+      {
+        "area": "Georgia",
+        "keywords": [],
+        "total_volume": 0,
+        "primary_keyword": {},
+        "demand": "candidate"
+      },
+      {
+        "area": "Hawaii",
+        "keywords": [],
+        "total_volume": 0,
+        "primary_keyword": {},
+        "demand": "candidate"
+      },
+      {
+        "area": "Idaho",
+        "keywords": [],
+        "total_volume": 0,
+        "primary_keyword": {},
+        "demand": "candidate"
+      },
+      {
+        "area": "Illinois",
+        "keywords": [],
+        "total_volume": 0,
+        "primary_keyword": {},
+        "demand": "candidate"
+      },
+      {
+        "area": "Indiana",
+        "keywords": [],
+        "total_volume": 0,
+        "primary_keyword": {},
+        "demand": "candidate"
+      },
+      {
+        "area": "Iowa",
+        "keywords": [],
+        "total_volume": 0,
+        "primary_keyword": {},
+        "demand": "candidate"
+      },
+      {
+        "area": "Kansas",
+        "keywords": [],
+        "total_volume": 0,
+        "primary_keyword": {},
+        "demand": "candidate"
+      },
+      {
+        "area": "Kentucky",
+        "keywords": [],
+        "total_volume": 0,
+        "primary_keyword": {},
+        "demand": "candidate"
+      },
+      {
+        "area": "Louisiana",
+        "keywords": [],
+        "total_volume": 0,
+        "primary_keyword": {},
+        "demand": "candidate"
+      },
+      {
+        "area": "Maine",
+        "keywords": [],
+        "total_volume": 0,
+        "primary_keyword": {},
+        "demand": "candidate"
+      },
+      {
+        "area": "Maryland",
+        "keywords": [],
+        "total_volume": 0,
+        "primary_keyword": {},
+        "demand": "candidate"
+      },
+      {
+        "area": "Massachusetts",
+        "keywords": [],
+        "total_volume": 0,
+        "primary_keyword": {},
+        "demand": "candidate"
+      },
+      {
+        "area": "Michigan",
+        "keywords": [],
+        "total_volume": 0,
+        "primary_keyword": {},
+        "demand": "candidate"
+      },
+      {
+        "area": "Minnesota",
+        "keywords": [],
+        "total_volume": 0,
+        "primary_keyword": {},
+        "demand": "candidate"
+      },
+      {
+        "area": "Mississippi",
+        "keywords": [],
+        "total_volume": 0,
+        "primary_keyword": {},
+        "demand": "candidate"
+      },
+      {
+        "area": "Missouri",
+        "keywords": [],
+        "total_volume": 0,
+        "primary_keyword": {},
+        "demand": "candidate"
+      },
+      {
+        "area": "Montana",
+        "keywords": [],
+        "total_volume": 0,
+        "primary_keyword": {},
+        "demand": "candidate"
+      },
+      {
+        "area": "Nebraska",
+        "keywords": [],
+        "total_volume": 0,
+        "primary_keyword": {},
+        "demand": "candidate"
+      },
+      {
+        "area": "Nevada",
+        "keywords": [],
+        "total_volume": 0,
+        "primary_keyword": {},
+        "demand": "candidate"
+      },
+      {
+        "area": "New Hampshire",
+        "keywords": [],
+        "total_volume": 0,
+        "primary_keyword": {},
+        "demand": "candidate"
+      },
+      {
+        "area": "New Jersey",
+        "keywords": [],
+        "total_volume": 0,
+        "primary_keyword": {},
+        "demand": "candidate"
+      },
+      {
+        "area": "New Mexico",
+        "keywords": [],
+        "total_volume": 0,
+        "primary_keyword": {},
+        "demand": "candidate"
+      },
+      {
+        "area": "New York",
+        "keywords": [],
+        "total_volume": 0,
+        "primary_keyword": {},
+        "demand": "candidate"
+      },
+      {
+        "area": "North Carolina",
+        "keywords": [],
+        "total_volume": 0,
+        "primary_keyword": {},
+        "demand": "candidate"
+      },
+      {
+        "area": "North Dakota",
+        "keywords": [],
+        "total_volume": 0,
+        "primary_keyword": {},
+        "demand": "candidate"
+      },
+      {
+        "area": "Ohio",
+        "keywords": [],
+        "total_volume": 0,
+        "primary_keyword": {},
+        "demand": "candidate"
+      },
+      {
+        "area": "Oklahoma",
+        "keywords": [],
+        "total_volume": 0,
+        "primary_keyword": {},
+        "demand": "candidate"
+      },
+      {
+        "area": "Oregon",
+        "keywords": [],
+        "total_volume": 0,
+        "primary_keyword": {},
+        "demand": "candidate"
+      },
+      {
+        "area": "Pennsylvania",
+        "keywords": [],
+        "total_volume": 0,
+        "primary_keyword": {},
+        "demand": "candidate"
+      },
+      {
+        "area": "Rhode Island",
+        "keywords": [],
+        "total_volume": 0,
+        "primary_keyword": {},
+        "demand": "candidate"
+      },
+      {
+        "area": "San Francisco Bay Area",
+        "keywords": [],
+        "total_volume": 0,
+        "primary_keyword": {},
+        "demand": "candidate"
+      },
+      {
+        "area": "Silicon Valley",
+        "keywords": [],
+        "total_volume": 0,
+        "primary_keyword": {},
+        "demand": "candidate"
+      },
+      {
+        "area": "South Carolina",
+        "keywords": [],
+        "total_volume": 0,
+        "primary_keyword": {},
+        "demand": "candidate"
+      },
+      {
+        "area": "South Dakota",
+        "keywords": [],
+        "total_volume": 0,
+        "primary_keyword": {},
+        "demand": "candidate"
+      },
+      {
+        "area": "Tennessee",
+        "keywords": [],
+        "total_volume": 0,
+        "primary_keyword": {},
+        "demand": "candidate"
+      },
+      {
+        "area": "Texas",
+        "keywords": [],
+        "total_volume": 0,
+        "primary_keyword": {},
+        "demand": "candidate"
+      },
+      {
+        "area": "United States",
+        "keywords": [],
+        "total_volume": 0,
+        "primary_keyword": {},
+        "demand": "candidate"
+      },
+      {
+        "area": "Utah",
+        "keywords": [],
+        "total_volume": 0,
+        "primary_keyword": {},
+        "demand": "candidate"
+      },
+      {
+        "area": "Vermont",
+        "keywords": [],
+        "total_volume": 0,
+        "primary_keyword": {},
+        "demand": "candidate"
+      },
+      {
+        "area": "Virginia",
+        "keywords": [],
+        "total_volume": 0,
+        "primary_keyword": {},
+        "demand": "candidate"
+      },
+      {
+        "area": "Washington",
+        "keywords": [],
+        "total_volume": 0,
+        "primary_keyword": {},
+        "demand": "candidate"
+      },
+      {
+        "area": "West Virginia",
+        "keywords": [],
+        "total_volume": 0,
+        "primary_keyword": {},
+        "demand": "candidate"
+      },
+      {
+        "area": "Wisconsin",
+        "keywords": [],
+        "total_volume": 0,
+        "primary_keyword": {},
+        "demand": "candidate"
+      },
+      {
+        "area": "Wyoming",
+        "keywords": [],
+        "total_volume": 0,
+        "primary_keyword": {},
+        "demand": "candidate"
+      }
+    ],
+    "recommended_city_targets": [
+      "Texas",
+      "Florida",
+      "California",
+      "Georgia",
+      "North Carolina",
+      "Ohio",
+      "Pennsylvania",
+      "Arizona"
+    ],
+    "notes": "No specific city or state names appear in the keyword data itself — all searches are generic/national. Recommended targets are high roofing-demand states worth building dedicated location pages for, based on typical U.S. roofing market size.",
+    "geo_area_candidates": [
+      "United States",
+      "Alabama",
+      "Alaska",
+      "Arizona",
+      "Arkansas",
+      "California",
+      "Colorado",
+      "Connecticut",
+      "Delaware",
+      "District of Columbia",
+      "Florida",
+      "Georgia",
+      "Hawaii",
+      "Idaho",
+      "Illinois",
+      "Indiana",
+      "Iowa",
+      "Kansas",
+      "Kentucky",
+      "Louisiana",
+      "Maine",
+      "Maryland",
+      "Massachusetts",
+      "Michigan",
+      "Minnesota",
+      "Mississippi",
+      "Missouri",
+      "Montana",
+      "Nebraska",
+      "Nevada",
+      "New Hampshire",
+      "New Jersey",
+      "New Mexico",
+      "New York",
+      "North Carolina",
+      "North Dakota",
+      "Ohio",
+      "Oklahoma",
+      "Oregon",
+      "Pennsylvania",
+      "Rhode Island",
+      "San Francisco Bay Area",
+      "Silicon Valley",
+      "South Carolina",
+      "South Dakota",
+      "Tennessee",
+      "Texas",
+      "Utah",
+      "Vermont",
+      "Virginia",
+      "Washington",
+      "West Virginia",
+      "Wisconsin",
+      "Wyoming"
+    ]
+  },
+  "keyword_metrics": [
+    {
+      "keyword": "seo for roofers",
+      "volume": 2400,
+      "kd": 52,
+      "cpc_low": 2779.2,
+      "cpc_high": 13895.99,
+      "funnel": "MOFU",
+      "intent": "commercial",
+      "trend": "DECLINING",
+      "peak_months": "Sep",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "seo roofing",
+      "volume": 2400,
+      "kd": 52,
+      "cpc_low": 2779.2,
+      "cpc_high": 13895.99,
+      "funnel": "MOFU",
+      "intent": "commercial",
+      "trend": "DECLINING",
+      "peak_months": "Sep",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "roofing seo company",
+      "volume": 1000,
+      "kd": 46,
+      "cpc_low": 2026.04,
+      "cpc_high": 13668.13,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "DECLINING",
+      "peak_months": "Sep",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "search engine optimization for roofing companies",
+      "volume": 1000,
+      "kd": 46,
+      "cpc_low": 2026.04,
+      "cpc_high": 13668.13,
+      "funnel": "MOFU",
+      "intent": "commercial",
+      "trend": "DECLINING",
+      "peak_months": "Sep",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "roofing seo services",
+      "volume": 720,
+      "kd": 43,
+      "cpc_low": 2373.44,
+      "cpc_high": 14569.44,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "DECLINING",
+      "peak_months": "Sep",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "local seo for roofing companies",
+      "volume": 260,
+      "kd": 45,
+      "cpc_low": 2517.95,
+      "cpc_high": 8490.45,
+      "funnel": "MOFU",
+      "intent": "commercial",
+      "trend": "SEASONAL",
+      "peak_months": "Jan",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "roofing seo agency",
+      "volume": 260,
+      "kd": 48,
+      "cpc_low": 3221.09,
+      "cpc_high": 12675.92,
+      "funnel": "MOFU",
+      "intent": "commercial",
+      "trend": "SEASONAL",
+      "peak_months": "Sep",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "roofing contractor seo",
+      "volume": 260,
+      "kd": 44,
+      "cpc_low": 2843.12,
+      "cpc_high": 12506.39,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "DECLINING",
+      "peak_months": "Sep",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "seo for roofing contractors",
+      "volume": 260,
+      "kd": 44,
+      "cpc_low": 2843.12,
+      "cpc_high": 12506.39,
+      "funnel": "MOFU",
+      "intent": "commercial",
+      "trend": "DECLINING",
+      "peak_months": "Sep",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "roofer ppc",
+      "volume": 210,
+      "kd": 52,
+      "cpc_low": 1968.31,
+      "cpc_high": 8626.63,
+      "funnel": "MOFU",
+      "intent": "commercial",
+      "trend": "DECLINING",
+      "peak_months": "Sep",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "local seo for roofers",
+      "volume": 110,
+      "kd": 56,
+      "cpc_low": 2312.29,
+      "cpc_high": 16067.85,
+      "funnel": "MOFU",
+      "intent": "commercial",
+      "trend": "GROWING",
+      "peak_months": "Oct/Dec/Jan",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "best roofing seo",
+      "volume": 110,
+      "kd": 0,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "MOFU",
+      "intent": "commercial",
+      "trend": "SEASONAL",
+      "peak_months": "Oct",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "roofing seo expert",
+      "volume": 110,
+      "kd": 0,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "DECLINING",
+      "peak_months": "Sep",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "roofing seo experts",
+      "volume": 110,
+      "kd": 0,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "MOFU",
+      "intent": "commercial",
+      "trend": "DECLINING",
+      "peak_months": "Sep",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "best roofing seo companies",
+      "volume": 90,
+      "kd": 50,
+      "cpc_low": 4958.74,
+      "cpc_high": 18954.98,
+      "funnel": "MOFU",
+      "intent": "commercial",
+      "trend": "SEASONAL",
+      "peak_months": "Oct",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "roofers seo marketing",
+      "volume": 90,
+      "kd": 13,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "MOFU",
+      "intent": "commercial",
+      "trend": "SEASONAL",
+      "peak_months": "Oct",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "roofing seo pros",
+      "volume": 90,
+      "kd": 0,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "MOFU",
+      "intent": "commercial",
+      "trend": "DECLINING",
+      "peak_months": "Sep",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "seo services for roofing company",
+      "volume": 70,
+      "kd": 2,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "DECLINING",
+      "peak_months": "Sep/Oct",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "seo for roofing businesses",
+      "volume": 40,
+      "kd": 1,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "MOFU",
+      "intent": "commercial",
+      "trend": "DECLINING",
+      "peak_months": "Mar",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "seo services for roofers",
+      "volume": 40,
+      "kd": 24,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "DECLINING",
+      "peak_months": "Sep",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "roofing search engine optimization",
+      "volume": 40,
+      "kd": 17,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "MOFU",
+      "intent": "commercial",
+      "trend": "DECLINING",
+      "peak_months": "Sep",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "roofing seo pros digital marketing",
+      "volume": 20,
+      "kd": 3,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "MOFU",
+      "intent": "commercial",
+      "trend": "SEASONAL",
+      "peak_months": "Mar",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "roofing local seo company",
+      "volume": 20,
+      "kd": 6,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "DECLINING",
+      "peak_months": "Mar",
+      "ai_overview_prone": false,
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "roofing seo advertising company",
+      "volume": 20,
+      "kd": 0,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "DECLINING",
+      "peak_months": "Mar",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "gutter installation seo",
+      "volume": 10,
+      "kd": 0,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "BOFU",
+      "intent": "transactional",
+      "trend": "GROWING",
+      "peak_months": "Aug/Oct/Jan/Feb/Mar/Apr/May/Jun",
+      "ai_overview_prone": false,
+      "flags": []
+    },
+    {
+      "keyword": "roofing website seo",
+      "volume": 10,
+      "kd": 0,
+      "cpc_low": 0.0,
+      "cpc_high": 0.0,
+      "funnel": "MOFU",
+      "intent": "commercial",
+      "trend": "DECLINING",
+      "peak_months": "Aug/Feb/Mar",
+      "ai_overview_prone": false,
+      "flags": []
+    }
+  ]
+}
