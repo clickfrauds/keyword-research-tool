@@ -371,7 +371,11 @@ def _norm_name(s):
     return re.sub(r"[^a-z0-9]+", "", str(s).lower())
 
 
-def validate(raw, by_id):
+def validate(raw, by_id, geo_areas=None, keywords=()):
+    # geo_areas and keywords are both built in main() and used further down to
+    # group per-area demand. They used to be read straight out of the enclosing
+    # scope, which raised NameError the moment that block ran. As parameters
+    # they are explicit and the function stays testable on its own.
     m4 = raw.get("mode4_cluster") or {}
     seen = set()
     clusters = []
@@ -664,7 +668,7 @@ def main():
         print(f"❌ Could not get valid JSON: {last_err}. Raw saved.")
         sys.exit(1)
 
-    mode4, mode3, mode2, mode5 = validate(raw, by_id)
+    mode4, mode3, mode2, mode5 = validate(raw, by_id, geo_areas, keywords)
     # Full candidate list (not just Claude's picks) — Mode 5 in the website
     # builder can page over ALL real areas of the selected city/country.
     mode5["geo_area_candidates"] = geo_areas
