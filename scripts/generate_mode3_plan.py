@@ -106,6 +106,9 @@ AC_PER_CAT = int(os.environ.get("AC_QUERIES_PER_CATEGORY", "40"))
 _AC_GL = resolve_gl() if AC_PER_CAT > 0 else None   # one geo lookup per run
 _AC_QUESTION = re.compile(
     r"^(how|what|why|when|which|where|who|is|are|do|does|can)\b", re.I)
+# Filled once in main() by local_place_terms(); empty = bare seeds skipped.
+_AC_CITY_TERM = ""
+_AC_EXCLUDE = []
 
 
 def _norm(s):
@@ -166,6 +169,48 @@ _CE_LANG_RULE = (f"""
    (they are shown to the content writer for every page of a
    {CONTENT_LANG_NAME} site). Category names stay ENGLISH — they become URLs."""
                  if CONTENT_LANG_NAME else "")
+
+
+def local_place_terms(client):
+    """(target city term, other-city blocklist) in the SITE'S language.
+
+    Needed because a bare seed reaches a different query space than a
+    city-qualified one — measured on the Riyadh services, 51 queries vs 106
+    with only 8 in common, and the bare form is the only route to the
+    vocabulary that matters (materials grp/cmb, brands سيكا/فالكون, types
+    اسمنتي/امريكي). The catch is that the bare form also drags in other cities
+    (37 of 106). The geo dataset carries English names only, so it cannot
+    filter Arabic — or Turkish, or Hindi — drift; the model can, in one small
+    call. Fail-open: no terms means bare seeds are simply not probed."""
+    if not TARGET_LOCATION:
+        return "", []
+    try:
+        raw = claude_json(client, "Return valid JSON only.", f"""TARGET LOCATION: {TARGET_LOCATION}
+SITE LANGUAGE: {CONTENT_LANG_NAME or 'English'}
+
+Return, in the SITE LANGUAGE exactly as locals type them into Google:
+1. "city_term": the target city's name. Bare name only — no preposition,
+   no article, no country.
+2. "other_cities": 25-40 OTHER cities and major regions of the SAME country
+   that people search service keywords for. These are used to DROP
+   suggestions belonging to other cities, so include the spellings that
+   actually appear in search — with and without attached prepositions or
+   articles where both are common, and common misspellings. NEVER include
+   the target city or any district inside it.
+
+JSON: {{"city_term": "...", "other_cities": ["...", "..."]}}""")
+        city = str(raw.get("city_term", "")).strip()
+        others = [str(t).strip() for t in (raw.get("other_cities") or [])
+                  if str(t).strip()]
+        # A blocklist entry that matches the target city would delete the very
+        # queries we want.
+        others = [t for t in others if city and city.lower() not in t.lower()][:60]
+        if city and others:
+            print(f"   🗺️ place filter: city '{city}', {len(others)} other-city terms")
+        return city, others
+    except Exception as e:
+        print(f"   ℹ️ place-term lookup failed ({str(e)[:60]}) — bare seeds skipped")
+        return "", []
 
 
 def group_services(client, services):
@@ -305,7 +350,8 @@ def fetch_category_keywords(ads_client, category, location_id, language_id, glob
         try:
             ac_queries, _ = expand_queries(
                 seeds, hl=(CONTENT_LANGUAGE or "en")[:5], gl=_AC_GL,
-                depth=1, max_queries=AC_PER_CAT * 4, verbose=False)
+                depth=1, max_queries=AC_PER_CAT * 4, verbose=False,
+                city_term=_AC_CITY_TERM, exclude_terms=_AC_EXCLUDE)
             fresh = [q for q in ac_queries
                      if _norm(q) not in local_seen and _norm(q) not in global_seen]
             if fresh:
@@ -522,6 +568,9 @@ def main():
           + (f" | output in {CONTENT_LANG_NAME}" if CONTENT_LANG_NAME else ""))
 
     print(f"\n🗂️ Stage A — grouping {len(SERVICES)} services into categories...")
+    if AC_PER_CAT > 0:
+        globals()["_AC_CITY_TERM"], globals()["_AC_EXCLUDE"] = local_place_terms(claude)
+
     categories, site_context = group_services(claude, SERVICES)
     if site_context.get("central_entity"):
         print(f"   🎯 central entity: {site_context['central_entity']}")

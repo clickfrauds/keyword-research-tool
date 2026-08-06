@@ -233,14 +233,32 @@ def _probes_for(seed, full=True):
 
 
 def expand_queries(seeds, hl="en", gl=None, depth=2, max_seeds_d2=45,
-                   max_queries=600, workers=8, verbose=True):
+                   max_queries=600, workers=8, verbose=True,
+                   city_term="", exclude_terms=None):
     """Seeds → a de-duplicated, drift-filtered set of real search queries.
 
     Importable: generate_mode3_plan.py calls this per service category so the
-    100-page builds get the same query network the cluster runs do."""
+    100-page builds get the same query network the cluster runs do.
+
+    city_term / exclude_terms exist because a city-qualified seed and a bare
+    one reach almost disjoint query spaces. Measured on the Riyadh services:
+    "عزل أسطح بالرياض" returned 51 queries, "عزل أسطح" returned 106, and only
+    8 were common to both — 149 unique between them. The bare form is where
+    the vocabulary lives (materials: grp/cmb, brands: سيكا/فالكون, types:
+    اسمنتي/امريكي); the qualified form is where the local commercial intent
+    lives. Probing only one of them throws away most of the network.
+
+    The reason the bare form was not used before is that it drags in other
+    cities (37 of 106 here). exclude_terms is the caller's blocklist of place
+    names in the site's own language — the geo dataset only has English names,
+    so it cannot filter Arabic drift on its own. No blocklist = bare seeds are
+    skipped entirely, which is the old, safe behaviour."""
     seeds = [s for s in (seeds or []) if str(s).strip()]
     if not seeds:
         return [], []
+    exclude_terms = [str(t).strip().lower() for t in (exclude_terms or [])
+                     if str(t).strip()]
+    city_term = str(city_term or "").strip().lower()
 
     anchors = anchor_prefixes(seeds)
     if verbose:
@@ -258,14 +276,30 @@ def expand_queries(seeds, hl="en", gl=None, depth=2, max_seeds_d2=45,
                         found.add(c)
         return found, len(probe_list)
 
+    # Bare seeds only when the caller can filter the other cities they drag in.
+    bare_seeds = []
+    if city_term and exclude_terms:
+        for s in seeds:
+            b = re.sub(r"\s+", " ", str(s).lower().replace(city_term, "")).strip()
+            # Arabic attaches prepositions to the city (بالرياض); stripping the
+            # city can leave the bare "ب" behind.
+            b = re.sub(r"\s+[بفول]$", "", b).strip()
+            if b and b != str(s).strip().lower() and len(b.split()) >= 1:
+                bare_seeds.append(b)
+        bare_seeds = list(dict.fromkeys(bare_seeds))
+
+    def other_city(q):
+        return any(t in q for t in exclude_terms)
+
     probes = []
-    for s in seeds:
+    for s in seeds + bare_seeds:
         probes += _probes_for(s, full=True)
     raw1, n1 = run(probes)
-    keep1 = {q for q in raw1 if is_relevant(q, anchors)}
+    keep1 = {q for q in raw1 if is_relevant(q, anchors) and not other_city(q)}
     if verbose:
-        print(f"   🔎 depth 1: {n1} probes → {len(raw1)} raw, {len(keep1)} on-topic "
-              f"({len(raw1) - len(keep1)} drift dropped)")
+        _extra = f" (+{len(bare_seeds)} bare seed forms)" if bare_seeds else ""
+        print(f"   🔎 depth 1: {n1} probes{_extra} → {len(raw1)} raw, "
+              f"{len(keep1)} on-topic ({len(raw1) - len(keep1)} dropped)")
 
     keep = set(keep1)
     if depth >= 2 and keep1:
@@ -276,7 +310,7 @@ def expand_queries(seeds, hl="en", gl=None, depth=2, max_seeds_d2=45,
         for s in d2_seeds:
             probes2 += _probes_for(s, full=False)   # alphabet only — cheaper
         raw2, n2 = run(probes2)
-        keep2 = {q for q in raw2 if is_relevant(q, anchors)}
+        keep2 = {q for q in raw2 if is_relevant(q, anchors) and not other_city(q)}
         new2 = keep2 - keep1
         keep |= keep2
         if verbose:
