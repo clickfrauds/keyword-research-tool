@@ -853,6 +853,9 @@ RETURN JSON ONLY:
 
 SERP_GROUP_OVERLAP = int(os.environ.get("SERP_GROUP_OVERLAP", "4"))
 SERP_MAX_QUERIES = int(os.environ.get("SERP_MAX_QUERIES", "60"))
+# Above this many services the prefilter stands down — see serp_prefilter for
+# why a long catalogue must not be pruned by SERP overlap.
+SERP_PREFILTER_MAX = int(os.environ.get("SERP_PREFILTER_MAX", "25"))
 
 
 def _serp_urls(keyword, gl, hl, num=10):
@@ -905,11 +908,27 @@ def serp_prefilter(services, gl, hl):
         print("   ℹ️ no SERPAPI_API_KEY — SERP prefilter skipped, "
               "all requested pages kept")
         return services, {}
+    # A SHORT list is an SEO decision: eight ways of saying "AI website
+    # builder", where two pages on one SERP only split their own signal and
+    # merging is the right call. A LONG list is a business decision: a home
+    # maintenance company offering plumbing, painting, carpentry and wiring
+    # needs a page per trade whether or not Google mixes their results, and
+    # nobody wants a catalogue quietly pruned. It also costs one credit per
+    # name, so a hundred services would spend a hundred of them.
+    if len(services) > SERP_PREFILTER_MAX:
+        print(f"   ℹ️ {len(services)} services — SERP prefilter skipped "
+              f"(over {SERP_PREFILTER_MAX}). A catalogue this size is a "
+              f"business decision, not a keyword one; every page is kept. "
+              f"Raise SERP_PREFILTER_MAX to force the check.")
+        return services, {}
 
-    print(f"\n🔍 SERP prefilter — {len(services)} service names "
-          f"({len(services)} SerpApi credits)...")
+    # Hard credit ceiling even under the threshold — nothing should be able to
+    # spend an unbounded number of searches.
+    probe = services[:SERP_MAX_QUERIES]
+    print(f"\n🔍 SERP prefilter — {len(probe)} service names "
+          f"({len(probe)} SerpApi credits)...")
     serps = {}
-    for name in services:
+    for name in probe:
         urls = _serp_urls(name, gl, hl)
         if urls:
             serps[name] = set(urls)
