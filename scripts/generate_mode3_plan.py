@@ -138,6 +138,31 @@ def _norm(s):
     return re.sub(r"[\W_]+", "", str(s).lower())
 
 
+_AR_TRANSLIT = {
+    "ا": "a", "أ": "a", "إ": "i", "آ": "a", "ب": "b", "ت": "t", "ث": "th",
+    "ج": "j", "ح": "h", "خ": "kh", "د": "d", "ذ": "dh", "ر": "r", "ز": "z",
+    "س": "s", "ش": "sh", "ص": "s", "ض": "d", "ط": "t", "ظ": "z", "ع": "a",
+    "غ": "gh", "ف": "f", "ق": "q", "ك": "k", "ل": "l", "م": "m", "ن": "n",
+    "ه": "h", "و": "w", "ي": "y", "ى": "a", "ة": "a", "ء": "", "ؤ": "u",
+    "ئ": "i", "َ": "", "ُ": "", "ِ": "", "ّ": "", "ْ": "", "ً": "", "ٌ": "", "ٍ": "",
+}
+
+
+def _clean_slug(candidate, fallback_name):
+    """ASCII URL slug. Prefers the model's ENGLISH slug; romanises the page
+    name only as a last resort.
+
+    The producer owns the slug so that the Mode 3 page, the builder's output
+    path and any later Mode 5 area page all read ONE value instead of each
+    deriving their own and disagreeing."""
+    s = re.sub(r"[^a-z0-9]+", "-", str(candidate or "").lower()).strip("-")
+    if len(s) >= 3:
+        return s[:70]
+    romanised = "".join(_AR_TRANSLIT.get(c, c) for c in str(fallback_name).lower())
+    romanised = re.sub(r"[^a-z0-9]+", "-", romanised).strip("-")
+    return (romanised or "page")[:70]
+
+
 def claude_json(client, system_prompt, user_prompt):
     """One Claude call with a strict-JSON retry, parsed via the shared
     4-pass robust parser."""
@@ -227,6 +252,74 @@ JSON: {{"city_term": "...", "other_cities": ["...", "..."]}}""")
     except Exception as e:
         print(f"   ℹ️ place-term lookup failed ({str(e)[:60]}) — bare seeds skipped")
         return "", []
+
+
+def extract_area_targets(client, plan_categories, city_term):
+    """Area/district demand hiding inside the service pages' keyword sets.
+
+    A page like "كشف تسربات المياه بالرياض" came back with 97 keywords, and 17
+    of them were district queries — شمال الرياض, العليا, الملز, لبن — worth
+    2,220/mo between them. They can never rank on that one page; each is its
+    own pSEO page. Buried in a keyword list nobody reads, that demand was
+    simply lost.
+
+    These are NOT turned into Mode 3 pages. Mode 5 has a dedicated pipeline
+    for area research, and its `extra_areas` input exists for exactly this
+    case: areas people search that the geo dataset does not list. So this
+    hands the names over and stops there.
+
+    Fail-open: no areas, or a failed call, means the plan is unchanged."""
+    if not city_term:
+        return []
+    cand = []
+    for c in plan_categories:
+        for s in c["services"]:
+            for k in s.get("keywords", []):
+                q = k.get("keyword", "")
+                # City mentioned AND something beyond the service+city wording
+                if city_term in q and _norm(q) != _norm(s["name"]):
+                    cand.append((q, k.get("volume", 0), s["name"]))
+    if not cand:
+        return []
+    cand.sort(key=lambda x: -x[1])
+    lines = "\n".join(f"{q} | {v}/mo | page: {p}" for q, v, p in cand[:120])
+    try:
+        raw = claude_json(client, "Return valid JSON only.", f"""CITY: {city_term}
+
+Keywords from this site's pages that mention the city:
+{lines}
+
+Some of these name a DISTRICT, NEIGHBOURHOOD or COMPASS AREA of the city
+(for example a quadrant like "north {city_term}", or a named district).
+Others are just the plain city keyword with no area in them.
+
+Return ONLY the ones that name an area. For each, give the area name exactly
+as people type it, the total monthly volume of its keywords, and the service
+page the demand belongs to.
+
+Ignore any area belonging to a DIFFERENT city. Ignore plain city keywords.
+
+JSON: {{"areas": [{{"area": "...", "volume": 0, "service": "exact page name",
+"keywords": ["..."]}}]}}""")
+        out = []
+        for a in (raw.get("areas") or []):
+            name = str(a.get("area", "")).strip()
+            if not name or _norm(name) == _norm(city_term):
+                continue
+            out.append({
+                "area": name,
+                "volume": int(a.get("volume") or 0),
+                "service": str(a.get("service", "")).strip(),
+                "keywords": [str(k).strip() for k in (a.get("keywords") or []) if str(k).strip()],
+            })
+        out.sort(key=lambda a: -a["volume"])
+        if out:
+            print(f"   📍 {len(out)} area(s) with real demand → Mode 5 handover "
+                  f"({sum(a['volume'] for a in out):,}/mo total)")
+        return out[:60]
+    except Exception as e:
+        print(f"   ℹ️ area extraction skipped ({str(e)[:60]}) — plan unchanged")
+        return []
 
 
 def group_services(client, services):
@@ -485,6 +578,12 @@ RULES:
    what the page must actually say to satisfy it. ORDER THEM by how much
    demand the data shows — the builder writes them in the order you give.
 5. "name" must be a CHARACTER-FOR-CHARACTER copy of a service page name.
+5b. url_slug: the page's URL, in ENGLISH, lowercase a-z 0-9 and hyphens only,
+   3-6 words. Translate the MEANING of the service into English — never
+   transliterate ("كشف تسربات المياه بالرياض" → "water-leak-detection-riyadh",
+   NOT "kshf-tsrbat-almyah"). A romanised slug reads as nonsense to Arabic and
+   English speakers alike, while an English one stays readable in a WhatsApp
+   share, a backlink and an analytics report. Unique across every page.
 6. A page with no matching keywords still appears (empty keyword_ids).
 7. long_tail_ids (only if a LONG-TAIL list appears above): same one-id-one-page
    rule. Never use one as primary_keyword_id — it carries no volume, so it
@@ -494,7 +593,8 @@ RULES:
    Do NOT translate the page `name` (copy it exactly) or the JSON keys.
 """ if CONTENT_LANG_NAME else "") + """
 RETURN JSON ONLY:
-{{"services": [{{"name": "exact page name", "primary_keyword_id": 1,
+{{"services": [{{"name": "exact page name", "url_slug": "english-words-only",
+  "primary_keyword_id": 1,
   "keyword_ids": [1, 2], "long_tail_ids": [31, 44],
   "questions": [{{"q": "...", "answer_angle": "...",
   "type": "conversational|voice|paa|local"}}],
@@ -548,6 +648,10 @@ RETURN JSON ONLY:
             "entities_to_mention": [str(e).strip() for e in
                                     svc.get("entities_to_mention", []) if str(e).strip()],
             "long_tail": [by_id[i]["keyword"] for i in tail_ids],
+            # English URL. Falls back to a romanised slug only if the model
+            # skipped it — a readable English path is the whole point, but a
+            # page must never end up without one.
+            "url_slug": _clean_slug(svc.get("url_slug"), real_name),
             # Coverage contract for this page, in demand order. The builder
             # turns each into a section, so this is also what makes the page
             # grow when the data justifies it instead of staying a fixed size.
@@ -562,7 +666,7 @@ RETURN JSON ONLY:
     return [services_out[s] or {"name": s, "primary_keyword": None, "keywords": [],
                                 "total_volume": 0, "questions": [],
                                 "entities_to_mention": [], "long_tail": [],
-                                "attributes": []}
+                                "attributes": [], "url_slug": _clean_slug("", s)}
             for s in category["services"]]
 
 
@@ -642,6 +746,12 @@ def main():
     plan_categories.sort(key=lambda c: -c["total_volume"])
     all_services_ordered = [s["name"] for c in plan_categories for s in c["services"]]
 
+    # Areas hiding in the pages' keyword sets → Mode 5, not Mode 3 pages.
+    areas = extract_area_targets(claude, plan_categories, _AC_CITY_TERM)
+    top_service = (max((s for c in plan_categories for s in c["services"]),
+                       key=lambda s: s.get("total_volume") or 0)["name"]
+                   if plan_categories else "")
+
     out = {
         "business": {"name": BUSINESS_NAME, "niche": NICHE_DESCRIPTION,
                      "location": TARGET_LOCATION},
@@ -658,6 +768,21 @@ def main():
             "central_entity": site_context.get("central_entity", ""),
             "source_context": site_context.get("source_context", ""),
             "categories": plan_categories,
+            # Real, volume-backed areas. The builder shows these under "Areas
+            # We Serve" instead of the neighbourhood list it used to invent
+            # with an AI call. Text only — Mode 5 picks one of five slug
+            # patterns per city, so Mode 3 cannot predict an area page's URL
+            # and linking before Mode 5 has run would only ship 404s.
+            "areas_served": areas,
+            # Paste-ready inputs for the dedicated Mode 5 area pipeline. Its
+            # `extra_areas` field exists for areas people search that the geo
+            # dataset does not carry — which is exactly what these are.
+            "mode5_handover": {
+                "target_location": TARGET_LOCATION,
+                "primary_service": top_service,
+                "extra_areas": ", ".join(a["area"] for a in areas),
+                "language": CONTENT_LANGUAGE or "",
+            },
             "workflow_inputs": {
                 "services_mode3": ", ".join(all_services_ordered),
             },
