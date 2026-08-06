@@ -15,6 +15,10 @@ on:
       seed_keywords:
         description: "Comma-separated seed keywords for this client"
         required: true
+      keywords_csv_url:
+        description: "OPTIONAL: raw URL of a Keyword Planner CSV export. When set, Stage 1 uses THAT keyword set instead of pulling ideas from the seeds — your own curated export, no second API pull."
+        required: false
+        default: ''
       research_type:
         description: "Deliverable type: google_ads (campaigns+script) | seo (website-builder content plan) | both"
         required: false
@@ -122,7 +126,14 @@ jobs:
           LOCATION_ID: ${{ github.event.inputs.location_id }}
           LANGUAGE_ID: ${{ github.event.inputs.language_id }}
           LANGUAGE: ${{ github.event.inputs.language }}
+        if: ${{ github.event.inputs.keywords_csv_url == '' }}
         run: python scripts/keyword_research.py
+
+      - name: Stage 1-CSV - Use a Keyword Planner export instead of pulling
+        if: ${{ github.event.inputs.keywords_csv_url != '' }}
+        env:
+          KEYWORDS_CSV_URL: ${{ github.event.inputs.keywords_csv_url }}
+        run: python scripts/import_keyword_csv.py
 
       # SEO deliverables only. The Ads run is deliberately untouched: its
       # keyword set must stay exactly what Planner will report on, and
@@ -144,7 +155,11 @@ jobs:
           AC_DEPTH: "2"
         run: python scripts/expand_autocomplete.py
 
+      # Legacy mechanical clustering; Stage 3 no longer reads it. Skipped on a
+      # CSV run because it wants Stage 1's .txt, which the import does not
+      # produce — and a missing file would fail the whole workflow.
       - name: Stage 2 - Filter and cluster keywords (niche-agnostic)
+        if: ${{ github.event.inputs.keywords_csv_url == '' }}
         run: python scripts/filter_and_cluster.py keyword_data_output.txt
 
       - name: Stage 2.5 - Score keywords (Python data refinery — free, no API)

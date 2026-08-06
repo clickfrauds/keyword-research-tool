@@ -233,6 +233,40 @@ def dedupe_keywords(rows):
             keep["variants"] = [i["keyword"] for i in items[1:]]
         out.append(keep)
     out.sort(key=lambda r: -(r.get("avg_monthly_searches") or 0))
+
+    # Second pass: GOOGLE'S OWN grouping. Token overlap cannot see that
+    # "ai website builder", "ai website creator" and "ai site builder" are one
+    # query — different words entirely — yet Planner reports all three at
+    # 40,500/mo with competition 58 and identical bid ranges, because that is
+    # one close-variant group on its side. An identical metric tuple is Google
+    # telling us directly.
+    #
+    # Guarded, because low-volume rows collide by accident: on this dataset 64
+    # unrelated keywords shared (10/mo, no bids). Require a real bid range, so
+    # the tuple is distinctive, AND a shared content token, so two unrelated
+    # queries cannot merge on numbers alone. That kept 12 genuine merges and
+    # rejected all 64 coincidences.
+    metric = {}
+    for r in out:
+        v = r.get("avg_monthly_searches") or 0
+        lo, hi = r.get("low_top_bid") or 0, r.get("high_top_bid") or 0
+        if v > 0 and (lo > 0 or hi > 0):
+            metric.setdefault((v, r.get("competition_index"), lo, hi), []).append(r)
+    merged = set()
+    for items in metric.values():
+        if len(items) < 2:
+            continue
+        head = items[0]
+        head_toks = set(_kw_signature(head["keyword"]))
+        for other in items[1:]:
+            if id(other) in merged:
+                continue
+            if head_toks & set(_kw_signature(other["keyword"])):
+                head.setdefault("variants", []).append(other["keyword"])
+                head["variants"].extend(other.get("variants") or [])
+                merged.add(id(other))
+    if merged:
+        out = [r for r in out if id(r) not in merged]
     return out
 
 
