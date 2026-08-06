@@ -1,0 +1,223 @@
+{
+  "business": {
+    "name": "مؤسسة إتقان للعزل وكشف التسربات",
+    "niche": "شركة متخصصة في كشف تسربات المياه بالأجهزة الإلكترونية وأعمال العزل المائي والحراري للأسطح والخزاناتوالمسابح وترميم المنازل في مدينة الرياض",
+    "location": "Riyadh, Saudi Arabia"
+  },
+  "model_used": "claude-sonnet-5",
+  "language": "ar",
+  "mode3_site_plan": {
+    "industry_label": "شركة متخصصة في كشف تسربات المياه بالأجهز",
+    "central_entity": "العزل المائي وكشف التسربات",
+    "source_context": "مؤسسة إتقان للعزل وكشف التسربات هي شركة متخصصة في الرياض تقدم خدمات كشف التسربات بالأجهزة الإلكترونية وأعمال العزل المائي والحراري والترميم، مما يجعلها مرجعاً موثوقاً في هذا المجال بالمدينة",
+    "categories": [
+      {
+        "name": "Water Leak Detection",
+        "description": "خدمات الكشف عن تسربات المياه في المنازل والمسابح باستخدام الأجهزة الإلكترونية الحديثة",
+        "total_volume": 950,
+        "services": [
+          {
+            "name": "عزل حمامات بالرياض",
+            "primary_keyword": {
+              "keyword": "ترميم منازل",
+              "volume": 590,
+              "kd": 68,
+              "cpc_low": 441.57,
+              "cpc_high": 1703.31,
+              "funnel": "MOFU",
+              "intent": "",
+              "trend": "DECLINING",
+              "peak_months": "Jul/Aug",
+              "ai_overview_prone": false,
+              "flags": [],
+              "source": "autocomplete"
+            },
+            "keywords": [
+              {
+                "keyword": "ترميم منازل",
+                "volume": 590,
+                "kd": 68,
+                "cpc_low": 441.57,
+                "cpc_high": 1703.31,
+                "funnel": "MOFU",
+                "intent": "",
+                "trend": "DECLINING",
+                "peak_months": "Jul/Aug",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "autocomplete"
+              },
+              {
+                "keyword": "شركة ترميم منازل بالرياض",
+                "volume": 320,
+                "kd": 49,
+                "cpc_low": 520.33,
+                "cpc_high": 1703.15,
+                "funnel": "MOFU",
+                "intent": "",
+                "trend": "SEASONAL",
+                "peak_months": "Oct",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "autocomplete"
+              },
+              {
+                "keyword": "ترميم منازل قديمة",
+                "volume": 20,
+                "kd": 8,
+                "cpc_low": 0.0,
+                "cpc_high": 0.0,
+                "funnel": "MOFU",
+                "intent": "",
+                "trend": "SEASONAL",
+                "peak_months": "Nov",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "autocomplete"
+              },
+              {
+                "keyword": "ترميم منازل بالتقسيط",
+                "volume": 10,
+                "kd": 90,
+                "cpc_low": 293.61,
+                "cpc_high": 1483.89,
+                "funnel": "MOFU",
+                "intent": "",
+                "trend": "DECLINING",
+                "peak_months": "Jul",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "autocomplete"
+              },
+              {
+                "keyword": "ترميم منازل قبل وبعد",
+                "volume": 10,
+                "kd": 0,
+                "cpc_low": 0.0,
+                "cpc_high": 0.0,
+                "funnel": "MOFU",
+                "intent": "",
+                "trend": "DECLINING",
+                "peak_months": "Aug/Mar",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "autocomplete"
+              }
+            ],
+            "total_volume": 950,
+            "questions": [
+              {
+                "q": "كم تكلفة ترميم منزل قديم في الرياض؟",
+                "answer_angle": "عرض جدول أسعار تقريبي حسب مساحة المنزل ونوع الترميم المطلوب.",
+                "type": "conversational"
+              },
+              {
+                "q": "هل يمكن ترميم منزل بالتقسيط؟",
+                "answer_angle": "توضيح خيارات الدفع والتقسيط المتاحة مع الشركة وشروطها.",
+                "type": "conversational"
+              },
+              {
+                "q": "كيف يتم ترميم المنازل القديمة المتصدعة؟",
+                "answer_angle": "شرح خطوات الفحص الإنشائي وإصلاح الشقوق وتقوية الأساسات.",
+                "type": "paa"
+              },
+              {
+                "q": "ما الفرق بين المنزل قبل وبعد الترميم؟",
+                "answer_angle": "عرض صور ونماذج فعلية توضح نتائج الترميم لبناء الثقة.",
+                "type": "paa"
+              },
+              {
+                "q": "كم يستغرق ترميم منزل كامل بالرياض؟",
+                "answer_angle": "تحديد مدة زمنية تقريبية حسب حجم الأعمال المطلوبة.",
+                "type": "local"
+              }
+            ],
+            "entities_to_mention": [
+              "الشقوق الإنشائية",
+              "تقوية الأساسات",
+              "عزل الرطوبة",
+              "ترميم الواجهات",
+              "إصلاح التمديدات"
+            ],
+            "long_tail": [],
+            "attributes": [
+              {
+                "attribute": "cost",
+                "covers": "توضيح أسعار ترميم المنازل القديمة وخيارات التقسيط المتاحة."
+              },
+              {
+                "attribute": "process",
+                "covers": "شرح مراحل الترميم من الفحص إلى التسليم النهائي."
+              },
+              {
+                "attribute": "timeline",
+                "covers": "بيان المدة الزمنية المتوقعة لإنجاز الترميم حسب حجم المنزل."
+              },
+              {
+                "attribute": "comparison",
+                "covers": "عرض صور قبل وبعد لإظهار جودة العمل والفرق الملموس."
+              },
+              {
+                "attribute": "local",
+                "covers": "التأكيد على تغطية جميع أحياء الرياض وسرعة الاستجابة."
+              }
+            ]
+          },
+          {
+            "name": "ترميم منازل بالرياض",
+            "primary_keyword": null,
+            "keywords": [],
+            "total_volume": 0,
+            "questions": [],
+            "entities_to_mention": [],
+            "long_tail": [],
+            "attributes": []
+          },
+          {
+            "name": "كشف تسربات المياه بالرياض",
+            "primary_keyword": null,
+            "keywords": [],
+            "total_volume": 0,
+            "questions": [],
+            "entities_to_mention": [],
+            "long_tail": [],
+            "attributes": []
+          },
+          {
+            "name": "عزل أسطح بالرياض",
+            "primary_keyword": null,
+            "keywords": [],
+            "total_volume": 0,
+            "questions": [],
+            "entities_to_mention": [],
+            "long_tail": [],
+            "attributes": []
+          },
+          {
+            "name": "عزل خزانات بالرياض",
+            "primary_keyword": null,
+            "keywords": [],
+            "total_volume": 0,
+            "questions": [],
+            "entities_to_mention": [],
+            "long_tail": [],
+            "attributes": []
+          },
+          {
+            "name": "كشف تسربات المسابح بالرياض",
+            "primary_keyword": null,
+            "keywords": [],
+            "total_volume": 0,
+            "questions": [],
+            "entities_to_mention": [],
+            "long_tail": [],
+            "attributes": []
+          }
+        ]
+      }
+    ],
+    "workflow_inputs": {
+      "services_mode3": "عزل حمامات بالرياض, ترميم منازل بالرياض, كشف تسربات المياه بالرياض, عزل أسطح بالرياض, عزل خزانات بالرياض, كشف تسربات المسابح بالرياض"
+    }
+  }
+}
