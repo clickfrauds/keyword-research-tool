@@ -619,15 +619,24 @@ def assign_keywords(client, category, keywords):
             # and the model would rank it as dead. It isn't — see is_long_tail.
             tail_lines.append(f"{idx}|{k['keyword']}")
         else:
+            # intent + flags were computed and then never shown to the model.
+            # Without them it cannot tell a "near me" query from a plain one,
+            # or a spoken-style question from a typed keyword — so local and
+            # voice demand had no way of shaping the outline.
+            _flags = ",".join(k.get("flags", [])) or "-"
             lines.append(f"{idx}|{k['keyword']}|vol:{k['avg_monthly_searches']}"
-                         f"|kd:{k['kd_proxy']}|{k['funnel']}|{k.get('trend', '?')}")
+                         f"|kd:{k['kd_proxy']}|{k['funnel']}|{k.get('trend', '?')}"
+                         f"|{k.get('intent', '?')}|{_flags}")
 
     prompt = f"""CATEGORY: {category['name']}
 LOCATION: {TARGET_LOCATION or '(not local)'}
 SERVICE PAGES in this category (one page each — copy names EXACTLY):
 {chr(10).join('- ' + s for s in category['services'])}
 
-KEYWORDS ({len(lines)} rows — id|keyword|volume|kd|funnel|trend):
+KEYWORDS ({len(lines)} rows — id|keyword|volume|kd|funnel|trend|intent|flags).
+`flags` marks demand you must not lose: `local` = the searcher wants a
+provider near them or in a named area, `voice` = phrased the way people speak
+to an assistant, `urgent` = needs it today:
 {chr(10).join(lines)}
 {f'''
 LONG-TAIL QUERIES ({len(tail_lines)} rows — id|query). Real queries from Google
@@ -661,6 +670,19 @@ RULES:
      THAT section — not the page's generic entity list repeated.
    - Do NOT restate the attributes' benefit cards; those are short trust
      blocks elsewhere on the page. H2 sections are the body prose.
+   - LOCAL: if ANY keyword carries the `local` flag, or names an area or
+     "near me", one H2 must serve that intent directly — coverage of the
+     service area, response time to named areas, whether the price changes by
+     distance. Local demand is the highest-converting traffic a service page
+     gets and it was being folded into generic sections.
+   - VOICE: if any keyword carries the `voice` flag, or the long-tail list
+     holds spoken-style questions, one H2 must be phrased as a FULL SPOKEN
+     QUESTION, exactly as someone would say it out loud — "هل يمكن كشف
+     التسرب بدون تكسير؟", "Can you find a leak without breaking the floor?"
+     Assistants read back the passage that matches the spoken phrasing, so
+     the heading has to sound spoken, not typed.
+   - URGENT: if any keyword carries the `urgent` flag, one H2 covers same-day
+     or emergency availability.
    - Order by what a buyer needs first, ending with the section that leads
      naturally into the call to action.
 4b. attributes: the ANGLES this page must cover to be complete. A page that
