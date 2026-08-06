@@ -125,44 +125,65 @@ def _tokens(s):
     return re.findall(r"[^\W_]+", str(s).lower(), re.UNICODE)
 
 
+_AR_SCRIPT = re.compile(r"[؀-ۿ]")
+# Arabic fuses the definite article (and some prepositions) onto the front of
+# the word, which is fatal for a PREFIX stem: خزانات stems to خزانا but
+# الخزانات stems to الخزا, so "اسعار عزل الخزانات" failed to match its own
+# seed "عزل خزانات". Strip the article before stemming — applied to seed and
+# query alike, so the two sides always agree.
+_AR_PREFIX = re.compile(r"^(?:وال|فال|بال|كال|لل|ال)")
+
+
 def _stem(t):
     """Crude 5-char prefix stem. Enough to tie roofing/roofers/roofer and
     maintenance/maintain together without dragging in a stemming library."""
+    if _AR_SCRIPT.search(t):
+        stripped = _AR_PREFIX.sub("", t)
+        if len(stripped) >= 2:      # never strip a word down to nothing
+            t = stripped
     return t[:5]
 
 
-def anchor_prefixes(seeds, coverage=0.5):
-    """Stems that appear in at least `coverage` of the seeds.
+def anchor_prefixes(seeds):
+    """One stem set PER SEED — each seed defines its own topic.
 
-    These describe what the run is ABOUT. Derived from the seeds themselves so
-    the filter works for any niche in any language — nothing is hardcoded."""
-    if not seeds:
-        return []
-    counts = {}
-    for s in seeds:
-        for stem in {_stem(t) for t in _tokens(s)
-                     if t not in _STOPWORDS and len(t) > 1}:
-            counts[stem] = counts.get(stem, 0) + 1
-    need = max(1, round(coverage * len(seeds)))
-    return sorted([p for p, n in counts.items() if n >= need])
+    This used to be a single global set: stems appearing in >=50% of the
+    seeds. That silently assumes every seed is about the same thing, and a
+    real run breaks it immediately. Seeds
+    "كشف تسربات المياه / عزل اسطح / عزل خزانات" produced exactly one global
+    anchor (عزل, 2 of 3) and the filter then threw away EVERY leak-detection
+    query — the larger half of the site. Nothing to do with Arabic: English
+    seeds "water leak detection / roof insulation / tank insulation" fail the
+    same way.
+
+    Per seed, a suggestion is judged against the seed that could have produced
+    it, which is what the probe structure actually models."""
+    out = []
+    for s in (seeds or []):
+        stems = {_stem(t) for t in _tokens(s)
+                 if t not in _STOPWORDS and len(t) > 1}
+        if stems:
+            out.append(stems)
+    return out
 
 
 def is_relevant(query, anchors):
-    """A query must hit at least TWO anchor stems (or all of them, when the
-    seeds only produced one). Measured on real data:
+    """Relevant if the query shares enough vocabulary with ANY ONE seed.
 
-      seeds "ac repair dubai / air conditioning repair dubai / ac maintenance
-      dubai" → anchors {ac, dubai, repai}. "ac maintenance dubai marina" keeps
-      2 ✓, "air conditioning repair dubai marina" keeps 2 ✓ (synonym survives),
-      "dubai marina restaurants" keeps 1 ✗.
-
-    One anchor alone is too loose — that is how "is roofing a good career"
-    ("roof") and "how much does seo cost" ("seo") got in during testing."""
+    Two stems for a multi-word seed, one for a single-word seed. One stem is
+    too loose on multi-word seeds — that is how "is roofing a good career"
+    (shares "roofing") and "ppc vs ppc cement" (shares "ppc") got through in
+    testing; two is what dropped them while keeping
+    "air conditioning repair dubai marina", which shares no "ac" token with
+    its seed but plenty else."""
     if not anchors:
         return True
     stems = {_stem(t) for t in _tokens(query)}
-    hits = sum(1 for a in anchors if a in stems)
-    return hits >= min(2, len(anchors))
+    for seed_stems in anchors:
+        need = 1 if len(seed_stems) == 1 else 2
+        if len(stems & seed_stems) >= need:
+            return True
+    return False
 
 
 def clean_suggestion(s):
@@ -220,7 +241,8 @@ def expand_queries(seeds, hl="en", gl=None, depth=2, max_seeds_d2=45,
 
     anchors = anchor_prefixes(seeds)
     if verbose:
-        print(f"   ⚓ anchor stems from seeds: {', '.join(anchors) or '(none)'}")
+        print(f"   ⚓ topic vocabulary from {len(anchors)} seed(s), "
+              f"{sum(len(a) for a in anchors)} stems")
 
     def run(probe_list):
         probe_list = list(dict.fromkeys(probe_list))
