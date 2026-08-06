@@ -695,6 +695,12 @@ RULES:
    what the page must actually say to satisfy it. ORDER THEM by how much
    demand the data shows — the builder writes them in the order you give.
 5. "name" must be a CHARACTER-FOR-CHARACTER copy of a service page name.
+4c. internal_links: 2-4 OTHER page names from the list above that a reader of
+   this page would genuinely want next — a shared job, the step before or
+   after, the thing they must choose between. Not "everything in the
+   category". The builder anchors each link on the TARGET page's primary
+   keyword, so choosing the right target is the whole decision here. Never
+   link a page to itself.
 5b. url_slug: the page's URL, in ENGLISH, lowercase a-z 0-9 and hyphens only,
    3-6 words. Translate the MEANING of the service into English — never
    transliterate ("كشف تسربات المياه بالرياض" → "water-leak-detection-riyadh",
@@ -717,6 +723,7 @@ RETURN JSON ONLY:
   "type": "conversational|voice|paa|local"}}],
   "h2_outline": [{{"h2": "conversion-shaped heading in the site language",
     "keyword_ids": [5, 12], "entities": ["..."]}}],
+  "internal_links": ["exact name of a RELATED page in this category"],
   "attributes": [{{"attribute": "cost", "covers": "one sentence on what this page must say"}}],
   "entities_to_mention": ["..."]}}], "excluded_ids": [3]}}"""
 
@@ -778,6 +785,14 @@ RETURN JSON ONLY:
             # page's own set and used once, so a heading cannot claim a
             # keyword that belongs to another section or another page.
             "h2_outline": _validate_outline(svc.get("h2_outline"), ids, by_id),
+            # Related pages by MEANING. The builder used to pick link targets
+            # mechanically — same-category siblings plus two from each other
+            # category — so a Google Ads page linked to whatever happened to
+            # sit first elsewhere. Names are validated against the real page
+            # list below, and self-links dropped.
+            "internal_links": [str(x).strip() for x in
+                               (svc.get("internal_links") or [])[:4]
+                               if str(x).strip()],
             # Coverage contract for this page, in demand order. The builder
             # turns each into a section, so this is also what makes the page
             # grow when the data justifies it instead of staying a fixed size.
@@ -795,6 +810,120 @@ RETURN JSON ONLY:
                                 "attributes": [], "h2_outline": [],
                                 "url_slug": _clean_slug("", s)}
             for s in category["services"]]
+
+
+
+# ══════════════════════════════════════════════════════════════════════════
+# SERP merge guard + core/outer + publish order
+# ══════════════════════════════════════════════════════════════════════════
+
+SERP_GROUP_OVERLAP = int(os.environ.get("SERP_GROUP_OVERLAP", "4"))
+SERP_MAX_QUERIES = int(os.environ.get("SERP_MAX_QUERIES", "60"))
+
+
+def _serp_urls(keyword, gl, hl, num=10):
+    """Top organic URLs for one query. Same SerpApi key Mode 6 already uses,
+    and only the result URLs — no page fetching, so no scraping credits."""
+    key = os.environ.get("SERPAPI_API_KEY", "").strip()
+    if not key:
+        return None
+    try:
+        import urllib.parse, urllib.request
+        q = urllib.parse.urlencode({"engine": "google", "q": keyword,
+                                    "num": num, "gl": gl or "us",
+                                    "hl": hl or "en", "api_key": key})
+        with urllib.request.urlopen(f"https://serpapi.com/search?{q}", timeout=30) as r:
+            data = json.loads(r.read().decode("utf-8", "replace"))
+        out = []
+        for res in (data.get("organic_results") or [])[:num]:
+            u = str(res.get("link") or "")
+            if u.startswith("http") and "google." not in u:
+                out.append(u.split("?")[0].rstrip("/").lower())
+        return out
+    except Exception:
+        return None
+
+
+def assign_serp_groups(plan_categories, gl, hl):
+    """Group pages whose primary keywords return the SAME SERP.
+
+    The one Koray check the data alone cannot make. Keyword ids being
+    mutually exclusive stops two pages sharing a KEYWORD; it says nothing
+    about two pages chasing the same RESULT SET. The roofing plan split
+    "roofing seo company" and "roofing seo services" into separate pages —
+    different strings, one SERP, so the two pages would only have competed
+    with each other.
+
+    One search per page (1 SerpApi credit each), URLs only. Pages sharing
+    SERP_GROUP_OVERLAP of the top ten get the same serp_group_id and every
+    page after the first in a group is flagged serp_merge_into. Nothing is
+    deleted — the call is the user's.
+
+    No key, or any failure, leaves every page ungrouped."""
+    pages = [s for c in plan_categories for s in c["services"]
+             if (s.get("primary_keyword") or {}).get("keyword")]
+    if not pages or not os.environ.get("SERPAPI_API_KEY", "").strip():
+        return 0
+    pages = sorted(pages, key=lambda s: -(s.get("total_volume") or 0))[:SERP_MAX_QUERIES]
+    print(f"\n🔍 SERP merge guard — {len(pages)} queries "
+          f"({len(pages)} SerpApi credits)...")
+    serps = {}
+    for s in pages:
+        kw = s["primary_keyword"]["keyword"]
+        urls = _serp_urls(kw, gl, hl)
+        if urls:
+            serps[s["name"]] = set(urls)
+        time.sleep(1.2)
+    if len(serps) < 2:
+        print("   ℹ️ not enough SERP data — pages left ungrouped")
+        return 0
+    groups, gid = {}, 0
+    for s in pages:
+        name = s["name"]
+        if name not in serps or name in groups:
+            continue
+        gid += 1
+        groups[name] = gid
+        s["serp_group_id"] = gid
+        for other in pages:
+            o = other["name"]
+            if o == name or o in groups or o not in serps:
+                continue
+            if len(serps[name] & serps[o]) >= SERP_GROUP_OVERLAP:
+                groups[o] = gid
+                other["serp_group_id"] = gid
+                other["serp_merge_into"] = name
+                print(f"   ⚠️  '{o}' shares "
+                      f"{len(serps[name] & serps[o])}/10 results with '{name}' "
+                      f"— same SERP, consider ONE page")
+    merged = sum(1 for s in pages if s.get("serp_merge_into"))
+    print(f"   ✅ {gid} distinct SERPs across {len(serps)} pages"
+          + (f" | {merged} merge candidate(s)" if merged else " | no overlap"))
+    return merged
+
+
+def assign_sections(plan_categories):
+    """core = the page that earns; outer = the page that supports it.
+
+    Derived, not asked for: a page whose primary keyword is transactional or
+    BOFU is what a buyer lands on ready to hire — core. Informational/TOFU
+    pages exist to build authority and hand it to core through their links.
+
+    publish_order is the build order: core first, highest demand first. Even
+    when everything ships the same day, generating the money pages first
+    means a run that dies halfway still leaves the pages that matter."""
+    pages = [s for c in plan_categories for s in c["services"]]
+    for s in pages:
+        pk = s.get("primary_keyword") or {}
+        s["section"] = ("core" if (pk.get("intent") in ("transactional", "commercial")
+                                   or pk.get("funnel") == "BOFU") else "outer")
+    order = sorted(pages, key=lambda s: (0 if s["section"] == "core" else 1,
+                                         -(s.get("total_volume") or 0)))
+    for i, s in enumerate(order, 1):
+        s["publish_order"] = i
+    n_core = sum(1 for s in pages if s["section"] == "core")
+    print(f"   🎯 {n_core} core / {len(pages) - n_core} outer pages "
+          f"(core generates first)")
 
 
 # ══════════════════════════════════════════════════════════════════════════
@@ -872,6 +1001,9 @@ def main():
     # Demand-first ordering: highest-volume categories/pages generate first
     plan_categories.sort(key=lambda c: -c["total_volume"])
     all_services_ordered = [s["name"] for c in plan_categories for s in c["services"]]
+
+    assign_sections(plan_categories)
+    assign_serp_groups(plan_categories, _AC_GL, CONTENT_LANGUAGE or "en")
 
     # Areas hiding in the pages' keyword sets → Mode 5, not Mode 3 pages.
     areas = extract_area_targets(claude, plan_categories, _AC_CITY_TERM)
