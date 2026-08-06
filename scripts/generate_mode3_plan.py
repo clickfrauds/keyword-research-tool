@@ -878,6 +878,79 @@ def _serp_urls(keyword, gl, hl, num=10):
         return None
 
 
+SERP_STAGE = os.environ.get("SERP_STAGE", "pre").strip().lower()
+SERP_AUTO_MERGE = os.environ.get("SERP_AUTO_MERGE", "yes").strip().lower() not in (
+    "no", "false", "0")
+
+
+def serp_prefilter(services, gl, hl):
+    """Drop duplicate pages BEFORE anything is planned for them.
+
+    The post-assignment guard could only warn, because it needs each page's
+    primary keyword and that exists only after Claude assigns keywords. By
+    then the run has already grouped, pulled Planner data for, and written a
+    full brief for pages that should never have existed — and the user is
+    handed three warnings instead of a clean plan.
+
+    Checking the service NAMES first costs the same searches and moves the
+    decision to the only point where it is free. A page that shares four of
+    Google's top ten with another page is not a second page; it is the same
+    page written twice, and two of them can only split their own signal.
+
+    Returns (kept_services, merges) — merges maps a dropped name to the
+    survivor, so the JSON can still show what happened and why."""
+    if not services or len(services) < 2:
+        return services, {}
+    if not os.environ.get("SERPAPI_API_KEY", "").strip():
+        print("   ℹ️ no SERPAPI_API_KEY — SERP prefilter skipped, "
+              "all requested pages kept")
+        return services, {}
+
+    print(f"\n🔍 SERP prefilter — {len(services)} service names "
+          f"({len(services)} SerpApi credits)...")
+    serps = {}
+    for name in services:
+        urls = _serp_urls(name, gl, hl)
+        if urls:
+            serps[name] = set(urls)
+        time.sleep(1.2)
+    if len(serps) < 2:
+        print("   ℹ️ not enough SERP data — all pages kept")
+        return services, {}
+
+    kept, merges, flagged = [], {}, set()
+    for name in services:                    # input order = the user's priority
+        if name in merges:
+            continue
+        mine = serps.get(name)
+        kept.append(name)
+        if not mine:
+            continue
+        for other in services:
+            if other == name or other in merges or other in kept:
+                continue
+            theirs = serps.get(other)
+            if theirs and len(mine & theirs) >= SERP_GROUP_OVERLAP:
+                shared = len(mine & theirs)
+                if SERP_AUTO_MERGE:
+                    merges[other] = name
+                    print(f"   🔗 '{other}' merged into '{name}' "
+                          f"— {shared}/10 results identical")
+                else:
+                    flagged.add(other)
+                    print(f"   ⚠️  '{other}' shares {shared}/10 with '{name}' "
+                          f"— same SERP (SERP_AUTO_MERGE=no, page kept)")
+    if merges:
+        print(f"   ✅ {len(services)} requested → {len(kept)} distinct pages "
+              f"({len(merges)} merged before planning)")
+    elif flagged:
+        print(f"   ⚠️  {len(flagged)} page(s) share a SERP with another and were "
+              f"KEPT — set SERP_AUTO_MERGE=yes to collapse them")
+    else:
+        print(f"   ✅ {len(kept)} pages, every one its own SERP")
+    return kept, merges
+
+
 def assign_serp_groups(plan_categories, gl, hl):
     """Group pages whose primary keywords return the SAME SERP.
 
@@ -1002,7 +1075,11 @@ def main():
     if AC_PER_CAT > 0:
         globals()["_AC_CITY_TERM"], globals()["_AC_EXCLUDE"] = local_place_terms(claude)
 
-    categories, site_context = group_services(claude, SERVICES)
+    # Duplicate pages die here, before anything is planned for them.
+    services, serp_merges = (serp_prefilter(SERVICES, _AC_GL, CONTENT_LANGUAGE or "en")
+                             if SERP_STAGE in ("pre", "both") else (SERVICES, {}))
+
+    categories, site_context = group_services(claude, services)
     if site_context.get("central_entity"):
         print(f"   🎯 central entity: {site_context['central_entity']}")
     print(f"   ✅ {len(categories)} categories: " +
@@ -1037,7 +1114,10 @@ def main():
     all_services_ordered = [s["name"] for c in plan_categories for s in c["services"]]
 
     assign_sections(plan_categories)
-    assign_serp_groups(plan_categories, _AC_GL, CONTENT_LANGUAGE or "en")
+    # The prefilter already spent the credits and acted on the answer; running
+    # the same check again on the primary keywords would only re-buy it.
+    if SERP_STAGE in ("post", "both"):
+        assign_serp_groups(plan_categories, _AC_GL, CONTENT_LANGUAGE or "en")
 
     # Areas hiding in the pages' keyword sets → Mode 5, not Mode 3 pages.
     areas = extract_area_targets(claude, plan_categories, _AC_CITY_TERM)
@@ -1067,6 +1147,9 @@ def main():
             # patterns per city, so Mode 3 cannot predict an area page's URL
             # and linking before Mode 5 has run would only ship 404s.
             "areas_served": areas,
+            # {dropped page: the page it merged into} — a page absent from this
+            # plan that the user asked for is explained here, not silently gone.
+            "serp_merges": serp_merges,
             # Paste-ready inputs for the dedicated Mode 5 area pipeline. Its
             # `extra_areas` field exists for areas people search that the geo
             # dataset does not carry — which is exactly what these are.
