@@ -319,14 +319,33 @@ def fetch_category_keywords(ads_client, category, location_id, language_id, glob
     cannibalization guard, layer 1)."""
     seeds = category["services"]
     rows = []
-    for i in range(0, len(seeds), ADS_SEED_LIMIT):
-        chunk = seeds[i:i + ADS_SEED_LIMIT]
-        try:
-            rows.extend(ads_fetch_ideas(ads_client, chunk, location_id, language_id))
-        except Exception as e:
-            print(f"⚠️ Ads call failed for '{category['name']}' chunk {i // ADS_SEED_LIMIT + 1}: "
-                  f"{str(e)[:120]} — continuing")
-        time.sleep(ADS_CALL_DELAY)
+    # LANGUAGE PER SEED SCRIPT, not per run. keyword_research.py learned this
+    # in July: a run-wide language sends every seed to the Planner under one
+    # filter, so in a mixed list the minority script comes back nearly empty.
+    # This script never got the fix. A seed written in Arabic or Devanagari is
+    # unambiguous, so its own script decides; Latin-script seeds keep the
+    # run-wide code, because es/fr/de cannot be told apart by script.
+    by_lang = {}
+    for s in seeds:
+        script_lang, _why = detect_language_id([s])
+        if language_id and script_lang != "1000" and script_lang != language_id:
+            seed_lang = script_lang
+        else:
+            seed_lang = language_id or script_lang
+        by_lang.setdefault(seed_lang, []).append(s)
+    if len(by_lang) > 1:
+        print(f"   🔤 mixed scripts in '{category['name']}': "
+              + ", ".join(f"{len(v)} seed(s) as {k}" for k, v in by_lang.items()))
+    for seed_lang, lang_seeds in by_lang.items():
+        for i in range(0, len(lang_seeds), ADS_SEED_LIMIT):
+            chunk = lang_seeds[i:i + ADS_SEED_LIMIT]
+            try:
+                rows.extend(ads_fetch_ideas(ads_client, chunk, location_id, seed_lang))
+            except Exception as e:
+                print(f"⚠️ Ads call failed for '{category['name']}' chunk "
+                      f"{i // ADS_SEED_LIMIT + 1} [{seed_lang}]: "
+                      f"{str(e)[:120]} — continuing")
+            time.sleep(ADS_CALL_DELAY)
     for r in rows:
         r.setdefault("source", "planner")
     out, local_seen = [], set()
