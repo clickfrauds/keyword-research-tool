@@ -1,0 +1,2455 @@
+{
+  "business": {
+    "name": "SEOblogy",
+    "niche": "AI website builder that generates complete SEO-optimised websites automatically — full sites, Google Ads landing pages, programmatic city pages and built-in SEO automation",
+    "location": "N/A"
+  },
+  "model_used": "claude-sonnet-5",
+  "language": "",
+  "mode3_site_plan": {
+    "industry_label": "AI website builder that generates comple",
+    "central_entity": "AI-generated website",
+    "source_context": "SEOblogy publishes this site as the maker of an AI website builder platform, giving it firsthand authority on how automated SEO-optimised sites, landing pages, and programmatic pages are built.",
+    "categories": [
+      {
+        "name": "AI Website Building",
+        "description": "Tools that automatically generate full websites optimised for SEO, including platform-specific builders.",
+        "total_volume": 311360,
+        "services": [
+          {
+            "name": "AI Website Builder",
+            "primary_keyword": {
+              "keyword": "ai website builder",
+              "volume": 110000,
+              "kd": 77,
+              "cpc_low": 216.98,
+              "cpc_high": 4159.01,
+              "funnel": "MOFU",
+              "intent": "commercial",
+              "trend": "STABLE",
+              "peak_months": "Aug/Sep/Oct/Jan/Feb/Mar/Apr/May/Jun",
+              "ai_overview_prone": false,
+              "flags": [],
+              "source": "planner"
+            },
+            "keywords": [
+              {
+                "keyword": "ai website builder",
+                "volume": 110000,
+                "kd": 77,
+                "cpc_low": 216.98,
+                "cpc_high": 4159.01,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "STABLE",
+                "peak_months": "Aug/Sep/Oct/Jan/Feb/Mar/Apr/May/Jun",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "planner"
+              },
+              {
+                "keyword": "wix ai website builder",
+                "volume": 60500,
+                "kd": 45,
+                "cpc_low": 92.44,
+                "cpc_high": 2610.25,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "GROWING",
+                "peak_months": "May/Jun",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "planner"
+              },
+              {
+                "keyword": "wix artificial intelligence",
+                "volume": 27100,
+                "kd": 75,
+                "cpc_low": 95.72,
+                "cpc_high": 1788.45,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "GROWING",
+                "peak_months": "Feb/Mar/Apr/May",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "planner"
+              },
+              {
+                "keyword": "ai website builder free",
+                "volume": 22200,
+                "kd": 83,
+                "cpc_low": 91.06,
+                "cpc_high": 2647.48,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "STABLE",
+                "peak_months": "Jul/Aug/Sep/Oct/Nov/Dec/Jan/Feb/Mar/Apr/May/Jun",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "planner"
+              },
+              {
+                "keyword": "ai powered website builder",
+                "volume": 14800,
+                "kd": 41,
+                "cpc_low": 405.59,
+                "cpc_high": 5732.27,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "GROWING",
+                "peak_months": "Feb/Mar/Apr/Jun",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "planner"
+              },
+              {
+                "keyword": "ai website maker",
+                "volume": 12100,
+                "kd": 79,
+                "cpc_low": 255.04,
+                "cpc_high": 3664.77,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "GROWING",
+                "peak_months": "Aug/Oct/Jan/Feb/Mar/Apr/May",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "planner"
+              },
+              {
+                "keyword": "ai website generator",
+                "volume": 9900,
+                "kd": 74,
+                "cpc_low": 159.77,
+                "cpc_high": 2923.98,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "DECLINING",
+                "peak_months": "Aug",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "planner"
+              },
+              {
+                "keyword": "best ai website builder",
+                "volume": 9900,
+                "kd": 81,
+                "cpc_low": 639.21,
+                "cpc_high": 5975.16,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "STABLE",
+                "peak_months": "Jul/Aug/Sep/Oct/Nov/Dec/Jan/Feb/Mar/Apr/May/Jun",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "planner"
+              },
+              {
+                "keyword": "durable ai website builder",
+                "volume": 5400,
+                "kd": 73,
+                "cpc_low": 65.97,
+                "cpc_high": 1980.48,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "GROWING",
+                "peak_months": "Mar",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "planner"
+              },
+              {
+                "keyword": "best free ai website builder",
+                "volume": 3600,
+                "kd": 81,
+                "cpc_low": 137.73,
+                "cpc_high": 3055.09,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "STABLE",
+                "peak_months": "Jul/Aug/Sep/Oct/Jan/Feb/Mar/Apr/Jun",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "planner"
+              },
+              {
+                "keyword": "ai web builder",
+                "volume": 3600,
+                "kd": 80,
+                "cpc_low": 166.75,
+                "cpc_high": 3353.34,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "GROWING",
+                "peak_months": "Oct/Nov/Dec/Jan/Feb/Mar/Apr/May/Jun",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "planner"
+              },
+              {
+                "keyword": "website building ai",
+                "volume": 2900,
+                "kd": 82,
+                "cpc_low": 125.76,
+                "cpc_high": 2594.24,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "GROWING",
+                "peak_months": "Oct/Dec/Jan/Feb/Mar/Apr/May/Jun",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "planner"
+              },
+              {
+                "keyword": "website builder low cost",
+                "volume": 2900,
+                "kd": 64,
+                "cpc_low": 1253.13,
+                "cpc_high": 7803.1,
+                "funnel": "BOFU",
+                "intent": "transactional",
+                "trend": "STABLE",
+                "peak_months": "Jul/Sep/Feb/Mar/Apr/May/Jun",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "autocomplete"
+              },
+              {
+                "keyword": "ai website maker free",
+                "volume": 2400,
+                "kd": 78,
+                "cpc_low": 111.56,
+                "cpc_high": 2667.35,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "STABLE",
+                "peak_months": "Aug/Oct/Nov/Dec",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "planner"
+              },
+              {
+                "keyword": "wix ai builder",
+                "volume": 1600,
+                "kd": 51,
+                "cpc_low": 152.09,
+                "cpc_high": 3383.95,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "GROWING",
+                "peak_months": "Apr",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "planner"
+              },
+              {
+                "keyword": "chatgpt website builder",
+                "volume": 1000,
+                "kd": 68,
+                "cpc_low": 64.6,
+                "cpc_high": 3726.93,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "STABLE",
+                "peak_months": "Feb",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "planner"
+              },
+              {
+                "keyword": "ai ecommerce website builder",
+                "volume": 480,
+                "kd": 75,
+                "cpc_low": 259.35,
+                "cpc_high": 5105.09,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "SEASONAL",
+                "peak_months": "Oct",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "planner"
+              },
+              {
+                "keyword": "ai based website builder",
+                "volume": 480,
+                "kd": 71,
+                "cpc_low": 216.6,
+                "cpc_high": 2576.52,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "DECLINING",
+                "peak_months": "Jul/Aug/Sep/Oct/Nov/Jan/Feb/Mar",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "planner"
+              },
+              {
+                "keyword": "top ai website builders",
+                "volume": 480,
+                "kd": 80,
+                "cpc_low": 428.63,
+                "cpc_high": 4848.01,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "GROWING",
+                "peak_months": "Jan/Feb/Mar/Apr",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "autocomplete"
+              },
+              {
+                "keyword": "website builder with ai",
+                "volume": 390,
+                "kd": 77,
+                "cpc_low": 270.35,
+                "cpc_high": 5415.93,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "STABLE",
+                "peak_months": "Oct/Nov/Jan/Feb",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "planner"
+              },
+              {
+                "keyword": "ai page builder",
+                "volume": 390,
+                "kd": 75,
+                "cpc_low": 176.47,
+                "cpc_high": 3741.82,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "GROWING",
+                "peak_months": "Oct/Nov/Jan/Feb/Mar/May/Jun",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "planner"
+              },
+              {
+                "keyword": "what is website builder",
+                "volume": 390,
+                "kd": 56,
+                "cpc_low": 297.33,
+                "cpc_high": 3644.41,
+                "funnel": "TOFU",
+                "intent": "question",
+                "trend": "DECLINING",
+                "peak_months": "Jul/Sep/Oct/Feb/Mar/Apr",
+                "ai_overview_prone": true,
+                "flags": [
+                  "voice"
+                ],
+                "source": "autocomplete"
+              },
+              {
+                "keyword": "ai website builder tools",
+                "volume": 390,
+                "kd": 76,
+                "cpc_low": 245.35,
+                "cpc_high": 5940.75,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "DECLINING",
+                "peak_months": "Oct",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "autocomplete"
+              },
+              {
+                "keyword": "ai website builder open source",
+                "volume": 320,
+                "kd": 72,
+                "cpc_low": 141.74,
+                "cpc_high": 1461.56,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "DECLINING",
+                "peak_months": "Jul/Aug/Oct",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "planner"
+              },
+              {
+                "keyword": "ai website builder reddit",
+                "volume": 320,
+                "kd": 71,
+                "cpc_low": 1279.73,
+                "cpc_high": 5157.07,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "DECLINING",
+                "peak_months": "Jul/Aug/Sep/Oct/Dec/Jan/Mar",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "planner"
+              },
+              {
+                "keyword": "durable co ai website builder",
+                "volume": 320,
+                "kd": 78,
+                "cpc_low": 38.91,
+                "cpc_high": 833.75,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "DECLINING",
+                "peak_months": "Jul/Aug",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "planner"
+              },
+              {
+                "keyword": "ai website examples",
+                "volume": 320,
+                "kd": 62,
+                "cpc_low": 257.58,
+                "cpc_high": 1461.68,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "STABLE",
+                "peak_months": "Mar/Apr/May/Jun",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "autocomplete"
+              },
+              {
+                "keyword": "ai builder pricing",
+                "volume": 260,
+                "kd": 48,
+                "cpc_low": 179.26,
+                "cpc_high": 5523.73,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "DECLINING",
+                "peak_months": "Jul/Aug/Sep/Oct/Nov",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "autocomplete"
+              },
+              {
+                "keyword": "cheap ai website builder",
+                "volume": 210,
+                "kd": 87,
+                "cpc_low": 557.71,
+                "cpc_high": 6556.84,
+                "funnel": "BOFU",
+                "intent": "transactional",
+                "trend": "GROWING",
+                "peak_months": "Oct/Jan/Feb/Mar/Apr/May/Jun",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "autocomplete"
+              },
+              {
+                "keyword": "gpt website builder",
+                "volume": 170,
+                "kd": 51,
+                "cpc_low": 44.62,
+                "cpc_high": 1708.71,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "GROWING",
+                "peak_months": "Apr/May",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "planner"
+              },
+              {
+                "keyword": "ai website builder github",
+                "volume": 140,
+                "kd": 59,
+                "cpc_low": 380.24,
+                "cpc_high": 2070.45,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "DECLINING",
+                "peak_months": "Jul/Aug/Sep/Oct/Nov/Dec/Jan/Feb/Mar",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "autocomplete"
+              },
+              {
+                "keyword": "ai website template generator",
+                "volume": 110,
+                "kd": 80,
+                "cpc_low": 138.23,
+                "cpc_high": 2496.28,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "DECLINING",
+                "peak_months": "Jul/Aug/Sep",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "planner"
+              },
+              {
+                "keyword": "how to create ai website",
+                "volume": 110,
+                "kd": 80,
+                "cpc_low": 81.38,
+                "cpc_high": 1571.72,
+                "funnel": "TOFU",
+                "intent": "question",
+                "trend": "STABLE",
+                "peak_months": "Jul/Aug/Dec/Apr",
+                "ai_overview_prone": true,
+                "flags": [
+                  "voice"
+                ],
+                "source": "autocomplete"
+              },
+              {
+                "keyword": "website builder examples",
+                "volume": 110,
+                "kd": 58,
+                "cpc_low": 191.93,
+                "cpc_high": 1530.83,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "DECLINING",
+                "peak_months": "Jul/Sep/Oct/Feb",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "autocomplete"
+              },
+              {
+                "keyword": "openai website builder",
+                "volume": 90,
+                "kd": 73,
+                "cpc_low": 385.78,
+                "cpc_high": 5326.49,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "GROWING",
+                "peak_months": "Oct",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "planner"
+              },
+              {
+                "keyword": "ai website builder app",
+                "volume": 90,
+                "kd": 80,
+                "cpc_low": 244.51,
+                "cpc_high": 3745.27,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "GROWING",
+                "peak_months": "Oct/Mar/Jun",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "autocomplete"
+              },
+              {
+                "keyword": "ai website design agency",
+                "volume": 90,
+                "kd": 70,
+                "cpc_low": 569.99,
+                "cpc_high": 2425.94,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "GROWING",
+                "peak_months": "Mar",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "autocomplete"
+              },
+              {
+                "keyword": "ai website builder google",
+                "volume": 90,
+                "kd": 69,
+                "cpc_low": 259.26,
+                "cpc_high": 2600.97,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "GROWING",
+                "peak_months": "Mar/Apr/May",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "autocomplete"
+              },
+              {
+                "keyword": "ai website builder gratis",
+                "volume": 90,
+                "kd": 80,
+                "cpc_low": 50.66,
+                "cpc_high": 404.87,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "GROWING",
+                "peak_months": "Apr/May/Jun",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "autocomplete"
+              },
+              {
+                "keyword": "ai website design ideas",
+                "volume": 70,
+                "kd": 60,
+                "cpc_low": 273.06,
+                "cpc_high": 1497.65,
+                "funnel": "TOFU",
+                "intent": "informational",
+                "trend": "STABLE",
+                "peak_months": "Jul/Aug/Feb/Mar",
+                "ai_overview_prone": true,
+                "flags": [],
+                "source": "autocomplete"
+              },
+              {
+                "keyword": "ai website builder prompt",
+                "volume": 70,
+                "kd": 78,
+                "cpc_low": 261.24,
+                "cpc_high": 2617.4,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "STABLE",
+                "peak_months": "Dec/Mar/Apr/May",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "autocomplete"
+              },
+              {
+                "keyword": "ai website builder price",
+                "volume": 50,
+                "kd": 67,
+                "cpc_low": 297.43,
+                "cpc_high": 2611.01,
+                "funnel": "BOFU",
+                "intent": "transactional",
+                "trend": "SEASONAL",
+                "peak_months": "Oct",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "autocomplete"
+              },
+              {
+                "keyword": "can ai design website",
+                "volume": 30,
+                "kd": 72,
+                "cpc_low": 308.24,
+                "cpc_high": 2642.13,
+                "funnel": "TOFU",
+                "intent": "question",
+                "trend": "DECLINING",
+                "peak_months": "Jul/Aug/Sep",
+                "ai_overview_prone": true,
+                "flags": [
+                  "voice"
+                ],
+                "source": "autocomplete"
+              },
+              {
+                "keyword": "which ai builds websites",
+                "volume": 30,
+                "kd": 84,
+                "cpc_low": 258.54,
+                "cpc_high": 3814.22,
+                "funnel": "TOFU",
+                "intent": "question",
+                "trend": "GROWING",
+                "peak_months": "Mar/Apr/May/Jun",
+                "ai_overview_prone": true,
+                "flags": [
+                  "voice"
+                ],
+                "source": "autocomplete"
+              },
+              {
+                "keyword": "generative ai website builder",
+                "volume": 20,
+                "kd": 62,
+                "cpc_low": 1824.29,
+                "cpc_high": 5652.76,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "DECLINING",
+                "peak_months": "Jul/Jan",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "planner"
+              },
+              {
+                "keyword": "is ai builder free",
+                "volume": 20,
+                "kd": 58,
+                "cpc_low": 62.17,
+                "cpc_high": 491.53,
+                "funnel": "TOFU",
+                "intent": "question",
+                "trend": "DECLINING",
+                "peak_months": "Oct",
+                "ai_overview_prone": true,
+                "flags": [
+                  "voice"
+                ],
+                "source": "autocomplete"
+              },
+              {
+                "keyword": "automatic website builder using ai",
+                "volume": 10,
+                "kd": 52,
+                "cpc_low": 0.0,
+                "cpc_high": 0.0,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "SEASONAL",
+                "peak_months": "Jul/Aug/Sep/Oct/Jan/Feb/Mar/Apr/May/Jun",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "planner"
+              },
+              {
+                "keyword": "openai website creator",
+                "volume": 10,
+                "kd": 74,
+                "cpc_low": 448.83,
+                "cpc_high": 9679.37,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "STABLE",
+                "peak_months": "Jul/Aug/Sep/Oct/Nov/Dec/Jan/Feb/Mar/Apr/May/Jun",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "planner"
+              }
+            ],
+            "total_volume": 296050,
+            "questions": [
+              {
+                "q": "Does AI actually build a working website or just a template?",
+                "answer_angle": "Explain the AI generates a full structured layout with real content drafts, not just a static template, then let users edit visually.",
+                "type": "voice"
+              },
+              {
+                "q": "Can AI design a website from scratch with no coding?",
+                "answer_angle": "Confirm no-code AI generation from a text prompt or business description, with examples of what it builds automatically.",
+                "type": "voice"
+              },
+              {
+                "q": "Which AI website builder is best for beginners?",
+                "answer_angle": "Compare top options by ease of use, pricing tier, and speed to publish, recommending based on skill level.",
+                "type": "paa"
+              },
+              {
+                "q": "Is there a free AI website builder that's actually good?",
+                "answer_angle": "List what free plans include versus paid, and what limitations (branding, pages, AI credits) to expect.",
+                "type": "conversational"
+              },
+              {
+                "q": "How much does an AI website builder cost?",
+                "answer_angle": "Break down free vs paid tiers and typical monthly cost ranges by feature set.",
+                "type": "conversational"
+              },
+              {
+                "q": "Can I build an ecommerce site with an AI website builder?",
+                "answer_angle": "Explain AI ecommerce capabilities like product page generation and store setup automation.",
+                "type": "paa"
+              }
+            ],
+            "entities_to_mention": [
+              "GPT-based generation",
+              "drag-and-drop editor",
+              "SEO-ready output",
+              "custom domain",
+              "ecommerce integration",
+              "template library"
+            ],
+            "long_tail": [
+              "do ai websites work",
+              "can ai build website",
+              "does ai build websites",
+              "which ai design website",
+              "can ai build website now",
+              "can ai do website design",
+              "which ai website builder"
+            ],
+            "url_slug": "ai-website-builder",
+            "h2_outline": [
+              {
+                "h2": "What Can an AI Website Builder Actually Create for You?",
+                "keywords": [
+                  "ai website builder",
+                  "ai website maker",
+                  "ai website generator",
+                  "website building ai",
+                  "website builder with ai"
+                ],
+                "entities": [
+                  "prompt-to-site generation",
+                  "layout AI",
+                  "content drafting"
+                ]
+              },
+              {
+                "h2": "Free vs Paid: Which AI Website Builder Fits Your Budget?",
+                "keywords": [
+                  "ai website builder free",
+                  "best free ai website builder",
+                  "website builder low cost",
+                  "ai website maker free",
+                  "cheap ai website builder",
+                  "ai website builder price"
+                ],
+                "entities": [
+                  "free tier limits",
+                  "subscription pricing",
+                  "custom domain"
+                ]
+              },
+              {
+                "h2": "How Does It Compare to Wix, Durable and 10Web AI Tools?",
+                "keywords": [
+                  "wix ai website builder",
+                  "wix artificial intelligence",
+                  "durable ai website builder",
+                  "wix ai builder",
+                  "durable co ai website builder"
+                ],
+                "entities": [
+                  "Wix ADI",
+                  "Durable AI",
+                  "template library"
+                ]
+              },
+              {
+                "h2": "Can You Build an Online Store with AI Alone?",
+                "keywords": [
+                  "ai ecommerce website builder"
+                ],
+                "entities": [
+                  "product catalog AI",
+                  "checkout setup",
+                  "inventory sync"
+                ]
+              },
+              {
+                "h2": "Do AI Websites Actually Work Once Published?",
+                "keywords": [
+                  "can ai design website",
+                  "which ai builds websites",
+                  "is ai builder free"
+                ],
+                "entities": [
+                  "SEO-ready output",
+                  "mobile responsiveness",
+                  "hosting included"
+                ]
+              },
+              {
+                "h2": "Open Source, GitHub and Developer-Friendly AI Options",
+                "keywords": [
+                  "ai website builder open source",
+                  "ai website builder reddit",
+                  "ai website builder github",
+                  "openai website builder",
+                  "openai website creator"
+                ],
+                "entities": [
+                  "open-source AI builder",
+                  "API access",
+                  "self-hosting"
+                ]
+              },
+              {
+                "h2": "Real Examples: What AI-Built Sites Look Like",
+                "keywords": [
+                  "top ai website builders",
+                  "ai website builder tools",
+                  "ai website examples",
+                  "ai website template generator",
+                  "website builder examples",
+                  "ai website design agency",
+                  "ai website design ideas"
+                ],
+                "entities": [
+                  "portfolio sites",
+                  "agency landing pages",
+                  "design templates"
+                ]
+              },
+              {
+                "h2": "Getting Started: From Prompt to Published Site",
+                "keywords": [
+                  "ai powered website builder",
+                  "best ai website builder",
+                  "ai web builder",
+                  "chatgpt website builder",
+                  "ai based website builder",
+                  "ai page builder",
+                  "ai builder pricing",
+                  "gpt website builder",
+                  "how to create ai website",
+                  "ai website builder app",
+                  "ai website builder google",
+                  "ai website builder gratis",
+                  "ai website builder prompt",
+                  "generative ai website builder",
+                  "automatic website builder using ai"
+                ],
+                "entities": [
+                  "ChatGPT integration",
+                  "GPT prompt builder",
+                  "one-click publish"
+                ]
+              }
+            ],
+            "internal_links": [
+              "WordPress AI Website Builder",
+              "SEO Automation Software"
+            ],
+            "attributes": [
+              {
+                "attribute": "comparison",
+                "covers": "Compare leading AI website builder tools (Wix, Durable, 10Web) on features, pricing and output quality."
+              },
+              {
+                "attribute": "cost",
+                "covers": "State clear free vs paid pricing tiers and what upgrades unlock."
+              },
+              {
+                "attribute": "process",
+                "covers": "Walk through how a prompt becomes a published site step by step."
+              },
+              {
+                "attribute": "problem",
+                "covers": "Address doubts about whether AI-built sites actually work, rank, and look professional."
+              },
+              {
+                "attribute": "requirement",
+                "covers": "Clarify what info or assets a user needs to provide the AI to get good results."
+              }
+            ],
+            "section": "core",
+            "publish_order": 1
+          },
+          {
+            "name": "WordPress AI Website Builder",
+            "primary_keyword": {
+              "keyword": "wordpress ai website builder",
+              "volume": 2900,
+              "kd": 74,
+              "cpc_low": 311.56,
+              "cpc_high": 3237.78,
+              "funnel": "MOFU",
+              "intent": "commercial",
+              "trend": "SEASONAL",
+              "peak_months": "Oct/Jan/Feb/Mar",
+              "ai_overview_prone": false,
+              "flags": [],
+              "source": "planner"
+            },
+            "keywords": [
+              {
+                "keyword": "10web ai website builder",
+                "volume": 3600,
+                "kd": 81,
+                "cpc_low": 36.13,
+                "cpc_high": 2390.61,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "STABLE",
+                "peak_months": "Jul/Oct/Nov/Dec/Jan/Feb/Mar/Apr",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "planner"
+              },
+              {
+                "keyword": "wordpress ai website builder",
+                "volume": 2900,
+                "kd": 74,
+                "cpc_low": 311.56,
+                "cpc_high": 3237.78,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "SEASONAL",
+                "peak_months": "Oct/Jan/Feb/Mar",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "planner"
+              },
+              {
+                "keyword": "10web ai builder",
+                "volume": 2400,
+                "kd": 79,
+                "cpc_low": 53.12,
+                "cpc_high": 2696.9,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "SEASONAL",
+                "peak_months": "Mar/Apr",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "planner"
+              },
+              {
+                "keyword": "wordpress ai builder",
+                "volume": 1000,
+                "kd": 80,
+                "cpc_low": 277.21,
+                "cpc_high": 2821.95,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "STABLE",
+                "peak_months": "Jan/Feb/Mar",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "planner"
+              }
+            ],
+            "total_volume": 9900,
+            "questions": [
+              {
+                "q": "How does an AI website builder work with WordPress?",
+                "answer_angle": "Explain plugin-based AI generation that builds a WordPress theme and content structure automatically.",
+                "type": "conversational"
+              },
+              {
+                "q": "Is 10Web better than a regular WordPress theme builder?",
+                "answer_angle": "Compare AI-driven setup speed and SEO automation versus manual theme customization.",
+                "type": "paa"
+              },
+              {
+                "q": "How much does a WordPress AI builder cost per month?",
+                "answer_angle": "Give typical pricing tiers including hosting bundles versus plugin-only costs.",
+                "type": "conversational"
+              },
+              {
+                "q": "Can I migrate an existing WordPress site into an AI builder?",
+                "answer_angle": "Explain import/migration process and what content transfers automatically.",
+                "type": "conversational"
+              }
+            ],
+            "entities_to_mention": [
+              "WordPress core",
+              "10Web",
+              "Gutenberg blocks",
+              "AI theme generation",
+              "hosting bundle"
+            ],
+            "long_tail": [],
+            "url_slug": "wordpress-ai-website-builder",
+            "h2_outline": [
+              {
+                "h2": "What Makes a WordPress AI Website Builder Different?",
+                "keywords": [
+                  "wordpress ai website builder",
+                  "wordpress ai builder"
+                ],
+                "entities": [
+                  "WordPress plugin",
+                  "Gutenberg editor",
+                  "AI content generation"
+                ]
+              },
+              {
+                "h2": "How 10Web's AI Builder Automates Your WordPress Setup",
+                "keywords": [
+                  "10web ai website builder",
+                  "10web ai builder"
+                ],
+                "entities": [
+                  "10Web hosting",
+                  "AI theme generation",
+                  "speed optimization"
+                ]
+              },
+              {
+                "h2": "Pricing: Plugin, Hosting and AI Credits Explained",
+                "keywords": [],
+                "entities": [
+                  "monthly plans",
+                  "hosting bundle",
+                  "AI generation limits"
+                ]
+              },
+              {
+                "h2": "Migrating an Existing Site into an AI-Powered WordPress Build",
+                "keywords": [],
+                "entities": [
+                  "site import tool",
+                  "content migration",
+                  "backup"
+                ]
+              },
+              {
+                "h2": "SEO and Speed: What Comes Built-In",
+                "keywords": [],
+                "entities": [
+                  "Core Web Vitals",
+                  "Yoast compatibility",
+                  "caching"
+                ]
+              }
+            ],
+            "internal_links": [
+              "AI Website Builder",
+              "SEO Automation Software"
+            ],
+            "attributes": [
+              {
+                "attribute": "comparison",
+                "covers": "Explain how WordPress AI builders differ from generic AI website builders and manual WP theming."
+              },
+              {
+                "attribute": "cost",
+                "covers": "Break down plugin, hosting, and AI-credit costs together."
+              },
+              {
+                "attribute": "process",
+                "covers": "Detail the setup flow from prompt to live WordPress site."
+              },
+              {
+                "attribute": "requirement",
+                "covers": "Note WordPress hosting or plugin prerequisites needed to use these tools."
+              }
+            ],
+            "section": "core",
+            "publish_order": 2
+          },
+          {
+            "name": "SEO Automation Software",
+            "primary_keyword": {
+              "keyword": "auto seo tools",
+              "volume": 1300,
+              "kd": 47,
+              "cpc_low": 416.51,
+              "cpc_high": 5312.7,
+              "funnel": "MOFU",
+              "intent": "commercial",
+              "trend": "DECLINING",
+              "peak_months": "Sep",
+              "ai_overview_prone": false,
+              "flags": [],
+              "source": "planner"
+            },
+            "keywords": [
+              {
+                "keyword": "auto seo tools",
+                "volume": 1300,
+                "kd": 47,
+                "cpc_low": 416.51,
+                "cpc_high": 5312.7,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "DECLINING",
+                "peak_months": "Sep",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "planner"
+              },
+              {
+                "keyword": "seo automation tool",
+                "volume": 1000,
+                "kd": 49,
+                "cpc_low": 144.29,
+                "cpc_high": 2152.02,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "SEASONAL",
+                "peak_months": "Jul/Mar",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "planner"
+              },
+              {
+                "keyword": "automated seo platform",
+                "volume": 720,
+                "kd": 41,
+                "cpc_low": 430.44,
+                "cpc_high": 3793.28,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "SEASONAL",
+                "peak_months": "Sep/Mar",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "planner"
+              },
+              {
+                "keyword": "best seo automation tools",
+                "volume": 480,
+                "kd": 47,
+                "cpc_low": 718.7,
+                "cpc_high": 10688.74,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "DECLINING",
+                "peak_months": "Sep",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "planner"
+              },
+              {
+                "keyword": "automatic backlink software",
+                "volume": 320,
+                "kd": 46,
+                "cpc_low": 135.04,
+                "cpc_high": 980.52,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "DECLINING",
+                "peak_months": "Jul",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "planner"
+              },
+              {
+                "keyword": "automated rank tracker",
+                "volume": 260,
+                "kd": 1,
+                "cpc_low": 0.0,
+                "cpc_high": 0.0,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "DECLINING",
+                "peak_months": "Sep",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "planner"
+              },
+              {
+                "keyword": "backlink automation software",
+                "volume": 210,
+                "kd": 1,
+                "cpc_low": 0.0,
+                "cpc_high": 0.0,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "DECLINING",
+                "peak_months": "Jul",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "planner"
+              },
+              {
+                "keyword": "top seo softwares",
+                "volume": 210,
+                "kd": 44,
+                "cpc_low": 2387.67,
+                "cpc_high": 5478.57,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "DECLINING",
+                "peak_months": "Aug/Sep",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "autocomplete"
+              },
+              {
+                "keyword": "best seo automation software",
+                "volume": 170,
+                "kd": 45,
+                "cpc_low": 841.64,
+                "cpc_high": 5430.31,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "DECLINING",
+                "peak_months": "Sep",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "planner"
+              },
+              {
+                "keyword": "free automated seo software",
+                "volume": 170,
+                "kd": 1,
+                "cpc_low": 0.0,
+                "cpc_high": 0.0,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "DECLINING",
+                "peak_months": "Sep",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "planner"
+              },
+              {
+                "keyword": "seo automation software free",
+                "volume": 170,
+                "kd": 1,
+                "cpc_low": 0.0,
+                "cpc_high": 0.0,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "DECLINING",
+                "peak_months": "Sep",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "planner"
+              },
+              {
+                "keyword": "auto link building software",
+                "volume": 140,
+                "kd": 46,
+                "cpc_low": 74.59,
+                "cpc_high": 1307.28,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "DECLINING",
+                "peak_months": "Jul/Sep/Jan/Mar",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "planner"
+              },
+              {
+                "keyword": "top seo software tools",
+                "volume": 90,
+                "kd": 0,
+                "cpc_low": 0.0,
+                "cpc_high": 0.0,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "DECLINING",
+                "peak_months": "Sep",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "autocomplete"
+              },
+              {
+                "keyword": "seo ai automation",
+                "volume": 50,
+                "kd": 81,
+                "cpc_low": 312.44,
+                "cpc_high": 5031.57,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "STABLE",
+                "peak_months": "Sep/Mar/May",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "autocomplete"
+              },
+              {
+                "keyword": "best seo automation",
+                "volume": 40,
+                "kd": 0,
+                "cpc_low": 0.0,
+                "cpc_high": 0.0,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "DECLINING",
+                "peak_months": "Sep",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "planner"
+              },
+              {
+                "keyword": "what is seo automation",
+                "volume": 40,
+                "kd": 42,
+                "cpc_low": 19.53,
+                "cpc_high": 1038.44,
+                "funnel": "TOFU",
+                "intent": "question",
+                "trend": "SEASONAL",
+                "peak_months": "Jun",
+                "ai_overview_prone": true,
+                "flags": [
+                  "voice"
+                ],
+                "source": "autocomplete"
+              },
+              {
+                "keyword": "automated seo testing",
+                "volume": 30,
+                "kd": 1,
+                "cpc_low": 0.0,
+                "cpc_high": 0.0,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "DECLINING",
+                "peak_months": "Sep",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "planner"
+              },
+              {
+                "keyword": "best automated link building software",
+                "volume": 10,
+                "kd": 1,
+                "cpc_low": 0.0,
+                "cpc_high": 0.0,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "GROWING",
+                "peak_months": "Jun",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "planner"
+              }
+            ],
+            "total_volume": 5410,
+            "questions": [
+              {
+                "q": "What is SEO automation and how does it work?",
+                "answer_angle": "Define automated SEO tasks (rank tracking, backlink building, audits) and how software handles them without manual work.",
+                "type": "voice"
+              },
+              {
+                "q": "Is there free SEO automation software worth using?",
+                "answer_angle": "List genuine free tools and their limits versus paid automation suites.",
+                "type": "conversational"
+              },
+              {
+                "q": "Can automated backlink software get you penalized?",
+                "answer_angle": "Explain risks of low-quality automated link building and how to use it safely.",
+                "type": "conversational"
+              },
+              {
+                "q": "How much does SEO automation software cost?",
+                "answer_angle": "Compare pricing tiers of leading platforms by feature depth.",
+                "type": "conversational"
+              },
+              {
+                "q": "What's the best automated rank tracker?",
+                "answer_angle": "Recommend tools based on accuracy, update frequency, and integration options.",
+                "type": "paa"
+              }
+            ],
+            "entities_to_mention": [
+              "rank tracking",
+              "backlink monitoring",
+              "site audit automation",
+              "keyword clustering",
+              "API integrations"
+            ],
+            "long_tail": [],
+            "url_slug": "seo-automation-software",
+            "h2_outline": [
+              {
+                "h2": "What Does SEO Automation Software Actually Do?",
+                "keywords": [
+                  "what is seo automation"
+                ],
+                "entities": [
+                  "rank tracking",
+                  "site audits",
+                  "reporting dashboards"
+                ]
+              },
+              {
+                "h2": "Automated Rank Tracking and Reporting Tools",
+                "keywords": [
+                  "automated rank tracker",
+                  "top seo software tools"
+                ],
+                "entities": [
+                  "SERP tracking",
+                  "keyword position alerts",
+                  "dashboards"
+                ]
+              },
+              {
+                "h2": "Backlink and Link-Building Automation: Risks and Rewards",
+                "keywords": [
+                  "automatic backlink software",
+                  "backlink automation software",
+                  "auto link building software",
+                  "best automated link building software"
+                ],
+                "entities": [
+                  "automated outreach",
+                  "link quality checks",
+                  "penalty risk"
+                ]
+              },
+              {
+                "h2": "Best Free and Paid SEO Automation Platforms Compared",
+                "keywords": [
+                  "seo automation tool",
+                  "automated seo platform",
+                  "best seo automation tools",
+                  "top seo softwares",
+                  "best seo automation software",
+                  "free automated seo software",
+                  "seo automation software free",
+                  "best seo automation"
+                ],
+                "entities": [
+                  "free tier limits",
+                  "enterprise plans",
+                  "API access"
+                ]
+              },
+              {
+                "h2": "How Automated SEO Testing Improves Rankings Over Time",
+                "keywords": [
+                  "automated seo testing"
+                ],
+                "entities": [
+                  "A/B title testing",
+                  "content scoring",
+                  "technical audits"
+                ]
+              },
+              {
+                "h2": "Combining AI and Automation for Ongoing SEO Wins",
+                "keywords": [
+                  "auto seo tools",
+                  "seo ai automation"
+                ],
+                "entities": [
+                  "AI content optimization",
+                  "auto keyword clustering",
+                  "workflow automation"
+                ]
+              }
+            ],
+            "internal_links": [
+              "AI Website Builder",
+              "WordPress AI Website Builder"
+            ],
+            "attributes": [
+              {
+                "attribute": "comparison",
+                "covers": "Compare top SEO automation platforms on features, pricing, and free tier limits."
+              },
+              {
+                "attribute": "problem",
+                "covers": "Address risk of automated backlink/link-building tools causing penalties."
+              },
+              {
+                "attribute": "cost",
+                "covers": "Show pricing tiers from free to enterprise automation suites."
+              },
+              {
+                "attribute": "process",
+                "covers": "Explain what tasks get automated (tracking, audits, backlinks) and how setup works."
+              },
+              {
+                "attribute": "maintenance",
+                "covers": "Describe ongoing monitoring and testing automation provides after setup."
+              }
+            ],
+            "section": "core",
+            "publish_order": 4
+          }
+        ]
+      },
+      {
+        "name": "Landing Pages and Programmatic SEO",
+        "description": "Tools focused on generating landing pages for ad campaigns and programmatic city pages at scale.",
+        "total_volume": 14810,
+        "services": [
+          {
+            "name": "AI Landing Page Builder",
+            "primary_keyword": {
+              "keyword": "ai landing page builder",
+              "volume": 1600,
+              "kd": 77,
+              "cpc_low": 231.67,
+              "cpc_high": 4346.94,
+              "funnel": "MOFU",
+              "intent": "commercial",
+              "trend": "DECLINING",
+              "peak_months": "Jul/Aug/Sep/Oct/Nov/Dec/Jan/Feb/Mar/Apr",
+              "ai_overview_prone": false,
+              "flags": [],
+              "source": "planner"
+            },
+            "keywords": [
+              {
+                "keyword": "building a landing page",
+                "volume": 1900,
+                "kd": 80,
+                "cpc_low": 224.25,
+                "cpc_high": 4466.27,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "DECLINING",
+                "peak_months": "Oct/Mar",
+                "ai_overview_prone": false,
+                "flags": [
+                  "local"
+                ],
+                "source": "autocomplete"
+              },
+              {
+                "keyword": "ai landing page builder",
+                "volume": 1600,
+                "kd": 77,
+                "cpc_low": 231.67,
+                "cpc_high": 4346.94,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "DECLINING",
+                "peak_months": "Jul/Aug/Sep/Oct/Nov/Dec/Jan/Feb/Mar/Apr",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "planner"
+              },
+              {
+                "keyword": "ai landing page generator",
+                "volume": 1300,
+                "kd": 74,
+                "cpc_low": 77.21,
+                "cpc_high": 2243.22,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "STABLE",
+                "peak_months": "Jul/Sep/Oct/Nov/Dec/Jan/Mar",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "autocomplete"
+              },
+              {
+                "keyword": "top landing page builder",
+                "volume": 1000,
+                "kd": 71,
+                "cpc_low": 461.87,
+                "cpc_high": 4705.14,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "DECLINING",
+                "peak_months": "Jul/Aug/Sep/Oct/Mar",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "autocomplete"
+              },
+              {
+                "keyword": "best ai landing page builder",
+                "volume": 260,
+                "kd": 78,
+                "cpc_low": 600.87,
+                "cpc_high": 4389.33,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "STABLE",
+                "peak_months": "Aug/Jan/Feb/Mar",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "autocomplete"
+              },
+              {
+                "keyword": "ai powered landing page builder",
+                "volume": 260,
+                "kd": 41,
+                "cpc_low": 343.77,
+                "cpc_high": 3741.99,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "GROWING",
+                "peak_months": "Jun",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "autocomplete"
+              },
+              {
+                "keyword": "ai landing page generator free",
+                "volume": 210,
+                "kd": 82,
+                "cpc_low": 52.89,
+                "cpc_high": 1363.0,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "DECLINING",
+                "peak_months": "Jul/Sep/Dec/Jan/Feb/Mar/Apr",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "autocomplete"
+              },
+              {
+                "keyword": "ai landing page creator",
+                "volume": 140,
+                "kd": 83,
+                "cpc_low": 300.26,
+                "cpc_high": 3838.2,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "SEASONAL",
+                "peak_months": "Jul/Sep/Oct/Nov/Dec/Jan/Mar/Apr",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "planner"
+              },
+              {
+                "keyword": "which ai website builder is best",
+                "volume": 140,
+                "kd": 78,
+                "cpc_low": 254.94,
+                "cpc_high": 4102.08,
+                "funnel": "TOFU",
+                "intent": "question",
+                "trend": "SEASONAL",
+                "peak_months": "Feb/Mar",
+                "ai_overview_prone": true,
+                "flags": [
+                  "voice"
+                ],
+                "source": "autocomplete"
+              },
+              {
+                "keyword": "cheapest landing page",
+                "volume": 140,
+                "kd": 84,
+                "cpc_low": 1322.1,
+                "cpc_high": 7257.13,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "DECLINING",
+                "peak_months": "Jul/Aug/Sep/Oct/Nov/Dec/Jan/Mar",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "autocomplete"
+              },
+              {
+                "keyword": "cheap landing page builder",
+                "volume": 110,
+                "kd": 84,
+                "cpc_low": 726.42,
+                "cpc_high": 4442.84,
+                "funnel": "BOFU",
+                "intent": "transactional",
+                "trend": "DECLINING",
+                "peak_months": "Jul/Sep/Oct/Nov/Jan/Mar",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "autocomplete"
+              },
+              {
+                "keyword": "ai landing page builder free",
+                "volume": 110,
+                "kd": 82,
+                "cpc_low": 79.03,
+                "cpc_high": 2891.12,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "STABLE",
+                "peak_months": "Jul/Nov/Jan/Feb/Mar",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "autocomplete"
+              },
+              {
+                "keyword": "what ai builds websites",
+                "volume": 50,
+                "kd": 86,
+                "cpc_low": 1269.03,
+                "cpc_high": 5834.0,
+                "funnel": "TOFU",
+                "intent": "question",
+                "trend": "GROWING",
+                "peak_months": "Mar",
+                "ai_overview_prone": true,
+                "flags": [
+                  "voice"
+                ],
+                "source": "autocomplete"
+              },
+              {
+                "keyword": "are ai website builders good",
+                "volume": 30,
+                "kd": 81,
+                "cpc_low": 544.9,
+                "cpc_high": 4461.67,
+                "funnel": "TOFU",
+                "intent": "question",
+                "trend": "SEASONAL",
+                "peak_months": "Apr/May",
+                "ai_overview_prone": true,
+                "flags": [
+                  "voice"
+                ],
+                "source": "autocomplete"
+              },
+              {
+                "keyword": "what is the best landing page builder",
+                "volume": 30,
+                "kd": 57,
+                "cpc_low": 844.83,
+                "cpc_high": 6502.01,
+                "funnel": "TOFU",
+                "intent": "question",
+                "trend": "SEASONAL",
+                "peak_months": "Jun",
+                "ai_overview_prone": true,
+                "flags": [
+                  "voice"
+                ],
+                "source": "autocomplete"
+              },
+              {
+                "keyword": "what is the best free landing page builder",
+                "volume": 20,
+                "kd": 65,
+                "cpc_low": 130.48,
+                "cpc_high": 2541.49,
+                "funnel": "TOFU",
+                "intent": "question",
+                "trend": "DECLINING",
+                "peak_months": "Jul",
+                "ai_overview_prone": true,
+                "flags": [
+                  "voice"
+                ],
+                "source": "autocomplete"
+              },
+              {
+                "keyword": "what is landing page builder",
+                "volume": 10,
+                "kd": 31,
+                "cpc_low": 0.0,
+                "cpc_high": 0.0,
+                "funnel": "TOFU",
+                "intent": "question",
+                "trend": "STABLE",
+                "peak_months": "Jul/Aug/Sep/Oct/Nov/Dec/Jan/Feb/Mar/Apr/May/Jun",
+                "ai_overview_prone": true,
+                "flags": [
+                  "voice"
+                ],
+                "source": "autocomplete"
+              },
+              {
+                "keyword": "how to build a landing page with ai",
+                "volume": 10,
+                "kd": 80,
+                "cpc_low": 520.18,
+                "cpc_high": 4049.94,
+                "funnel": "TOFU",
+                "intent": "question",
+                "trend": "GROWING",
+                "peak_months": "Apr/Jun",
+                "ai_overview_prone": true,
+                "flags": [
+                  "voice",
+                  "local"
+                ],
+                "source": "autocomplete"
+              },
+              {
+                "keyword": "how to build a landing page using ai",
+                "volume": 10,
+                "kd": 92,
+                "cpc_low": 643.03,
+                "cpc_high": 1941.31,
+                "funnel": "TOFU",
+                "intent": "question",
+                "trend": "SEASONAL",
+                "peak_months": "Mar/Apr/May/Jun",
+                "ai_overview_prone": true,
+                "flags": [
+                  "voice",
+                  "local"
+                ],
+                "source": "autocomplete"
+              }
+            ],
+            "total_volume": 7330,
+            "questions": [
+              {
+                "q": "Can AI build a landing page for me?",
+                "answer_angle": "Confirm yes and describe the prompt-to-page workflow the builder uses, naming the AI engine involved.",
+                "type": "voice"
+              },
+              {
+                "q": "What is the best AI landing page builder?",
+                "answer_angle": "Give a direct named answer plus a short comparison table against 2-3 known competitors to win the snippet.",
+                "type": "paa"
+              },
+              {
+                "q": "How do I build a landing page with AI?",
+                "answer_angle": "Answer as a numbered 4-5 step process starting with entering a prompt or business URL.",
+                "type": "voice"
+              },
+              {
+                "q": "Is there a free AI landing page builder?",
+                "answer_angle": "State clearly what the free tier includes and where paid plans begin.",
+                "type": "conversational"
+              },
+              {
+                "q": "Which AI website builder is best for landing pages?",
+                "answer_angle": "Distinguish general website builders from dedicated landing page/AI builders and recommend the latter for conversion.",
+                "type": "voice"
+              }
+            ],
+            "entities_to_mention": [
+              "AI generation engine",
+              "templates",
+              "drag-and-drop editor",
+              "no-code",
+              "CRM integrations",
+              "hosting"
+            ],
+            "long_tail": [
+              "where is landing page",
+              "who builds landing pages",
+              "why build a landing page",
+              "can ai make a landing page",
+              "can ai build a landing page",
+              "can ai create landing pages",
+              "what is landing page software",
+              "where can i build a landing page",
+              "where is the landing page in wordpress",
+              "where is the landing page on a website",
+              "what is the best ai landing page builder"
+            ],
+            "url_slug": "ai-landing-page-builder",
+            "h2_outline": [
+              {
+                "h2": "What Is an AI Landing Page Builder and How Does It Work?",
+                "keywords": [
+                  "ai landing page builder",
+                  "ai landing page generator",
+                  "ai powered landing page builder",
+                  "ai landing page creator"
+                ],
+                "entities": [
+                  "AI generation engine",
+                  "drag-and-drop editor",
+                  "templates"
+                ]
+              },
+              {
+                "h2": "How Much Does an AI Landing Page Builder Cost?",
+                "keywords": [
+                  "cheapest landing page",
+                  "cheap landing page builder",
+                  "ai landing page builder free",
+                  "ai landing page generator free"
+                ],
+                "entities": [
+                  "free tier",
+                  "pricing plans",
+                  "credits"
+                ]
+              },
+              {
+                "h2": "How Do You Build a Landing Page With AI, Step by Step?",
+                "keywords": [
+                  "how to build a landing page with ai",
+                  "how to build a landing page using ai"
+                ],
+                "entities": [
+                  "prompt input",
+                  "brand kit",
+                  "publish button"
+                ]
+              },
+              {
+                "h2": "Can AI Really Build a Landing Page for You?",
+                "keywords": [
+                  "what ai builds websites"
+                ],
+                "entities": [
+                  "GPT-4",
+                  "no-code automation",
+                  "content generation"
+                ]
+              },
+              {
+                "h2": "Which AI Landing Page Builder Is Best for You?",
+                "keywords": [
+                  "top landing page builder",
+                  "best ai landing page builder",
+                  "which ai website builder is best",
+                  "are ai website builders good",
+                  "what is the best landing page builder",
+                  "what is the best free landing page builder",
+                  "what is landing page builder"
+                ],
+                "entities": [
+                  "Unbounce",
+                  "Leadpages",
+                  "Wix ADI",
+                  "comparison chart"
+                ]
+              },
+              {
+                "h2": "Building a Landing Page Wherever Your Team Works",
+                "keywords": [
+                  "building a landing page"
+                ],
+                "entities": [
+                  "remote collaboration",
+                  "cloud editor",
+                  "shared workspace"
+                ]
+              },
+              {
+                "h2": "Where Can You Build or Find Your Landing Page?",
+                "keywords": [],
+                "entities": [
+                  "WordPress plugin",
+                  "website builder",
+                  "hosting"
+                ]
+              }
+            ],
+            "internal_links": [
+              "Landing Page Generator for Google Ads",
+              "Programmatic SEO Services"
+            ],
+            "attributes": [
+              {
+                "attribute": "process",
+                "covers": "Walks through the exact steps from prompt to published page."
+              },
+              {
+                "attribute": "cost",
+                "covers": "States free tier limits and paid plan pricing tiers clearly."
+              },
+              {
+                "attribute": "comparison",
+                "covers": "Compares this AI builder against named competitor tools on speed and features."
+              },
+              {
+                "attribute": "requirement",
+                "covers": "Lists what's needed to start: account, brand assets, no coding required."
+              },
+              {
+                "attribute": "local",
+                "covers": "Explains how distributed/remote teams collaborate on the same page in the cloud editor."
+              },
+              {
+                "attribute": "problem",
+                "covers": "Addresses common issues like broken templates or failed AI generation and how to fix them."
+              }
+            ],
+            "section": "core",
+            "publish_order": 3
+          },
+          {
+            "name": "Programmatic SEO Services",
+            "primary_keyword": {
+              "keyword": "programmatic seo",
+              "volume": 3600,
+              "kd": 53,
+              "cpc_low": 248.57,
+              "cpc_high": 2303.08,
+              "funnel": "MOFU",
+              "intent": "commercial",
+              "trend": "SEASONAL",
+              "peak_months": "Jul/Mar/Apr/May",
+              "ai_overview_prone": false,
+              "flags": [],
+              "source": "planner"
+            },
+            "keywords": [
+              {
+                "keyword": "programmatic seo",
+                "volume": 3600,
+                "kd": 53,
+                "cpc_low": 248.57,
+                "cpc_high": 2303.08,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "SEASONAL",
+                "peak_months": "Jul/Mar/Apr/May",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "planner"
+              },
+              {
+                "keyword": "programmatic seo services",
+                "volume": 110,
+                "kd": 46,
+                "cpc_low": 253.57,
+                "cpc_high": 3507.32,
+                "funnel": "BOFU",
+                "intent": "transactional",
+                "trend": "SEASONAL",
+                "peak_months": "Jan/Feb/Mar",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "planner"
+              },
+              {
+                "keyword": "programmatic seo wordpress",
+                "volume": 70,
+                "kd": 42,
+                "cpc_low": 291.68,
+                "cpc_high": 1207.88,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "SEASONAL",
+                "peak_months": "Jun",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "planner"
+              },
+              {
+                "keyword": "programmatic seo webflow",
+                "volume": 40,
+                "kd": 0,
+                "cpc_low": 0.0,
+                "cpc_high": 0.0,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "DECLINING",
+                "peak_months": "Oct/Feb",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "planner"
+              },
+              {
+                "keyword": "programmatic semantic seo",
+                "volume": 10,
+                "kd": 0,
+                "cpc_low": 0.0,
+                "cpc_high": 0.0,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "DECLINING",
+                "peak_months": "Jul/Aug/Oct/Jan/Jun",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "planner"
+              }
+            ],
+            "total_volume": 3830,
+            "questions": [
+              {
+                "q": "What is programmatic SEO?",
+                "answer_angle": "Define it as templated, data-driven page generation at scale with one clear example.",
+                "type": "conversational"
+              },
+              {
+                "q": "How much do programmatic SEO services cost?",
+                "answer_angle": "Give a pricing range tied to page volume/complexity tiers.",
+                "type": "conversational"
+              },
+              {
+                "q": "Can programmatic SEO work on WordPress?",
+                "answer_angle": "Confirm compatibility via custom fields/ACF and describe the setup briefly.",
+                "type": "conversational"
+              },
+              {
+                "q": "Does programmatic SEO work on Webflow?",
+                "answer_angle": "Confirm via Webflow CMS collections and dynamic page templates.",
+                "type": "conversational"
+              },
+              {
+                "q": "What is semantic programmatic SEO?",
+                "answer_angle": "Explain it as combining entity/topic-cluster SEO with programmatic templates for depth.",
+                "type": "paa"
+              }
+            ],
+            "entities_to_mention": [
+              "templated pages",
+              "keyword clustering",
+              "entity SEO",
+              "CMS collections",
+              "crawl budget"
+            ],
+            "long_tail": [],
+            "url_slug": "programmatic-seo-services",
+            "h2_outline": [
+              {
+                "h2": "What Is Programmatic SEO and How Does It Work?",
+                "keywords": [
+                  "programmatic seo"
+                ],
+                "entities": [
+                  "templated pages",
+                  "data-driven content",
+                  "scalable SEO"
+                ]
+              },
+              {
+                "h2": "What Do Programmatic SEO Services Actually Include?",
+                "keywords": [
+                  "programmatic seo services"
+                ],
+                "entities": [
+                  "keyword clustering",
+                  "content templates",
+                  "deployment pipeline"
+                ]
+              },
+              {
+                "h2": "Can You Run Programmatic SEO on WordPress?",
+                "keywords": [
+                  "programmatic seo wordpress"
+                ],
+                "entities": [
+                  "WordPress plugin",
+                  "custom fields",
+                  "ACF"
+                ]
+              },
+              {
+                "h2": "Does Programmatic SEO Work on Webflow?",
+                "keywords": [
+                  "programmatic seo webflow"
+                ],
+                "entities": [
+                  "Webflow CMS",
+                  "dynamic pages",
+                  "collections"
+                ]
+              },
+              {
+                "h2": "What Is Semantic Programmatic SEO?",
+                "keywords": [
+                  "programmatic semantic seo"
+                ],
+                "entities": [
+                  "entity SEO",
+                  "topic clusters",
+                  "NLP"
+                ]
+              },
+              {
+                "h2": "How Long Until Programmatic SEO Pages Start Ranking?",
+                "keywords": [],
+                "entities": [
+                  "indexing timeline",
+                  "crawl budget",
+                  "ranking curve"
+                ]
+              }
+            ],
+            "internal_links": [
+              "AI Landing Page Builder",
+              "Landing Page Generator for Google Ads"
+            ],
+            "attributes": [
+              {
+                "attribute": "process",
+                "covers": "Describes how keyword clustering feeds into templated page generation and deployment."
+              },
+              {
+                "attribute": "requirement",
+                "covers": "Confirms platform compatibility for WordPress and Webflow builds."
+              },
+              {
+                "attribute": "cost",
+                "covers": "States service pricing tiers based on page volume."
+              },
+              {
+                "attribute": "timeline",
+                "covers": "Sets realistic expectations for indexing and ranking timeframes."
+              },
+              {
+                "attribute": "comparison",
+                "covers": "Distinguishes semantic/entity-based programmatic SEO from basic templated approaches."
+              }
+            ],
+            "section": "core",
+            "publish_order": 5
+          },
+          {
+            "name": "Landing Page Generator for Google Ads",
+            "primary_keyword": {
+              "keyword": "landing page generator",
+              "volume": 3600,
+              "kd": 80,
+              "cpc_low": 189.77,
+              "cpc_high": 4094.41,
+              "funnel": "MOFU",
+              "intent": "commercial",
+              "trend": "DECLINING",
+              "peak_months": "Jul/Aug/Sep/Oct/Mar",
+              "ai_overview_prone": false,
+              "flags": [],
+              "source": "autocomplete"
+            },
+            "keywords": [
+              {
+                "keyword": "landing page generator",
+                "volume": 3600,
+                "kd": 80,
+                "cpc_low": 189.77,
+                "cpc_high": 4094.41,
+                "funnel": "MOFU",
+                "intent": "commercial",
+                "trend": "DECLINING",
+                "peak_months": "Jul/Aug/Sep/Oct/Mar",
+                "ai_overview_prone": false,
+                "flags": [],
+                "source": "autocomplete"
+              },
+              {
+                "keyword": "what is landing page in google ads",
+                "volume": 30,
+                "kd": 4,
+                "cpc_low": 0.0,
+                "cpc_high": 0.0,
+                "funnel": "TOFU",
+                "intent": "question",
+                "trend": "DECLINING",
+                "peak_months": "Jul/Aug/Sep/Dec/Jan",
+                "ai_overview_prone": true,
+                "flags": [
+                  "voice"
+                ],
+                "source": "autocomplete"
+              },
+              {
+                "keyword": "how to create a landing page for google ads",
+                "volume": 20,
+                "kd": 69,
+                "cpc_low": 294.42,
+                "cpc_high": 2806.28,
+                "funnel": "TOFU",
+                "intent": "question",
+                "trend": "SEASONAL",
+                "peak_months": "Sep/Jan/Feb/Mar/May",
+                "ai_overview_prone": true,
+                "flags": [
+                  "voice",
+                  "local"
+                ],
+                "source": "autocomplete"
+              }
+            ],
+            "total_volume": 3650,
+            "questions": [
+              {
+                "q": "What is a landing page in Google Ads?",
+                "answer_angle": "Define it in one sentence as the destination URL an ad click leads to, distinct from a homepage.",
+                "type": "conversational"
+              },
+              {
+                "q": "Do I need a landing page for Google Ads?",
+                "answer_angle": "Say yes for most campaigns and explain the Quality Score and conversion impact of skipping one.",
+                "type": "conversational"
+              },
+              {
+                "q": "How do I create a landing page for Google Ads?",
+                "answer_angle": "Give a step list: pick template, add tracking template/UTM, set as Final URL.",
+                "type": "voice"
+              },
+              {
+                "q": "Where do I find landing pages in my Google Ads account?",
+                "answer_angle": "Point to the Final URL field inside the Ad or Ad Group settings with a short navigation path.",
+                "type": "voice"
+              },
+              {
+                "q": "Can I use Google Sites for a Google Ads landing page?",
+                "answer_angle": "Explain it's technically possible but limited for tracking/conversion optimization versus a dedicated generator.",
+                "type": "paa"
+              }
+            ],
+            "entities_to_mention": [
+              "Final URL",
+              "Quality Score",
+              "tracking template",
+              "conversion rate",
+              "ad relevance"
+            ],
+            "long_tail": [
+              "does google have a landing page",
+              "does google offer landing pages",
+              "is google sites good for landing pages",
+              "do i need a landing page for google ads",
+              "where to see landing pages in google ads",
+              "how to make a landing page for google ads",
+              "where to find landing pages in google ads",
+              "what is a good landing page for google ads",
+              "can i create a landing page on google sites"
+            ],
+            "url_slug": "landing-page-generator-google-ads",
+            "h2_outline": [
+              {
+                "h2": "What Is a Landing Page Generator for Google Ads?",
+                "keywords": [
+                  "landing page generator",
+                  "what is landing page in google ads"
+                ],
+                "entities": [
+                  "PPC landing page",
+                  "Quality Score",
+                  "ad relevance"
+                ]
+              },
+              {
+                "h2": "Do You Actually Need a Dedicated Landing Page for Google Ads?",
+                "keywords": [],
+                "entities": [
+                  "conversion rate optimization",
+                  "bounce rate",
+                  "landing page experience"
+                ]
+              },
+              {
+                "h2": "How Do You Create a Landing Page for Google Ads, Step by Step?",
+                "keywords": [
+                  "how to create a landing page for google ads"
+                ],
+                "entities": [
+                  "UTM parameters",
+                  "tracking template",
+                  "campaign URL"
+                ]
+              },
+              {
+                "h2": "Where Do You See or Manage Your Landing Pages in Google Ads?",
+                "keywords": [],
+                "entities": [
+                  "Google Ads dashboard",
+                  "Final URL field",
+                  "Ad Group settings"
+                ]
+              },
+              {
+                "h2": "Does Google Offer Its Own Landing Page Tool?",
+                "keywords": [],
+                "entities": [
+                  "Google Sites",
+                  "Google Web Designer",
+                  "Google Business Profile"
+                ]
+              },
+              {
+                "h2": "Can You Target Local Campaigns With the Same Landing Page?",
+                "keywords": [],
+                "entities": [
+                  "geo-targeting",
+                  "location extensions",
+                  "dynamic location insertion"
+                ]
+              }
+            ],
+            "internal_links": [
+              "AI Landing Page Builder",
+              "Programmatic SEO Services"
+            ],
+            "attributes": [
+              {
+                "attribute": "requirement",
+                "covers": "Explains whether a landing page is mandatory versus optional for a Google Ads campaign."
+              },
+              {
+                "attribute": "process",
+                "covers": "Details the step-by-step build and linking process into a live Google Ads campaign."
+              },
+              {
+                "attribute": "comparison",
+                "covers": "Compares Google's native tools (Sites, Web Designer) against a dedicated generator."
+              },
+              {
+                "attribute": "local",
+                "covers": "Covers how the same generator supports geo-targeted or multi-location ad campaigns."
+              },
+              {
+                "attribute": "problem",
+                "covers": "Troubleshoots common Quality Score or policy-compliance issues tied to landing pages."
+              }
+            ],
+            "section": "core",
+            "publish_order": 6
+          }
+        ]
+      }
+    ],
+    "areas_served": [],
+    "serp_merges": {
+      "Free AI Website Builder": "AI Website Builder",
+      "AI Website Generator": "AI Website Builder"
+    },
+    "mode5_handover": {
+      "target_location": "N/A",
+      "primary_service": "AI Website Builder",
+      "extra_areas": "",
+      "language": ""
+    },
+    "workflow_inputs": {
+      "services_mode3": "AI Website Builder, WordPress AI Website Builder, SEO Automation Software, AI Landing Page Builder, Programmatic SEO Services, Landing Page Generator for Google Ads"
+    }
+  }
+}
