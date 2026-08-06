@@ -74,6 +74,14 @@ from generate_seo_strategy import parse_json_robust, enrich, expand_kw, is_long_
 # Stage 1.6 — same query-network module the cluster pipeline uses, so a Mode 3
 # site plan and a Mode 4 cluster plan are built from the same kind of data.
 from expand_autocomplete import expand_queries, fetch_historical_metrics, resolve_gl
+# Intent + local/voice/urgent flags. Stage 2.5 sets these in the cluster
+# pipeline, but Mode 3 never runs that stage, so every keyword reached the
+# builder with intent="" — which collapsed to funnel MOFU for ALL of them.
+# The builder tiers a page's keywords by exactly these fields, so its
+# high-intent tier was falling back to raw volume order and its local tier to
+# an invented "24/7 {service} {city}" string. classify() carries Arabic
+# vocabularies as well as English, so this works for both sides of the run.
+from score_keywords import classify as classify_intent
 
 JSON_OUT = "website_builder_inputs.json"
 
@@ -190,7 +198,10 @@ SITE LANGUAGE: {CONTENT_LANG_NAME or 'English'}
 
 Return, in the SITE LANGUAGE exactly as locals type them into Google:
 1. "city_term": the target city's name. Bare name only — no preposition,
-   no article, no country.
+   no article, no country. RETURN AN EMPTY STRING if the target is a whole
+   country, a region, or anything with no single city: a national site wants
+   every city's queries, so filtering them out would delete the demand it
+   exists to serve.
 2. "other_cities": 25-40 OTHER cities and major regions of the SAME country
    that people search service keywords for. These are used to DROP
    suggestions belonging to other cities, so include the spellings that
@@ -207,6 +218,11 @@ JSON: {{"city_term": "...", "other_cities": ["...", "..."]}}""")
         others = [t for t in others if city and city.lower() not in t.lower()][:60]
         if city and others:
             print(f"   🗺️ place filter: city '{city}', {len(others)} other-city terms")
+        elif not city:
+            # Country/region target: the seeds carry no city, so they are
+            # already the bare form and there is nothing to strip — and every
+            # city's queries are in scope, so nothing should be excluded.
+            print("   🗺️ national target — no city filter (all cities in scope)")
         return city, others
     except Exception as e:
         print(f"   ℹ️ place-term lookup failed ({str(e)[:60]}) — bare seeds skipped")
@@ -348,6 +364,7 @@ def fetch_category_keywords(ads_client, category, location_id, language_id, glob
             time.sleep(ADS_CALL_DELAY)
     for r in rows:
         r.setdefault("source", "planner")
+        r["intent"], r["flags"] = classify_intent(r["keyword"])
     out, local_seen = [], set()
     for r in sorted(rows, key=lambda r: -r["avg_monthly_searches"]):
         key = _norm(r["keyword"])
@@ -386,6 +403,7 @@ def fetch_category_keywords(ads_client, category, location_id, language_id, glob
                                "low_top_bid": 0.0, "high_top_bid": 0.0,
                                "trend": "UNKNOWN", "peak_months": "",
                                "source": "autocomplete"}
+                    row["intent"], row["flags"] = classify_intent(row["keyword"])
                     extra.append(row)
                 # Question-shaped first (FAQ/heading fodder is the point of
                 # this pass), then by volume.
