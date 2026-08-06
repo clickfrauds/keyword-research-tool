@@ -64,6 +64,9 @@ PRIMARY_SERVICE   = (os.environ.get("PRIMARY_SERVICE", "").strip()
 CUSTOMER_ID       = os.environ.get("GOOGLE_ADS_CUSTOMER_ID", "").replace("-", "")
 LANGUAGE_ID       = os.environ.get("LANGUAGE_ID", "").strip()
 LANGUAGE          = os.environ.get("LANGUAGE", "").strip().lower()
+# "no" = the form's "English (default)", not Norwegian (languageConstant
+# 1013). Same normalisation every other stage applies.
+LANGUAGE = {"no": "", "none": "", "default": "", "english": "en"}.get(LANGUAGE, LANGUAGE)
 # Comma-separated area names to measure on top of whatever the geo database has —
 # for districts Google cannot target but people still search ("Deira").
 EXTRA_AREAS       = os.environ.get("EXTRA_AREAS", "").strip()

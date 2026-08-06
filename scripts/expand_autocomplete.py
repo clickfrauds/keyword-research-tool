@@ -85,6 +85,12 @@ SEED_KEYWORDS = [s.strip() for s in
 TARGET_LOCATION = os.environ.get("TARGET_LOCATION", "").strip()
 LOCATION_ID = os.environ.get("LOCATION_ID", "").strip()
 LANGUAGE = os.environ.get("LANGUAGE", "").strip().lower()
+# "no" is the form's "English (default) — no language override", NOT Norwegian.
+# Every other stage maps it away; this one did not, so an English run resolved
+# languageConstant 1013 and looked up its autocomplete volumes under Norwegian.
+# Real symptom in the AI-website-builder run: "Language 'no' → languageConstant
+# 1013" printed once per category on a site with no Norwegian anywhere in it.
+LANGUAGE = {"no": "", "none": "", "default": "", "english": "en"}.get(LANGUAGE, LANGUAGE)
 LANGUAGE_ID = os.environ.get("LANGUAGE_ID", "").strip()
 
 DEPTH = int(os.environ.get("AC_DEPTH", "2"))
