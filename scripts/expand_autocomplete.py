@@ -195,7 +195,13 @@ def clean_suggestion(s):
         return None
     if _ASSISTANT_PROMPT.match(s):
         return None
-    return s
+    # Alphabet-soup artifact: Google sometimes echoes the probe back, so
+    # "كشف تسربات المياه" + "ب" returns "كشف تسربات المياه ب". A trailing
+    # single character is the probe letter, not part of a query anybody typed,
+    # and it reads as a typo if it reaches an FAQ heading. Trim it and keep
+    # the rest — the stem is still a real suggestion.
+    s = re.sub(r"\s+\S$", "", s).strip() if re.search(r"\s\S$", s) else s
+    return s if len(s) >= 3 else None
 
 
 # ══════════════════════════════════════════════════════════════════════════
