@@ -84,7 +84,18 @@ NICHE_DESCRIPTION = os.environ.get("NICHE_DESCRIPTION", "").strip()
 TARGET_LOCATION = os.environ.get("TARGET_LOCATION", "").strip()
 MAX_KW_PER_CAT = int(os.environ.get("MAX_KEYWORDS_PER_CATEGORY", "120"))
 
-SERVICES = [s.strip() for s in os.environ.get("SERVICES_MODE3", "").split(",") if s.strip()]
+# Arabic keyboards produce ، (U+060C), not the ASCII comma, and Arabic text
+# pasted from a document carries it through. Splitting on "," alone turned a
+# whole Arabic service list into ONE service — the run then built a single
+# page named after the entire list. Accept both, plus semicolons.
+_LIST_SEP = re.compile("[,،؛;\n]+")
+
+
+def split_list(raw):
+    return [s.strip() for s in _LIST_SEP.split(str(raw or "")) if s.strip()]
+
+
+SERVICES = split_list(os.environ.get("SERVICES_MODE3", ""))
 
 ADS_SEED_LIMIT = 20          # GenerateKeywordIdeas hard limit: 20 seed keywords/request
 ADS_CALL_DELAY = 1.5         # polite pacing between Ads API calls (seconds)

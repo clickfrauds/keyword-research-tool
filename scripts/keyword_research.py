@@ -52,7 +52,7 @@ SEED_KEYWORDS = [
     for kw in os.environ.get(
         "SEED_KEYWORDS",
         "ac repair dubai,ac not cooling,ac service dubai,air conditioner repair",
-    ).split(",")
+    ).replace("،", ",").replace("؛", ",").split(",")
     if kw.strip()
 ]
 # UNIVERSAL geo/language: nothing hardcoded. Explicit ids win; otherwise the

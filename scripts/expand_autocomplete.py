@@ -77,8 +77,11 @@ IN_OUT_FILE = "keyword_data_output.json"
 ENDPOINT = "https://suggestqueries.google.com/complete/search"
 UA = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
 
+# Arabic keyboards emit ، (U+060C), not the ASCII comma — splitting on ","
+# alone collapsed a whole Arabic seed list into one seed.
+_LIST_SEP = re.compile("[,،؛;\n]+")
 SEED_KEYWORDS = [s.strip() for s in
-                 os.environ.get("SEED_KEYWORDS", "").split(",") if s.strip()]
+                 _LIST_SEP.split(os.environ.get("SEED_KEYWORDS", "")) if s.strip()]
 TARGET_LOCATION = os.environ.get("TARGET_LOCATION", "").strip()
 LOCATION_ID = os.environ.get("LOCATION_ID", "").strip()
 LANGUAGE = os.environ.get("LANGUAGE", "").strip().lower()
