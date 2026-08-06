@@ -132,6 +132,16 @@ GROUPING_SYSTEM = """You are a Website Information Architect for a service
 business site. Output must be valid JSON only."""
 
 
+# central_entity/source_context are prose the builder puts in front of the
+# writer on EVERY page, so they must be in the site's language — unlike the
+# category names, which stay English because they become URL segments.
+_CE_LANG_RULE = (f"""
+7. LANGUAGE: write central_entity and source_context in {CONTENT_LANG_NAME}
+   (they are shown to the content writer for every page of a
+   {CONTENT_LANG_NAME} site). Category names stay ENGLISH — they become URLs."""
+                 if CONTENT_LANG_NAME else "")
+
+
 def group_services(client, services):
     prompt = f"""Organize this service list into a logical category hierarchy
 for a website (main categories → service pages).
@@ -150,9 +160,19 @@ RULES:
 3. Place EVERY service in exactly one category.
 4. CRITICAL: copy each service name CHARACTER-FOR-CHARACTER from the input.
    Never rephrase, translate, or retitle a service.
+5. central_entity: the ONE thing this whole site is about — the noun every
+   page ultimately describes ("air conditioning", "roof", "dental implant").
+   Not the company name, not a service name. Every page on the site is an
+   attribute or sub-topic of it.
+6. source_context: one sentence on WHO is publishing and WHY they are
+   credible on that entity — the site's angle. Two sites covering the same
+   entity differ by this, and it is what keeps 100 pages reading as one site
+   instead of 100 unrelated pages.{_CE_LANG_RULE}
 
 RETURN JSON ONLY:
-{{"categories": [{{"name": "Category Name", "description": "1 sentence",
+{{"central_entity": "the one noun the site is about",
+  "source_context": "one sentence: who publishes this and why they are credible",
+  "categories": [{{"name": "Category Name", "description": "1 sentence",
   "services": ["exact service name", "..."]}}]}}"""
     raw = claude_json(client, GROUPING_SYSTEM, prompt)
     cats = []
@@ -179,7 +199,10 @@ RETURN JSON ONLY:
         print(f"⚠️ Grouping dropped {len(missing)} service(s) — forcing back in.")
         for i, s in enumerate(missing):
             cats[i % len(cats)]["services"].append(s)
-    return cats
+    return cats, {
+        "central_entity": str(raw.get("central_entity", "")).strip()[:120],
+        "source_context": str(raw.get("source_context", "")).strip()[:400],
+    }
 
 
 # ══════════════════════════════════════════════════════════════════════════
@@ -343,6 +366,15 @@ RULES:
    sentence on HOW the content should answer to win the snippet.
 4. entities_to_mention: 3-6 specific terms/parts/standards per service
    for topical authority.
+4b. attributes: the ANGLES this page must cover to be complete. A page that
+   answers "what it is" but never "what it costs" or "how long it takes" is
+   thin no matter how many words it has, and a searcher goes back to Google.
+   Return 4-7 per service, EACH one chosen because the keywords or questions
+   above show demand for it — never a generic checklist. Use these names
+   where they fit: cost, timeline, process, comparison, requirement, problem,
+   maintenance, warranty, local. Each gets a `covers` line: one sentence on
+   what the page must actually say to satisfy it. ORDER THEM by how much
+   demand the data shows — the builder writes them in the order you give.
 5. "name" must be a CHARACTER-FOR-CHARACTER copy of a service page name.
 6. A page with no matching keywords still appears (empty keyword_ids).
 7. long_tail_ids (only if a LONG-TAIL list appears above): same one-id-one-page
@@ -357,6 +389,7 @@ RETURN JSON ONLY:
   "keyword_ids": [1, 2], "long_tail_ids": [31, 44],
   "questions": [{{"q": "...", "answer_angle": "...",
   "type": "conversational|voice|paa|local"}}],
+  "attributes": [{{"attribute": "cost", "covers": "one sentence on what this page must say"}}],
   "entities_to_mention": ["..."]}}], "excluded_ids": [3]}}"""
 
     raw = claude_json(client, ASSIGN_SYSTEM, prompt)
@@ -406,12 +439,21 @@ RETURN JSON ONLY:
             "entities_to_mention": [str(e).strip() for e in
                                     svc.get("entities_to_mention", []) if str(e).strip()],
             "long_tail": [by_id[i]["keyword"] for i in tail_ids],
+            # Coverage contract for this page, in demand order. The builder
+            # turns each into a section, so this is also what makes the page
+            # grow when the data justifies it instead of staying a fixed size.
+            "attributes": [
+                {"attribute": str(a.get("attribute", "")).strip()[:40],
+                 "covers": str(a.get("covers", "")).strip()[:300]}
+                for a in (svc.get("attributes") or [])[:7]
+                if str(a.get("attribute", "")).strip()],
         }
     # Pages Claude skipped still exist — the builder falls back to its
     # own guessed keywords for them (volume 0 = visible in the report).
     return [services_out[s] or {"name": s, "primary_keyword": None, "keywords": [],
                                 "total_volume": 0, "questions": [],
-                                "entities_to_mention": [], "long_tail": []}
+                                "entities_to_mention": [], "long_tail": [],
+                                "attributes": []}
             for s in category["services"]]
 
 
@@ -454,7 +496,9 @@ def main():
           + (f" | output in {CONTENT_LANG_NAME}" if CONTENT_LANG_NAME else ""))
 
     print(f"\n🗂️ Stage A — grouping {len(SERVICES)} services into categories...")
-    categories = group_services(claude, SERVICES)
+    categories, site_context = group_services(claude, SERVICES)
+    if site_context.get("central_entity"):
+        print(f"   🎯 central entity: {site_context['central_entity']}")
     print(f"   ✅ {len(categories)} categories: " +
           ", ".join(f"{c['name']} ({len(c['services'])})" for c in categories))
 
@@ -495,6 +539,12 @@ def main():
         "language": CONTENT_LANGUAGE or "",
         "mode3_site_plan": {
             "industry_label": NICHE_DESCRIPTION[:40],
+            # Site-wide framing. The builder puts these in front of the writer
+            # on EVERY page, which is what stops 100 pages reading as 100
+            # unrelated pages — each one is visibly about the same entity,
+            # published by the same source.
+            "central_entity": site_context.get("central_entity", ""),
+            "source_context": site_context.get("source_context", ""),
             "categories": plan_categories,
             "workflow_inputs": {
                 "services_mode3": ", ".join(all_services_ordered),
