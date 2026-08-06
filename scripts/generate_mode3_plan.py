@@ -279,7 +279,14 @@ def claude_json(client, system_prompt, user_prompt):
             "\n\nIMPORTANT: your previous response was not valid JSON. Return ONLY the JSON object."
         with client.messages.stream(
             model=MODEL,
-            max_tokens=16000,
+            # A service's assignment used to be ids + a few questions. It now
+            # also carries h2_outline, attributes, internal_links and a slug —
+            # roughly 1,100 tokens each instead of 300. Ten services in one
+            # category already reach 11k, and Stage A puts no ceiling on how
+            # lopsided the grouping can be, so a 60-service site could land 20
+            # in a single call. At 16k that response is truncated, the JSON
+            # fails to parse and the whole category loses its keywords.
+            max_tokens=32000,
             output_config={"effort": EFFORT},
             system=system_prompt,
             messages=[{"role": "user", "content": p}],
