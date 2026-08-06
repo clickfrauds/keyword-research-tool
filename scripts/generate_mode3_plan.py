@@ -109,7 +109,22 @@ _AC_QUESTION = re.compile(
 
 
 def _norm(s):
-    return re.sub(r"[^a-z0-9]+", "", str(s).lower())
+    """Match key for a service name or keyword — UNICODE, not ASCII.
+
+    [^a-z0-9] deletes every non-Latin character, so all six Arabic services in
+    the Riyadh run normalised to the SAME empty string. The damage compounded
+    through the whole pipeline:
+      * Stage A's by_norm held one entry → 5 of 6 services "dropped" and
+        force-added round-robin into a single category;
+      * fetch_category_keywords guards with `if key and ...`, and "" is falsy,
+        so EVERY Arabic Planner keyword was silently discarded — the run kept
+        only the autocomplete queries;
+      * assign_keywords resolved every page name to the same entry, so one
+        page got all the keywords and the other five got nothing.
+    The build reported success throughout, and the one page that did get data
+    ("عزل حمامات بالرياض") was handed "ترميم منازل" keywords.
+    """
+    return re.sub(r"[\W_]+", "", str(s).lower())
 
 
 def claude_json(client, system_prompt, user_prompt):

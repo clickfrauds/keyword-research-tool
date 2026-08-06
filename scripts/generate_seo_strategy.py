@@ -407,13 +407,17 @@ def _safe_page_name(s):
     """Cluster names travel inside a comma-separated 'Topic :: a, b, c'
     string that Mode 4 splits on commas — a comma (or ::/|) INSIDE a name
     used to shatter it into bogus half-name pages. Strip those chars.
-    Matching downstream is unaffected: it normalizes to a-z0-9 anyway."""
+    Matching downstream is unaffected: it normalizes the name anyway."""
     s = str(s).replace("::", " ").replace("|", " ").replace(",", " ")
     return re.sub(r"\s+", " ", s).strip()
 
 
 def _norm_name(s):
-    return re.sub(r"[^a-z0-9]+", "", str(s).lower())
+    # Unicode, not ASCII. [^a-z0-9] erases every Arabic / Hindi / Chinese
+    # cluster name to the same empty string, which then collides with the
+    # pillar check below and with the builder's own matching. Same fault that
+    # wiped out the Riyadh Mode 3 run.
+    return re.sub(r"[\W_]+", "", str(s).lower())
 
 
 def validate(raw, by_id, geo_areas=None, keywords=()):
