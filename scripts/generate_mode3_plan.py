@@ -70,7 +70,10 @@ _M3_LANG_NAMES = {
 CONTENT_LANGUAGE = {"no": "", "english": "en", "spanish": "es", "french": "fr",
                     "german": "de", "arabic": "ar"}.get(CONTENT_LANGUAGE, CONTENT_LANGUAGE)
 CONTENT_LANG_NAME = _M3_LANG_NAMES.get(CONTENT_LANGUAGE, "") if CONTENT_LANGUAGE != "en" else ""
-from generate_seo_strategy import parse_json_robust, enrich, expand_kw
+from generate_seo_strategy import parse_json_robust, enrich, expand_kw, is_long_tail
+# Stage 1.6 — same query-network module the cluster pipeline uses, so a Mode 3
+# site plan and a Mode 4 cluster plan are built from the same kind of data.
+from expand_autocomplete import expand_queries, fetch_historical_metrics, resolve_gl
 
 JSON_OUT = "website_builder_inputs.json"
 
@@ -85,6 +88,13 @@ SERVICES = [s.strip() for s in os.environ.get("SERVICES_MODE3", "").split(",") i
 
 ADS_SEED_LIMIT = 20          # GenerateKeywordIdeas hard limit: 20 seed keywords/request
 ADS_CALL_DELAY = 1.5         # polite pacing between Ads API calls (seconds)
+
+# Autocomplete queries kept per category, on top of the Planner slice. Set
+# AC_QUERIES_PER_CATEGORY=0 to turn the whole Stage 1.6 pass off for Mode 3.
+AC_PER_CAT = int(os.environ.get("AC_QUERIES_PER_CATEGORY", "40"))
+_AC_GL = resolve_gl() if AC_PER_CAT > 0 else None   # one geo lookup per run
+_AC_QUESTION = re.compile(
+    r"^(how|what|why|when|which|where|who|is|are|do|does|can)\b", re.I)
 
 
 def _norm(s):
@@ -223,14 +233,64 @@ def fetch_category_keywords(ads_client, category, location_id, language_id, glob
             print(f"⚠️ Ads call failed for '{category['name']}' chunk {i // ADS_SEED_LIMIT + 1}: "
                   f"{str(e)[:120]} — continuing")
         time.sleep(ADS_CALL_DELAY)
+    for r in rows:
+        r.setdefault("source", "planner")
     out, local_seen = [], set()
     for r in sorted(rows, key=lambda r: -r["avg_monthly_searches"]):
         key = _norm(r["keyword"])
         if key and key not in local_seen and key not in global_seen:
             local_seen.add(key)
             out.append(r)
+    out = out[:MAX_KW_PER_CAT]
+
+    # ── Stage 1.6 query network (Google Autocomplete) ─────────────────────
+    # Planner only reports queries it has advertiser data for, which on a
+    # 100-page build leaves most service pages with a handful of head terms
+    # and no long tail at all. Autocomplete returns queries out of Google's
+    # own logs, so the pages get real customer phrasing to answer.
+    # Depth 1 here on purpose: a 10-category run would pay depth 2 ten times.
+    # Kept OUTSIDE the MAX_KW_PER_CAT slice above — a zero-volume question
+    # sorts last by volume and would always be the first thing cut, which is
+    # exactly the material we are trying to keep.
+    if AC_PER_CAT > 0:
+        try:
+            ac_queries, _ = expand_queries(
+                seeds, hl=(CONTENT_LANGUAGE or "en")[:5], gl=_AC_GL,
+                depth=1, max_queries=AC_PER_CAT * 4, verbose=False)
+            fresh = [q for q in ac_queries
+                     if _norm(q) not in local_seen and _norm(q) not in global_seen]
+            if fresh:
+                metrics = fetch_historical_metrics(fresh, verbose=False)
+                extra = []
+                for q in fresh:
+                    row = metrics.get(q)
+                    if row:
+                        row["source"] = "autocomplete"
+                    else:
+                        row = {"keyword": q, "avg_monthly_searches": 0,
+                               "competition": "UNKNOWN", "competition_index": 0,
+                               "low_top_bid": 0.0, "high_top_bid": 0.0,
+                               "trend": "UNKNOWN", "peak_months": "",
+                               "source": "autocomplete"}
+                    extra.append(row)
+                # Question-shaped first (FAQ/heading fodder is the point of
+                # this pass), then by volume.
+                extra.sort(key=lambda r: (
+                    0 if _AC_QUESTION.match(r["keyword"]) else 1,
+                    -r["avg_monthly_searches"]))
+                extra = extra[:AC_PER_CAT]
+                for r in extra:
+                    local_seen.add(_norm(r["keyword"]))
+                out.extend(extra)
+                _with_vol = sum(1 for r in extra if r["avg_monthly_searches"] > 0)
+                print(f"   🌐 +{len(extra)} autocomplete queries for "
+                      f"'{category['name']}' ({_with_vol} with volume)")
+        except Exception as e:
+            print(f"   ℹ️ Autocomplete expansion skipped for "
+                  f"'{category['name']}' ({str(e)[:70]}) — Planner data stands")
+
     global_seen.update(local_seen)
-    return out[:MAX_KW_PER_CAT]
+    return out
 
 
 # ══════════════════════════════════════════════════════════════════════════
@@ -245,11 +305,17 @@ category. Output must be valid JSON only."""
 def assign_keywords(client, category, keywords):
     by_id = {}
     lines = []
+    tail_lines = []
     for idx, k in enumerate(keywords, 1):
         k = enrich(dict(k, id=idx))
         by_id[idx] = k
-        lines.append(f"{idx}|{k['keyword']}|vol:{k['avg_monthly_searches']}"
-                     f"|kd:{k['kd_proxy']}|{k['funnel']}|{k.get('trend', '?')}")
+        if is_long_tail(k):
+            # No volume figure exists, so the metric columns would all read 0
+            # and the model would rank it as dead. It isn't — see is_long_tail.
+            tail_lines.append(f"{idx}|{k['keyword']}")
+        else:
+            lines.append(f"{idx}|{k['keyword']}|vol:{k['avg_monthly_searches']}"
+                         f"|kd:{k['kd_proxy']}|{k['funnel']}|{k.get('trend', '?')}")
 
     prompt = f"""CATEGORY: {category['name']}
 LOCATION: {TARGET_LOCATION or '(not local)'}
@@ -258,7 +324,13 @@ SERVICE PAGES in this category (one page each — copy names EXACTLY):
 
 KEYWORDS ({len(lines)} rows — id|keyword|volume|kd|funnel|trend):
 {chr(10).join(lines)}
-
+{f'''
+LONG-TAIL QUERIES ({len(tail_lines)} rows — id|query). Real queries from Google
+Autocomplete that Keyword Planner has no advertiser data for, so no volume
+figure exists. NOT page targets — assign each to the ONE page that should
+answer it in its FAQs and headings, via long_tail_ids:
+{chr(10).join(tail_lines)}
+''' if tail_lines else ''}
 TASK: assign keywords to the service page they belong on.
 RULES:
 1. Every keyword id on AT MOST one page (one query = one page, no
@@ -273,13 +345,17 @@ RULES:
    for topical authority.
 5. "name" must be a CHARACTER-FOR-CHARACTER copy of a service page name.
 6. A page with no matching keywords still appears (empty keyword_ids).
-""" + (f"""7. LANGUAGE: write every `q`, `answer_angle` and `entities_to_mention`
+7. long_tail_ids (only if a LONG-TAIL list appears above): same one-id-one-page
+   rule. Never use one as primary_keyword_id — it carries no volume, so it
+   cannot justify targeting a page. Skip any that fit no page.
+""" + (f"""8. LANGUAGE: write every `q`, `answer_angle` and `entities_to_mention`
    value in {CONTENT_LANG_NAME} (real {CONTENT_LANG_NAME} customer phrasing).
    Do NOT translate the page `name` (copy it exactly) or the JSON keys.
 """ if CONTENT_LANG_NAME else "") + """
 RETURN JSON ONLY:
 {{"services": [{{"name": "exact page name", "primary_keyword_id": 1,
-  "keyword_ids": [1, 2], "questions": [{{"q": "...", "answer_angle": "...",
+  "keyword_ids": [1, 2], "long_tail_ids": [31, 44],
+  "questions": [{{"q": "...", "answer_angle": "...",
   "type": "conversational|voice|paa|local"}}],
   "entities_to_mention": ["..."]}}], "excluded_ids": [3]}}"""
 
@@ -291,14 +367,25 @@ RETURN JSON ONLY:
         real_name = by_norm.get(_norm(svc.get("name", "")))
         if not real_name or services_out.get(real_name):
             continue
-        ids = []
+        ids, tail_ids = [], []
         for i in svc.get("keyword_ids", []):
             try:
                 i = int(i)
             except (TypeError, ValueError):
                 continue
             if i in by_id and i not in seen_ids:
-                ids.append(i)
+                # Same rule as the cluster pipeline: a Stage 1.6 autocomplete
+                # query with no Planner volume is heading/FAQ wording, never a
+                # page's target keyword. Demote it rather than lose it.
+                (tail_ids if is_long_tail(by_id[i]) else ids).append(i)
+                seen_ids.add(i)
+        for i in svc.get("long_tail_ids", []):
+            try:
+                i = int(i)
+            except (TypeError, ValueError):
+                continue
+            if i in by_id and i not in seen_ids and is_long_tail(by_id[i]):
+                tail_ids.append(i)
                 seen_ids.add(i)
         try:
             prim = int(svc.get("primary_keyword_id"))
@@ -318,11 +405,13 @@ RETURN JSON ONLY:
             "questions": questions,
             "entities_to_mention": [str(e).strip() for e in
                                     svc.get("entities_to_mention", []) if str(e).strip()],
+            "long_tail": [by_id[i]["keyword"] for i in tail_ids],
         }
     # Pages Claude skipped still exist — the builder falls back to its
     # own guessed keywords for them (volume 0 = visible in the report).
     return [services_out[s] or {"name": s, "primary_keyword": None, "keywords": [],
-                                "total_volume": 0, "questions": [], "entities_to_mention": []}
+                                "total_volume": 0, "questions": [],
+                                "entities_to_mention": [], "long_tail": []}
             for s in category["services"]]
 
 

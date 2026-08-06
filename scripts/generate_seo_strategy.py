@@ -54,6 +54,10 @@ MD_OUT = "seo_content_plan.md"
 MODEL = os.environ.get("CLAUDE_MODEL", "claude-sonnet-5")
 EFFORT = os.environ.get("CLAUDE_EFFORT", "medium")
 MAX_CLUSTERS = int(os.environ.get("MAX_SEO_CLUSTERS", "8"))
+# How many no-volume Stage 1.6 queries reach the prompt (0 = ignore them).
+MAX_LONG_TAIL = int(os.environ.get("MAX_LONG_TAIL", "250"))
+_QUESTION_SHAPED = re.compile(
+    r"^(how|what|why|when|which|where|who|is|are|do|does|can)\b", re.I)
 
 BUSINESS_NAME = os.environ.get("BUSINESS_NAME", "").strip()
 NICHE_DESCRIPTION = os.environ.get("NICHE_DESCRIPTION", "").strip()
@@ -206,7 +210,8 @@ Your outputs feed FOUR website-generator modes. Return ONLY a JSON object:
             "answer_angle": "one sentence: exactly how the content should answer to win the snippet/AI overview",
             "type": "conversational|voice|paa|local"}}
         ],
-        "entities_to_mention": ["specific entities/terms/standards the content must mention for topical authority"]
+        "entities_to_mention": ["specific entities/terms/standards the content must mention for topical authority"],
+        "long_tail_ids": [31, 44]
       }}
     ]
   }},
@@ -264,6 +269,13 @@ HARD RULES:
    Keep each name under 60 characters.
 10. NO cluster may have the same name/theme as main_topic — the pillar page
    already covers it. Clusters are its DISTINCT subtopics only.
+11. LONG-TAIL QUERIES (the second list, if present): real queries from Google
+   Autocomplete with no Planner volume. Put each id in long_tail_ids of the
+   ONE cluster whose page should answer it — same one-id-one-cluster rule as
+   keyword_ids. NEVER create a cluster for these and NEVER use one as a
+   primary_keyword_id: they carry no volume, so they cannot justify a page.
+   They exist to make a page's FAQs and headings match real phrasing. Skip
+   any that fit no cluster — do not force them.
 """
 
 if CONTENT_LANG_NAME:
@@ -308,15 +320,30 @@ def fetch_geo_areas():
         return []
 
 
+def is_long_tail(k):
+    """A Stage 1.6 autocomplete find that Planner has no ad data for.
+
+    Zero volume here does NOT mean nobody searches it — Google Autocomplete
+    only suggests queries out of its own logs, so the query is real; Planner
+    just has no advertisers bidding on it. These are the queries AI Overviews
+    and featured snippets answer, so they belong in a page's FAQs and headings
+    — never as a page of their own."""
+    return (k.get("source") == "autocomplete"
+            and not k.get("avg_monthly_searches"))
+
+
 def build_user_prompt(keywords, geo_areas=None):
-    lines = []
+    lines, tail_lines = [], []
     for k in keywords:
         flags = ",".join(k.get("flags", [])) or "-"
-        lines.append(
-            f"{k['id']}|{k['keyword']}|vol:{k['avg_monthly_searches']}"
-            f"|kd:{k['kd_proxy']}|{k['funnel']}"
-            f"|{k.get('trend', 'UNKNOWN')}|{k.get('intent', '?')}|{flags}"
-        )
+        if is_long_tail(k):
+            tail_lines.append(f"{k['id']}|{k['keyword']}")
+        else:
+            lines.append(
+                f"{k['id']}|{k['keyword']}|vol:{k['avg_monthly_searches']}"
+                f"|kd:{k['kd_proxy']}|{k['funnel']}"
+                f"|{k.get('trend', 'UNKNOWN')}|{k.get('intent', '?')}|{flags}"
+            )
     geo_block = ""
     if geo_areas:
         geo_block = (
@@ -333,7 +360,18 @@ def build_user_prompt(keywords, geo_areas=None):
         + geo_block +
         f"KEYWORDS ({len(lines)} rows — format: id|keyword|volume|kd|funnel|trend|intent|flags):\n"
     )
-    return header + "\n".join(lines)
+    body = header + "\n".join(lines)
+    if tail_lines:
+        body += (
+            f"\n\nLONG-TAIL QUERIES ({len(tail_lines)} rows — format: id|query).\n"
+            "These came from Google Autocomplete, so real people type them, but "
+            "Keyword Planner has no advertiser data for them (no volume number "
+            "exists). They are NOT page targets — assign them with "
+            "long_tail_ids to the ONE cluster whose page should answer them in "
+            "its FAQs and headings:\n"
+            + "\n".join(tail_lines)
+        )
+    return body
 
 
 # ══════════════════════════════════════════════════════════════════════════
@@ -355,6 +393,13 @@ def expand_kw(k):
         "peak_months": k.get("peak_months", ""),
         "ai_overview_prone": k["ai_overview_prone"],
         "flags": k.get("flags", []),
+        # Where the query came from. "planner" = Google had advertiser data for
+        # it; "autocomplete" = Stage 1.6 found it in Google's own suggestions.
+        # An autocomplete query at volume 0 is NOT dead — Planner just has no
+        # ad data for it. Those are the long-tail questions AI Overviews answer,
+        # so the builder uses them as FAQ/heading material, never page targets.
+        # Shared by Mode 3 (generate_mode3_plan imports this) and Modes 4/6.
+        "source": k.get("source", "planner"),
     }
 
 
@@ -380,14 +425,27 @@ def validate(raw, by_id, geo_areas=None, keywords=()):
     seen = set()
     clusters = []
     for c in (m4.get("clusters") or [])[:MAX_CLUSTERS]:
-        ids = []
+        ids, tail_ids = [], []
         for i in c.get("keyword_ids", []):
             try:
                 i = int(i)
             except (TypeError, ValueError):
                 continue
             if i in by_id and i not in seen:  # cannibalization guard
-                ids.append(i); seen.add(i)
+                # A no-volume autocomplete query can never be a page's target
+                # keyword, whatever list the model put it in — it has no demand
+                # number to justify ranking a page on. Demote, never drop.
+                (tail_ids if is_long_tail(by_id[i]) else ids).append(i)
+                seen.add(i)
+        for i in c.get("long_tail_ids", []):
+            try:
+                i = int(i)
+            except (TypeError, ValueError):
+                continue
+            # Same one-id-one-cluster rule: a query answered on two pages is
+            # the cannibalization this guard exists to prevent.
+            if i in by_id and i not in seen and is_long_tail(by_id[i]):
+                tail_ids.append(i); seen.add(i)
         if not ids:
             continue
         try:
@@ -439,6 +497,11 @@ def validate(raw, by_id, geo_areas=None, keywords=()):
             "ai_overview_prone": bool(cluster_aio),
             "questions": questions,
             "entities_to_mention": [str(e).strip() for e in c.get("entities_to_mention", []) if str(e).strip()],
+            # Real phrasing from Google Autocomplete with no Planner volume.
+            # The builder writes FAQs and headings from these; they are never
+            # page targets (see is_long_tail). Plain strings — there are no
+            # metrics to carry, and every consumer already accepts strings.
+            "long_tail": [by_id[i]["keyword"] for i in tail_ids],
         })
 
     try:
@@ -622,14 +685,37 @@ def main():
 
     # SEO wants EVERYTHING the ads run rejects: questions and informational
     # keywords are content gold. Take kept_for_ai + all question/informational.
+    # `kept_for_ai` is Stage 2.5's 35th-percentile SCORE floor, and score is
+    # driven by volume — so a no-volume Stage 1.6 query scores near the bottom
+    # by construction and the floor would throw away most of what Stage 1.6
+    # just found. It must not: these are judged by their own cap
+    # (MAX_LONG_TAIL) a few lines down, not against keywords that have volume.
+    # Autocomplete queries that DID come back with volume are ordinary
+    # keywords and stay subject to the floor like everything else.
     keywords = [enrich(k) for k in data["keywords"]
                 if k.get("kept_for_ai")
-                or k.get("intent") in ("question", "informational")]
+                or k.get("intent") in ("question", "informational")
+                or is_long_tail(k)]
+
+    # Stage 1.6 can hand over hundreds of no-volume autocomplete queries. They
+    # are cheap in the prompt (id|query, no metrics) but not free, so keep the
+    # most useful ones: question-shaped first — those are the FAQ and heading
+    # material this pass exists to find — then the rest, longest first, since a
+    # longer query is the more specific phrasing.
+    _tail = [k for k in keywords if is_long_tail(k)]
+    _core = [k for k in keywords if not is_long_tail(k)]
+    if len(_tail) > MAX_LONG_TAIL:
+        _tail.sort(key=lambda k: (
+            0 if _QUESTION_SHAPED.match(k["keyword"]) else 1,
+            -len(k["keyword"].split())))
+        _tail = _tail[:MAX_LONG_TAIL]
+        keywords = _core + _tail
     by_id = {k["id"]: k for k in keywords}
 
-    print(f"SEO strategy: {len(keywords)} keywords "
-          f"(incl. {sum(1 for k in keywords if k['funnel'] == 'TOFU')} TOFU / "
-          f"{sum(1 for k in keywords if k['ai_overview_prone'])} AI-overview-prone) → {MODEL} (effort={EFFORT})")
+    print(f"SEO strategy: {len(_core)} demand keywords + {len(_tail)} long-tail "
+          f"queries (Stage 1.6) "
+          f"(incl. {sum(1 for k in _core if k['funnel'] == 'TOFU')} TOFU / "
+          f"{sum(1 for k in _core if k['ai_overview_prone'])} AI-overview-prone) → {MODEL} (effort={EFFORT})")
 
     client = anthropic.Anthropic()
     geo_areas = fetch_geo_areas()

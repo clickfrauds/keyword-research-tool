@@ -330,12 +330,18 @@ def main():
         "total_keywords": len(rows),
         "kept_for_ai": len(kept),
         "score_floor_used": floors,
+        # This whitelist is what reaches Stage 3 — a field missing here is a
+        # field the strategy stage can never see, no matter what Stage 1/1.6
+        # wrote. `source` rides along so the SEO stage can tell a Planner
+        # keyword from a Stage 1.6 autocomplete query (which may legitimately
+        # have volume 0). Rows from an older run have no source → "planner".
         "keywords": [
-            {k: r[k] for k in (
+            dict({k: r[k] for k in (
                 "id", "keyword", "avg_monthly_searches", "competition",
                 "competition_index", "low_top_bid", "high_top_bid",
                 "trend", "peak_months", "intent", "flags", "score",
-                "kept_for_ai", "variants")}
+                "kept_for_ai", "variants")},
+                source=r.get("source", "planner"))
             for r in rows
         ],
     }

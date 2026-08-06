@@ -124,6 +124,26 @@ jobs:
           LANGUAGE: ${{ github.event.inputs.language }}
         run: python scripts/keyword_research.py
 
+      # SEO deliverables only. The Ads run is deliberately untouched: its
+      # keyword set must stay exactly what Planner will report on, and
+      # zero-volume long tail has no place in a bid strategy.
+      - name: Stage 1.6 - Query network expansion (Google Autocomplete, free)
+        if: ${{ github.event.inputs.research_type == 'seo' || github.event.inputs.research_type == 'both' }}
+        env:
+          GOOGLE_ADS_DEVELOPER_TOKEN: ${{ secrets.GOOGLE_ADS_DEVELOPER_TOKEN }}
+          GOOGLE_ADS_CLIENT_ID: ${{ secrets.GOOGLE_ADS_CLIENT_ID }}
+          GOOGLE_ADS_CLIENT_SECRET: ${{ secrets.GOOGLE_ADS_CLIENT_SECRET }}
+          GOOGLE_ADS_REFRESH_TOKEN: ${{ secrets.GOOGLE_ADS_REFRESH_TOKEN }}
+          GOOGLE_ADS_CUSTOMER_ID: ${{ secrets.GOOGLE_ADS_CUSTOMER_ID }}
+          GOOGLE_ADS_USE_PROTO_PLUS: "true"
+          SEED_KEYWORDS: ${{ github.event.inputs.seed_keywords }}
+          TARGET_LOCATION: ${{ github.event.inputs.target_location }}
+          LOCATION_ID: ${{ github.event.inputs.location_id }}
+          LANGUAGE_ID: ${{ github.event.inputs.language_id }}
+          LANGUAGE: ${{ github.event.inputs.language }}
+          AC_DEPTH: "2"
+        run: python scripts/expand_autocomplete.py
+
       - name: Stage 2 - Filter and cluster keywords (niche-agnostic)
         run: python scripts/filter_and_cluster.py keyword_data_output.txt
 
