@@ -163,6 +163,79 @@ def _clean_slug(candidate, fallback_name):
     return (romanised or "page")[:70]
 
 
+def _validate_outline(raw, page_ids, by_id):
+    """Keep only headings whose keyword ids belong to THIS page, each id used
+    once. A heading that claims another page's keyword is how a plan starts
+    cannibalising itself."""
+    out, used = [], set()
+    for h in (raw or [])[:8]:
+        if not isinstance(h, dict):
+            continue
+        text = str(h.get("h2", "")).strip()
+        if not text:
+            continue
+        ids = []
+        for i in h.get("keyword_ids", []):
+            try:
+                i = int(i)
+            except (TypeError, ValueError):
+                continue
+            if i in page_ids and i not in used:
+                ids.append(i)
+                used.add(i)
+        out.append({
+            "h2": text[:120],
+            "keywords": [by_id[i]["keyword"] for i in ids],
+            "entities": [str(e).strip() for e in (h.get("entities") or [])
+                         if str(e).strip()][:4],
+        })
+    return out
+
+
+def _kw_signature(q):
+    """Token signature for near-duplicate collapse, script-agnostic.
+
+    Arabic writes the same query many ways: hamza (أ/ا), ta-marbuta (ة/ه),
+    alef-maqsura (ى/ي), and the fused prefixes بـ/الـ. English has word order
+    and plurals. All of those are the SAME query to Google."""
+    q = str(q).lower()
+    q = re.sub(r"[أإآ]", "ا", q)
+    q = re.sub(r"ة", "ه", q)
+    q = re.sub(r"ى", "ي", q)
+    toks = []
+    for t in re.findall(r"[^\W_]+", q, re.UNICODE):
+        t = re.sub(r"^(بال|وال|فال|كال|لل|ال)", "", t)
+        t = re.sub(r"(?<=[a-z]{4})s$", "", t)      # English plural
+        if t and t not in {"في", "من", "مع", "the", "a", "an", "in", "of", "for"}:
+            toks.append(t)
+    return tuple(sorted(set(toks)))
+
+
+def dedupe_keywords(rows):
+    """Collapse spelling / word-order / prefix variants into one entry.
+
+    Measured on the Riyadh leak-detection page: 97 keywords carried only 73
+    distinct queries, and six of them were the same phrase written six ways
+    ("كشف تسربات المياه بالرياض" / "... الرياض" / "... في الرياض" ...). Sending
+    all 97 to the assignment prompt wastes the model's attention on
+    orthography and pushes genuinely different angles — "مجانا", "أسعار",
+    "حل ارتفاع فاتورة المياه" — down out of view.
+
+    The highest-volume spelling represents the group; the rest ride along as
+    `variants` so nothing is lost and the writer can still use them."""
+    groups = {}
+    for r in sorted(rows, key=lambda r: -(r.get("avg_monthly_searches") or 0)):
+        groups.setdefault(_kw_signature(r["keyword"]), []).append(r)
+    out = []
+    for items in groups.values():
+        keep = dict(items[0])
+        if len(items) > 1:
+            keep["variants"] = [i["keyword"] for i in items[1:]]
+        out.append(keep)
+    out.sort(key=lambda r: -(r.get("avg_monthly_searches") or 0))
+    return out
+
+
 def claude_json(client, system_prompt, user_prompt):
     """One Claude call with a strict-JSON retry, parsed via the shared
     4-pass robust parser."""
@@ -515,6 +588,13 @@ def fetch_category_keywords(ads_client, category, location_id, language_id, glob
                   f"'{category['name']}' ({str(e)[:70]}) — Planner data stands")
 
     global_seen.update(local_seen)
+    # Collapse spelling/word-order variants LAST, so the cap above still
+    # measured real coverage but the assignment prompt sees distinct queries.
+    before = len(out)
+    out = dedupe_keywords(out)
+    if before != len(out):
+        print(f"   🧹 {before} -> {len(out)} distinct queries "
+              f"({before - len(out)} spelling/word-order variants merged)")
     return out
 
 
@@ -568,6 +648,21 @@ RULES:
    sentence on HOW the content should answer to win the snippet.
 4. entities_to_mention: 3-6 specific terms/parts/standards per service
    for topical authority.
+4a. h2_outline: the page's BODY SKELETON — 5-8 H2 sections, in reading order.
+   This is where the page's keyword coverage actually lives. Rules:
+   - Each H2 is CONVERSION-SHAPED: written the way a buyer thinks, not a
+     category label. "كم تكلفة كشف التسربات في الرياض؟" not "الأسعار";
+     "How Much Does Leak Detection Cost?" not "Pricing". A heading that
+     answers a real worry earns the scroll and can win a snippet on its own.
+   - keyword_ids: which of THIS page's keywords that section is written to
+     satisfy. Spread them — the whole point is that a keyword nobody could
+     fit in the title still gets a home. Every id may appear in one H2 only.
+   - entities: 2-4 specific terms/materials/standards/brands that belong in
+     THAT section — not the page's generic entity list repeated.
+   - Do NOT restate the attributes' benefit cards; those are short trust
+     blocks elsewhere on the page. H2 sections are the body prose.
+   - Order by what a buyer needs first, ending with the section that leads
+     naturally into the call to action.
 4b. attributes: the ANGLES this page must cover to be complete. A page that
    answers "what it is" but never "what it costs" or "how long it takes" is
    thin no matter how many words it has, and a searcher goes back to Google.
@@ -598,6 +693,8 @@ RETURN JSON ONLY:
   "keyword_ids": [1, 2], "long_tail_ids": [31, 44],
   "questions": [{{"q": "...", "answer_angle": "...",
   "type": "conversational|voice|paa|local"}}],
+  "h2_outline": [{{"h2": "conversion-shaped heading in the site language",
+    "keyword_ids": [5, 12], "entities": ["..."]}}],
   "attributes": [{{"attribute": "cost", "covers": "one sentence on what this page must say"}}],
   "entities_to_mention": ["..."]}}], "excluded_ids": [3]}}"""
 
@@ -652,6 +749,13 @@ RETURN JSON ONLY:
             # skipped it — a readable English path is the whole point, but a
             # page must never end up without one.
             "url_slug": _clean_slug(svc.get("url_slug"), real_name),
+            # Body skeleton. Each H2 owns a slice of the page's keywords, so a
+            # query that could never fit the title still has a home — the
+            # Riyadh leak page had 73 distinct queries and only the top few
+            # could reach the title/intro. ids are validated against THIS
+            # page's own set and used once, so a heading cannot claim a
+            # keyword that belongs to another section or another page.
+            "h2_outline": _validate_outline(svc.get("h2_outline"), ids, by_id),
             # Coverage contract for this page, in demand order. The builder
             # turns each into a section, so this is also what makes the page
             # grow when the data justifies it instead of staying a fixed size.
@@ -666,7 +770,8 @@ RETURN JSON ONLY:
     return [services_out[s] or {"name": s, "primary_keyword": None, "keywords": [],
                                 "total_volume": 0, "questions": [],
                                 "entities_to_mention": [], "long_tail": [],
-                                "attributes": [], "url_slug": _clean_slug("", s)}
+                                "attributes": [], "h2_outline": [],
+                                "url_slug": _clean_slug("", s)}
             for s in category["services"]]
 
 
