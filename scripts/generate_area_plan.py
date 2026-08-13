@@ -847,9 +847,16 @@ def main():
         client = GoogleAdsClient.load_from_env()
         svc = client.get_service("KeywordPlanIdeaService")
 
-    # Planner language ids. Anything not listed researches in English.
-    LANG_IDS = {"en": "1000", "ar": "1019", "hi": "1023", "es": "1003", "fr": "1002",
-                "de": "1001", "tr": "1037", "ur": "1041", "ru": "1031", "zh": "1017"}
+    # Planner language ids. Anything not listed researches in English AND ships a
+    # blank language in the plan, so the website builder cannot auto-adopt it —
+    # keep this table in step with keyword_research._KNOWN_LANG_IDS and
+    # push_to_google_ads._LANG_CONSTANTS or a language silently degrades here.
+    # ("ur" was 1041; the other two tables both say 1056, which is the real Urdu
+    # languageConstant — Mode 5 was researching Urdu areas under the wrong one.)
+    LANG_IDS = {"en": "1000", "ar": "1019", "hi": "1023", "ur": "1056",
+                "es": "1003", "fr": "1002", "de": "1001", "it": "1004",
+                "nl": "1010", "pt": "1014", "ru": "1031", "tr": "1037",
+                "zh": "1017", "ja": "1005", "ko": "1012"}
     lang_code = LANGUAGE if LANGUAGE in LANG_IDS else ""
     if LANGUAGE and not lang_code:
         # "no" is a real ISO code (Norwegian). Someone answering the form's
