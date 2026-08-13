@@ -138,6 +138,13 @@
     <label for="website_url">Website URL <span style="opacity:.6">(optional — RSA ads ke Final URLs iske landing-page slugs par banenge)</span></label>
     <input id="website_url" name="website_url" placeholder="https://yourdomain.com">
 
+    <label for="lang_url_prefix">Language URL folder <span style="opacity:.6">(non-English runs ke liye)</span></label>
+    <select id="lang_url_prefix" name="lang_url_prefix" style="width:100%; padding:10px 12px; border:1px solid #dcdad3; border-radius:8px; font-size:14px; background:#fff;">
+      <option value="yes">/{lang}/ folder — e.g. /ar/slug/ (website builder ka DEFAULT)</option>
+      <option value="no">Domain root — /slug/ (builder mein lang_url_prefix=no set kiya ho tab)</option>
+    </select>
+    <div class="hint" id="langpfx-hint">Ye website builder ke <b>lang_url_prefix</b> se match hona ZAROORI hai. Galat hua to har ad aur sitelink 404 par jayega — Arabic campaign ke ads <code>/slug/</code> par jate the jabke pages <code>/ar/slug/</code> par thay. English runs par koi asar nahi.</div>
+
     <label for="research_type">Deliverable type</label>
     <select id="research_type" name="research_type" style="width:100%; padding:10px 12px; border:1px solid #dcdad3; border-radius:8px; font-size:14px; background:#fff;">
       <option value="google_ads">Google Ads — campaigns, ad groups, negatives, guard script</option>
@@ -182,8 +189,9 @@
       // "Locations only" runs entirely in the browser (same geo dataset, same
       // row format as generate_locations.py) — no GitHub Actions run needed.
       // The form shrinks to: campaign name(s) + the location picker.
-      var LOC_HIDE = ["niche_description", "website_url", "seed_keywords",
-                      "existing_campaign", "existing_ad_groups", "max_ad_groups"];
+      var LOC_HIDE = ["niche_description", "website_url", "lang_url_prefix",
+                      "seed_keywords", "existing_campaign", "existing_ad_groups",
+                      "max_ad_groups"];
       function setLocationsOnly(on) {
         LOC_HIDE.forEach(function (id) {
           var el = document.getElementById(id);
@@ -195,6 +203,7 @@
         document.getElementById("push-block").style.display = on ? "none" : "";
         document.getElementById("seed-hint").style.display = on ? "none" : "";
         document.getElementById("existing-hint").style.display = on ? "none" : "";
+        document.getElementById("langpfx-hint").style.display = on ? "none" : "";
         document.querySelector('label[for="business_name"]').textContent =
           on ? "Campaign name(s) — exact names from your account, comma-separated" : "Business name";
         document.getElementById("business_name").placeholder =

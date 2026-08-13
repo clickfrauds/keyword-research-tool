@@ -107,14 +107,26 @@ def slug_for(group_name, pages):
     return ""
 
 
+# Must match generate_rsa_ads.py — the builder's lang_url_prefix defaults to the
+# /{lang}/ folder, so sitelinks default to it too. Set LANG_URL_PREFIX=no only
+# when the builder published at the domain root.
+_LANG_AT_ROOT = os.environ.get("LANG_URL_PREFIX", "yes").strip().lower() in (
+    "no", "false", "0", "root")
+
+
 def lang_prefix_for(group):
     """Non-English ad groups point at /{lang}/{slug}/ — the folder the website
     builder actually publishes that language into. Only used when the RSA stage
-    did not already resolve a Final URL for this group."""
+    did not already resolve a Final URL for this group.
+
+    `code == _LANG` used to zero the prefix, which silently dropped /ar/ from
+    every sitelink on a single-language Arabic run (same bug as the RSA stage).
+    Where the pages live is decided by the builder's lang_url_prefix, not by the
+    run-wide language."""
     code = str(group.get("language") or "").strip().lower()
     if not code:
         code = "ar" if re.search(r"[؀-ۿ]", str(group.get("name", "")) + str(group.get("theme", ""))) else "en"
-    if code in ("", "en") or code == _LANG:
+    if code in ("", "en") or _LANG_AT_ROOT:
         return ""
     return f"/{code}"
 

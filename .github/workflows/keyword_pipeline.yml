@@ -59,6 +59,10 @@ on:
         description: "OPTIONAL: explicit numeric Google language id (overrides 'language' above) — blank = auto"
         required: false
         default: ''
+      lang_url_prefix:
+        description: "Does the website publish this language under /{lang}/ ? yes = /ar/slug/ (the website builder's DEFAULT). no = domain root, /slug/. MUST match the builder's lang_url_prefix or every ad + sitelink 404s. Ignored for English."
+        required: false
+        default: 'yes'
       bid_currency:
         description: "Currency label for suggested Max CPC bids (Planner data is in the API account's currency)"
         required: false
@@ -220,6 +224,7 @@ jobs:
           TARGET_LOCATION: ${{ github.event.inputs.target_location }}
           WEBSITE_URL: ${{ github.event.inputs.website_url }}
           LANGUAGE: ${{ github.event.inputs.language }}
+          LANG_URL_PREFIX: ${{ github.event.inputs.lang_url_prefix }}
         run: python scripts/generate_rsa_ads.py
 
       - name: Stage 3.85 - Ad-group sitelinks from the landing-page anchors (~$0.02)
@@ -229,6 +234,7 @@ jobs:
           MODEL: claude-sonnet-5
           WEBSITE_URL: ${{ github.event.inputs.website_url }}
           LANGUAGE: ${{ github.event.inputs.language }}
+          LANG_URL_PREFIX: ${{ github.event.inputs.lang_url_prefix }}
         run: python scripts/generate_sitelinks.py
 
       - name: Stage 3.9 - Location targeting CSV + Claude bid tiers + negative locations (~$0.02)

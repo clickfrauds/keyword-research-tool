@@ -331,12 +331,28 @@ def group_language(group):
     return "en", RSA_LANG_NAME or ""
 
 
+# Where does the website builder publish this language — /{lang}/ or the domain
+# root? The builder's own `lang_url_prefix` config defaults to "yes" (the folder),
+# so that is the default here too. Set LANG_URL_PREFIX=no ONLY when the builder
+# was run with lang_url_prefix=no; the two MUST agree or the ads 404.
+_LANG_AT_ROOT = os.environ.get("LANG_URL_PREFIX", "yes").strip().lower() in (
+    "no", "false", "0", "root")
+
+
 def lang_url_prefix(lang_code):
     """The website builder publishes non-English content under /{lang}/
     (lang_mode folder). An Arabic ad group whose Final URL skipped that folder
-    pointed at a 404 while the real page sat at /ar/{slug}/."""
+    pointed at a 404 while the real page sat at /ar/{slug}/.
+
+    The prefix used to be dropped whenever the ad group's language equalled the
+    run-wide LANGUAGE — which is true of EVERY single-language campaign, the
+    normal case. A full Arabic run therefore pointed every ad and sitelink at
+    /{slug}/ while the builder published /ar/{slug}/, so the whole campaign
+    served 404s. The run-wide language says nothing about where the pages live;
+    only the builder's lang_url_prefix does, so that is what decides now.
+    """
     code = (lang_code or "en").strip().lower()
-    if not code or code == "en" or code == (_rsa_lang or "en"):
+    if not code or code == "en" or _LANG_AT_ROOT:
         return ""
     return f"/{code}"
 
