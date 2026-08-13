@@ -166,9 +166,17 @@ def detect_language_id(seeds):
 # Our ISO code → Google Ads languageConstant.code (mostly identical; a few
 # specials). Used only to build the API query; the numeric id comes from Google.
 _GADS_LANG_CODE = {"zh": "zh_CN", "he": "iw", "nb": "no"}
-# Fast-path for codes whose ids the tool already hardcodes elsewhere — avoids an
-# API round-trip for the existing en/ar/hi runs.
-_KNOWN_LANG_IDS = {"en": "1000", "ar": "1019", "hi": "1023"}
+# Fast-path: avoids an API round-trip for all form-supported languages.
+_KNOWN_LANG_IDS = {
+    "en": "1000", "ar": "1019", "hi": "1023", "ur": "1056",
+    "es": "1003", "fr": "1002", "de": "1001", "it": "1004",
+    "nl": "1010", "pt": "1014", "ru": "1031", "tr": "1037",
+    "zh": "1017", "ja": "1005", "ko": "1012",
+}
+# Urdu and Arabic both use Arabic Unicode script — script detection alone cannot
+# distinguish them. When the forced language is one of these, script detection
+# must not override it with the other.
+_ARABIC_SCRIPT_LANGS = frozenset({"1019", "1056"})  # ar, ur
 
 
 def resolve_language_from_code(client, code):
@@ -303,9 +311,17 @@ def main():
         _script_lang, _script_why = detect_language_id([seed])
         _forced = LANGUAGE_ID or resolved_lang_id
         if _forced and _script_lang != "1000" and _script_lang != _forced:
-            seed_lang = _script_lang
-            print(f"   🔤 '{seed[:40]}' is {_script_why.split(' (')[0]} script — "
-                  f"pulled as {_script_lang}, not the run-wide {_forced}")
+            # Urdu seeds are indistinguishable from Arabic by script alone.
+            # When both the forced language and the detected language belong to
+            # the Arabic-script family, trust the explicit LANGUAGE setting.
+            _same_script = (_forced in _ARABIC_SCRIPT_LANGS
+                            and _script_lang in _ARABIC_SCRIPT_LANGS)
+            if _same_script:
+                seed_lang = _forced
+            else:
+                seed_lang = _script_lang
+                print(f"   🔤 '{seed[:40]}' is {_script_why.split(' (')[0]} script — "
+                      f"pulled as {_script_lang}, not the run-wide {_forced}")
         else:
             seed_lang = _forced or _script_lang
         response = None
@@ -331,7 +347,7 @@ def main():
             if key and key not in ideas_by_text:
                 ideas_by_text[key] = idea
                 n_new += 1
-        lang_tag = {"1000": "en", "1019": "ar", "1023": "hi"}.get(seed_lang, seed_lang)
+        lang_tag = {v: k for k, v in _KNOWN_LANG_IDS.items()}.get(seed_lang, seed_lang)
         print(f"   🌱 '{seed}' [{lang_tag}]: +{n_new} new ideas (running total {len(ideas_by_text)})")
     if not ideas_by_text:
         print("❌ No keyword ideas returned for any seed — check seeds/geo.")
