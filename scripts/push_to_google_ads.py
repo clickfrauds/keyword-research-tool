@@ -176,9 +176,37 @@ def main():
     # filter on the user's Google interface language, so a campaign that never
     # targeted Arabic under-serves its Arabic ad groups. Target exactly the
     # languages the ad groups are actually written in.
+    # Fast path for the ids we already know. A code that is NOT here used to be
+    # dropped silently, and the campaign fell back to English — a Polish or Thai
+    # campaign then targeted English speakers. Rather than hardcode more ids from
+    # memory (a wrong id mis-targets a live campaign, which is worse than the
+    # bug), unknown codes are resolved from Google itself, the same way
+    # keyword_research.resolve_language_from_code does it.
     _LANG_CONSTANTS = {"en": 1000, "ar": 1019, "hi": 1023, "ur": 1056, "fr": 1002,
                        "de": 1001, "es": 1003, "it": 1004, "nl": 1010, "pt": 1014,
                        "ru": 1031, "tr": 1037, "zh": 1017, "ja": 1005, "ko": 1012}
+    _GADS_LANG_CODE = {"zh": "zh_CN", "he": "iw", "nb": "no"}
+
+    def _lang_id(code):
+        """languageConstant id for an ISO code: known table first, else ask the
+        API. Returns None when Google has no such language or the lookup fails,
+        and the caller then skips that criterion rather than mis-targeting."""
+        if code in _LANG_CONSTANTS:
+            return _LANG_CONSTANTS[code]
+        gcode = _GADS_LANG_CODE.get(code, code)
+        try:
+            q = ("SELECT language_constant.id FROM language_constant "
+                 f"WHERE language_constant.code = '{gcode}'")
+            for row in svc.search(customer_id=PUSH_CUSTOMER_ID, query=q):
+                lid = int(row.language_constant.id)
+                _LANG_CONSTANTS[code] = lid          # cache for the rest of the run
+                log(f"ℹ️ Language '{code}' resolved via API → languageConstant {lid}.")
+                return lid
+            log(f"⚠️ Google has no language matching '{code}' — not targeted.")
+        except Exception as _le:
+            log(f"⚠️ Language lookup failed for '{code}' ({str(_le)[:60]}) — not targeted.")
+        return None
+
     _langs = set()
     for g in groups:
         code = str(g.get("language") or "").strip().lower()
@@ -186,15 +214,28 @@ def main():
             blob = str(g.get("name", "")) + " ".join(
                 str(k.get("keyword", "")) for k in (g.get("keywords") or []))
             code = "ar" if any("؀" <= ch <= "ۿ" for ch in blob) else "en"
-        if code in _LANG_CONSTANTS:
+        if code:
             _langs.add(code)
+    _targeted = []
     for code in sorted(_langs or {"en"}):
+        lid = _lang_id(code)
+        if lid is None:
+            continue
         o = op()
         cc = o.campaign_criterion_operation.create
         cc.campaign = temp("campaigns/-2")
-        cc.language.language_constant = f"languageConstants/{_LANG_CONSTANTS[code]}"
+        cc.language.language_constant = f"languageConstants/{lid}"
         ops.append(o)
-    log(f"Campaign languages targeted: {', '.join(sorted(_langs or {'en'}))}")
+        _targeted.append(code)
+    # Never ship a campaign with no language criterion at all.
+    if not _targeted:
+        o = op()
+        cc = o.campaign_criterion_operation.create
+        cc.campaign = temp("campaigns/-2")
+        cc.language.language_constant = "languageConstants/1000"
+        ops.append(o)
+        _targeted = ["en (fallback)"]
+    log(f"Campaign languages targeted: {', '.join(_targeted)}")
 
     # ── ad groups + keywords + negatives ────────────────────────────────
     n_kw = n_neg = 0

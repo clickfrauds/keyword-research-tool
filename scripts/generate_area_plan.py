@@ -859,13 +859,29 @@ def main():
                 "zh": "1017", "ja": "1005", "ko": "1012"}
     lang_code = LANGUAGE if LANGUAGE in LANG_IDS else ""
     if LANGUAGE and not lang_code:
-        # "no" is a real ISO code (Norwegian). Someone answering the form's
-        # language field with "no" meaning "none" would otherwise stamp the plan
-        # with a language the site is not in, so an unrecognised code is dropped
-        # rather than carried forward.
-        print(f"   ⚠️ language '{LANGUAGE}' not recognised — researching in English "
-              f"and leaving the plan's language blank. Use one of: "
-              f"{', '.join(sorted(LANG_IDS))}.")
+        # Not in the fast-path table — ask Google rather than silently dropping
+        # the language (that researched the areas in English AND shipped a blank
+        # language, so the website builder could not adopt it either). "no" is a
+        # real ISO code for Norwegian but the form means "no language chosen", so
+        # it is normalised to "" further up and never reaches this lookup.
+        try:
+            # NOTE: `svc` here is the KeywordPlanIdeaService, which has no
+            # search() — a GAQL query needs GoogleAdsService.
+            _gsvc = client.get_service("GoogleAdsService")
+            _gcode = {"zh": "zh_CN", "he": "iw", "nb": "no"}.get(LANGUAGE, LANGUAGE)
+            _q = ("SELECT language_constant.id FROM language_constant "
+                  f"WHERE language_constant.code = '{_gcode}'")
+            for _row in _gsvc.search(customer_id=CUSTOMER_ID, query=_q):
+                LANG_IDS[LANGUAGE] = str(_row.language_constant.id)
+                lang_code = LANGUAGE
+                print(f"   🗣️ language '{LANGUAGE}' resolved via API → "
+                      f"languageConstant {LANG_IDS[LANGUAGE]}")
+                break
+        except Exception as _le:
+            print(f"   ⚠️ language lookup failed for '{LANGUAGE}' ({str(_le)[:60]})")
+        if not lang_code:
+            print(f"   ⚠️ language '{LANGUAGE}' not recognised — researching in "
+                  f"English and leaving the plan's language blank.")
     lang_id = LANGUAGE_ID or LANG_IDS.get(lang_code, "1000")
 
     # geo target for the CITY itself — every request is scoped to it, so an

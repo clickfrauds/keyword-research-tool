@@ -83,11 +83,16 @@ if WEBSITE_URL and not re.match(r"^https?://", WEBSITE_URL, re.IGNORECASE):
 # language of the keywords", but a group with few/short keywords can slip into
 # English. When LANGUAGE is set explicitly we name the language so every RSA
 # asset is unambiguously in it. Blank/"en" = unchanged.
+# Every code the form and the workflow accept. A code missing here produced ad
+# copy with NO language instruction at all — Claude then guessed from the
+# keywords, so a Czech or Thai run could come back with English headlines.
 _RSA_LANG_NAMES = {
     "en": "English", "ar": "Arabic", "es": "Spanish", "fr": "French",
     "de": "German", "it": "Italian", "pt": "Portuguese", "nl": "Dutch",
     "ru": "Russian", "tr": "Turkish", "hi": "Hindi", "ur": "Urdu",
     "zh": "Chinese", "ja": "Japanese", "ko": "Korean", "pl": "Polish",
+    "cs": "Czech", "el": "Greek", "hu": "Hungarian", "id": "Indonesian",
+    "ro": "Romanian", "sv": "Swedish", "th": "Thai", "vi": "Vietnamese",
 }
 _rsa_lang = os.environ.get("LANGUAGE", "").strip().lower()
 _rsa_lang = {"no": "", "english": "en", "spanish": "es", "french": "fr",

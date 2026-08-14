@@ -51,9 +51,16 @@ if WEBSITE_URL and not re.match(r"^https?://", WEBSITE_URL, re.I):
 
 MODEL = os.environ.get("SITELINK_MODEL", os.environ.get("MODEL", "claude-sonnet-4-6"))
 _LANG = os.environ.get("LANGUAGE", "").strip().lower()
+# Keep in step with generate_rsa_ads._RSA_LANG_NAMES — a code missing here left
+# the sitelinks with no language instruction, so a Japanese campaign shipped
+# Japanese ads next to English sitelink text.
 _LANG_NAMES = {"ar": "Arabic", "es": "Spanish", "fr": "French", "de": "German",
                "tr": "Turkish", "ur": "Urdu", "hi": "Hindi", "ru": "Russian",
-               "zh": "Chinese", "pt": "Portuguese", "it": "Italian", "nl": "Dutch"}
+               "zh": "Chinese", "pt": "Portuguese", "it": "Italian", "nl": "Dutch",
+               "ja": "Japanese", "ko": "Korean", "pl": "Polish", "cs": "Czech",
+               "el": "Greek", "hu": "Hungarian", "id": "Indonesian",
+               "ro": "Romanian", "sv": "Swedish", "th": "Thai",
+               "vi": "Vietnamese"}
 LANG_NAME = _LANG_NAMES.get(_LANG, "")
 
 # The five anchors the site generator emits on every service/landing page.
