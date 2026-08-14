@@ -57,8 +57,23 @@ GEO_BASE = os.environ.get("GEO_BASE_URL", "https://clickadsprotector.com/geo").r
 MAX_ROWS = int(os.environ.get("MAX_LOCATION_ROWS", "300"))
 BUSINESS_NAME = os.environ.get("BUSINESS_NAME", "").strip()
 NICHE_DESCRIPTION = os.environ.get("NICHE_DESCRIPTION", "").strip()
-PREMIUM_BID_ADJ = int(os.environ.get("PREMIUM_BID_ADJ", "25"))
-LOW_BID_ADJ = int(os.environ.get("LOW_BID_ADJ", "-90"))
+# Google's location bid adjustment range is -90%..+900% (0.1x..10x). The push
+# stage sends these as `1 + adj/100`, and the core mutate is atomic, so a single
+# out-of-range value (LOW_BID_ADJ=-95 → 0.05x) fails the ENTIRE campaign push.
+# Clamp here rather than let one env var sink the run.
+def _clamp_adj(raw, default):
+    try:
+        v = int(raw)
+    except (TypeError, ValueError):
+        return default
+    c = max(-90, min(900, v))
+    if c != v:
+        print(f"⚠️ Bid adjustment {v}% is outside Google's -90..+900 range — using {c}%.")
+    return c
+
+
+PREMIUM_BID_ADJ = _clamp_adj(os.environ.get("PREMIUM_BID_ADJ"), 25)
+LOW_BID_ADJ = _clamp_adj(os.environ.get("LOW_BID_ADJ"), -90)
 MODEL = os.environ.get("CLAUDE_MODEL", "claude-sonnet-5")
 
 INPUT_JSON = "keyword_strategy.json"
@@ -128,6 +143,59 @@ def pick_locations(geo, city):
     provinces = [g for g in geo if g.get("t") in ("Province", "State", "Region",
                                                   "Governorate", "Territory")]
     return country + sorted(provinces, key=lambda g: g.get("n", ""))
+
+
+def _norm_area(s):
+    """Loose key for matching an AI-returned area name to a real geo name."""
+    return re.sub(r"[^a-z0-9]+", " ", str(s or "").casefold()).strip()
+
+
+# Tokens that carry no place identity, so dropping them cannot change WHICH
+# place is meant: Arabic/Spanish/English articles and generic area words.
+_FILLER_TOKENS = {"al", "el", "la", "the", "district", "area", "region",
+                  "city", "neighbourhood", "neighborhood", "zone"}
+
+
+def map_tiers_to_areas(chosen, tiers, city="", cc=""):
+    """{AI name: tier} → {real geo name: tier}, plus the names that matched nothing.
+
+    The model is handed the exact geo names and asked to echo them, but it
+    routinely rewrites them: "Al Satwa" → "Satwa", "AL QUOZ" → "Al Quoz",
+    "Deira" → "Deira, Dubai". The CSV lookup was an exact dict hit defaulting to
+    "standard", so ANY such drift silently dropped that area's modifier — the run
+    still logged "9 low (-90%)" while the CSV carried nine blank Bid Modifier
+    cells. That is invisible unless you diff the file by hand, and it is exactly
+    the down-bid on fraud-prone areas that the whole tier system exists for.
+
+    Matching is normalised-exact, then TOKEN-SET equality after dropping filler
+    words and the target city/country ("Deira, Dubai" == "Deira"). It is NOT
+    substring matching: "Jumeirah Beach" must not silently claim "Jumeirah",
+    because a -90% bid on the wrong area costs real money. Anything that cannot
+    be matched confidently is returned for the caller to report.
+    """
+    drop = set(_FILLER_TOKENS) | set(_norm_area(city).split()) | {_norm_area(cc)}
+    drop.discard("")
+
+    def key_of(s):
+        toks = [t for t in _norm_area(s).split() if t not in drop]
+        return " ".join(toks) or _norm_area(s)
+
+    by_exact, by_tokens = {}, {}
+    for g in chosen:
+        by_exact.setdefault(_norm_area(g["n"]), []).append(g["n"])
+        by_tokens.setdefault(frozenset(key_of(g["n"]).split()), []).append(g["n"])
+    mapped, unmatched = {}, []
+    for raw_name, tier in (tiers or {}).items():
+        hits = by_exact.get(_norm_area(raw_name))
+        if not hits:
+            cand = by_tokens.get(frozenset(key_of(raw_name).split()))
+            hits = cand if cand and len(cand) == 1 else None
+        if hits:
+            for n in hits:
+                mapped[n] = tier
+        else:
+            unmatched.append(raw_name)
+    return mapped, unmatched
 
 
 def classify_bid_tiers(chosen, cc, city, geo, index):
@@ -201,10 +269,20 @@ Output ONLY JSON:
                  if str(v).strip().lower() in ("premium", "standard", "low")}
         neg_names = ([str(x).strip() for x in raw.get("negative_siblings") or []]
                      + [str(x).strip() for x in raw.get("negative_countries") or []])
+        # Resolve to REAL geo names before counting, so the numbers printed here
+        # are the numbers that actually reach the CSV.
+        tiers, unmatched = map_tiers_to_areas(chosen, tiers, city, cc)
         n_prem = sum(1 for v in tiers.values() if v == "premium")
         n_low = sum(1 for v in tiers.values() if v == "low")
-        print(f"💰 Bid tiers: {n_prem} premium (+{PREMIUM_BID_ADJ}%) | "
-              f"{n_low} low ({LOW_BID_ADJ}%) | negatives suggested: {neg_names}")
+        n_std = sum(1 for v in tiers.values() if v == "standard")
+        print(f"💰 Bid tiers applied: {n_prem} premium (+{PREMIUM_BID_ADJ}%) | "
+              f"{n_low} low ({LOW_BID_ADJ}%) | {n_std} standard | "
+              f"{len(chosen) - len(tiers)} of {len(chosen)} areas unclassified")
+        if unmatched:
+            print(f"   ⚠️ {len(unmatched)} tier name(s) matched no targeted area "
+                  f"(left at standard): {', '.join(unmatched[:8])}"
+                  + (" …" if len(unmatched) > 8 else ""))
+        print(f"   Negatives suggested: {neg_names}")
         return tiers, neg_names
     except Exception as e:
         print(f"⚠️ Bid-tier call failed ({e}) — plain locations, no modifiers.")
