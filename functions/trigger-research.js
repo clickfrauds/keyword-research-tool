@@ -132,6 +132,10 @@ export async function onRequestPost(context) {
         // builder's default is yes (/ar/slug/), so anything but an explicit
         // "no" keeps the folder — a wrong guess here 404s every ad.
         lang_url_prefix: body.lang_url_prefix === "no" ? "no" : "yes",
+        // Manual bid-tier overrides for the Locations stage. These beat the
+        // model's own call, so a good area can be protected from a wrong -90%.
+        premium_areas: String(body.premium_areas || "").slice(0, 600),
+        low_areas: String(body.low_areas || "").slice(0, 600),
         // Stage 4-PUSH: direct API push (digits-only id; blank = CSV-only)
         push_customer_id: String(body.push_customer_id || "").replace(/\D/g, "").slice(0, 12),
         push_mode: body.push_mode === "live" ? "live" : "validate",

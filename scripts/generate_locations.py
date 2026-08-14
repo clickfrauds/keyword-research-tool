@@ -74,6 +74,15 @@ def _clamp_adj(raw, default):
 
 PREMIUM_BID_ADJ = _clamp_adj(os.environ.get("PREMIUM_BID_ADJ"), 25)
 LOW_BID_ADJ = _clamp_adj(os.environ.get("LOW_BID_ADJ"), -90)
+
+# Your own knowledge beats the model's. Comma-separated area names; these are
+# matched the same forgiving way the model's answers are, and they OVERRIDE
+# whatever the model decided. Use PREMIUM_AREAS to protect areas that must never
+# be bid down by mistake.
+PREMIUM_AREAS = [s.strip() for s in
+                 os.environ.get("PREMIUM_AREAS", "").split(",") if s.strip()]
+LOW_AREAS = [s.strip() for s in
+             os.environ.get("LOW_AREAS", "").split(",") if s.strip()]
 MODEL = os.environ.get("CLAUDE_MODEL", "claude-sonnet-5")
 
 INPUT_JSON = "keyword_strategy.json"
@@ -198,6 +207,32 @@ def map_tiers_to_areas(chosen, tiers, city="", cc=""):
     return mapped, unmatched
 
 
+def apply_area_overrides(chosen, tiers, reasons, city="", cc=""):
+    """PREMIUM_AREAS / LOW_AREAS win over the model.
+
+    The model's tier call is judgment, not data, and the expensive way for it to
+    be wrong is marking an affluent area "low" — a deep bid cut on exactly the
+    areas that convert. These lists let you pin the areas you already know,
+    matched the same forgiving way the model's own answers are. They also work
+    with no ANTHROPIC_API_KEY at all, as a purely manual tier list.
+    """
+    tiers, reasons = dict(tiers), dict(reasons)
+    for names, tier in ((PREMIUM_AREAS, "premium"), (LOW_AREAS, "low")):
+        if not names:
+            continue
+        mapped, missing = map_tiers_to_areas(
+            chosen, {n: tier for n in names}, city, cc)
+        for area, t in mapped.items():
+            if tiers.get(area) and tiers[area] != t:
+                print(f"   ✏️ Override: '{area}' {tiers[area]} → {t} (your {tier.upper()}_AREAS)")
+            tiers[area] = t
+            reasons[area] = "manual override"
+        if missing:
+            print(f"   ⚠️ {tier.upper()}_AREAS not in the targeted list "
+                  f"(ignored): {', '.join(missing)}")
+    return tiers, reasons
+
+
 def classify_bid_tiers(chosen, cc, city, geo, index):
     """Claude judges every chosen area by wealth / commercial intent /
     fraud-risk using world knowledge (the user's Dubai playbook, any market):
@@ -207,14 +242,17 @@ def classify_bid_tiers(chosen, cc, city, geo, index):
     Also returns negative locations: sibling regions NOT targeted (e.g.
     Dubai/Sharjah/Ajman when targeting Abu Dhabi) + common fake-click source
     countries. Fail-open: returns ({}, []) on any problem."""
+    # Your own PREMIUM_AREAS / LOW_AREAS still apply when the model does not run.
     if not os.environ.get("ANTHROPIC_API_KEY"):
-        print("ℹ️ ANTHROPIC_API_KEY not set — skipping bid tiers/negative locations.")
-        return {}, []
+        print("ℹ️ ANTHROPIC_API_KEY not set — no model tiers/negative locations.")
+        t, r = apply_area_overrides(chosen, {}, {}, city, cc)
+        return t, r, []
     try:
         import anthropic
     except ImportError:
-        print("ℹ️ anthropic package missing — skipping bid tiers.")
-        return {}, []
+        print("ℹ️ anthropic package missing — no model tiers.")
+        t, r = apply_area_overrides(chosen, {}, {}, city, cc)
+        return t, r, []
     names = [g["n"] for g in chosen]
     # sibling candidates: same-country locations NOT already chosen (their
     # names give Claude the real list to pick negatives from)
@@ -240,20 +278,31 @@ industrial zones, click-fraud reputation):
   "premium"  = affluent/elite or high-commercial-intent (bid UP)
   "standard" = normal (no change)
   "low"      = labour/industrial/low-intent or fraud-prone (bid WAY down)
-Be decisive — a local media buyer knows Palm Jumeirah is premium and Al Satwa
-is low. Unknown/ambiguous → "standard".
+
+A "low" area gets its bid cut by {abs(LOW_BID_ADJ)}%, which all but switches it
+off. NEVER give "low" to an affluent, upmarket, waterfront, tourist or
+central-business area — that is the single most expensive mistake here, because
+it turns off the areas that actually convert. If you are not sure who lives or
+works in an area, answer "standard". Reserve "low" for areas you positively
+know to be labour accommodation, industrial/warehouse zones, or with a real
+click-fraud reputation.
+
+Give a SHORT reason (max 10 words) for every non-standard call, so a human can
+check it before spending money. Example shape, for a Dubai campaign:
+  "Palm Jumeirah": {{"tier": "premium", "why": "elite waterfront villas, high disposable income"}}
+  "Al Satwa": {{"tier": "low", "why": "dense labour housing, low purchase intent"}}
 
 TASK 2 — negative locations:
   "negative_siblings": from the sibling list ONLY, the regions most likely to
-   send irrelevant clicks to this business (nearby big cities/emirates that
+   send irrelevant clicks to this business (nearby big cities/regions that
    are NOT the target). Max 8.
   "negative_countries": 4-8 countries that are well-known fake-click/bot
-   sources for {TARGET_LOCATION}-targeted campaigns (exact names from real
-   country names, e.g. "United States", "Philippines", "Pakistan", "India",
-   "Bangladesh", "Indonesia"). Never include the target country itself.
+   sources for {TARGET_LOCATION}-targeted campaigns, given as exact country
+   names. NEVER include the target country ({cc}) or any region inside it —
+   excluding the target makes the campaign serve nowhere at all.
 
 Output ONLY JSON:
-{{"tiers": {{"<area name>": "premium|standard|low", ...}},
+{{"tiers": {{"<area name>": {{"tier": "premium|standard|low", "why": "..."}}, ...}},
   "negative_siblings": ["..."], "negative_countries": ["..."]}}"""
     try:
         client = anthropic.Anthropic()
@@ -264,14 +313,27 @@ Output ONLY JSON:
         text = "".join(b.text for b in resp.content if b.type == "text")
         m = re.search(r"\{.*\}", text, re.DOTALL)
         raw = json.loads(m.group(0) if m else text)
-        tiers = {str(k).strip(): str(v).strip().lower()
-                 for k, v in (raw.get("tiers") or {}).items()
-                 if str(v).strip().lower() in ("premium", "standard", "low")}
+        # Accepts both {"area": "low"} and {"area": {"tier": "low", "why": "..."}}
+        tiers, reasons = {}, {}
+        for k, v in (raw.get("tiers") or {}).items():
+            name = str(k).strip()
+            if isinstance(v, dict):
+                tier = str(v.get("tier", "")).strip().lower()
+                why = str(v.get("why", "")).strip()
+            else:
+                tier, why = str(v).strip().lower(), ""
+            if tier in ("premium", "standard", "low"):
+                tiers[name] = tier
+                if why:
+                    reasons[name] = why
         neg_names = ([str(x).strip() for x in raw.get("negative_siblings") or []]
                      + [str(x).strip() for x in raw.get("negative_countries") or []])
         # Resolve to REAL geo names before counting, so the numbers printed here
         # are the numbers that actually reach the CSV.
         tiers, unmatched = map_tiers_to_areas(chosen, tiers, city, cc)
+        reasons, _ = map_tiers_to_areas(chosen, reasons, city, cc)
+        tiers, reasons = apply_area_overrides(chosen, tiers, reasons, city, cc)
+
         n_prem = sum(1 for v in tiers.values() if v == "premium")
         n_low = sum(1 for v in tiers.values() if v == "low")
         n_std = sum(1 for v in tiers.values() if v == "standard")
@@ -282,30 +344,70 @@ Output ONLY JSON:
             print(f"   ⚠️ {len(unmatched)} tier name(s) matched no targeted area "
                   f"(left at standard): {', '.join(unmatched[:8])}"
                   + (" …" if len(unmatched) > 8 else ""))
+        # A run that switches off most of the map is far more likely to be a bad
+        # classification than a real market. Say so loudly — the CSV is Paused
+        # and reviewable, but this is the failure that quietly wastes a budget.
+        if tiers and n_low > max(3, int(0.6 * len(chosen))):
+            print(f"   🚨 {n_low} of {len(chosen)} areas marked LOW ({LOW_BID_ADJ}%). "
+                  f"That is most of the map — CHECK locations.md before pushing, "
+                  f"and pin the good areas with PREMIUM_AREAS if this is wrong.")
+        for _n, _t in sorted(tiers.items()):
+            if _t != "standard":
+                print(f"      {'▲' if _t == 'premium' else '▼'} {_n}: {_t}"
+                      + (f" — {reasons[_n]}" if _n in reasons else ""))
         print(f"   Negatives suggested: {neg_names}")
-        return tiers, neg_names
+        return tiers, reasons, neg_names
     except Exception as e:
-        print(f"⚠️ Bid-tier call failed ({e}) — plain locations, no modifiers.")
-        return {}, []
+        print(f"⚠️ Bid-tier call failed ({e}) — falling back to your overrides only.")
+        t, r = apply_area_overrides(chosen, {}, {}, city, cc)
+        return t, r, []
 
 
-def resolve_negative_rows(neg_names, cc, geo, index):
+def resolve_negative_rows(neg_names, cc, geo, index, chosen=()):
     """Map Claude's negative names to real geo rows. Sibling regions resolve
     inside the target country's file; country names resolve to that
-    country's own Country row (fetched per-country, non-fatal)."""
+    country's own Country row (fetched per-country, non-fatal).
+
+    Two things are never allowed through, because either one silently kills the
+    campaign rather than protecting it:
+      - the TARGET COUNTRY itself. Its own Country row lives in this very geo
+        file, so a model that answered "United States" on a US campaign used to
+        resolve cleanly and exclude the entire target. Only the second lookup
+        below was guarded (other_cc != cc); this one was not.
+      - anything already being TARGETED. Targeting and excluding the same place
+        is contradictory, and Google honours the exclusion.
+    """
     rows, seen = [], set()
     by_name = {}
     for g in geo:
         by_name.setdefault(norm(g.get("n", "")), g)
     cc_by_name = {norm(e["name"]): e["cc"] for e in index
                   if e.get("name") and e.get("cc") and e["name"] != e["cc"]}
+    target_country_keys = {norm(e["name"]) for e in index
+                           if e.get("cc") == cc and e.get("name")} | {norm(cc)}
+    chosen_keys = {norm(g.get("n", "")) for g in (chosen or ())}
     for name in neg_names:
         key = norm(name)
         if not key or key in seen:
             continue
         seen.add(key)
+        if key in target_country_keys:
+            print(f"   🛑 Refusing to exclude '{name}' — that is the TARGET "
+                  f"country; the campaign would serve nowhere.")
+            continue
+        if key in chosen_keys:
+            print(f"   🛑 Refusing to exclude '{name}' — it is in the targeted "
+                  f"list for this campaign.")
+            continue
         g = by_name.get(key)
         if g:
+            # A Country row inside the target country's own file can only be
+            # the target country itself — already refused above, but a geo
+            # dataset that names it differently must not slip through here.
+            if str(g.get("t", "")).lower() == "country":
+                print(f"   🛑 Refusing to exclude country row '{name}' from the "
+                      f"target country's own dataset.")
+                continue
             # prefer the Province/City row over neighborhoods with same name
             rows.append(g)
             continue
@@ -359,7 +461,7 @@ def main():
         print(f"⚠️ No matching locations for '{TARGET_LOCATION}' in {cc} — skipping.")
         return
 
-    tiers, neg_names = classify_bid_tiers(chosen, cc, city, geo, index)
+    tiers, tier_reasons, neg_names = classify_bid_tiers(chosen, cc, city, geo, index)
     # Editor CSV bulk-import format for bid adjustments (per Google's docs,
     # support.google.com/google-ads/editor/answer/30532): a PLAIN NUMBER
     # with no percent sign — "+25%" is written as 25, "-90%" as -90.
@@ -378,15 +480,21 @@ def main():
         for camp in campaigns:
             for g in chosen:
                 tier = tiers.get(g["n"], "standard")
+                # Comment column carries the tier AND why, so the reason for
+                # every bid change is visible in the file you are about to
+                # import — not buried in a log you have already scrolled past.
+                note = "" if tier == "standard" else (
+                    f"{tier}: {tier_reasons[g['n']]}"[:180] if g["n"] in tier_reasons
+                    else tier)
                 w.writerow([camp, "", "", g["id"], "", g["c"], "", "", "", "",
                             "", "", "", adj.get(tier, ""), "Paused", "", "Enabled",
-                            tier if tier != "standard" else ""])
+                            note])
 
     # negative locations — separate small file: paste into the Editor's
     # "Locations, Negative" section (Make multiple changes). Not merged into
     # the master CSV because the Editor has no proven combined-import header
     # for excluded locations.
-    neg_rows = resolve_negative_rows(neg_names, cc, geo, index)
+    neg_rows = resolve_negative_rows(neg_names, cc, geo, index, chosen)
     if neg_rows:
         with open(OUT_NEG_CSV, "w", newline="", encoding="utf-8-sig") as f:
             w = csv.writer(f)
@@ -400,10 +508,17 @@ def main():
              f"{len(chosen)} locations x {len(campaigns)} campaigns", ""]
     prem = [g["n"] for g in chosen if tiers.get(g["n"]) == "premium"]
     low = [g["n"] for g in chosen if tiers.get(g["n"]) == "low"]
+    def _why_lines(names):
+        return [f"- **{n}** — {tier_reasons[n]}" if n in tier_reasons else f"- **{n}**"
+                for n in names]
+
     if prem:
-        lines += [f"## Premium areas (+{PREMIUM_BID_ADJ}% bid)", ", ".join(prem), ""]
+        lines += [f"## Premium areas (+{PREMIUM_BID_ADJ}% bid)"] + _why_lines(prem) + [""]
     if low:
-        lines += [f"## Low-intent/fraud-prone areas ({LOW_BID_ADJ}% bid)", ", ".join(low), ""]
+        lines += [f"## Low-intent/fraud-prone areas ({LOW_BID_ADJ}% bid)",
+                  f"_Each of these is bid down {abs(LOW_BID_ADJ)}%. Read the reasons "
+                  f"before importing — if any of them is actually a good area, set "
+                  f"`PREMIUM_AREAS` for it and re-run._"] + _why_lines(low) + [""]
     if neg_rows:
         lines += ["## Negative locations (locations_negative.csv → Editor: "
                   "Locations, Negative)", ", ".join(g["n"] for g in neg_rows), ""]

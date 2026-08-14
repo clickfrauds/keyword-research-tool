@@ -288,7 +288,7 @@
       // The form shrinks to: campaign name(s) + the location picker.
       var LOC_HIDE = ["niche_description", "website_url", "lang_url_prefix",
                       "seed_keywords", "existing_campaign", "existing_ad_groups",
-                      "max_ad_groups"];
+                      "max_ad_groups", "premium_areas", "low_areas"];
       function setLocationsOnly(on) {
         LOC_HIDE.forEach(function (id) {
           var el = document.getElementById(id);
@@ -301,6 +301,7 @@
         document.getElementById("seed-hint").style.display = on ? "none" : "";
         document.getElementById("existing-hint").style.display = on ? "none" : "";
         document.getElementById("langpfx-hint").style.display = on ? "none" : "";
+        document.getElementById("areas-hint").style.display = on ? "none" : "";
         document.querySelector('label[for="business_name"]').textContent =
           on ? "Campaign name(s) — exact names from your account, comma-separated" : "Business name";
         document.getElementById("business_name").placeholder =
@@ -411,6 +412,12 @@
     <label for="existing_ad_groups">Existing ad groups <span style="opacity:.6">(optional, comma-separated)</span></label>
     <textarea id="existing_ad_groups" name="existing_ad_groups" placeholder="Emergency Plumbing, Drain Cleaning, Water Heater Repair"></textarea>
     <div class="hint" id="existing-hint">Fill both to add NEW ad groups into a live account — new groups slot into this campaign with 2-way negative siloing against these groups.</div>
+
+    <label for="premium_areas">Premium areas — bid UP <span style="opacity:.6">(optional, comma-separated)</span></label>
+    <textarea id="premium_areas" name="premium_areas" placeholder="the affluent / high-intent areas you already know — e.g. Financial District, Waterfront, Uptown"></textarea>
+    <label for="low_areas">Low / fraud-prone areas — bid DOWN <span style="opacity:.6">(optional, comma-separated)</span></label>
+    <textarea id="low_areas" name="low_areas" placeholder="areas you know send junk clicks — e.g. Industrial Park, Warehouse District"></textarea>
+    <div class="hint" id="areas-hint">The AI already classifies every targeted area (affluent → <b>+25%</b>, labour/industrial/fraud-prone → <b>−90%</b>) from its own knowledge of who lives and works there. These two boxes <b>override that call</b> for areas you already know. Use the first one to protect good areas — a wrongly bid-down premium area is the most expensive mistake this stage can make. Every bid change and its reason is written into the Locations CSV's Comment column and <code>locations.md</code>, so check it before you push.</div>
 
     <label for="max_ad_groups">Max new ad groups <span style="opacity:.6">(optional)</span></label>
     <input id="max_ad_groups" name="max_ad_groups" type="number" min="1" max="10" placeholder="10 (use 1-2 for a small niche service)">
@@ -614,6 +621,35 @@
       </dl>
       <div class="sg-tips">
         <div><b>Perfect-use tips:</b> import via Ads Editor → Account → Import. Campaigns that don't exist yet import <b>Paused</b>. After import set each campaign to <b>“Presence: people in or regularly in”</b> — never “interest” — so budget only buys clicks inside the target area.</div>
+      </div>
+    </div>
+
+    <div class="sg-section">Area bid tiers — how the Locations CSV decides to bid up or down</div>
+
+    <div class="sg-card is-mode">
+      <div class="sg-head"><span class="sg-badge">GOOGLE ADS · LOCATIONS</span><span class="sg-eg">every targeted area gets a bid modifier</span></div>
+      <div class="sg-mode-name">Bid up where the money is, bid down where the junk clicks are</div>
+      <div class="sg-formula">geo dataset → area names → AI classification → your overrides → Bid Modifier column</div>
+      <div class="sg-tips">
+        <div><b>What it does:</b> every area in the Locations CSV is graded into one of three tiers — <b>premium</b> (affluent or high-commercial-intent) gets <b>+25%</b>, <b>standard</b> gets no change, and <b>low</b> (labour housing, industrial and warehouse zones, areas with a click-fraud reputation) gets <b>−90%</b>, which effectively switches it off.</div>
+        <div><b>What it decides on:</b> the geo dataset supplies only names and Google geo IDs — no income, population or traffic data exists in it. The tiers come from the model's own world knowledge of who lives and works in each named area. That works well in cities it knows well and defaults to <b>standard</b> when it is unsure, which is the safe direction.</div>
+        <div><b>Because it is judgment, not data:</b> every non-standard call now ships with a short reason, written into the Locations CSV's <b>Comment</b> column and listed in <code>locations.md</code>. Read that list before you import — the one expensive mistake here is a good area wrongly marked low.</div>
+        <div><b>Your knowledge wins:</b> put anything you already know into <b>Premium areas</b> or <b>Low / fraud-prone areas</b> above. Those override the model completely, and they work even with no AI key at all. Use the premium list to protect areas that must never be bid down.</div>
+        <div><b>Guardrails:</b> bid adjustments are clamped to Google's −90%…+900% range so one bad value cannot fail the whole campaign push; if most of the map gets marked low the run warns you loudly; and the target country and any area you are targeting can never be added as a negative location.</div>
+      </div>
+    </div>
+
+    <div class="sg-section">Languages</div>
+
+    <div class="sg-card is-mode">
+      <div class="sg-head"><span class="sg-badge">23 LANGUAGES + ENGLISH</span><span class="sg-eg">the same set everywhere</span></div>
+      <div class="sg-mode-name">One language per run, end to end</div>
+      <div class="sg-tips">
+        <div><b>Google Ads:</b> all 24 run the full pipeline — Planner research, ad group architecture, RSA ad copy, sitelinks, and campaign language targeting on the live API push.</div>
+        <div><b>Mode 3 websites and Mode 4 cluster sites:</b> the same 24. The website builder itself handles 43 languages, so every language this tool can research is one it can build.</div>
+        <div><b>Right-to-left:</b> Arabic and Urdu build RTL pages automatically.</div>
+        <div><b>URLs:</b> content and ad copy come back in your language; URL slugs always stay clean English, on both sides, so the two repos agree on every path.</div>
+        <div><b>Mode 5 is the one exception:</b> it researches and tags the language — so the builder's area pages come out in it — but the area plan's own summary text is not translated.</div>
       </div>
     </div>
 

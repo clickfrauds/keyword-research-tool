@@ -63,6 +63,14 @@ on:
         description: "Does the website publish this language under /{lang}/ ? yes = /ar/slug/ (the website builder's DEFAULT). no = domain root, /slug/. MUST match the builder's lang_url_prefix or every ad + sitelink 404s. Ignored for English."
         required: false
         default: 'yes'
+      premium_areas:
+        description: "OPTIONAL: areas to force to PREMIUM bids, comma-separated (e.g. Palm Jumeirah, Dubai Marina). Overrides the AI's call — use this to protect good areas from being bid down by mistake."
+        required: false
+        default: ''
+      low_areas:
+        description: "OPTIONAL: areas to force to LOW bids, comma-separated (e.g. Al Satwa, Deira, Al Karama). Overrides the AI's call — your own fraud/labour-area knowledge wins."
+        required: false
+        default: ''
       bid_currency:
         description: "Currency label for suggested Max CPC bids (Planner data is in the API account's currency)"
         required: false
@@ -245,6 +253,10 @@ jobs:
           CLAUDE_MODEL: claude-sonnet-5
           BUSINESS_NAME: ${{ github.event.inputs.business_name }}
           NICHE_DESCRIPTION: ${{ github.event.inputs.niche_description }}
+          # Your own area calls, which override the model's. Use premium_areas to
+          # protect areas that must never be bid down by a bad classification.
+          PREMIUM_AREAS: ${{ github.event.inputs.premium_areas }}
+          LOW_AREAS: ${{ github.event.inputs.low_areas }}
         run: python scripts/generate_locations.py
 
       - name: Stage 3.95 - Master CSV (ONE Editor import - campaign settings + keywords + negatives + RSAs + locations)
