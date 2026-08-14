@@ -13,6 +13,11 @@
     --bg: #f6f5f2;
     --accent: #0b5d5a;
     --accent-soft: #e3f0ef;
+    --accent-deep: #084543;
+    --gold: #b4791f;
+    --gold-soft: #fdf3e0;
+    --shadow-sm: 0 1px 2px rgba(20, 24, 28, .05);
+    --shadow-md: 0 4px 16px -4px rgba(20, 24, 28, .10);
     --mono: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Menlo, Consolas, monospace;
     --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   }
@@ -23,8 +28,11 @@
     color: var(--ink);
     font-family: var(--sans);
     line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
   }
-  .wrap { max-width: 640px; margin: 0 auto; padding: 48px 20px 80px; }
+  .wrap { max-width: 640px; margin: 0 auto; padding: 0 20px 80px; }
+  /* The guide reads better a little wider than the form column. */
+  #seed-guide { max-width: 760px; margin-left: auto; margin-right: auto; }
   .eyebrow {
     font-family: var(--mono);
     font-size: 11px;
@@ -33,7 +41,35 @@
     color: var(--accent);
     margin-bottom: 8px;
   }
-  h1 { font-size: 24px; margin: 0 0 24px; }
+  h1 { font-size: 26px; margin: 0 0 6px; letter-spacing: -.015em; }
+  /* ── Masthead ── */
+  .masthead {
+    background: linear-gradient(160deg, var(--accent-deep) 0%, var(--accent) 55%, #0d6f6a 100%);
+    color: #fff;
+    padding: 40px 20px 34px;
+    margin-bottom: 34px;
+  }
+  .masthead-in { max-width: 640px; margin: 0 auto; }
+  .masthead .eyebrow { color: #9ed8d4; margin-bottom: 10px; }
+  .masthead h1 { color: #fff; }
+  .masthead p { margin: 0; font-size: 14px; color: #cfe9e7; max-width: 52ch; }
+  .mast-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
+  .mast-chip {
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: .06em;
+    text-transform: uppercase; color: #d8efed;
+    background: rgba(255, 255, 255, .12); border: 1px solid rgba(255, 255, 255, .18);
+    padding: 4px 9px; border-radius: 999px; white-space: nowrap;
+  }
+  /* ── Form card ── */
+  .form-card {
+    background: var(--paper); border: 1px solid var(--line); border-radius: 14px;
+    padding: 24px 22px; box-shadow: var(--shadow-md);
+  }
+  select {
+    width: 100%; font-family: var(--sans); font-size: 14px; padding: 10px 12px;
+    border: 1px solid var(--line); border-radius: 8px; background: #fff; color: var(--ink);
+  }
+  select:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
   label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; margin-top: 18px; }
   label:first-of-type { margin-top: 0; }
   input, textarea {
@@ -83,38 +119,80 @@
   }
   #report { margin-top: 16px; }
   #report iframe { width: 100%; height: 80vh; border: 1px solid var(--line); border-radius: 8px; }
-  /* ── Seed keyword guide ── */
+  /* ── Guide ── */
   #seed-guide { margin-top: 8px; }
-  .sg-title { font-size: 18px; margin: 0 0 6px; }
+  .sg-title { font-size: 21px; margin: 0 0 6px; letter-spacing: -.01em; }
   .sg-sub { font-size: 13px; color: var(--muted); margin: 0 0 18px; }
-  .sg-card { background: var(--paper); border: 1px solid var(--line); border-left: 3px solid var(--accent); border-radius: 0 8px 8px 0; padding: 14px 16px; margin-bottom: 14px; }
-  .sg-head { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin-bottom: 8px; }
+  .sg-card {
+    background: var(--paper); border: 1px solid var(--line);
+    border-left: 3px solid var(--accent); border-radius: 0 10px 10px 0;
+    padding: 16px 18px; margin-bottom: 14px; box-shadow: var(--shadow-sm);
+  }
+  .sg-head { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin-bottom: 8px; align-items: baseline; }
   .sg-badge { font-family: var(--mono); font-size: 11px; font-weight: 700; color: var(--accent); background: var(--accent-soft); padding: 3px 9px; border-radius: 4px; }
   .sg-eg { font-size: 12px; color: var(--muted); }
   .sg-formula { font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: .02em; margin-bottom: 8px; }
   .sg-seeds { display: block; font-family: var(--mono); font-size: 12px; background: var(--accent-soft); color: var(--ink); padding: 9px 11px; border-radius: 6px; margin-bottom: 10px; line-height: 1.6; }
   .sg-tips { font-size: 12.5px; color: var(--muted); line-height: 1.7; margin-bottom: 10px; }
+  .sg-tips > div + div { margin-top: 6px; }
   .sg-tips b { color: var(--ink); }
   .sg-use { margin-top: 0; width: auto; font-size: 12px; padding: 7px 14px; background: var(--paper); color: var(--accent); border: 1px solid var(--accent); }
-  .sg-check { font-size: 12.5px; color: var(--muted); border: 1px dashed var(--line); border-radius: 8px; padding: 11px 14px; line-height: 1.7; }
+  .sg-check { font-size: 12.5px; color: var(--muted); border: 1px dashed var(--line); border-radius: 10px; padding: 13px 16px; line-height: 1.75; background: var(--paper); }
   .sg-check b { color: var(--ink); }
   .sg-niche { font-size: 12.5px; color: var(--muted); margin-bottom: 8px; }
   .sg-niche b { color: var(--ink); }
-  .sg-flow { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 14px 18px; margin-bottom: 14px; }
+  .sg-flow { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 16px 20px; margin-bottom: 14px; box-shadow: var(--shadow-sm); }
   .sg-flow h3 { font-size: 12px; margin: 0 0 8px; font-family: var(--mono); text-transform: uppercase; letter-spacing: .08em; color: var(--accent); }
   .sg-flow ol { margin: 0; padding-left: 20px; font-size: 13px; color: var(--muted); line-height: 1.75; }
   .sg-flow b { color: var(--ink); }
-  .sg-section { font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin: 26px 0 10px; border-bottom: 1px solid var(--line); padding-bottom: 6px; }
+  .sg-section {
+    font-family: var(--mono); font-size: 11px; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--muted);
+    margin: 34px 0 12px; border-bottom: 1px solid var(--line); padding-bottom: 6px;
+  }
+  /* ── Per-mode guide extras ── */
+  .sg-card.is-mode { border-left-width: 4px; }
+  .sg-mode-name { font-size: 15px; font-weight: 700; margin: 2px 0 2px; }
+  /* What the mode hands to the website builder */
+  .sg-handoff {
+    display: grid; grid-template-columns: max-content 1fr; gap: 5px 12px;
+    font-size: 12.5px; background: var(--gold-soft); border: 1px solid #f0dcb4;
+    border-radius: 8px; padding: 11px 13px; margin: 10px 0;
+  }
+  .sg-handoff dt { font-family: var(--mono); font-size: 10.5px; letter-spacing: .05em;
+                   text-transform: uppercase; color: var(--gold); padding-top: 2px; }
+  .sg-handoff dd { margin: 0; color: var(--ink); }
+  .sg-handoff code { font-family: var(--mono); font-size: 11.5px; background: rgba(180,121,31,.12);
+                     padding: 1px 5px; border-radius: 4px; }
+  .sg-none { color: var(--muted); font-style: italic; }
+  .sg-steps { margin: 0; padding-left: 18px; font-size: 12.5px; color: var(--muted); line-height: 1.7; }
+  .sg-steps b { color: var(--ink); }
+  .sg-steps li { margin-bottom: 3px; }
+  @media (max-width: 560px) {
+    .sg-handoff { grid-template-columns: 1fr; gap: 2px; }
+    .sg-handoff dt { padding-top: 8px; }
+    .masthead { padding: 30px 20px 26px; }
+  }
 </style>
 </head>
 <body>
+<header class="masthead">
+  <div class="masthead-in">
+    <div class="eyebrow">SEOblogy</div>
+    <h1>Keyword Strategy Generator</h1>
+    <p>Real Google Keyword Planner data in, a complete campaign or content plan out — and a JSON link that drives the AI Website Builder.</p>
+    <div class="mast-chips">
+      <span class="mast-chip">Live Planner data</span>
+      <span class="mast-chip">Google Ads API push</span>
+      <span class="mast-chip">Builder modes 1 · 3 · 4 · 5</span>
+      <span class="mast-chip">12 languages</span>
+    </div>
+  </div>
+</header>
 <div class="wrap">
-  <div class="eyebrow">SEOblogy</div>
-  <h1>Keyword Strategy Generator</h1>
-
-  <form id="research-form">
+  <form id="research-form" class="form-card">
     <label for="business_name">Business name</label>
-    <input id="business_name" name="business_name" required placeholder="e.g. Awais AC & Plumber">
+    <input id="business_name" name="business_name" required placeholder="e.g. Summit Air &amp; Plumbing">
 
     <label for="niche_description">Niche / what the business does</label>
     <textarea id="niche_description" name="niche_description" required placeholder="e.g. AC repair, installation and maintenance company"></textarea>
@@ -132,31 +210,31 @@
       <input id="loc-city" list="loc-city-list" disabled placeholder="City / area (optional — whole country)" style="flex:1 1 220px;">
       <datalist id="loc-city-list"></datalist>
     </div>
-    <input id="target_location" name="target_location" required placeholder="e.g. Dubai, UAE — or pick above">
+    <input id="target_location" name="target_location" required placeholder="e.g. Phoenix, United States — or pick above">
     <div class="hint">Pick country + city above (auto-fills this field), or type free text. For Google Ads runs the Locations CSV targets the best areas of the country — narrowed to the city when one is chosen. Use <b>Worldwide (N/A)</b> for global SEO runs.</div>
 
-    <label for="website_url">Website URL <span style="opacity:.6">(optional — RSA ads ke Final URLs iske landing-page slugs par banenge)</span></label>
+    <label for="website_url">Website URL <span style="opacity:.6">(optional — RSA Final URLs are built from this plus each landing-page slug)</span></label>
     <input id="website_url" name="website_url" placeholder="https://yourdomain.com">
 
-    <label for="lang_url_prefix">Language URL folder <span style="opacity:.6">(non-English runs ke liye)</span></label>
-    <select id="lang_url_prefix" name="lang_url_prefix" style="width:100%; padding:10px 12px; border:1px solid #dcdad3; border-radius:8px; font-size:14px; background:#fff;">
-      <option value="yes">/{lang}/ folder — e.g. /ar/slug/ (website builder ka DEFAULT)</option>
-      <option value="no">Domain root — /slug/ (builder mein lang_url_prefix=no set kiya ho tab)</option>
+    <label for="lang_url_prefix">Language URL folder <span style="opacity:.6">(non-English runs only)</span></label>
+    <select id="lang_url_prefix" name="lang_url_prefix">
+      <option value="yes">/{lang}/ folder — e.g. /es/slug/ (the website builder's DEFAULT)</option>
+      <option value="no">Domain root — /slug/ (only if the builder ran with lang_url_prefix=no)</option>
     </select>
-    <div class="hint" id="langpfx-hint">Ye website builder ke <b>lang_url_prefix</b> se match hona ZAROORI hai. Galat hua to har ad aur sitelink 404 par jayega — Arabic campaign ke ads <code>/slug/</code> par jate the jabke pages <code>/ar/slug/</code> par thay. English runs par koi asar nahi.</div>
+    <div class="hint" id="langpfx-hint">This <b>must</b> match the website builder's <code>lang_url_prefix</code> setting. Get it wrong and every ad and sitelink lands on a 404 — a Spanish campaign's ads point at <code>/slug/</code> while the builder published the pages at <code>/es/slug/</code>. No effect on English runs.</div>
 
     <label for="research_type">Deliverable type</label>
-    <select id="research_type" name="research_type" style="width:100%; padding:10px 12px; border:1px solid #dcdad3; border-radius:8px; font-size:14px; background:#fff;">
-      <option value="google_ads">Google Ads — campaigns, ad groups, negatives, guard script</option>
-      <option value="seo">SEO — website content plan (clusters, services, questions)</option>
-      <option value="both">Both — Ads package + SEO package</option>
-      <option value="mode3">Mode 3 Site Plan — full website (services list → per-page keywords)</option>
-      <option value="mode5">Mode 5 Area Plan — pSEO (every area of the city, measured one by one)</option>
+    <select id="research_type" name="research_type">
+      <option value="google_ads">Google Ads — campaigns, ad groups, negatives, guard script → Builder Mode 1</option>
+      <option value="seo">SEO — website content plan (clusters, services, questions) → Builder Mode 4</option>
+      <option value="both">Both — Ads package + SEO package → Builder Modes 1 + 4</option>
+      <option value="mode3">Mode 3 Site Plan — full website (services list → per-page keywords) → Builder Mode 3</option>
+      <option value="mode5">Mode 5 Area Plan — pSEO (every area of the city, measured one by one) → Builder Mode 5</option>
       <option value="locations">Locations only — instant Editor CSV (no pipeline run)</option>
     </select>
 
     <label for="language">Language <span style="opacity:.6">(content + Google Ads output; MUST match the website builder's language)</span></label>
-    <select id="language" name="language" style="width:100%; padding:10px 12px; border:1px solid #dcdad3; border-radius:8px; font-size:14px; background:#fff;">
+    <select id="language" name="language">
       <option value="no">English (default)</option>
       <option value="ar">Arabic — العربية (RTL)</option>
       <option value="es">Spanish — Español</option>
@@ -170,16 +248,16 @@
       <option value="ur">Urdu — اردو (RTL)</option>
       <option value="hi">Hindi — हिन्दी</option>
     </select>
-    <div class="hint">Seeds/services aap isi language mein do (e.g. Spanish site ke liye Spanish seeds). Planner data + ad groups + landing pages sab isi language mein aayenge; URLs saaf English rehte hain. Blank/English = purana behavior.</div>
+    <div class="hint">Give your seeds and services <b>in this same language</b> (Spanish seeds for a Spanish site). Planner data, ad groups and landing pages all come back in it; URL slugs stay clean English. English is the default and behaves exactly as before.</div>
 
     <label for="seed_keywords" id="seed-label">Seed keywords</label>
-    <textarea id="seed_keywords" name="seed_keywords" required placeholder="ac repair dubai, ac not cooling, ac service dubai"></textarea>
+    <textarea id="seed_keywords" name="seed_keywords" required placeholder="ac repair phoenix, ac not cooling, ac service phoenix"></textarea>
     <div class="hint" id="seed-hint">Comma-separated. 3–6 seed terms works well. Tip: include your city in a few seeds for local data.</div>
 
     <div id="extra-areas-block" style="display:none">
       <label for="extra_areas">Extra areas to measure <span style="opacity:.6">(optional, comma-separated)</span></label>
-      <textarea id="extra_areas" name="extra_areas" placeholder="Discovery Gardens, Bur Dubai, JLT, Downtown Dubai, Palm Jumeirah, Deira, Satwa"></textarea>
-      <div class="hint">Google cannot TARGET every district it can measure: Discovery Gardens, Bur Dubai, JLT, Downtown Dubai and Palm Jumeirah are in no Ads location list, yet all of them carry real search volume. Anything you name here is measured exactly like a geo area and still has to clear the volume threshold. Leave blank and the run proposes them itself.</div>
+      <textarea id="extra_areas" name="extra_areas" placeholder="Arcadia, Ahwatukee, Biltmore, Roosevelt Row, Desert Ridge, Willo, Encanto"></textarea>
+      <div class="hint">Google cannot TARGET every neighborhood it can measure: districts like Arcadia, Ahwatukee or Roosevelt Row appear in no Ads location list, yet all of them carry real search volume. Anything you name here is measured exactly like a geo area and still has to clear the volume threshold. Leave blank and the run proposes them itself.</div>
     </div>
     <script>
       // Mode 3 reuses the same box, but its meaning changes: it carries the
@@ -207,7 +285,7 @@
         document.querySelector('label[for="business_name"]').textContent =
           on ? "Campaign name(s) — exact names from your account, comma-separated" : "Business name";
         document.getElementById("business_name").placeholder =
-          on ? "Core Appliance Repair, Specialty Appliance Repair" : "e.g. Awais AC & Plumber";
+          on ? "Core Appliance Repair, Specialty Appliance Repair" : "e.g. Summit Air & Plumbing";
         document.getElementById("submit-btn").textContent = on ? "Download Locations CSV" : "Generate Report";
       }
       document.getElementById("research_type").addEventListener("change", function () {
@@ -222,11 +300,11 @@
         document.getElementById("seed_keywords").placeholder = m3
           ? "AC Repair, Fridge Repair, Washing Machine Repair, Oven Repair, ..."
           : m5 ? "washing machine repair"
-          : "ac repair dubai, ac not cooling, ac service dubai";
+          : "ac repair phoenix, ac not cooling, ac service phoenix";
         document.getElementById("seed-hint").textContent = m3
           ? "Comma-separated SERVICES — paste the exact same list you give the website builder's Mode 3 (up to 100+). The result is one JSON link for the builder's seo_inputs_url field."
           : m5
-          ? "ONE service. Every real area of the city is then measured separately (\"{service} {area}\") and only areas with their own demand are kept — that is what stops pSEO turning into doorway pages. Set Target location as CITY, COUNTRY (e.g. Dubai, UAE): the country is required. ~3 minutes for 60 areas. Paste the resulting .mode5.json link into the builder's Mode 5."
+          ? "ONE service. Every real area of the city is then measured separately (\"{service} {area}\") and only areas with their own demand are kept — that is what stops pSEO turning into doorway pages. Set Target location as CITY, COUNTRY (e.g. Phoenix, United States): the country is required. ~3 minutes for 60 areas. Paste the resulting .mode5.json link into the builder's Mode 5."
           : "Comma-separated. 3–6 seed terms works well. Tip: include your city in a few seeds for local data.";
       });
     </script>
@@ -299,7 +377,7 @@
     </script>
 
     <label for="existing_campaign">Existing campaign name <span style="opacity:.6">(optional — for accounts already running)</span></label>
-    <input id="existing_campaign" name="existing_campaign" placeholder="e.g. Plumbing Services Dubai">
+    <input id="existing_campaign" name="existing_campaign" placeholder="e.g. Plumbing Services Phoenix">
 
     <label for="existing_ad_groups">Existing ad groups <span style="opacity:.6">(optional, comma-separated)</span></label>
     <textarea id="existing_ad_groups" name="existing_ad_groups" placeholder="Emergency Plumbing, Drain Cleaning, Water Heater Repair"></textarea>
@@ -309,15 +387,15 @@
     <input id="max_ad_groups" name="max_ad_groups" type="number" min="1" max="10" placeholder="10 (use 1-2 for a small niche service)">
 
     <div id="push-block">
-      <label for="push_customer_id">🚀 API Push — Google Ads customer ID <span style="opacity:.6">(optional — blank = sirf CSV files)</span></label>
+      <label for="push_customer_id">🚀 API Push — Google Ads customer ID <span style="opacity:.6">(optional — leave blank for CSV files only)</span></label>
       <div style="display:flex; gap:8px; flex-wrap:wrap;">
         <input id="push_customer_id" name="push_customer_id" placeholder="123-456-7890 (MCC-linked account)" style="flex:2 1 220px;">
-        <select id="push_mode" name="push_mode" style="flex:1 1 160px; padding:10px 12px; border:1px solid #dcdad3; border-radius:8px; font-size:14px; background:#fff;">
-          <option value="validate">Validate — dry-run test (kuch create nahi hota)</option>
-          <option value="live">Live — campaign create karo (Paused)</option>
+        <select id="push_mode" name="push_mode" style="flex:1 1 160px;">
+          <option value="validate">Validate — dry run (nothing is created)</option>
+          <option value="live">Live — create the campaign (Paused)</option>
         </select>
       </div>
-      <div class="hint">Poori campaign API se seedha account mein — Editor/import ki zaroorat nahi. Pehle <b>Validate</b> chalao (Google har cheez check karta hai, account ko haath nahi lagata), phir Live. Campaign hamesha <b>Paused</b> banti hai. Account aapke MCC se linked hona chahiye.</div>
+      <div class="hint">Pushes the whole campaign straight into the account through the API — no Editor, no import. Run <b>Validate</b> first (Google checks every operation without touching the account), then Live. The campaign always lands <b>Paused</b>. The account must be linked to your MCC.</div>
     </div>
 
     <button type="submit" id="submit-btn">Generate Report</button>
@@ -333,7 +411,7 @@
   <div id="mode5-link-row" hidden style="margin-top:14px; padding:12px 14px; border:1px solid var(--line); border-radius:8px; background:var(--paper);">
     <div style="font-size:12px; font-weight:600; margin-bottom:6px;">
       Mode 5 area plan link
-      <span style="opacity:.6; font-weight:400">(website builder ke Mode 5 "plan URL" field mein paste karein — koi Google Sheet nahi)</span>
+      <span style="opacity:.6; font-weight:400">(paste into the website builder's Mode 5 "plan URL" field — no Google Sheet needed)</span>
     </div>
     <div style="display:flex; gap:8px;">
       <input id="mode5-link-input" readonly style="font-family:var(--mono); font-size:12px;">
@@ -344,7 +422,7 @@
   <div id="seo-link-row" hidden style="margin-top:14px; padding:12px 14px; border:1px solid var(--line); border-radius:8px; background:var(--paper);">
     <div style="font-size:12px; font-weight:600; margin-bottom:6px;">
       Mode 4 SEO data link
-      <span style="opacity:.6; font-weight:400">(website builder ke "SEO data URL" field mein paste karein)</span>
+      <span style="opacity:.6; font-weight:400">(paste into the website builder's "SEO data URL" field)</span>
     </div>
     <div style="display:flex; gap:8px;">
       <input id="seo-link-input" readonly style="font-family:var(--mono); font-size:12px;">
@@ -356,7 +434,7 @@
   <div id="pages-link-row" hidden style="margin-top:14px; padding:12px 14px; border:1px solid var(--line); border-radius:8px; background:var(--paper);">
     <div style="font-size:12px; font-weight:600; margin-bottom:6px;">
       Mode 1 landing pages link
-      <span style="opacity:.6; font-weight:400">(website builder ke Mode 1 "Landing pages JSON URL" field mein paste karein — EK run mein saare ad-group landing pages, RSA slugs par, internally linked)</span>
+      <span style="opacity:.6; font-weight:400">(paste into the website builder's Mode 1 "Landing pages JSON URL" field — ONE run builds every ad group's landing page, on the exact RSA slugs, internally linked)</span>
     </div>
     <div style="display:flex; gap:8px;">
       <input id="pages-link-input" readonly style="font-family:var(--mono); font-size:12px;">
@@ -368,13 +446,13 @@
   <div id="ads-links-row" hidden style="margin-top:14px; padding:12px 14px; border:1px solid var(--line); border-radius:8px; background:var(--paper);">
     <div style="font-size:12px; font-weight:600; margin-bottom:8px;">
       Google Ads deliverables
-      <span style="opacity:.6; font-weight:400">(CSV → Ads Editor mein paste/import; Script → Tools &gt; Scripts)</span>
+      <span style="opacity:.6; font-weight:400">(CSVs → Ads Editor, Account → Import; Script → Tools &gt; Scripts)</span>
     </div>
     <div style="display:flex; gap:8px; flex-wrap:wrap;">
-      <a id="master-csv-link" hidden download target="_blank" rel="noopener" style="display:inline-block; font-size:13px; font-weight:700; color:#fff; background:var(--accent); border:1px solid var(--accent); border-radius:8px; padding:8px 14px; text-decoration:none;">⭐ Master CSV — ONE import (poori campaign)</a>
+      <a id="master-csv-link" hidden download target="_blank" rel="noopener" style="display:inline-block; font-size:13px; font-weight:700; color:#fff; background:var(--accent); border:1px solid var(--accent); border-radius:8px; padding:8px 14px; text-decoration:none;">⭐ Master CSV — ONE import (entire campaign)</a>
       <a id="push-report-link" hidden download target="_blank" rel="noopener" style="display:inline-block; font-size:13px; font-weight:700; color:var(--accent); background:var(--accent-soft); border:1px solid var(--accent); border-radius:8px; padding:8px 14px; text-decoration:none;">🚀 API Push Report</a>
       <a id="ads-csv-link" hidden download target="_blank" rel="noopener" style="display:inline-block; font-size:13px; font-weight:600; color:var(--accent); border:1px solid var(--accent); border-radius:8px; padding:8px 14px; text-decoration:none;">⬇️ Ads Editor CSV (positives)</a>
-      <a id="negatives-csv-link" hidden download target="_blank" rel="noopener" style="display:inline-block; font-size:13px; font-weight:600; color:var(--accent); border:1px solid var(--accent); border-radius:8px; padding:8px 14px; text-decoration:none;">⬇️ Negatives CSV (alag paste karein)</a>
+      <a id="negatives-csv-link" hidden download target="_blank" rel="noopener" style="display:inline-block; font-size:13px; font-weight:600; color:var(--accent); border:1px solid var(--accent); border-radius:8px; padding:8px 14px; text-decoration:none;">⬇️ Negatives CSV (import separately)</a>
       <a id="guard-js-link" hidden download target="_blank" rel="noopener" style="display:inline-block; font-size:13px; font-weight:600; color:var(--accent); border:1px solid var(--accent); border-radius:8px; padding:8px 14px; text-decoration:none;">⬇️ Negative Guard Script</a>
       <a id="audiences-csv-link" hidden download target="_blank" rel="noopener" style="display:inline-block; font-size:13px; font-weight:600; color:var(--accent); border:1px solid var(--accent); border-radius:8px; padding:8px 14px; text-decoration:none;">⬇️ Audiences CSV (+)</a>
       <a id="audiences-negatives-csv-link" hidden download target="_blank" rel="noopener" style="display:inline-block; font-size:13px; font-weight:600; color:var(--accent); border:1px solid var(--accent); border-radius:8px; padding:8px 14px; text-decoration:none;">⬇️ Audiences Negatives CSV (−)</a>
@@ -393,61 +471,131 @@
     <p class="sg-sub">Get the first step right and everything downstream — scoring, ad groups, SEO clusters, website content — comes out right on its own. Give <b>3–6 seed keywords, one from each pattern</b> shown on the card. Click <b>Use template</b> to fill the form (niche, location, seeds, deliverable type), then adjust it for your business.</p>
 
     <div class="sg-check" style="margin-bottom:22px">
-      <b>Every run, 5 rules:</b> 3–6 seeds &nbsp;·&nbsp; no brand names &nbsp;·&nbsp; no single generic words ("cleaning" ❌ → "sofa cleaning dubai" ✅) &nbsp;·&nbsp; one language per run — pick it in the <b>Language</b> dropdown and give seeds in that language (data, ad groups & landing pages all come back in it; URLs stay English) &nbsp;·&nbsp; location as free text ("Lahore, Pakistan", or "N/A" for worldwide) — the geo target resolves automatically
+      <b>Every run, 5 rules:</b> 3–6 seeds &nbsp;·&nbsp; no brand names &nbsp;·&nbsp; no single generic words (“cleaning” ❌ → “carpet cleaning denver” ✅) &nbsp;·&nbsp; one language per run — pick it in the <b>Language</b> dropdown and give seeds in that language (data, ad groups and landing pages all come back in it; URLs stay English) &nbsp;·&nbsp; location as free text (“Denver, United States”, or “N/A” for worldwide) — the geo target resolves automatically
     </div>
 
-    <div class="sg-section">The 5 deliverable modes — every pipeline explained</div>
+    <div class="sg-section">The 6 deliverable modes — what each one runs, and what the website builder does with it</div>
 
-    <div class="sg-card">
-      <div class="sg-head"><span class="sg-badge">MODE · GOOGLE ADS</span><span class="sg-eg">launch or expand a paid search account</span></div>
-      <div class="sg-formula">planner pull → python scoring → claude campaign architecture → bids → RSA ads → audiences → guard script → locations</div>
+    <p class="sg-sub">Every mode except <b>Locations only</b> ends with a JSON link on the result page. That link is the handoff: paste it into the matching field in the AI Website Builder and the builder stops guessing — it builds from measured search demand instead. The <b>Hands to the builder</b> box on each card tells you exactly which file, which builder mode, and which field.</p>
+
+    <div class="sg-card is-mode">
+      <div class="sg-head"><span class="sg-badge">1 · GOOGLE ADS</span><span class="sg-eg">launch or expand a paid search account</span></div>
+      <div class="sg-mode-name">Complete campaign + the landing pages its ads point at</div>
+      <div class="sg-formula">planner pull → python scoring → claude campaign architecture → bids → RSA ads → sitelinks → audiences → guard script → locations</div>
       <div class="sg-tips">
-        <div><b>What runs:</b> your seeds go to the real Google Ads Keyword Planner (volumes, CPC ranges, competition, 12-month trend) → Python dedupes, classifies intent and scores 0–100 against the dataset itself → Claude designs 1–3 campaigns and up to 10 ad groups <b>(count comes from the data, never padded)</b> with cross-group negative siloing so groups can never cannibalize each other → every keyword gets a suggested starting bid computed from its real top-of-page bid range → 15 headlines + 4 descriptions per ad group (policy-checked) → audience plan matched from the 3,504-segment master list → an hourly negative-guard Ads Script → Editor-ready geo target rows.</div>
-        <div><b>You get 7 downloads:</b> Ads Editor CSV (positives) · Negatives CSV · Negative Guard Script · Audiences CSV (+) · Audiences Negatives CSV (−) · RSA Ads CSV · Locations CSV.</div>
-        <div><b>Best when:</b> a client is paying for clicks. Fill <b>Website URL</b> so RSA Final URLs point at real landing-page slugs, never the homepage.</div>
-        <div><b>Perfect-use tips:</b> pick country + city in the location picker (city → the Locations CSV targets that city's real areas). Account already live? Fill <b>Existing campaign + ad groups</b> — new groups arrive pre-siloed. Small niche → cap Max new ad groups at 1–2.</div>
+        <div><b>What runs:</b> your seeds go to the real Google Ads Keyword Planner (volumes, CPC ranges, competition, 12-month trend) → Python dedupes, classifies intent and scores 0–100 against the dataset itself → Claude designs 1–3 campaigns and up to 10 ad groups <b>(count comes from the data, never padded)</b> with cross-group negative siloing so groups can never cannibalize each other → every keyword gets a suggested starting bid from its real top-of-page bid range → 15 headlines + 4 descriptions per ad group (policy-checked) → per-ad-group sitelinks → audience plan matched from the 3,504-segment master list → an hourly negative-guard Ads Script → Editor-ready geo target rows.</div>
+        <div><b>You get 7 downloads:</b> Ads Editor CSV (positives) · Negatives CSV · Negative Guard Script · Audiences CSV (+) · Audiences Negatives CSV (−) · RSA Ads CSV · Locations CSV — plus the Master CSV and, if you filled the push field, a live API push.</div>
+      </div>
+      <dl class="sg-handoff">
+        <dt>File</dt><dd><code>landing_pages.json</code> — shown as <b>“Mode 1 landing pages link”</b></dd>
+        <dt>Goes to</dt><dd>Website Builder → <b>Mode 1</b> → <code>Landing pages JSON URL</code></dd>
+        <dt>Carries</dt><dd>one entry per ad group: the page's <b>service name</b>, its <b>url_slug</b> (the exact slug the RSA Final URLs point at), its <b>sub-services</b>, its own <b>industry</b>, the keyword count and monthly volume it covers, and the page's <b>language</b>.</dd>
+        <dt>Builder does</dt><dd>builds <b>every</b> ad group's landing page in one run, each at its RSA slug, internally linked, same brand — so every ad lands on a page written for that exact ad group. Message match is what raises Quality Score and cuts CPC.</dd>
+      </dl>
+      <div class="sg-tips">
+        <div><b>Perfect-use tips:</b> fill <b>Website URL</b> or the Final URLs fall back to a placeholder domain. Set <b>Language URL folder</b> to match the builder, or non-English ads 404. Pick country + city in the location picker so the Locations CSV targets that city's real areas. Account already live? Fill <b>Existing campaign + ad groups</b> — new groups arrive pre-siloed. Small niche → cap Max new ad groups at 1–2.</div>
       </div>
     </div>
 
-    <div class="sg-card">
-      <div class="sg-head"><span class="sg-badge">MODE · SEO</span><span class="sg-eg">content plan for a site that should rank</span></div>
+    <div class="sg-card is-mode">
+      <div class="sg-head"><span class="sg-badge">2 · SEO</span><span class="sg-eg">content plan for a site that should rank</span></div>
+      <div class="sg-mode-name">Cluster architecture for a topic-authority site</div>
       <div class="sg-formula">planner pull → python scoring → claude cluster strategy → one JSON link for the website builder</div>
       <div class="sg-tips">
-        <div><b>What runs:</b> same real-Planner data collection and scoring, then Claude builds the <b>Mode 4 cluster architecture</b>: a pillar topic + 3–8 clusters (count data-driven), each with its primary keyword, keyword set, funnel stage, 4–8 real customer questions with answer angles (the pattern that wins featured snippets and AI overviews) and entities to mention. One keyword never sits in two clusters — cannibalization guard. The same JSON also carries a demand-backed services list (Mode 3), a services hub (Mode 2) and city/area targets (Mode 5).</div>
-        <div><b>City-level pSEO:</b> pick a city in the location picker and the Mode 5 block is built from that city's <b>real Google geo areas</b> (all candidates included as <code>geo_area_candidates</code>) — ready for per-area pages, no invented area names.</div>
-        <div><b>You get:</b> the <b>Mode 4 SEO data link</b> on the result page — paste it into the website builder's <b>SEO data URL</b> field and leave Main topic / Problem clusters blank; they fill from real demand.</div>
-        <div><b>Perfect-use tips:</b> question seeds ("how to…", "cost of…") are the gold here. Blogs/affiliate: location <b>N/A</b> for worldwide volumes. Multi-section sites: one run per section, each with its own parent slug.</div>
+        <div><b>What runs:</b> the same real-Planner collection and scoring, then Claude builds the <b>cluster architecture</b>: a pillar topic plus 3–8 clusters (count data-driven), each with its primary keyword, keyword set, funnel stage, 4–8 real customer questions with <b>answer angles</b> (the pattern that wins featured snippets and AI overviews), and the entities the page must mention. One keyword never sits in two clusters — that is the cannibalization guard.</div>
+        <div><b>City-level pSEO:</b> pick a city in the location picker and the area block is built from that city's <b>real Google geo areas</b> (all candidates ship as <code>geo_area_candidates</code>) — ready for per-area pages, with no invented neighborhood names.</div>
       </div>
-    </div>
-
-    <div class="sg-card">
-      <div class="sg-head"><span class="sg-badge">MODE · BOTH</span><span class="sg-eg">the default for local service clients</span></div>
-      <div class="sg-formula">one data pull → the full Ads package + the full SEO package</div>
+      <dl class="sg-handoff">
+        <dt>File</dt><dd><code>&lt;id&gt;.seo.json</code> — shown as <b>“Mode 4 SEO data link”</b></dd>
+        <dt>Goes to</dt><dd>Website Builder → <b>Mode 4</b> → <code>SEO data URL</code></dd>
+        <dt>Carries</dt><dd>the pillar topic, every cluster with its primary + supporting keywords and real volumes, funnel stage, customer questions with answer angles, entities to mention — and, in the same file, a demand-backed <b>services list</b> (Mode 3), a <b>services hub</b> block (Mode 2) and <b>city/area targets</b> (Mode 5).</dd>
+        <dt>Builder does</dt><dd>turns each cluster into a page: the primary keyword is forced into the hero title and first paragraph, the questions become <b>H2 sections and H3 FAQs</b>, and each answer's opening line follows its answer angle. Leave <b>Main topic</b> and <b>Problem clusters</b> blank in the builder — they fill themselves from this file.</dd>
+      </dl>
       <div class="sg-tips">
-        <div><b>What runs:</b> everything from both modes above on a single Planner pull — same seeds, same scoring, two strategy stages. The ads keywords and the SEO clusters come from the same demand data, so your landing pages and your content plan tell one consistent story.</div>
-        <div><b>Best when:</b> a client wants leads now (ads) and cheaper leads later (SEO) — which is almost every local service business.</div>
-        <div><b>Perfect-use tips:</b> BOFU commercial keywords go to ads; TOFU problem/question keywords are auto-excluded from ads but become your strongest SEO pages — nothing is wasted, every keyword lands on the side it converts on.</div>
+        <div><b>Perfect-use tips:</b> question seeds (“how to…”, “cost of…”) are the gold here. Blogs and affiliate sites: set location <b>N/A</b> for worldwide volumes. Multi-section sites: one run per section, each with its own parent slug. One file, four builder modes — reuse the same link when you run Modes 2, 3 or 5.</div>
       </div>
     </div>
 
-    <div class="sg-card">
-      <div class="sg-head"><span class="sg-badge">MODE · MODE 3 SITE PLAN</span><span class="sg-eg">full website — services list in, per-page keywords out</span></div>
+    <div class="sg-card is-mode">
+      <div class="sg-head"><span class="sg-badge">3 · BOTH</span><span class="sg-eg">the default for local service clients</span></div>
+      <div class="sg-mode-name">The ads package and the SEO package off one data pull</div>
+      <div class="sg-formula">one planner pull → full Ads package + full SEO package</div>
+      <div class="sg-tips">
+        <div><b>What runs:</b> everything from the two modes above on a single Planner pull — same seeds, same scoring, two strategy stages. The ads keywords and the SEO clusters come from the same demand data, so the landing pages and the content plan tell one consistent story instead of contradicting each other.</div>
+        <div><b>Where each keyword lands:</b> BOFU commercial keywords go to ads; TOFU problem and question keywords are automatically kept out of ads and become the strongest SEO pages. Nothing is wasted — every keyword ends up on the side it actually converts on.</div>
+      </div>
+      <dl class="sg-handoff">
+        <dt>Files</dt><dd><b>both</b> links appear: <code>landing_pages.json</code> and <code>&lt;id&gt;.seo.json</code></dd>
+        <dt>Goes to</dt><dd>Website Builder → <b>Mode 1</b> (landing pages) <i>and</i> <b>Mode 4</b> (cluster site)</dd>
+        <dt>Builder does</dt><dd>run Mode 1 first for the paid landing pages, then Mode 4 for the organic site — or the reverse. They share the brand, the language and the same measured demand, so they can live on one domain without competing for the same queries.</dd>
+      </dl>
+      <div class="sg-tips">
+        <div><b>Best when:</b> a client wants leads now (ads) and cheaper leads later (SEO) — which is nearly every local service business.</div>
+      </div>
+    </div>
+
+    <div class="sg-card is-mode">
+      <div class="sg-head"><span class="sg-badge">4 · MODE 3 SITE PLAN</span><span class="sg-eg">full website — services list in, per-page keywords out</span></div>
+      <div class="sg-mode-name">A keyword-verified plan for a whole multi-service site</div>
       <div class="sg-formula">paste your services list → claude groups into categories → per-category planner pull → per-page keyword + question assignment</div>
       <div class="sg-tips">
-        <div><b>What runs:</b> the seed box becomes a <b>services list</b> (paste the exact same comma-separated list you give the website builder's Mode 3 — 100+ services is fine). Claude groups them into up to 10 categories (names copied character-for-character), each category gets its own Planner pull for clean attribution, then every page is assigned its primary keyword, supporting keywords with real volumes, and 3–6 questions with answer angles — plus a site-wide cannibalization guard.</div>
-        <div><b>You get:</b> one JSON link for the builder's <b>seo_inputs_url</b> field — the builder adopts this plan's category tree and real keywords instead of guessing.</div>
-        <div><b>Perfect-use tips:</b> the services list must match the builder run <b>exactly</b>. Zero-volume services stay in the plan (flagged) — pages still build. Use for high-value clients; for quick sites the builder's own guesses are fine.</div>
+        <div><b>What runs:</b> the seed box becomes a <b>services list</b> — paste the exact same comma-separated list you will give the builder's Mode 3 (100+ services is fine). Claude groups them into up to 10 categories with the names copied character-for-character, each category gets <b>its own Planner pull</b> so attribution stays clean, then every page is assigned its primary keyword, supporting keywords with real volumes, and 3–6 questions with answer angles — plus a site-wide cannibalization guard.</div>
+        <div><b>Why the separate pulls matter:</b> a single combined request makes Google intersect the themes and return a fraction of the ideas. Per-category pulls are what give a 100-service site real long-tail depth on every page.</div>
+      </div>
+      <dl class="sg-handoff">
+        <dt>File</dt><dd><code>&lt;id&gt;.seo.json</code> — the same “SEO data link” slot on the result page</dd>
+        <dt>Goes to</dt><dd>Website Builder → <b>Mode 3</b> → <code>seo_inputs_url</code></dd>
+        <dt>Carries</dt><dd>the category tree, and for every page: its <b>exact name</b>, an English <b>url_slug</b>, its primary keyword, supporting keywords with volumes, its questions with answer angles, and internal-link targets.</dd>
+        <dt>Builder does</dt><dd>adopts this category tree and these real keywords instead of inventing its own, and builds the full site — homepage, category hubs and every service page — on measured demand. Slugs stay English on both sides, so the URLs match exactly.</dd>
+      </dl>
+      <div class="sg-tips">
+        <div><b>Perfect-use tips:</b> the services list must match the builder run <b>exactly</b> — same spelling, same order. Zero-volume services stay in the plan (flagged) so their pages still build. Worth it for high-value clients; for a quick site the builder's own guesses are fine.</div>
       </div>
     </div>
 
-    <div class="sg-card">
-      <div class="sg-head"><span class="sg-badge">MODE · LOCATIONS ONLY</span><span class="sg-eg">instant geo CSV — no pipeline run, no wait</span></div>
+    <div class="sg-card is-mode">
+      <div class="sg-head"><span class="sg-badge">5 · MODE 5 AREA PLAN</span><span class="sg-eg">pSEO — one service, every neighborhood, measured</span></div>
+      <div class="sg-mode-name">Per-area pages that are not doorway pages</div>
+      <div class="sg-formula">one service + a city → every real area measured separately → only areas with their own demand survive</div>
+      <div class="sg-tips">
+        <div><b>What runs:</b> you give <b>one</b> service and a city. The run pulls that city's real Google geo areas, adds any districts you list under <b>Extra areas</b> (Google can measure many neighborhoods it cannot target), then measures <b>each area separately</b> as “{service} {area}”. Areas that fail the volume threshold are dropped, and the survivors are enriched with their own keywords, neighbouring areas and local context.</div>
+        <div><b>Why measure one at a time:</b> this is the whole point. Spraying one template across every district on a map is what makes pSEO a doorway-page penalty. An area only gets a page here if people actually search for that service in that area.</div>
+      </div>
+      <dl class="sg-handoff">
+        <dt>File</dt><dd><code>&lt;id&gt;.mode5.json</code> — shown as <b>“Mode 5 area plan link”</b></dd>
+        <dt>Goes to</dt><dd>Website Builder → <b>Mode 5</b> → the <code>plan URL</code> field (no Google Sheet needed)</dd>
+        <dt>Carries</dt><dd>the surviving areas only, each with its measured volume, its own keyword set, neighbouring areas for internal linking, and the run's <b>language</b> and primary service.</dd>
+        <dt>Builder does</dt><dd>builds one page per surviving area, each with its own hero, services, local context, map and testimonials block, cross-linked to its neighbours, plus a hub page listing every area covered.</dd>
+      </dl>
+      <div class="sg-tips">
+        <div><b>Perfect-use tips:</b> set <b>Target location</b> as <code>CITY, COUNTRY</code> — the country is required. Budget roughly 3 minutes for 60 areas. Leave <b>Extra areas</b> blank and the run proposes districts itself. Run it once per service, never for a bundle of services.</div>
+      </div>
+    </div>
+
+    <div class="sg-card is-mode">
+      <div class="sg-head"><span class="sg-badge">6 · LOCATIONS ONLY</span><span class="sg-eg">instant geo CSV — no pipeline run, no wait</span></div>
+      <div class="sg-mode-name">Targeting rows for campaigns you already have</div>
       <div class="sg-formula">campaign name(s) + country/city picker → Editor CSV built in your browser in seconds</div>
       <div class="sg-tips">
-        <div><b>What runs:</b> nothing on the server — your browser fetches the real Google geo-target database and builds the same 18-column Editor CSV the full pipeline produces. Country only → country + all states/provinces. Country + city → the city + its province + every sub-area inside it (Dubai = 107 rows).</div>
-        <div><b>Best when:</b> you already have campaigns and just need proper location targeting — enter the exact campaign names from your account, comma-separated for several at once.</div>
-        <div><b>Perfect-use tips:</b> import via Ads Editor → Account → Import. Campaigns that don't exist yet import <b>Paused</b>. After import set each campaign to <b>"Presence: people in or regularly in"</b> — never "interest" — so budget only buys clicks inside the target.</div>
+        <div><b>What runs:</b> nothing on the server. Your browser fetches the real Google geo-target database and builds the same 18-column Editor CSV the full pipeline produces. Country only → the country plus all its states. Country + city → the city, its state, and every sub-area inside it (a large US metro runs to 100+ rows).</div>
+        <div><b>Best when:</b> the campaigns already exist and you only need proper location targeting. Enter the exact campaign names from your account, comma-separated to do several at once.</div>
       </div>
+      <dl class="sg-handoff">
+        <dt>Builder</dt><dd class="sg-none">Not used — this mode is Google Ads only and produces no JSON.</dd>
+      </dl>
+      <div class="sg-tips">
+        <div><b>Perfect-use tips:</b> import via Ads Editor → Account → Import. Campaigns that don't exist yet import <b>Paused</b>. After import set each campaign to <b>“Presence: people in or regularly in”</b> — never “interest” — so budget only buys clicks inside the target area.</div>
+      </div>
+    </div>
+
+    <div class="sg-flow">
+      <h3>The two repos, one flow</h3>
+      <ol class="sg-steps" style="padding-left:20px">
+        <li><b>Pick the language first.</b> Whatever you choose here must be the same language you set in the website builder. The tool writes it into every JSON and the builder adopts it automatically.</li>
+        <li><b>Run the mode</b> that matches what you are building — the dropdown labels name the builder mode each one feeds.</li>
+        <li><b>Copy the JSON link</b> from the result page and paste it into the builder field named on the card above.</li>
+        <li><b>For paid campaigns, match the URL folder.</b> The builder publishes non-English sites under <code>/{lang}/</code> by default; the <b>Language URL folder</b> field here has to agree with it or the ads point at pages that do not exist.</li>
+      </ol>
     </div>
 
     <div class="sg-flow">
@@ -480,10 +628,10 @@
     <div class="sg-section">Business type templates</div>
 
     <div class="sg-card">
-      <div class="sg-head"><span class="sg-badge">1 · LOCAL SERVICE</span><span class="sg-eg">AC repair company — Dubai, UAE</span></div>
+      <div class="sg-head"><span class="sg-badge">1 · LOCAL SERVICE</span><span class="sg-eg">HVAC company — Phoenix, AZ</span></div>
       <div class="sg-formula">core service · service + city · price/cost modifier · problem phrase · urgency</div>
-      <div class="sg-niche"><b>Niche:</b> <span class="sg-niche-text">AC repair, installation and maintenance company for homes and offices</span><span class="sg-loc" hidden>Dubai, UAE</span></div>
-      <code class="sg-seeds">ac repair dubai, ac not cooling, ac service cost dubai, emergency ac repair, ac maintenance dubai</code>
+      <div class="sg-niche"><b>Niche:</b> <span class="sg-niche-text">AC repair, installation and maintenance company for homes and offices</span><span class="sg-loc" hidden>Phoenix, United States</span></div>
+      <code class="sg-seeds">ac repair phoenix, ac not cooling, ac repair cost phoenix, emergency ac repair, hvac maintenance phoenix</code>
       <div class="sg-tips">
         <div>• Deliverable: <b>Both</b> — the Ads package (campaigns, negatives, guard script) and the SEO package (Mode 4 cluster site) in one run.</div>
         <div>• Problem phrases ("ac not cooling") pull the diagnostic long-tail that becomes your strongest SEO pages.</div>
@@ -493,10 +641,10 @@
     </div>
 
     <div class="sg-card">
-      <div class="sg-head"><span class="sg-badge">2 · MULTI-TRADE SERVICES</span><span class="sg-eg">home maintenance company — this card = the plumbing run</span></div>
-      <div class="sg-formula">run each trade SEPARATELY — clone this run for electrical, carpentry, painting…</div>
-      <div class="sg-niche"><b>Niche:</b> <span class="sg-niche-text">Plumbing repair and installation services for villas and apartments</span><span class="sg-loc" hidden>Dubai, UAE</span></div>
-      <code class="sg-seeds">plumber dubai, emergency plumber near me, plumbing repair cost, leaking pipe fix, water heater installation</code>
+      <div class="sg-head"><span class="sg-badge">2 · MULTI-TRADE SERVICES</span><span class="sg-eg">home services company — this card = the plumbing run</span></div>
+      <div class="sg-formula">run each trade SEPARATELY — clone this run for electrical, roofing, painting…</div>
+      <div class="sg-niche"><b>Niche:</b> <span class="sg-niche-text">Plumbing repair and installation services for houses and apartments</span><span class="sg-loc" hidden>Austin, United States</span></div>
+      <code class="sg-seeds">plumber austin, emergency plumber near me, plumbing repair cost, slab leak repair, water heater installation</code>
       <div class="sg-tips">
         <div>• <b>Never mix trades in one run</b> — the 400-keyword cap and the percentile floor squeeze out each trade's long-tail and the clusters go shallow.</div>
         <div>• Ads: each run = its own campaign (per-trade budget control). Adding a trade to a live account later? Fill the <b>Existing campaign / ad groups</b> fields — 2-way negative siloing is automatic.</div>
@@ -506,10 +654,10 @@
     </div>
 
     <div class="sg-card">
-      <div class="sg-head"><span class="sg-badge">3 · ECOMMERCE STORE</span><span class="sg-eg">online perfume store — UAE</span></div>
+      <div class="sg-head"><span class="sg-badge">3 · ECOMMERCE STORE</span><span class="sg-eg">online fragrance store — United States</span></div>
       <div class="sg-formula">buy + product · product + price · best X for Y · category / type · occasion / gifting</div>
-      <div class="sg-niche"><b>Niche:</b> <span class="sg-niche-text">Online store selling perfumes and fragrances with UAE-wide delivery</span><span class="sg-loc" hidden>United Arab Emirates</span></div>
-      <code class="sg-seeds">buy perfume online uae, perfume price in dubai, best perfume for men, oud perfume, perfume gift set for women</code>
+      <div class="sg-niche"><b>Niche:</b> <span class="sg-niche-text">Online store selling perfumes and fragrances with nationwide shipping</span><span class="sg-loc" hidden>United States</span></div>
+      <code class="sg-seeds">buy perfume online, designer perfume prices, best cologne for men, niche fragrance brands, perfume gift set for women</code>
       <div class="sg-tips">
         <div>• <b>One run per main category</b> (perfumes ≠ watches) — one category = one clean cluster architecture.</div>
         <div>• Never seed your own brand or competitor brands — competitors get auto-excluded and auto-negatived.</div>
@@ -532,10 +680,10 @@
     </div>
 
     <div class="sg-card">
-      <div class="sg-head"><span class="sg-badge">5 · CLINIC / HEALTHCARE</span><span class="sg-eg">dental clinic — Lahore, Pakistan</span></div>
+      <div class="sg-head"><span class="sg-badge">5 · CLINIC / HEALTHCARE</span><span class="sg-eg">dental practice — Charlotte, NC</span></div>
       <div class="sg-formula">practitioner + city · treatment + price · treatment cost · condition / symptom</div>
-      <div class="sg-niche"><b>Niche:</b> <span class="sg-niche-text">Dental clinic offering implants, braces, whitening and general dentistry</span><span class="sg-loc" hidden>Lahore, Pakistan</span></div>
-      <code class="sg-seeds">dentist lahore, teeth whitening price lahore, dental implant cost, braces for teeth, tooth pain treatment</code>
+      <div class="sg-niche"><b>Niche:</b> <span class="sg-niche-text">Dental practice offering implants, braces, whitening and general dentistry</span><span class="sg-loc" hidden>Charlotte, United States</span></div>
+      <code class="sg-seeds">dentist charlotte nc, teeth whitening cost, dental implant cost, invisalign near me, tooth pain treatment</code>
       <div class="sg-tips">
         <div>• Symptom seeds ("tooth pain") pull TOFU keywords: <b>excluded from ads automatically</b>, but they power the SEO cluster pages that bring patients in.</div>
         <div>• If one treatment matters most commercially (implants), give it its <b>own run</b> for depth.</div>
@@ -545,10 +693,10 @@
     </div>
 
     <div class="sg-card">
-      <div class="sg-head"><span class="sg-badge">6 · B2B / SAAS</span><span class="sg-eg">HR software — GCC market</span></div>
+      <div class="sg-head"><span class="sg-badge">6 · B2B / SAAS</span><span class="sg-eg">HR software — United States</span></div>
       <div class="sg-formula">category + market · product + price · best X for business · feature / use-case · vs comparison</div>
-      <div class="sg-niche"><b>Niche:</b> <span class="sg-niche-text">Cloud HR and payroll software for small and medium businesses</span><span class="sg-loc" hidden>United Arab Emirates</span></div>
-      <code class="sg-seeds">hr software uae, payroll software price, best hr software for small business, employee attendance system, hr software vs excel</code>
+      <div class="sg-niche"><b>Niche:</b> <span class="sg-niche-text">Cloud HR and payroll software for small and medium businesses</span><span class="sg-loc" hidden>United States</span></div>
+      <code class="sg-seeds">hr software for small business, payroll software pricing, best hris system, employee time tracking software, gusto vs adp</code>
       <div class="sg-tips">
         <div>• Low volumes are <b>normal in B2B</b> — the tool scores against the dataset itself (no absolute floors), so relative opportunity still surfaces.</div>
         <div>• <b>"vs / comparison"</b> seeds create the MOFU clusters that actually convert in long sales cycles.</div>
@@ -558,26 +706,26 @@
     </div>
 
     <div class="sg-card">
-      <div class="sg-head"><span class="sg-badge">7 · REAL ESTATE</span><span class="sg-eg">property agency — Dubai, UAE</span></div>
+      <div class="sg-head"><span class="sg-badge">7 · REAL ESTATE</span><span class="sg-eg">real estate brokerage — Tampa, FL</span></div>
       <div class="sg-formula">inventory + intent (rent/buy) · area-specific · price query · market segment</div>
-      <div class="sg-niche"><b>Niche:</b> <span class="sg-niche-text">Real estate agency for buying, selling and renting apartments and villas</span><span class="sg-loc" hidden>Dubai, UAE</span></div>
-      <code class="sg-seeds">apartments for rent dubai, buy villa dubai, studio for rent in marina, property prices dubai, off plan projects dubai</code>
+      <div class="sg-niche"><b>Niche:</b> <span class="sg-niche-text">Real estate brokerage for buying, selling and renting homes and condos</span><span class="sg-loc" hidden>Tampa, United States</span></div>
+      <code class="sg-seeds">apartments for rent tampa, homes for sale tampa, condos in south tampa, tampa home prices, new construction homes tampa</code>
       <div class="sg-tips">
         <div>• <b>Rent vs buy are different intents</b> — expect the tool to silo them into separate ad groups with cross-negatives automatically.</div>
-        <div>• Area names in seeds ("marina") feed <b>Mode 5 pSEO</b>: the JSON lists areas ranked by search demand for per-area pages.</div>
+        <div>• Neighborhood names in seeds ("south tampa") feed <b>Mode 5 pSEO</b>: run that mode to get per-area pages, each one measured before it is built.</div>
       </div>
       <button type="button" class="sg-use" data-rt="both">Use template</button>
     </div>
 
     <div class="sg-card">
-      <div class="sg-head"><span class="sg-badge">8 · EDUCATION / COACHING</span><span class="sg-eg">IELTS academy — Karachi, Pakistan</span></div>
-      <div class="sg-formula">course + city · fees / price · best X · online variant · how-to (content)</div>
-      <div class="sg-niche"><b>Niche:</b> <span class="sg-niche-text">IELTS and English language test preparation academy with online classes</span><span class="sg-loc" hidden>Karachi, Pakistan</span></div>
-      <code class="sg-seeds">ielts preparation karachi, ielts coaching fees, best ielts academy, ielts online classes pakistan, how to prepare for ielts at home</code>
+      <div class="sg-head"><span class="sg-badge">8 · EDUCATION / COACHING</span><span class="sg-eg">test prep tutoring — Chicago, IL</span></div>
+      <div class="sg-formula">course + city · cost / price · best X · online variant · how-to (content)</div>
+      <div class="sg-niche"><b>Niche:</b> <span class="sg-niche-text">SAT and ACT test preparation tutoring with in-person and online classes</span><span class="sg-loc" hidden>Chicago, United States</span></div>
+      <code class="sg-seeds">sat prep chicago, act tutoring cost, best sat prep course, online sat classes, how to study for the sat at home</code>
       <div class="sg-tips">
-        <div>• Use the words your market uses — here <b>"fees"</b> is the price modifier, not "price".</div>
-        <div>• Serving remote students too? Do a <b>second run with location N/A</b> (worldwide) for the online demand — different volumes, different competition.</div>
-        <div>• "how to prepare" seeds feed the SEO content plan (TOFU articles that rank and funnel into the course pages).</div>
+        <div>• Use the words your market uses — in the US that is <b>"cost"</b> and <b>"tutoring"</b>, not "fees" or "coaching".</div>
+        <div>• Teaching remote students too? Do a <b>second run with location N/A</b> (worldwide) for the online demand — different volumes, different competition.</div>
+        <div>• "how to study" seeds feed the SEO content plan (TOFU articles that rank and funnel into the course pages).</div>
       </div>
       <button type="button" class="sg-use" data-rt="both">Use template</button>
     </div>
