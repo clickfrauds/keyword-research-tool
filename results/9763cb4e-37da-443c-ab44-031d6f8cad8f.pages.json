@@ -1,0 +1,134 @@
+[
+  {
+    "page_name": "Water Leak Detection Services",
+    "url_slug": "water-leak-detection-services",
+    "language": "en",
+    "service_name": "Water Leak Detection",
+    "industry": "Water Leak Detection Services",
+    "sub_services": [
+      "Moisture Detection",
+      "Underground Leak Detection",
+      "Leak Detection Systems",
+      "Emergency Leak Detection",
+      "Commercial Leak Detection",
+      "Leak Detection Reports"
+    ],
+    "ad_groups_covered": [
+      "Water Leak Detection Services",
+      "Leak Detection System Installation",
+      "Emergency Leak Repair"
+    ],
+    "keywords_covered": 52,
+    "monthly_volume_covered": 3370,
+    "mode1_config": {
+      "main_service": "Water Leak Detection",
+      "sub_services": "Moisture Detection, Underground Leak Detection, Leak Detection Systems, Emergency Leak Detection, Commercial Leak Detection, Leak Detection Reports",
+      "industry": "Water Leak Detection Services"
+    },
+    "google_ads_tracking_tip": "Final URL suffix: kw={keyword} — enables the landing page's Dynamic Keyword Insertion (DKI)."
+  },
+  {
+    "page_name": "Underground & Main Line Water Leak Repair",
+    "url_slug": "underground-main-water-line-leak-repair",
+    "language": "en",
+    "service_name": "Underground Water Line Repair",
+    "industry": "Underground Utility Repair Services",
+    "sub_services": [
+      "Main Line Leak Repair",
+      "Underground Pipe Detection",
+      "Trenchless Pipe Repair",
+      "Water Supply Line Repair",
+      "Underground Tank Leak Repair",
+      "Main Line Replacement"
+    ],
+    "ad_groups_covered": [
+      "Underground & Main Water Line Repair"
+    ],
+    "keywords_covered": 24,
+    "monthly_volume_covered": 250,
+    "mode1_config": {
+      "main_service": "Underground Water Line Repair",
+      "sub_services": "Main Line Leak Repair, Underground Pipe Detection, Trenchless Pipe Repair, Water Supply Line Repair, Underground Tank Leak Repair, Main Line Replacement",
+      "industry": "Underground Utility Repair Services"
+    },
+    "google_ads_tracking_tip": "Final URL suffix: kw={keyword} — enables the landing page's Dynamic Keyword Insertion (DKI)."
+  },
+  {
+    "page_name": "Slab Leak Repair",
+    "url_slug": "slab-leak-repair-dubai",
+    "language": "en",
+    "service_name": "Slab Leak Repair",
+    "industry": "Slab Leak Repair Services",
+    "sub_services": [
+      "Concrete Slab Leak Detection",
+      "Slab Leak Repair",
+      "Foundation Leak Repair",
+      "Under-Slab Pipe Repair",
+      "Slab Leak Repair Cost Estimates",
+      "Plumbing Repipe Under Slab"
+    ],
+    "ad_groups_covered": [
+      "Slab Leak Repair"
+    ],
+    "keywords_covered": 35,
+    "monthly_volume_covered": 350,
+    "mode1_config": {
+      "main_service": "Slab Leak Repair",
+      "sub_services": "Concrete Slab Leak Detection, Slab Leak Repair, Foundation Leak Repair, Under-Slab Pipe Repair, Slab Leak Repair Cost Estimates, Plumbing Repipe Under Slab",
+      "industry": "Slab Leak Repair Services"
+    },
+    "google_ads_tracking_tip": "Final URL suffix: kw={keyword} — enables the landing page's Dynamic Keyword Insertion (DKI)."
+  },
+  {
+    "page_name": "Pipe Leak Repair",
+    "url_slug": "pipe-leak-repair-dubai",
+    "language": "en",
+    "service_name": "Pipe Leak Repair",
+    "industry": "Pipe Leak Repair Services",
+    "sub_services": [
+      "PVC Pipe Leak Repair",
+      "Copper Pipe Leak Repair",
+      "Galvanized Pipe Repair",
+      "Pipe Joint Leak Repair",
+      "Wall & Ceiling Pipe Leak Repair",
+      "Water Pipe Burst Repair"
+    ],
+    "ad_groups_covered": [
+      "Pipe Leak Repair"
+    ],
+    "keywords_covered": 40,
+    "monthly_volume_covered": 460,
+    "mode1_config": {
+      "main_service": "Pipe Leak Repair",
+      "sub_services": "PVC Pipe Leak Repair, Copper Pipe Leak Repair, Galvanized Pipe Repair, Pipe Joint Leak Repair, Wall & Ceiling Pipe Leak Repair, Water Pipe Burst Repair",
+      "industry": "Pipe Leak Repair Services"
+    },
+    "google_ads_tracking_tip": "Final URL suffix: kw={keyword} — enables the landing page's Dynamic Keyword Insertion (DKI)."
+  },
+  {
+    "page_name": "Household Fixture Leak Repair",
+    "url_slug": "household-fixture-leak-repair-dubai",
+    "language": "en",
+    "service_name": "Fixture Leak Repair",
+    "industry": "Home Plumbing Repair",
+    "sub_services": [
+      "Sink & Faucet Leak Repair",
+      "Shower & Bathtub Leak Repair",
+      "Toilet Leak Repair",
+      "Washing Machine Hose Repair",
+      "Water Heater Leak Repair",
+      "Kitchen Pipe Leak Repair"
+    ],
+    "ad_groups_covered": [
+      "Household Fixture Leak Repair"
+    ],
+    "keywords_covered": 40,
+    "monthly_volume_covered": 420,
+    "mode1_config": {
+      "main_service": "Fixture Leak Repair",
+      "sub_services": "Sink & Faucet Leak Repair, Shower & Bathtub Leak Repair, Toilet Leak Repair, Washing Machine Hose Repair, Water Heater Leak Repair, Kitchen Pipe Leak Repair",
+      "industry": "Home Plumbing Repair"
+    },
+    "google_ads_tracking_tip": "Final URL suffix: kw={keyword} — enables the landing page's Dynamic Keyword Insertion (DKI)."
+  }
+]
