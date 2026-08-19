@@ -930,10 +930,14 @@ def serp_prefilter(services, gl, hl):
     # nobody wants a catalogue quietly pruned. It also costs one credit per
     # name, so a hundred services would spend a hundred of them.
     if len(services) > SERP_PREFILTER_MAX:
-        print(f"   ℹ️ {len(services)} services — SERP prefilter skipped "
-              f"(over {SERP_PREFILTER_MAX}). A catalogue this size is a "
-              f"business decision, not a keyword one; every page is kept. "
-              f"Raise SERP_PREFILTER_MAX to force the check.")
+        if SERP_PREFILTER_MAX <= 0:
+            print("   ℹ️ merge-before-planning disabled (serp_dedupe=flag) — "
+                  "no page will be removed from the plan")
+        else:
+            print(f"   ℹ️ {len(services)} services — SERP prefilter skipped "
+                  f"(over {SERP_PREFILTER_MAX}). A catalogue this size is a "
+                  f"business decision, not a keyword one; every page is kept. "
+                  f"Run with serp_dedupe=merge to force the check.")
         # The size argument is against DELETING pages, not against LOOKING.
         # Skipping silently here meant a 35-service run got no SERP check at
         # all — the prefilter bailed on size and the post-assignment guard

@@ -34,6 +34,12 @@ on:
         description: "OPTIONAL: explicit numeric Google language id (overrides 'language') — blank = auto"
         required: false
         default: ''
+      serp_dedupe:
+        description: "Duplicate-page check via SerpApi (1 credit per page). auto = merge lists of 25 or fewer, flag longer ones | merge = always remove duplicates before planning | flag = never remove, only report | off = no SERP check"
+        required: false
+        type: choice
+        default: 'auto'
+        options: ['auto', 'merge', 'flag', 'off']
       request_id:
         description: "Unique id for this run — blank = auto"
         required: false
@@ -62,6 +68,21 @@ jobs:
           else
             echo "value=${{ github.event.inputs.request_id }}" >> "$GITHUB_OUTPUT"
           fi
+
+      # The SERP duplicate check has two modes and they do different things:
+      # the prefilter compares SERVICE NAMES and MERGES duplicates before
+      # anything is planned for them; the post guard compares each page's
+      # PRIMARY KEYWORD after assignment and only FLAGS. Which one runs used to
+      # depend silently on whether the list was longer than 25.
+      - name: Resolve SERP duplicate-check mode
+        run: |
+          case "${{ github.event.inputs.serp_dedupe }}" in
+            merge) echo "SERP_PREFILTER_MAX=500" >> "$GITHUB_ENV"
+                   echo "SERP_AUTO_MERGE=yes"    >> "$GITHUB_ENV" ;;
+            flag)  echo "SERP_PREFILTER_MAX=0"   >> "$GITHUB_ENV" ;;
+            off)   echo "SERP_STAGE=off"         >> "$GITHUB_ENV" ;;
+            *)     : ;;   # auto — script defaults
+          esac
 
       - name: Generate Mode 3 site plan (Ads volumes + Claude assignment)
         env:
