@@ -1035,6 +1035,129 @@ def assign_serp_groups(plan_categories, gl, hl):
     return merged
 
 
+def _short_label(text, limit):
+    """Trim to `limit` on a word boundary, and stop at the first clause.
+
+    A niche description is written as a sentence ("Full-service plumbing: drain
+    cleaning, water heater/geyser repair, ...") but industry_label is used as a
+    LABEL — it names the site's topic to the page writer. The head of the
+    sentence is the label; everything after the colon is the list.
+    """
+    t = " ".join(str(text or "").split())
+    if not t:
+        return ""
+    head = re.split(r"[:;.]", t, 1)[0].strip()
+    t = head if 3 <= len(head) <= limit else t
+    if len(t) <= limit:
+        return t
+    return t[:limit].rsplit(" ", 1)[0].rstrip(",;:-") or t[:limit]
+
+
+def normalize_entities(plan_categories):
+    """One entity per concept, and let a category share its vocabulary.
+
+    Two problems the plan shipped with:
+
+    1. FRAGMENTED ENTITIES. "DEWA", "DEWA compliance", "DEWA approval" and
+       "DEWA safety standards" arrived as four entities across four pages.
+       They are one entity — DEWA — carrying different attributes. Split like
+       that, no page states the entity plainly and the site never establishes
+       it. The shortest form is the entity; the longer ones are it plus a
+       word, so they collapse onto it when they are a strict extension.
+
+    2. NO CONTEXTUAL BRIDGES. 125 of 150 entities appeared on exactly one page,
+       so the topical map was a set of islands rather than a graph. Entities
+       shared between sibling pages are what tell a search engine those pages
+       belong to one topic. Any entity already used by two or more pages in a
+       category is offered to the rest of that category — offered, not forced:
+       it is appended only where the page does not already carry five of its
+       own, so a page's specific vocabulary always wins over the shared kind.
+
+    Returns the number of merges, for the run log.
+    """
+    pages_all = [s for c in plan_categories for s in c.get("services", [])]
+    allents = [str(e).strip() for s in pages_all
+               for e in (s.get("entities_to_mention") or []) if str(e).strip()]
+    uniq = list(dict.fromkeys(allents))
+    canon = {}
+
+    # ── 1a. shared PROPER-NOUN prefix, across the whole plan ──────────────
+    # "DEWA compliance", "DEWA approval" and "DEWA safety standards" sat on
+    # three different pages in two different categories, so no per-category
+    # pass and no substring rule could see them: their common root, "DEWA",
+    # was never an entity in its own right. Group by the capitalised or
+    # all-caps head of the phrase — that head IS the entity, and the trailing
+    # words are attributes of it.
+    def _proper_head(name):
+        toks = name.split()
+        head = []
+        for t in toks:
+            if t.isupper() or (t[:1].isupper() and not t.isdigit()):
+                head.append(t)
+            else:
+                break
+        return " ".join(head) if head and len(head) < len(toks) else ""
+
+    groups = {}
+    for e in uniq:
+        h = _proper_head(e)
+        if h:
+            groups.setdefault(h, []).append(e)
+    for head, members in groups.items():
+        if len(members) >= 2:
+            for m in members:
+                canon[m] = head
+
+    # ── 1b. an entity that wholly contains a shorter one is that one ──────
+    roots = sorted(uniq, key=len)
+    for e in sorted(uniq, key=lambda x: -len(x)):
+        if e in canon:
+            continue
+        low = e.lower()
+        for r in roots:
+            rl = r.lower()
+            if rl != low and re.search(rf"\b{re.escape(rl)}\b", low):
+                canon[e] = canon.get(r, r)
+                break
+
+    # Counts variants folded onto a root, not the drop in list length — a
+    # rename keeps the count the same, so measuring length would always
+    # report zero and hide the whole pass.
+    merged = 0
+    for s in pages_all:
+        seen, out = set(), []
+        for raw in (s.get("entities_to_mention") or []):
+            raw = str(raw).strip()
+            e = canon.get(raw, raw)
+            if e != raw:
+                merged += 1
+            if e and e.lower() not in seen:
+                seen.add(e.lower())
+                out.append(e)
+        s["entities_to_mention"] = out
+
+    for cat in plan_categories:
+        pages = cat.get("services", [])
+
+        # ── 2. offer the category's shared vocabulary to thin pages ───────
+        counts = {}
+        for s in pages:
+            for e in s["entities_to_mention"]:
+                counts[e.lower()] = counts.get(e.lower(), 0) + 1
+        shared = [e for s in pages for e in s["entities_to_mention"]
+                  if counts[e.lower()] >= 2]
+        shared = list(dict.fromkeys(shared))
+        for s in pages:
+            have = {e.lower() for e in s["entities_to_mention"]}
+            for e in shared:
+                if len(s["entities_to_mention"]) >= 5:
+                    break
+                if e.lower() not in have:
+                    s["entities_to_mention"].append(e)
+                    have.add(e.lower())
+    return merged
+
+
 def assign_sections(plan_categories):
     """core = the page that earns; outer = the page that supports it.
 
@@ -1139,6 +1262,14 @@ def main():
     plan_categories.sort(key=lambda c: -c["total_volume"])
     all_services_ordered = [s["name"] for c in plan_categories for s in c["services"]]
 
+    _merged = normalize_entities(plan_categories)
+    _ents = [e for c in plan_categories for s in c["services"]
+             for e in s.get("entities_to_mention", [])]
+    _shared = len(_ents) - len(set(_ents))
+    print(f"   🧩 entities: {len(set(_ents))} unique across {len(_ents)} mentions"
+          + (f", {_merged} variant(s) merged onto their root" if _merged else "")
+          + f", {_shared} shared between sibling pages (contextual bridges)")
+
     assign_sections(plan_categories)
     # The prefilter already spent the credits and acted on the answer; running
     # the same check again on the primary keywords would only re-buy it.
@@ -1159,7 +1290,13 @@ def main():
         # only pick the language ONCE (here). Blank = English.
         "language": CONTENT_LANGUAGE or "",
         "mode3_site_plan": {
-            "industry_label": NICHE_DESCRIPTION[:40],
+            # A hard [:40] cut this mid-word: a 197-character niche description
+            # shipped as "Full-service plumbing: drain cleaning, w". The builder
+            # shows it to the writer on every page and uses it to look up the
+            # home page's demand block, so a fragment ending in "w" was framing
+            # the whole site. Cut on a word boundary, and only when it is
+            # genuinely too long to be a label.
+            "industry_label": _short_label(NICHE_DESCRIPTION, 60),
             # Site-wide framing. The builder puts these in front of the writer
             # on EVERY page, which is what stops 100 pages reading as 100
             # unrelated pages — each one is visibly about the same entity,
