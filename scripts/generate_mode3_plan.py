@@ -889,6 +889,13 @@ def _serp_urls(keyword, gl, hl, num=10):
 
 
 SERP_STAGE = os.environ.get("SERP_STAGE", "pre").strip().lower()
+# Informational articles per category for the outer section. 0 turns it off.
+OUTER_PER_CATEGORY = int(os.environ.get("OUTER_PER_CATEGORY", "2"))
+# Top the outer section's query pool up from Google Autocomplete. On by
+# default: the Planner is seeded with commercial service names, so on its own
+# it returns almost no question queries to build informational pages from.
+OUTER_AUTOCOMPLETE = os.environ.get("OUTER_AUTOCOMPLETE", "yes").strip().lower() not in (
+    "no", "0", "false", "off")
 SERP_AUTO_MERGE = os.environ.get("SERP_AUTO_MERGE", "yes").strip().lower() not in (
     "no", "false", "0")
 
@@ -927,6 +934,16 @@ def serp_prefilter(services, gl, hl):
               f"(over {SERP_PREFILTER_MAX}). A catalogue this size is a "
               f"business decision, not a keyword one; every page is kept. "
               f"Raise SERP_PREFILTER_MAX to force the check.")
+        # The size argument is against DELETING pages, not against LOOKING.
+        # Skipping silently here meant a 35-service run got no SERP check at
+        # all — the prefilter bailed on size and the post-assignment guard
+        # only runs when SERP_STAGE asks for it, which it does not by default.
+        # That is exactly the size where two pages most easily land on one
+        # result set. Escalate to the post stage, which flags and never
+        # deletes, so the decision stays the user's.
+        globals()["SERP_STAGE"] = "post" if SERP_STAGE == "pre" else SERP_STAGE
+        print(f"   ↪️ escalating to the post-assignment SERP guard instead "
+              f"(flags overlapping pages, deletes nothing)")
         return services, {}
 
     # Hard credit ceiling even under the threshold — nothing should be able to
@@ -1033,6 +1050,135 @@ def assign_serp_groups(plan_categories, gl, hl):
     print(f"   ✅ {gid} distinct SERPs across {len(serps)} pages"
           + (f" | {merged} merge candidate(s)" if merged else " | no overlap"))
     return merged
+
+
+def build_outer_section(client, plan_categories, central_entity, city_term, per_category=2):
+    """The informational half of the topical map.
+
+    Every page in this plan came back section="core", 35 out of 35. That is not
+    a bug in assign_sections — it derives core/outer from intent, and every
+    service fed in was transactional. It is a gap in the MAP: a topical map is
+    a core section that earns plus an outer section that establishes the site
+    knows the subject and hands that authority down through its links. Without
+    one, the money pages carry the whole burden of proving expertise, and the
+    only informational content on the site is whatever the builder's blog
+    engine invents with no demand data behind it.
+
+    So this asks for informational topics per category, each built out of
+    question keywords the Planner already measured — the ones no commercial
+    page should target because answering them is not the same as selling.
+
+    Each topic names the core pages it must link to. That direction matters:
+    outer links INTO core, which is how the authority actually moves.
+
+    Fail-open: no client, no keywords, or a bad reply leaves outer_section
+    empty and the plan is exactly as it was.
+    """
+    if not client or not plan_categories:
+        return []
+
+    _Q_HEAD = ("how", "what", "why", "when", "does", "do", "is", "are", "can",
+               "should", "which", "who", "will")
+    out = []
+    for cat in plan_categories:
+        # Question-shaped and informational keywords across this category that
+        # no page claimed as its primary — the outer section's raw material.
+        claimed = {str((s.get("primary_keyword") or {}).get("keyword") or "").lower()
+                   for s in cat.get("services", [])}
+        pool = {}
+        for s in cat.get("services", []):
+            for k in s.get("keywords", []):
+                kw = str(k.get("keyword", "")).strip()
+                low = kw.lower()
+                if not kw or low in claimed or low in pool:
+                    continue
+                informational = (k.get("intent") == "informational"
+                                 or k.get("funnel") == "TOFU"
+                                 or low.split()[0] in _Q_HEAD)
+                if informational:
+                    pool[low] = k
+        # ── Top up from Google Autocomplete ──────────────────────────────
+        # The Planner only returns what its seeds imply, and every seed here
+        # was a commercial service name, so the whole plan yielded eleven
+        # informational queries — not enough to build an outer section from.
+        # Autocomplete is where the question space actually lives, and asking
+        # it with question stems is free of Planner bias. No volume behind
+        # these, which is fine: an outer article is not competing on volume,
+        # it is establishing that the site knows the subject.
+        if OUTER_AUTOCOMPLETE:
+            stems = [f"{w} {s['name'].lower()}" for s in cat.get("services", [])[:4]
+                     for w in ("how to", "why", "what is")]
+            try:
+                extra, _ = expand_queries(stems, hl=CONTENT_LANGUAGE or "en",
+                                          gl=_AC_GL, depth=1, max_queries=80,
+                                          verbose=False, city_term=_AC_CITY_TERM,
+                                          exclude_terms=_AC_EXCLUDE)
+            except Exception as _e:
+                print(f"   ℹ️ outer-section autocomplete skipped ({str(_e)[:50]})")
+                extra = []
+            for q in extra:
+                low = str(q).strip().lower()
+                if low and low not in pool and low not in claimed:
+                    pool[low] = {"keyword": str(q).strip(), "volume": 0,
+                                 "intent": "informational", "source": "autocomplete"}
+
+        if not pool:
+            continue
+        ranked = sorted(pool.values(), key=lambda k: -(k.get("volume") or 0))[:40]
+        kw_lines = "\n".join(f'{k["keyword"]} | {k.get("volume", 0)}/mo'
+                             for k in ranked)
+        core_pages = [{"name": s["name"], "url_slug": s.get("url_slug", "")}
+                      for s in cat.get("services", [])]
+        core_lines = "\n".join(f'{p["name"]} | /{p["url_slug"]}/' for p in core_pages)
+
+        raw = claude_json(client, "Return valid JSON only.", f"""
+CENTRAL ENTITY OF THE SITE: {central_entity or cat['name']}
+CATEGORY: {cat['name']}
+CITY: {city_term or "(not city-specific)"}
+
+MEASURED INFORMATIONAL QUERIES in this category (no commercial page targets these):
+{kw_lines}
+
+THIS CATEGORY'S COMMERCIAL PAGES (the core section):
+{core_lines}
+
+Design up to {per_category} INFORMATIONAL articles that together make this
+category's expertise obvious. Rules:
+
+1. An article ANSWERS a question. It never sells a service — the core pages do
+   that. If a topic would duplicate a core page's job, drop it.
+2. Base each on the measured queries above; the focus_keyword MUST be one of
+   them, copied exactly.
+3. Each article links to 1-3 core pages from the list, chosen because the
+   reader who finishes that article genuinely needs that service next. Use the
+   page NAME exactly as written.
+4. Titles read like an article a person would open, not a category label.
+5. slug: lowercase, hyphenated, English, no city unless the query has one.
+
+JSON:
+{{"articles": [{{"title": "...", "slug": "...", "focus_keyword": "...",
+  "supporting_keywords": ["..."], "links_to_core": ["Page Name"],
+  "angle": "one sentence on what this answers that the core pages do not"}}]}}
+""")
+        for a in (raw.get("articles") or [])[:per_category] if isinstance(raw, dict) else []:
+            if not a.get("title") or not a.get("focus_keyword"):
+                continue
+            fk = str(a["focus_keyword"]).strip().lower()
+            a["category"] = cat["name"]
+            a["section"] = "outer"
+            a["volume"] = (pool.get(fk) or {}).get("volume", 0)
+            a["links_to_core"] = [n for n in (a.get("links_to_core") or [])
+                                  if any(p["name"] == n for p in core_pages)]
+            out.append(a)
+
+    if out:
+        print(f"   🌐 outer section: {len(out)} informational article(s) across "
+              f"{len({a['category'] for a in out})} categories "
+              f"→ {sum(len(a['links_to_core']) for a in out)} links into core")
+    else:
+        print("   ℹ️ outer section: no unclaimed informational queries — "
+              "the plan is core-only (seed some question keywords to change that)")
+    return out
 
 
 def _short_label(text, limit):
@@ -1276,6 +1422,12 @@ def main():
     if SERP_STAGE in ("post", "both"):
         assign_serp_groups(plan_categories, _AC_GL, CONTENT_LANGUAGE or "en")
 
+    # The informational half of the map — the builder turns these into blog
+    # posts that link INTO the core pages.
+    outer = build_outer_section(claude, plan_categories,
+                                site_context.get("central_entity", ""), _AC_CITY_TERM,
+                                per_category=OUTER_PER_CATEGORY)
+
     # Areas hiding in the pages' keyword sets → Mode 5, not Mode 3 pages.
     areas = extract_area_targets(claude, plan_categories, _AC_CITY_TERM)
     top_service = (max((s for c in plan_categories for s in c["services"]),
@@ -1309,6 +1461,12 @@ def main():
             # with an AI call. Text only — Mode 5 picks one of five slug
             # patterns per city, so Mode 3 cannot predict an area page's URL
             # and linking before Mode 5 has run would only ship 404s.
+            # Koray's outer section: informational articles built from measured
+            # question queries, each naming the core pages it links into. The
+            # builder feeds these to its blog engine as topics_override, so the
+            # site's informational layer has demand data behind it instead of
+            # being invented at build time.
+            "outer_section": outer,
             "areas_served": areas,
             # {dropped page: the page it merged into} — a page absent from this
             # plan that the user asked for is explained here, not silently gone.
