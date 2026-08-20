@@ -57,6 +57,7 @@ import sys
 import csv
 import json
 import unicodedata
+from urllib.parse import urlparse
 
 # Windows local runs: cp1252 console can't print the emoji in our log lines
 if hasattr(sys.stdout, "reconfigure"):
@@ -362,7 +363,7 @@ def lang_url_prefix(lang_code):
     return f"/{code}"
 
 
-def ask_claude(client, group, kw_lines, retry_note=""):
+def ask_claude(client, group, kw_lines, retry_note="", page=None):
     _code, _lang_name = group_language(group)
     # The per-group rule rides in the USER message so the cached SYSTEM prompt
     # stays byte-identical across ad groups (prompt-cache discount preserved).
@@ -370,9 +371,31 @@ def ask_claude(client, group, kw_lines, retry_note=""):
                  f"{_lang_name}. Its keywords are in {_lang_name}, so an ad in any other "
                  f"language cannot serve for them. The 30/90 character limits are counted "
                  f"in {_lang_name} characters.\n" if _lang_name else "")
+    # FIXED PAGES MODE: the landing page already exists and we have read it,
+    # so the ad can be written in the page's own words. That is the whole
+    # Quality Score argument — Ad Relevance and Landing Page Experience both
+    # improve when the ad promises what the page actually says, instead of
+    # what a slug suggested it might say.
+    page_block = ""
+    if page and (page.get("h1") or page.get("h2")):
+        _h2 = " | ".join((page.get("h2") or [])[:8])
+        _h3 = " | ".join((page.get("h3") or [])[:8])
+        page_block = f"""
+THE LANDING PAGE THIS AD SENDS PEOPLE TO (already live — read it and match it):
+  URL: {page.get('final_url', '')}
+  H1: {page.get('h1', '')}
+  H2s: {_h2 or '(none)'}
+  H3s: {_h3 or '(none)'}
+  Sells: {page.get('service_name', '')}
+Write copy the page can back up. Promise nothing that is not on that page —
+a headline the page does not deliver is a bounced click and a bad Landing
+Page Experience score. Where the page names a real offer, guarantee or
+credential, put it in a headline.
+"""
+
     user = f"""AD GROUP: {group['name']}
 THEME (the single user intent): {group.get('theme', '')}
-{lang_rule}TARGET KEYWORDS (with monthly volume):
+{lang_rule}{page_block}TARGET KEYWORDS (with monthly volume):
 {kw_lines}
 {retry_note}
 Write the RSA JSON now."""
@@ -484,9 +507,18 @@ def main():
     # ad group -> landing page slug (one dedicated page per group; the
     # homepage is never a PPC landing page — message match dies there)
     slug_by_group = {}
+    # FIXED PAGES MODE: the page is already live and its URL is carried on the
+    # strategy verbatim. Rebuilding it from a slug is exactly the invention
+    # that produced ads pointing at pages nobody had built — so when a page
+    # brings its own final_url, that URL is used and nothing recomputes it.
+    url_by_group = {}
+    page_by_group = {}
     for lp in (strategy.get("landing_pages") or []):
         for g in (lp.get("ad_groups_covered") or []):
             slug_by_group[g] = lp.get("url_slug", "")
+            page_by_group[g] = lp
+            if lp.get("final_url"):
+                url_by_group[g] = lp["final_url"]
 
     base = WEBSITE_URL or "https://REPLACE-WITH-YOUR-DOMAIN.com"
     client = anthropic.Anthropic()
@@ -513,7 +545,8 @@ def main():
                 f"descriptions. Keep every headline UNDER 30 characters and "
                 f"every description UNDER 90 characters. Recount each one.")
             try:
-                raw = ask_claude(client, group, kw_lines, note)
+                raw = ask_claude(client, group, kw_lines, note,
+                                 page=page_by_group.get(group["name"]))
             except Exception as e:
                 print(f"   ⚠️ Claude call failed for '{group['name']}': {e}")
                 raw = {}
@@ -541,10 +574,19 @@ def main():
             descriptions.append(d)
 
         slug = slug_by_group.get(group["name"], "")
-        _g_code, _ = group_language(group)
-        _pfx = lang_url_prefix(_g_code)
-        final_url = f"{base}{_pfx}/{slug}/" if slug else f"{base}{_pfx}/"
-        p1, p2 = make_paths(slug or group["name"])
+        _fixed = url_by_group.get(group["name"], "")
+        if _fixed:
+            # A live URL: no language folder, no slug arithmetic. The path
+            # crumbs still come from the URL's own last segment so the display
+            # path matches where the click actually lands.
+            final_url = _fixed
+            _seg = [x for x in urlparse(_fixed).path.split("/") if x]
+            p1, p2 = make_paths(_seg[-1] if _seg else group["name"])
+        else:
+            _g_code, _ = group_language(group)
+            _pfx = lang_url_prefix(_g_code)
+            final_url = f"{base}{_pfx}/{slug}/" if slug else f"{base}{_pfx}/"
+            p1, p2 = make_paths(slug or group["name"])
         pins = pin_plan(headlines, kws)
 
         cov = sum(1 for h in headlines

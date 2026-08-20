@@ -273,10 +273,69 @@ def ask_claude(groups, urls, pages):
     return out
 
 
+def fixed_page_links(page, proposed, fallback):
+    """Sitelinks for a landing page that already exists.
+
+    ANCHORS assumes the five section ids the site generator writes onto every
+    page it builds. A client's own page has no such ids, so pointing at
+    "#pricing" there drops the visitor at the top of the page they are already
+    on — a sitelink that does nothing, on every ad group.
+
+    Two honest options instead:
+      anchors     the crawl found real in-page ids; use those.
+      cross_page  no ids, so point at the client's OTHER pages. That is a
+                  better sitelink anyway: it goes somewhere new, which is what
+                  a sitelink is for, and it gives the visitor a real path
+                  through the site rather than a scroll.
+    """
+    mode = page.get("sitelink_mode") or "cross_page"
+    targets = page.get("sitelink_targets") or []
+    labels = page.get("sitelink_labels") or []
+    if not targets:
+        return []
+
+    links = []
+    for i, url in enumerate(targets[:5]):
+        cand = proposed[i] if i < len(proposed) and isinstance(proposed[i], dict) else {}
+        text = str(cand.get("text", "")).strip()
+        d1 = str(cand.get("desc1", "")).strip()
+        d2 = str(cand.get("desc2", "")).strip()
+
+        if mode == "cross_page":
+            # The label is the other page's own service name, so the sitelink
+            # says where it actually goes. A model-written label here could
+            # promise something that page does not sell.
+            lbl = labels[i] if i < len(labels) else ""
+            if _fits(lbl, TEXT_MAX):
+                text = lbl
+        elif not _fits(text, TEXT_MAX):
+            anchor = url.split("#", 1)[-1] if "#" in url else ""
+            text = anchor.replace("-", " ").replace("_", " ").title()[:TEXT_MAX]
+
+        if not _fits(text, TEXT_MAX):
+            fb = fallback[i] if i < len(fallback) else None
+            if not fb:
+                continue
+            text = fb["text"]
+        if not (_fits(d1, DESC_MAX) and _fits(d2, DESC_MAX) and d1 and d2):
+            d1 = d2 = ""
+
+        links.append({"text": text, "desc1": d1, "desc2": d2, "url": url,
+                      "anchor": url.split("#", 1)[-1] if "#" in url else "",
+                      "source": f"fixed:{mode}"})
+    return links
+
+
 def main():
     strategy = load_json(STRATEGY, {})
     groups = strategy.get("ad_groups") or []
     pages = strategy.get("landing_pages") or []
+    # Pages that already exist carry their own sitelink plan from the crawl.
+    fixed_by_group = {}
+    for _p in pages:
+        if _p.get("final_url") and _p.get("sitelink_targets"):
+            for _g in (_p.get("ad_groups_covered") or []):
+                fixed_by_group[_g] = _p
     if not groups:
         print("ℹ️ No ad groups in the strategy — sitelink stage skipped.")
         return
@@ -301,8 +360,11 @@ def main():
         proposed = copy_by_group.get(name) or []
         fallback = fallback_set(name, g.get("theme", ""), base)
 
-        links = []
-        for i, (anchor, _why) in enumerate(ANCHORS):
+        links = fixed_page_links(fixed_by_group[name], proposed, fallback)             if name in fixed_by_group else []
+        if links:
+            n_model += sum(1 for l in links if l["desc1"])
+            n_fixed += sum(1 for l in links if not l["desc1"])
+        for i, (anchor, _why) in enumerate(ANCHORS if not links else []):
             cand = proposed[i] if i < len(proposed) and isinstance(proposed[i], dict) else {}
             text, d1, d2 = (str(cand.get("text", "")).strip(),
                             str(cand.get("desc1", "")).strip(),

@@ -146,6 +146,20 @@ def suggest_bids(low, high, comp_index=0):
 EXISTING_CAMPAIGN = os.environ.get("EXISTING_CAMPAIGN", "").strip()
 EXISTING_AD_GROUPS = [g.strip() for g in os.environ.get("EXISTING_AD_GROUPS", "").split(",") if g.strip()]
 
+# FIXED PAGES MODE — crawl_landing_pages.py has already read this client's
+# live pages. The page set is then a fact, not something to design: one ad
+# group per page, no more, and the URLs are the ones that already serve.
+# This is what makes "Destination not working" impossible on this path —
+# no slug is invented, so no ad can point at a page that was never built.
+FIXED_PAGES = []
+if os.path.exists("landing_pages_source.json"):
+    try:
+        with open("landing_pages_source.json", encoding="utf-8") as _f:
+            FIXED_PAGES = (json.load(_f).get("pages") or [])
+    except Exception as _e:
+        print(f"⚠️ landing_pages_source.json unreadable ({str(_e)[:60]}) — "
+              "continuing in normal mode.")
+
 # Single-campaign mode (user request, Jul 2026): Ads Editor imports of a
 # multi-campaign file are easy to get wrong (the second campaign's rows get
 # skipped when a paste range starts mid-file), and small accounts usually
@@ -340,6 +354,41 @@ D. Also return this extra top-level key:
    each existing group so they cannot cannibalize the new group either.
    Only include existing groups that actually need protection.
 E. Landing pages: only for the NEW themes (1 page per new theme is typical).
+"""
+
+if FIXED_PAGES:
+    _fp_lines = []
+    for _p in FIXED_PAGES:
+        _fp_lines.append(
+            f'- AD GROUP "{_p["ad_group"]}" -> {_p["url"]}\n'
+            f'    sells: {_p.get("service_name","")}\n'
+            f'    page says: {_p.get("h1","")} | '
+            + " | ".join((_p.get("h2") or [])[:6])
+        )
+    SYSTEM_PROMPT += f"""
+EXISTING LANDING PAGES MODE — this client's pages are ALREADY LIVE:
+
+{chr(10).join(_fp_lines)}
+
+Extra rules that OVERRIDE the ones above:
+A. AD GROUPS: return EXACTLY {len(FIXED_PAGES)} of them, one per page, named
+   EXACTLY as listed. Not one more, not one fewer, and do not rename them.
+   The page set is a fact here, not a design decision — an ad group with no
+   page has nowhere to send its clicks.
+B. Sort every keyword into the group whose page actually sells that thing.
+   Judge by what the page says above, not by the keyword alone.
+C. A keyword that no page sells goes in excluded_ids. Do NOT stretch a group
+   to cover it — a click landing on a page that does not sell what was
+   searched is a wasted click and a bad Landing Page Experience score.
+D. Also return this extra top-level key:
+   "new_page_opportunities": [
+     {{"suggested_page": "what it would sell", "keyword_ids": [1, 2],
+       "monthly_volume": 1234, "why": "one line"}}
+   ]
+   = the excluded keywords that carry real volume and would justify a NEW
+   page. This is the client's growth list; do not silently discard them.
+E. LANDING PAGES: skip the landing_pages array entirely. Return it empty —
+   the pages already exist and their URLs must not be regenerated.
 """
 
 if CONTENT_LANG_NAME and CONTENT_LANGUAGE != "en":
@@ -735,6 +784,51 @@ def validate_strategy(raw, kept):
             "sub_services": subs,
             "ad_groups_covered": ag,
         })
+    # FIXED PAGES MODE: the pages are already live, so they replace whatever
+    # the model returned rather than being described by it. Rule E asks for an
+    # empty landing_pages array, but this does not depend on the model obeying.
+    #
+    # final_url is the point. Everything downstream builds its URL as
+    # WEBSITE_URL + "/" + url_slug + "/", which is exactly the invention that
+    # produced ads pointing at pages nobody had built yet. Here the URL is one
+    # that already answered a request during the crawl, so it is carried
+    # through untouched and nothing is allowed to rebuild it.
+    if FIXED_PAGES:
+        pages = []
+        covered = set()
+        for _p in FIXED_PAGES:
+            _has_group = _p["ad_group"] in group_names
+            _ag = [_p["ad_group"]] if _has_group else []
+            covered.update(_ag)
+            pages.append({
+                "page_name": (_p.get("service_name") or _p["ad_group"])[:80],
+                "url_slug": _p.get("url_slug", ""),
+                "final_url": _p["final_url"],
+                "language": CONTENT_LANGUAGE or "en",
+                "service_name": _p.get("service_name", ""),
+                "industry": NICHE_DESCRIPTION[:40],
+                "sub_services": _p.get("sub_services", []),
+                "ad_groups_covered": _ag,
+                "anchors": _p.get("anchors", []),
+                "sitelink_mode": _p.get("sitelink_mode", "cross_page"),
+                "sitelink_targets": _p.get("sitelink_targets", []),
+                "sitelink_labels": _p.get("sitelink_labels", []),
+                "verdict": _p.get("verdict", "strong"),
+                "h1": _p.get("h1", ""),
+                "h2": _p.get("h2", []),
+                "h3": _p.get("h3", []),
+            })
+        _orphan_pages = [p["ad_group"] for p in FIXED_PAGES
+                         if p["ad_group"] not in group_names]
+        if _orphan_pages:
+            # The model was told to return exactly these ad group names. When
+            # one is missing that page has no keywords, so it would sit in the
+            # campaign with nothing to trigger it.
+            print(f"   ⚠️ {len(_orphan_pages)} page(s) received no ad group: "
+                  + ", ".join(_orphan_pages[:5]))
+        print(f"   📄 Fixed pages: {len(pages)} live URL(s), "
+              f"{len(covered)} matched to an ad group")
+
     uncovered_groups = sorted(group_names - covered)
 
     excluded = set()
@@ -996,6 +1090,12 @@ def main():
         "model_used": MODEL,
         "campaigns": campaigns,
         "existing_account_mode": bool(EXISTING_CAMPAIGN or EXISTING_AD_GROUPS),
+        "fixed_pages_mode": bool(FIXED_PAGES),
+        # Keywords with real volume that no existing page sells. Not an error
+        # and not to be thrown away — this is the client's growth list, and it
+        # is what the website builder would build next.
+        "new_page_opportunities": (raw.get("new_page_opportunities") or []
+                                   if FIXED_PAGES else []),
         "existing_ad_groups": EXISTING_AD_GROUPS,
         "negatives_for_existing_groups": negatives_for_existing,
         "ad_groups": groups,
