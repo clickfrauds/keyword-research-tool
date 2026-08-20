@@ -13,8 +13,14 @@ on:
         description: "Target location (e.g. 'Dubai, UAE', or 'N/A' if not local)"
         required: true
       seed_keywords:
-        description: "Comma-separated seed keywords for this client"
-        required: true
+        description: "Comma-separated seed keywords. Optional ONLY when landing_urls is given — Stage 0-CRAWL then reads the seeds off the client's own pages"
+        # Not required at this layer any more: an existing-pages run has no
+        # seeds to send, because working them out is what the crawl is for,
+        # and GitHub rejects the whole dispatch when a required input arrives
+        # empty. The form and trigger-research.js both still insist on one of
+        # the two, so a run can never reach here with neither.
+        required: false
+        default: ''
       keywords_csv_url:
         description: "OPTIONAL: raw URL of a Keyword Planner CSV export. When set, Stage 1 uses THAT keyword set instead of pulling ideas from the seeds — your own curated export, no second API pull."
         required: false
@@ -159,6 +165,18 @@ jobs:
           else
             echo "value=${{ github.event.inputs.request_id }}" >> "$GITHUB_OUTPUT"
           fi
+
+      # seed_keywords stopped being `required` so that an existing-pages run
+      # (which has no seeds — working them out is the crawl's whole job) is
+      # not rejected by GitHub before the workflow starts. That removed the
+      # only check that one of the two was present, so it lives here now:
+      # with neither, Stage 1 would run on an empty keyword list and fail
+      # somewhere further down, where the reason is much harder to see.
+      - name: Guard - seeds or landing URLs
+        if: ${{ github.event.inputs.seed_keywords == '' && github.event.inputs.landing_urls == '' }}
+        run: |
+          echo "::error::Give either seed_keywords or landing_urls. With landing_urls the seeds are read off the client's own pages in Stage 0-CRAWL."
+          exit 1
 
       # Conversion tracking, before anything else touches the account.
       #
