@@ -340,7 +340,8 @@ JS_TEMPLATE = r"""/**
  */
 
 function main() {
-  // ⚙️ CONFIG — sirf campaign name check karein, baqi sab data-generated hai
+  // ⚙️ CONFIG — sirf campaign name check karein, baqi sab data-generated hai.
+  //    Case ki fikar na karein: naam account se case-insensitively match hota hai.
   var CAMPAIGN_NAMES = %%CAMPAIGNS%%;
   var DATE_RANGE = "TODAY";        // TODAY | YESTERDAY | LAST_7_DAYS
   var MIN_IMPRESSIONS = 0;
@@ -481,19 +482,43 @@ function main() {
   // GAQL string literal — escape quotes so a campaign name like
   // "Naseem's Solar" can never break the query syntax
   function gaqlEscape(s) { return s.replace(/\\/g, "\\\\").replace(/'/g, "\\'"); }
-  var campaignList = CAMPAIGN_NAMES.map(function (c) { return gaqlEscape(c); }).join("','");
 
-  // sanity: warn about campaign names that don't exist in the account
+  // GAQL's `campaign.name IN (...)` is case-SENSITIVE, so "solar panel cleaning"
+  // never matches an account campaign called "Solar Panel Cleaning". Resolve every
+  // configured name against the account's own spelling first (case-insensitive,
+  // trimmed) and use the account's exact string from here on.
+  var resolvedCampaigns = [];
   try {
-    var found = {};
-    var cRows = AdsApp.search(
-      "SELECT campaign.name FROM campaign WHERE campaign.name IN ('" + campaignList + "')");
-    while (cRows.hasNext()) found[cRows.next().campaign.name] = true;
-    for (var cn = 0; cn < CAMPAIGN_NAMES.length; cn++) {
-      if (!found[CAMPAIGN_NAMES[cn]])
-        Logger.log("⚠️ Campaign NOT FOUND (check exact name): '" + CAMPAIGN_NAMES[cn] + "'");
+    var accountNames = {};   // lowercased -> exact name as it exists in the account
+    var allRows = AdsApp.search("SELECT campaign.name FROM campaign");
+    while (allRows.hasNext()) {
+      var acctName = allRows.next().campaign.name;
+      accountNames[acctName.toLowerCase().trim()] = acctName;
     }
-  } catch (e) { /* older runtimes — non-fatal */ }
+    for (var cn = 0; cn < CAMPAIGN_NAMES.length; cn++) {
+      var wanted = String(CAMPAIGN_NAMES[cn]).toLowerCase().trim();
+      var exact = accountNames[wanted];
+      if (exact) {
+        if (exact !== CAMPAIGN_NAMES[cn])
+          Logger.log("ℹ️ Campaign matched case-insensitively: '" + CAMPAIGN_NAMES[cn] +
+                     "' -> '" + exact + "'");
+        resolvedCampaigns.push(exact);
+      } else {
+        Logger.log("⚠️ Campaign NOT FOUND in this account: '" + CAMPAIGN_NAMES[cn] + "'");
+      }
+    }
+  } catch (e) {
+    Logger.log("⚠️ Could not list account campaigns (" + e + ") — using configured names as-is.");
+    resolvedCampaigns = CAMPAIGN_NAMES.slice();
+  }
+
+  if (!resolvedCampaigns.length) {
+    Logger.log("❌ None of the configured campaign names exist in this account — nothing to do. " +
+               "Check CAMPAIGN_NAMES at the top of the script.");
+    return;
+  }
+
+  var campaignList = resolvedCampaigns.map(function (c) { return gaqlEscape(c); }).join("','");
 
   var query =
     "SELECT search_term_view.search_term, metrics.impressions, metrics.clicks, " +
@@ -644,9 +669,17 @@ function main() {
 """
 
 
-def js_list(items, per_line=6):
-    """Render a python list as a compact JS array literal."""
-    items = sorted(set(str(i).lower().strip() for i in items if str(i).strip()))
+def js_list(items, per_line=6, lower=True):
+    """Render a python list as a compact JS array literal.
+
+    lower=False keeps the original casing — campaign names must go out
+    verbatim, because GAQL's `campaign.name IN (...)` is case-sensitive.
+    """
+    if lower:
+        items = sorted(set(str(i).lower().strip() for i in items if str(i).strip()))
+    else:
+        seen, items = set(), [str(i).strip() for i in items if str(i).strip()]
+        items = [i for i in items if not (i.lower() in seen or seen.add(i.lower()))]
     if not items:
         return "[]"
     lines = []
@@ -679,7 +712,7 @@ def render_script(campaigns, bid_keywords, products, fuzzy_roots, niche):
     js = (JS_TEMPLATE
           .replace("%%BUSINESS%%", BUSINESS_NAME or "Universal")
           .replace("%%LOCATION%%", TARGET_LOCATION or "any location")
-          .replace("%%CAMPAIGNS%%", js_list(campaigns, 2))
+          .replace("%%CAMPAIGNS%%", js_list(campaigns, 2, lower=False))
           .replace("%%FORBIDDEN_LOCATIONS%%", js_list(forbidden_locations))
           .replace("%%EDU_CAREER%%", js_list(edu, 4))
           .replace("%%INFO_DIY%%", js_list(info_diy, 4))

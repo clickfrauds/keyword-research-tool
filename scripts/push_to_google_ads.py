@@ -94,13 +94,16 @@ def main():
     # (DUPLICATE_CAMPAIGN_NAME) — every re-run of the same client hit this.
     # Suffix a counter instead of dying.
     try:
-        existing = {row.campaign.name for row in svc.search(
+        # compared case-insensitively: Google Ads treats "Solar Cleaning" and
+        # "solar cleaning" as two campaigns, and that casing twin is exactly what
+        # makes the generated Ads script fail to find the campaign later.
+        existing = {row.campaign.name.strip().lower() for row in svc.search(
             customer_id=PUSH_CUSTOMER_ID,
             query="SELECT campaign.name FROM campaign "
                   "WHERE campaign.status != 'REMOVED'")}
-        if camp_name in existing:
+        if camp_name.strip().lower() in existing:
             base_name, n = camp_name, 2
-            while f"{base_name} v{n}" in existing and n < 50:
+            while f"{base_name} v{n}".strip().lower() in existing and n < 50:
                 n += 1
             camp_name = f"{base_name} v{n}"
             log(f"ℹ️ '{base_name}' already exists in the account — pushing as '{camp_name}'.")
