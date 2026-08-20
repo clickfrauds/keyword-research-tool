@@ -301,7 +301,8 @@
       // The form shrinks to: campaign name(s) + the location picker.
       var LOC_HIDE = ["niche_description", "website_url", "lang_url_prefix",
                       "seed_keywords", "existing_campaign", "existing_ad_groups",
-                      "max_ad_groups", "premium_areas", "low_areas", "pages_mode"];
+                      "max_ad_groups", "premium_areas", "low_areas", "pages_mode",
+                      "client_token"];
       function setLocationsOnly(on) {
         LOC_HIDE.forEach(function (id) {
           var el = document.getElementById(id);
@@ -492,6 +493,16 @@
       <div class="hint">Left blank, the budget is worked out from the campaign it just built: <b>median Max CPC × the clicks a day it needs to learn</b> (about 15), trimmed to what the search volume can actually deliver, and floored so the most expensive keyword can still serve. Every campaign used to launch on a flat <b>1000 a day</b> in whatever the account currency was — roughly AED 30,000 a month on a campaign nobody had sized, and unspendable on a small niche. The figure and the reasoning appear in the push report and the Master CSV.</div>
 
       <div class="hint">Pushes the whole campaign straight into the account through the API — no Editor, no import. Run <b>Validate</b> first (Google checks every operation without touching the account), then Live. The campaign always lands <b>Paused</b>. The account must be linked to your MCC.</div>
+
+      <label for="client_token" style="margin-top:18px;">🎯 Conversion tracking — client token <span style="opacity:.6">(optional — from the ClickAds Protector client manager)</span></label>
+      <div style="display:flex; gap:8px; flex-wrap:wrap;">
+        <input id="client_token" name="client_token" placeholder="CF-XXXX-2026-xxxxxx" style="flex:2 1 220px;">
+        <select id="conv_setup" name="conv_setup" style="flex:1 1 200px;">
+          <option value="check">Check only — report what is missing</option>
+          <option value="create">Create the conversion actions</option>
+        </select>
+      </div>
+      <div class="hint" id="conv-hint">The three conversion actions a lead-gen client needs — <b>phone, WhatsApp, form</b> — created in the Ads account through the API, with their tag labels read back and written onto this client's row. Open the client manager afterwards, click the client, and the four middleware fields are already filled: <b>no label is ever copied by hand</b>. The account comes off the client row, so a token belonging to a different account is refused rather than writing one client's labels onto another's row. It is idempotent, so a second run re-reads what is already there instead of creating duplicates — duplicate conversion actions split the data and quietly wreck Smart Bidding.<br><br><b>Check only</b> is the default on purpose: you asked for keyword research, so nothing appears in your live Ads account unless you choose <b>Create</b>. This is a once-per-client job, not a once-per-run one. <b>After it is live, stop importing the GA4 events into Ads</b> — keep the GA4↔Ads link, drop the import, or every lead counts twice.</div>
     </div>
 
     <button type="submit" id="submit-btn">Generate Report</button>

@@ -153,6 +153,11 @@ export async function onRequestPost(context) {
         // the better answer — so an unparseable value becomes blank, never a
         // number nobody chose.
         daily_budget: String(body.daily_budget || "").replace(/[^\d.]/g, "").slice(0, 10),
+        // Conversion setup. "create" is the only value that touches the live
+        // Ads account, and it has to be asked for — a keyword research run
+        // must not quietly create things in someone's account.
+        client_token: String(body.client_token || "").replace(/[^A-Za-z0-9_-]/g, "").slice(0, 64),
+        conv_setup: body.conv_setup === "create" ? "create" : "check",
         // Two-phase push. auto holds the ads back whenever a landing page is
         // not serving yet, which is what stops Google disapproving them as
         // "Destination not working"; creative attaches them on a later run.

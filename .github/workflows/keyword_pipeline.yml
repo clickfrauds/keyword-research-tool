@@ -116,6 +116,18 @@ on:
         description: "Campaign daily budget in the account currency. Blank = sized from the campaign's own bids and search volume"
         required: false
         default: ''
+      client_token:
+        description: "CONVERSIONS: the ClickAds Protector client token. Needed to look the client row up and write its conversion labels back"
+        required: false
+        default: ''
+      conv_setup:
+        description: "CONVERSIONS: check = report what is missing, nothing created | create = create the three conversion actions in the Ads account"
+        required: false
+        default: 'check'
+        type: choice
+        options:
+          - check
+          - create
       landing_urls:
         description: "EXISTING PAGES: the client's live landing page URLs, comma or newline separated. Given these, seeds are read off the pages and one ad group is built per page"
         required: false
@@ -147,6 +159,35 @@ jobs:
           else
             echo "value=${{ github.event.inputs.request_id }}" >> "$GITHUB_OUTPUT"
           fi
+
+      # Conversion tracking, before anything else touches the account.
+      #
+      # Runs first on purpose: the labels have to exist before the site is
+      # built, so the pages go live already carrying the ones the Ads account
+      # knows about. Do it afterwards and there is a window where a campaign
+      # points at pages with no tracking on them.
+      #
+      # conv_setup=check (the default) validates and creates nothing. Only an
+      # explicit "create" writes to the live account — you asked for keyword
+      # research, so nothing should appear in the account unless you said so.
+      # This is a once-per-client job; re-running is harmless because the
+      # script matches on action name and re-reads instead of duplicating.
+      - name: Stage 0-CONV - Google Ads conversion actions + labels
+        if: ${{ github.event.inputs.client_token != '' && github.event.inputs.push_customer_id != '' }}
+        continue-on-error: true
+        env:
+          GOOGLE_ADS_DEVELOPER_TOKEN: ${{ secrets.GOOGLE_ADS_DEVELOPER_TOKEN }}
+          GOOGLE_ADS_CLIENT_ID: ${{ secrets.GOOGLE_ADS_CLIENT_ID }}
+          GOOGLE_ADS_CLIENT_SECRET: ${{ secrets.GOOGLE_ADS_CLIENT_SECRET }}
+          GOOGLE_ADS_REFRESH_TOKEN: ${{ secrets.GOOGLE_ADS_REFRESH_TOKEN }}
+          GOOGLE_ADS_LOGIN_CUSTOMER_ID: ${{ secrets.GOOGLE_ADS_LOGIN_CUSTOMER_ID }}
+          GOOGLE_ADS_USE_PROTO_PLUS: "true"
+          PUSH_CUSTOMER_ID: ${{ github.event.inputs.push_customer_id }}
+          CLIENT_TOKEN: ${{ github.event.inputs.client_token }}
+          ADMIN_API_URL: https://clickadsprotector.com/api/add-client
+          ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+          CONV_MODE: ${{ github.event.inputs.conv_setup == 'create' && 'live' || 'validate' }}
+        run: python scripts/setup_conversions.py
 
       # EXISTING PAGES PATH. Only the seeds change: they are read off the
       # client's live pages instead of typed in, and the page->ad-group map is
