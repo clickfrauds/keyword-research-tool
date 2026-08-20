@@ -61,7 +61,14 @@ EFFORT = os.environ.get("CLAUDE_EFFORT_CRAWL", "low")
 BUSINESS_NAME = os.environ.get("BUSINESS_NAME", "").strip()
 NICHE_DESCRIPTION = os.environ.get("NICHE_DESCRIPTION", "").strip()
 TARGET_LOCATION = os.environ.get("TARGET_LOCATION", "").strip()
-LANGUAGE = os.environ.get("LANGUAGE", "en").strip().lower()
+# "no" is the form's legacy sentinel for "no language chosen" = English, NOT
+# Norwegian. Every other stage maps it away; without this the crawl would tell
+# Claude "the page is in 'no'" on every single English run and ask for
+# Norwegian seed keywords.
+LANGUAGE = os.environ.get("LANGUAGE", "").strip().lower()
+if LANGUAGE in ("no", "none", "default", "english"):
+    LANGUAGE = "en"
+LANGUAGE = LANGUAGE or "en"
 
 MAX_PAGES = int(os.environ.get("CRAWL_MAX_PAGES", "25") or 25)
 

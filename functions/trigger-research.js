@@ -149,6 +149,10 @@ export async function onRequestPost(context) {
         // Stage 4-PUSH: direct API push (digits-only id; blank = CSV-only)
         push_customer_id: String(body.push_customer_id || "").replace(/\D/g, "").slice(0, 12),
         push_mode: body.push_mode === "live" ? "live" : "validate",
+        // Blank means "size it from the strategy", which is the default and
+        // the better answer — so an unparseable value becomes blank, never a
+        // number nobody chose.
+        daily_budget: String(body.daily_budget || "").replace(/[^\d.]/g, "").slice(0, 10),
         // Two-phase push. auto holds the ads back whenever a landing page is
         // not serving yet, which is what stops Google disapproving them as
         // "Destination not working"; creative attaches them on a later run.

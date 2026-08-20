@@ -112,6 +112,10 @@ on:
         options:
           - 'no'
           - 'yes'
+      daily_budget:
+        description: "Campaign daily budget in the account currency. Blank = sized from the campaign's own bids and search volume"
+        required: false
+        default: ''
       landing_urls:
         description: "EXISTING PAGES: the client's live landing page URLs, comma or newline separated. Given these, seeds are read off the pages and one ad group is built per page"
         required: false
@@ -307,6 +311,10 @@ jobs:
 
       - name: Stage 3.95 - Master CSV (ONE Editor import - campaign settings + keywords + negatives + RSAs + locations)
         if: ${{ github.event.inputs.research_type != 'seo' }}
+        env:
+          # Blank = the CSV takes the sized budget out of the strategy, so the
+          # imported campaign and the pushed one agree on the number.
+          DAILY_BUDGET: ${{ github.event.inputs.daily_budget }}
         run: python scripts/generate_master_csv.py
 
       - name: Stage 4-PUSH - Direct API push to Google Ads (validate or live)
@@ -320,6 +328,7 @@ jobs:
           GOOGLE_ADS_USE_PROTO_PLUS: "true"
           PUSH_CUSTOMER_ID: ${{ github.event.inputs.push_customer_id }}
           PUSH_MODE: ${{ github.event.inputs.push_mode || 'validate' }}
+          DAILY_BUDGET: ${{ github.event.inputs.daily_budget }}
           PUSH_PHASE: ${{ github.event.inputs.push_phase || 'auto' }}
           ENABLE_CAMPAIGN: ${{ github.event.inputs.enable_campaign || 'no' }}
         run: python scripts/push_to_google_ads.py

@@ -487,6 +487,10 @@
         </select>
       </div>
       <div class="hint" id="push-phase-hint"><b>Auto is the one to use.</b> Before pushing any ad it fetches every Final URL and sitelink: a 404, a page that returns 200 while saying "not found", one that redirects to the homepage, or one too thin to have real content all count as not ready. If any page fails, the campaign, ad groups, keywords, negatives, geo and audiences still go up — none of them carries a URL, so Google has nothing to review and nothing to disapprove — and the ads are held. Deploy the pages, run the <b>same thing again</b>, and the ads go in. That is what ends "Destination not working". Enabling is separate on purpose: a campaign that turns itself on starts spending money.</div>
+      <label for="daily_budget" style="margin-top:14px;">Daily budget <span style="opacity:.6">(optional — blank = sized from this campaign's own bids and volume)</span></label>
+      <input id="daily_budget" name="daily_budget" type="number" min="1" step="1" placeholder="leave blank to let the run size it">
+      <div class="hint">Left blank, the budget is worked out from the campaign it just built: <b>median Max CPC × the clicks a day it needs to learn</b> (about 15), trimmed to what the search volume can actually deliver, and floored so the most expensive keyword can still serve. Every campaign used to launch on a flat <b>1000 a day</b> in whatever the account currency was — roughly AED 30,000 a month on a campaign nobody had sized, and unspendable on a small niche. The figure and the reasoning appear in the push report and the Master CSV.</div>
+
       <div class="hint">Pushes the whole campaign straight into the account through the API — no Editor, no import. Run <b>Validate</b> first (Google checks every operation without touching the account), then Live. The campaign always lands <b>Paused</b>. The account must be linked to your MCC.</div>
     </div>
 

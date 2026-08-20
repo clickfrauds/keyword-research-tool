@@ -54,7 +54,8 @@ REQUIREMENTS
 Env : PUSH_CUSTOMER_ID (required to run), PUSH_MODE (validate|live),
       PUSH_PHASE (auto|structure|creative), PREFLIGHT (on|off),
       ENABLE_CAMPAIGN (no|yes),
-      DAILY_BUDGET (account currency, default 1000),
+      DAILY_BUDGET (account currency; blank = sized from the strategy's
+        own bids and search volume),
       GOOGLE_ADS_* client env vars, GOOGLE_ADS_LOGIN_CUSTOMER_ID (MCC)
 Input : keyword_strategy.json, rsa_editor.csv?, locations_editor.csv?,
         locations_negative.csv?, audience_plan.json?
@@ -83,7 +84,11 @@ PUSH_PHASE = os.environ.get("PUSH_PHASE", "auto").strip().lower()
 PREFLIGHT = os.environ.get("PREFLIGHT", "on").strip().lower() not in ("off", "0", "no", "false")
 # Enabling spends money, so it stays opt-in even in the creative phase.
 ENABLE_CAMPAIGN = os.environ.get("ENABLE_CAMPAIGN", "no").strip().lower() in ("yes", "1", "true", "on")
-DAILY_BUDGET = float(os.environ.get("DAILY_BUDGET", "1000") or 1000)
+# Blank = size it from the strategy's own bids and volume (analyze_with_claude
+# writes strategy["budget"]). The old default was a flat 1000 in whatever the
+# account currency was — roughly 30,000 AED a month on a campaign nobody had
+# sized, and unspendable on a small niche. An explicit value still wins.
+DAILY_BUDGET = float(os.environ.get("DAILY_BUDGET", "") or 0)
 
 STRATEGY = "keyword_strategy.json"
 REPORT = "google_ads_push_report.md"
@@ -488,6 +493,21 @@ def main():
     camp_name = campaigns[0]  # single-campaign mode is the default
     validate = PUSH_MODE != "live"
 
+    # ── daily budget ────────────────────────────────────────────────────
+    _b = strategy.get("budget") or {}
+    if DAILY_BUDGET > 0:
+        daily_budget = DAILY_BUDGET
+        log(f"Daily budget: {daily_budget} (DAILY_BUDGET set explicitly)")
+    elif _b.get("daily_budget"):
+        daily_budget = float(_b["daily_budget"])
+        log(f"Daily budget: {daily_budget} {_b.get('currency', '')} — {_b.get('basis', '')}")
+    else:
+        # No Planner bid data anywhere. Guessing a number here would be the
+        # same placeholder that caused the problem, so say so instead.
+        daily_budget = 0
+        log("⚠️ No bid data — daily budget cannot be sized. Set DAILY_BUDGET, "
+            "or set the budget in the account after the push.")
+
     # ── decide what this run is allowed to push ─────────────────────────
     creative_urls = collect_creative_urls()
     pages_live, dead = (True, [])
@@ -562,7 +582,7 @@ def main():
     b = o.campaign_budget_operation.create
     b.resource_name = temp("campaignBudgets/-1")
     b.name = f"{camp_name} budget"
-    b.amount_micros = int(DAILY_BUDGET * 1_000_000)
+    b.amount_micros = int(daily_budget * 1_000_000)
     b.explicitly_shared = False
     ops.append(o)
 
@@ -737,7 +757,12 @@ def main():
             cr = o.ad_group_criterion_operation.create
             cr.ad_group = ag_res
             cr.keyword.text = t
-            cr.keyword.match_type = client.enums.KeywordMatchTypeEnum.PHRASE
+            # The group's own match type, not a hardcoded PHRASE. An EXACT ad
+            # group used to get its expansion keywords as PHRASE, which is
+            # exactly the hole the negative siloing exists to close: a phrase
+            # keyword matches queries the exact keywords cannot, so the group
+            # starts competing with its siblings on terms nobody silo'd against.
+            cr.keyword.match_type = mt
             if median:
                 cr.cpc_bid_micros = int(median * 1_000_000)
             ops.append(o)

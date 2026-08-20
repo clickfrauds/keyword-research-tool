@@ -32,7 +32,7 @@ documented "Type" column (Negative / Campaign negative — answer/57747).
 The ONLY thing not in this file is the negative-guard Ads Script
 (paste manually in Google Ads → Tools → Scripts).
 
-Env: DAILY_BUDGET (optional, default 1000)
+Env: DAILY_BUDGET (optional; blank = the sized budget from the strategy)
 Input : keyword_strategy.json, rsa_editor.csv?, locations_editor.csv?
 Output: google_ads_master.csv
 """
@@ -51,7 +51,10 @@ LOC_CSV = "locations_editor.csv"
 AUD_JSON = "audience_plan.json"
 OUT = "google_ads_master.csv"
 
-DAILY_BUDGET = os.environ.get("DAILY_BUDGET", "1000").strip()
+# Blank = take the sized budget out of the strategy (analyze_with_claude
+# derives it from this campaign's own bids and volume). A flat 1000 was a
+# placeholder that shipped, and it landed in every client's CSV.
+DAILY_BUDGET = os.environ.get("DAILY_BUDGET", "").strip()
 
 N_HEADLINES, N_DESCRIPTIONS = 15, 4
 
@@ -96,6 +99,18 @@ def main():
         print("⚠️ No campaigns/ad groups in strategy — skipping master CSV.")
         return
 
+    # Budget: explicit env wins, otherwise the sized figure the strategy
+    # carries. Left blank when there was no bid data to size from — an empty
+    # Budget cell makes the Editor ask, which is better than importing a
+    # number nobody chose.
+    _b = strategy.get("budget") or {}
+    daily_budget = DAILY_BUDGET or (str(_b["daily_budget"]) if _b.get("daily_budget") else "")
+    if daily_budget:
+        print(f"   💵 Daily budget: {daily_budget} {_b.get('currency', '')}"
+              + (f" — {_b['basis']}" if _b.get("basis") and not DAILY_BUDGET else ""))
+    else:
+        print("   ⚠️ Daily budget left blank — set it in the Editor before posting.")
+
     rows = []
 
     # 1) campaign rows — the settings the user otherwise builds by hand
@@ -104,7 +119,7 @@ def main():
             blank_row(), Campaign=camp, **{
                 "Campaign Type": "Search",
                 "Networks": "Google search",          # partners OFF
-                "Budget": DAILY_BUDGET, "Budget type": "Daily",
+                "Budget": daily_budget, "Budget type": "Daily",
                 "Bid Strategy Type": "Manual CPC",
                 "Enhanced CPC": "Disabled",
                 # landing-page DKI: every click carries its bid keyword so the

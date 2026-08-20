@@ -106,13 +106,42 @@ def _round_bid(v):
     return round(v, 2)
 
 
-def suggest_bids(low, high, comp_index=0):
+# What a keyword is worth, on top of what it costs. The competition scale
+# below says how much you must pay to appear; this says how much appearing is
+# worth. They are different questions and both belong in the bid.
+#   transactional  "emergency ac repair dubai" — ready to buy, pay to win it
+#   commercial     "ac repair dubai"           — the normal case, no change
+#   informational  research, rarely in ads at all — bid defensively
+#   question       same, and usually routed to SEO instead
+_INTENT_BID = {
+    "transactional": 1.15,
+    "commercial":    1.00,
+    "informational": 0.80,
+    "question":      0.75,
+}
+
+# Outlier guard. The Planner's top-of-page range is occasionally enormous for
+# one keyword in a set — a broad head term, or a term some other industry bids
+# hard on. Before any conversion data exists there is nothing to justify paying
+# it, and one such keyword can drain a day's budget on a handful of clicks.
+# Capped against the campaign's own median rather than a fixed number, so it
+# travels across currencies and niches without tuning.
+MAX_CPC_MULTIPLE = float(os.environ.get("MAX_CPC_MULTIPLE", "5") or 5)
+
+# Clicks a day a new campaign should be able to buy before anyone reads a
+# CPA from it. Under ten, delivery is lumpy and the data says nothing.
+DAILY_CLICKS_TARGET = float(os.environ.get("DAILY_CLICKS_TARGET", "15") or 15)
+
+
+def suggest_bids(low, high, comp_index=0, intent=""):
     """PRO bid formula — real Google Ads data → starting Max CPC per match type.
 
     Logic (top-of-page bid range = what advertisers actually pay for top slots):
       anchor = low + (high - low) * (0.35 + 0.40 * competition/100)
         → low-competition keywords anchor near 35% of the range (no need to
           overpay), cut-throat keywords anchor near 75% (must pay to play).
+      then × the intent multiplier — competition sets the price of entry,
+      intent sets what entry is worth.
       EXACT  = 1.00 × anchor  — tightest targeting, highest CVR → bid the most
       PHRASE = 0.85 × anchor  — some query variance → moderate discount
       BROAD  = 0.70 × anchor  — widest matching, smart-bidding explores cheap
@@ -130,6 +159,7 @@ def suggest_bids(low, high, comp_index=0):
         low = high * 0.30
     c = min(max(float(comp_index or 0), 0), 100) / 100.0
     anchor = low + (high - low) * (0.35 + 0.40 * c)
+    anchor *= _INTENT_BID.get(str(intent or "").strip().lower(), 1.00)
     return {
         "exact": max(anchor, low),
         "phrase": max(anchor * 0.85, low * 0.90),
@@ -666,7 +696,7 @@ def validate_strategy(raw, kept):
                 "score": k.get("score", 0),
             }
             bids = suggest_bids(k.get("low_top_bid", 0), k.get("high_top_bid", 0),
-                                k.get("competition_index", 0))
+                                k.get("competition_index", 0), k.get("intent", ""))
             if bids:
                 entry["suggested_bid_exact"] = _round_bid(bids["exact"] * bid_mult)
                 entry["suggested_bid_phrase"] = _round_bid(bids["phrase"] * bid_mult)
@@ -902,8 +932,9 @@ def _normalize_bids(groups):
     g_med = all_bids[n // 2]
     # Ceiling from the MEDIAN (robust to the outlier itself — a p90/max-based
     # cap fails because the outlier IS the max). 5x median allows genuinely
-    # competitive keywords through while taming a 15x freak bid.
-    ceiling = round(g_med * 5, 2)
+    # competitive keywords through while taming a 15x freak bid. Lower it with
+    # MAX_CPC_MULTIPLE on a niche where one head term skews everything.
+    ceiling = round(g_med * MAX_CPC_MULTIPLE, 2)
     n_fill = n_cap = 0
     for g in groups:
         for k in g["keywords"]:
@@ -924,6 +955,79 @@ def _normalize_bids(groups):
         print(f"   💰 Bid guard: campaign median={g_med}, ceiling={ceiling} | "
               f"{n_fill} no-bid keywords back-filled (would have been ~min bid / "
               f"zero impressions), {n_cap} outliers capped")
+
+
+def recommend_daily_budget(groups):
+    """A daily budget derived from this campaign's own bids and volume.
+
+    Every campaign used to launch on a hardcoded 1000 a day, in whatever the
+    account currency happened to be. In AED that is roughly 30,000 a month on
+    a campaign nobody sized — and on a small niche it is a number the search
+    volume cannot spend anyway. It was a placeholder that shipped.
+
+    The sizing question is "how many clicks a day does this need to learn?"
+    Below roughly ten, delivery is lumpy and no meaningful CPA signal ever
+    arrives; well above that is just spending faster before there is anything
+    to optimise against. So:
+
+        budget = median Max CPC x clicks wanted per day
+
+    with two corrections that matter more than the headline number:
+
+      Volume ceiling. A niche with 300 searches a month cannot produce 15
+      clicks a day. Asking for them sets a budget that only ever half-spends
+      and makes the campaign look under-delivering when it is simply capped by
+      demand. Roughly 5% of impressions becoming clicks is the conservative
+      end of a normal Search CTR, and the click target is trimmed to whatever
+      that allows, never below 3.
+
+      Top-bid floor. Google throttles delivery when the daily budget cannot
+      cover more than a click or two of the most expensive keyword in the
+      campaign. The floor keeps the priciest keyword servable.
+
+    Returns None when the Planner gave no bid data at all — the caller then
+    leaves the budget to be set by hand, which is the honest outcome.
+    """
+    bids = sorted(k["suggested_bid"] for g in groups for k in g.get("keywords", [])
+                  if k.get("suggested_bid"))
+    if not bids:
+        return None
+
+    median = bids[len(bids) // 2]
+    top = bids[-1]
+    volume = sum(k.get("avg_monthly_searches", 0) or 0
+                 for g in groups for k in g.get("keywords", []))
+
+    wanted = DAILY_CLICKS_TARGET
+    if volume > 0:
+        affordable = (volume / 30.0) * 0.05
+        wanted = max(3.0, min(float(wanted), affordable))
+
+    budget = median * wanted
+    floor = top * 3
+    budget = max(budget, floor)
+
+    # Round to something a human would have typed: 2 significant figures up to
+    # 100, then to the nearest 10. An oddly precise budget invites nobody to
+    # question it, and this number is a starting point, not a measurement.
+    if budget < 10:
+        budget = round(budget, 1)
+    elif budget < 100:
+        budget = round(budget)
+    else:
+        budget = int(round(budget / 10.0) * 10)
+
+    return {
+        "daily_budget": budget,
+        "currency": BID_CURRENCY,
+        "median_bid": median,
+        "top_bid": top,
+        "clicks_per_day": round(wanted, 1),
+        "monthly_volume": volume,
+        "basis": (f"{median} {BID_CURRENCY} median Max CPC x {round(wanted, 1)} "
+                  f"clicks/day"
+                  + (f", raised to 3x the top bid ({top})" if floor > median * wanted else "")),
+    }
 
 
 # ══════════════════════════════════════════════════════════════════════════
@@ -1091,6 +1195,10 @@ def main():
         "campaigns": campaigns,
         "existing_account_mode": bool(EXISTING_CAMPAIGN or EXISTING_AD_GROUPS),
         "fixed_pages_mode": bool(FIXED_PAGES),
+        # Sized from this campaign's own bids and volume. The push and the
+        # master CSV both read it, so the number the report shows is the
+        # number the account gets.
+        "budget": recommend_daily_budget(groups),
         # Keywords with real volume that no existing page sells. Not an error
         # and not to be thrown away — this is the client's growth list, and it
         # is what the website builder would build next.
