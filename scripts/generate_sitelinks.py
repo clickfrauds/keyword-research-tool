@@ -331,6 +331,7 @@ def main():
     groups = strategy.get("ad_groups") or []
     pages = strategy.get("landing_pages") or []
     # Pages that already exist carry their own sitelink plan from the crawl.
+    n_fixed_pages = 0
     fixed_by_group = {}
     for _p in pages:
         if _p.get("final_url") and _p.get("sitelink_targets"):
@@ -362,6 +363,7 @@ def main():
 
         links = fixed_page_links(fixed_by_group[name], proposed, fallback)             if name in fixed_by_group else []
         if links:
+            n_fixed_pages += 1
             n_model += sum(1 for l in links if l["desc1"])
             n_fixed += sum(1 for l in links if not l["desc1"])
         for i, (anchor, _why) in enumerate(ANCHORS if not links else []):
@@ -405,12 +407,24 @@ def main():
             or _len(r["Description Line 2"]) > DESC_MAX]
     print(f"✅ Sitelinks: {len(rows)} across {len(payload)} ad groups "
           f"({n_model} written by the model, {n_fixed} from the safe template)")
-    print(f"   anchors: {', '.join('#' + a for a, _ in ANCHORS)}")
+    # Both of the lines below used to report the slug path unconditionally, so
+    # a fixed-pages run — where the URLs came off the client's live pages and
+    # are perfectly correct — printed the five generic anchors it had not used
+    # and warned about a placeholder domain it had not touched. A false alarm
+    # on correct output is worse than no line at all: it teaches you to
+    # distrust the summary.
+    if n_fixed_pages:
+        _modes = sorted({p.get("sitelink_mode", "cross_page") for p in pages
+                         if p.get("sitelink_targets")})
+        print(f"   from the live pages themselves ({', '.join(_modes)}) — "
+              f"{n_fixed_pages} of {len(payload)} ad groups")
+    else:
+        print(f"   anchors: {', '.join('#' + a for a, _ in ANCHORS)}")
     print(f"   → {CSV_OUT} (Editor import) + {JSON_OUT} (API push)")
     if over:
         print(f"❌ {len(over)} rows still exceed a limit — this should be impossible; "
               f"first offender: {over[0]}")
-    if not WEBSITE_URL:
+    if not WEBSITE_URL and n_fixed_pages < len(payload):
         print("   ⚠️ WEBSITE_URL not set — URLs use a placeholder domain; set it "
               "before importing or pushing.")
 
