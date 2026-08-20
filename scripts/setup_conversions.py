@@ -65,7 +65,16 @@ CONV_MODE = os.environ.get("CONV_MODE", "validate").strip().lower()
 
 ADMIN_API_URL = os.environ.get("ADMIN_API_URL", "").strip().rstrip("/")
 ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD", "")
+# One token, several comma-separated, or "all" for every active client.
+# Seventeen clients meant seventeen workflow runs — twice, counting the check
+# pass — which is the sort of chore that never gets finished.
 CLIENT_TOKEN = os.environ.get("CLIENT_TOKEN", "").strip()
+CLIENT_TOKENS = [t.strip() for t in CLIENT_TOKEN.split(",") if t.strip()]
+ALL_CLIENTS = CLIENT_TOKEN.strip().lower() in ("all", "*")
+
+# Every client's results end up here; the file holds a list for a batch run
+# and a single object for one client, so nothing that read it before breaks.
+ALL_RESULTS = []
 
 OUTPUT_FILE = "conversion_actions.json"
 
@@ -200,28 +209,69 @@ def build_create_op(client, name, spec):
     return op
 
 
-def fetch_client_row():
-    """The client_keys row for CLIENT_TOKEN, or None.
+def fetch_clients():
+    """Every client_keys row, through the admin endpoint.
 
-    Read through the admin endpoint, never straight from Supabase: a direct
-    call would need the service role key on whatever machine runs this, and
-    that key can read and rewrite every table the fraud system depends on.
+    Read there and never straight from Supabase: a direct call would need the
+    service role key on whatever machine runs this, and that key can read and
+    rewrite every table the fraud system depends on.
     """
-    if not (ADMIN_API_URL and ADMIN_PASSWORD and CLIENT_TOKEN):
-        return None
+    if not (ADMIN_API_URL and ADMIN_PASSWORD):
+        return []
 
     import urllib.request
     import urllib.parse
 
     try:
         url = f"{ADMIN_API_URL}?password={urllib.parse.quote(ADMIN_PASSWORD)}"
-        with urllib.request.urlopen(url, timeout=20) as r:
-            clients = json.loads(r.read().decode("utf-8")).get("clients") or []
+        with urllib.request.urlopen(url, timeout=30) as r:
+            payload = json.loads(r.read().decode("utf-8"))
     except Exception as e:
         log(f"⚠️ Could not read the client list ({str(e)[:80]}).")
-        return None
+        return []
 
-    return next((c for c in clients if c.get("client_token") == CLIENT_TOKEN), None)
+    if payload.get("notice"):
+        log(f"⚠️ {payload['notice']}")
+    return payload.get("clients") or []
+
+
+def select_clients():
+    """The rows this run should work through."""
+    rows = fetch_clients()
+
+    if ALL_CLIENTS:
+        # active only: an inactive client is one whose tracking is switched
+        # off, and creating conversion actions for it would be pure noise.
+        picked = [c for c in rows if c.get("active")]
+        log(f"Selected ALL active clients: {len(picked)} of {len(rows)}")
+        return picked
+
+    if CLIENT_TOKENS:
+        by_token = {c.get("client_token"): c for c in rows}
+        picked, missing = [], []
+        for t in CLIENT_TOKENS:
+            if t in by_token:
+                picked.append(by_token[t])
+            else:
+                missing.append(t)
+        if missing:
+            log(f"⚠️ Not found in the client list: {', '.join(missing)}")
+        # Setting PUSH_CUSTOMER_ID as well as a token used to be the way to
+        # write one account's labels onto another client's row. The row is the
+        # authority, so a disagreement is refused rather than silently resolved.
+        if PUSH_CUSTOMER_ID and len(picked) == 1:
+            resolve_account(picked[0])
+        elif PUSH_CUSTOMER_ID and len(picked) > 1:
+            log("⚠️ PUSH_CUSTOMER_ID ignored — several clients selected, and "
+                "each one's account comes off its own row.")
+        return picked
+
+    # No token at all: the old single-account path, for a one-off run against
+    # an account that has no client row yet.
+    if PUSH_CUSTOMER_ID:
+        return [{"website_name": f"account {PUSH_CUSTOMER_ID}",
+                 "customer_id": PUSH_CUSTOMER_ID, "client_token": None}]
+    return []
 
 
 def resolve_account(row):
@@ -250,8 +300,6 @@ def resolve_account(row):
         sys.exit(1)
 
     if not PUSH_CUSTOMER_ID and row_cid:
-        log(f"ℹ️ Using account {row_cid} from client row "
-            f"'{row.get('website_name')}'.")
         return row_cid
 
     return PUSH_CUSTOMER_ID
@@ -262,20 +310,19 @@ def write_back(results, row):
     import urllib.request
     import urllib.error
 
-    if not (ADMIN_API_URL and ADMIN_PASSWORD and CLIENT_TOKEN):
+    if not (ADMIN_API_URL and ADMIN_PASSWORD and (row or {}).get("client_token")):
         log("ℹ️ ADMIN_API_URL / ADMIN_PASSWORD / CLIENT_TOKEN not all set — "
             "labels not written back. Paste them into the admin page by hand, "
             "or set the three and re-run.")
         return
 
     if not row:
-        log(f"⚠️ client_token '{CLIENT_TOKEN}' not found in the admin list — "
-            "nothing written back. Check the token.")
+        log("⚠️ no client row — nothing written back.")
         return
 
     payload = {
         "password": ADMIN_PASSWORD,
-        "client_token": CLIENT_TOKEN,
+        "client_token": row["client_token"],
         "website_name": row.get("website_name"),
         "aw_id": results["aw_id"],
     }
@@ -307,43 +354,31 @@ def write_back(results, row):
         log(f"⚠️ Write-back failed: {str(e)[:120]}")
 
 
-def main():
+def run_one(client, svc, ca_svc, row, validate, GoogleAdsException):
+    """One client: create what is missing, read the labels, write them back.
+
+    Returns a short status string for the run summary. Never raises — one
+    client's Ads account being misconfigured must not stop the other sixteen.
+    """
     global PUSH_CUSTOMER_ID
-
-    # The client row is read FIRST, before a single call to Google, so the
-    # account can be settled (and a mismatch refused) while nothing has been
-    # created yet.
-    row = fetch_client_row()
-    PUSH_CUSTOMER_ID = resolve_account(row)
-
+    name = (row or {}).get("website_name", "?")
+    PUSH_CUSTOMER_ID = "".join(c for c in str((row or {}).get("customer_id") or "")
+                               if c.isdigit())
     if not PUSH_CUSTOMER_ID:
-        print("❌ No Google Ads account. Set PUSH_CUSTOMER_ID, or set "
-              "CLIENT_TOKEN (with ADMIN_API_URL + ADMIN_PASSWORD) so the "
-              "account can be read off the client row.")
-        sys.exit(1)
+        log(f"⚠️ {name}: no customer_id on the client row — skipped.")
+        return "no customer_id"
 
-    from google.ads.googleads.client import GoogleAdsClient
-    from google.ads.googleads.errors import GoogleAdsException
+    log("")
+    log(f"── {name}  (account {PUSH_CUSTOMER_ID}) " + "─" * 20)
 
-    client = GoogleAdsClient.load_from_env()
-    svc = client.get_service("GoogleAdsService")
-    ca_svc = client.get_service("ConversionActionService")
+    try:
+        existing = fetch_actions(svc, list(ACTIONS.keys()))
+    except Exception as e:
+        log(f"❌ {name}: could not read conversion actions — {str(e)[:100]}")
+        return "read failed"
 
-    validate = CONV_MODE != "live"
-    log(f"# Google Ads conversion setup — account {PUSH_CUSTOMER_ID}")
-    log(f"Mode: {'VALIDATE (nothing created)' if validate else 'LIVE'}")
-    log("Primary (feeds bidding): "
-        + ", ".join(sorted(k for k, v in ACTIONS.items() if v["primary"]) or ["(none)"])
-        + " | Secondary: "
-        + ", ".join(sorted(k for k, v in ACTIONS.items() if not v["primary"]) or ["(none)"]))
-    if not any(v["primary"] for v in ACTIONS.values()):
-        log("⚠️ No primary conversion — bidding would have nothing to optimise "
-            "for. Set PRIMARY_CONVERSIONS, e.g. \"phone,whatsapp,form\".")
-
-    existing = fetch_actions(svc, list(ACTIONS.keys()))
     for n in existing:
         log(f"   already exists: {n}")
-
     missing = [n for n in ACTIONS if n not in existing]
 
     if missing:
@@ -355,53 +390,98 @@ def main():
                 validate_only=validate,
             )
         except GoogleAdsException as e:
-            for err in e.failure.errors:
-                log(f"❌ {err.message}")
-            sys.exit(1)
+            for err in e.failure.errors[:5]:
+                log(f"❌ {name}: {err.message}")
+            return "rejected by Google"
+        except Exception as e:
+            log(f"❌ {name}: {str(e)[:120]}")
+            return "failed"
 
         if validate:
-            log(f"✅ VALIDATE ok — {len(missing)} action(s) would be created: "
-                + ", ".join(missing))
-            log("   Set CONV_MODE=live to actually create them.")
+            log(f"✅ VALIDATE ok — would create {len(missing)}: " + ", ".join(missing))
         else:
             log(f"✅ Created {len(missing)}: " + ", ".join(missing))
-            # Re-read: labels only exist once the actions do.
             existing = fetch_actions(svc, list(ACTIONS.keys()))
     else:
-        log("✅ All three conversion actions already present — nothing to create.")
+        log("✅ All three already present — nothing to create.")
 
-    results = {"customer_id": PUSH_CUSTOMER_ID, "aw_id": None, "actions": {}}
-    for name, spec in ACTIONS.items():
-        info = existing.get(name)
+    results = {"customer_id": PUSH_CUSTOMER_ID, "website_name": name,
+               "aw_id": None, "actions": {}}
+    for n, spec in ACTIONS.items():
+        info = existing.get(n)
         if not info:
-            results["actions"][name] = {"column": spec["column"], "label": None}
+            results["actions"][n] = {"column": spec["column"], "label": None}
             continue
         aw_id, label = parse_label(info["snippets"])
         if aw_id:
             results["aw_id"] = aw_id
-        results["actions"][name] = {
-            "column": spec["column"],
-            "id": info["id"],
-            "label": label,
-            "primary": spec["primary"],
-        }
+        results["actions"][n] = {"column": spec["column"], "id": info["id"],
+                                 "label": label, "primary": spec["primary"]}
 
-    with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
-        json.dump(results, f, indent=2, ensure_ascii=False)
+    log(f"   AW id: {results['aw_id'] or '(not available yet)'}")
+    for n, spec in ACTIONS.items():
+        log(f"   {spec['column']:<16} {results['actions'][n].get('label') or '(none yet)'}")
 
-    log("")
-    log(f"AW id: {results['aw_id'] or '(not available yet)'}")
-    for name, spec in ACTIONS.items():
-        lbl = results["actions"][name].get("label")
-        log(f"  {spec['column']:<16} {name:<18} {lbl or '(none yet)'}")
-    log(f"→ {OUTPUT_FILE}")
+    ALL_RESULTS.append(results)
 
     if results["aw_id"] and all(results["actions"][n].get("label") for n in ACTIONS):
         write_back(results, row)
-    elif not validate:
-        log("ℹ️ Labels not all available yet — Google can take a moment to mint "
-            "the tag snippets. Re-run this script (validate mode is fine) to "
-            "read them.")
+        return "labels written" if not validate else "validated"
+    if validate:
+        return "validated"
+    return "labels not minted yet"
+
+
+def main():
+    from google.ads.googleads.client import GoogleAdsClient
+    from google.ads.googleads.errors import GoogleAdsException
+
+    validate = CONV_MODE != "live"
+
+    # Which clients this run covers. One token, several, or every active
+    # client — 17 clients was 34 separate workflow runs otherwise, which is
+    # the kind of chore nobody finishes.
+    rows = select_clients()
+    if not rows:
+        print("❌ No client selected. Set CLIENT_TOKEN to a token, a comma-separated "
+              "list, or 'all'; or set PUSH_CUSTOMER_ID for a one-off account.")
+        sys.exit(1)
+
+    log(f"# Google Ads conversion setup — {len(rows)} client(s)")
+    log(f"Mode: {'VALIDATE (nothing created)' if validate else 'LIVE'}")
+    log("Primary (feeds bidding): "
+        + ", ".join(sorted(k for k, v in ACTIONS.items() if v["primary"]) or ["(none)"])
+        + " | Secondary: "
+        + ", ".join(sorted(k for k, v in ACTIONS.items() if not v["primary"]) or ["(none)"]))
+    if not any(v["primary"] for v in ACTIONS.values()):
+        log("⚠️ No primary conversion — bidding would have nothing to optimise "
+            "for. Set PRIMARY_CONVERSIONS, e.g. phone,whatsapp,form")
+
+    client = GoogleAdsClient.load_from_env()
+    svc = client.get_service("GoogleAdsService")
+    ca_svc = client.get_service("ConversionActionService")
+
+    summary = []
+    for row in rows:
+        try:
+            status = run_one(client, svc, ca_svc, row, validate, GoogleAdsException)
+        except Exception as e:
+            status = f"error: {str(e)[:60]}"
+            log(f"❌ {row.get('website_name','?')}: {status}")
+        summary.append((row.get("website_name", "?"), status))
+
+    with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
+        json.dump(ALL_RESULTS if len(ALL_RESULTS) != 1 else ALL_RESULTS[0],
+                  f, indent=2, ensure_ascii=False)
+
+    log("")
+    log("=" * 60)
+    log(f"SUMMARY — {len(summary)} client(s)")
+    log("=" * 60)
+    for name, status in summary:
+        mark = "✅" if status in ("labels written", "validated") else "⚠️"
+        log(f"  {mark} {name:<32} {status}")
+    log(f"→ {OUTPUT_FILE}")
 
     log("")
     log("⚠️ Ab Google Ads me purani GA4-imported conversions ko Remove ya "

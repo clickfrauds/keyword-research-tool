@@ -9,15 +9,21 @@ name: Conversions only (no campaign, no keyword research)
 # push you did not ask for. Conversion setup is a once-per-client job and
 # belongs on its own trigger.
 #
-# The Ads account is not typed in: it comes off the client row, so a token
-# and an account can never be mismatched here.
+# The Ads account is not typed in: it comes off each client's own row, so a
+# token and an account can never be mismatched here.
+#
+# "all" does every active client in one run. Seventeen clients was seventeen
+# runs — twice over, counting the check pass — and one account refusing must
+# not stop the other sixteen, so each is handled on its own and the run ends
+# with a per-client summary.
 
 on:
   workflow_dispatch:
     inputs:
       client_token:
-        description: "ClickAds Protector client token, e.g. CF-AQUA-2026-m4p8q2 (from the client manager)"
+        description: "One token, several comma-separated, or 'all' for every ACTIVE client in the client manager"
         required: true
+        default: 'all'
       primary_conversions:
         description: "Which actions feed bidding. Default phone,form. Use phone,whatsapp,form where WhatsApp is how customers actually make contact"
         required: false
@@ -63,6 +69,6 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: conversion-labels-${{ github.event.inputs.client_token }}
+          name: conversion-labels
           path: conversion_actions.json
           if-no-files-found: warn
