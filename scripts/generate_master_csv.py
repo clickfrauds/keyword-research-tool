@@ -154,7 +154,14 @@ def main():
             rows.append(set_cells(
                 blank_row(), Campaign=camp, **{
                     "Ad Group": name, "Keyword": e,
-                    "Criterion Type": "Phrase", "Max CPC": median,
+                    # The group's own match type, not a hardcoded Phrase. An
+                    # EXACT ad group used to get its expansion keywords as
+                    # Phrase, which reopens the hole the negative siloing
+                    # exists to close: a phrase keyword matches queries the
+                    # exact ones cannot, so the group competes with its
+                    # siblings on terms nothing was silo'd against. The API
+                    # push was fixed; this CSV path had the same bug.
+                    "Criterion Type": mt, "Max CPC": median,
                 }))
         # 4) ad-group-level negatives
         for n in g.get("negative_keywords", []):
