@@ -21,6 +21,16 @@ on:
         # the two, so a run can never reach here with neither.
         required: false
         default: ''
+      advanced:
+        # GitHub allows at most 25 workflow_dispatch inputs, and six separate
+        # knobs that the form never sends were using up five of them. They are
+        # manual-run overrides — explicit geo/language ids instead of the
+        # auto-detection, the bid currency and its FX rate, and the
+        # single-campaign audience switch — so they ride together as JSON and
+        # leave room for inputs people actually fill in.
+        description: 'Manual-run overrides as JSON. Keys: bid_currency, bid_fx_rate, location_id, language_id, single_campaign. Example: {"bid_currency":"AED","bid_fx_rate":"1"}'
+        required: false
+        default: '{}'
       keywords_csv_url:
         description: "OPTIONAL: raw URL of a Keyword Planner CSV export. When set, Stage 1 uses THAT keyword set instead of pulling ideas from the seeds — your own curated export, no second API pull."
         required: false
@@ -49,20 +59,8 @@ on:
         description: "Max NEW ad groups (chhote/niche keyword sets ke liye 1-2 rakhen)"
         required: false
         default: '10'
-      single_campaign:
-        description: "Sab ad groups AIK campaign mein (true) — ya campaign ka naam likh dein. 'false' = Claude 1-3 campaigns bana sakta hai"
-        required: false
-        default: 'true'
-      location_id:
-        description: "OPTIONAL: explicit Google geo target id — blank = auto-resolve from target_location (universal, any market)"
-        required: false
-        default: ''
       language:
         description: "Content language CODE for a non-English/Arabic market: es, fr, de, it, pt, tr, ru... Blank = auto (English/Arabic by seed script). Sets Planner language + writes ad groups/landing pages/RSAs in this language. MUST match the website builder's language."
-        required: false
-        default: ''
-      language_id:
-        description: "OPTIONAL: explicit numeric Google language id (overrides 'language' above) — blank = auto"
         required: false
         default: ''
       lang_url_prefix:
@@ -77,14 +75,6 @@ on:
         description: "OPTIONAL: areas to force to LOW bids, comma-separated (e.g. Al Satwa, Deira, Al Karama). Overrides the AI's call — your own fraud/labour-area knowledge wins."
         required: false
         default: ''
-      bid_currency:
-        description: "Currency label for suggested Max CPC bids (Planner data is in the API account's currency)"
-        required: false
-        default: 'PKR'
-      bid_fx_rate:
-        description: "FX multiplier account-currency → bid_currency (1 = account already in that currency)"
-        required: false
-        default: '1'
       website_url:
         description: "Client website (e.g. https://clickadsprotector.com) — used for RSA Final URLs (Stage 3.8)"
         required: false
@@ -244,8 +234,8 @@ jobs:
           # Universal targeting: geo auto-resolves from the free-text location,
           # language auto-detects from the seeds. Explicit ids override both.
           TARGET_LOCATION: ${{ github.event.inputs.target_location }}
-          LOCATION_ID: ${{ github.event.inputs.location_id }}
-          LANGUAGE_ID: ${{ github.event.inputs.language_id }}
+          LOCATION_ID: ${{ fromJSON(github.event.inputs.advanced || '{}').location_id }}
+          LANGUAGE_ID: ${{ fromJSON(github.event.inputs.advanced || '{}').language_id }}
           LANGUAGE: ${{ github.event.inputs.language }}
         if: ${{ github.event.inputs.keywords_csv_url == '' }}
         run: python scripts/keyword_research.py
@@ -270,8 +260,8 @@ jobs:
           GOOGLE_ADS_USE_PROTO_PLUS: "true"
           SEED_KEYWORDS: ${{ steps.crawl.outputs.seeds || github.event.inputs.seed_keywords }}
           TARGET_LOCATION: ${{ github.event.inputs.target_location }}
-          LOCATION_ID: ${{ github.event.inputs.location_id }}
-          LANGUAGE_ID: ${{ github.event.inputs.language_id }}
+          LOCATION_ID: ${{ fromJSON(github.event.inputs.advanced || '{}').location_id }}
+          LANGUAGE_ID: ${{ fromJSON(github.event.inputs.advanced || '{}').language_id }}
           LANGUAGE: ${{ github.event.inputs.language }}
           AC_DEPTH: "2"
         run: python scripts/expand_autocomplete.py
@@ -297,14 +287,14 @@ jobs:
           CLAUDE_EFFORT: "medium"
           MAX_AD_GROUPS: ${{ github.event.inputs.max_ad_groups || '10' }}
           MAX_KEYWORDS_PER_GROUP: "40"
-          SINGLE_CAMPAIGN: ${{ github.event.inputs.single_campaign || 'true' }}
+          SINGLE_CAMPAIGN: ${{ fromJSON(github.event.inputs.advanced || '{}').single_campaign || 'true' }}
           EXISTING_CAMPAIGN: ${{ github.event.inputs.existing_campaign }}
           EXISTING_AD_GROUPS: ${{ github.event.inputs.existing_ad_groups }}
           BUSINESS_NAME: ${{ github.event.inputs.business_name }}
           NICHE_DESCRIPTION: ${{ github.event.inputs.niche_description }}
           TARGET_LOCATION: ${{ github.event.inputs.target_location }}
-          BID_CURRENCY: ${{ github.event.inputs.bid_currency || 'PKR' }}
-          BID_FX_RATE: ${{ github.event.inputs.bid_fx_rate || '1' }}
+          BID_CURRENCY: ${{ fromJSON(github.event.inputs.advanced || '{}').bid_currency || 'PKR' }}
+          BID_FX_RATE: ${{ fromJSON(github.event.inputs.advanced || '{}').bid_fx_rate || '1' }}
           LANGUAGE: ${{ github.event.inputs.language }}
         run: python scripts/analyze_with_claude.py
 
@@ -324,7 +314,7 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           CLAUDE_MODEL: claude-sonnet-5
           CLAUDE_EFFORT_AUDIENCES: "low"
-          SINGLE_CAMPAIGN: ${{ github.event.inputs.single_campaign || 'true' }}
+          SINGLE_CAMPAIGN: ${{ fromJSON(github.event.inputs.advanced || '{}').single_campaign || 'true' }}
           BUSINESS_NAME: ${{ github.event.inputs.business_name }}
           NICHE_DESCRIPTION: ${{ github.event.inputs.niche_description }}
           TARGET_LOCATION: ${{ github.event.inputs.target_location }}
