@@ -132,6 +132,14 @@ MAX_CPC_MULTIPLE = float(os.environ.get("MAX_CPC_MULTIPLE", "5") or 5)
 # CPA from it. Under ten, delivery is lumpy and the data says nothing.
 DAILY_CLICKS_TARGET = float(os.environ.get("DAILY_CLICKS_TARGET", "15") or 15)
 
+# Force every ad group to one match type. Blank = the model decides per group
+# under the rule in the prompt. There was no rule at all before, so the choice
+# was invisible and inconsistent — one group came back exact and two phrase
+# with nothing to explain why.
+FORCE_MATCH_TYPE = os.environ.get("MATCH_TYPE", "").strip().lower()
+if FORCE_MATCH_TYPE not in ("phrase", "exact"):
+    FORCE_MATCH_TYPE = ""
+
 
 def suggest_bids(low, high, comp_index=0, intent=""):
     """PRO bid formula — real Google Ads data → starting Max CPC per match type.
@@ -293,6 +301,7 @@ Your job has FOUR outputs (one JSON object, nothing else, no markdown fences):
       "campaign": "exact campaign name from above",
       "theme": "one sentence: the single user intent this group targets",
       "match_type": "phrase|exact",
+      "match_type_reason": "one short clause: why this group, not the default",
       "priority": "high|medium|low",
       "bid_multiplier": 1.0,
       "keyword_ids": [1, 2, 3],
@@ -322,14 +331,29 @@ HARD RULES:
    DATA: one group per genuinely distinct commercial theme visible in the
    keywords. If the data only supports 4 themes, return 4. NEVER pad with
    thin groups, NEVER split one theme into two.
-3. ZERO CANNIBALIZATION:
+3. MATCH TYPE — DEFAULT IS PHRASE. Justify any exception.
+   This campaign launches on Manual CPC with no conversion history, so its
+   first job is to find out what people actually type. Phrase does that and
+   the hourly negative-guard script removes what does not belong. Exact locks
+   the campaign into the keyword list you guessed today and it never
+   discovers the long tail that converts.
+   Use "exact" for a group ONLY when BOTH are true:
+     a) its keywords carry high top-of-page bids relative to the others in
+        this account — an exploratory click there is genuinely expensive; and
+     b) the theme is one unambiguous purchase intent, so close variants add
+        no reach worth paying for.
+   Never choose exact merely because a group feels "more commercial". Put
+   the reason in match_type_reason either way — "default: discovery on a new
+   campaign" is a perfectly good reason for phrase.
+
+4. ZERO CANNIBALIZATION:
    - Every keyword id appears in AT MOST one group.
    - Themes must be mutually exclusive — a real search query should match
      exactly one group, never two.
    - negative_keywords for each group = the distinctive core terms of the
      OTHER groups (negative-keyword siloing). Be thorough — this is what
      stops Google serving two of your groups against one query.
-4. INTENT EXPANSION (your unique value): for each ad group, add 5-12 NEW
+5. INTENT EXPANSION (your unique value): for each ad group, add 5-12 NEW
    keywords that real buyers of THIS business type in THIS location search
    but which are missing from the data. Use: buying modifiers (cost, price,
    quote, installation, best, hire), urgency, the target location appended
@@ -338,7 +362,7 @@ HARD RULES:
      keyword or another expansion, in this group or any other group.
    - Must belong to THIS group's theme only (respect the siloing).
    - Lowercase, realistic search queries — no marketing copy.
-5. LANDING PAGES: 3-6 pages. Each page covers 1+ ad groups whose themes fit
+6. LANDING PAGES: 3-6 pages. Each page covers 1+ ad groups whose themes fit
    ONE selling proposition (message match = Quality Score). Fields feed an
    AI landing-page generator directly:
    - service_name: what the page sells, title case.
@@ -346,11 +370,11 @@ HARD RULES:
    - industry: short label steering the generator's design/copy tone.
    - url_slug: kebab-case, keyword-rich, no location suffix.
    Every ad group must be covered by exactly one landing page.
-6. EXCLUDE (excluded_ids): informational/question queries (SEO material,
+7. EXCLUDE (excluded_ids): informational/question queries (SEO material,
    not ads), competitor brand names, DIY-intent, and anything irrelevant
    to this business.
-7. Reference provided keywords ONLY by numeric id. Never echo their text.
-8. Use volumes/competition/scores to set priorities: the campaign and group
+8. Reference provided keywords ONLY by numeric id. Never echo their text.
+9. Use volumes/competition/scores to set priorities: the campaign and group
    holding the best opportunity keywords is "high".
 8b. BID_MULTIPLIER (per ad group, 0.8-1.3): a Python formula computes each
    keyword's starting Max CPC from its real Google cpc_range + competition.
@@ -358,7 +382,7 @@ HARD RULES:
    can't see: money-maker/high-priority groups with strong buying intent
    → 1.1-1.3; experimental, adjacent-service or low-priority groups
    → 0.8-0.95; everything normal → 1.0.
-9. SMALL DATASETS: if the keyword set is small or low-volume (niche service,
+10. SMALL DATASETS: if the keyword set is small or low-volume (niche service,
    max volume under a few hundred), that is normal — do NOT split it to look
    thorough. One tight group with strong intent expansions beats three thin
    groups. Low absolute volume is fine; relative opportunity is what matters.
@@ -679,7 +703,9 @@ def validate_strategy(raw, kept):
         except (TypeError, ValueError):
             bid_mult = 1.0
         bid_mult = min(max(bid_mult, 0.7), 1.5)
-        group_match = g.get("match_type", "phrase")
+        group_match = FORCE_MATCH_TYPE or g.get("match_type", "phrase")
+        if group_match not in ("phrase", "exact"):
+            group_match = "phrase"
 
         def _kw_entry(k):
             entry = {
@@ -721,6 +747,9 @@ def validate_strategy(raw, kept):
             "language": _g_lang,
             "theme": str(g.get("theme", "")).strip(),
             "match_type": group_match,
+            # Kept so the report can show WHY, and so a run can be argued with.
+            "match_type_reason": ("forced by MATCH_TYPE" if FORCE_MATCH_TYPE
+                                  else str(g.get("match_type_reason", "")).strip()[:120]),
             "priority": g.get("priority", "medium"),
             "bid_multiplier": bid_mult,
             "bid_currency": BID_CURRENCY,
@@ -1257,7 +1286,10 @@ def main():
     for c in campaigns:
         md.append(f"## 📣 Campaign: {c['name']}  `{c['priority']}`")
         for g in [g for g in groups if g["campaign"] == c["name"]]:
+            _mtr = g.get("match_type_reason", "")
             md.append(f"### {g['name']}  `{g['priority']}` `{g['match_type']}`")
+            if _mtr:
+                md.append(f"*match type: {_mtr}*")
             md.append(f"_{g['theme']}_")
             md.append(f"- Volume: {g['total_volume']}/mo | Avg score: {g['avg_score']} | {len(g['keywords'])} keywords")
             _bids = [k["suggested_bid"] for k in g["keywords"] if k.get("suggested_bid")]

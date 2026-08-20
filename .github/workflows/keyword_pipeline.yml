@@ -28,7 +28,7 @@ on:
         # auto-detection, the bid currency and its FX rate, and the
         # single-campaign audience switch — so they ride together as JSON and
         # leave room for inputs people actually fill in.
-        description: 'Manual-run overrides as JSON. Keys: bid_currency, bid_fx_rate, location_id, language_id, single_campaign. Example: {"bid_currency":"AED","bid_fx_rate":"1"}'
+        description: 'Manual-run overrides as JSON. Keys: bid_currency, bid_fx_rate, location_id, language_id, single_campaign, match_type (phrase|exact — blank lets the model decide per ad group), daily_clicks_target. Example: {"bid_currency":"AED","match_type":"phrase"}'
         required: false
         default: '{}'
       keywords_csv_url:
@@ -286,6 +286,10 @@ jobs:
           CLAUDE_MODEL: claude-sonnet-5
           CLAUDE_EFFORT: "medium"
           MAX_AD_GROUPS: ${{ github.event.inputs.max_ad_groups || '10' }}
+          # Blank = the model picks per ad group under the prompt's rule
+          # (default phrase, exact only for expensive unambiguous themes).
+          MATCH_TYPE: ${{ fromJSON(github.event.inputs.advanced || '{}').match_type }}
+          DAILY_CLICKS_TARGET: ${{ fromJSON(github.event.inputs.advanced || '{}').daily_clicks_target }}
           MAX_KEYWORDS_PER_GROUP: "40"
           SINGLE_CAMPAIGN: ${{ fromJSON(github.event.inputs.advanced || '{}').single_campaign || 'true' }}
           EXISTING_CAMPAIGN: ${{ github.event.inputs.existing_campaign }}
