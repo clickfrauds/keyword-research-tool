@@ -43,6 +43,8 @@ SAFETY MODEL
 
 Env : PUSH_CUSTOMER_ID (required), CONV_MODE (validate|live),
       GOOGLE_ADS_* client env vars, GOOGLE_ADS_LOGIN_CUSTOMER_ID (MCC),
+      PRIMARY_CONVERSIONS (which actions feed bidding; default
+        "phone,form" — add whatsapp where it is the main channel),
       CONV_VALUE_PHONE / _WA / _FORM (default lead values, account
         currency; 0 = no default value),
       ADMIN_API_URL + ADMIN_PASSWORD + CLIENT_TOKEN (optional — write the
@@ -69,30 +71,49 @@ OUTPUT_FILE = "conversion_actions.json"
 
 # name -> (column on client_keys, Ads category, primary?, value env var)
 #
-# PRIMARY vs SECONDARY matters: every primary action feeds bidding. Phone
-# and form are the real leads. WhatsApp is kept secondary because it fires
-# on the click, not on a reply — counting it as a primary lead would teach
-# Smart Bidding to chase taps that never became conversations.
+# PRIMARY vs SECONDARY decides what bidding optimises for. Only primary
+# actions feed it.
+#
+# The default keeps phone and form primary and WhatsApp secondary, because a
+# tap on a WhatsApp button opens the app with a prefilled message and the
+# person still has to send it — plenty never do. But that reasoning is
+# regional, not universal: across the Gulf and South Asia WhatsApp is often
+# the main way customers make contact, and treating the client's busiest
+# channel as secondary teaches bidding to ignore it.
+#
+# So it is a setting, not a verdict. PRIMARY_CONVERSIONS lists the actions
+# that should count for bidding, e.g. "phone,whatsapp,form" for a client
+# whose leads mostly arrive on WhatsApp.
+# `or` not a .get default: the workflow passes an empty string when the field
+# is cleared, and .get only falls back when the variable is absent entirely.
+# Empty here would mean no primary conversion at all, and bidding would have
+# nothing to optimise for.
+_PRIMARY = {k.strip().lower() for k in
+            (os.environ.get("PRIMARY_CONVERSIONS", "").strip() or "phone,form").split(",")
+            if k.strip()}
+
 ACTIONS = {
     "Phone Call Click": {
         "column":   "label_phone",
         "category": "PHONE_CALL_LEAD",
-        "primary":  True,
+        "key":      "phone",
         "value_env": "CONV_VALUE_PHONE",
     },
     "WhatsApp Click": {
         "column":   "label_whatsapp",
         "category": "CONTACT",
-        "primary":  False,
+        "key":      "whatsapp",
         "value_env": "CONV_VALUE_WA",
     },
     "Form Submit": {
         "column":   "label_form",
         "category": "SUBMIT_LEAD_FORM",
-        "primary":  True,
+        "key":      "form",
         "value_env": "CONV_VALUE_FORM",
     },
 }
+for _spec in ACTIONS.values():
+    _spec["primary"] = _spec["key"] in _PRIMARY
 
 report = []
 
@@ -311,6 +332,13 @@ def main():
     validate = CONV_MODE != "live"
     log(f"# Google Ads conversion setup — account {PUSH_CUSTOMER_ID}")
     log(f"Mode: {'VALIDATE (nothing created)' if validate else 'LIVE'}")
+    log("Primary (feeds bidding): "
+        + ", ".join(sorted(k for k, v in ACTIONS.items() if v["primary"]) or ["(none)"])
+        + " | Secondary: "
+        + ", ".join(sorted(k for k, v in ACTIONS.items() if not v["primary"]) or ["(none)"]))
+    if not any(v["primary"] for v in ACTIONS.values()):
+        log("⚠️ No primary conversion — bidding would have nothing to optimise "
+            "for. Set PRIMARY_CONVERSIONS, e.g. \"phone,whatsapp,form\".")
 
     existing = fetch_actions(svc, list(ACTIONS.keys()))
     for n in existing:

@@ -1,0 +1,68 @@
+name: Conversions only (no campaign, no keyword research)
+
+# For a client whose campaign is ALREADY running. Creates the three
+# conversion actions, reads their labels back, and writes them onto the
+# client_keys row — and does nothing else.
+#
+# The full pipeline does this too, as Stage 0-CONV, but getting labels that
+# way means paying for a Planner pull, several Claude calls and a campaign
+# push you did not ask for. Conversion setup is a once-per-client job and
+# belongs on its own trigger.
+#
+# The Ads account is not typed in: it comes off the client row, so a token
+# and an account can never be mismatched here.
+
+on:
+  workflow_dispatch:
+    inputs:
+      client_token:
+        description: "ClickAds Protector client token, e.g. CF-AQUA-2026-m4p8q2 (from the client manager)"
+        required: true
+      primary_conversions:
+        description: "Which actions feed bidding. Default phone,form. Use phone,whatsapp,form where WhatsApp is how customers actually make contact"
+        required: false
+        default: 'phone,form'
+      mode:
+        description: "check = report what is missing, create nothing | create = create the three conversion actions"
+        required: true
+        default: 'check'
+        type: choice
+        options:
+          - check
+          - create
+
+jobs:
+  conversions:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - run: pip install google-ads
+
+      - name: Conversion actions + labels
+        env:
+          GOOGLE_ADS_DEVELOPER_TOKEN: ${{ secrets.GOOGLE_ADS_DEVELOPER_TOKEN }}
+          GOOGLE_ADS_CLIENT_ID: ${{ secrets.GOOGLE_ADS_CLIENT_ID }}
+          GOOGLE_ADS_CLIENT_SECRET: ${{ secrets.GOOGLE_ADS_CLIENT_SECRET }}
+          GOOGLE_ADS_REFRESH_TOKEN: ${{ secrets.GOOGLE_ADS_REFRESH_TOKEN }}
+          GOOGLE_ADS_LOGIN_CUSTOMER_ID: ${{ secrets.GOOGLE_ADS_LOGIN_CUSTOMER_ID }}
+          GOOGLE_ADS_USE_PROTO_PLUS: "true"
+          # No PUSH_CUSTOMER_ID on purpose — the script reads the account from
+          # the client row, which is the only place the two are known to agree.
+          CLIENT_TOKEN: ${{ github.event.inputs.client_token }}
+          ADMIN_API_URL: https://clickadsprotector.com/api/add-client
+          ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+          CONV_MODE: ${{ github.event.inputs.mode == 'create' && 'live' || 'validate' }}
+          PRIMARY_CONVERSIONS: ${{ github.event.inputs.primary_conversions }}
+        run: python scripts/setup_conversions.py
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: conversion-labels-${{ github.event.inputs.client_token }}
+          path: conversion_actions.json
+          if-no-files-found: warn
