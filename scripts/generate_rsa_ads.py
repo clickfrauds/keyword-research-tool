@@ -378,7 +378,8 @@ def lang_url_prefix(lang_code):
     return f"/{code}"
 
 
-def ask_claude(client, group, kw_lines, retry_note="", page=None):
+def ask_claude(client, group, kw_lines, retry_note="", page=None,
+               h_max=H_MAX, d_max=D_MAX):
     _code, _lang_name = group_language(group)
     # The per-group rule rides in the USER message so the cached SYSTEM prompt
     # stays byte-identical across ad groups (prompt-cache discount preserved).
