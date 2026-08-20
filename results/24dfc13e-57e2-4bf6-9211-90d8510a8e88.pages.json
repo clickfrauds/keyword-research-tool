@@ -1,0 +1,180 @@
+[
+  {
+    "page_name": "Static Website Builds For Service Businesses",
+    "url_slug": "",
+    "final_url": "https://seoblogy.com/tools/website-builder/",
+    "language": "en",
+    "service_name": "Static Website Builds For Service Businesses",
+    "industry": "AI-built websites, SEO sites & Google Ad",
+    "sub_services": [
+      "Static HTML Website Build",
+      "SEO Page Structure Setup",
+      "Schema Markup Implementation",
+      "Multilingual Site Builds",
+      "WordPress To Static Migration",
+      "Cloudflare Pages Hosting"
+    ],
+    "ad_groups_covered": [
+      "Static Website Builds For Service Businesses"
+    ],
+    "anchors": [
+      "compare",
+      "get-started"
+    ],
+    "sitelink_mode": "anchors",
+    "sitelink_targets": [
+      "https://seoblogy.com/tools/website-builder/#compare",
+      "https://seoblogy.com/tools/website-builder/#get-started"
+    ],
+    "sitelink_labels": [],
+    "verdict": "strong",
+    "h1": "No WordPress. No Plugins. Nothing To Hack.",
+    "h2": [
+      "Three Ways A Service Business Website Fails",
+      "Static HTML. That's The Whole Trick.",
+      "Three Ways To Get A Website Built",
+      "From A Hacked WordPress To Static Files",
+      "One Build, Your Market's Language",
+      "Six Builds, Six Straight Answers",
+      "A Website Is One Piece",
+      "You Do 10 Minutes. We Do The Rest.",
+      "One Build Fee. No Monthly Anything.",
+      "A Website That Earns Its Keep."
+    ],
+    "h3": [
+      "Get My Website"
+    ],
+    "keywords_covered": 40,
+    "monthly_volume_covered": 53500,
+    "mode1_config": {
+      "main_service": "Static Website Builds For Service Businesses",
+      "sub_services": "Static HTML Website Build, SEO Page Structure Setup, Schema Markup Implementation, Multilingual Site Builds, WordPress To Static Migration, Cloudflare Pages Hosting",
+      "industry": "AI-built websites, SEO sites & Google Ad"
+    },
+    "google_ads_tracking_tip": "Final URL suffix: kw={keyword} — enables the landing page's Dynamic Keyword Insertion (DKI)."
+  },
+  {
+    "page_name": "Google Ads Campaign Management",
+    "url_slug": "",
+    "final_url": "https://seoblogy.com/tools/google-ads-builder/",
+    "language": "en",
+    "service_name": "Google Ads Campaign Management",
+    "industry": "AI-built websites, SEO sites & Google Ad",
+    "sub_services": [
+      "Keyword Research",
+      "Ad Copywriting",
+      "Negative Keyword Protection",
+      "Landing Page Creation",
+      "Campaign API Deployment",
+      "Bid Location Optimization"
+    ],
+    "ad_groups_covered": [
+      "Google Ads Campaign Management"
+    ],
+    "anchors": [
+      "how-it-works",
+      "terminal-log",
+      "example",
+      "get-started"
+    ],
+    "sitelink_mode": "anchors",
+    "sitelink_targets": [
+      "https://seoblogy.com/tools/google-ads-builder/#how-it-works",
+      "https://seoblogy.com/tools/google-ads-builder/#terminal-log",
+      "https://seoblogy.com/tools/google-ads-builder/#example",
+      "https://seoblogy.com/tools/google-ads-builder/#get-started"
+    ],
+    "sitelink_labels": [],
+    "verdict": "strong",
+    "h1": "More Customers From Google. Less Wasted Budget.",
+    "h2": [
+      "Six Stages, One Automated Run",
+      "Everything In Your Master Campaign File",
+      "The Negative-Keyword Guard Script",
+      "Your Account, Our Manager Link, One API Push",
+      "Every File From The Build",
+      "One Research Run, A Complete Campaign",
+      "A Page Per Ad Group — Built & Deployed Free",
+      "Download A Real Build. Open The Live Pages.",
+      "You Do 10 Minutes. We Do The Rest.",
+      "Let Us Manage It — And Guard Every Click",
+      "A Lead Machine — For Less Than One Bad Week Of Ads.",
+      "Ready To Make The Phone Ring?"
+    ],
+    "h3": [
+      "Why it matters",
+      "Landing pages — open them live",
+      "Want the SaaS-level code?",
+      "Start My Campaign"
+    ],
+    "keywords_covered": 40,
+    "monthly_volume_covered": 29310,
+    "mode1_config": {
+      "main_service": "Google Ads Campaign Management",
+      "sub_services": "Keyword Research, Ad Copywriting, Negative Keyword Protection, Landing Page Creation, Campaign API Deployment, Bid Location Optimization",
+      "industry": "AI-built websites, SEO sites & Google Ad"
+    },
+    "google_ads_tracking_tip": "Final URL suffix: kw={keyword} — enables the landing page's Dynamic Keyword Insertion (DKI)."
+  },
+  {
+    "page_name": "SEO Website Build Service",
+    "url_slug": "",
+    "final_url": "https://seoblogy.com/tools/seo-automation/",
+    "language": "en",
+    "service_name": "SEO Website Build Service",
+    "industry": "AI-built websites, SEO sites & Google Ad",
+    "sub_services": [
+      "Keyword Planner Data Research",
+      "Keyword Scoring & Filtering",
+      "Silo Architecture Design",
+      "Schema Markup Implementation",
+      "Static Site Build & Deployment",
+      "Internal Link Auditing"
+    ],
+    "ad_groups_covered": [
+      "SEO Website Build Service"
+    ],
+    "anchors": [
+      "how-it-works",
+      "terminal-log",
+      "roofing",
+      "get-started"
+    ],
+    "sitelink_mode": "anchors",
+    "sitelink_targets": [
+      "https://seoblogy.com/tools/seo-automation/#how-it-works",
+      "https://seoblogy.com/tools/seo-automation/#terminal-log",
+      "https://seoblogy.com/tools/seo-automation/#roofing",
+      "https://seoblogy.com/tools/seo-automation/#get-started"
+    ],
+    "sitelink_labels": [],
+    "verdict": "weak",
+    "h1": "Every Page Backed By Real Search Volume.",
+    "h2": [
+      "Research First. Pages Second.",
+      "You Can Watch It Choose The Keywords",
+      "A Pretty Five-Page Site Is Not An SEO Site",
+      "One Research Run, A Complete Website",
+      "Nothing Is A Black Box",
+      "Built For Your Trade, Not A Generic Template",
+      "One Industry, Mapped End To End",
+      "You Do 10 Minutes. We Do The Rest.",
+      "Organic Takes Months. Ads Take Days.",
+      "One Build Fee. No Monthly Platform.",
+      "Stop Guessing What To Publish."
+    ],
+    "h3": [
+      "Why this matters",
+      "Built by this pipeline — open them live",
+      "Get My Site Plan"
+    ],
+    "keywords_covered": 40,
+    "monthly_volume_covered": 137450,
+    "mode1_config": {
+      "main_service": "SEO Website Build Service",
+      "sub_services": "Keyword Planner Data Research, Keyword Scoring & Filtering, Silo Architecture Design, Schema Markup Implementation, Static Site Build & Deployment, Internal Link Auditing",
+      "industry": "AI-built websites, SEO sites & Google Ad"
+    },
+    "google_ads_tracking_tip": "Final URL suffix: kw={keyword} — enables the landing page's Dynamic Keyword Insertion (DKI)."
+  }
+]
