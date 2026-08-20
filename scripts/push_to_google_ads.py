@@ -725,6 +725,34 @@ def main():
             t = " ".join(str(text or "").split())
             if not t:
                 return None
+
+            # Match type travels in its own field, never in the text. Anyone
+            # writing a seed the old way — +seo +agency, [exact], "phrase" —
+            # produces text Google rejects as INVALID_KEYWORD_TEXT, and this
+            # mutate is atomic with partial_failure off, so a single one of
+            # them takes down the entire campaign push. Broad match modifier
+            # has not existed since 2021 in any case: its behaviour moved into
+            # phrase match, so stripping the punctuation loses nothing.
+            _before = t
+            t = t.strip('"')
+            if t.startswith("[") and t.endswith("]"):
+                t = t[1:-1]
+            t = " ".join(w.lstrip("+") for w in t.split())
+            t = " ".join(t.split())
+            if t != _before:
+                log(f"ℹ️ {label} cleaned of match-type punctuation: "
+                    f"'{_before[:40]}' -> '{t[:40]}'")
+            if not t:
+                return None
+
+            # Whatever is left must still be legal. Better to drop one keyword
+            # with a named reason than to have Google refuse the whole push.
+            bad = set('!@%,*"[]+') & set(t)
+            if bad:
+                log(f"⚠️ {label} skipped (Google rejects {''.join(sorted(bad))} "
+                    f"in keyword text): {t[:60]}")
+                return None
+
             if len(t) > 80 or len(t.split()) > 10:
                 log(f"⚠️ {label} skipped (Google limit: 80 chars / 10 words): {t[:60]}")
                 return None
