@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seoblogy</title>
+<style>
+  :root {
+    --ink: #14181c;
+    --muted: #6b6560;
+    --line: #dcdad3;
+    --paper: #fdfcfa;
+    --bg: #f6f5f2;
+    --accent: #0b5d5a;
+    --accent-soft: #e3f0ef;
+    --mono: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Menlo, Consolas, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    line-height: 1.55;
+  }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 36px 20px 70px; }
+  header {
+    position: relative;
+    border-bottom: 2px dashed var(--line);
+    padding-bottom: 22px;
+    margin-bottom: 30px;
+  }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  header h1 { font-size: 26px; margin: 0 0 6px; }
+  header .subtitle { color: var(--muted); font-size: 14px; }
+  header .generated { font-family: var(--mono); color: var(--muted); font-size: 11px; margin-top: 12px; }
+  .stamp {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    line-height: 1.3;
+    text-align: center;
+    color: var(--accent);
+    border: 2px solid var(--accent);
+    border-radius: 6px;
+    padding: 6px 10px;
+    transform: rotate(4deg);
+  }
+  .stat-bar { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 36px; }
+  .stat {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 12px 16px;
+    flex: 1;
+    min-width: 110px;
+    text-align: center;
+  }
+  .stat-num { font-family: var(--mono); font-size: 20px; font-weight: 700; color: var(--accent); }
+  .stat-label { font-size: 11px; color: var(--muted); margin-top: 3px; }
+  section { margin-bottom: 40px; }
+  section > h2 {
+    font-family: var(--mono);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 9px;
+    margin-bottom: 16px;
+  }
+  .card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    padding: 16px 18px;
+    margin-bottom: 12px;
+  }
+  .card-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; flex-wrap: wrap; }
+  .card h3 { margin: 0; font-size: 15px; }
+  .badges { display: flex; gap: 6px; flex-wrap: wrap; }
+  .badge { font-family: var(--mono); font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 4px; white-space: nowrap; }
+  .intent-badge { background: var(--accent-soft); color: var(--accent); }
+  .meta-line { font-size: 13px; color: var(--muted); margin-top: 7px; }
+  .reasoning { font-size: 14px; margin-top: 9px; margin-bottom: 0; }
+  .ad-preview { margin-top: 11px; background: var(--bg); border: 1px dashed var(--line); border-radius: 6px; padding: 10px 13px; }
+  .ad-headline { color: #1a0dab; font-size: 14px; font-weight: 600; }
+  .ad-description { color: #4d5156; font-size: 13px; margin-top: 3px; }
+  .faq { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 11px 15px; margin-bottom: 7px; }
+  .faq summary { cursor: pointer; font-weight: 600; font-size: 14px; }
+  .faq summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .faq p { font-size: 14px; color: var(--muted); margin: 9px 0 2px; }
+  .chip-wrap { display: flex; flex-wrap: wrap; gap: 7px; }
+  .chip { background: var(--accent-soft); color: var(--accent); font-size: 12px; padding: 5px 11px; border-radius: 999px; }
+  .empty { color: var(--muted); font-style: italic; font-size: 14px; }
+  .campaign-block { margin-bottom: 26px; }
+  .campaign-head { font-family: var(--mono); font-size: 13px; font-weight: 700; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+  .kw-vol { color: var(--muted); font-size: 11px; }
+  .neg-line { color: #9c2b1f; }
+  footer { text-align: center; font-family: var(--mono); color: var(--muted); font-size: 11px; margin-top: 56px; }
+  @media (max-width: 480px) {
+    .stamp { position: static; display: inline-block; margin-top: 12px; transform: rotate(-1deg); }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="eyebrow">Keyword Strategy Report</div>
+    <h1>Seoblogy</h1>
+    <div class="subtitle">AI-built websites, SEO sites &amp; Google Ads campaigns for service businesses — every page and ad group backed by real Google search data. &middot; N/A</div>
+    <div class="generated">Generated 20 Aug 2026, 17:13 UTC</div>
+    <div class="stamp">2 HIGH<br>PRIORITY</div>
+  </header>
+
+  <div class="stat-bar"><div class="stat"><div class="stat-num">2404</div><div class="stat-label">Keywords Analyzed</div></div><div class="stat"><div class="stat-num">1</div><div class="stat-label">Campaigns</div></div><div class="stat"><div class="stat-num">3</div><div class="stat-label">Ad Groups</div></div><div class="stat"><div class="stat-num">120</div><div class="stat-label">Keywords</div></div><div class="stat"><div class="stat-num">25</div><div class="stat-label">Intent Expansions</div></div><div class="stat"><div class="stat-num">3</div><div class="stat-label">Landing Pages</div></div></div>
+
+  
+  <section>
+    <h2>Campaign &amp; Ad Group Structure</h2>
+    
+    <div class="campaign-block">
+      <div class="campaign-head">📣 Campaign: Website Build Services <span class="badge" style="color:#92400e;background:#fef0dc">HIGH</span></div>
+      
+        <div class="card">
+          <div class="card-head">
+            <h3>Static Website Builds For Service Businesses</h3>
+            <div class="badges"><span class="badge" style="color:#92400e;background:#fef0dc">HIGH</span><span class="badge intent-badge">PHRASE</span></div>
+          </div>
+          <p class="reasoning">Service-business owners searching to hire a professional to design/build a fast, no-WordPress business website.</p>
+          <div class="meta-line">Volume: <strong>53500/mo</strong> &middot; Avg score: <strong>78.4</strong> &middot; 40 keywords</div>
+          <div class="meta-line">Keywords: business website design near me <span class='kw-vol'>(320)</span>, best web design agencies near me <span class='kw-vol'>(260)</span>, best web design agency near me <span class='kw-vol'>(260)</span>, affordable website designers <span class='kw-vol'>(1600)</span>, near web development company <span class='kw-vol'>(110)</span>, small business web design near me <span class='kw-vol'>(140)</span>, best website development company near me <span class='kw-vol'>(70)</span>, real estate website development company <span class='kw-vol'>(320)</span>, real estate web development company <span class='kw-vol'>(320)</span>, boca web agency <span class='kw-vol'>(210)</span>, affordable web design agency <span class='kw-vol'>(260)</span>, service business website design <span class='kw-vol'>(390)</span>, business web design services <span class='kw-vol'>(390)</span>, business website design services <span class='kw-vol'>(390)</span>, coffee shop web design <span class='kw-vol'>(1300)</span>, business website development company <span class='kw-vol'>(140)</span>, website design and development company near me <span class='kw-vol'>(30)</span>, professional web design agency <span class='kw-vol'>(320)</span>, professional website design agency <span class='kw-vol'>(320)</span>, electrical services website <span class='kw-vol'>(50)</span>, site development companies <span class='kw-vol'>(1600)</span>, static website design <span class='kw-vol'>(260)</span>, static web page design <span class='kw-vol'>(260)</span>, static page design <span class='kw-vol'>(260)</span>, online website development company <span class='kw-vol'>(170)</span>, website builder for small business <span class='kw-vol'>(9900)</span>, website creator for small business <span class='kw-vol'>(9900)</span>, website maker for small business <span class='kw-vol'>(9900)</span>, small business web builder <span class='kw-vol'>(9900)</span>, small business website designer near me <span class='kw-vol'>(40)</span>, best it company website design <span class='kw-vol'>(90)</span>, contractor website services <span class='kw-vol'>(170)</span>, top web design agencies <span class='kw-vol'>(1000)</span>, top website design agencies <span class='kw-vol'>(1000)</span>, top rated web design agency <span class='kw-vol'>(1000)</span>, small business website design near me <span class='kw-vol'>(110)</span>, phoenix web design agency <span class='kw-vol'>(170)</span>, website making company near me <span class='kw-vol'>(90)</span>, business website development services <span class='kw-vol'>(90)</span>, best corporate web design <span class='kw-vol'>(390)</span></div>
+          <div class='meta-line'>🆕 Intent expansions:</div><div class='chip-wrap'><span class="chip">static website builder for contractors</span><span class="chip">hire website designer for small business</span><span class="chip">website design quote for service business</span><span class="chip">cost to build a business website</span><span class="chip">custom website for plumbers</span><span class="chip">website design company for electricians</span><span class="chip">fast loading website for small business</span><span class="chip">secure website no wordpress plugins</span><span class="chip">small business website design cost</span></div>
+          <div class='meta-line neg-line'>🚫 Negatives (anti-cannibalization): seo, keyword research, backlink, google ads, ppc, adwords, campaign management, ad manager, admin, ads, advertising, adword, analysis, audience, bright, budget, canterbury, click, coast, competition, content, control, dental, developer, developers, directories, does, engine, enterprise, fee, free, friendly, global, gold, how, hvac, keyword, keywords, lawyers, listing, localized, locations, management, manager, marketing, monthly, much, multiple, optimisation, optimization, pay, per, pest, rank, ranking, search, serp, setup, shopping, term, tool, tracker</div>
+        </div>
+        <div class="card">
+          <div class="card-head">
+            <h3>SEO Website Build Service</h3>
+            <div class="badges"><span class="badge" style="color:#6b5a3a;background:#f2ede0">MEDIUM</span><span class="badge intent-badge">PHRASE</span></div>
+          </div>
+          <p class="reasoning">Buyers wanting a website whose pages and design are driven by real SEO/keyword research rather than a template.</p>
+          <div class="meta-line">Volume: <strong>137450/mo</strong> &middot; Avg score: <strong>82.7</strong> &middot; 40 keywords</div>
+          <div class="meta-line">Keywords: seo keyword tracker <span class='kw-vol'>(1600)</span>, bright local serp <span class='kw-vol'>(480)</span>, seo web company <span class='kw-vol'>(1900)</span>, seo website company <span class='kw-vol'>(1900)</span>, google local rank tracker <span class='kw-vol'>(1600)</span>, seo keyword research <span class='kw-vol'>(22200)</span>, seo keyword analysis <span class='kw-vol'>(22200)</span>, search engine optimization keyword research <span class='kw-vol'>(22200)</span>, research keywords seo <span class='kw-vol'>(22200)</span>, search engine optimization keyword analysis <span class='kw-vol'>(22200)</span>, seo for web developers <span class='kw-vol'>(390)</span>, web developer and seo <span class='kw-vol'>(390)</span>, seo keyword competition analysis <span class='kw-vol'>(320)</span>, website optimization near me <span class='kw-vol'>(590)</span>, seo keyword tool <span class='kw-vol'>(2900)</span>, search engine optimization keyword tool <span class='kw-vol'>(2900)</span>, local seo optimisation <span class='kw-vol'>(590)</span>, local keyword research <span class='kw-vol'>(720)</span>, local seo keyword research <span class='kw-vol'>(480)</span>, local seo for multiple locations <span class='kw-vol'>(320)</span>, website seo near me <span class='kw-vol'>(390)</span>, website design and seo near me <span class='kw-vol'>(260)</span>, seo keyword search <span class='kw-vol'>(1900)</span>, seo for multiple locations <span class='kw-vol'>(590)</span>, keyword research analysis <span class='kw-vol'>(480)</span>, localized keyword research <span class='kw-vol'>(720)</span>, website directories seo <span class='kw-vol'>(480)</span>, seo design <span class='kw-vol'>(720)</span>, seo research <span class='kw-vol'>(1000)</span>, keyword services <span class='kw-vol'>(110)</span>, search term research <span class='kw-vol'>(210)</span>, business listing sites for seo <span class='kw-vol'>(70)</span>, best website builder for seo <span class='kw-vol'>(590)</span>, best web builder for seo <span class='kw-vol'>(590)</span>, best site builder for seo <span class='kw-vol'>(590)</span>, local search websites <span class='kw-vol'>(140)</span>, local search sites <span class='kw-vol'>(140)</span>, website seo companies near me <span class='kw-vol'>(170)</span>, canterbury website design &amp; seo <span class='kw-vol'>(50)</span>, keyword research and analysis for seo <span class='kw-vol'>(170)</span></div>
+          <div class='meta-line'>🆕 Intent expansions:</div><div class='chip-wrap'><span class="chip">seo audit for small business website</span><span class="chip">local seo package pricing</span><span class="chip">seo content for service business website</span><span class="chip">keyword research service quote</span><span class="chip">how much does seo cost for small business</span><span class="chip">seo friendly website builder pricing</span><span class="chip">local business seo ranking service</span><span class="chip">seo website build cost</span></div>
+          <div class='meta-line neg-line'>🚫 Negatives (anti-cannibalization): google ads, ppc, adwords, campaign management, static website, no wordpress, hosting, admin, ads, advertising, adword, audience, boca, budget, click, coast, coffee, contractor, contractors, control, corporate, creator, custom, dental, development, electrical, electricians, enterprise, estate, fast, fee, free, global, gold, hvac, lawyers, loading, maker, making, management, manager, marketing, monthly, online, page, pay, per, pest, plugins, plumbers, rated, real, secure, setup, shop, shopping, static, wordpress</div>
+        </div>
+        <div class="card">
+          <div class="card-head">
+            <h3>Google Ads Campaign Management</h3>
+            <div class="badges"><span class="badge" style="color:#92400e;background:#fef0dc">HIGH</span><span class="badge intent-badge">EXACT</span></div>
+          </div>
+          <p class="reasoning">Business owners wanting an agency/expert to build and manage their Google Ads (search/shopping/PPC) campaigns.</p>
+          <div class="meta-line">Volume: <strong>29310/mo</strong> &middot; Avg score: <strong>71.1</strong> &middot; 40 keywords</div>
+          <div class="meta-line">Keywords: google ads management near me <span class='kw-vol'>(1000)</span>, ppc management near me <span class='kw-vol'>(880)</span>, google ads management services near me <span class='kw-vol'>(110)</span>, google ads audience manager <span class='kw-vol'>(390)</span>, google ads for local business <span class='kw-vol'>(1300)</span>, google local business advertising <span class='kw-vol'>(1300)</span>, google local business ad <span class='kw-vol'>(1300)</span>, google ads for small business <span class='kw-vol'>(2900)</span>, google advertising for small business <span class='kw-vol'>(2900)</span>, google ads marketing agency near me <span class='kw-vol'>(140)</span>, google local ads services <span class='kw-vol'>(390)</span>, adword agency <span class='kw-vol'>(880)</span>, adwords advertising agency <span class='kw-vol'>(880)</span>, adwords agency <span class='kw-vol'>(880)</span>, google ads admin <span class='kw-vol'>(720)</span>, hvac google ads <span class='kw-vol'>(70)</span>, google free advertising for small business <span class='kw-vol'>(480)</span>, ppc research <span class='kw-vol'>(140)</span>, google shopping ads management services <span class='kw-vol'>(30)</span>, google ads management pricing <span class='kw-vol'>(320)</span>, pay per click management near me <span class='kw-vol'>(30)</span>, google ads management cost <span class='kw-vol'>(70)</span>, google ads for pest control <span class='kw-vol'>(110)</span>, enterprise ppc management <span class='kw-vol'>(90)</span>, google ads budget management <span class='kw-vol'>(30)</span>, ai ppc management <span class='kw-vol'>(140)</span>, google ads management gold coast <span class='kw-vol'>(110)</span>, dental google adwords agency <span class='kw-vol'>(90)</span>, google ads management for lawyers <span class='kw-vol'>(20)</span>, hvac ppc management <span class='kw-vol'>(20)</span>, global google ads agency <span class='kw-vol'>(50)</span>, top google ads agency <span class='kw-vol'>(70)</span>, google shopping management agency <span class='kw-vol'>(140)</span>, google ads management for small business <span class='kw-vol'>(50)</span>, phoenix ppc management <span class='kw-vol'>(70)</span>, ppc management service <span class='kw-vol'>(2900)</span>, ppc ads services <span class='kw-vol'>(2900)</span>, ppc advertising services <span class='kw-vol'>(2900)</span>, google ads management services <span class='kw-vol'>(2400)</span>, google advertising manager <span class='kw-vol'>(110)</span></div>
+          <div class='meta-line'>🆕 Intent expansions:</div><div class='chip-wrap'><span class="chip">google ads management pricing packages</span><span class="chip">hire google ads expert</span><span class="chip">ppc management quote</span><span class="chip">google ads agency for small business near me</span><span class="chip">google ads audit service</span><span class="chip">google ads setup and management cost</span><span class="chip">best ppc agency for local business</span><span class="chip">monthly google ads management fee</span></div>
+          <div class='meta-line neg-line'>🚫 Negatives (anti-cannibalization): website design, web development, seo, keyword research, static website, backlink, analysis, boca, bright, canterbury, coffee, competition, content, contractor, contractors, corporate, creator, custom, developer, developers, development, directories, does, electrical, electricians, engine, estate, fast, friendly, how, keyword, keywords, listing, loading, localized, locations, maker, making, much, multiple, online, optimisation, optimization, page, plugins, plumbers, rank, ranking, rated, real, search, secure, serp, shop, static, term, tool, tracker, wordpress</div>
+        </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Landing Pages (website generator inputs)</h2>
+    
+        <div class="card">
+          <div class="card-head">
+            <h3>Static Website Builds For Service Businesses</h3>
+            <span class="badge intent-badge">//</span>
+          </div>
+          <div class="meta-line">Main service: <strong>Static Website Builds For Service Businesses</strong> &middot; Industry: AI-built websites, SEO sites &amp; Google Ad</div>
+          <div class="meta-line">Sub-services (page sections): Static HTML Website Build, SEO Page Structure Setup, Schema Markup Implementation, Multilingual Site Builds, WordPress To Static Migration, Cloudflare Pages Hosting</div>
+          <div class="meta-line">Covers ad groups: Static Website Builds For Service Businesses</div>
+        </div>
+        <div class="card">
+          <div class="card-head">
+            <h3>Google Ads Campaign Management</h3>
+            <span class="badge intent-badge">//</span>
+          </div>
+          <div class="meta-line">Main service: <strong>Google Ads Campaign Management</strong> &middot; Industry: AI-built websites, SEO sites &amp; Google Ad</div>
+          <div class="meta-line">Sub-services (page sections): Keyword Research, Ad Copywriting, Negative Keyword Protection, Landing Page Creation, Campaign API Deployment, Bid Location Optimization</div>
+          <div class="meta-line">Covers ad groups: Google Ads Campaign Management</div>
+        </div>
+        <div class="card">
+          <div class="card-head">
+            <h3>SEO Website Build Service</h3>
+            <span class="badge intent-badge">//</span>
+          </div>
+          <div class="meta-line">Main service: <strong>SEO Website Build Service</strong> &middot; Industry: AI-built websites, SEO sites &amp; Google Ad</div>
+          <div class="meta-line">Sub-services (page sections): Keyword Planner Data Research, Keyword Scoring &amp; Filtering, Silo Architecture Design, Schema Markup Implementation, Static Site Build &amp; Deployment, Internal Link Auditing</div>
+          <div class="meta-line">Covers ad groups: SEO Website Build Service</div>
+        </div>
+  </section>
+
+  <section>
+    <h2>Voice-search / question keywords (SEO content, not ads)</h2>
+    <div class="chip-wrap"><span class="chip">how to set up ppc</span><span class="chip">how to set up ppc on amazon</span><span class="chip">how to set up google pay per click</span><span class="chip">how to set up a paid search campaign</span><span class="chip">how to set up amazon ppc campaign</span><span class="chip">how to set up a ppc campaign</span><span class="chip">how to set up a pay per click campaign</span><span class="chip">how to set up a successful ppc campaign</span><span class="chip">how to set up pay per click advertising</span><span class="chip">how to set up pay per click</span><span class="chip">how to set up ppc campaign in google</span></div>
+  </section>
+
+  <section>
+    <h2>Strategy Notes</h2>
+    <p class="reasoning">Because the three landing pages are fixed, every keyword was silo&#x27;d strictly by which existing page actually fulfills the search intent, with platform-confusion terms (Google Ad Manager, DIY/free builders, WordPress, ecommerce/webapp dev, competitor brands) excluded rather than forced onto a mismatched page. The Website Build campaign carries the bulk of volume/opportunity across Static and SEO builds, while Google Ads Management is kept high-priority and exact-match for its strong buying intent and high CPCs.</p>
+  </section>
+
+  <footer>SEOblogy &middot; Keyword Strategy Report</footer>
+
+</div>
+</body>
+</html>
