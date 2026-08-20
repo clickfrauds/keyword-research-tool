@@ -106,6 +106,21 @@ OUT_CSV = "rsa_editor.csv"
 OUT_MD = "rsa_ads.md"
 
 H_MAX, D_MAX, PATH_MAX = 30, 90, 15
+
+# Google halves every text limit for double-width scripts: a Chinese, Japanese
+# or Korean headline gets 15 characters, not 30, and a description 45. The
+# limits were flat here, so a zh/ja/ko run wrote assets up to twice the legal
+# length and Google rejected them at import or push — after the Claude spend,
+# with nothing usable to show for it. Arabic, Urdu, Hindi, Thai and Greek are
+# NOT double-width; they keep the full 30/90.
+_DOUBLE_WIDTH = {"zh", "ja", "ko"}
+
+
+def limits_for(lang_code):
+    """(headline, description, path) limits for one ad group's language."""
+    if str(lang_code or "").strip().lower() in _DOUBLE_WIDTH:
+        return 15, 45, 7
+    return H_MAX, D_MAX, PATH_MAX
 N_HEADLINES, N_DESCRIPTIONS = 15, 4
 MIN_KEYWORD_HEADLINES = 7
 
@@ -237,15 +252,15 @@ def title_case_keyword(kw):
     return out[:H_MAX].strip()
 
 
-def make_paths(slug):
+def make_paths(slug, path_max=PATH_MAX):
     parts = [p for p in re.split(r"[^a-z0-9]+", str(slug).lower()) if p]
     p1, p2 = "", ""
     for part in parts:
         cand = (p1 + "-" + part).strip("-")
-        if len(cand) <= PATH_MAX:
+        if len(cand) <= path_max:
             p1 = cand
         elif not p2:
-            p2 = part[:PATH_MAX]
+            p2 = part[:path_max]
         else:
             break
     return p1[:PATH_MAX], p2[:PATH_MAX]
@@ -393,9 +408,16 @@ Page Experience score. Where the page names a real offer, guarantee or
 credential, put it in a headline.
 """
 
+    # Stated only when it differs from the cached SYSTEM prompt's 30/90, so an
+    # ordinary run keeps its prompt-cache discount.
+    limit_rule = ("" if (h_max, d_max) == (H_MAX, D_MAX) else
+                  f"\nCHARACTER LIMITS FOR THIS AD GROUP: headlines {h_max} "
+                  f"characters, descriptions {d_max} — NOT 30/90. Google halves "
+                  f"every text limit for this script. Count each character.\n")
+
     user = f"""AD GROUP: {group['name']}
 THEME (the single user intent): {group.get('theme', '')}
-{lang_rule}{page_block}TARGET KEYWORDS (with monthly volume):
+{lang_rule}{limit_rule}{page_block}TARGET KEYWORDS (with monthly volume):
 {kw_lines}
 {retry_note}
 Write the RSA JSON now."""
@@ -415,14 +437,18 @@ Write the RSA JSON now."""
     return robust_json(text)
 
 
-def validate_and_repair(raw, group_keywords):
-    """Clean every asset, drop invalid ones, report what survived."""
+def validate_and_repair(raw, group_keywords, h_max=H_MAX, d_max=D_MAX):
+    """Clean every asset, drop invalid ones, report what survived.
+
+    h_max/d_max come from the ad group's own language, because a mixed
+    account can hold a Japanese group beside an English one and they do not
+    share a character limit."""
     kw_token_sets = [tokens_of(k) for k in group_keywords]
 
     headlines, seen = [], set()
     for h in (raw.get("headlines") or []):
         h = clean_text(h, is_headline=True)
-        if not h or len(h) > H_MAX or violates_policy(h):
+        if not h or len(h) > h_max or violates_policy(h):
             continue
         key = h.lower()
         if key in seen:
@@ -464,7 +490,7 @@ def validate_and_repair(raw, group_keywords):
                 d = d.replace("!", ".")
             else:
                 bang_used = True
-        if not d or len(d) > D_MAX or violates_policy(d):
+        if not d or len(d) > d_max or violates_policy(d):
             continue
         if d.lower() in dseen:
             continue
@@ -537,20 +563,24 @@ def main():
         for extra in (group.get("intent_expansion_keywords") or [])[:8]:
             kw_lines += f"\n- {extra} (intent expansion)"
 
+        # This group's own limits — halved for Chinese, Japanese and Korean.
+        _h_max, _d_max, _path_max = limits_for(group_language(group)[0])
+
         headlines, descriptions = [], []
         for attempt in (1, 2):
             note = "" if attempt == 1 else (
                 f"\nPREVIOUS ATTEMPT FAILED VALIDATION — you returned "
                 f"{len(headlines)} valid headlines / {len(descriptions)} valid "
-                f"descriptions. Keep every headline UNDER 30 characters and "
-                f"every description UNDER 90 characters. Recount each one.")
+                f"descriptions. Keep every headline UNDER {_h_max} characters "
+                f"and every description UNDER {_d_max} characters. Recount each one.")
             try:
                 raw = ask_claude(client, group, kw_lines, note,
-                                 page=page_by_group.get(group["name"]))
+                                 page=page_by_group.get(group["name"]),
+                                 h_max=_h_max, d_max=_d_max)
             except Exception as e:
                 print(f"   ⚠️ Claude call failed for '{group['name']}': {e}")
                 raw = {}
-            headlines, descriptions = validate_and_repair(raw, kws)
+            headlines, descriptions = validate_and_repair(raw, kws, _h_max, _d_max)
             if len(headlines) >= N_HEADLINES and len(descriptions) >= N_DESCRIPTIONS:
                 break
 
@@ -581,12 +611,12 @@ def main():
             # path matches where the click actually lands.
             final_url = _fixed
             _seg = [x for x in urlparse(_fixed).path.split("/") if x]
-            p1, p2 = make_paths(_seg[-1] if _seg else group["name"])
+            p1, p2 = make_paths(_seg[-1] if _seg else group["name"], _path_max)
         else:
             _g_code, _ = group_language(group)
             _pfx = lang_url_prefix(_g_code)
             final_url = f"{base}{_pfx}/{slug}/" if slug else f"{base}{_pfx}/"
-            p1, p2 = make_paths(slug or group["name"])
+            p1, p2 = make_paths(slug or group["name"], _path_max)
         pins = pin_plan(headlines, kws)
 
         cov = sum(1 for h in headlines
