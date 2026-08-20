@@ -90,6 +90,11 @@ FILES_TO_PUSH = [
     ("locations_negative.csv", "locations_negative.csv"),
     # LAST on purpose — the readiness marker (see note above).
     ("keyword_strategy_report.html", "html"),
+    # Existing-pages runs: the pages that need content work, and the labels
+    # the conversion stage read back. Both were being written and then left
+    # on the runner, which is the same as not producing them at all.
+    ("page_improvements.json", "page_improvements.json"),
+    ("conversion_actions.json", "conversion_actions.json"),
 ]
 
 

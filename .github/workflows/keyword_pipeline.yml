@@ -446,3 +446,7 @@ jobs:
             seo_content_plan.md
             keyword_strategy_report.html
             keyword_strategy_targets.csv
+            conversion_actions.json
+            landing_pages_source.json
+            page_improvements.json
+            push_manifest.json
