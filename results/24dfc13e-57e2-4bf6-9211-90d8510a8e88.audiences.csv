@@ -1,0 +1,13 @@
+﻿Campaign,Ad Group,Audience,Bid Modifier,Flexible Reach,Comment
+Website Build Services,,Web Design & Development,30%,,IN_MARKET | observation | Direct match to website design intent
+Website Build Services,,SEO & SEM Services,30%,,IN_MARKET | observation | Direct match for SEO-driven website buyers
+Website Build Services,,Advertising & Marketing Services,30%,,IN_MARKET | observation | Matches PPC/Google Ads management intent
+Website Build Services,,Web Hosting,15%,,IN_MARKET | observation | Related web infrastructure buyers
+Website Build Services,,Domain Registration,10%,,IN_MARKET | observation | Adjacent website setup intent
+Website Build Services,,Enterprise Software,10%,,IN_MARKET | observation | Business software buyers overlap
+Website Build Services,,Business Technology,15%,,IN_MARKET | observation | Business owners investing in tech tools
+Website Build Services,,CRM Solutions,10%,,IN_MARKET | observation | Service-business software buyers overlap
+Website Build Services,,Business Professionals,15%,,AFFINITY | observation | Core decision-maker audience for B2B services
+Website Build Services,,Technophiles,10%,,AFFINITY | observation | Tech-savvy business owners interested in digital tools
+Website Build Services,,Avid Investors,10%,,"AFFINITY | observation | Higher income, growth-minded business owners"
+Website Build Services,,Charitable Donors & Volunteers,10%,,AFFINITY | observation | Local service business community engagement signal
