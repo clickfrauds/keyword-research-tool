@@ -20,6 +20,30 @@ SAFETY MODEL
     second best-effort pass so an unmatched segment name can never
     sink the core campaign.
 
+PHASES (PUSH_PHASE)
+  Ads used to be disapproved as "Destination not working" because the
+  Final URL is WEBSITE_URL plus a slug analyze_with_claude.py invented,
+  and it was pushed whether or not a page existed there yet — the page
+  only appears later, when the website builder consumes the same JSON.
+  Pausing does not help; Google reviews the ads either way.
+
+  So the run splits on "carries a URL" rather than "paused vs live":
+    structure  budget, campaign, ad groups, keywords, negatives, geo,
+               language, audiences. Nothing here has a Final URL, so
+               there is nothing to review and nothing to disapprove.
+    creative   RSAs and sitelinks, plus the optional enable. Only ever
+               pushed once every page answers.
+
+  auto (default) does both at once when the pages are already live, and
+  otherwise stops after structure and says which URLs it is waiting on.
+  Same command every time — run it again after the site deploys and it
+  picks up where it left off. State lands in push_manifest.json.
+
+  PREFLIGHT=off skips the page checks (a staging host unreachable from
+  here but fine for Google). ENABLE_CAMPAIGN=yes turns the campaign on
+  at the end of the creative phase; without it the campaign stays Paused,
+  because enabling spends money and must never be a side effect.
+
 REQUIREMENTS
   - google-ads.yaml equivalents via env (same secrets Stage 1 uses).
   - The OAuth user must have access to PUSH_CUSTOMER_ID; if it's a
@@ -28,23 +52,37 @@ REQUIREMENTS
   - Account currency must match BID_CURRENCY (bids are sent as micros).
 
 Env : PUSH_CUSTOMER_ID (required to run), PUSH_MODE (validate|live),
+      PUSH_PHASE (auto|structure|creative), PREFLIGHT (on|off),
+      ENABLE_CAMPAIGN (no|yes),
       DAILY_BUDGET (account currency, default 1000),
       GOOGLE_ADS_* client env vars, GOOGLE_ADS_LOGIN_CUSTOMER_ID (MCC)
 Input : keyword_strategy.json, rsa_editor.csv?, locations_editor.csv?,
         locations_negative.csv?, audience_plan.json?
-Output: google_ads_push_report.md (+ log lines)
+Output: google_ads_push_report.md, push_manifest.json (+ log lines)
 """
 
 import os
+import re
 import sys
 import csv
 import json
+from datetime import datetime, timezone
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 PUSH_CUSTOMER_ID = "".join(c for c in os.environ.get("PUSH_CUSTOMER_ID", "") if c.isdigit())
 PUSH_MODE = os.environ.get("PUSH_MODE", "validate").strip().lower()
+
+# auto      : push structure, and add the creative too if every page answers
+# structure : structure only, never the ads (use while the site is being built)
+# creative  : the ads/sitelinks for a campaign structure that already exists
+PUSH_PHASE = os.environ.get("PUSH_PHASE", "auto").strip().lower()
+# Preflight is the whole point; leave it on unless a page is genuinely
+# unreachable from here but fine for Google (a firewalled staging host).
+PREFLIGHT = os.environ.get("PREFLIGHT", "on").strip().lower() not in ("off", "0", "no", "false")
+# Enabling spends money, so it stays opt-in even in the creative phase.
+ENABLE_CAMPAIGN = os.environ.get("ENABLE_CAMPAIGN", "no").strip().lower() in ("yes", "1", "true", "on")
 DAILY_BUDGET = float(os.environ.get("DAILY_BUDGET", "1000") or 1000)
 
 STRATEGY = "keyword_strategy.json"
@@ -63,6 +101,367 @@ def load_rows(path):
         return []
     with open(path, encoding="utf-8-sig", newline="") as f:
         return list(csv.DictReader(f))
+
+
+# ══════════════════════════════════════════════════════════════════════
+# PREFLIGHT + PHASES
+#
+# The reason ads kept coming back "Destination not working": the Final URL
+# is built from WEBSITE_URL plus a slug that analyze_with_claude.py invented,
+# and it was pushed whether or not a page existed there yet. The page only
+# appears later, when the website builder consumes the same JSON. Two systems
+# agreeing by convention, with nothing checking. A paused campaign does not
+# help — Google reviews the ads either way.
+#
+# The split is therefore NOT "paused vs live" but "carries a URL vs does not":
+#
+#   structure : budget, campaign, ad groups, keywords, negatives, geo,
+#               language, audiences. None of it has a Final URL, so there is
+#               nothing for Google to review and nothing to disapprove.
+#   creative  : RSAs and sitelinks — the only things with URLs — plus the
+#               optional enable. Pushed once every page answers.
+#
+# PUSH_PHASE=auto (default) does both in one go when the pages are already
+# live, and otherwise stops after structure and says so. Same command every
+# time; it just declines to push ads at pages that are not there.
+# ══════════════════════════════════════════════════════════════════════
+
+MANIFEST = "push_manifest.json"
+
+# A page that exists but says "not found" in a 200 response is the trap that
+# a plain status check walks straight into — Cloudflare Pages and most static
+# hosts serve their 404 body with a 200 for unknown paths.
+_SOFT_404 = ("page not found", "404 not found", "not found",
+             "page doesn't exist", "page does not exist")
+_MIN_BYTES = 500
+
+
+def _norm_path(p):
+    return (p or "/").rstrip("/") or "/"
+
+
+def check_url(url, timeout=15):
+    """(ok, detail). Anything but a real, on-topic 200 is a failure."""
+    import urllib.request
+    import urllib.error
+    from urllib.parse import urlparse
+
+    want = urlparse(url)
+    req = urllib.request.Request(url, headers={
+        # Some hosts serve a stripped page, or block outright, without one.
+        "User-Agent": "Mozilla/5.0 (compatible; AdsPreflight/1.0)",
+        "Accept": "text/html,application/xhtml+xml",
+    })
+    try:
+        with urllib.request.urlopen(req, timeout=timeout) as r:
+            final = urlparse(r.geturl())
+            body = r.read(200_000).decode("utf-8", "replace")
+            code = r.getcode()
+    except urllib.error.HTTPError as e:
+        return False, f"HTTP {e.code}"
+    except Exception as e:
+        return False, f"unreachable ({str(e)[:60]})"
+
+    if code != 200:
+        return False, f"HTTP {code}"
+
+    # Redirected off the host, or collapsed onto the homepage. Google calls
+    # this a destination mismatch and disapproves it just like a 404.
+    if final.netloc != want.netloc:
+        return False, f"redirects to another host ({final.netloc})"
+    if _norm_path(final.path) != _norm_path(want.path):
+        return False, f"redirects to {final.path or '/'}"
+
+    text = re.sub(r"(?is)<(script|style)\b.*?</\1>", " ", body)
+    text = re.sub(r"(?s)<[^>]+>", " ", text)
+    text = re.sub(r"\s+", " ", text).strip()
+
+    title = ""
+    m = re.search(r"(?is)<title[^>]*>(.*?)</title>", body)
+    if m:
+        title = re.sub(r"\s+", " ", m.group(1)).strip().lower()
+    if any(s in title for s in _SOFT_404):
+        return False, f"soft 404 — title says '{title[:40]}'"
+
+    if len(text) < _MIN_BYTES:
+        return False, f"thin page ({len(text)} chars of text)"
+
+    return True, f"200, {len(text)} chars"
+
+
+def collect_creative_urls():
+    """Every URL the creative phase would send to Google."""
+    urls = set()
+    for r in load_rows("rsa_editor.csv"):
+        u = (r.get("Final URL") or "").strip()
+        if u:
+            urls.add(u)
+    if os.path.exists("sitelinks.json"):
+        try:
+            with open("sitelinks.json", encoding="utf-8") as f:
+                for s in json.load(f).get("sitelink_sets", []):
+                    for l in (s.get("sitelinks") or []):
+                        u = (l.get("url") or "").strip()
+                        # A #anchor rides on a page that is checked anyway.
+                        if u:
+                            urls.add(u.split("#", 1)[0])
+        except Exception as e:
+            log(f"⚠️ sitelinks.json unreadable ({str(e)[:60]}) — its URLs not checked.")
+    return sorted(u for u in urls if u.lower().startswith(("http://", "https://")))
+
+
+def preflight(urls):
+    """(live, dead[]). Every URL is reported, not just the first failure —
+    one round of fixes should clear the whole list."""
+    if not urls:
+        return True, []
+    log(f"\n## Preflight — {len(urls)} landing page(s)")
+    dead = []
+    for u in urls:
+        ok, detail = check_url(u)
+        log(f"   {'✅' if ok else '❌'} {u}  ({detail})")
+        if not ok:
+            dead.append((u, detail))
+    return (not dead), dead
+
+
+def write_manifest(phase, camp_name, urls, dead):
+    data = {
+        "phase": phase,
+        "customer_id": PUSH_CUSTOMER_ID,
+        "campaign_name": camp_name,
+        "updated": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+        "urls": urls,
+        "pending": [u for u, _ in dead],
+    }
+    with open(MANIFEST, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=2, ensure_ascii=False)
+    return data
+
+
+def build_creative_ops(client, op, temp, ag_res_by_name, c_ops):
+    """RSAs and sitelinks — everything that carries a Final URL.
+
+    Pulled out of the main sequence so the same code can serve two callers:
+    the combined push, where ag_res_by_name holds temp ids for ad groups
+    being created in the very same mutate, and the creative phase, where it
+    holds the real resource names of ad groups that already exist. The ops
+    themselves are identical either way.
+    """
+    # ── RSAs (from Stage 3.8's Editor CSV — same data, API delivery) ────
+    n_rsa = 0
+    pin_enum = client.enums.ServedAssetFieldTypeEnum
+    pin_map = {"1": pin_enum.HEADLINE_1, "2": pin_enum.HEADLINE_2, "3": pin_enum.HEADLINE_3}
+    for r in load_rows("rsa_editor.csv"):
+        ag_res = ag_res_by_name.get(r.get("Ad Group"))
+        if not ag_res:
+            log(f"⚠️ RSA skipped — unknown ad group '{r.get('Ad Group')}'")
+            continue
+        o = op()
+        ad = o.ad_group_ad_operation.create
+        ad.ad_group = ag_res
+        ad.status = client.enums.AdGroupAdStatusEnum.ENABLED
+        rsa = ad.ad.responsive_search_ad
+        for i in range(1, 16):
+            h = (r.get(f"Headline {i}") or "").strip()
+            if not h:
+                continue
+            asset = client.get_type("AdTextAsset")
+            asset.text = h
+            pin = (r.get(f"Headline {i} position") or "").strip()
+            if pin in pin_map:
+                asset.pinned_field = pin_map[pin]
+            rsa.headlines.append(asset)
+        for j in range(1, 5):
+            d = (r.get(f"Description {j}") or "").strip()
+            if d:
+                asset = client.get_type("AdTextAsset")
+                asset.text = d
+                rsa.descriptions.append(asset)
+        if r.get("Path 1"):
+            rsa.path1 = r["Path 1"][:15]
+        if r.get("Path 2"):
+            rsa.path2 = r["Path 2"][:15]
+        if r.get("Final URL"):
+            ad.ad.final_urls.append(r["Final URL"])
+        # Google requires >=3 headlines and >=2 descriptions on an RSA, and a
+        # Final URL. One short row would fail the whole atomic push, so drop the
+        # row instead and say so.
+        if len(rsa.headlines) < 3 or len(rsa.descriptions) < 2 or not ad.ad.final_urls:
+            log(f"⚠️ RSA skipped for '{r.get('Ad Group')}' — needs 3+ headlines, "
+                f"2+ descriptions and a Final URL "
+                f"(got {len(rsa.headlines)}/{len(rsa.descriptions)}"
+                f"{', no URL' if not ad.ad.final_urls else ''})")
+            continue
+        c_ops.append(o)
+        n_rsa += 1
+
+    # ── sitelinks: one set PER AD GROUP, pointing at that page's anchors ──
+    # Ad-group level so a Washing Machine group shows "Washer Repair Pricing",
+    # not a campaign-wide generic "Pricing". Asset + AdGroupAsset link ride in
+    # the same atomic mutate as everything else.
+    n_sl = 0
+    if os.path.exists("sitelinks.json"):
+        with open("sitelinks.json", encoding="utf-8") as f:
+            sl_data = json.load(f)
+        asset_i = -1000
+        for s in sl_data.get("sitelink_sets", []):
+            ag_res = ag_res_by_name.get(s.get("ad_group"))
+            if not ag_res:
+                log(f"⚠️ Sitelinks skipped — unknown ad group '{s.get('ad_group')}'")
+                continue
+            for l in (s.get("sitelinks") or []):
+                text = (l.get("text") or "").strip()
+                d1 = (l.get("desc1") or "").strip()
+                d2 = (l.get("desc2") or "").strip()
+                url = (l.get("url") or "").strip()
+                # Google's limits — an over-long asset fails the whole mutate.
+                # Descriptions are all-or-nothing: send both lines or neither.
+                if not text or not url or len(text) > 25:
+                    log(f"⚠️ Sitelink dropped ({s.get('ad_group')}): "
+                        f"text {len(text)}/25 chars or missing URL — '{text[:30]}'")
+                    continue
+                asset_res = temp(f"assets/{asset_i}")
+                asset_i -= 1
+                o = op()
+                a = o.asset_operation.create
+                a.resource_name = asset_res
+                a.name = f"{s.get('ad_group','')} — {text}"[:120]
+                a.sitelink_asset.link_text = text
+                if len(d1) <= 35 and len(d2) <= 35 and d1 and d2:
+                    a.sitelink_asset.description1 = d1
+                    a.sitelink_asset.description2 = d2
+                a.final_urls.append(url)
+                c_ops.append(o)
+
+                o = op()
+                aga = o.ad_group_asset_operation.create
+                aga.ad_group = ag_res
+                aga.asset = asset_res
+                aga.field_type = client.enums.AssetFieldTypeEnum.SITELINK
+                c_ops.append(o)
+                n_sl += 1
+
+
+    return n_rsa, n_sl
+
+
+def run_creative_phase(client, svc, camp_name, validate):
+    """Attach the ads to a campaign that already exists.
+
+    This is the second half of a held push: the structure went up while the
+    site was still being built, the pages are live now, preflight has passed,
+    and only the URL-carrying operations are left.
+
+    Nothing is created from scratch here, so there are no temp ids — the ad
+    groups are found by name in the account and the real resource names are
+    handed to the same builder the combined push uses.
+    """
+    from google.ads.googleads.errors import GoogleAdsException
+
+    # Resolve the campaign case-insensitively, the same way the guard script
+    # does: the strategy's casing and the account's casing drift apart, and
+    # GAQL's = is case-sensitive.
+    camp_res = camp_id = None
+    for row in svc.search(customer_id=PUSH_CUSTOMER_ID, query=(
+            "SELECT campaign.resource_name, campaign.id, campaign.name, campaign.status "
+            "FROM campaign WHERE campaign.status != 'REMOVED'")):
+        if row.campaign.name.strip().lower() == camp_name.strip().lower():
+            camp_res, camp_id = row.campaign.resource_name, row.campaign.id
+            if row.campaign.name != camp_name:
+                log(f"ℹ️ Campaign matched case-insensitively: '{camp_name}' -> '{row.campaign.name}'")
+            camp_name = row.campaign.name
+            break
+
+    if not camp_res:
+        log(f"❌ Campaign '{camp_name}' not found in account {PUSH_CUSTOMER_ID}. "
+            "Run the structure phase first.")
+        return
+
+    ag_res_by_name = {}
+    for row in svc.search(customer_id=PUSH_CUSTOMER_ID, query=(
+            "SELECT ad_group.resource_name, ad_group.name FROM ad_group "
+            f"WHERE campaign.id = {camp_id} AND ad_group.status != 'REMOVED'")):
+        ag_res_by_name[row.ad_group.name] = row.ad_group.resource_name
+
+    if not ag_res_by_name:
+        log(f"❌ Campaign '{camp_name}' has no ad groups — structure phase incomplete.")
+        return
+    log(f"Found campaign '{camp_name}' with {len(ag_res_by_name)} ad group(s).")
+
+    # Re-pushing the same RSAs would stack a second identical ad in every ad
+    # group, and Google will happily let you: duplicate ads split impressions
+    # and make the ad-strength reading meaningless.
+    existing_ads = 0
+    for row in svc.search(customer_id=PUSH_CUSTOMER_ID, query=(
+            "SELECT ad_group_ad.ad.id FROM ad_group_ad "
+            f"WHERE campaign.id = {camp_id} AND ad_group_ad.status != 'REMOVED'")):
+        existing_ads += 1
+    if existing_ads:
+        log(f"⚠️ {existing_ads} ad(s) already live in this campaign — creative "
+            "phase already ran. Nothing pushed (delete them first to re-push).")
+        return
+
+    def op():
+        return client.get_type("MutateOperation")
+
+    def temp(res_id):
+        return f"customers/{PUSH_CUSTOMER_ID}/{res_id}"
+
+    ops = []
+    n_rsa, n_sl = build_creative_ops(client, op, temp, ag_res_by_name, ops)
+    if not ops:
+        log("⚠️ Nothing to push — no RSA rows or sitelinks found.")
+        return
+
+    log(f"Creative ops: {n_rsa} RSAs + {n_sl} sitelinks = {len(ops)}")
+
+    req = client.get_type("MutateGoogleAdsRequest")
+    req.customer_id = PUSH_CUSTOMER_ID
+    req.mutate_operations.extend(ops)
+    req.validate_only = validate
+    req.partial_failure = False
+    try:
+        svc.mutate(request=req)
+    except GoogleAdsException as e:
+        log("❌ Google Ads API rejected the creative push:")
+        for err in e.failure.errors[:20]:
+            log(f"   - {err.error_code} | {err.message}")
+        return
+
+    if validate:
+        log("✅ VALIDATION PASSED — the ads are valid; nothing was created. "
+            "Run again with push_mode=live to attach them.")
+        return
+
+    log(f"✅ CREATIVE PUSH DONE — {n_rsa} RSAs + {n_sl} sitelinks on '{camp_name}'.")
+
+    # Enabling starts spend, so it never happens as a side effect.
+    if ENABLE_CAMPAIGN:
+        try:
+            from google.api_core import protobuf_helpers
+
+            c_svc = client.get_service("CampaignService")
+            c_op = client.get_type("CampaignOperation")
+            c_op.update.resource_name = camp_res
+            c_op.update.status = client.enums.CampaignStatusEnum.ENABLED
+            # An update without a field mask is rejected; the mask has to
+            # name exactly the fields that were set.
+            client.copy_from(
+                c_op.update_mask,
+                protobuf_helpers.field_mask(None, c_op.update._pb),
+            )
+            c_svc.mutate_campaigns(customer_id=PUSH_CUSTOMER_ID, operations=[c_op])
+            log(f"🟢 Campaign '{camp_name}' ENABLED — it is spending now.")
+        except GoogleAdsException as e:
+            log("⚠️ Could not enable the campaign:")
+            for err in e.failure.errors[:5]:
+                log(f"   - {err.message}")
+    else:
+        log(f"⏸️  Campaign '{camp_name}' is still PAUSED. Enable it in the UI, "
+            "or re-run with enable_campaign=yes.")
+
+    write_manifest("creative_done", camp_name, collect_creative_urls(), [])
 
 
 def main():
@@ -88,6 +487,42 @@ def main():
         return
     camp_name = campaigns[0]  # single-campaign mode is the default
     validate = PUSH_MODE != "live"
+
+    # ── decide what this run is allowed to push ─────────────────────────
+    creative_urls = collect_creative_urls()
+    pages_live, dead = (True, [])
+    if PREFLIGHT and creative_urls and PUSH_PHASE != "structure":
+        pages_live, dead = preflight(creative_urls)
+    elif not PREFLIGHT:
+        log("⚠️ PREFLIGHT=off — landing pages not checked. A URL that 404s "
+            "here will be disapproved by Google.")
+
+    if PUSH_PHASE == "structure":
+        push_creative = False
+        log("")
+        log("▶ Phase: STRUCTURE (ads held back by request)")
+    elif PUSH_PHASE == "creative":
+        # Its own path: the campaign already exists, so nothing is created
+        # from scratch and the ad groups are looked up by name.
+        if not pages_live:
+            log("")
+            log("❌ Creative phase blocked — these pages are not serving yet:")
+            for u, why in dead:
+                log(f"   {u} — {why}")
+            write_manifest("structure_done", camp_name, creative_urls, dead)
+            _write_report()
+            return
+        run_creative_phase(client, svc, camp_name, validate)
+        _write_report()
+        return
+    else:
+        push_creative = pages_live
+        log("")
+        if pages_live:
+            log("▶ Phase: AUTO — every page answers, pushing structure + ads together")
+        else:
+            log(f"▶ Phase: AUTO — {len(dead)} of {len(creative_urls)} page(s) "
+                "not live yet, so structure only")
 
     # NAME COLLISION: the mutate is atomic and partial_failure is off, so a
     # campaign whose name already exists in the account fails the ENTIRE push
@@ -322,101 +757,17 @@ def main():
             ops.append(o)
             n_neg += 1
 
-    # ── RSAs (from Stage 3.8's Editor CSV — same data, API delivery) ────
-    n_rsa = 0
+    # RSAs + sitelinks only when this run is allowed to push creative.
+    # In structure phase they are held back on purpose: they are the only
+    # operations with a Final URL, so holding them is what makes a push at a
+    # site that is not built yet impossible to disapprove.
+    n_rsa = n_sl = 0
     ag_res_by_name = {g.get("name"): temp(f"adGroups/{-10 - i}")
                       for i, g in enumerate(groups)}
-    pin_enum = client.enums.ServedAssetFieldTypeEnum
-    pin_map = {"1": pin_enum.HEADLINE_1, "2": pin_enum.HEADLINE_2, "3": pin_enum.HEADLINE_3}
-    for r in load_rows("rsa_editor.csv"):
-        ag_res = ag_res_by_name.get(r.get("Ad Group"))
-        if not ag_res:
-            log(f"⚠️ RSA skipped — unknown ad group '{r.get('Ad Group')}'")
-            continue
-        o = op()
-        ad = o.ad_group_ad_operation.create
-        ad.ad_group = ag_res
-        ad.status = client.enums.AdGroupAdStatusEnum.ENABLED
-        rsa = ad.ad.responsive_search_ad
-        for i in range(1, 16):
-            h = (r.get(f"Headline {i}") or "").strip()
-            if not h:
-                continue
-            asset = client.get_type("AdTextAsset")
-            asset.text = h
-            pin = (r.get(f"Headline {i} position") or "").strip()
-            if pin in pin_map:
-                asset.pinned_field = pin_map[pin]
-            rsa.headlines.append(asset)
-        for j in range(1, 5):
-            d = (r.get(f"Description {j}") or "").strip()
-            if d:
-                asset = client.get_type("AdTextAsset")
-                asset.text = d
-                rsa.descriptions.append(asset)
-        if r.get("Path 1"):
-            rsa.path1 = r["Path 1"][:15]
-        if r.get("Path 2"):
-            rsa.path2 = r["Path 2"][:15]
-        if r.get("Final URL"):
-            ad.ad.final_urls.append(r["Final URL"])
-        # Google requires >=3 headlines and >=2 descriptions on an RSA, and a
-        # Final URL. One short row would fail the whole atomic push, so drop the
-        # row instead and say so.
-        if len(rsa.headlines) < 3 or len(rsa.descriptions) < 2 or not ad.ad.final_urls:
-            log(f"⚠️ RSA skipped for '{r.get('Ad Group')}' — needs 3+ headlines, "
-                f"2+ descriptions and a Final URL "
-                f"(got {len(rsa.headlines)}/{len(rsa.descriptions)}"
-                f"{', no URL' if not ad.ad.final_urls else ''})")
-            continue
-        ops.append(o)
-        n_rsa += 1
-
-    # ── sitelinks: one set PER AD GROUP, pointing at that page's anchors ──
-    # Ad-group level so a Washing Machine group shows "Washer Repair Pricing",
-    # not a campaign-wide generic "Pricing". Asset + AdGroupAsset link ride in
-    # the same atomic mutate as everything else.
-    n_sl = 0
-    if os.path.exists("sitelinks.json"):
-        with open("sitelinks.json", encoding="utf-8") as f:
-            sl_data = json.load(f)
-        asset_i = -1000
-        for s in sl_data.get("sitelink_sets", []):
-            ag_res = ag_res_by_name.get(s.get("ad_group"))
-            if not ag_res:
-                log(f"⚠️ Sitelinks skipped — unknown ad group '{s.get('ad_group')}'")
-                continue
-            for l in (s.get("sitelinks") or []):
-                text = (l.get("text") or "").strip()
-                d1 = (l.get("desc1") or "").strip()
-                d2 = (l.get("desc2") or "").strip()
-                url = (l.get("url") or "").strip()
-                # Google's limits — an over-long asset fails the whole mutate.
-                # Descriptions are all-or-nothing: send both lines or neither.
-                if not text or not url or len(text) > 25:
-                    log(f"⚠️ Sitelink dropped ({s.get('ad_group')}): "
-                        f"text {len(text)}/25 chars or missing URL — '{text[:30]}'")
-                    continue
-                asset_res = temp(f"assets/{asset_i}")
-                asset_i -= 1
-                o = op()
-                a = o.asset_operation.create
-                a.resource_name = asset_res
-                a.name = f"{s.get('ad_group','')} — {text}"[:120]
-                a.sitelink_asset.link_text = text
-                if len(d1) <= 35 and len(d2) <= 35 and d1 and d2:
-                    a.sitelink_asset.description1 = d1
-                    a.sitelink_asset.description2 = d2
-                a.final_urls.append(url)
-                ops.append(o)
-
-                o = op()
-                aga = o.ad_group_asset_operation.create
-                aga.ad_group = ag_res
-                aga.asset = asset_res
-                aga.field_type = client.enums.AssetFieldTypeEnum.SITELINK
-                ops.append(o)
-                n_sl += 1
+    if push_creative:
+        n_rsa, n_sl = build_creative_ops(client, op, temp, ag_res_by_name, ops)
+    else:
+        log("⏸️  Structure phase — RSAs and sitelinks held back.")
 
     # ── locations: targets with bid modifiers + exclusions ─────────────
     n_loc = n_loc_neg = 0
@@ -476,6 +827,35 @@ def main():
                 + (f" | at {err.location.field_path_elements}" if err.location.field_path_elements else ""))
         _write_report()
         return
+
+    # ── what happens next ───────────────────────────────────────────────
+    # A held push is only half a campaign, and the half that is missing is
+    # invisible in the Ads UI — the campaign looks finished, it just has no
+    # ads. Say so plainly, and leave the manifest behind so the state is on
+    # disk rather than in someone's memory.
+    if not validate:
+        write_manifest("creative_done" if push_creative else "structure_done",
+                       camp_name, creative_urls, dead)
+
+    if not push_creative:
+        log("")
+        log("⏸️  HELD — the campaign structure is up, but it has NO ADS yet.")
+        if dead:
+            log(f"    {len(dead)} landing page(s) are not serving:")
+            for u, why in dead:
+                log(f"      {u} — {why}")
+            log("    Build/deploy those pages, then run this stage again.")
+        elif creative_urls:
+            log(f"    {len(creative_urls)} landing page URL(s) were NOT checked "
+                "(structure phase skips preflight).")
+        else:
+            log("    No landing page URLs were found — is rsa_editor.csv missing?")
+        log("    The next run pushes the RSAs and sitelinks and, with "
+            "enable_campaign=yes, turns the campaign on.")
+    elif not validate:
+        log("")
+        log(f"⏸️  Campaign '{camp_name}' is PAUSED — nothing is spending. "
+            "Enable it in the UI, or re-run with enable_campaign=yes.")
 
     # ── audiences (second pass, best-effort): resolve segment names →
     #    user_interest ids, then attach as campaign criteria ─────────────
