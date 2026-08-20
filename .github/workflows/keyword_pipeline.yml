@@ -95,6 +95,27 @@ on:
         options:
           - validate
           - live
+      push_phase:
+        description: "API PUSH phase: auto = push the ads too once every landing page answers | structure = campaign + keywords only, ads held for a later run | creative = attach the ads to a structure that already exists"
+        required: false
+        default: 'auto'
+        type: choice
+        options:
+          - auto
+          - structure
+          - creative
+      enable_campaign:
+        description: "Turn the campaign ON at the end of the creative phase. Off by default because enabling starts spending"
+        required: false
+        default: 'no'
+        type: choice
+        options:
+          - 'no'
+          - 'yes'
+      landing_urls:
+        description: "EXISTING PAGES: the client's live landing page URLs, comma or newline separated. Given these, seeds are read off the pages and one ad group is built per page"
+        required: false
+        default: ''
 
 # Needed so Stage 5 can push the finished report to the results-data branch
 # using the automatic GITHUB_TOKEN (no extra secret required for this part).
@@ -123,6 +144,31 @@ jobs:
             echo "value=${{ github.event.inputs.request_id }}" >> "$GITHUB_OUTPUT"
           fi
 
+      # EXISTING PAGES PATH. Only the seeds change: they are read off the
+      # client's live pages instead of typed in, and the page->ad-group map is
+      # written for the later stages. Everything after this is the normal
+      # pipeline, so the strategy is still built on real Planner volumes.
+      - name: Stage 0-CRAWL - Read the client's existing landing pages
+        id: crawl
+        if: ${{ github.event.inputs.landing_urls != '' }}
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          CLAUDE_MODEL: claude-sonnet-5
+          CLAUDE_EFFORT_CRAWL: "low"
+          LANDING_URLS: ${{ github.event.inputs.landing_urls }}
+          BUSINESS_NAME: ${{ github.event.inputs.business_name }}
+          NICHE_DESCRIPTION: ${{ github.event.inputs.niche_description }}
+          TARGET_LOCATION: ${{ github.event.inputs.target_location }}
+          LANGUAGE: ${{ github.event.inputs.language }}
+        run: |
+          python scripts/crawl_landing_pages.py
+          # Hand the crawled seeds to Stage 1. Written as a step output rather
+          # than an env var because the Stage 1 step sets SEED_KEYWORDS in its
+          # own env block, which would win over anything exported here.
+          SEEDS=$(python -c "import json;print(','.join(json.load(open('landing_pages_source.json',encoding='utf-8'))['seed_keywords']))")
+          echo "seeds=$SEEDS" >> "$GITHUB_OUTPUT"
+          echo "Seeds from the pages: $SEEDS"
+
       - name: Stage 1 - Pull real keyword data from Google Ads
         env:
           GOOGLE_ADS_DEVELOPER_TOKEN: ${{ secrets.GOOGLE_ADS_DEVELOPER_TOKEN }}
@@ -131,7 +177,7 @@ jobs:
           GOOGLE_ADS_REFRESH_TOKEN: ${{ secrets.GOOGLE_ADS_REFRESH_TOKEN }}
           GOOGLE_ADS_CUSTOMER_ID: ${{ secrets.GOOGLE_ADS_CUSTOMER_ID }}
           GOOGLE_ADS_USE_PROTO_PLUS: "true"
-          SEED_KEYWORDS: ${{ github.event.inputs.seed_keywords }}
+          SEED_KEYWORDS: ${{ steps.crawl.outputs.seeds || github.event.inputs.seed_keywords }}
           # Universal targeting: geo auto-resolves from the free-text location,
           # language auto-detects from the seeds. Explicit ids override both.
           TARGET_LOCATION: ${{ github.event.inputs.target_location }}
@@ -159,7 +205,7 @@ jobs:
           GOOGLE_ADS_REFRESH_TOKEN: ${{ secrets.GOOGLE_ADS_REFRESH_TOKEN }}
           GOOGLE_ADS_CUSTOMER_ID: ${{ secrets.GOOGLE_ADS_CUSTOMER_ID }}
           GOOGLE_ADS_USE_PROTO_PLUS: "true"
-          SEED_KEYWORDS: ${{ github.event.inputs.seed_keywords }}
+          SEED_KEYWORDS: ${{ steps.crawl.outputs.seeds || github.event.inputs.seed_keywords }}
           TARGET_LOCATION: ${{ github.event.inputs.target_location }}
           LOCATION_ID: ${{ github.event.inputs.location_id }}
           LANGUAGE_ID: ${{ github.event.inputs.language_id }}
@@ -274,6 +320,8 @@ jobs:
           GOOGLE_ADS_USE_PROTO_PLUS: "true"
           PUSH_CUSTOMER_ID: ${{ github.event.inputs.push_customer_id }}
           PUSH_MODE: ${{ github.event.inputs.push_mode || 'validate' }}
+          PUSH_PHASE: ${{ github.event.inputs.push_phase || 'auto' }}
+          ENABLE_CAMPAIGN: ${{ github.event.inputs.enable_campaign || 'no' }}
         run: python scripts/push_to_google_ads.py
 
       - name: Stage 3-SEO - Website-builder content plan (Mode 4 focus, ~$0.20)

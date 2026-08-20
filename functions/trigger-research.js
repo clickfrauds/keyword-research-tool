@@ -33,10 +33,17 @@ export async function onRequestPost(context) {
 
   const { business_name, niche_description, target_location, seed_keywords, access_code } = body;
 
-  if (!business_name || !niche_description || !target_location || !seed_keywords) {
+  // Existing-pages runs supply URLs instead of seeds: the seeds are read off
+  // the pages themselves in Stage 0-CRAWL, so requiring them here would force
+  // the operator to invent the very thing the crawl exists to work out.
+  const landing_urls = String(body.landing_urls || "").trim();
+
+  if (!business_name || !niche_description || !target_location ||
+      (!seed_keywords && !landing_urls)) {
     return new Response(
       JSON.stringify({
-        error: "business_name, niche_description, target_location and seed_keywords are all required",
+        error: "business_name, niche_description and target_location are required, "
+             + "plus either seed_keywords or landing_urls",
       }),
       { status: 400, headers: { "Content-Type": "application/json" } }
     );
@@ -117,7 +124,10 @@ export async function onRequestPost(context) {
         business_name: String(business_name).slice(0, 200),
         niche_description: String(niche_description).slice(0, 500),
         target_location: String(target_location).slice(0, 200),
-        seed_keywords: String(seed_keywords).slice(0, 1000),
+        seed_keywords: String(seed_keywords || "").slice(0, 1000),
+        // Live pages the campaign must be built around. Present = Stage
+        // 0-CRAWL runs and its seeds replace seed_keywords downstream.
+        landing_urls: landing_urls.slice(0, 4000),
         language,
         // Deliverable selector: google_ads | seo | both
         research_type: ["google_ads", "seo", "both"].includes(body.research_type)
@@ -139,6 +149,14 @@ export async function onRequestPost(context) {
         // Stage 4-PUSH: direct API push (digits-only id; blank = CSV-only)
         push_customer_id: String(body.push_customer_id || "").replace(/\D/g, "").slice(0, 12),
         push_mode: body.push_mode === "live" ? "live" : "validate",
+        // Two-phase push. auto holds the ads back whenever a landing page is
+        // not serving yet, which is what stops Google disapproving them as
+        // "Destination not working"; creative attaches them on a later run.
+        push_phase: ["auto", "structure", "creative"].includes(body.push_phase)
+          ? body.push_phase : "auto",
+        // Enabling starts spend, so it is never inferred — only an explicit
+        // yes turns the campaign on.
+        enable_campaign: body.enable_campaign === "yes" ? "yes" : "no",
         request_id,
       };
 

@@ -269,6 +269,19 @@
     <div class="hint" id="lang-hint">All 23 languages work for <b>Google Ads campaigns</b> (research, ad groups, ad copy, sitelinks and live push) and for <b>Mode 3 websites</b>. Give your seeds and services <b>in this same language</b> — Spanish seeds for a Spanish site. Planner data, ad groups and landing pages all come back in it; URL slugs stay clean English. English is the default and behaves exactly as before.</div>
     <div class="hint" id="lang-mode5-note" style="display:none; color:#8a5a12;">⚠️ <b>Mode 5 note:</b> the area research runs in your chosen language and the plan is tagged with it, so the builder's area pages come out in that language — but the plan's own summary text is not translated. Everything else is unaffected.</div>
 
+    <label for="pages_mode">Landing pages</label>
+    <select id="pages_mode" name="pages_mode">
+      <option value="build">Will be built later — the website builder makes them from this run's JSON</option>
+      <option value="existing">Already live — paste the client's page URLs below</option>
+    </select>
+    <div class="hint" id="pages-mode-hint">Choose <b>Already live</b> for a client whose site exists. The run then reads those pages instead of asking you for seed keywords, and builds <b>one ad group per page</b> — so an ad group whose page does not exist becomes impossible.</div>
+
+    <div id="landing-urls-block" style="display:none">
+      <label for="landing_urls">Existing landing page URLs</label>
+      <textarea id="landing_urls" name="landing_urls" rows="5" placeholder="https://client.com/ac-repair/&#10;https://client.com/ac-installation/&#10;https://client.com/duct-cleaning/"></textarea>
+      <div class="hint">One per line (commas work too). Each page is read for its real services, and those become the seed keywords — <b>then the normal Google Keyword Planner pull runs on them</b>, so the strategy still comes from measured volume, never from guessing at page text. As many ad groups as URLs: 5 pages → 5 ad groups. The URLs are used exactly as given, so nothing can point at a page that was never built. Sitelinks use each page's own <code>#sections</code> when it has them, and otherwise point at the client's other pages. Any page too thin to convert comes back in <code>page_improvements.json</code> — feed it to the builder and the content improves while the URL stays put.</div>
+    </div>
+
     <label for="seed_keywords" id="seed-label">Seed keywords</label>
     <textarea id="seed_keywords" name="seed_keywords" required placeholder="ac repair phoenix, ac not cooling, ac service phoenix"></textarea>
     <div class="hint" id="seed-hint">Comma-separated. 3–6 seed terms works well. Tip: include your city in a few seeds for local data.</div>
@@ -288,7 +301,7 @@
       // The form shrinks to: campaign name(s) + the location picker.
       var LOC_HIDE = ["niche_description", "website_url", "lang_url_prefix",
                       "seed_keywords", "existing_campaign", "existing_ad_groups",
-                      "max_ad_groups", "premium_areas", "low_areas"];
+                      "max_ad_groups", "premium_areas", "low_areas", "pages_mode"];
       function setLocationsOnly(on) {
         LOC_HIDE.forEach(function (id) {
           var el = document.getElementById(id);
@@ -298,6 +311,9 @@
           if (id === "niche_description" || id === "seed_keywords") el.required = !on;
         });
         document.getElementById("push-block").style.display = on ? "none" : "";
+        document.getElementById("landing-urls-block").style.display = "none";
+        document.getElementById("landing_urls").required = false;
+        document.getElementById("pages-mode-hint").style.display = on ? "none" : "";
         document.getElementById("seed-hint").style.display = on ? "none" : "";
         document.getElementById("existing-hint").style.display = on ? "none" : "";
         document.getElementById("langpfx-hint").style.display = on ? "none" : "";
@@ -331,6 +347,34 @@
           ? "ONE service. Every real area of the city is then measured separately (\"{service} {area}\") and only areas with their own demand are kept — that is what stops pSEO turning into doorway pages. Set Target location as CITY, COUNTRY (e.g. Phoenix, United States): the country is required. ~3 minutes for 60 areas. Paste the resulting .mode5.json link into the builder's Mode 5."
           : "Comma-separated. 3–6 seed terms works well. Tip: include your city in a few seeds for local data.";
       });
+      // Existing-pages mode. The seed box is not just hidden, it is switched
+      // off (required=false): the whole point is that the seeds come off the
+      // client's own pages, so demanding them here would ask the operator to
+      // invent the answer the crawl exists to find.
+      function setPagesMode() {
+        var on = document.getElementById("pages_mode").value === "existing";
+        var m3 = document.getElementById("research_type").value === "mode3";
+        var m5 = document.getElementById("research_type").value === "mode5";
+        document.getElementById("landing-urls-block").style.display = on ? "" : "none";
+        document.getElementById("landing_urls").required = on;
+        var seedEl = document.getElementById("seed_keywords");
+        var seedLab = document.getElementById("seed-label");
+        // Modes 3 and 5 use that box for their own thing, so it always stays.
+        var hideSeeds = on && !m3 && !m5;
+        seedEl.style.display = hideSeeds ? "none" : "";
+        seedEl.required = !hideSeeds;
+        seedLab.style.display = hideSeeds ? "none" : "";
+        document.getElementById("seed-hint").style.display = hideSeeds ? "none" : "";
+        // Final URLs come from the pages themselves now, so the domain field
+        // has nothing to build and would only mislead.
+        var wu = document.getElementById("website_url");
+        var wuLab = document.querySelector('label[for="website_url"]');
+        wu.style.display = hideSeeds ? "none" : "";
+        if (wuLab) wuLab.style.display = hideSeeds ? "none" : "";
+      }
+      document.getElementById("pages_mode").addEventListener("change", setPagesMode);
+      document.getElementById("research_type").addEventListener("change", setPagesMode);
+
       // The Mode 5 language caveat also has to react to the language dropdown.
       document.getElementById("language").addEventListener("change", function () {
         var m5 = document.getElementById("research_type").value === "mode5";
@@ -431,6 +475,18 @@
           <option value="live">Live — create the campaign (Paused)</option>
         </select>
       </div>
+      <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:8px;">
+        <select id="push_phase" name="push_phase" style="flex:2 1 220px;">
+          <option value="auto">Auto — push the ads too, but only once every landing page answers</option>
+          <option value="structure">Structure only — campaign + keywords now, ads held for later</option>
+          <option value="creative">Creative — attach the ads to a structure already in the account</option>
+        </select>
+        <select id="enable_campaign" name="enable_campaign" style="flex:1 1 160px;">
+          <option value="no">Leave Paused (default)</option>
+          <option value="yes">Enable the campaign — starts spending</option>
+        </select>
+      </div>
+      <div class="hint" id="push-phase-hint"><b>Auto is the one to use.</b> Before pushing any ad it fetches every Final URL and sitelink: a 404, a page that returns 200 while saying "not found", one that redirects to the homepage, or one too thin to have real content all count as not ready. If any page fails, the campaign, ad groups, keywords, negatives, geo and audiences still go up — none of them carries a URL, so Google has nothing to review and nothing to disapprove — and the ads are held. Deploy the pages, run the <b>same thing again</b>, and the ads go in. That is what ends "Destination not working". Enabling is separate on purpose: a campaign that turns itself on starts spending money.</div>
       <div class="hint">Pushes the whole campaign straight into the account through the API — no Editor, no import. Run <b>Validate</b> first (Google checks every operation without touching the account), then Live. The campaign always lands <b>Paused</b>. The account must be linked to your MCC.</div>
     </div>
 
@@ -621,6 +677,32 @@
       </dl>
       <div class="sg-tips">
         <div><b>Perfect-use tips:</b> import via Ads Editor → Account → Import. Campaigns that don't exist yet import <b>Paused</b>. After import set each campaign to <b>“Presence: people in or regularly in”</b> — never “interest” — so budget only buys clicks inside the target area.</div>
+      </div>
+    </div>
+
+    <div class="sg-section">Existing pages &amp; the two-phase push</div>
+
+    <div class="sg-card is-mode">
+      <div class="sg-head"><span class="sg-badge">GOOGLE ADS · LANDING PAGES</span><span class="sg-eg">the "Destination not working" fix</span></div>
+      <div class="sg-mode-name">The ads never go up before the pages do</div>
+      <div class="sg-tips">
+        <div><b>Why ads used to be disapproved:</b> the Final URL was your domain plus a slug the run invented, and it was pushed whether or not a page existed there — the page only appeared later, when the website builder used the same JSON. Pausing the campaign does not help: Google reviews the ads either way.</div>
+        <div><b>Auto (the default)</b> fetches every Final URL and sitelink before pushing an ad. It refuses more than a 404: a page that returns 200 while its title says "not found", one that redirects to your homepage or another domain, and one too thin to have real content all count as not ready.</div>
+        <div><b>If a page is not ready</b>, the campaign, ad groups, keywords, negatives, geo targeting and audiences still go up — none of them carries a URL, so there is nothing for Google to review. Only the ads are held. Deploy the pages, run the same thing again, and the ads go in.</div>
+        <div><b>Enabling is separate.</b> The campaign stays Paused unless you pick "Enable the campaign" — turning it on starts spending, and that should never happen as a side effect of a push.</div>
+      </div>
+    </div>
+
+    <div class="sg-card is-mode">
+      <div class="sg-head"><span class="sg-badge">EXISTING PAGES</span><span class="sg-eg">clients whose site is already live</span></div>
+      <div class="sg-mode-name">The pages decide the campaign, not the other way round</div>
+      <div class="sg-formula">your URLs → pages read → seeds → <b>Keyword Planner (real volumes)</b> → 1 page = 1 ad group</div>
+      <div class="sg-tips">
+        <div><b>Set Landing pages to "Already live"</b> and paste the URLs instead of seed keywords. Each page is read for what it actually sells, and that becomes the seeds — <b>then the normal Planner pull runs on them</b>. The strategy still comes from measured volume; the crawl only replaces you typing the seeds in.</div>
+        <div><b>One ad group per URL.</b> 5 pages → 5 ad groups. An ad group whose page does not exist stops being possible, and the URLs are used exactly as given, so nothing is ever rebuilt from a slug.</div>
+        <div><b>Ad copy matches the page.</b> The run reads each page's real H1 and H2s and writes ads the page can back up — which is what lifts Ad Relevance and Landing Page Experience, and lowers CPC.</div>
+        <div><b>Sitelinks that go somewhere.</b> If a page has its own <code>#sections</code> they are used; if not, its sitelinks point at the client's <b>other pages</b> — a better path than scrolling the page the visitor is already on.</div>
+        <div><b>Nothing is wasted.</b> Keywords with real volume that no current page sells come back as <code>new_page_opportunities</code> — the client's growth list. Pages too thin to convert come back in <code>page_improvements.json</code>: feed it to the builder and the content improves while the URL stays exactly where it is, so nothing in the campaign has to move.</div>
       </div>
     </div>
 
