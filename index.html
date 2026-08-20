@@ -1021,7 +1021,17 @@
         body: JSON.stringify(data),
       });
       const json = await res.json();
-      if (!res.ok) throw new Error(json.error || "Could not start the report");
+      // GitHub's own message rides in `detail` and used to be thrown away, so
+      // every dispatch problem looked identical and said nothing about itself.
+      if (!res.ok) {
+        var msg = json.error || "Could not start the report";
+        if (json.detail) {
+          var d = json.detail;
+          try { var p = JSON.parse(d); d = p.message || d; } catch (e) {}
+          msg += " — " + String(d).slice(0, 400);
+        }
+        throw new Error(msg);
+      }
       request_id = json.request_id;
     } catch (err) {
       setStatus("Error: " + err.message, true);
