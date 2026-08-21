@@ -402,11 +402,15 @@ def run_one(client, svc, ca_svc, row, validate, GoogleAdsException):
     if missing:
         ops = [build_create_op(client, n, ACTIONS[n]) for n in missing]
         try:
-            ca_svc.mutate_conversion_actions(
-                customer_id=PUSH_CUSTOMER_ID,
-                operations=ops,
-                validate_only=validate,
-            )
+            # validate_only lives on the request message, not on the method:
+            # mutate_conversion_actions() only takes request / customer_id /
+            # operations, so passing it as a keyword raises TypeError before a
+            # single call reaches Google.
+            req = client.get_type("MutateConversionActionsRequest")
+            req.customer_id = PUSH_CUSTOMER_ID
+            req.operations.extend(ops)
+            req.validate_only = validate
+            ca_svc.mutate_conversion_actions(request=req)
         except GoogleAdsException as e:
             for err in e.failure.errors[:5]:
                 log(f"❌ {name}: {err.message}")
