@@ -209,6 +209,19 @@ def build_create_op(client, name, spec):
     return op
 
 
+# Cloudflare sits in front of the admin endpoint and its Browser Integrity
+# Check rejects a request whose headers do not look like a browser's —
+# error 1010, a 403 raised before the function ever runs, so the password is
+# never even examined. urllib sends no User-Agent at all by default, which is
+# exactly the shape it refuses.
+_API_HEADERS = {
+    "User-Agent": ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+                   "(KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"),
+    "Accept": "application/json, text/plain, */*",
+    "Accept-Language": "en-US,en;q=0.9",
+}
+
+
 def fetch_clients():
     """Every client_keys row, through the admin endpoint.
 
@@ -224,10 +237,15 @@ def fetch_clients():
 
     try:
         url = f"{ADMIN_API_URL}?password={urllib.parse.quote(ADMIN_PASSWORD)}"
-        with urllib.request.urlopen(url, timeout=30) as r:
+        req = urllib.request.Request(url, headers=_API_HEADERS)
+        with urllib.request.urlopen(req, timeout=30) as r:
             payload = json.loads(r.read().decode("utf-8"))
     except Exception as e:
         log(f"⚠️ Could not read the client list ({str(e)[:80]}).")
+        if "403" in str(e):
+            log("   A 403 here is Cloudflare, not the password — the request "
+                "was refused before the endpoint ran. Add a WAF skip rule for "
+                "/api/* so server-to-server calls get through.")
         return []
 
     if payload.get("notice"):
@@ -340,7 +358,7 @@ def write_back(results, row):
         req = urllib.request.Request(
             ADMIN_API_URL,
             data=json.dumps(payload).encode("utf-8"),
-            headers={"Content-Type": "application/json"},
+            headers=dict(_API_HEADERS, **{"Content-Type": "application/json"}),
             method="POST",
         )
         with urllib.request.urlopen(req, timeout=20) as r:
