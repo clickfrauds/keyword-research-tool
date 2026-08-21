@@ -324,7 +324,15 @@ def resolve_account(row):
 
 
 def write_back(results, row):
-    """Put the labels on the client_keys row, through the admin endpoint."""
+    """Put the labels on the client_keys row, through the admin endpoint.
+
+    Returns True only if the row actually took them. The caller used to
+    announce "labels written" whichever way this went, so a client whose row
+    received nothing still got a green tick in the summary — and the labels
+    were only missed later, when the generated middleware came out with an
+    empty AW id.
+    """
+    import time
     import urllib.request
     import urllib.error
 
@@ -332,11 +340,11 @@ def write_back(results, row):
         log("ℹ️ ADMIN_API_URL / ADMIN_PASSWORD / CLIENT_TOKEN not all set — "
             "labels not written back. Paste them into the admin page by hand, "
             "or set the three and re-run.")
-        return
+        return False
 
     if not row:
         log("⚠️ no client row — nothing written back.")
-        return
+        return False
 
     payload = {
         "password": ADMIN_PASSWORD,
@@ -354,22 +362,43 @@ def write_back(results, row):
     # given, and sending stale copies of those would be a way to overwrite
     # them — `active` in particular, which both edge functions check on
     # every single request.
-    try:
-        req = urllib.request.Request(
-            ADMIN_API_URL,
-            data=json.dumps(payload).encode("utf-8"),
-            headers=dict(_API_HEADERS, **{"Content-Type": "application/json"}),
-            method="POST",
-        )
-        with urllib.request.urlopen(req, timeout=20) as r:
-            r.read()
-        log(f"✅ Labels written to client_keys row '{row.get('website_name')}'.")
-        log("   Admin page ab ye 4 fields khud bhar lega — middleware generate kar lein.")
-    except urllib.error.HTTPError as e:
-        body = e.read().decode("utf-8", "replace")[:200]
-        log(f"⚠️ Write-back failed ({e.code}): {body}")
-    except Exception as e:
-        log(f"⚠️ Write-back failed: {str(e)[:120]}")
+    # Cloudflare rate limits /api/*. The client list was read a few seconds
+    # ago and this is the second call — measured live, two seconds apart earns
+    # a 429 and five seconds apart does not, which is exactly where this lands.
+    # Waiting is the whole fix, and it has to be automatic: by the time this
+    # runs the actions exist in Google and only the row is missing.
+    for attempt in range(1, 6):
+        try:
+            req = urllib.request.Request(
+                ADMIN_API_URL,
+                data=json.dumps(payload).encode("utf-8"),
+                headers=dict(_API_HEADERS, **{"Content-Type": "application/json"}),
+                method="POST",
+            )
+            with urllib.request.urlopen(req, timeout=20) as r:
+                r.read()
+            log(f"✅ Labels written to client_keys row '{row.get('website_name')}'.")
+            log("   Admin page ab ye 4 fields khud bhar lega — middleware generate kar lein.")
+            return True
+        except urllib.error.HTTPError as e:
+            if e.code == 429 and attempt < 5:
+                try:
+                    wait = int(e.headers.get("Retry-After", "") or 10)
+                except (TypeError, ValueError):
+                    wait = 10
+                wait = min(max(wait, 1) + 1, 60)
+                log(f"   ⏳ rate limited writing the row — waiting {wait}s "
+                    f"(attempt {attempt} of 5)")
+                time.sleep(wait)
+                continue
+            body = e.read().decode("utf-8", "replace")[:200]
+            log(f"⚠️ Write-back failed ({e.code}): {body}")
+            return False
+        except Exception as e:
+            log(f"⚠️ Write-back failed: {str(e)[:120]}")
+            return False
+
+    return False
 
 
 def run_one(client, svc, ca_svc, row, validate, GoogleAdsException):
@@ -456,8 +485,20 @@ def run_one(client, svc, ca_svc, row, validate, GoogleAdsException):
     ALL_RESULTS.append(results)
 
     if results["aw_id"] and all(results["actions"][n].get("label") for n in ACTIONS):
-        write_back(results, row)
-        return "labels written" if not validate else "validated"
+        if validate:
+            return "validated"
+        if write_back(results, row):
+            return "labels written"
+        # Google has the actions and the labels; the row does not. Nothing
+        # needs creating again — say so, and say where the labels are, because
+        # the artifact has them and they can be pasted in by hand.
+        log("")
+        log("   ⚠️  The actions and labels exist in Google, but the client row")
+        log("      did not take them. Nothing needs creating again. Either")
+        log("      re-run this (it will find what it made and retry the row),")
+        log("      or copy the four values out of conversion_actions.json into")
+        log("      the admin page by hand.")
+        return "row not updated"
     if validate:
         return "validated"
     return "labels not minted yet"
