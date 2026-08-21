@@ -444,6 +444,15 @@ def run_one(client, svc, ca_svc, row, validate, GoogleAdsException):
     for n, spec in ACTIONS.items():
         log(f"   {spec['column']:<16} {results['actions'][n].get('label') or '(none yet)'}")
 
+    # A label is minted BY the conversion action existing. In check mode none
+    # were created, so blank labels here are the mode working, not a failure —
+    # but they look identical to one, which is why this line exists.
+    if validate and missing:
+        log("")
+        log("   ℹ️  Labels are blank because this was a CHECK run — nothing was")
+        log("      created, so Google has no tag to give a label to. Re-run with")
+        log("      mode: create to actually make the actions and mint them.")
+
     ALL_RESULTS.append(results)
 
     if results["aw_id"] and all(results["actions"][n].get("label") for n in ACTIONS):
@@ -504,6 +513,21 @@ def main():
         mark = "✅" if status in ("labels written", "validated") else "⚠️"
         log(f"  {mark} {name:<32} {status}")
     log(f"→ {OUTPUT_FILE}")
+
+    if validate:
+        log("")
+        log("ℹ️  CHECK RUN — nothing was created and no labels were minted.")
+        log("   That is what check mode is for: it proves Google would accept")
+        log("   these actions before any are made. The labels the middleware")
+        log("   needs only exist once the actions do.")
+        log("   NEXT: run this again with mode: create.")
+
+    if any(st == "labels not minted yet" for _, st in summary):
+        log("")
+        log("⚠️  Some actions were created but Google had not attached their tag")
+        log("   snippets yet. Nothing is wrong and nothing needs creating again —")
+        log("   re-run in create mode in a few minutes and it will find what it")
+        log("   made and read the labels off it.")
 
     log("")
     log("⚠️ Ab Google Ads me purani GA4-imported conversions ko Remove ya "
