@@ -58,6 +58,7 @@ Output: offline_conversions.json (+ log lines)
 import os
 import sys
 import json
+import time
 import datetime as dt
 
 if hasattr(sys.stdout, "reconfigure"):
@@ -108,11 +109,43 @@ _API_HEADERS = {
 }
 
 
+# Cloudflare rate limits /api/*: a second call a couple of seconds after the
+# first comes back 429 with Retry-After: 10. A run covering several clients
+# makes one call per client, so it will meet that limit. Waiting is the whole
+# fix — but it has to be automatic, because the call that matters most is the
+# stamp, and by then Google already holds the conversions.
+RATE_LIMIT_TRIES = 6
+
+
+def _open(req, what):
+    import urllib.error
+    import urllib.request
+
+    for attempt in range(1, RATE_LIMIT_TRIES + 1):
+        try:
+            with urllib.request.urlopen(req, timeout=45) as r:
+                return json.loads(r.read().decode("utf-8"))
+        except urllib.error.HTTPError as e:
+            if e.code != 429 or attempt == RATE_LIMIT_TRIES:
+                raise
+            # Cloudflare says how long it wants; trust it, and add a second so
+            # a clock that rounds down does not send us straight back into it.
+            try:
+                wait = int(e.headers.get("Retry-After", "") or 10)
+            except (TypeError, ValueError):
+                wait = 10
+            wait = min(max(wait, 1) + 1, 60)
+            log(f"   ⏳ rate limited on {what} — waiting {wait}s "
+                f"(attempt {attempt} of {RATE_LIMIT_TRIES})")
+            time.sleep(wait)
+
+    raise RuntimeError("unreachable")
+
+
 def _get(url):
     import urllib.request
     req = urllib.request.Request(url, headers=_API_HEADERS)
-    with urllib.request.urlopen(req, timeout=45) as r:
-        return json.loads(r.read().decode("utf-8"))
+    return _open(req, "read")
 
 
 def _post(url, payload):
@@ -123,8 +156,7 @@ def _post(url, payload):
         headers=dict(_API_HEADERS, **{"Content-Type": "application/json"}),
         method="POST",
     )
-    with urllib.request.urlopen(req, timeout=45) as r:
-        return json.loads(r.read().decode("utf-8"))
+    return _open(req, "write")
 
 
 def fetch_clients():
@@ -434,6 +466,11 @@ def main():
             log(f"── {token}: no client row — skipped")
             results.append({"client": token, "skipped": "unknown client", "sent": 0})
             continue
+
+        # Cheaper than being told to wait: leave a gap between clients so the
+        # rate limit is not tripped in the first place.
+        if results:
+            time.sleep(3)
 
         outcome = upload_for_client(client, row, leads, GoogleAdsException)
         results.append(outcome)
