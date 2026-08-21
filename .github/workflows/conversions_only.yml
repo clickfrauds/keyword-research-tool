@@ -29,13 +29,17 @@ on:
         required: false
         default: 'phone,form'
       mode:
-        description: "check = report what is missing, create nothing | create = create the three conversion actions"
+        # The option text is the whole warning. "check" on its own reads like
+        # "check it works", and it has now been run three times in a row by
+        # someone waiting for labels that check mode can never produce —
+        # labels are minted BY the action existing, and check creates nothing.
+        description: "Labels only appear in CREATE mode — check makes nothing at all"
         required: true
-        default: 'check'
+        default: 'check - nothing is created, no labels'
         type: choice
         options:
-          - check
-          - create
+          - check - nothing is created, no labels
+          - create - makes the actions AND the labels
 
 jobs:
   conversions:
@@ -62,7 +66,9 @@ jobs:
           CLIENT_TOKEN: ${{ github.event.inputs.client_token }}
           ADMIN_API_URL: https://clickadsprotector.com/api/add-client
           ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
-          CONV_MODE: ${{ github.event.inputs.mode == 'create' && 'live' || 'validate' }}
+          # Matches on the leading word, so the option text can be reworded
+          # without silently turning every run into a no-op.
+          CONV_MODE: ${{ startsWith(github.event.inputs.mode, 'create') && 'live' || 'validate' }}
           PRIMARY_CONVERSIONS: ${{ github.event.inputs.primary_conversions }}
         run: python scripts/setup_conversions.py
 
