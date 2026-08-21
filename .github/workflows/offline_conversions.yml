@@ -1,0 +1,75 @@
+name: Offline conversions (send jobs back to Google)
+
+# Sends the leads someone marked as paying work on clickadsprotector.com/leads
+# back to Google Ads, against the click that produced them, carrying what the
+# job was worth.
+#
+# Run it weekly. Monthly works, but Google needs a click id to still be inside
+# its 90-day window, and Smart Bidding learns from fresh data — a job reported
+# eight weeks late teaches it very little.
+#
+# The Ads account is never typed in: each lead carries its client token, and
+# the account comes off that client's own row. A gclid can only be matched
+# inside the account that served the click, so clients are uploaded one at a
+# time even when the run covers all of them.
+#
+# START IN CHECK MODE. Google has no way to undo a conversion once it is
+# uploaded, so the default reports what would be sent and sends nothing.
+
+on:
+  workflow_dispatch:
+    inputs:
+      client_token:
+        description: "One token, several comma-separated, or 'all' for every client with jobs waiting"
+        required: true
+        default: 'all'
+      mode:
+        description: "check = report what would be sent, upload nothing | upload = send them, for real, permanently"
+        required: true
+        default: 'check'
+        type: choice
+        options:
+          - check
+          - upload
+      action_name:
+        description: "Name of the offline conversion action in Google Ads. Created if missing, on every account"
+        required: false
+        default: 'Job (offline)'
+
+jobs:
+  offline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - run: pip install google-ads
+
+      - name: Upload offline conversions
+        env:
+          GOOGLE_ADS_DEVELOPER_TOKEN: ${{ secrets.GOOGLE_ADS_DEVELOPER_TOKEN }}
+          GOOGLE_ADS_CLIENT_ID: ${{ secrets.GOOGLE_ADS_CLIENT_ID }}
+          GOOGLE_ADS_CLIENT_SECRET: ${{ secrets.GOOGLE_ADS_CLIENT_SECRET }}
+          GOOGLE_ADS_REFRESH_TOKEN: ${{ secrets.GOOGLE_ADS_REFRESH_TOKEN }}
+          GOOGLE_ADS_LOGIN_CUSTOMER_ID: ${{ secrets.GOOGLE_ADS_LOGIN_CUSTOMER_ID }}
+          GOOGLE_ADS_USE_PROTO_PLUS: "true"
+          CLIENT_TOKEN: ${{ github.event.inputs.client_token }}
+          # Two endpoints, one password. Neither the Supabase URL nor the
+          # service role key comes near this runner — that key can rewrite
+          # every table the fraud system depends on.
+          ADMIN_API_URL: https://clickadsprotector.com/api/add-client
+          LEADS_API_URL: https://clickadsprotector.com/api/lead-status
+          ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+          UPLOAD_MODE: ${{ github.event.inputs.mode == 'upload' && 'live' || 'validate' }}
+          OFFLINE_ACTION_NAME: ${{ github.event.inputs.action_name }}
+        run: python scripts/upload_offline_conversions.py
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: offline-conversions
+          path: offline_conversions.json
+          if-no-files-found: warn
