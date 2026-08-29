@@ -225,6 +225,10 @@ Your outputs feed FOUR website-generator modes. Return ONLY a JSON object:
           {{"attribute": "cost|timeline|process|comparison|requirement|problem|maintenance|warranty|local",
             "covers": "one sentence: what this page must actually SAY to satisfy that angle"}}
         ],
+        "h2_outline": [
+          {{"h2": "conversion-shaped heading in the content language",
+            "keyword_ids": [8, 13], "entities": ["specific term for THIS section"]}}
+        ],
         "long_tail_ids": [31, 44]
       }}
     ]
@@ -279,6 +283,21 @@ HARD RULES:
    gets a `covers` line: one sentence on what the page must actually say to
    satisfy it. ORDER THEM by how much demand the data shows — the builder
    writes its sections in the order you give.
+3d. h2_outline (per cluster): the page's BODY SKELETON — EXACTLY 3 H2
+   sections, in reading order. Three, not five: the Mode 4 page renders
+   exactly three deep-dive blocks, so a fourth would be written and thrown
+   away. This is where the page's keyword coverage actually lives. Rules:
+   - Each H2 is CONVERSION-SHAPED: written the way a buyer thinks, not a
+     category label. "How Much Does AC Gas Refilling Cost in Dubai?" not
+     "Pricing". A heading that answers a real worry earns the scroll and can
+     win a snippet on its own.
+   - keyword_ids: which of THIS cluster's keywords that section is written
+     to satisfy. Spread them — the whole point is that a keyword nobody
+     could fit in the title still gets a home. Every id in one H2 only.
+   - entities: 2-4 specific terms/materials/standards/brands that belong in
+     THAT section — not the cluster's generic entity list repeated.
+   - Do NOT restate the attributes. Those become short trust cards and FAQs
+     elsewhere on the page; H2 sections are the body prose.
 4. mode3 services: ONLY services with visible search demand in the data —
    if nobody searches it, it doesn't get a page. Order by demand.
 5. mode5: detect city/area names present in the keywords (any language).
@@ -540,6 +559,35 @@ def validate(raw, by_id, geo_areas=None, keywords=()):
                     "covers": str(a.get("covers", "")).strip()[:220],
                 })
 
+        # The page's BODY SKELETON. Mode 3 has carried this for a while; the
+        # cluster block never did, so a Mode 4 page got the entity framing and
+        # the coverage contract but no per-section keyword distribution — the
+        # long tail had nowhere to live and the three deep-dive headings were
+        # whatever the writer invented.
+        #
+        # Capped at 3 because the Mode 4 renderer draws exactly three zigzag
+        # blocks (build_zigzag_section takes zigzag_blocks[:3]). A fourth
+        # section would be planned, written and then dropped on the floor.
+        #
+        # keyword_ids are resolved to plain strings here, the same way the
+        # questions are: the builder puts them in a prompt, and it has no
+        # access to the id table.
+        h2_outline = []
+        for h in (c.get("h2_outline") or [])[:3]:
+            if not isinstance(h, dict):
+                continue
+            _h2 = str(h.get("h2", "")).strip()[:120]
+            if not _h2:
+                continue
+            _hk = [by_id[i]["keyword"] for i in (h.get("keyword_ids") or [])
+                   if i in by_id]
+            h2_outline.append({
+                "h2": _h2,
+                "keywords": _hk[:8],
+                "entities": [str(e).strip() for e in (h.get("entities") or [])
+                             if str(e).strip()][:4],
+            })
+
         clusters.append({
             "cluster_name": str(c.get("cluster_name", "Cluster")).strip()[:80],
             "funnel": c.get("funnel", "MOFU"),
@@ -552,6 +600,7 @@ def validate(raw, by_id, geo_areas=None, keywords=()):
             "questions": questions,
             "entities_to_mention": [str(e).strip() for e in c.get("entities_to_mention", []) if str(e).strip()],
             "attributes": attributes,
+            "h2_outline": h2_outline,
             # Real phrasing from Google Autocomplete with no Planner volume.
             # The builder writes FAQs and headings from these; they are never
             # page targets (see is_long_tail). Plain strings — there are no
@@ -894,8 +943,9 @@ def main():
         print(f"   Tokens: {usage.input_tokens} in / {usage.output_tokens} out ≈ ${cost:.3f} this run")
     nq = sum(len(c["questions"]) for c in mode4["clusters"])
     na = sum(len(c.get("attributes") or []) for c in mode4["clusters"])
+    nh = sum(len(c.get("h2_outline") or []) for c in mode4["clusters"])
     print(f"✅ Mode4: {len(mode4['clusters'])} clusters, {nq} AI-overview questions, "
-          f"{na} coverage attributes | "
+          f"{na} coverage attributes | {nh} h2 sections | "
           f"Mode3: {len(mode3['services'])} services | Mode5: {len(mode5['cities_in_data'])} cities")
     if mode4.get("central_entity"):
         print(f"   🎯 central entity: {mode4['central_entity']}")
