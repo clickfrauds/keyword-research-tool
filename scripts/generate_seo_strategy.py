@@ -15,6 +15,14 @@ WHAT IT PRODUCES (one Claude call, ~$0.15-0.30):
       conversational/AI-overview/voice/local questions WITH answer angles,
       entities to mention, funnel stage. SEO-cannibalization guard: every
       keyword belongs to exactly ONE cluster (Python-enforced).
+      Plus the two things that make N pages read as ONE site, the same way
+      generate_mode3_plan.py already does it: central_entity + source_context
+      (site-wide framing the builder shows the writer on every page) and
+      per-cluster `attributes` (the angles that page must cover to be
+      complete, ranked by demand — they replace the builder's fixed
+      root-cause/DIY/cost rotation). Mode 6 reads this same block, so both
+      builder modes get them. Every one of these is OPTIONAL downstream: a
+      plan without them builds exactly as before.
     - mode3_full_website: which services deserve pages (search-demand-backed
       services_mode3 list — no page for a service nobody searches)
     - mode2_services_hub: main_service + sub_services
@@ -198,6 +206,8 @@ Your outputs feed FOUR website-generator modes. Return ONLY a JSON object:
 {{
   "mode4_cluster": {{
     "main_topic": "the pillar topic (drives the pillar page)",
+    "central_entity": "the ONE thing this whole site is about",
+    "source_context": "who is publishing and why they are credible on it",
     "pillar_keyword_id": 12,
     "clusters": [
       {{
@@ -211,6 +221,10 @@ Your outputs feed FOUR website-generator modes. Return ONLY a JSON object:
             "type": "conversational|voice|paa|local"}}
         ],
         "entities_to_mention": ["specific entities/terms/standards the content must mention for topical authority"],
+        "attributes": [
+          {{"attribute": "cost|timeline|process|comparison|requirement|problem|maintenance|warranty|local",
+            "covers": "one sentence: what this page must actually SAY to satisfy that angle"}}
+        ],
         "long_tail_ids": [31, 44]
       }}
     ]
@@ -247,6 +261,24 @@ HARD RULES:
    an answer_angle telling the content writer HOW to win the AI overview /
    featured snippet (lead with the number, give the range, name the
    standard, etc.).
+3b. central_entity + source_context (site-wide framing, written ONCE):
+   central_entity = the ONE thing every cluster page is an attribute or
+   sub-topic of — the noun a reader would name if asked what the site is
+   about. Not the business name, not a keyword: the subject itself.
+   source_context = who is publishing and why they are credible on that
+   entity — the site's angle. Two sites covering the same entity differ by
+   this, and it is what stops a 30-page cluster reading as 30 unrelated
+   pages. Both are prose the page writer sees on EVERY page.
+3c. attributes (per cluster): the ANGLES that page must cover to be
+   complete. A page that answers "what it is" but never "what it costs" or
+   "how long it takes" is thin at any word count, and the searcher goes
+   back to Google. Return 4-7 per cluster, EACH one chosen because the
+   keywords or questions above show demand for it — never a generic
+   checklist. Use these names where they fit: cost, timeline, process,
+   comparison, requirement, problem, maintenance, warranty, local. Each
+   gets a `covers` line: one sentence on what the page must actually say to
+   satisfy it. ORDER THEM by how much demand the data shows — the builder
+   writes its sections in the order you give.
 4. mode3 services: ONLY services with visible search demand in the data —
    if nobody searches it, it doesn't get a page. Order by demand.
 5. mode5: detect city/area names present in the keywords (any language).
@@ -490,6 +522,24 @@ def validate(raw, by_id, geo_areas=None, keywords=()):
                         if q["type"] in ("conversational", "voice", "paa"))
         cluster_aio = (any(by_id[i].get("ai_overview_prone") for i in ids)
                        or _q_signal >= 2)
+        # COVERAGE CONTRACT — the angles this page must cover to be complete,
+        # in the order the model ranked them by demand. Mode 3's plan has
+        # carried these for a while and the builder writes one section per
+        # attribute; Modes 4 and 6 read THIS block, so emitting them here
+        # wires both. Optional by design: an older plan (or a model reply
+        # that skipped the field) leaves the list empty and the builder falls
+        # back to its own fixed angle rotation, exactly as before.
+        attributes = []
+        for a in (c.get("attributes") or [])[:7]:
+            if not isinstance(a, dict):
+                continue
+            _name = str(a.get("attribute", "")).strip()[:40]
+            if _name:
+                attributes.append({
+                    "attribute": _name,
+                    "covers": str(a.get("covers", "")).strip()[:220],
+                })
+
         clusters.append({
             "cluster_name": str(c.get("cluster_name", "Cluster")).strip()[:80],
             "funnel": c.get("funnel", "MOFU"),
@@ -501,6 +551,7 @@ def validate(raw, by_id, geo_areas=None, keywords=()):
             "ai_overview_prone": bool(cluster_aio),
             "questions": questions,
             "entities_to_mention": [str(e).strip() for e in c.get("entities_to_mention", []) if str(e).strip()],
+            "attributes": attributes,
             # Real phrasing from Google Autocomplete with no Planner volume.
             # The builder writes FAQs and headings from these; they are never
             # page targets (see is_long_tail). Plain strings — there are no
@@ -540,6 +591,12 @@ def validate(raw, by_id, geo_areas=None, keywords=()):
             "main_topic": main_topic,
             "problem_clusters": f"{main_topic or 'Guide'} :: " + ", ".join(page_names),
         },
+        # Site-wide framing the builder puts in front of the writer on EVERY
+        # page of the cluster — the same entity, the same publisher voice. An
+        # empty string means "not provided" and the builder writes the pages
+        # exactly the way it did before this field existed.
+        "central_entity": str(m4.get("central_entity", "")).strip()[:120],
+        "source_context": str(m4.get("source_context", "")).strip()[:300],
         "pillar_keyword": pillar,
         "clusters": clusters,
     }
@@ -789,6 +846,10 @@ def main():
     md.append(f"## 🏛️ Mode 4 — Cluster Architecture (PRIMARY)")
     md.append(f"**main_topic:** `{mode4['workflow_inputs']['main_topic']}`")
     md.append(f"**problem_clusters:** `{mode4['workflow_inputs']['problem_clusters']}`")
+    if mode4.get("central_entity"):
+        md.append(f"**Central entity:** {mode4['central_entity']}")
+    if mode4.get("source_context"):
+        md.append(f"**Publishing as:** {mode4['source_context']}")
     if mode4["pillar_keyword"]:
         p = mode4["pillar_keyword"]
         md.append(f"**Pillar keyword:** {p['keyword']} ({p['volume']}/mo, KD {p['kd']})")
@@ -805,6 +866,10 @@ def main():
                 md.append(f"    - **{q['q']}** `{q['type']}` — _{q['answer_angle']}_")
         if c["entities_to_mention"]:
             md.append(f"- Entities: " + ", ".join(c["entities_to_mention"]))
+        if c.get("attributes"):
+            md.append("- Must cover (ranked by demand):")
+            for a in c["attributes"]:
+                md.append(f"    - **{a['attribute']}** — _{a['covers']}_")
         md.append("")
     md.append("## 🌐 Mode 3 — Full Website Services (demand-backed)")
     md.append(f"`services_mode3` = {mode3['workflow_inputs']['services_mode3']}\n")
@@ -828,8 +893,15 @@ def main():
         cost = usage.input_tokens * 3 / 1e6 + usage.output_tokens * 15 / 1e6
         print(f"   Tokens: {usage.input_tokens} in / {usage.output_tokens} out ≈ ${cost:.3f} this run")
     nq = sum(len(c["questions"]) for c in mode4["clusters"])
-    print(f"✅ Mode4: {len(mode4['clusters'])} clusters, {nq} AI-overview questions | "
+    na = sum(len(c.get("attributes") or []) for c in mode4["clusters"])
+    print(f"✅ Mode4: {len(mode4['clusters'])} clusters, {nq} AI-overview questions, "
+          f"{na} coverage attributes | "
           f"Mode3: {len(mode3['services'])} services | Mode5: {len(mode5['cities_in_data'])} cities")
+    if mode4.get("central_entity"):
+        print(f"   🎯 central entity: {mode4['central_entity']}")
+    else:
+        print("   ℹ️ no central_entity in the reply — the builder will write each "
+              "cluster page without site-wide framing (non-fatal)")
     print(f"✅ Saved: {JSON_OUT}, {MD_OUT}")
 
 
