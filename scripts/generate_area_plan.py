@@ -803,8 +803,10 @@ def peak_months(monthly):
     avg = sum(m.monthly_searches for m in monthly) / len(monthly)
     names = {1: "Jan", 2: "Feb", 3: "Mar", 4: "Apr", 5: "May", 6: "Jun",
              7: "Jul", 8: "Aug", 9: "Sep", 10: "Oct", 11: "Nov", 12: "Dec"}
-    return "/".join(names.get(int(m.month), "") for m in monthly
-                    if m.monthly_searches > avg * 1.2)
+    # Planner returns 12+ months, so a month above average in TWO years came
+    # back twice -- "May/Jun/Jul/May/Jun". Dedupe, keep calendar order.
+    hot = {int(m.month) for m in monthly if m.monthly_searches > avg * 1.2}
+    return "/".join(names[m] for m in sorted(hot) if m in names)
 
 
 def main():
