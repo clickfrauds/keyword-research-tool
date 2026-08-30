@@ -693,6 +693,59 @@ def js_list(items, per_line=6, lower=True):
 CAMPAIGN_NEGATIVES_CSV = "google_ads_campaign_negatives.csv"
 
 
+def negatives_from_excluded(strategy, bid_keywords):
+    """The account's OWN measured junk, as campaign negatives.
+
+    analyze_with_claude.py already puts every informational/question query and
+    every keyword it judged irrelevant, junk or competitor-brand for THIS
+    business into `seo_content_keywords`. That list is real search demand,
+    measured by the Planner, specific to this niche and this city -- a far
+    better negative list than anything generic, and it was only ever used to
+    fill a report.
+
+    A negative PHRASE blocks any query containing that word sequence, so this
+    is the dangerous direction and the filtering is deliberately strict. A
+    candidate survives only if:
+
+      1. it clears filter_forbidden() -- it does not appear inside any bid
+         keyword. "ac repair" would otherwise wipe out the whole account.
+      2. it has 3+ tokens. Two-word phrases built from this vocabulary are one
+         modifier away from a term we bid on; the universal list is where short
+         blunt tokens like "jobs" belong, because those are junk in any
+         phrasing.
+      3. it introduces at least one token the bid keywords never use. That new
+         token IS the junk signal -- "how", "salary", "used", "diy". A phrase
+         made entirely of our own words is our own vocabulary rearranged, and
+         blocking it blocks us.
+
+    Rule 3 is the one that matters. Without it "cost of ac repair in dubai"
+    survives rules 1 and 2 and then blocks a query we are paying for.
+    """
+    cands = []
+    for k in (strategy.get("seo_content_keywords") or []):
+        kw = str(k.get("keyword", "")).strip().lower()
+        if kw:
+            cands.append(kw)
+    if not cands:
+        return []
+    kept = filter_forbidden(cands, bid_keywords, "excluded-keyword")
+    bid_tokens = {t for kw in bid_keywords for t in tokens_of(kw)}
+    out, short, no_signal = [], 0, 0
+    for kw in kept:
+        toks = tokens_of(kw)
+        if len(toks) < 3:
+            short += 1
+            continue
+        if not (set(toks) - bid_tokens):
+            no_signal += 1
+            continue
+        out.append(kw)
+    if short or no_signal:
+        print(f"   🛡️ Excluded-keyword negatives: dropped {short} too short (<3 words) "
+              f"and {no_signal} built only from our own bid vocabulary")
+    return sorted(set(out))
+
+
 def write_campaign_negatives(campaigns, block_lists):
     """The same block lists, added to the account BEFORE the first click.
 
@@ -720,7 +773,10 @@ def write_campaign_negatives(campaigns, block_lists):
     for label, terms in (("locations", block_lists.get("locations") or []),
                          ("forbidden", block_lists.get("forbidden") or []),
                          ("edu", block_lists.get("edu") or []),
-                         ("info_diy", block_lists.get("info_diy") or [])):
+                         ("info_diy", block_lists.get("info_diy") or []),
+                         # Second list: this account's own measured junk demand,
+                         # not a generic one. See negatives_from_excluded.
+                         ("excluded", block_lists.get("excluded") or [])):
         for t in terms:
             t = str(t).strip().lower()
             if t and t not in seen:
@@ -827,7 +883,9 @@ def main():
     print("   Paste into Google Ads > Tools > Scripts + hourly schedule — LIVE by default "
           "(DRY_RUN=false); converted terms are always protected.")
 
-    write_campaign_negatives(campaigns, stats.get("block_lists") or {})
+    _bl = dict(stats.get("block_lists") or {})
+    _bl["excluded"] = negatives_from_excluded(strategy, bid_keywords)
+    write_campaign_negatives(campaigns, _bl)
 
 
 if __name__ == "__main__":
