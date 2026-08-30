@@ -428,6 +428,78 @@ def main():
         print("   ⚠️ WEBSITE_URL not set — URLs use a placeholder domain; set it "
               "before importing or pushing.")
 
+    merge_ad_copy_into_landing_pages(payload)
+
+
+def merge_ad_copy_into_landing_pages(sitelink_sets):
+    """Fold the ad's OWN words back into landing_pages.json.
+
+    The website builder's Mode 1 reads that file and nothing else, so until now
+    it wrote every ad landing page without ever seeing the ad. If the RSA
+    promises "60-Min Response" and the page never mentions it, the visitor's
+    expectation breaks at the moment of arrival -- message match is the most
+    cited landing-page conversion factor, and Quality Score pairs ad relevance
+    with landing-page experience for the same reason.
+
+    Sitelinks matter twice over: they are literal promises ("Free Inspection")
+    AND they point at same-page anchors. A sitelink to #pricing on a page whose
+    section list left pricing out lands the visitor at the top instead.
+    Shipping them lets the builder guarantee the section exists.
+
+    This is the last content stage before push_results, so both inputs are on
+    disk by now. Fails open -- a merge problem must never cost an ads run.
+    """
+    LP = "landing_pages.json"
+    if not os.path.exists(LP):
+        return                              # seo run, or no batch pages
+    try:
+        with open(LP, encoding="utf-8") as f:
+            pages = json.load(f)
+        if not isinstance(pages, list):
+            return
+        ads = []
+        if os.path.exists("rsa_ads.json"):
+            with open("rsa_ads.json", encoding="utf-8") as f:
+                ads = (json.load(f) or {}).get("ads") or []
+        by_ad = {a.get("ad_group"): a for a in ads if a.get("ad_group")}
+        by_sl = {s.get("ad_group"): s for s in (sitelink_sets or []) if s.get("ad_group")}
+        n = 0
+        for pg in pages:
+            groups = pg.get("ad_groups_covered") or []
+            heads, descs, links = [], [], []
+            seen_h, seen_d, seen_l = set(), set(), set()
+            for g in groups:
+                for h in (by_ad.get(g, {}).get("headlines") or []):
+                    k = str(h).strip()
+                    if k and k.lower() not in seen_h:
+                        seen_h.add(k.lower()); heads.append(k)
+                for d in (by_ad.get(g, {}).get("descriptions") or []):
+                    k = str(d).strip()
+                    if k and k.lower() not in seen_d:
+                        seen_d.add(k.lower()); descs.append(k)
+                for l in (by_sl.get(g, {}).get("sitelinks") or []):
+                    k = str(l.get("text", "")).strip()
+                    if k and k.lower() not in seen_l:
+                        seen_l.add(k.lower())
+                        links.append({"text": k,
+                                      "desc1": str(l.get("desc1", "")).strip(),
+                                      "desc2": str(l.get("desc2", "")).strip(),
+                                      "anchor": str(l.get("anchor", "")).strip()})
+            if heads or descs or links:
+                # The writer needs the promise, not all fifteen variations of it.
+                pg["ad_copy"] = {"headlines": heads[:12],
+                                 "descriptions": descs[:4],
+                                 "sitelinks": links[:6]}
+                n += 1
+        if n:
+            with open(LP, "w", encoding="utf-8") as f:
+                json.dump(pages, f, indent=2, ensure_ascii=False)
+            print(f"   → ad copy merged into {LP} for {n} landing page(s) "
+                  f"- Mode 1 can now match the ad it is paid for")
+    except Exception as e:
+        print(f"   ⚠️ could not merge ad copy into landing_pages.json "
+              f"({str(e)[:70]}) - the file is unchanged")
+
 
 if __name__ == "__main__":
     try:
