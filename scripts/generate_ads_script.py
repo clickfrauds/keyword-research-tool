@@ -51,6 +51,7 @@ import os
 import re
 import sys
 import json
+import csv
 
 try:
     import anthropic
@@ -689,6 +690,58 @@ def js_list(items, per_line=6, lower=True):
     return "[\n    " + ",\n    ".join(lines) + "\n  ]"
 
 
+CAMPAIGN_NEGATIVES_CSV = "google_ads_campaign_negatives.csv"
+
+
+def write_campaign_negatives(campaigns, block_lists):
+    """The same block lists, added to the account BEFORE the first click.
+
+    The guard script is reactive by design: it reads search_term_view and
+    negatives what already came through, so every junk query -- a job seeker,
+    a supplier, someone after a second-hand unit -- is paid for once before it
+    is stopped. Nothing recovers that spend.
+
+    These lists are junk INTENT, not siloing, so they belong to the whole
+    campaign, not to one ad group. (The ad-group negatives that
+    analyze_with_claude.py writes are the opposite thing: each group gets the
+    other groups' distinctive terms, so one query matches one group.)
+
+    Claude builds them per niche and filter_forbidden() has already dropped
+    anything colliding with a bid keyword, so the same guarantee that keeps the
+    script from blocking real traffic applies here unchanged.
+
+    context_product_words is deliberately excluded. Those are ambiguous single
+    words -- "fitting", "handle", "door" -- and the script blocks them ONLY when
+    no service signal appears with them. Flat campaign negatives have no such
+    condition, so adding them would kill "door handle repair" along with "door
+    handle". They stay with the script, which can tell the two apart.
+    """
+    rows, seen = [], set()
+    for label, terms in (("locations", block_lists.get("locations") or []),
+                         ("forbidden", block_lists.get("forbidden") or []),
+                         ("edu", block_lists.get("edu") or []),
+                         ("info_diy", block_lists.get("info_diy") or [])):
+        for t in terms:
+            t = str(t).strip().lower()
+            if t and t not in seen:
+                seen.add(t)
+                rows.append(t)
+    if not rows:
+        return 0
+    with open(CAMPAIGN_NEGATIVES_CSV, "w", encoding="utf-8-sig", newline="") as f:
+        w = csv.writer(f)
+        # Same columns as google_ads_editor_negatives.csv; a blank Ad Group is
+        # what makes the Editor read the row as campaign level.
+        w.writerow(["Campaign", "Ad Group", "Keyword", "Criterion Type"])
+        for c in campaigns:
+            for t in rows:
+                w.writerow([c, "", t, "Negative Phrase"])
+    print(f"✅ {CAMPAIGN_NEGATIVES_CSV}: {len(rows)} campaign-level negatives "
+          f"x {len(campaigns)} campaign(s) — blocks the junk BEFORE it is paid for. "
+          f"Import into the Editor's 'Keywords, Negative' section.")
+    return len(rows)
+
+
 def render_script(campaigns, bid_keywords, products, fuzzy_roots, niche):
     """Merge universal + niche lists (collision-filtered) and render the JS.
     Pure function — testable without the Claude API."""
@@ -732,6 +785,13 @@ def render_script(campaigns, bid_keywords, products, fuzzy_roots, niche):
         "locations": len(set(forbidden_locations)),
         "products": len(set(all_products)), "actions": len(set(actions)),
         "fuzzy_roots": list(fuzzy_roots),
+        # The block lists themselves, so they can ALSO be added to the account
+        # up front as campaign negatives instead of only being enforced by the
+        # script after the click. context_words is deliberately NOT here -- see
+        # write_campaign_negatives.
+        "block_lists": {"forbidden": list(forbidden), "edu": list(edu),
+                        "info_diy": list(info_diy),
+                        "locations": list(dict.fromkeys(forbidden_locations))},
     }
     return js, stats
 
@@ -766,6 +826,8 @@ def main():
           f"{stats['products']} products | {stats['actions']} actions")
     print("   Paste into Google Ads > Tools > Scripts + hourly schedule — LIVE by default "
           "(DRY_RUN=false); converted terms are always protected.")
+
+    write_campaign_negatives(campaigns, stats.get("block_lists") or {})
 
 
 if __name__ == "__main__":

@@ -73,6 +73,11 @@ FILES_TO_PUSH = [
     # grid imported mixed-file Negative Phrase rows as POSITIVE keywords.
     # Paste this one into the "Keywords, Negative" section separately.
     ("google_ads_editor_negatives.csv", "negatives.csv"),
+    # Campaign-level junk-intent negatives (jobs, supplier, second hand, wrong
+    # cities). Different job from the file above: those are cross-silo, one ad
+    # group against another. These block the query outright, so they go in the
+    # "Keywords, Negative" section with a blank Ad Group.
+    ("google_ads_campaign_negatives.csv", "campaign_negatives.csv"),
     ("negative_guard_script.js", "guard.js"),
     # Stage 3.7: niche-matched audience plan (positive + negative segments,
     # Editor paste-ready) — downloadable straight from the result page.
