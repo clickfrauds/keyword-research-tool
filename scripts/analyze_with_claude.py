@@ -1123,12 +1123,47 @@ def write_landing_pages_json(pages, groups):
     by_name = {g["name"]: g for g in groups}
     out = []
     for p in pages:
-        kw_count = sum(len(by_name[a]["keywords"]) for a in p["ad_groups_covered"] if a in by_name)
-        vol = sum(by_name[a]["total_volume"] for a in p["ad_groups_covered"] if a in by_name)
+        _gs = [by_name[a] for a in p["ad_groups_covered"] if a in by_name]
+        kw_count = sum(len(g["keywords"]) for g in _gs)
+        vol = sum(g["total_volume"] for g in _gs)
+        # THE ACTUAL BID TERMS. This function has always had them -- it counted
+        # them with len() and sent the count. So the landing page was written
+        # from a service name and six sub-service labels, all of them Claude's
+        # paraphrase of the keywords, while the terms being paid for never
+        # arrived. Quality Score's landing-page component asks whether the page
+        # is relevant to THE KEYWORD, and the page could not contain what it
+        # never received.
+        #
+        # Best first, deduped, capped -- a page covering four ad groups can
+        # reach 80 terms and the builder only needs the ones worth writing to.
+        _seen, _tk = set(), []
+        for k in sorted((k for g in _gs for k in g["keywords"]),
+                        key=lambda k: -k.get("score", 0)):
+            _n = k["keyword"].strip().lower()
+            if _n and _n not in _seen:
+                _seen.add(_n)
+                _tk.append({"keyword": k["keyword"],
+                            "volume": k.get("avg_monthly_searches", 0),
+                            "intent": k.get("intent", ""),
+                            "cpc_range": k.get("cpc_range", ""),
+                            "score": k.get("score", 0)})
+        # What the ad group EXCLUDES is the other half of message match: it is
+        # how the page avoids attracting the intent the campaign pays to block.
+        _neg, _nseen = [], set()
+        for g in _gs:
+            for n in (g.get("negative_keywords") or []):
+                _ns = str(n).strip().lower()
+                if _ns and _ns not in _nseen:
+                    _nseen.add(_ns)
+                    _neg.append(str(n).strip())
         out.append({
             **p,
             "keywords_covered": kw_count,
             "monthly_volume_covered": vol,
+            "target_keywords": _tk[:25],
+            "negative_keywords": _neg[:20],
+            "ad_group_themes": [g["theme"] for g in _gs if g.get("theme")],
+            "match_types": sorted({g["match_type"] for g in _gs if g.get("match_type")}),
             "mode1_config": {
                 "main_service": p["service_name"],
                 "sub_services": ", ".join(p["sub_services"]),
