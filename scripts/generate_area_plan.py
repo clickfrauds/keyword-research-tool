@@ -728,6 +728,12 @@ def _enrich_areas(results, vocab=None):
             '  "entities": 8-14 concrete things the page must mention for topical '
             "authority — brands, parts, fault codes, standards, appliance types. "
             "Take them from the related demand above; do not invent products.\n"
+            '  "attributes": 4-6 ANGLES this page is incomplete without — cost, '
+            "timeline, process, requirement, comparison, maintenance, warranty, "
+            "local. Choose each one because the keywords or questions above show "
+            "demand for it, never from a checklist. Each gets a \"covers\" line: "
+            "one sentence on what the page must actually say to satisfy it. Order "
+            "them by how much demand the data shows.\n"
             '  "headings": 5-7 H2s, each BUILT FROM one of the related keywords so '
             "the section it opens answers a search someone actually makes. Readable, "
             "not keyword-stuffed. If the area has neighbours, let one heading cover "
@@ -735,7 +741,8 @@ def _enrich_areas(results, vocab=None):
             "Reply with ONLY minified JSON — no line breaks inside strings, no "
             "commentary, no code fence. Keys are the exact area names:\n"
             '{"Al Qusais":{"questions":[{"q":"...","answer_angle":"..."}],'
-            '"entities":["..."],"headings":["..."]}}'
+            '"entities":["..."],"headings":["..."],'
+            '"attributes":[{"attribute":"cost","covers":"..."}]}}'
         )
         try:
             msg = anthropic.Anthropic().messages.create(
@@ -754,13 +761,23 @@ def _enrich_areas(results, vocab=None):
             qs = [q for q in (got.get("questions") or []) if q.get("q")]
             ents = [str(e).strip() for e in (got.get("entities") or []) if str(e).strip()]
             heads = [str(h).strip() for h in (got.get("headings") or []) if str(h).strip()]
-            if qs or ents or heads:
+            # Coverage contract — Modes 3, 4 aur 6 ye pehle se rakhte hain; Mode 5
+            # ke paas nahi tha, jabke wo sab se ZYADA pages banata hai. Usi batch
+            # call mein aa jata hai, koi extra API kharcha nahi.
+            attrs = [a2 for a2 in (got.get("attributes") or [])
+                     if isinstance(a2, dict) and str(a2.get("attribute", "")).strip()]
+            if qs or ents or heads or attrs:
                 a["questions"] = qs[:6]
                 a["entities"] = ents[:14]
                 a["headings"] = heads[:7]
+                a["attributes"] = [{"attribute": str(x["attribute"]).strip()[:40],
+                                    "covers": str(x.get("covers", "")).strip()[:220]}
+                                   for x in attrs[:7]]
                 added += 1
     if added:
-        print(f"   ✨ Questions, entities and headings added for {added}/{len(results)} areas")
+        _na = sum(len(a.get("attributes") or []) for a in results)
+        print(f"   ✨ Questions, entities, headings and {_na} coverage attributes "
+              f"added for {added}/{len(results)} areas")
     else:
         print("   ⚠️ No area got questions or entities — the builder will write its own.")
 
@@ -1068,6 +1085,14 @@ def main():
         },
         # the exact shape the website builder's Mode 5 already reads
         "mode5_pseo": {
+            # Site-wide framing, the same two lines Modes 3, 4 and 6 already get.
+            # Mode 5 builds the MOST pages of any mode — a few hundred area pages
+            # for one client — so it is the mode where "N pages reading as N
+            # strangers" hurts most, and it was the one mode without them.
+            "central_entity": f"{PRIMARY_SERVICE} in {TARGET_LOCATION}",
+            "source_context": (NICHE_DESCRIPTION.strip()
+                               or f"{BUSINESS_NAME}, a {PRIMARY_SERVICE} provider "
+                                  f"serving {TARGET_LOCATION}"),
             "areas": results,
             "cities_in_data": [],
             "recommended_city_targets": [TARGET_LOCATION] if results else [],
