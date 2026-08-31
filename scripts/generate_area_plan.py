@@ -700,6 +700,14 @@ def _enrich_areas(results, vocab=None):
     # and died on a single bad delimiter — "Expecting ',' delimiter: line 57" —
     # so every area lost its questions at once. A short reply parses reliably,
     # and a bad batch now costs four areas instead of the whole run.
+    # Headings already handed to earlier batches. ENRICH_BATCH is 4, so a run
+    # with forty areas is ten INDEPENDENT calls -- batch 2 has no idea what
+    # batch 1 wrote. Every batch is also fed the same city-wide `vocab`, which
+    # is 14 of the ~20 terms each area sees. Side by side inside one batch the
+    # model differentiates on its own; across batches nothing stopped ten areas
+    # opening with the same five H2s, and near-identical headings across a few
+    # hundred area pages is what makes pSEO read like doorway pages.
+    used_headings = []
     for start in range(0, len(results), ENRICH_BATCH):
         chunk = results[start:start + ENRICH_BATCH]
         brief = []
@@ -738,7 +746,12 @@ def _enrich_areas(results, vocab=None):
             "the section it opens answers a search someone actually makes. Readable, "
             "not keyword-stuffed. If the area has neighbours, let one heading cover "
             "them.\n\n"
-            "Reply with ONLY minified JSON — no line breaks inside strings, no "
+            + ("ALREADY USED as H2s on other area pages in this same build - do "
+               "NOT reuse them or their shape; each area's headings must be "
+               "recognisably about THAT area:\n  "
+               + "\n  ".join(used_headings[-24:]) + "\n\n"
+               if used_headings else "")
+            + "Reply with ONLY minified JSON — no line breaks inside strings, no "
             "commentary, no code fence. Keys are the exact area names:\n"
             '{"Al Qusais":{"questions":[{"q":"...","answer_angle":"..."}],'
             '"entities":["..."],"headings":["..."],'
@@ -770,6 +783,7 @@ def _enrich_areas(results, vocab=None):
                 a["questions"] = qs[:6]
                 a["entities"] = ents[:14]
                 a["headings"] = heads[:7]
+                used_headings.extend(a["headings"])
                 a["attributes"] = [{"attribute": str(x["attribute"]).strip()[:40],
                                     "covers": str(x.get("covers", "")).strip()[:220]}
                                    for x in attrs[:7]]
