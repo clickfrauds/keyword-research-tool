@@ -1,0 +1,49 @@
+{
+  "note": "Content only — every URL stays exactly as it is, so nothing in the campaign has to move.",
+  "pages": [
+    {
+      "url": "https://seoblogy.com/tools/seo-automation/",
+      "page_name": "SEO Automation Website Builder",
+      "verdict": "weak",
+      "word_count": 2006,
+      "issues": [
+        "No visible pricing despite mentioning 'one build fee, no monthly platform'",
+        "No client testimonials, case studies, or named client results shown",
+        "No form, only a phone number, raising friction for agencies wanting quick info",
+        "CTA 'Get My Site Plan' is vague — unclear what happens after clicking (call? questionnaire? demo?)",
+        "Heavy technical/process focus but little proof of ranking outcomes or traffic gains"
+      ],
+      "improvements": [
+        "Add a pricing section or starting price to qualify leads before they call",
+        "Add 2-3 case studies with before/after ranking or traffic screenshots",
+        "Add a short lead-capture form as an alternative to the phone number",
+        "Clarify the CTA with a one-line description of what happens after clicking 'Get My Site Plan'",
+        "Add client logos or agency testimonials to build trust for cold ad traffic"
+      ],
+      "keep_url": true
+    },
+    {
+      "url": "https://seoblogy.com/tools/click-fraud-protection/",
+      "page_name": "Click Fraud Protection",
+      "verdict": "thin",
+      "word_count": 1313,
+      "issues": [
+        "Stat counters show 0 or placeholder values, undermining credibility",
+        "No visible pricing details despite an H2 promising 'Simple Per-Account Pricing'",
+        "No form for lead capture, only a phone number with a non-US country code",
+        "Testimonials section heading exists but no actual client quotes shown in provided text",
+        "Heavy focus on technical jargon (CIDR, /64, honeypot) without translating benefit to a non-technical agency owner",
+        "No case studies or named client results to prove actual budget savings"
+      ],
+      "improvements": [
+        "Add a lead capture form alongside the phone number for lower-friction conversion",
+        "Replace zeroed-out stat counters with real or illustrative aggregate numbers",
+        "Publish actual per-account pricing tiers instead of implying simplicity without figures",
+        "Insert 2-3 named client testimonials with company names and measurable savings",
+        "Add a US-based phone number or contact option to build local trust",
+        "Include a short plain-English summary of how much budget clients typically save"
+      ],
+      "keep_url": true
+    }
+  ]
+}
