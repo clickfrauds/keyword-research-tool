@@ -143,6 +143,16 @@ DIRECTORIES = ("yelp.com", "bbb.org", "angi.com", "angieslist.com",
                "contractorplus.app", "fixr.com", "mapquest.com")
 FORUMS      = ("reddit.com", "quora.com", "houzz.com/discussions",
                "city-data.com", "diychatroom.com", "terrylove.com")
+# A business's Facebook page ranking on page 1 is the same signal as a
+# directory: nobody built a real page for this query. Classified as
+# "dedicated" it was scoring like a serious competitor instead.
+SOCIAL      = ("facebook.com", "instagram.com", "linkedin.com", "x.com",
+               "twitter.com", "nextdoor.com", "youtube.com", "tiktok.com",
+               "pinterest.com")
+# Big-box retail runs programmatic location pages in every city. Huge
+# authority, thin pages — a national occupant, not a local competitor.
+BIGBOX      = ("homedepot.com", "lowes.com", "menards.com", "acehardware.com",
+               "costco.com", "walmart.com", "sears.com", "bestbuy.com")
 NATIONALS   = ("rotorooter.com", "servpro.com", "terminix.com", "orkin.com",
                "mrrooter.com", "rainbowrestores.com", "aptive.com",
                "rentokil.com", "benjaminfranklinplumbing.com",
@@ -151,6 +161,24 @@ NATIONALS   = ("rotorooter.com", "servpro.com", "terminix.com", "orkin.com",
                "mosquitojoe.com", "roto-rooter.com")
 
 _SUBDOMAIN_PSEO = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*-[a-z]{2}\.", re.I)
+
+# SerpApi's `location` wants a full place string, not a postal code.
+STATE_NAMES = {
+    "AL": "Alabama", "AK": "Alaska", "AZ": "Arizona", "AR": "Arkansas",
+    "CA": "California", "CO": "Colorado", "CT": "Connecticut", "DE": "Delaware",
+    "DC": "District of Columbia", "FL": "Florida", "GA": "Georgia",
+    "HI": "Hawaii", "ID": "Idaho", "IL": "Illinois", "IN": "Indiana",
+    "IA": "Iowa", "KS": "Kansas", "KY": "Kentucky", "LA": "Louisiana",
+    "ME": "Maine", "MD": "Maryland", "MA": "Massachusetts", "MI": "Michigan",
+    "MN": "Minnesota", "MS": "Mississippi", "MO": "Missouri", "MT": "Montana",
+    "NE": "Nebraska", "NV": "Nevada", "NH": "New Hampshire", "NJ": "New Jersey",
+    "NM": "New Mexico", "NY": "New York", "NC": "North Carolina",
+    "ND": "North Dakota", "OH": "Ohio", "OK": "Oklahoma", "OR": "Oregon",
+    "PA": "Pennsylvania", "RI": "Rhode Island", "SC": "South Carolina",
+    "SD": "South Dakota", "TN": "Tennessee", "TX": "Texas", "UT": "Utah",
+    "VT": "Vermont", "VA": "Virginia", "WA": "Washington",
+    "WV": "West Virginia", "WI": "Wisconsin", "WY": "Wyoming",
+}
 
 
 def j(url, tries=3):
@@ -272,13 +300,23 @@ def shortlist(rows):
 # ══════════════════════════════════════════════════════════════════
 # STAGE 4 — SERP scan (the only stage that costs money)
 # ══════════════════════════════════════════════════════════════════
-def serp(query):
+def serp(query, location=None):
+    """
+    `location` is not optional for local intent. Without it SerpApi answers
+    from a default US locale, and "roof leak repair Redwood City CA" comes
+    back as a generic national SERP — which is how a page-1 stack of two city
+    EMDs and four exact-match pages once scored a clean 100 here. The whole
+    point of the scan is the LOCAL result set, so send the city every time.
+    """
     if not SERP_KEY:
         return None
-    q = urllib.parse.urlencode({
+    params = {
         "engine": "google", "q": query, "num": 10,
         "gl": SERP_GL, "hl": "en", "api_key": SERP_KEY,
-    })
+    }
+    if location:
+        params["location"] = location
+    q = urllib.parse.urlencode(params)
     try:
         with urllib.request.urlopen(f"https://serpapi.com/search?{q}", timeout=40) as r:
             return json.loads(r.read().decode("utf-8", "replace"))
@@ -303,8 +341,10 @@ def score_serp(data, service, city):
 
     svc_words = [w for w in re.split(r"\W+", service.lower()) if len(w) > 3]
     city_l = city.lower()
+    city_slug = city_l.replace(" ", "-")
+    city_flat = city_slug.replace("-", "")
     tally = {"dedicated": 0, "pseo": 0, "national": 0, "emd": 0,
-             "directory": 0, "forum": 0, "results": len(results)}
+             "directory": 0, "forum": 0, "other_local": 0, "results": len(results)}
     occupants = []
 
     for res in results:
@@ -312,34 +352,47 @@ def score_serp(data, service, city):
         title = (res.get("title") or "").lower()
         host  = urllib.parse.urlparse(link).netloc.lower()
         bare  = host[4:] if host.startswith("www.") else host
+        flat  = bare.replace("-", "").replace(".", "")
         blob  = f"{title} {link}"
-        kind  = None
+        kinds = []
 
         if any(d in bare for d in DIRECTORIES):
-            tally["directory"] += 1; kind = "directory"
+            tally["directory"] += 1; kinds.append("directory")
+        elif any(s_ in bare for s_ in SOCIAL):
+            tally["directory"] += 1; kinds.append("social profile")
         elif any(f in bare for f in FORUMS):
-            tally["forum"] += 1; kind = "forum"
-        elif any(n in bare for n in NATIONALS):
-            tally["national"] += 1; kind = "national brand"
+            tally["forum"] += 1; kinds.append("forum")
+        elif any(n in bare for n in NATIONALS) or any(b in bare for b in BIGBOX):
+            tally["national"] += 1; kinds.append("national brand")
         else:
-            city_slug = city_l.replace(" ", "-")
+            # An EMD is USUALLY also an exact-match page, so these are counted
+            # together rather than as an either/or. The old elif chain let a
+            # city EMD serving a dedicated page book the cheaper of the two
+            # penalties and skip the expensive one.
             if _SUBDOMAIN_PSEO.match(bare) and city_slug in bare:
-                tally["pseo"] += 1; kind = "pSEO subdomain"
-            elif city_slug.replace("-", "") in bare.replace("-", "").replace(".", ""):
-                tally["emd"] += 1; kind = "city EMD"
-            elif city_l in blob and any(w in blob for w in svc_words):
-                tally["dedicated"] += 1; kind = "dedicated page"
-        if kind:
-            occupants.append({"host": bare, "kind": kind})
+                tally["pseo"] += 1; kinds.append("pSEO subdomain")
+            if city_flat in flat:
+                tally["emd"] += 1; kinds.append("city EMD")
+            if city_l in blob and any(w in blob for w in svc_words):
+                tally["dedicated"] += 1; kinds.append("dedicated page")
+            if not kinds:
+                # A local contractor ranking here without the city in its
+                # title is still a competitor. Left unclassified these were
+                # invisible — a SERP of ten real businesses scored a clean
+                # 100 because not one of them fell into a bucket.
+                tally["other_local"] += 1; kinds.append("independent site")
+        if kinds:
+            occupants.append({"host": bare, "kind": " + ".join(kinds)})
 
     s = 100
-    s -= tally["dedicated"] * 18
-    s -= tally["pseo"]      * 12
-    s -= tally["national"]  * 10
-    s -= tally["emd"]       * 6
-    s += tally["directory"] * 6
-    s += tally["forum"]     * 8
-    if tally["dedicated"] == 0:
+    s -= tally["dedicated"]   * 18
+    s -= tally["emd"]         * 20   # the single strongest occupant
+    s -= tally["pseo"]        * 12
+    s -= tally["national"]    * 10
+    s -= tally["other_local"] * 4
+    s += tally["directory"]   * 6
+    s += tally["forum"]       * 8
+    if tally["dedicated"] == 0 and tally["emd"] == 0:
         s += 10
     return max(0, min(100, s)), tally, occupants
 
@@ -369,7 +422,8 @@ def scan(cands):
     found = []
     for i, (c, niche_name, niche_payout, sub) in enumerate(jobs, 1):
         query = f"{sub} {c['city']} {c['state']}"
-        res = score_serp(serp(query), sub, c["city"])
+        loc   = f"{c['city']}, {STATE_NAMES.get(c['state'], c['state'])}, United States"
+        res   = score_serp(serp(query, loc), sub, c["city"])
         if not res:
             continue
         sc, tally, occ = res
@@ -423,15 +477,17 @@ def write(meta, cands, scored):
         w = csv.writer(f)
         w.writerow(["rank", "opportunity", "serp_score", "payout", "bundle_value",
                     "niche", "sub_service", "city", "state", "county",
-                    "population", "zips", "dedicated", "pseo", "national",
-                    "directory", "query"])
+                    "population", "zips", "dedicated", "emd", "pseo", "national",
+                    "other_local", "directory", "query", "occupants"])
         for i, o in enumerate(scored[:200], 1):
             b = o["serp_breakdown"]
             w.writerow([i, o["opportunity"], o["serp_score"], o["payout"],
                         o["bundle_value"], o["niche"], o["sub_service"],
                         o["city"], o["state"], o["county"], o["population"],
-                        o["zips"], b["dedicated"], b["pseo"], b["national"],
-                        b["directory"], o["query"]])
+                        o["zips"], b["dedicated"], b.get("emd", 0), b["pseo"],
+                        b["national"], b.get("other_local", 0), b["directory"],
+                        o["query"],
+                        " | ".join(f"{x['host']} ({x['kind']})" for x in o["occupants"][:6])])
 
     lines = [
         "# Opportunity scan",
@@ -448,8 +504,9 @@ def write(meta, cands, scored):
                   "|---|---|---|---|---|---|"]
         for i, o in enumerate(scored[:30], 1):
             b = o["serp_breakdown"]
-            occ = (f"{b['dedicated']} dedicated, {b['pseo']} pSEO, "
-                   f"{b['national']} national, {b['directory']} directory")
+            occ = (f"{b['dedicated']} dedicated, {b.get('emd',0)} EMD, "
+                   f"{b['pseo']} pSEO, {b.get('other_local',0)} local, "
+                   f"{b['directory']} directory")
             lines.append(f"| {i} | **{o['opportunity']:.0f}** | {o['serp_score']} "
                          f"| ${o['payout']:.2f} | `{o['query']}` | {occ} |")
     else:
