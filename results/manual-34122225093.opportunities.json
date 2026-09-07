@@ -1,0 +1,6531 @@
+{
+  "pricing_model_by_niche": {
+    "Plumbing (CPL)": {
+      "distinct": 7,
+      "mode": "geo"
+    },
+    "Electrical (Call)": {
+      "distinct": 144,
+      "mode": "geo"
+    },
+    "Appliance (Call)": {
+      "distinct": 69,
+      "mode": "geo"
+    },
+    "Gutters (Call)": {
+      "distinct": 1,
+      "mode": "flat"
+    },
+    "HVAC (Call)": {
+      "distinct": 238,
+      "mode": "geo"
+    },
+    "Water Damage (CPL)": {
+      "distinct": 37,
+      "mode": "geo"
+    },
+    "Bathroom Remodeling (Call)": {
+      "distinct": 186,
+      "mode": "geo"
+    },
+    "Pest Control (Call)": {
+      "distinct": 2,
+      "mode": "flat"
+    },
+    "Roofing (Call)": {
+      "distinct": 366,
+      "mode": "geo"
+    },
+    "Plumbing (Call)": {
+      "distinct": 430,
+      "mode": "geo"
+    },
+    "Siding (CPL)": {
+      "distinct": 8,
+      "mode": "geo"
+    },
+    "Mold Removal (CPL)": {
+      "distinct": 12,
+      "mode": "geo"
+    },
+    "Roofing CPL (CPL)": {
+      "distinct": 7,
+      "mode": "geo"
+    },
+    "Biohazard (CPL)": {
+      "distinct": 9,
+      "mode": "geo"
+    },
+    "Tree Services (Call)": {
+      "distinct": 9,
+      "mode": "geo"
+    },
+    "Fire Damage Removal (CPL)": {
+      "distinct": 12,
+      "mode": "geo"
+    },
+    "Garage Door (CPL)": {
+      "distinct": 2,
+      "mode": "flat"
+    },
+    "Waterproofing (CPL)": {
+      "distinct": 7,
+      "mode": "geo"
+    },
+    "Painting (CPL)": {
+      "distinct": 2,
+      "mode": "flat"
+    },
+    "Kitchen (CPL)": {
+      "distinct": 1,
+      "mode": "flat"
+    },
+    "Foundation Repair (CPL)": {
+      "distinct": 2,
+      "mode": "flat"
+    },
+    "Deck (CPL)": {
+      "distinct": 1,
+      "mode": "flat"
+    }
+  },
+  "generated": "2026-09-07 12:30 UTC",
+  "dataset_date": "2026-09-06",
+  "filters": {
+    "payout_type": "Call",
+    "min_payout": 35.0,
+    "population": [
+      8000,
+      120000
+    ],
+    "niches": "all",
+    "states": [
+      "OH",
+      "IN",
+      "MI",
+      "MO",
+      "KY",
+      "TN",
+      "AL",
+      "AR",
+      "OK",
+      "IA",
+      "KS",
+      "NE",
+      "WV",
+      "LA",
+      "WI"
+    ],
+    "min_bundle_niches": 3
+  },
+  "candidate_cities": 319,
+  "serp_scanned": 0,
+  "opportunities": [],
+  "top_candidates_unscanned": [
+    {
+      "city": "Lees Summit",
+      "state": "MO",
+      "county": "Jackson",
+      "pop": 103656,
+      "zips": 6,
+      "top_niche": "HVAC",
+      "top_payout": 59.5,
+      "bundle_value": 179.43,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 59.5,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 57.75,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 52.45,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Bathroom Remodeling",
+          "payout": 44.63,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 42.52,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Lenexa",
+      "state": "KS",
+      "county": "Johnson",
+      "pop": 58384,
+      "zips": 6,
+      "top_niche": "Roofing",
+      "top_payout": 57.75,
+      "bundle_value": 173.84,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 57.75,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 52.45,
+          "pricing": "geo"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 50.4,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Bathroom Remodeling",
+          "payout": 44.63,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 42.21,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Liberty",
+      "state": "MO",
+      "county": "Clay",
+      "pop": 30689,
+      "zips": 2,
+      "top_niche": "HVAC",
+      "top_payout": 59.5,
+      "bundle_value": 171.74,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 59.5,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 57.75,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Bathroom Remodeling",
+          "payout": 44.63,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 39.9,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 39.69,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Fishers",
+      "state": "IN",
+      "county": "Hamilton",
+      "pop": 102337,
+      "zips": 3,
+      "top_niche": "HVAC",
+      "top_payout": 94.5,
+      "bundle_value": 171.05,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 94.5,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 61.6,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 49.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Mission",
+      "state": "KS",
+      "county": "Johnson",
+      "pop": 9915,
+      "zips": 4,
+      "top_niche": "Roofing",
+      "top_payout": 57.75,
+      "bundle_value": 165.01,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 57.75,
+          "pricing": "geo"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 45.5,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Bathroom Remodeling",
+          "payout": 44.63,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 42.21,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 39.69,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Shawnee",
+      "state": "KS",
+      "county": "Johnson",
+      "pop": 68542,
+      "zips": 6,
+      "top_niche": "Roofing",
+      "top_payout": 57.75,
+      "bundle_value": 164.77,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 57.75,
+          "pricing": "geo"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 45.5,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Bathroom Remodeling",
+          "payout": 44.63,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 40.79,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 40.63,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Middletown",
+      "state": "OH",
+      "county": "Butler",
+      "pop": 97529,
+      "zips": 2,
+      "top_niche": "HVAC",
+      "top_payout": 70.0,
+      "bundle_value": 163.76,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 70.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 56.7,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 45.81,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 42.52,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Leawood",
+      "state": "KS",
+      "county": "Johnson",
+      "pop": 33809,
+      "zips": 3,
+      "top_niche": "Roofing",
+      "top_payout": 57.75,
+      "bundle_value": 163.26,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 57.75,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Bathroom Remodeling",
+          "payout": 44.63,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 42.21,
+          "pricing": "geo"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 42.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 39.69,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Hamilton",
+      "state": "OH",
+      "county": "Butler",
+      "pop": 63468,
+      "zips": 4,
+      "top_niche": "HVAC",
+      "top_payout": 70.0,
+      "bundle_value": 162.82,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 70.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 54.81,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 45.81,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 42.52,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Franklin",
+      "state": "OH",
+      "county": "Warren",
+      "pop": 11712,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 70.0,
+      "bundle_value": 160.62,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 70.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 50.4,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 45.81,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 42.52,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Delaware",
+      "state": "OH",
+      "county": "Delaware",
+      "pop": 44589,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 59.85,
+      "bundle_value": 160.04,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 59.85,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 58.27,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 54.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 45.36,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Leavenworth",
+      "state": "KS",
+      "county": "Leavenworth",
+      "pop": 37195,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 59.5,
+      "bundle_value": 159.5,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 59.5,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 57.75,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 55.13,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Bathroom Remodeling",
+          "payout": 44.63,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Lansing",
+      "state": "KS",
+      "county": "Leavenworth",
+      "pop": 11246,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 59.5,
+      "bundle_value": 158.28,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 59.5,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 57.75,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 52.67,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Bathroom Remodeling",
+          "payout": 44.63,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Oxford",
+      "state": "OH",
+      "county": "Butler",
+      "pop": 21753,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 70.0,
+      "bundle_value": 157.69,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 70.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 47.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 43.12,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 42.52,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Edmond",
+      "state": "OK",
+      "county": "Oklahoma",
+      "pop": 96825,
+      "zips": 6,
+      "top_niche": "Roofing",
+      "top_payout": 61.25,
+      "bundle_value": 157.4,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 61.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 56.7,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 49.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 44.1,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "London",
+      "state": "OH",
+      "county": "Madison",
+      "pop": 10484,
+      "zips": 1,
+      "top_niche": "Plumbing",
+      "top_payout": 58.27,
+      "bundle_value": 156.14,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 58.27,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 54.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 53.63,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 45.36,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Miamisburg",
+      "state": "OH",
+      "county": "Montgomery",
+      "pop": 19948,
+      "zips": 2,
+      "top_niche": "HVAC",
+      "top_payout": 70.0,
+      "bundle_value": 155.54,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 70.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 45.81,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 42.52,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 40.25,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Brownsburg",
+      "state": "IN",
+      "county": "Hendricks",
+      "pop": 31215,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 78.75,
+      "bundle_value": 155.1,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 78.75,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 63.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 47.2,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Trenton",
+      "state": "OH",
+      "county": "Butler",
+      "pop": 13583,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 70.0,
+      "bundle_value": 155.0,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 70.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 47.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 42.52,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 37.73,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Ballwin",
+      "state": "MO",
+      "county": "St. Louis",
+      "pop": 31279,
+      "zips": 4,
+      "top_niche": "Roofing",
+      "top_payout": 67.38,
+      "bundle_value": 151.84,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 67.38,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 48.23,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Bathroom Remodeling",
+          "payout": 44.63,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 38.27,
+          "pricing": "geo"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 37.8,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Powell",
+      "state": "OH",
+      "county": "Delaware",
+      "pop": 14451,
+      "zips": 1,
+      "top_niche": "Roofing",
+      "top_payout": 54.25,
+      "bundle_value": 151.77,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 54.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 53.63,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 53.55,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 45.36,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Westerville",
+      "state": "OH",
+      "county": "Franklin",
+      "pop": 38645,
+      "zips": 3,
+      "top_niche": "Roofing",
+      "top_payout": 54.25,
+      "bundle_value": 151.77,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 54.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 53.63,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 53.55,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 45.36,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Sunbury",
+      "state": "OH",
+      "county": "Delaware",
+      "pop": 8005,
+      "zips": 1,
+      "top_niche": "Roofing",
+      "top_payout": 54.25,
+      "bundle_value": 151.22,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 54.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 53.63,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 52.45,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 45.36,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Gardner",
+      "state": "KS",
+      "county": "Johnson",
+      "pop": 24526,
+      "zips": 1,
+      "top_niche": "Roofing",
+      "top_payout": 57.75,
+      "bundle_value": 149.88,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 57.75,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 55.13,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Bathroom Remodeling",
+          "payout": 44.63,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 42.0,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Greenwood",
+      "state": "IN",
+      "county": "Johnson",
+      "pop": 66029,
+      "zips": 2,
+      "top_niche": "HVAC",
+      "top_payout": 72.45,
+      "bundle_value": 149.7,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 72.45,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 63.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 49.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Beech Grove",
+      "state": "IN",
+      "county": "Marion",
+      "pop": 14913,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 72.45,
+      "bundle_value": 149.62,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 72.45,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 63.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 48.83,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Newark",
+      "state": "OH",
+      "county": "Licking",
+      "pop": 82292,
+      "zips": 3,
+      "top_niche": "Roofing",
+      "top_payout": 54.25,
+      "bundle_value": 148.89,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 54.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 53.63,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 53.55,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 39.6,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Zanesville",
+      "state": "OH",
+      "county": "Muskingum",
+      "pop": 24740,
+      "zips": 2,
+      "top_niche": "HVAC",
+      "top_payout": 53.63,
+      "bundle_value": 148.84,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 53.63,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 53.55,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 49.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 45.36,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Carmel",
+      "state": "IN",
+      "county": "Hamilton",
+      "pop": 101651,
+      "zips": 3,
+      "top_niche": "HVAC",
+      "top_payout": 72.45,
+      "bundle_value": 148.25,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 72.45,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 63.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 46.11,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Fairfield",
+      "state": "OH",
+      "county": "Butler",
+      "pop": 44828,
+      "zips": 2,
+      "top_niche": "Roofing",
+      "top_payout": 56.33,
+      "bundle_value": 148.0,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 56.33,
+          "pricing": "geo"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 52.5,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 45.81,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 42.52,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Grove City",
+      "state": "OH",
+      "county": "Franklin",
+      "pop": 42517,
+      "zips": 1,
+      "top_niche": "Roofing",
+      "top_payout": 54.25,
+      "bundle_value": 147.99,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 54.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 53.63,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 53.55,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 37.8,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Lancaster",
+      "state": "OH",
+      "county": "Fairfield",
+      "pop": 41249,
+      "zips": 1,
+      "top_niche": "Roofing",
+      "top_payout": 54.25,
+      "bundle_value": 147.99,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 54.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 53.63,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 53.55,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 37.8,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Hendersonville",
+      "state": "TN",
+      "county": "Sumner",
+      "pop": 63091,
+      "zips": 2,
+      "top_niche": "Roofing",
+      "top_payout": 61.25,
+      "bundle_value": 147.95,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 61.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 49.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Bathroom Remodeling",
+          "payout": 42.52,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 39.38,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Mount Juliet",
+      "state": "TN",
+      "county": "Wilson",
+      "pop": 42073,
+      "zips": 2,
+      "top_niche": "Roofing",
+      "top_payout": 61.25,
+      "bundle_value": 147.95,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 61.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 49.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Bathroom Remodeling",
+          "payout": 42.52,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 39.38,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Springfield",
+      "state": "OH",
+      "county": "Clark",
+      "pop": 80812,
+      "zips": 6,
+      "top_niche": "Plumbing",
+      "top_payout": 58.27,
+      "bundle_value": 147.81,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 58.27,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 54.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 42.73,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 39.6,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Noblesville",
+      "state": "IN",
+      "county": "Hamilton",
+      "pop": 73362,
+      "zips": 3,
+      "top_niche": "HVAC",
+      "top_payout": 94.5,
+      "bundle_value": 147.25,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 94.5,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 63.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Circleville",
+      "state": "OH",
+      "county": "Pickaway",
+      "pop": 14142,
+      "zips": 1,
+      "top_niche": "Roofing",
+      "top_payout": 54.25,
+      "bundle_value": 146.96,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 54.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 53.55,
+          "pricing": "geo"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 49.77,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 39.6,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Marysville",
+      "state": "OH",
+      "county": "Union",
+      "pop": 27518,
+      "zips": 2,
+      "top_niche": "Roofing",
+      "top_payout": 54.25,
+      "bundle_value": 146.86,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 54.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 53.63,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 49.48,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 39.6,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Dublin",
+      "state": "OH",
+      "county": "Franklin",
+      "pop": 49294,
+      "zips": 2,
+      "top_niche": "Roofing",
+      "top_payout": 54.25,
+      "bundle_value": 146.8,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 54.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 53.63,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 51.17,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 37.8,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Coshocton",
+      "state": "OH",
+      "county": "Coshocton",
+      "pop": 11068,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 53.63,
+      "bundle_value": 145.41,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 53.63,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 52.45,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 49.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 39.6,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Urbana",
+      "state": "OH",
+      "county": "Champaign",
+      "pop": 11204,
+      "zips": 1,
+      "top_niche": "Roofing",
+      "top_payout": 54.25,
+      "bundle_value": 145.38,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 54.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 50.4,
+          "pricing": "geo"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 49.77,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 39.6,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Mount Vernon",
+      "state": "OH",
+      "county": "Knox",
+      "pop": 17052,
+      "zips": 1,
+      "top_niche": "Plumbing",
+      "top_payout": 53.87,
+      "bundle_value": 145.34,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 53.87,
+          "pricing": "geo"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 53.63,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 49.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 37.8,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Heath",
+      "state": "OH",
+      "county": "Licking",
+      "pop": 10644,
+      "zips": 1,
+      "top_niche": "Roofing",
+      "top_payout": 54.25,
+      "bundle_value": 145.22,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 54.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 53.63,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 46.2,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 39.6,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Gallatin",
+      "state": "TN",
+      "county": "Sumner",
+      "pop": 48532,
+      "zips": 1,
+      "top_niche": "Roofing",
+      "top_payout": 61.25,
+      "bundle_value": 144.45,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 61.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Bathroom Remodeling",
+          "payout": 42.52,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 42.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 39.38,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Lebanon",
+      "state": "IN",
+      "county": "Boone",
+      "pop": 17812,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 66.41,
+      "bundle_value": 143.66,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 66.41,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 63.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 49.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Martinsville",
+      "state": "IN",
+      "county": "Morgan",
+      "pop": 11933,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 75.6,
+      "bundle_value": 142.61,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 75.6,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 49.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 42.52,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Spring Hill",
+      "state": "KS",
+      "county": "Johnson",
+      "pop": 9120,
+      "zips": 1,
+      "top_niche": "Roofing",
+      "top_payout": 57.75,
+      "bundle_value": 142.48,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 57.75,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Bathroom Remodeling",
+          "payout": 44.63,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 42.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 40.33,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Anderson",
+      "state": "IN",
+      "county": "Madison",
+      "pop": 80597,
+      "zips": 8,
+      "top_niche": "HVAC",
+      "top_payout": 72.45,
+      "bundle_value": 141.74,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 72.45,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 48.83,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 47.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Lebanon",
+      "state": "OH",
+      "county": "Warren",
+      "pop": 21501,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 52.5,
+      "bundle_value": 141.54,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 52.5,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 47.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 45.81,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 42.52,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "West Chester",
+      "state": "OH",
+      "county": "Butler",
+      "pop": 9496,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 52.5,
+      "bundle_value": 141.54,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 52.5,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 47.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 45.81,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 42.52,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Mooresville",
+      "state": "IN",
+      "county": "Morgan",
+      "pop": 9751,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 78.75,
+      "bundle_value": 140.6,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 78.75,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 42.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 39.2,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Avon",
+      "state": "IN",
+      "county": "Hendricks",
+      "pop": 23437,
+      "zips": 2,
+      "top_niche": "HVAC",
+      "top_payout": 78.75,
+      "bundle_value": 139.62,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 78.75,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 42.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 37.24,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Mason",
+      "state": "OH",
+      "county": "Warren",
+      "pop": 35509,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 70.0,
+      "bundle_value": 137.78,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 70.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 47.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 45.81,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Springboro",
+      "state": "OH",
+      "county": "Warren",
+      "pop": 19980,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 70.0,
+      "bundle_value": 137.78,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 70.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 47.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 45.81,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Choctaw",
+      "state": "OK",
+      "county": "Oklahoma",
+      "pop": 12303,
+      "zips": 1,
+      "top_niche": "Electrical",
+      "top_payout": 63.0,
+      "bundle_value": 136.93,
+      "niche_list": [
+        {
+          "niche": "Electrical",
+          "payout": 63.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 61.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 44.1,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Grandview",
+      "state": "MO",
+      "county": "Jackson",
+      "pop": 26527,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 59.5,
+      "bundle_value": 136.57,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 59.5,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 57.75,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 53.9,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Richmond",
+      "state": "KY",
+      "county": "Madison",
+      "pop": 37111,
+      "zips": 2,
+      "top_niche": "HVAC",
+      "top_payout": 66.15,
+      "bundle_value": 135.01,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 66.15,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 59.5,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 42.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 36.23,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Pataskala",
+      "state": "OH",
+      "county": "Licking",
+      "pop": 18223,
+      "zips": 2,
+      "top_niche": "HVAC",
+      "top_payout": 59.85,
+      "bundle_value": 135.0,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 59.85,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 54.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 53.55,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Reynoldsburg",
+      "state": "OH",
+      "county": "Franklin",
+      "pop": 41224,
+      "zips": 2,
+      "top_niche": "HVAC",
+      "top_payout": 59.85,
+      "bundle_value": 135.0,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 59.85,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 54.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 53.55,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Saint Charles",
+      "state": "MO",
+      "county": "St. Charles",
+      "pop": 71508,
+      "zips": 4,
+      "top_niche": "Roofing",
+      "top_payout": 55.13,
+      "bundle_value": 134.38,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 55.13,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Bathroom Remodeling",
+          "payout": 44.63,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 38.27,
+          "pricing": "geo"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 37.8,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 37.8,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Muncie",
+      "state": "IN",
+      "county": "Delaware",
+      "pop": 85519,
+      "zips": 4,
+      "top_niche": "HVAC",
+      "top_payout": 64.58,
+      "bundle_value": 133.87,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 64.58,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 48.83,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 47.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Westfield",
+      "state": "IN",
+      "county": "Hamilton",
+      "pop": 54677,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 66.5,
+      "bundle_value": 133.16,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 66.5,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 48.83,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 42.0,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Grain Valley",
+      "state": "MO",
+      "county": "Jackson",
+      "pop": 16271,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 59.5,
+      "bundle_value": 131.94,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 59.5,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 57.75,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Bathroom Remodeling",
+          "payout": 44.63,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Shelbyville",
+      "state": "IN",
+      "county": "Shelby",
+      "pop": 20296,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 66.41,
+      "bundle_value": 131.41,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 66.41,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 49.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 38.5,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Kearney",
+      "state": "MO",
+      "county": "Clay",
+      "pop": 10885,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 59.5,
+      "bundle_value": 130.88,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 59.5,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 57.75,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 42.52,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "El Reno",
+      "state": "OK",
+      "county": "Canadian",
+      "pop": 18557,
+      "zips": 1,
+      "top_niche": "Roofing",
+      "top_payout": 49.0,
+      "bundle_value": 130.8,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 49.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 44.1,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 40.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 36.75,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Blue Springs",
+      "state": "MO",
+      "county": "Jackson",
+      "pop": 59965,
+      "zips": 3,
+      "top_niche": "HVAC",
+      "top_payout": 59.5,
+      "bundle_value": 130.73,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 59.5,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 57.75,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 42.21,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Elwood",
+      "state": "IN",
+      "county": "Madison",
+      "pop": 8356,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 64.58,
+      "bundle_value": 130.72,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 64.58,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 47.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 42.52,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Spring Hill",
+      "state": "TN",
+      "county": "Maury",
+      "pop": 67964,
+      "zips": 1,
+      "top_niche": "Roofing",
+      "top_payout": 61.25,
+      "bundle_value": 129.75,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 61.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 55.13,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 39.38,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Lawrence",
+      "state": "KS",
+      "county": "Douglas",
+      "pop": 97387,
+      "zips": 5,
+      "top_niche": "HVAC",
+      "top_payout": 59.5,
+      "bundle_value": 129.13,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 59.5,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 54.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 42.52,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Pickerington",
+      "state": "OH",
+      "county": "Fairfield",
+      "pop": 24477,
+      "zips": 1,
+      "top_niche": "Roofing",
+      "top_payout": 54.25,
+      "bundle_value": 129.09,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 54.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 53.63,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 53.55,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Bethany",
+      "state": "OK",
+      "county": "Oklahoma",
+      "pop": 20560,
+      "zips": 1,
+      "top_niche": "Roofing",
+      "top_payout": 61.25,
+      "bundle_value": 129.05,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 61.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 49.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 44.1,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Piedmont",
+      "state": "OK",
+      "county": "Canadian",
+      "pop": 8342,
+      "zips": 1,
+      "top_niche": "Roofing",
+      "top_payout": 61.25,
+      "bundle_value": 129.05,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 61.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 49.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 44.1,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Yukon",
+      "state": "OK",
+      "county": "Canadian",
+      "pop": 25529,
+      "zips": 2,
+      "top_niche": "Roofing",
+      "top_payout": 61.25,
+      "bundle_value": 129.05,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 61.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 49.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 44.1,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Smyrna",
+      "state": "TN",
+      "county": "Rutherford",
+      "pop": 56692,
+      "zips": 1,
+      "top_niche": "Roofing",
+      "top_payout": 61.25,
+      "bundle_value": 128.26,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 61.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 49.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Bathroom Remodeling",
+          "payout": 42.52,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Chesterfield",
+      "state": "MO",
+      "county": "St. Louis",
+      "pop": 49574,
+      "zips": 3,
+      "top_niche": "Roofing",
+      "top_payout": 67.38,
+      "bundle_value": 127.31,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 67.38,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Bathroom Remodeling",
+          "payout": 44.63,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 38.27,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 36.96,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Covington",
+      "state": "KY",
+      "county": "Kenton",
+      "pop": 41110,
+      "zips": 5,
+      "top_niche": "HVAC",
+      "top_payout": 56.0,
+      "bundle_value": 127.12,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 56.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 52.5,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 47.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Erlanger",
+      "state": "KY",
+      "county": "Kenton",
+      "pop": 19875,
+      "zips": 2,
+      "top_niche": "HVAC",
+      "top_payout": 56.0,
+      "bundle_value": 127.12,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 56.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 52.5,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 47.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Florence",
+      "state": "KY",
+      "county": "Boone",
+      "pop": 32803,
+      "zips": 2,
+      "top_niche": "HVAC",
+      "top_payout": 56.0,
+      "bundle_value": 126.69,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 56.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 55.13,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 43.75,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Brentwood",
+      "state": "TN",
+      "county": "Williamson",
+      "pop": 45556,
+      "zips": 2,
+      "top_niche": "Roofing",
+      "top_payout": 61.25,
+      "bundle_value": 126.69,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 61.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 49.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 39.38,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Franklin",
+      "state": "TN",
+      "county": "Williamson",
+      "pop": 87133,
+      "zips": 5,
+      "top_niche": "Roofing",
+      "top_payout": 61.25,
+      "bundle_value": 126.69,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 61.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 49.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 39.38,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Lebanon",
+      "state": "TN",
+      "county": "Wilson",
+      "pop": 44788,
+      "zips": 4,
+      "top_niche": "Roofing",
+      "top_payout": 61.25,
+      "bundle_value": 126.69,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 61.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 49.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 39.38,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Mansfield",
+      "state": "OH",
+      "county": "Richland",
+      "pop": 75233,
+      "zips": 7,
+      "top_niche": "Plumbing",
+      "top_payout": 53.87,
+      "bundle_value": 126.44,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 53.87,
+          "pricing": "geo"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 53.63,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 49.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Piqua",
+      "state": "OH",
+      "county": "Miami",
+      "pop": 20646,
+      "zips": 1,
+      "top_niche": "Plumbing",
+      "top_payout": 58.27,
+      "bundle_value": 126.28,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 58.27,
+          "pricing": "geo"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 49.77,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 43.75,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Columbia",
+      "state": "TN",
+      "county": "Maury",
+      "pop": 45441,
+      "zips": 2,
+      "top_niche": "Roofing",
+      "top_payout": 61.25,
+      "bundle_value": 126.25,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 61.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 49.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 38.5,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "La Vergne",
+      "state": "TN",
+      "county": "Rutherford",
+      "pop": 40243,
+      "zips": 2,
+      "top_niche": "Roofing",
+      "top_payout": 61.25,
+      "bundle_value": 126.03,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 61.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 49.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 38.06,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Wooster",
+      "state": "OH",
+      "county": "Wayne",
+      "pop": 26971,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 53.63,
+      "bundle_value": 125.6,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 53.63,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 52.45,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 49.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Prairie Village",
+      "state": "KS",
+      "county": "Johnson",
+      "pop": 22874,
+      "zips": 1,
+      "top_niche": "Roofing",
+      "top_payout": 57.75,
+      "bundle_value": 125.52,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 57.75,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 51.03,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 42.0,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Hilliard",
+      "state": "OH",
+      "county": "Franklin",
+      "pop": 38033,
+      "zips": 1,
+      "top_niche": "Roofing",
+      "top_payout": 54.25,
+      "bundle_value": 125.42,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 54.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 53.63,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 46.2,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "New Albany",
+      "state": "OH",
+      "county": "Franklin",
+      "pop": 10896,
+      "zips": 1,
+      "top_niche": "Roofing",
+      "top_payout": 54.25,
+      "bundle_value": 125.42,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 54.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 53.63,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 46.2,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Canal Winchester",
+      "state": "OH",
+      "county": "Franklin",
+      "pop": 10170,
+      "zips": 1,
+      "top_niche": "Roofing",
+      "top_payout": 54.25,
+      "bundle_value": 125.42,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 54.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 53.63,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 46.2,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Harrodsburg",
+      "state": "KY",
+      "county": "Mercer",
+      "pop": 9313,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 57.75,
+      "bundle_value": 125.12,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 57.75,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 52.5,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 42.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 40.25,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Danville",
+      "state": "KY",
+      "county": "Boyle",
+      "pop": 17327,
+      "zips": 2,
+      "top_niche": "HVAC",
+      "top_payout": 57.75,
+      "bundle_value": 125.12,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 57.75,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 52.5,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 42.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 40.25,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Burlington",
+      "state": "KY",
+      "county": "Boone",
+      "pop": 18008,
+      "zips": 1,
+      "top_niche": "Plumbing",
+      "top_payout": 55.13,
+      "bundle_value": 125.03,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 55.13,
+          "pricing": "geo"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 53.55,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 43.75,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Alexandria",
+      "state": "KY",
+      "county": "Campbell",
+      "pop": 10562,
+      "zips": 1,
+      "top_niche": "Plumbing",
+      "top_payout": 55.13,
+      "bundle_value": 124.5,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 55.13,
+          "pricing": "geo"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 52.5,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 43.75,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Belton",
+      "state": "MO",
+      "county": "Cass",
+      "pop": 25008,
+      "zips": 1,
+      "top_niche": "Roofing",
+      "top_payout": 57.75,
+      "bundle_value": 124.15,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 57.75,
+          "pricing": "geo"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 50.4,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 39.9,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Georgetown",
+      "state": "KY",
+      "county": "Scott",
+      "pop": 39117,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 57.75,
+      "bundle_value": 124.08,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 57.75,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 50.4,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 42.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 40.25,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Fort Leavenworth",
+      "state": "KS",
+      "county": "Leavenworth",
+      "pop": 37195,
+      "zips": 1,
+      "top_niche": "Roofing",
+      "top_payout": 57.75,
+      "bundle_value": 124.06,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 57.75,
+          "pricing": "geo"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 45.5,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Bathroom Remodeling",
+          "payout": 44.63,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Fort Thomas",
+      "state": "KY",
+      "county": "Campbell",
+      "pop": 17169,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 52.67,
+      "bundle_value": 123.8,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 52.67,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 52.5,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 47.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Latonia",
+      "state": "KY",
+      "county": "Kenton",
+      "pop": 41110,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 52.5,
+      "bundle_value": 123.62,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 52.5,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 52.5,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 47.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Ft Mitchell",
+      "state": "KY",
+      "county": "Kenton",
+      "pop": 8713,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 52.5,
+      "bundle_value": 123.62,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 52.5,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 52.5,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 47.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Newport",
+      "state": "KY",
+      "county": "Campbell",
+      "pop": 13967,
+      "zips": 4,
+      "top_niche": "HVAC",
+      "top_payout": 52.5,
+      "bundle_value": 123.62,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 52.5,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 52.5,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 47.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Mustang",
+      "state": "OK",
+      "county": "Canadian",
+      "pop": 22192,
+      "zips": 1,
+      "top_niche": "Roofing",
+      "top_payout": 61.25,
+      "bundle_value": 123.54,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 61.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 44.1,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 37.98,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Dickson",
+      "state": "TN",
+      "county": "Dickson",
+      "pop": 16424,
+      "zips": 2,
+      "top_niche": "Roofing",
+      "top_payout": 61.25,
+      "bundle_value": 123.19,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 61.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 42.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 39.38,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Cameron",
+      "state": "MO",
+      "county": "Clinton",
+      "pop": 8519,
+      "zips": 1,
+      "top_niche": "Roofing",
+      "top_payout": 54.25,
+      "bundle_value": 122.31,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 54.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 49.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Bathroom Remodeling",
+          "payout": 44.63,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Independence",
+      "state": "KY",
+      "county": "Kenton",
+      "pop": 29392,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 52.5,
+      "bundle_value": 121.88,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 52.5,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 52.5,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 43.75,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Elizabethtown",
+      "state": "KY",
+      "county": "Hardin",
+      "pop": 81379,
+      "zips": 2,
+      "top_niche": "HVAC",
+      "top_payout": 57.75,
+      "bundle_value": 121.85,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 57.75,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 45.81,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 42.14,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 40.25,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Zionsville",
+      "state": "IN",
+      "county": "Boone",
+      "pop": 32095,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 78.75,
+      "bundle_value": 121.0,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 78.75,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 42.0,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Paris",
+      "state": "KY",
+      "county": "Bourbon",
+      "pop": 10160,
+      "zips": 2,
+      "top_niche": "HVAC",
+      "top_payout": 52.5,
+      "bundle_value": 121.0,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 52.5,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 52.5,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 42.0,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Chillicothe",
+      "state": "OH",
+      "county": "Ross",
+      "pop": 21902,
+      "zips": 1,
+      "top_niche": "Roofing",
+      "top_payout": 56.7,
+      "bundle_value": 120.85,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 56.7,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 46.2,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 39.6,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Raymore",
+      "state": "MO",
+      "county": "Cass",
+      "pop": 24526,
+      "zips": 1,
+      "top_niche": "Roofing",
+      "top_payout": 57.75,
+      "bundle_value": 120.64,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 57.75,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 42.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 41.27,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Saint Joseph",
+      "state": "MO",
+      "county": "Buchanan",
+      "pop": 73256,
+      "zips": 8,
+      "top_niche": "Roofing",
+      "top_payout": 54.25,
+      "bundle_value": 120.56,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 54.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 45.5,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Bathroom Remodeling",
+          "payout": 44.63,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Atchison",
+      "state": "KS",
+      "county": "Atchison",
+      "pop": 10785,
+      "zips": 1,
+      "top_niche": "Roofing",
+      "top_payout": 54.25,
+      "bundle_value": 120.56,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 54.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 45.5,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Bathroom Remodeling",
+          "payout": 44.63,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Loveland",
+      "state": "OH",
+      "county": "Hamilton",
+      "pop": 13197,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 52.67,
+      "bundle_value": 120.45,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 52.67,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 47.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 45.81,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Monroe",
+      "state": "OH",
+      "county": "Butler",
+      "pop": 15401,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 52.5,
+      "bundle_value": 120.28,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 52.5,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 47.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 45.81,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Troy",
+      "state": "OH",
+      "county": "Miami",
+      "pop": 26842,
+      "zips": 2,
+      "top_niche": "Plumbing",
+      "top_payout": 55.69,
+      "bundle_value": 119.88,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 55.69,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 43.16,
+          "pricing": "geo"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 42.73,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Fairborn",
+      "state": "OH",
+      "county": "Greene",
+      "pop": 34534,
+      "zips": 1,
+      "top_niche": "Roofing",
+      "top_payout": 54.25,
+      "bundle_value": 119.77,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 54.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 45.81,
+          "pricing": "geo"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 42.73,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Xenia",
+      "state": "OH",
+      "county": "Greene",
+      "pop": 25689,
+      "zips": 1,
+      "top_niche": "Roofing",
+      "top_payout": 54.25,
+      "bundle_value": 119.67,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 54.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 45.81,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 42.52,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Yorktown",
+      "state": "IN",
+      "county": "Delaware",
+      "pop": 11699,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 50.23,
+      "bundle_value": 119.52,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 50.23,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 48.83,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 47.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Barberton",
+      "state": "OH",
+      "county": "Summit",
+      "pop": 24844,
+      "zips": 1,
+      "top_niche": "Plumbing",
+      "top_payout": 51.03,
+      "bundle_value": 119.09,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 51.03,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 49.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Bathroom Remodeling",
+          "payout": 44.63,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Amelia",
+      "state": "OH",
+      "county": "Clermont",
+      "pop": 12871,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 52.5,
+      "bundle_value": 118.94,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 52.5,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 47.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 43.12,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Harrison",
+      "state": "OH",
+      "county": "Hamilton",
+      "pop": 13084,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 52.5,
+      "bundle_value": 118.64,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 52.5,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 47.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 42.52,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Wadsworth",
+      "state": "OH",
+      "county": "Medina",
+      "pop": 24492,
+      "zips": 2,
+      "top_niche": "Roofing",
+      "top_payout": 49.0,
+      "bundle_value": 116.67,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 49.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 48.2,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Bathroom Remodeling",
+          "payout": 44.63,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Portland",
+      "state": "TN",
+      "county": "Sumner",
+      "pop": 13449,
+      "zips": 1,
+      "top_niche": "Roofing",
+      "top_payout": 53.55,
+      "bundle_value": 116.54,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 53.55,
+          "pricing": "geo"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 44.1,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 39.38,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Broken Arrow",
+      "state": "OK",
+      "county": "Tulsa",
+      "pop": 118180,
+      "zips": 4,
+      "top_niche": "Electrical",
+      "top_payout": 52.45,
+      "bundle_value": 115.52,
+      "niche_list": [
+        {
+          "niche": "Electrical",
+          "payout": 52.45,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 42.52,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 41.11,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Plainfield",
+      "state": "IN",
+      "county": "Hendricks",
+      "pop": 36369,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 74.03,
+      "bundle_value": 114.88,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 74.03,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 39.2,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Greenfield",
+      "state": "IN",
+      "county": "Hancock",
+      "pop": 24940,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 72.45,
+      "bundle_value": 114.7,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 72.45,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 42.0,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Franklin",
+      "state": "IN",
+      "county": "Johnson",
+      "pop": 26168,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 54.25,
+      "bundle_value": 114.67,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 54.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 39.2,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 39.13,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Springfield",
+      "state": "TN",
+      "county": "Robertson",
+      "pop": 19255,
+      "zips": 1,
+      "top_niche": "Roofing",
+      "top_payout": 52.5,
+      "bundle_value": 114.44,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 52.5,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 42.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 39.38,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Danville",
+      "state": "IN",
+      "county": "Hendricks",
+      "pop": 11714,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 54.25,
+      "bundle_value": 113.79,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 54.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 41.58,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 35.0,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Clayton",
+      "state": "OH",
+      "county": "Montgomery",
+      "pop": 13277,
+      "zips": 1,
+      "top_niche": "Plumbing",
+      "top_payout": 51.03,
+      "bundle_value": 113.77,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 51.03,
+          "pricing": "geo"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 42.73,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 40.25,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Crawfordsville",
+      "state": "IN",
+      "county": "Montgomery",
+      "pop": 16491,
+      "zips": 1,
+      "top_niche": "Roofing",
+      "top_payout": 47.3,
+      "bundle_value": 112.65,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 47.3,
+          "pricing": "geo"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 47.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 40.95,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Martinsburg",
+      "state": "WV",
+      "county": "Berkeley",
+      "pop": 18904,
+      "zips": 4,
+      "top_niche": "HVAC",
+      "top_payout": 47.25,
+      "bundle_value": 112.61,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 47.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Bathroom Remodeling",
+          "payout": 44.1,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 44.1,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 42.52,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Cuyahoga Falls",
+      "state": "OH",
+      "county": "Summit",
+      "pop": 50909,
+      "zips": 3,
+      "top_niche": "Roofing",
+      "top_payout": 49.0,
+      "bundle_value": 112.25,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 49.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Bathroom Remodeling",
+          "payout": 44.63,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 39.38,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Saint Peters",
+      "state": "MO",
+      "county": "St. Charles",
+      "pop": 59092,
+      "zips": 1,
+      "top_niche": "Roofing",
+      "top_payout": 55.13,
+      "bundle_value": 112.06,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 55.13,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 38.27,
+          "pricing": "geo"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 37.8,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 37.8,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Lewisburg",
+      "state": "TN",
+      "county": "Marshall",
+      "pop": 12861,
+      "zips": 1,
+      "top_niche": "Roofing",
+      "top_payout": 50.4,
+      "bundle_value": 111.9,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 50.4,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 42.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 38.5,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Harrison",
+      "state": "TN",
+      "county": "Hamilton",
+      "pop": 8011,
+      "zips": 1,
+      "top_niche": "Plumbing",
+      "top_payout": 66.15,
+      "bundle_value": 111.81,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 66.15,
+          "pricing": "geo"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 45.94,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 45.38,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Pulaski",
+      "state": "TN",
+      "county": "Giles",
+      "pop": 8285,
+      "zips": 1,
+      "top_niche": "Roofing",
+      "top_payout": 49.5,
+      "bundle_value": 111.44,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 49.5,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 42.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 39.38,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Tipp City",
+      "state": "OH",
+      "county": "Miami",
+      "pop": 10439,
+      "zips": 1,
+      "top_niche": "Plumbing",
+      "top_payout": 48.2,
+      "bundle_value": 110.94,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 48.2,
+          "pricing": "geo"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 42.73,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 40.25,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Mishawaka",
+      "state": "IN",
+      "county": "St. Joseph",
+      "pop": 51021,
+      "zips": 3,
+      "top_niche": "Roofing",
+      "top_payout": 45.37,
+      "bundle_value": 110.72,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 45.37,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 44.1,
+          "pricing": "geo"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 44.1,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Blanchard",
+      "state": "OK",
+      "county": "McClain",
+      "pop": 9215,
+      "zips": 1,
+      "top_niche": "Roofing",
+      "top_payout": 49.0,
+      "bundle_value": 110.67,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 49.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 44.1,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 36.75,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Newcastle",
+      "state": "OK",
+      "county": "McClain",
+      "pop": 13001,
+      "zips": 1,
+      "top_niche": "Roofing",
+      "top_payout": 49.0,
+      "bundle_value": 110.67,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 49.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 44.1,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 36.75,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Tuttle",
+      "state": "OK",
+      "county": "Grady",
+      "pop": 8040,
+      "zips": 1,
+      "top_niche": "Roofing",
+      "top_payout": 49.0,
+      "bundle_value": 110.67,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 49.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 44.1,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 36.75,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Beachwood",
+      "state": "OH",
+      "county": "Cuyahoga",
+      "pop": 13865,
+      "zips": 1,
+      "top_niche": "Plumbing",
+      "top_payout": 45.81,
+      "bundle_value": 110.64,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 45.81,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Bathroom Remodeling",
+          "payout": 44.63,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 42.52,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Hartsville",
+      "state": "TN",
+      "county": "Trousdale",
+      "pop": 11957,
+      "zips": 1,
+      "top_niche": "Roofing",
+      "top_payout": 48.13,
+      "bundle_value": 110.07,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 48.13,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 42.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 39.38,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Winchester",
+      "state": "KY",
+      "county": "Clark",
+      "pop": 19213,
+      "zips": 2,
+      "top_niche": "Plumbing",
+      "top_payout": 59.5,
+      "bundle_value": 109.8,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 59.5,
+          "pricing": "geo"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 58.59,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 42.0,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Excelsior Springs",
+      "state": "MO",
+      "county": "Clay",
+      "pop": 10484,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 59.5,
+      "bundle_value": 109.62,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 59.5,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 57.75,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Oak Grove",
+      "state": "MO",
+      "county": "Jackson",
+      "pop": 8538,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 59.5,
+      "bundle_value": 109.62,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 59.5,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 57.75,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Pleasant Hill",
+      "state": "MO",
+      "county": "Cass",
+      "pop": 8847,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 59.5,
+      "bundle_value": 109.62,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 59.5,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 57.75,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Smithville",
+      "state": "MO",
+      "county": "Clay",
+      "pop": 10705,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 59.5,
+      "bundle_value": 109.62,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 59.5,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 57.75,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Harrisonville",
+      "state": "MO",
+      "county": "Cass",
+      "pop": 9970,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 59.5,
+      "bundle_value": 109.62,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 59.5,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 57.75,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "New Castle",
+      "state": "IN",
+      "county": "Henry",
+      "pop": 17367,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 64.58,
+      "bundle_value": 109.45,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 64.58,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 47.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Kenner",
+      "state": "LA",
+      "county": "Jefferson",
+      "pop": 64904,
+      "zips": 3,
+      "top_niche": "HVAC",
+      "top_payout": 66.5,
+      "bundle_value": 109.02,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 66.5,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 42.52,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 42.52,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Cleveland",
+      "state": "TN",
+      "county": "Bradley",
+      "pop": 72049,
+      "zips": 5,
+      "top_niche": "Plumbing",
+      "top_payout": 63.95,
+      "bundle_value": 108.84,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 63.95,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 45.38,
+          "pricing": "geo"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 44.41,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Grover",
+      "state": "MO",
+      "county": "St. Louis",
+      "pop": 35133,
+      "zips": 1,
+      "top_niche": "Roofing",
+      "top_payout": 67.38,
+      "bundle_value": 108.83,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 67.38,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Bathroom Remodeling",
+          "payout": 44.63,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 38.27,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Rocky River",
+      "state": "OH",
+      "county": "Cuyahoga",
+      "pop": 21490,
+      "zips": 1,
+      "top_niche": "Bathroom Remodeling",
+      "top_payout": 44.63,
+      "bundle_value": 108.81,
+      "niche_list": [
+        {
+          "niche": "Bathroom Remodeling",
+          "payout": 44.63,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 43.34,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 42.52,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Mccordsville",
+      "state": "IN",
+      "county": "Hancock",
+      "pop": 10329,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 66.5,
+      "bundle_value": 108.75,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 66.5,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 42.0,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Whitestown",
+      "state": "IN",
+      "county": "Boone",
+      "pop": 12466,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 66.5,
+      "bundle_value": 108.75,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 66.5,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 42.0,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Bargersville",
+      "state": "IN",
+      "county": "Johnson",
+      "pop": 10752,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 66.5,
+      "bundle_value": 108.75,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 66.5,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 42.0,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Niles",
+      "state": "MI",
+      "county": "Berrien",
+      "pop": 11803,
+      "zips": 1,
+      "top_niche": "Roofing",
+      "top_payout": 46.94,
+      "bundle_value": 108.44,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 46.94,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 44.1,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 36.4,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Belle Chasse",
+      "state": "LA",
+      "county": "Plaquemines",
+      "pop": 10934,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 66.5,
+      "bundle_value": 108.02,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 66.5,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 42.09,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 40.95,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Slidell",
+      "state": "LA",
+      "county": "St. Tammany",
+      "pop": 90755,
+      "zips": 4,
+      "top_niche": "HVAC",
+      "top_payout": 66.5,
+      "bundle_value": 108.02,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 66.5,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 42.09,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 40.95,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Ottawa",
+      "state": "KS",
+      "county": "Franklin",
+      "pop": 12678,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 59.5,
+      "bundle_value": 107.88,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 59.5,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 54.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Chalmette",
+      "state": "LA",
+      "county": "St. Bernard",
+      "pop": 22616,
+      "zips": 2,
+      "top_niche": "HVAC",
+      "top_payout": 66.5,
+      "bundle_value": 107.56,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 66.5,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 42.09,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 40.04,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Marrero",
+      "state": "LA",
+      "county": "Jefferson",
+      "pop": 32540,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 66.5,
+      "bundle_value": 107.56,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 66.5,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 42.09,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 40.04,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "O Fallon",
+      "state": "MO",
+      "county": "St. Charles",
+      "pop": 93801,
+      "zips": 2,
+      "top_niche": "Roofing",
+      "top_payout": 47.25,
+      "bundle_value": 107.37,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 47.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Bathroom Remodeling",
+          "payout": 44.63,
+          "pricing": "geo"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 37.8,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 37.8,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Berea",
+      "state": "KY",
+      "county": "Madison",
+      "pop": 15786,
+      "zips": 2,
+      "top_niche": "Plumbing",
+      "top_payout": 59.5,
+      "bundle_value": 107.28,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 59.5,
+          "pricing": "geo"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 53.55,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 42.0,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Gretna",
+      "state": "LA",
+      "county": "Jefferson",
+      "pop": 17389,
+      "zips": 2,
+      "top_niche": "HVAC",
+      "top_payout": 66.5,
+      "bundle_value": 107.11,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 66.5,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 42.09,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 39.13,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Fairview",
+      "state": "TN",
+      "county": "Williamson",
+      "pop": 10009,
+      "zips": 1,
+      "top_niche": "Roofing",
+      "top_payout": 61.25,
+      "bundle_value": 107.0,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 61.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 49.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Goodlettsville",
+      "state": "TN",
+      "county": "Sumner",
+      "pop": 17597,
+      "zips": 2,
+      "top_niche": "Roofing",
+      "top_payout": 61.25,
+      "bundle_value": 107.0,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 61.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 49.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Nolensville",
+      "state": "TN",
+      "county": "Williamson",
+      "pop": 15074,
+      "zips": 1,
+      "top_niche": "Roofing",
+      "top_payout": 61.25,
+      "bundle_value": 107.0,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 61.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 49.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Thompsons Station",
+      "state": "TN",
+      "county": "Maury",
+      "pop": 67964,
+      "zips": 1,
+      "top_niche": "Roofing",
+      "top_payout": 61.25,
+      "bundle_value": 107.0,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 61.25,
+          "pricing": "geo"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 49.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Berea",
+      "state": "OH",
+      "county": "Cuyahoga",
+      "pop": 18218,
+      "zips": 1,
+      "top_niche": "Bathroom Remodeling",
+      "top_payout": 44.63,
+      "bundle_value": 106.83,
+      "niche_list": [
+        {
+          "niche": "Bathroom Remodeling",
+          "payout": 44.63,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 42.52,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 39.38,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Olmsted Falls",
+      "state": "OH",
+      "county": "Cuyahoga",
+      "pop": 8639,
+      "zips": 1,
+      "top_niche": "Bathroom Remodeling",
+      "top_payout": 44.63,
+      "bundle_value": 105.96,
+      "niche_list": [
+        {
+          "niche": "Bathroom Remodeling",
+          "payout": 44.63,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 42.52,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 37.63,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Stow",
+      "state": "OH",
+      "county": "Summit",
+      "pop": 34240,
+      "zips": 1,
+      "top_niche": "Bathroom Remodeling",
+      "top_payout": 44.63,
+      "bundle_value": 105.96,
+      "niche_list": [
+        {
+          "niche": "Bathroom Remodeling",
+          "payout": 44.63,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 42.52,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 37.63,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Dyer",
+      "state": "IN",
+      "county": "Lake",
+      "pop": 16400,
+      "zips": 1,
+      "top_niche": "Bathroom Remodeling",
+      "top_payout": 44.63,
+      "bundle_value": 105.96,
+      "niche_list": [
+        {
+          "niche": "Bathroom Remodeling",
+          "payout": 44.63,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 43.75,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 36.4,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Hammond",
+      "state": "IN",
+      "county": "Lake",
+      "pop": 76768,
+      "zips": 5,
+      "top_niche": "Bathroom Remodeling",
+      "top_payout": 44.63,
+      "bundle_value": 105.96,
+      "niche_list": [
+        {
+          "niche": "Bathroom Remodeling",
+          "payout": 44.63,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 43.75,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 36.4,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Nicholasville",
+      "state": "KY",
+      "county": "Jessamine",
+      "pop": 32197,
+      "zips": 2,
+      "top_niche": "HVAC",
+      "top_payout": 57.75,
+      "bundle_value": 105.0,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 57.75,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 52.5,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 42.0,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Bellevue",
+      "state": "NE",
+      "county": "Sarpy",
+      "pop": 64510,
+      "zips": 3,
+      "top_niche": "Roofing",
+      "top_payout": 63.0,
+      "bundle_value": 104.73,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 63.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 42.52,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 40.95,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Papillion",
+      "state": "NE",
+      "county": "Sarpy",
+      "pop": 25244,
+      "zips": 2,
+      "top_niche": "Roofing",
+      "top_payout": 63.0,
+      "bundle_value": 104.73,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 63.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 42.52,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 40.95,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Shepherdsville",
+      "state": "KY",
+      "county": "Bullitt",
+      "pop": 14533,
+      "zips": 2,
+      "top_niche": "HVAC",
+      "top_payout": 57.75,
+      "bundle_value": 104.65,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 57.75,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 53.55,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 40.25,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Glenpool",
+      "state": "OK",
+      "county": "Tulsa",
+      "pop": 14151,
+      "zips": 1,
+      "top_niche": "Electrical",
+      "top_payout": 45.79,
+      "bundle_value": 104.35,
+      "niche_list": [
+        {
+          "niche": "Electrical",
+          "payout": 45.79,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 37.66,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 36.96,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Lawrenceburg",
+      "state": "KY",
+      "county": "Anderson",
+      "pop": 11943,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 57.75,
+      "bundle_value": 104.12,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 57.75,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 52.5,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 40.25,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Frankfort",
+      "state": "KY",
+      "county": "Franklin",
+      "pop": 28503,
+      "zips": 9,
+      "top_niche": "HVAC",
+      "top_payout": 57.75,
+      "bundle_value": 104.12,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 57.75,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 52.5,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 40.25,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Arlington",
+      "state": "TN",
+      "county": "Shelby",
+      "pop": 15205,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 63.0,
+      "bundle_value": 103.94,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 63.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 44.66,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 37.21,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "White House",
+      "state": "TN",
+      "county": "Robertson",
+      "pop": 14631,
+      "zips": 1,
+      "top_niche": "Pest Control",
+      "top_payout": 42.5,
+      "bundle_value": 103.31,
+      "niche_list": [
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 42.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 42.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 37.63,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Bardstown",
+      "state": "KY",
+      "county": "Nelson",
+      "pop": 13804,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 57.75,
+      "bundle_value": 103.25,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 57.75,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 50.75,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 40.25,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "La Grange",
+      "state": "KY",
+      "county": "Oldham",
+      "pop": 10311,
+      "zips": 2,
+      "top_niche": "HVAC",
+      "top_payout": 57.75,
+      "bundle_value": 103.25,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 57.75,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 50.75,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 40.25,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Mount Washington",
+      "state": "KY",
+      "county": "Bullitt",
+      "pop": 18480,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 57.75,
+      "bundle_value": 103.25,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 57.75,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 50.75,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 40.25,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Shelbyville",
+      "state": "KY",
+      "county": "Shelby",
+      "pop": 17668,
+      "zips": 2,
+      "top_niche": "HVAC",
+      "top_payout": 57.75,
+      "bundle_value": 103.25,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 57.75,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 50.75,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 40.25,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Radcliff",
+      "state": "KY",
+      "county": "Hardin",
+      "pop": 22864,
+      "zips": 2,
+      "top_niche": "HVAC",
+      "top_payout": 57.75,
+      "bundle_value": 103.25,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 57.75,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 50.75,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 40.25,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "La Porte",
+      "state": "IN",
+      "county": "LaPorte",
+      "pop": 22449,
+      "zips": 2,
+      "top_niche": "Plumbing",
+      "top_payout": 44.1,
+      "bundle_value": 102.8,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 44.1,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 38.5,
+          "pricing": "geo"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 36.4,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Maysville",
+      "state": "KY",
+      "county": "Mason",
+      "pop": 8737,
+      "zips": 2,
+      "top_niche": "Plumbing",
+      "top_payout": 59.5,
+      "bundle_value": 102.62,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 59.5,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 43.75,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Manchester",
+      "state": "TN",
+      "county": "Coffee",
+      "pop": 12944,
+      "zips": 2,
+      "top_niche": "HVAC",
+      "top_payout": 55.13,
+      "bundle_value": 102.56,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 55.13,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 52.36,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Gretna",
+      "state": "NE",
+      "county": "Sarpy",
+      "pop": 9193,
+      "zips": 1,
+      "top_niche": "Roofing",
+      "top_payout": 63.0,
+      "bundle_value": 102.04,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 63.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 40.95,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 37.13,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "La Vista",
+      "state": "NE",
+      "county": "Sarpy",
+      "pop": 16563,
+      "zips": 1,
+      "top_niche": "Roofing",
+      "top_payout": 63.0,
+      "bundle_value": 102.04,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 63.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 40.95,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 37.13,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Versailles",
+      "state": "KY",
+      "county": "Woodford",
+      "pop": 10492,
+      "zips": 2,
+      "top_niche": "HVAC",
+      "top_payout": 57.75,
+      "bundle_value": 101.5,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 57.75,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 45.5,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 42.0,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Shelby",
+      "state": "OH",
+      "county": "Richland",
+      "pop": 8865,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 53.63,
+      "bundle_value": 101.11,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 53.63,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Plumbing",
+          "payout": 52.45,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        }
+      ]
+    },
+    {
+      "city": "Covington",
+      "state": "LA",
+      "county": "St. Tammany",
+      "pop": 11658,
+      "zips": 3,
+      "top_niche": "HVAC",
+      "top_payout": 64.75,
+      "bundle_value": 99.75,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 64.75,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 35.0,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 35.0,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Guthrie",
+      "state": "OK",
+      "county": "Logan",
+      "pop": 11243,
+      "zips": 1,
+      "top_niche": "Pest Control",
+      "top_payout": 42.5,
+      "bundle_value": 99.72,
+      "niche_list": [
+        {
+          "niche": "Pest Control",
+          "payout": 42.5,
+          "pricing": "flat"
+        },
+        {
+          "niche": "Roofing",
+          "payout": 39.9,
+          "pricing": "geo"
+        },
+        {
+          "niche": "HVAC",
+          "payout": 37.8,
+          "pricing": "geo"
+        },
+        {
+          "niche": "Electrical",
+          "payout": 36.75,
+          "pricing": "geo"
+        }
+      ]
+    }
+  ]
+}
