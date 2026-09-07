@@ -351,6 +351,17 @@ def shortlist(rows, pricing):
 # ══════════════════════════════════════════════════════════════════
 # STAGE 4 — SERP scan (the only stage that costs money)
 # ══════════════════════════════════════════════════════════════════
+_UULE_KEY = ("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+             "0123456789-_")
+
+
+def _uule(location):
+    """Google's own canonical-name location encoding, computed locally."""
+    import base64
+    b = base64.b64encode(location.encode("utf-8")).decode("ascii")
+    return "w+CAIQICI" + _UULE_KEY[len(location) % len(_UULE_KEY)] + b
+
+
 def serp(query, location=None):
     """
     `location` is not optional for local intent. Without it SerpApi answers
@@ -366,7 +377,13 @@ def serp(query, location=None):
         "gl": SERP_GL, "hl": "en", "api_key": SERP_KEY,
     }
     if location:
+        # Both, deliberately. `location` depends on SerpApi resolving the
+        # string against its own place database and fails quietly for smaller
+        # cities; `uule` is Google's own encoding and needs no lookup. A run
+        # that sent only `location` came back with national cost-aggregator
+        # SERPs while reporting them as wide-open local ones.
         params["location"] = location
+        params["uule"] = _uule(location)
     q = urllib.parse.urlencode(params)
     try:
         with urllib.request.urlopen(f"https://serpapi.com/search?{q}", timeout=40) as r:
@@ -451,14 +468,28 @@ def score_serp(data, service, city):
         if kinds:
             occupants.append({"host": bare, "kind": " + ".join(kinds)})
 
+    # GUARD — is this even a local SERP? A service+city query answered by
+    # Google always surfaces local businesses. A result set carrying none,
+    # mostly national cost aggregators, is the signature of a request whose
+    # location never took effect. Scoring it produced a "wide open, 100/100"
+    # verdict on Duarte CA, whose real page one holds a city EMD and two
+    # programmatic subdomains. Refuse it instead of scoring it.
+    local_any = (tally["dedicated"] + tally["emd"] +
+                 tally["pseo"] + tally["other_local"])
+    if local_any == 0:
+        return None
+
     s = 100
     s -= tally["dedicated"]   * 18
     s -= tally["emd"]         * 20   # the single strongest occupant
     s -= tally["pseo"]        * 12
     s -= tally["national"]    * 10
     s -= tally["other_local"] * 4
-    s += tally["directory"]   * 6
-    s += tally["forum"]       * 8
+    # Bonuses are capped. Uncapped, eight directories paid +48 and cancelled
+    # two dedicated pages outright — the score then read 100 on a SERP the
+    # report's own rules say to walk away from.
+    s += min(tally["directory"] * 6, 12)
+    s += min(tally["forum"] * 8, 16)
     if tally["dedicated"] == 0 and tally["emd"] == 0:
         s += 10
 
@@ -474,7 +505,20 @@ def score_serp(data, service, city):
     elif pack_med >= 100:
         s -= 6
 
-    return max(0, min(100, s)), tally, occupants
+    s = max(0, min(100, s))
+
+    # HARD CAPS. The report tells the reader to STOP on any EMD, any pSEO
+    # network, or two dedicated pages — so the number must not then say 100.
+    # These are ceilings, not deductions: no amount of directory presence can
+    # lift a SERP back over an occupant that is already sitting in it.
+    if tally["emd"]:
+        s = min(s, 25)
+    if tally["pseo"]:
+        s = min(s, 30)
+    if tally["dedicated"] >= 2:
+        s = min(s, 35)
+
+    return s, tally, occupants
 
 
 def scan(cands):
@@ -585,7 +629,7 @@ def write(meta, cands, scored, pricing=None):
                         b["national"], b.get("other_local", 0), b["directory"],
                         b.get("pack_size", 0), b.get("pack_median_reviews", 0),
                         o["query"],
-                        " | ".join(f"{x['host']} ({x['kind']})" for x in o["occupants"][:6])])
+                        " | ".join(f"{x['host']} ({x['kind']})" for x in o["occupants"][:10])])
 
     lines = [
         "# Opportunity scan",
