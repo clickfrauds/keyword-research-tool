@@ -416,8 +416,19 @@ def serp(query, location=None):
 _SERP_ERRS = {}
 
 
+_QUOTA_HIT = []
+
+
 def _serp_err(msg):
     """Print each distinct failure once, with a count, instead of 200 lines."""
+    # A free SerpApi plan is 250 searches a month, so running dry mid-scan is
+    # an ordinary event, not an edge case. Every query after this point is
+    # guaranteed to fail, so stage 4 stops and keeps what it already scored.
+    low = msg.lower()
+    if any(w in low for w in ("run out of searches", "ran out of searches",
+                              "exceeded your", "account limit", "plan limit",
+                              "searches left", "upgrade your plan")):
+        _QUOTA_HIT.append(msg)
     _SERP_ERRS[msg] = _SERP_ERRS.get(msg, 0) + 1
     if _SERP_ERRS[msg] <= 2:
         print(f"      ⚠️ SERP failed: {msg}")
@@ -607,6 +618,11 @@ def scan(cands):
             # $160 payout behind six dedicated pages.
             "opportunity": round(sc / 100 * c["bundle_value"], 2),
         })
+        if _QUOTA_HIT:
+            print(f"   ⏹️ SerpApi quota exhausted after {i} queries — "
+                  f"{len(found)} scored and kept. ({_QUOTA_HIT[0]})")
+            break
+
         # Fail fast on a broken request. The last run sent 200 queries that
         # were all rejected for the same reason and reported "0 scored" at the
         # end — the misconfiguration was knowable after the first ten.
