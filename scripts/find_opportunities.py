@@ -83,6 +83,10 @@ SERP_GL    = os.environ.get("SERP_GL", "us").strip() or "us"
 # "location" (SerpApi resolves the place name) or "uule" (Google's own
 # encoding, no lookup). Never both — see serp().
 SERP_LOC_MODE = os.environ.get("SERP_LOC_MODE", "location").strip().lower()
+# How many raw SerpApi responses to write to serp_debug.json. The scan's
+# scores disagreed with four hand-checked SERPs in a row, and a score cannot
+# show why — only the response can.
+SERP_DEBUG_N  = int(os.environ.get("SERP_DEBUG_N", "3") or 3)
 # How the SERP budget is spent. 1 niche × 3 subs = a deep read on each city's
 # best offer. 3 niches × 1 sub = a bundle read — is this city open across
 # several offers, or only one? Both matter, at different points.
@@ -626,11 +630,36 @@ def scan(cands):
               f"were tested on their best niche. {len(cands) - len(jobs)} "
               f"candidates went untested — raise max_serp_checks to reach them.")
 
-    found = []
+    found, raw_dump = [], []
     for i, (c, niche_name, niche_payout, niche_pricing, sub) in enumerate(jobs, 1):
         query = f"{sub} {c['city']} {c['state']}"
         loc   = f"{c['city']}, {STATE_NAMES.get(c['state'], c['state'])}, United States"
-        res   = score_serp(serp(query, loc), sub, c["city"])
+        data  = serp(query, loc)
+
+        # Keep the first few responses verbatim. Four hand-checks in a row
+        # found heavy occupation — pSEO subdomains, dedicated pages, city
+        # domains — where the scan reported none, and the classifier scores
+        # those same result sets correctly when handed them directly. So the
+        # disagreement is in what comes back from the API, and that cannot be
+        # diagnosed from a score. This writes down what actually arrived.
+        if data and len(raw_dump) < SERP_DEBUG_N:
+            raw_dump.append({
+                "query": query,
+                "location_sent": loc,
+                "search_parameters": data.get("search_parameters"),
+                "search_information": data.get("search_information"),
+                "organic_results": [
+                    {"position": r.get("position"), "title": r.get("title"),
+                     "link": r.get("link")}
+                    for r in (data.get("organic_results") or [])
+                ],
+                "local_results_count": len(
+                    (data.get("local_results") or {}).get("places", [])
+                    if isinstance(data.get("local_results"), dict)
+                    else (data.get("local_results") or [])),
+            })
+
+        res = score_serp(data, sub, c["city"])
         if not res:
             continue
         sc, tally, occ = res
@@ -664,6 +693,11 @@ def scan(cands):
             print(f"   🔎 {i}/{len(jobs)} · best so far "
                   f"{max((f['opportunity'] for f in found), default=0):.0f}")
         time.sleep(0.7)
+
+    if raw_dump:
+        with open("serp_debug.json", "w", encoding="utf-8") as f:
+            json.dump(raw_dump, f, indent=2)
+        print(f"   🧪 wrote serp_debug.json — {len(raw_dump)} raw responses")
 
     found.sort(key=lambda f: -f["opportunity"])
     print(f"   ✅ {len(found)} scored")

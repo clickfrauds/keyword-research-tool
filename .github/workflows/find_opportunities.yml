@@ -94,6 +94,7 @@ jobs:
           NICHES_PER_CITY:   ${{ github.event.inputs.niches_per_city }}
           SUBS_PER_NICHE:    ${{ github.event.inputs.subs_per_niche }}
           SERP_GL:           us
+          SERP_DEBUG_N:      '5'
         run: python -u scripts/find_opportunities.py
 
       - name: Show the report in the run log
@@ -120,5 +121,6 @@ jobs:
             opportunities.json
             opportunities.csv
             opportunity_report.md
+            serp_debug.json
           retention-days: 30
           if-no-files-found: warn
