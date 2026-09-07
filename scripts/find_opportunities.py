@@ -243,7 +243,33 @@ def pull_coverage():
 # ══════════════════════════════════════════════════════════════════
 # STAGE 2 + 3 — filter, roll up to cities, detect bundles
 # ══════════════════════════════════════════════════════════════════
-def shortlist(rows):
+def price_modes(rows):
+    """
+    GATE 05 — is this niche geographically priced, or one flat rate?
+
+    Counted from the rows already in hand, so it costs nothing. A niche with
+    a handful of distinct payouts nationwide has no high-payout ZIP to hunt:
+    picking a market buys you nothing there, and the city decision collapses
+    to search volume and competition alone. A niche with hundreds of distinct
+    values is the opposite — the market you pick IS the lever.
+    """
+    vals = {}
+    for r in rows:
+        if r["niche"] and r["payout"]:
+            vals.setdefault((r["niche"], r["ptype"]), set()).add(r["payout"])
+    out = {}
+    for k, v in vals.items():
+        n = len(v)
+        out[k] = {"distinct": n, "mode": "flat" if n <= 3 else "geo"}
+    print("── Pricing model per niche ────────────────────────────")
+    for (niche, pt), m in sorted(out.items(), key=lambda kv: -kv[1]["distinct"])[:12]:
+        tag = "GEO " if m["mode"] == "geo" else "FLAT"
+        print(f"   {tag} {niche:<22} {pt:<5} {m['distinct']:>5} distinct payouts")
+    print()
+    return out
+
+
+def shortlist(rows, pricing):
     print("── STAGE 2: revenue filter ────────────────────────────")
     keep = []
     for r in rows:
@@ -287,7 +313,12 @@ def shortlist(rows):
         c["zips"] = len(c["zips"])
         c["top_niche"]  = top[0][0]
         c["top_payout"] = round(top[0][1]["best"], 2)
-        c["niche_list"] = [{"niche": n, "payout": round(v["best"], 2)} for n, v in top]
+        c["niche_list"] = [
+            {"niche": n, "payout": round(v["best"], 2),
+             "pricing": (pricing.get((n, PAYOUT_T)) or {}).get("mode", "?")}
+            for n, v in top
+        ]
+        c["top_pricing"] = c["niche_list"][0]["pricing"]
         c["bundle_value"] = round(bundle, 2)
         out.append(c)
 
@@ -339,12 +370,28 @@ def score_serp(data, service, city):
     if not results:
         return None
 
+    # GATE 07 — map pack. In most local service niches the pack takes the
+    # majority of the clicks, so an open organic SERP sitting under three
+    # 500-review businesses is not the opportunity it looks like. This rides
+    # on the same response the organic scan already paid for.
+    pack = (data.get("local_results") or {})
+    if isinstance(pack, dict):
+        pack = pack.get("places") or []
+    pack = pack if isinstance(pack, list) else []
+    pack_reviews = sorted(
+        (int(p.get("reviews") or 0) for p in pack), reverse=True)[:3]
+    pack_n   = len(pack)
+    pack_max = pack_reviews[0] if pack_reviews else 0
+    pack_med = pack_reviews[len(pack_reviews) // 2] if pack_reviews else 0
+
     svc_words = [w for w in re.split(r"\W+", service.lower()) if len(w) > 3]
     city_l = city.lower()
     city_slug = city_l.replace(" ", "-")
     city_flat = city_slug.replace("-", "")
     tally = {"dedicated": 0, "pseo": 0, "national": 0, "emd": 0,
-             "directory": 0, "forum": 0, "other_local": 0, "results": len(results)}
+             "directory": 0, "forum": 0, "other_local": 0, "results": len(results),
+             "pack_size": pack_n, "pack_top_reviews": pack_max,
+             "pack_median_reviews": pack_med}
     occupants = []
 
     for res in results:
@@ -394,6 +441,19 @@ def score_serp(data, service, city):
     s += tally["forum"]       * 8
     if tally["dedicated"] == 0 and tally["emd"] == 0:
         s += 10
+
+    # Pack penalty scales with how entrenched it is, not merely whether one
+    # exists. Three businesses at 500+ reviews each is a different market
+    # from three at 40.
+    if pack_n == 0:
+        s += 10
+    elif pack_med >= 500:
+        s -= 18
+    elif pack_med >= 200:
+        s -= 12
+    elif pack_med >= 100:
+        s -= 6
+
     return max(0, min(100, s)), tally, occupants
 
 
@@ -413,14 +473,15 @@ def scan(cands):
     for c in cands:
         for ni, nrec in enumerate(c["niche_list"][:NICHES_PER_CITY]):
             for si, sub in enumerate(SUB_SERVICES.get(nrec["niche"], [])[:SUBS_PER_NICHE]):
-                passes.append((ni * 100 + si, c, nrec["niche"], nrec["payout"], sub))
+                passes.append((ni * 100 + si, c, nrec["niche"], nrec["payout"],
+                               nrec.get("pricing", "?"), sub))
     passes.sort(key=lambda p: p[0])
     jobs = [p[1:] for p in passes][:MAX_SERP]
     print(f"   {len(jobs)} queries (cap {MAX_SERP}) · "
           f"{NICHES_PER_CITY} niche(s) × {SUBS_PER_NICHE} sub(s) per city")
 
     found = []
-    for i, (c, niche_name, niche_payout, sub) in enumerate(jobs, 1):
+    for i, (c, niche_name, niche_payout, niche_pricing, sub) in enumerate(jobs, 1):
         query = f"{sub} {c['city']} {c['state']}"
         loc   = f"{c['city']}, {STATE_NAMES.get(c['state'], c['state'])}, United States"
         res   = score_serp(serp(query, loc), sub, c["city"])
@@ -431,7 +492,8 @@ def scan(cands):
             "city": c["city"], "state": c["state"], "county": c["county"],
             "population": c["pop"], "zips": c["zips"],
             "niche": niche_name, "sub_service": sub, "query": query,
-            "payout": niche_payout, "bundle_value": c["bundle_value"],
+            "payout": niche_payout, "pricing": niche_pricing,
+            "bundle_value": c["bundle_value"],
             "niches_here": c["niche_list"],
             "serp_score": sc, "serp_breakdown": tally, "occupants": occ,
             # What a page here is worth: openness × revenue. A wide-open
@@ -452,8 +514,11 @@ def scan(cands):
 # ══════════════════════════════════════════════════════════════════
 # STAGE 5 — output
 # ══════════════════════════════════════════════════════════════════
-def write(meta, cands, scored):
+def write(meta, cands, scored, pricing=None):
     payload = {
+        "pricing_model_by_niche": {
+            f"{n} ({p})": v for (n, p), v in (pricing or {}).items()
+        },
         "generated":    time.strftime("%Y-%m-%d %H:%M UTC", time.gmtime()),
         "dataset_date": (meta or {}).get("data_date"),
         "filters": {
@@ -475,17 +540,20 @@ def write(meta, cands, scored):
 
     with open("opportunities.csv", "w", newline="", encoding="utf-8") as f:
         w = csv.writer(f)
-        w.writerow(["rank", "opportunity", "serp_score", "payout", "bundle_value",
-                    "niche", "sub_service", "city", "state", "county",
-                    "population", "zips", "dedicated", "emd", "pseo", "national",
-                    "other_local", "directory", "query", "occupants"])
+        w.writerow(["rank", "opportunity", "serp_score", "payout", "pricing",
+                    "bundle_value", "niche", "sub_service", "city", "state",
+                    "county", "population", "zips", "dedicated", "emd", "pseo",
+                    "national", "other_local", "directory", "pack_size",
+                    "pack_median_reviews", "query", "occupants"])
         for i, o in enumerate(scored[:200], 1):
             b = o["serp_breakdown"]
             w.writerow([i, o["opportunity"], o["serp_score"], o["payout"],
+                        o.get("pricing", "?"),
                         o["bundle_value"], o["niche"], o["sub_service"],
                         o["city"], o["state"], o["county"], o["population"],
                         o["zips"], b["dedicated"], b.get("emd", 0), b["pseo"],
                         b["national"], b.get("other_local", 0), b["directory"],
+                        b.get("pack_size", 0), b.get("pack_median_reviews", 0),
                         o["query"],
                         " | ".join(f"{x['host']} ({x['kind']})" for x in o["occupants"][:6])])
 
@@ -500,15 +568,46 @@ def write(meta, cands, scored):
     ]
     if scored:
         lines += ["## Top 30 by opportunity", "",
-                  "| # | Opportunity | SERP | Payout | Query | Occupied by |",
-                  "|---|---|---|---|---|---|"]
+                  "| # | Opp | SERP | Payout | Pricing | Pack | Query | Occupied by |",
+                  "|---|---|---|---|---|---|---|---|"]
         for i, o in enumerate(scored[:30], 1):
             b = o["serp_breakdown"]
             occ = (f"{b['dedicated']} dedicated, {b.get('emd',0)} EMD, "
                    f"{b['pseo']} pSEO, {b.get('other_local',0)} local, "
                    f"{b['directory']} directory")
+            pk = (f"{b.get('pack_size',0)}× {b.get('pack_median_reviews',0)} rev"
+                  if b.get("pack_size") else "none")
             lines.append(f"| {i} | **{o['opportunity']:.0f}** | {o['serp_score']} "
-                         f"| ${o['payout']:.2f} | `{o['query']}` | {occ} |")
+                         f"| ${o['payout']:.2f} | {o.get('pricing','?')} | {pk} "
+                         f"| `{o['query']}` | {occ} |")
+        lines += ["", "### Reading a row",
+                  "",
+                  "- **STOP** on any `EMD > 0` or `pSEO > 0` — a city exact-match "
+                  "domain or a programmatic network already holds that slot with "
+                  "authority a new domain does not have.",
+                  "- **STOP** on `dedicated >= 2` — the local trades already built "
+                  "that page.",
+                  "- `pricing: flat` means the payout is identical nationwide, so "
+                  "choosing this market over another buys nothing on the revenue "
+                  "side; judge it on volume and competition alone.",
+                  "- A pack of three businesses at 500+ reviews takes most of the "
+                  "clicks even when the organic SERP is open.",
+                  "",
+                  "### Gates this scan cannot answer",
+                  "",
+                  "Two decisions are not in any feed and must be confirmed with "
+                  "the network before a domain is bought:",
+                  "",
+                  "1. **Is the offer duration-based or buyer-qualified?** Only a "
+                  "stated billable duration is verifiable from your own call log. "
+                  "\"Booked appointment\" is the buyer's judgement, not a number.",
+                  "2. **What hours does the buyer answer?** Emergency niches earn "
+                  "at 2am. A 9-to-5 buyer drops exactly the traffic that converts "
+                  "best.",
+                  "",
+                  "Search volume is the third gate this scan skips — run the "
+                  "**Mode 5 Area Plan** workflow on the winning city with the "
+                  "*broad* service (not a sub-service) and `min_area_volume: 20`."]
     else:
         lines += ["## Candidate cities (no SERP key — revenue side only)", "",
                   "| # | City | Niches | Top payout | Bundle | Pop | ZIPs |",
@@ -536,9 +635,10 @@ def main():
         print("❌ no coverage rows — nothing to do")
         write(meta, [], [])
         return
-    cands  = shortlist(rows)
-    scored = scan(cands)
-    write(meta, cands, scored)
+    pricing = price_modes(rows)
+    cands   = shortlist(rows, pricing)
+    scored  = scan(cands)
+    write(meta, cands, scored, pricing)
 
     if scored:
         print("\n🏆 TOP 10")
