@@ -80,6 +80,9 @@ MIN_BUNDLE = int(os.environ.get("MIN_BUNDLE_NICHES", "1") or 1)
 MAX_SERP   = int(os.environ.get("MAX_SERP_CHECKS", "120") or 120)
 SERP_KEY   = os.environ.get("SERPAPI_API_KEY", "").strip()
 SERP_GL    = os.environ.get("SERP_GL", "us").strip() or "us"
+# "location" (SerpApi resolves the place name) or "uule" (Google's own
+# encoding, no lookup). Never both — see serp().
+SERP_LOC_MODE = os.environ.get("SERP_LOC_MODE", "location").strip().lower()
 # How the SERP budget is spent. 1 niche × 3 subs = a deep read on each city's
 # best offer. 3 niches × 1 sub = a bundle read — is this city open across
 # several offers, or only one? Both matter, at different points.
@@ -377,20 +380,49 @@ def serp(query, location=None):
         "gl": SERP_GL, "hl": "en", "api_key": SERP_KEY,
     }
     if location:
-        # Both, deliberately. `location` depends on SerpApi resolving the
-        # string against its own place database and fails quietly for smaller
-        # cities; `uule` is Google's own encoding and needs no lookup. A run
-        # that sent only `location` came back with national cost-aggregator
-        # SERPs while reporting them as wide-open local ones.
-        params["location"] = location
-        params["uule"] = _uule(location)
+        # ONE of these, never both. SerpApi treats `location` and `uule` as
+        # mutually exclusive and answers a request carrying both with a flat
+        # HTTP 400 — a run that sent both failed all 200 queries and scored
+        # nothing at all.
+        if SERP_LOC_MODE == "uule":
+            params["uule"] = _uule(location)
+        else:
+            params["location"] = location
     q = urllib.parse.urlencode(params)
+    global _SERP_ERRS
     try:
         with urllib.request.urlopen(f"https://serpapi.com/search?{q}", timeout=40) as r:
-            return json.loads(r.read().decode("utf-8", "replace"))
-    except Exception as e:
-        print(f"      ⚠️ SERP failed: {str(e)[:70]}")
+            data = json.loads(r.read().decode("utf-8", "replace"))
+        if data.get("error"):
+            _serp_err(f"SerpApi: {data['error']}")
+            return None
+        return data
+    except urllib.error.HTTPError as e:
+        # Read the body. "HTTP Error 400: Bad Request" on its own says nothing
+        # about WHICH parameter was rejected, and 200 identical copies of it
+        # said nothing 200 times.
+        detail = ""
+        try:
+            detail = json.loads(e.read().decode("utf-8", "replace")).get("error", "")
+        except Exception:
+            pass
+        _serp_err(f"HTTP {e.code} — {detail or 'no detail returned'}")
         return None
+    except Exception as e:
+        _serp_err(str(e)[:90])
+        return None
+
+
+_SERP_ERRS = {}
+
+
+def _serp_err(msg):
+    """Print each distinct failure once, with a count, instead of 200 lines."""
+    _SERP_ERRS[msg] = _SERP_ERRS.get(msg, 0) + 1
+    if _SERP_ERRS[msg] <= 2:
+        print(f"      ⚠️ SERP failed: {msg}")
+    elif _SERP_ERRS[msg] == 3:
+        print(f"      ⚠️ (further identical failures suppressed: {msg})")
 
 
 def score_serp(data, service, city):
@@ -575,13 +607,26 @@ def scan(cands):
             # $160 payout behind six dedicated pages.
             "opportunity": round(sc / 100 * c["bundle_value"], 2),
         })
+        # Fail fast on a broken request. The last run sent 200 queries that
+        # were all rejected for the same reason and reported "0 scored" at the
+        # end — the misconfiguration was knowable after the first ten.
+        if i >= 10 and not found and sum(_SERP_ERRS.values()) >= i:
+            print(f"   ❌ first {i} queries all failed — aborting rather than "
+                  f"spending the rest of the budget on the same error.")
+            break
+
         if i % 10 == 0 or i == len(jobs):
             print(f"   🔎 {i}/{len(jobs)} · best so far "
                   f"{max((f['opportunity'] for f in found), default=0):.0f}")
         time.sleep(0.7)
 
     found.sort(key=lambda f: -f["opportunity"])
-    print(f"   ✅ {len(found)} scored\n")
+    print(f"   ✅ {len(found)} scored")
+    if _SERP_ERRS:
+        print("   Failure summary:")
+        for msg, n in sorted(_SERP_ERRS.items(), key=lambda kv: -kv[1]):
+            print(f"      {n:>4}×  {msg}")
+    print()
     return found
 
 
