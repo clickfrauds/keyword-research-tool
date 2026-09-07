@@ -367,6 +367,28 @@ def _uule(location):
 
 def serp(query, location=None):
     """
+    Try `location`, fall back to `uule`.
+
+    SerpApi resolves `location` against its own place database, and the
+    coverage feed spells plenty of towns differently to it — "Lees Summit"
+    against Lee's Summit, "Ft Mitchell" against Fort Mitchell, "Saint Peters"
+    against St. Peters. Those come back as `Unsupported location`, and simply
+    dropping them loses real candidates for a spelling difference.
+
+    `uule` is Google's own encoding and needs no lookup, so it answers for any
+    place name. It is the fallback rather than the default because when
+    SerpApi *does* know a city, its own resolution is the more reliable of the
+    two. A rejected request is not billed, so the retry costs one search, not
+    two.
+    """
+    data = _serp_once(query, location, SERP_LOC_MODE)
+    if data is None and location and SERP_LOC_MODE == "location" and _LAST_UNSUPPORTED:
+        return _serp_once(query, location, "uule")
+    return data
+
+
+def _serp_once(query, location, mode):
+    """
     `location` is not optional for local intent. Without it SerpApi answers
     from a default US locale, and "roof leak repair Redwood City CA" comes
     back as a generic national SERP — which is how a page-1 stack of two city
@@ -384,12 +406,13 @@ def serp(query, location=None):
         # mutually exclusive and answers a request carrying both with a flat
         # HTTP 400 — a run that sent both failed all 200 queries and scored
         # nothing at all.
-        if SERP_LOC_MODE == "uule":
+        if mode == "uule":
             params["uule"] = _uule(location)
         else:
             params["location"] = location
     q = urllib.parse.urlencode(params)
-    global _SERP_ERRS
+    global _LAST_UNSUPPORTED
+    _LAST_UNSUPPORTED = False
     try:
         with urllib.request.urlopen(f"https://serpapi.com/search?{q}", timeout=40) as r:
             data = json.loads(r.read().decode("utf-8", "replace"))
@@ -406,6 +429,11 @@ def serp(query, location=None):
             detail = json.loads(e.read().decode("utf-8", "replace")).get("error", "")
         except Exception:
             pass
+        if "unsupported" in detail.lower() and "location" in detail.lower():
+            # Recoverable: retried with uule by the caller, so it is not a
+            # real failure and should not be counted as one.
+            _LAST_UNSUPPORTED = True
+            return None
         _serp_err(f"HTTP {e.code} — {detail or 'no detail returned'}")
         return None
     except Exception as e:
@@ -414,6 +442,7 @@ def serp(query, location=None):
 
 
 _SERP_ERRS = {}
+_LAST_UNSUPPORTED = False
 
 
 _QUOTA_HIT = []
