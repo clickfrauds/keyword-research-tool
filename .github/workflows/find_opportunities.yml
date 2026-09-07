@@ -1,0 +1,124 @@
+name: Opportunity Finder (payout coverage × SERP weakness)
+
+# Stages 1-3 are free and need no secret: they pull the static coverage JSON
+# and cut ~280k rows to a few hundred candidate cities. Only stage 4 costs
+# money, and MAX_SERP_CHECKS is the cap on it. Leave the SerpApi secret unset
+# and the run still publishes the revenue side.
+
+on:
+  workflow_dispatch:
+    inputs:
+      niches:
+        description: "Comma-separated niches. BLANK = every niche in the feed. e.g. Plumbing, HVAC, Roofing"
+        required: false
+        default: ''
+      payout_type:
+        description: "Which model to hunt in"
+        required: false
+        default: 'Call'
+        type: choice
+        options:
+          - Call
+          - CPL
+          - both
+      min_payout:
+        description: "Ignore anything paying less than this per call/lead"
+        required: false
+        default: '35'
+      min_pop:
+        description: "Smallest town worth a page. Below ~8k there is rarely enough search volume."
+        required: false
+        default: '8000'
+      max_pop:
+        description: "Largest city to consider. Big metros are where the agencies are — 120k keeps the run inside the winnable band."
+        required: false
+        default: '120000'
+      states:
+        description: "Comma-separated state codes (TX, CO, PA). BLANK = all 53."
+        required: false
+        default: ''
+      min_bundle_niches:
+        description: "1 = every city. 2+ = only cities where several niches are bought, so one site can carry more than one offer."
+        required: false
+        default: '1'
+      max_serp_checks:
+        description: "⚠️ THE MONEY KNOB — one SerpApi credit each. 120 is a cheap first pass; raise it once the filters are tuned."
+        required: false
+        default: '120'
+      niches_per_city:
+        description: "How many of a city's niches to SERP-test. 1 = deep read on its best offer. 3 = is this city open across the whole bundle?"
+        required: false
+        default: '1'
+      subs_per_niche:
+        description: "Sub-services tested per niche. 3 = confident read. 1 = stretch the same budget over 3x more cities."
+        required: false
+        default: '3'
+      request_id:
+        description: "Run id for the published raw link. Blank = manual-<run_id>."
+        required: false
+        default: ''
+
+permissions:
+  contents: write
+
+jobs:
+  find:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Resolve request id
+        id: reqid
+        run: |
+          RID="${{ github.event.inputs.request_id }}"
+          if [ -z "$RID" ]; then RID="manual-${{ github.run_id }}"; fi
+          echo "value=$RID" >> $GITHUB_OUTPUT
+
+      - name: Find opportunities
+        env:
+          # Stage 4 only. Unset = stages 1-3 still run and publish.
+          SERPAPI_API_KEY:   ${{ secrets.SERPAPI_API_KEY }}
+          NICHES:            ${{ github.event.inputs.niches }}
+          PAYOUT_TYPE:       ${{ github.event.inputs.payout_type }}
+          MIN_PAYOUT:        ${{ github.event.inputs.min_payout }}
+          MIN_POP:           ${{ github.event.inputs.min_pop }}
+          MAX_POP:           ${{ github.event.inputs.max_pop }}
+          STATES:            ${{ github.event.inputs.states }}
+          MIN_BUNDLE_NICHES: ${{ github.event.inputs.min_bundle_niches }}
+          MAX_SERP_CHECKS:   ${{ github.event.inputs.max_serp_checks }}
+          NICHES_PER_CITY:   ${{ github.event.inputs.niches_per_city }}
+          SUBS_PER_NICHE:    ${{ github.event.inputs.subs_per_niche }}
+          SERP_GL:           us
+        run: python -u scripts/find_opportunities.py
+
+      - name: Show the report in the run log
+        if: always()
+        run: |
+          if [ -f opportunity_report.md ]; then
+            cat opportunity_report.md >> $GITHUB_STEP_SUMMARY
+          fi
+
+      - name: Publish raw links
+        if: always()
+        env:
+          GITHUB_TOKEN:      ${{ secrets.GITHUB_TOKEN }}
+          REQUEST_ID:        ${{ steps.reqid.outputs.value }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: python scripts/push_results.py
+
+      - name: Upload artifact (backup copy)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: opportunities-${{ steps.reqid.outputs.value }}
+          path: |
+            opportunities.json
+            opportunities.csv
+            opportunity_report.md
+          retention-days: 30
+          if-no-files-found: warn

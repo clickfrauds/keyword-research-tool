@@ -93,6 +93,12 @@ FILES_TO_PUSH = [
     # Claude-suggested excluded locations (sibling regions + bot-source
     # countries) — Editor's "Locations, Negative" paste.
     ("locations_negative.csv", "locations_negative.csv"),
+    # Opportunity finder (find_opportunities.py): payout coverage crossed with
+    # real SERP occupancy. Published here for the same reason as every file
+    # above — a raw link beats digging a run artifact out of the Actions UI.
+    ("opportunities.json", "opportunities.json"),
+    ("opportunities.csv", "opportunities.csv"),
+    ("opportunity_report.md", "opportunities.md"),
     # LAST on purpose — the readiness marker (see note above).
     ("keyword_strategy_report.html", "html"),
     # Existing-pages runs: the pages that need content work, and the labels
