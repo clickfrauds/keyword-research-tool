@@ -132,7 +132,27 @@ SUB_SERVICES = {
                   "hoarding cleanup", "unattended death cleanup"],
     "Fire Damage Removal": ["fire damage restoration", "smoke damage cleanup",
                             "soot removal", "board up services"],
+    "Bathroom Remodeling": ["bathroom remodel", "shower replacement",
+                            "tub to shower conversion", "walk in tub installation",
+                            "bathroom renovation"],
+    "Kitchen": ["kitchen remodel", "kitchen cabinet refacing",
+                "countertop installation", "kitchen renovation"],
+    "Painting": ["interior painting", "exterior painting",
+                 "cabinet painting", "house painters"],
+    "Deck": ["deck building", "deck repair", "deck staining",
+             "composite deck installation"],
+    "Landscaping": ["landscaping services", "sod installation",
+                    "retaining wall installation", "irrigation installation"],
+    "Solar": ["solar panel installation", "solar panel repair",
+              "residential solar installation"],
+    "Roofing CPL": ["roof replacement", "roof leak repair",
+                    "storm damage roof repair", "roof inspection"],
 }
+
+# A niche with no entry here generates no queries, so its cities drop out of
+# stage 4 without a word. Bathroom Remodeling — a Call niche across 11,090
+# ZIPs — was being silently skipped exactly this way.
+_MISSING_SUBS = set()
 
 # ── SERP occupant classification ─────────────────────────────────────────
 # Derived from real result sets in this vertical, not a generic list.
@@ -472,6 +492,9 @@ def scan(cands):
     passes = []
     for c in cands:
         for ni, nrec in enumerate(c["niche_list"][:NICHES_PER_CITY]):
+            if nrec["niche"] not in SUB_SERVICES:
+                _MISSING_SUBS.add(nrec["niche"])
+                continue
             for si, sub in enumerate(SUB_SERVICES.get(nrec["niche"], [])[:SUBS_PER_NICHE]):
                 passes.append((ni * 100 + si, c, nrec["niche"], nrec["payout"],
                                nrec.get("pricing", "?"), sub))
@@ -479,6 +502,13 @@ def scan(cands):
     jobs = [p[1:] for p in passes][:MAX_SERP]
     print(f"   {len(jobs)} queries (cap {MAX_SERP}) · "
           f"{NICHES_PER_CITY} niche(s) × {SUBS_PER_NICHE} sub(s) per city")
+    if _MISSING_SUBS:
+        print(f"   ⚠️ no sub-services defined for {sorted(_MISSING_SUBS)} — "
+              f"those cities were skipped. Add them to SUB_SERVICES.")
+    if len(jobs) < len(cands):
+        print(f"   ℹ️ cap reached: the top {len(jobs)} cities by bundle value "
+              f"were tested on their best niche. {len(cands) - len(jobs)} "
+              f"candidates went untested — raise max_serp_checks to reach them.")
 
     found = []
     for i, (c, niche_name, niche_payout, niche_pricing, sub) in enumerate(jobs, 1):
