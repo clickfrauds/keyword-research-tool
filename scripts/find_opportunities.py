@@ -676,7 +676,14 @@ def score_serp(data, service, city):
             tally["directory"] += 1; kinds.append("social profile")
         elif any(f in bare for f in FORUMS):
             tally["forum"] += 1; kinds.append("forum")
-        elif any(n in bare for n in NATIONALS) or any(b in bare for b in BIGBOX):
+        elif ((any(n in bare for n in NATIONALS) or any(b in bare for b in BIGBOX))
+              and not (city_slug in link or city_flat in link.replace("-", ""))):
+            # A national brand with no city page is weak here — it ranks on
+            # domain strength alone. But rotorooter.com/doverpa and
+            # americanleakdetection.com/harrisburg ARE city pages, and this
+            # elif was letting them skip the dedicated check entirely: the
+            # single hardest occupant on the page booked the cheapest label.
+            # Only the brand WITHOUT a city path takes this branch now.
             tally["national"] += 1; kinds.append("national brand")
         else:
             # An EMD is USUALLY also an exact-match page, so these are counted
@@ -687,7 +694,21 @@ def score_serp(data, service, city):
                 tally["pseo"] += 1; kinds.append("pSEO subdomain")
             if city_flat in flat:
                 tally["emd"] += 1; kinds.append("city EMD")
-            if city_l in blob and any(w in blob for w in svc_words):
+            # Requiring a service word in the title or URL was too strict.
+            # jmlapp.com/city/willow-street is titled just "Willow Street" and
+            # neffsvilleph.com/service-area/willow-street-pa says "Plumbing and
+            # HVAC Service" — neither contains "leak", so both scored as
+            # nothing while sitting on page one for "leak detection <city>".
+            # Google already judged relevance by ranking them; the city in the
+            # title or URL is the signal that the page was built FOR this city.
+            _city_hit = (city_l in blob or city_slug in link
+                         or city_flat in link.replace("-", ""))
+            _path_hit = any(seg in link for seg in
+                            ("/city/", "/cities/", "/service-area", "/service_area",
+                             "/locations/", "/location/", "/areas/", "/areas-served",
+                             "/plumber-", "/plumbers-"))
+            if _city_hit and (any(w in blob for w in svc_words) or _path_hit
+                              or city_l in title):
                 tally["dedicated"] += 1; kinds.append("dedicated page")
             if not kinds:
                 # A local contractor ranking here without the city in its
