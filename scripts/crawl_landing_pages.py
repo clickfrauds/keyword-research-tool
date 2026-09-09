@@ -32,7 +32,19 @@ WHAT COMES OUT
         not, so nothing in the campaign has to move.
   The combined seed list, ready for SEED_KEYWORDS.
 
-Env : LANDING_URLS (comma/newline separated) or landing_urls.txt
+Env : LANDING_URLS — one page per line, or landing_urls.txt
+
+        https://client.com/ac-repair/
+        https://client.com/ac-installation/ | ac installation, new ac fitting
+
+      A bare URL behaves as it always has: the crawl picks the seeds. After a
+      pipe, the operator's own seeds for THAT page are merged into THAT ad
+      group, ahead of the crawled ones, and Claude is told about them so it
+      reports any the page cannot actually support. Per-URL and not one shared
+      box on purpose -- a seed with no page has no ad group, and the same seed
+      in every group makes the groups bid against each other.
+
+      A comma-separated list of bare URLs still works.
       CRAWL_MAX_PAGES (default 25)
       BUSINESS_NAME, NICHE_DESCRIPTION, TARGET_LOCATION, LANGUAGE (context)
       ANTHROPIC_API_KEY, CLAUDE_MODEL, CLAUDE_EFFORT_CRAWL (default low)
@@ -80,27 +92,67 @@ IMPROVE_FILE = "page_improvements.json"
 THIN_WORDS = 300
 
 
-def read_urls():
+def read_targets():
+    """Returns [(url, [operator seeds]), ...].
+
+    Two accepted shapes, on purpose:
+
+        https://client.com/ac-repair/
+        https://client.com/ac-repair/ | ac repair, split ac servicing
+
+    A bare URL behaves exactly as before -- the crawl decides the seeds on
+    its own. With a pipe, the terms after it are the operator's own seeds for
+    THAT page, and they are merged into that page's ad group only.
+
+    Per-URL rather than one shared seed box, because a seed that is not tied
+    to a page has no ad group to live in. Put the same term in all four
+    groups and they bid against each other, which is exactly what this tool's
+    negative siloing exists to prevent.
+
+    Parsing is line-first. The old splitter broke on commas as well as
+    newlines, so "url | one, two, three" would have turned the seeds into
+    three more URLs. Lines with no pipe still comma-split, so a pasted
+    comma-separated URL list keeps working.
+    """
     raw = os.environ.get("LANDING_URLS", "")
     if not raw and os.path.exists("landing_urls.txt"):
         with open("landing_urls.txt", encoding="utf-8") as f:
             raw = f.read()
-    parts = re.split(r"[,\n\r]+", raw)
-    urls, seen = [], set()
-    for p in parts:
-        u = p.strip()
+
+    def norm(u):
+        u = u.strip().strip(",").strip()
         if not u:
-            continue
+            return ""
         if not re.match(r"^https?://", u, re.I):
             u = "https://" + u
-        # Same page twice would become two ad groups competing for the same
-        # keywords on the same URL.
-        key = u.rstrip("/").lower()
-        if key in seen:
+        return u
+
+    targets, index = [], {}
+    for line in re.split(r"[\n\r]+", raw):
+        line = line.strip()
+        if not line:
             continue
-        seen.add(key)
-        urls.append(u)
-    return urls[:MAX_PAGES]
+        if "|" in line:
+            left, _, right = line.partition("|")
+            pairs = [(norm(left), [s.strip().lower()
+                                   for s in right.split(",") if s.strip()])]
+        else:
+            pairs = [(norm(u), []) for u in line.split(",")]
+        for url, seeds in pairs:
+            if not url:
+                continue
+            # Same page twice would become two ad groups competing for the
+            # same keywords on the same URL. Seeds from both lines merge.
+            key = url.rstrip("/").lower()
+            if key in index:
+                for s in seeds:
+                    if s not in index[key][1]:
+                        index[key][1].append(s)
+                continue
+            entry = [url, list(seeds)]
+            index[key] = entry
+            targets.append(entry)
+    return [(u, s) for u, s in targets[:MAX_PAGES]]
 
 
 def strip_tags(fragment):
@@ -204,10 +256,21 @@ verdict rules:
   strong - enough real copy, clear offer, trust signals, obvious next step
   thin   - too little content to rank or convince
   weak   - has content but no clear offer, no proof, or no call to action
-If the page is strong, "issues" and "improvements" may be empty lists."""
+If the page is strong, "issues" and "improvements" may be empty lists.
+
+OPERATOR SEEDS. The run may supply seed keywords the operator chose for this
+page. They are already going into the campaign, so do not repeat them in
+"seed_keywords" — add the ones the page itself supports that they missed.
+
+Judge the page against them as well. A page whose ads will run on "click
+fraud protection" while the copy never addresses invalid clicks will pay for
+every click and convert none of them, so the mismatch belongs in "issues"
+and the fix in "improvements" — name the operator term that is unsupported
+and say what the page has to add to earn it. This matters more than word
+count: Google scores the page against the query it was reached by."""
 
 
-def ask_claude(client, page):
+def ask_claude(client, page, operator_seeds=None):
     ctx = []
     if BUSINESS_NAME:
         ctx.append(f"BUSINESS: {BUSINESS_NAME}")
@@ -218,6 +281,11 @@ def ask_claude(client, page):
     if LANGUAGE and LANGUAGE != "en":
         ctx.append(f"The page is in '{LANGUAGE}' — write seed keywords in that "
                    f"language, because that is what its customers search in.")
+    if operator_seeds:
+        ctx.append("OPERATOR SEEDS for this page (already in the campaign): "
+                   + ", ".join(operator_seeds)
+                   + ". Do not repeat them. Judge the page against them and "
+                     "report any it cannot support in issues/improvements.")
 
     user = f"""{chr(10).join(ctx)}
 
@@ -275,23 +343,27 @@ def ad_group_name(service, url):
 
 
 def main():
-    urls = read_urls()
-    if not urls:
-        print("❌ No URLs. Set LANDING_URLS (comma or newline separated) or "
-              "create landing_urls.txt.")
+    targets = read_targets()
+    if not targets:
+        print("❌ No URLs. Set LANDING_URLS (one per line; optionally "
+              "'url | seed, seed') or create landing_urls.txt.")
         sys.exit(1)
     if not os.environ.get("ANTHROPIC_API_KEY"):
         print("❌ ANTHROPIC_API_KEY is missing.")
         sys.exit(1)
 
-    print(f"Reading {len(urls)} landing page(s)...")
+    n_manual = sum(1 for _, s in targets if s)
+    print(f"Reading {len(targets)} landing page(s)..."
+          + (f" ({n_manual} with operator seeds)" if n_manual else ""))
     client = anthropic.Anthropic()
 
     pages, improvements, all_seeds, failed = [], [], [], []
     used_names = set()
 
-    for i, url in enumerate(urls, 1):
-        print(f"\n[{i}/{len(urls)}] {url}")
+    for i, (url, manual_seeds) in enumerate(targets, 1):
+        print(f"\n[{i}/{len(targets)}] {url}")
+        if manual_seeds:
+            print(f"   operator seeds: {', '.join(manual_seeds)}")
         body, final = fetch(url)
         if body is None:
             print(f"   ❌ {final}")
@@ -307,14 +379,27 @@ def main():
         print(f"   {page['word_count']} words | {len(page['h2'])} H2 | "
               f"{len(page['anchors'])} anchors | form={page['has_form']}")
 
-        info = ask_claude(client, page)
-        seeds = [str(s).strip().lower() for s in (info.get("seed_keywords") or [])
-                 if str(s).strip()]
-        seeds = [s for s in seeds if 1 <= len(s.split()) <= 6][:10]
+        info = ask_claude(client, page, manual_seeds)
+        crawled = [str(s).strip().lower() for s in (info.get("seed_keywords") or [])
+                   if str(s).strip()]
+        # Operator seeds first: they are a deliberate choice, the crawl is an
+        # inference. If the cap has to drop something it drops the inference.
+        # Same 1-6 word rule both ways -- Keyword Planner returns nothing for
+        # a sentence, and a seed that returns nothing costs the page its ads.
+        seeds, seen_seed = [], set()
+        for s in list(manual_seeds) + crawled:
+            if not (1 <= len(s.split()) <= 6) or s in seen_seed:
+                continue
+            seen_seed.add(s)
+            seeds.append(s)
+        seeds = seeds[:12]
         if not seeds:
             print("   ⚠️ No usable seed keywords — page skipped.")
             failed.append({"url": url, "reason": "no seed keywords"})
             continue
+        if manual_seeds:
+            kept = [s for s in seeds if s in manual_seeds]
+            print(f"   seeds: {len(kept)} operator + {len(seeds) - len(kept)} crawled")
 
         name = ad_group_name(info.get("service_name"), url)
         # Two pages selling the same thing would collide into one ad group
@@ -341,6 +426,9 @@ def main():
             "sub_services": [str(s).strip() for s in (info.get("sub_services") or [])
                              if str(s).strip()][:6],
             "seed_keywords": seeds,
+            # which of them the operator chose, so a later stage can tell a
+            # deliberate target from something the crawl inferred
+            "operator_seeds": [s for s in seeds if s in manual_seeds],
             "title": page["title"],
             "h1": page["h1"],
             "h2": page["h2"],
