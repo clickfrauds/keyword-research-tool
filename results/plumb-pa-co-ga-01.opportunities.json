@@ -1,0 +1,3470 @@
+{
+  "pricing_model_by_niche": {
+    "Electrical (Call)": {
+      "distinct": 102,
+      "mode": "geo"
+    },
+    "Appliance (Call)": {
+      "distinct": 85,
+      "mode": "geo"
+    },
+    "Gutters (Call)": {
+      "distinct": 1,
+      "mode": "flat"
+    },
+    "Roofing CPL (CPL)": {
+      "distinct": 10,
+      "mode": "geo"
+    },
+    "HVAC (Call)": {
+      "distinct": 145,
+      "mode": "geo"
+    },
+    "Water Damage (CPL)": {
+      "distinct": 27,
+      "mode": "geo"
+    },
+    "Bathroom Remodeling (Call)": {
+      "distinct": 94,
+      "mode": "geo"
+    },
+    "Pest Control (Call)": {
+      "distinct": 2,
+      "mode": "flat"
+    },
+    "Roofing (Call)": {
+      "distinct": 156,
+      "mode": "geo"
+    },
+    "Plumbing (Call)": {
+      "distinct": 296,
+      "mode": "geo"
+    },
+    "Biohazard (CPL)": {
+      "distinct": 6,
+      "mode": "geo"
+    },
+    "Siding (CPL)": {
+      "distinct": 13,
+      "mode": "geo"
+    },
+    "Tree Services (Call)": {
+      "distinct": 16,
+      "mode": "geo"
+    },
+    "Mold Removal (CPL)": {
+      "distinct": 7,
+      "mode": "geo"
+    },
+    "Plumbing (CPL)": {
+      "distinct": 26,
+      "mode": "geo"
+    },
+    "Fire Damage Removal (CPL)": {
+      "distinct": 13,
+      "mode": "geo"
+    },
+    "Waterproofing (CPL)": {
+      "distinct": 9,
+      "mode": "geo"
+    },
+    "Kitchen (CPL)": {
+      "distinct": 3,
+      "mode": "flat"
+    },
+    "Garage Door (CPL)": {
+      "distinct": 10,
+      "mode": "geo"
+    },
+    "Deck (CPL)": {
+      "distinct": 4,
+      "mode": "geo"
+    },
+    "Foundation Repair (CPL)": {
+      "distinct": 3,
+      "mode": "flat"
+    },
+    "Painting (CPL)": {
+      "distinct": 7,
+      "mode": "geo"
+    },
+    "Landscaping (CPL)": {
+      "distinct": 1,
+      "mode": "flat"
+    }
+  },
+  "generated": "2026-09-09 12:50 UTC",
+  "dataset_date": "2026-09-08",
+  "filters": {
+    "payout_type": "Call",
+    "min_payout": 90.0,
+    "population": [
+      8000,
+      120000
+    ],
+    "niches": [
+      "Plumbing"
+    ],
+    "states": [
+      "PA",
+      "CO",
+      "GA",
+      "ID"
+    ],
+    "min_bundle_niches": 1
+  },
+  "candidate_cities": 55,
+  "serp_scanned": 33,
+  "opportunities": [
+    {
+      "city": "Suwanee",
+      "state": "GA",
+      "county": "Gwinnett",
+      "population": 22349,
+      "zips": 1,
+      "niche": "Plumbing",
+      "sub_service": "leak detection",
+      "query": "leak detection Suwanee GA",
+      "payout": 103.95,
+      "pricing": "geo",
+      "bundle_value": 103.95,
+      "niches_here": [
+        {
+          "niche": "Plumbing",
+          "payout": 103.95,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 100,
+      "serp_breakdown": {
+        "dedicated": 0,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 4,
+        "forum": 0,
+        "other_local": 5,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 321,
+        "pack_median_reviews": 83
+      },
+      "occupants": [
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "americanleakdetection.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "akinsplumbing.net",
+          "kind": "independent site"
+        },
+        {
+          "host": "waterleakdetectioncompany.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        },
+        {
+          "host": "deltaplumbingatlanta.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "halcombplumbing.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "thumbtack.com",
+          "kind": "directory"
+        },
+        {
+          "host": "m.yelp.com",
+          "kind": "directory"
+        }
+      ],
+      "opportunity": 103.95
+    },
+    {
+      "city": "Willow Street",
+      "state": "PA",
+      "county": "Lancaster",
+      "population": 9647,
+      "zips": 1,
+      "niche": "Plumbing",
+      "sub_service": "leak detection",
+      "query": "leak detection Willow Street PA",
+      "payout": 108.5,
+      "pricing": "geo",
+      "bundle_value": 108.5,
+      "niches_here": [
+        {
+          "niche": "Plumbing",
+          "payout": 108.5,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 86,
+      "serp_breakdown": {
+        "dedicated": 0,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 6,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 1400,
+        "pack_median_reviews": 264
+      },
+      "occupants": [
+        {
+          "host": "m.yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "neffsvilleph.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "m.yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "regalplumbinginc.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "jandj.net",
+          "kind": "independent site"
+        },
+        {
+          "host": "mantapools.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "lancasterenvironmentaltesting.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "willow-street-pa.ericemergencyrestorationfortworthtx.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "jkmechanical.com",
+          "kind": "independent site"
+        }
+      ],
+      "opportunity": 93.31
+    },
+    {
+      "city": "Dover",
+      "state": "PA",
+      "county": "York",
+      "population": 15485,
+      "zips": 1,
+      "niche": "Plumbing",
+      "sub_service": "leak detection",
+      "query": "leak detection Dover PA",
+      "payout": 108.5,
+      "pricing": "geo",
+      "bundle_value": 108.5,
+      "niches_here": [
+        {
+          "niche": "Plumbing",
+          "payout": 108.5,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 84,
+      "serp_breakdown": {
+        "dedicated": 1,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 4,
+        "forum": 0,
+        "other_local": 5,
+        "results": 10,
+        "pack_size": 0,
+        "pack_top_reviews": 0,
+        "pack_median_reviews": 0
+      },
+      "occupants": [
+        {
+          "host": "m.yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "demo.rematejoaquinsuarez.com.uy",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "prontoplumbing.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "m.yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "regalplumbinginc.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "instagram.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "americanrooterpa.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "griffithplumbingservices.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "servicetodayinc.com",
+          "kind": "independent site"
+        }
+      ],
+      "opportunity": 91.14
+    },
+    {
+      "city": "Mechanicsburg",
+      "state": "PA",
+      "county": "Cumberland",
+      "population": 9720,
+      "zips": 2,
+      "niche": "Plumbing",
+      "sub_service": "leak detection",
+      "query": "leak detection Mechanicsburg PA",
+      "payout": 108.5,
+      "pricing": "geo",
+      "bundle_value": 108.5,
+      "niches_here": [
+        {
+          "niche": "Plumbing",
+          "payout": 108.5,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 60,
+      "serp_breakdown": {
+        "dedicated": 1,
+        "pseo": 0,
+        "national": 1,
+        "emd": 0,
+        "directory": 4,
+        "forum": 0,
+        "other_local": 3,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 531,
+        "pack_median_reviews": 309
+      },
+      "occupants": [
+        {
+          "host": "centralpennplumbing.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "mrrooter.com",
+          "kind": "national brand"
+        },
+        {
+          "host": "m.yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "youtube.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "dehomemechanical.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yellowpages.com",
+          "kind": "directory"
+        },
+        {
+          "host": "gfbowman.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "hallerent.com",
+          "kind": "independent site"
+        }
+      ],
+      "opportunity": 65.1
+    },
+    {
+      "city": "Littleton",
+      "state": "CO",
+      "county": "Arapahoe",
+      "population": 44710,
+      "zips": 5,
+      "niche": "Plumbing",
+      "sub_service": "leak detection",
+      "query": "leak detection Littleton CO",
+      "payout": 108.67,
+      "pricing": "geo",
+      "bundle_value": 108.67,
+      "niches_here": [
+        {
+          "niche": "Plumbing",
+          "payout": 108.67,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 35,
+      "serp_breakdown": {
+        "dedicated": 2,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 4,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 12,
+        "pack_median_reviews": 9
+      },
+      "occupants": [
+        {
+          "host": "americanleakdetection.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "knightplumbingllc.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "levelupleakdetection.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "ezplumbingsolutions.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "hyperflowservice.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        },
+        {
+          "host": "americanleakdetection.com",
+          "kind": "independent site"
+        }
+      ],
+      "opportunity": 38.03
+    },
+    {
+      "city": "Decatur",
+      "state": "GA",
+      "county": "DeKalb",
+      "population": 24518,
+      "zips": 3,
+      "niche": "Plumbing",
+      "sub_service": "leak detection",
+      "query": "leak detection Decatur GA",
+      "payout": 103.95,
+      "pricing": "geo",
+      "bundle_value": 103.95,
+      "niches_here": [
+        {
+          "niche": "Plumbing",
+          "payout": 103.95,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 35,
+      "serp_breakdown": {
+        "dedicated": 2,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 2,
+        "forum": 0,
+        "other_local": 5,
+        "results": 9,
+        "pack_size": 0,
+        "pack_top_reviews": 0,
+        "pack_median_reviews": 0
+      },
+      "occupants": [
+        {
+          "host": "m.yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "americanleakdetection.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "reliableair.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "johnjetterplumbing.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "dalmatianplumbing.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        },
+        {
+          "host": "halcombplumbing.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "deltaplumbingatlanta.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "levelupleakdetection.com",
+          "kind": "independent site"
+        }
+      ],
+      "opportunity": 36.38
+    },
+    {
+      "city": "Roswell",
+      "state": "GA",
+      "county": "Fulton",
+      "population": 92621,
+      "zips": 2,
+      "niche": "Plumbing",
+      "sub_service": "leak detection",
+      "query": "leak detection Roswell GA",
+      "payout": 103.95,
+      "pricing": "geo",
+      "bundle_value": 103.95,
+      "niches_here": [
+        {
+          "niche": "Plumbing",
+          "payout": 103.95,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 35,
+      "serp_breakdown": {
+        "dedicated": 3,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 4,
+        "forum": 0,
+        "other_local": 2,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 321,
+        "pack_median_reviews": 213
+      },
+      "occupants": [
+        {
+          "host": "halcombplumbing.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "ngleakdetection.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "americanleakdetection.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "mapquest.com",
+          "kind": "directory"
+        },
+        {
+          "host": "valu-riteplumbing.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        },
+        {
+          "host": "levelupleakdetection.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 36.38
+    },
+    {
+      "city": "Acworth",
+      "state": "GA",
+      "county": "Cobb",
+      "population": 22473,
+      "zips": 1,
+      "niche": "Plumbing",
+      "sub_service": "leak detection",
+      "query": "leak detection Acworth GA",
+      "payout": 103.95,
+      "pricing": "geo",
+      "bundle_value": 103.95,
+      "niches_here": [
+        {
+          "niche": "Plumbing",
+          "payout": 103.95,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 28,
+      "serp_breakdown": {
+        "dedicated": 4,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 4,
+        "forum": 0,
+        "other_local": 0,
+        "results": 8,
+        "pack_size": 3,
+        "pack_top_reviews": 321,
+        "pack_median_reviews": 213
+      },
+      "occupants": [
+        {
+          "host": "cambridgeplumbings.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "emergency-leakdetection.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "jensenplumbingservice.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "cambridgeplumbings.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 29.11
+    },
+    {
+      "city": "Ephrata",
+      "state": "PA",
+      "county": "Lancaster",
+      "population": 13772,
+      "zips": 1,
+      "niche": "Plumbing",
+      "sub_service": "leak detection",
+      "query": "leak detection Ephrata PA",
+      "payout": 108.5,
+      "pricing": "geo",
+      "bundle_value": 108.5,
+      "niches_here": [
+        {
+          "niche": "Plumbing",
+          "payout": 108.5,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 25,
+      "serp_breakdown": {
+        "dedicated": 1,
+        "pseo": 1,
+        "national": 1,
+        "emd": 1,
+        "directory": 4,
+        "forum": 0,
+        "other_local": 3,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 264,
+        "pack_median_reviews": 13
+      },
+      "occupants": [
+        {
+          "host": "m.yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "neffsvilleph.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "ephrata-pa.waterdamagerepairphoenix.us",
+          "kind": "pSEO subdomain + city EMD + dedicated page"
+        },
+        {
+          "host": "yellowpages.com",
+          "kind": "directory"
+        },
+        {
+          "host": "prontoplumbing.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "jandj.net",
+          "kind": "independent site"
+        },
+        {
+          "host": "benjaminfranklinplumbing.com",
+          "kind": "national brand"
+        },
+        {
+          "host": "mapquest.com",
+          "kind": "directory"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        }
+      ],
+      "opportunity": 27.12
+    },
+    {
+      "city": "Longmont",
+      "state": "CO",
+      "county": "Boulder",
+      "population": 102512,
+      "zips": 3,
+      "niche": "Plumbing",
+      "sub_service": "leak detection",
+      "query": "leak detection Longmont CO",
+      "payout": 108.67,
+      "pricing": "geo",
+      "bundle_value": 108.67,
+      "niches_here": [
+        {
+          "niche": "Plumbing",
+          "payout": 108.67,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 24,
+      "serp_breakdown": {
+        "dedicated": 1,
+        "pseo": 1,
+        "national": 1,
+        "emd": 2,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 2,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 97,
+        "pack_median_reviews": 61
+      },
+      "occupants": [
+        {
+          "host": "blineplumbingco.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "longmontplumbingco.com",
+          "kind": "city EMD"
+        },
+        {
+          "host": "benjaminfranklinplumbing.com",
+          "kind": "national brand"
+        },
+        {
+          "host": "longmont-co.americanslidingdoorsinc.com",
+          "kind": "pSEO subdomain + city EMD"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "mapquest.com",
+          "kind": "directory"
+        },
+        {
+          "host": "cambridgeplumbings.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "expertise.com",
+          "kind": "directory"
+        },
+        {
+          "host": "mtnvalleyplumbing.com",
+          "kind": "independent site"
+        }
+      ],
+      "opportunity": 26.08
+    },
+    {
+      "city": "Middletown",
+      "state": "PA",
+      "county": "Dauphin",
+      "population": 9632,
+      "zips": 1,
+      "niche": "Plumbing",
+      "sub_service": "leak detection",
+      "query": "leak detection Middletown PA",
+      "payout": 108.5,
+      "pricing": "geo",
+      "bundle_value": 108.5,
+      "niches_here": [
+        {
+          "niche": "Plumbing",
+          "payout": 108.5,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 24,
+      "serp_breakdown": {
+        "dedicated": 3,
+        "pseo": 1,
+        "national": 0,
+        "emd": 1,
+        "directory": 4,
+        "forum": 0,
+        "other_local": 3,
+        "results": 10,
+        "pack_size": 0,
+        "pack_top_reviews": 0,
+        "pack_median_reviews": 0
+      },
+      "occupants": [
+        {
+          "host": "acepoolpro.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "m.yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "prontoplumbing.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "colonypool.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "neffsvilleph.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "superpages.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "west-middletown-pa.metalsroofing.com",
+          "kind": "pSEO subdomain + city EMD + dedicated page"
+        }
+      ],
+      "opportunity": 26.04
+    },
+    {
+      "city": "Marietta",
+      "state": "GA",
+      "county": "Cobb",
+      "population": 62263,
+      "zips": 4,
+      "niche": "Plumbing",
+      "sub_service": "leak detection",
+      "query": "leak detection Marietta GA",
+      "payout": 103.95,
+      "pricing": "geo",
+      "bundle_value": 103.95,
+      "niches_here": [
+        {
+          "niche": "Plumbing",
+          "payout": 103.95,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 25,
+      "serp_breakdown": {
+        "dedicated": 2,
+        "pseo": 0,
+        "national": 0,
+        "emd": 1,
+        "directory": 5,
+        "forum": 0,
+        "other_local": 2,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 573,
+        "pack_median_reviews": 321
+      },
+      "occupants": [
+        {
+          "host": "americanleakdetection.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "waterleakdetectioncompany.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "nextdoor.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "emergencylocalplumber.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "thumbtack.com",
+          "kind": "directory"
+        },
+        {
+          "host": "mariettaplumber.com",
+          "kind": "city EMD + dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        }
+      ],
+      "opportunity": 25.99
+    },
+    {
+      "city": "Austell",
+      "state": "GA",
+      "county": "Cobb",
+      "population": 8447,
+      "zips": 2,
+      "niche": "Plumbing",
+      "sub_service": "leak detection",
+      "query": "leak detection Austell GA",
+      "payout": 103.95,
+      "pricing": "geo",
+      "bundle_value": 103.95,
+      "niches_here": [
+        {
+          "niche": "Plumbing",
+          "payout": 103.95,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 25,
+      "serp_breakdown": {
+        "dedicated": 2,
+        "pseo": 0,
+        "national": 0,
+        "emd": 1,
+        "directory": 4,
+        "forum": 0,
+        "other_local": 4,
+        "results": 10,
+        "pack_size": 0,
+        "pack_top_reviews": 0,
+        "pack_median_reviews": 0
+      },
+      "occupants": [
+        {
+          "host": "emergencylocalplumber.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "m.yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        },
+        {
+          "host": "americanleakdetection.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "austellga.gov",
+          "kind": "city EMD + dedicated page"
+        },
+        {
+          "host": "reliableair.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "mapquest.com",
+          "kind": "directory"
+        },
+        {
+          "host": "landrumplumbing.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "ziprecruiter.com",
+          "kind": "independent site"
+        }
+      ],
+      "opportunity": 25.99
+    },
+    {
+      "city": "Cartersville",
+      "state": "GA",
+      "county": "Bartow",
+      "population": 24074,
+      "zips": 1,
+      "niche": "Plumbing",
+      "sub_service": "leak detection",
+      "query": "leak detection Cartersville GA",
+      "payout": 103.95,
+      "pricing": "geo",
+      "bundle_value": 103.95,
+      "niches_here": [
+        {
+          "niche": "Plumbing",
+          "payout": 103.95,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 25,
+      "serp_breakdown": {
+        "dedicated": 2,
+        "pseo": 0,
+        "national": 0,
+        "emd": 1,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 4,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 343,
+        "pack_median_reviews": 162
+      },
+      "occupants": [
+        {
+          "host": "cartersvilleslableakdetection.com",
+          "kind": "city EMD + dedicated page"
+        },
+        {
+          "host": "rapidplumbingsolutionsllc.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        },
+        {
+          "host": "rapidflowplumbing.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "reliableair.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "mapquest.com",
+          "kind": "directory"
+        },
+        {
+          "host": "americanleakdetection.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "theplumbmedic.com",
+          "kind": "independent site"
+        }
+      ],
+      "opportunity": 25.99
+    },
+    {
+      "city": "Alpharetta",
+      "state": "GA",
+      "county": "Fulton",
+      "population": 66855,
+      "zips": 3,
+      "niche": "Plumbing",
+      "sub_service": "leak detection",
+      "query": "leak detection Alpharetta GA",
+      "payout": 103.95,
+      "pricing": "geo",
+      "bundle_value": 103.95,
+      "niches_here": [
+        {
+          "niche": "Plumbing",
+          "payout": 103.95,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 20,
+      "serp_breakdown": {
+        "dedicated": 4,
+        "pseo": 0,
+        "national": 0,
+        "emd": 1,
+        "directory": 4,
+        "forum": 0,
+        "other_local": 0,
+        "results": 8,
+        "pack_size": 3,
+        "pack_top_reviews": 321,
+        "pack_median_reviews": 83
+      },
+      "occupants": [
+        {
+          "host": "cambridgeplumbings.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "alertplumber.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "instagram.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "cambridgeplumbings.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "alpharetta.rooterproplumbingfulton.com",
+          "kind": "city EMD + dedicated page"
+        },
+        {
+          "host": "instagram.com",
+          "kind": "social profile"
+        }
+      ],
+      "opportunity": 20.79
+    },
+    {
+      "city": "Cumming",
+      "state": "GA",
+      "county": "Forsyth",
+      "population": 8469,
+      "zips": 1,
+      "niche": "Plumbing",
+      "sub_service": "leak detection",
+      "query": "leak detection Cumming GA",
+      "payout": 103.95,
+      "pricing": "geo",
+      "bundle_value": 103.95,
+      "niches_here": [
+        {
+          "niche": "Plumbing",
+          "payout": 103.95,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 20,
+      "serp_breakdown": {
+        "dedicated": 3,
+        "pseo": 0,
+        "national": 1,
+        "emd": 1,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 2,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 375,
+        "pack_median_reviews": 83
+      },
+      "occupants": [
+        {
+          "host": "americanleakdetection.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "leakhunters.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "findatlantaleaks.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        },
+        {
+          "host": "cummingutilities.com",
+          "kind": "city EMD + dedicated page"
+        },
+        {
+          "host": "m.yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "ngleakdetection.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "mrrooter.com",
+          "kind": "national brand"
+        }
+      ],
+      "opportunity": 20.79
+    },
+    {
+      "city": "Canton",
+      "state": "GA",
+      "county": "Cherokee",
+      "population": 35741,
+      "zips": 1,
+      "niche": "Plumbing",
+      "sub_service": "leak detection",
+      "query": "leak detection Canton GA",
+      "payout": 103.95,
+      "pricing": "geo",
+      "bundle_value": 103.95,
+      "niches_here": [
+        {
+          "niche": "Plumbing",
+          "payout": 103.95,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 20,
+      "serp_breakdown": {
+        "dedicated": 3,
+        "pseo": 0,
+        "national": 0,
+        "emd": 1,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 3,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 321,
+        "pack_median_reviews": 166
+      },
+      "occupants": [
+        {
+          "host": "ngleakdetection.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "americanleakdetection.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "cantonslableakdetection.com",
+          "kind": "city EMD + dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "valu-riteplumbing.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "nextdoor.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "leakhunters.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "waterleakdetectioncompany.com",
+          "kind": "independent site"
+        }
+      ],
+      "opportunity": 20.79
+    },
+    {
+      "city": "Broomfield",
+      "state": "CO",
+      "county": "Broomfield",
+      "population": 76304,
+      "zips": 2,
+      "niche": "Plumbing",
+      "sub_service": "leak detection",
+      "query": "leak detection Broomfield CO",
+      "payout": 108.67,
+      "pricing": "geo",
+      "bundle_value": 108.67,
+      "niches_here": [
+        {
+          "niche": "Plumbing",
+          "payout": 108.67,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 18,
+      "serp_breakdown": {
+        "dedicated": 1,
+        "pseo": 2,
+        "national": 0,
+        "emd": 2,
+        "directory": 4,
+        "forum": 0,
+        "other_local": 3,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 97,
+        "pack_median_reviews": 56
+      },
+      "occupants": [
+        {
+          "host": "precisionplumbing.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "broomfield-co.ericemergencyrestorationfortworthtx.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "broomfield-co.keithrestorationsunrisefl.com",
+          "kind": "pSEO subdomain + city EMD"
+        },
+        {
+          "host": "allenservice.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "rexenvironmental.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        },
+        {
+          "host": "broomfield-co.marcosirrigationrepair.com",
+          "kind": "pSEO subdomain + city EMD + dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        }
+      ],
+      "opportunity": 19.56
+    },
+    {
+      "city": "Mount Joy",
+      "state": "PA",
+      "county": "Lancaster",
+      "population": 8344,
+      "zips": 1,
+      "niche": "Plumbing",
+      "sub_service": "leak detection",
+      "query": "leak detection Mount Joy PA",
+      "payout": 108.5,
+      "pricing": "geo",
+      "bundle_value": 108.5,
+      "niches_here": [
+        {
+          "niche": "Plumbing",
+          "payout": 108.5,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 14,
+      "serp_breakdown": {
+        "dedicated": 2,
+        "pseo": 1,
+        "national": 0,
+        "emd": 2,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 5,
+        "results": 10,
+        "pack_size": 0,
+        "pack_top_reviews": 0,
+        "pack_median_reviews": 0
+      },
+      "occupants": [
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "neffsvilleph.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "jandj.net",
+          "kind": "independent site"
+        },
+        {
+          "host": "handyside.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "m.yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "jmlapp.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "mountjoyplumbingspecialists.com",
+          "kind": "city EMD + dedicated page"
+        },
+        {
+          "host": "mount-joy-pa.odom-roofing.com",
+          "kind": "pSEO subdomain + city EMD + dedicated page"
+        },
+        {
+          "host": "wgal.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "mapquest.com",
+          "kind": "directory"
+        }
+      ],
+      "opportunity": 15.19
+    },
+    {
+      "city": "Golden",
+      "state": "CO",
+      "county": "Jefferson",
+      "population": 20417,
+      "zips": 1,
+      "niche": "Plumbing",
+      "sub_service": "leak detection",
+      "query": "leak detection Golden CO",
+      "payout": 108.67,
+      "pricing": "geo",
+      "bundle_value": 108.67,
+      "niches_here": [
+        {
+          "niche": "Plumbing",
+          "payout": 108.67,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 12,
+      "serp_breakdown": {
+        "dedicated": 4,
+        "pseo": 0,
+        "national": 0,
+        "emd": 1,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 2,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 34,
+        "pack_median_reviews": 32
+      },
+      "occupants": [
+        {
+          "host": "cudetection.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "americanleakdetection.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "goldenwestph.com",
+          "kind": "city EMD + dedicated page"
+        },
+        {
+          "host": "salzanoelectric.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "servicebyveteran.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "local.yahoo.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "youtube.com",
+          "kind": "social profile"
+        }
+      ],
+      "opportunity": 13.04
+    },
+    {
+      "city": "Erie",
+      "state": "CO",
+      "county": "Weld",
+      "population": 33808,
+      "zips": 1,
+      "niche": "Plumbing",
+      "sub_service": "leak detection",
+      "query": "leak detection Erie CO",
+      "payout": 108.67,
+      "pricing": "geo",
+      "bundle_value": 108.67,
+      "niches_here": [
+        {
+          "niche": "Plumbing",
+          "payout": 108.67,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 12,
+      "serp_breakdown": {
+        "dedicated": 4,
+        "pseo": 0,
+        "national": 1,
+        "emd": 1,
+        "directory": 2,
+        "forum": 0,
+        "other_local": 2,
+        "results": 10,
+        "pack_size": 0,
+        "pack_top_reviews": 0,
+        "pack_median_reviews": 0
+      },
+      "occupants": [
+        {
+          "host": "rexenvironmental.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "lime911.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "m.yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "levelupleakdetection.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "erieco.gov",
+          "kind": "city EMD"
+        },
+        {
+          "host": "americanleakdetection.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "msicolorado.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "rotorooter.com",
+          "kind": "national brand"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        },
+        {
+          "host": "ziprecruiter.com",
+          "kind": "independent site"
+        }
+      ],
+      "opportunity": 13.04
+    },
+    {
+      "city": "Hanover",
+      "state": "PA",
+      "county": "York",
+      "population": 16584,
+      "zips": 1,
+      "niche": "Plumbing",
+      "sub_service": "leak detection",
+      "query": "leak detection Hanover PA",
+      "payout": 108.5,
+      "pricing": "geo",
+      "bundle_value": 108.5,
+      "niches_here": [
+        {
+          "niche": "Plumbing",
+          "payout": 108.5,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 4,
+      "serp_breakdown": {
+        "dedicated": 2,
+        "pseo": 1,
+        "national": 0,
+        "emd": 2,
+        "directory": 2,
+        "forum": 0,
+        "other_local": 5,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 264,
+        "pack_median_reviews": 79
+      },
+      "occupants": [
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "americanleakdetection.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "hanover.com",
+          "kind": "city EMD + dedicated page"
+        },
+        {
+          "host": "callcarefirst.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "wengerservices.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "emergency-plumber-hanover-pa.plumberhaverhill.com",
+          "kind": "pSEO subdomain + city EMD + dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "griffithplumbingservices.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "signaturehvac.com",
+          "kind": "independent site"
+        }
+      ],
+      "opportunity": 4.34
+    },
+    {
+      "city": "Powder Springs",
+      "state": "GA",
+      "county": "Cobb",
+      "population": 18009,
+      "zips": 1,
+      "niche": "Plumbing",
+      "sub_service": "leak detection",
+      "query": "leak detection Powder Springs GA",
+      "payout": 103.95,
+      "pricing": "geo",
+      "bundle_value": 103.95,
+      "niches_here": [
+        {
+          "niche": "Plumbing",
+          "payout": 103.95,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 2,
+      "serp_breakdown": {
+        "dedicated": 4,
+        "pseo": 0,
+        "national": 0,
+        "emd": 2,
+        "directory": 4,
+        "forum": 0,
+        "other_local": 2,
+        "results": 10,
+        "pack_size": 0,
+        "pack_top_reviews": 0,
+        "pack_median_reviews": 0
+      },
+      "occupants": [
+        {
+          "host": "powderspringsleakdetection.com",
+          "kind": "city EMD + dedicated page"
+        },
+        {
+          "host": "m.yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "emergencylocalplumber.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        },
+        {
+          "host": "homeyou.com",
+          "kind": "directory"
+        },
+        {
+          "host": "americanleakdetection.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "powderspringsslableakdetection.com",
+          "kind": "city EMD + dedicated page"
+        },
+        {
+          "host": "theneighborlyplumber.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "ziprecruiter.com",
+          "kind": "independent site"
+        }
+      ],
+      "opportunity": 2.08
+    },
+    {
+      "city": "Westminster",
+      "state": "CO",
+      "county": "Adams",
+      "population": 115484,
+      "zips": 2,
+      "niche": "Plumbing",
+      "sub_service": "leak detection",
+      "query": "leak detection Westminster CO",
+      "payout": 108.67,
+      "pricing": "geo",
+      "bundle_value": 108.67,
+      "niches_here": [
+        {
+          "niche": "Plumbing",
+          "payout": 108.67,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 5,
+        "pseo": 2,
+        "national": 0,
+        "emd": 3,
+        "directory": 2,
+        "forum": 1,
+        "other_local": 0,
+        "results": 8,
+        "pack_size": 4,
+        "pack_top_reviews": 4000,
+        "pack_median_reviews": 59
+      },
+      "occupants": [
+        {
+          "host": "westminster-co.keithrestorationsunrisefl.com",
+          "kind": "pSEO subdomain + city EMD + dedicated page"
+        },
+        {
+          "host": "reddit.com",
+          "kind": "forum"
+        },
+        {
+          "host": "waterleakrepaircolorado.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "westminster-co.plumbers.us.com",
+          "kind": "pSEO subdomain + city EMD + dedicated page"
+        },
+        {
+          "host": "instagram.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "cambridgeplumbings.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "westminstercoplumbing.vercel.app",
+          "kind": "city EMD + dedicated page"
+        },
+        {
+          "host": "instagram.com",
+          "kind": "social profile"
+        }
+      ],
+      "opportunity": 0.0
+    },
+    {
+      "city": "Camp Hill",
+      "state": "PA",
+      "county": "Cumberland",
+      "population": 8169,
+      "zips": 1,
+      "niche": "Plumbing",
+      "sub_service": "leak detection",
+      "query": "leak detection Camp Hill PA",
+      "payout": 108.5,
+      "pricing": "geo",
+      "bundle_value": 108.5,
+      "niches_here": [
+        {
+          "niche": "Plumbing",
+          "payout": 108.5,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 7,
+        "pseo": 2,
+        "national": 0,
+        "emd": 2,
+        "directory": 1,
+        "forum": 0,
+        "other_local": 1,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 2800,
+        "pack_median_reviews": 25
+      },
+      "occupants": [
+        {
+          "host": "hallerent.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "alertplumber.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "camp-hill-pa.myabcplumber.com",
+          "kind": "pSEO subdomain + city EMD + dedicated page"
+        },
+        {
+          "host": "youtube.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "mywaterguys.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "ppsplumbingservices.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "alertplumber.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "mtsplumbingandheating.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "camp-hill-pa.gasleakrepairpro.com",
+          "kind": "pSEO subdomain + city EMD + dedicated page"
+        }
+      ],
+      "opportunity": 0.0
+    },
+    {
+      "city": "Elizabethtown",
+      "state": "PA",
+      "county": "Lancaster",
+      "population": 11925,
+      "zips": 1,
+      "niche": "Plumbing",
+      "sub_service": "leak detection",
+      "query": "leak detection Elizabethtown PA",
+      "payout": 108.5,
+      "pricing": "geo",
+      "bundle_value": 108.5,
+      "niches_here": [
+        {
+          "niche": "Plumbing",
+          "payout": 108.5,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 1,
+        "pseo": 4,
+        "national": 0,
+        "emd": 4,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 3,
+        "results": 10,
+        "pack_size": 0,
+        "pack_top_reviews": 0,
+        "pack_median_reviews": 0
+      },
+      "occupants": [
+        {
+          "host": "m.yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "elizabethtown-pa.marionplumber.com",
+          "kind": "pSEO subdomain + city EMD"
+        },
+        {
+          "host": "elizabethtown-pa.anytimeplumbingaustin.com",
+          "kind": "pSEO subdomain + city EMD"
+        },
+        {
+          "host": "instaservice.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "harrisburgplumbingprospa.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "elizabethtown-pa.marionplumber.com",
+          "kind": "pSEO subdomain + city EMD"
+        },
+        {
+          "host": "elizabethtown-pa.gutters.us.com",
+          "kind": "pSEO subdomain + city EMD + dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "indeed.com",
+          "kind": "independent site"
+        }
+      ],
+      "opportunity": 0.0
+    },
+    {
+      "city": "Hershey",
+      "state": "PA",
+      "county": "Dauphin",
+      "population": 14242,
+      "zips": 1,
+      "niche": "Plumbing",
+      "sub_service": "leak detection",
+      "query": "leak detection Hershey PA",
+      "payout": 108.5,
+      "pricing": "geo",
+      "bundle_value": 108.5,
+      "niches_here": [
+        {
+          "niche": "Plumbing",
+          "payout": 108.5,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 0,
+        "pseo": 3,
+        "national": 2,
+        "emd": 3,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 1,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 360,
+        "pack_median_reviews": 350
+      },
+      "occupants": [
+        {
+          "host": "rotorooter.com",
+          "kind": "national brand"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "pa.toptustinemergencyplumber.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "hershey-pa.marionplumber.com",
+          "kind": "pSEO subdomain + city EMD"
+        },
+        {
+          "host": "hershey-pa.anytimeplumbingaustin.com",
+          "kind": "pSEO subdomain + city EMD"
+        },
+        {
+          "host": "benjaminfranklinplumbing.com",
+          "kind": "national brand"
+        },
+        {
+          "host": "m.yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "hershey-pa.delcid-roofing.com",
+          "kind": "pSEO subdomain + city EMD"
+        }
+      ],
+      "opportunity": 0.0
+    },
+    {
+      "city": "Lebanon",
+      "state": "PA",
+      "county": "Lebanon",
+      "population": 74675,
+      "zips": 2,
+      "niche": "Plumbing",
+      "sub_service": "leak detection",
+      "query": "leak detection Lebanon PA",
+      "payout": 108.5,
+      "pricing": "geo",
+      "bundle_value": 108.5,
+      "niches_here": [
+        {
+          "niche": "Plumbing",
+          "payout": 108.5,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 3,
+        "pseo": 0,
+        "national": 1,
+        "emd": 2,
+        "directory": 1,
+        "forum": 0,
+        "other_local": 4,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 264,
+        "pack_median_reviews": 237
+      },
+      "occupants": [
+        {
+          "host": "gfbowman.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "valleysewerco.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "proplumberlebanon.com",
+          "kind": "city EMD + dedicated page"
+        },
+        {
+          "host": "benjaminfranklinplumbing.com",
+          "kind": "national brand"
+        },
+        {
+          "host": "neffsvilleph.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "lebanonplumbingco.com",
+          "kind": "city EMD + dedicated page"
+        },
+        {
+          "host": "countrysidefuel.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "americanwaterproofers.com",
+          "kind": "independent site"
+        }
+      ],
+      "opportunity": 0.0
+    },
+    {
+      "city": "Emmett",
+      "state": "ID",
+      "county": "Gem",
+      "population": 8275,
+      "zips": 1,
+      "niche": "Plumbing",
+      "sub_service": "leak detection",
+      "query": "leak detection Emmett ID",
+      "payout": 104.74,
+      "pricing": "geo",
+      "bundle_value": 104.74,
+      "niches_here": [
+        {
+          "niche": "Plumbing",
+          "payout": 104.74,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 3,
+        "pseo": 2,
+        "national": 0,
+        "emd": 2,
+        "directory": 2,
+        "forum": 0,
+        "other_local": 4,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 57,
+        "pack_median_reviews": 55
+      },
+      "occupants": [
+        {
+          "host": "m.yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "myalldry.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "westernhvac.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "americanleakdetection.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "emergency-plumber-emmett-id.plumberhaverhill.com",
+          "kind": "pSEO subdomain + city EMD + dedicated page"
+        },
+        {
+          "host": "emmett-id.delcid-roofing.com",
+          "kind": "pSEO subdomain + city EMD + dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "rockymountainplumbingandheating.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "ultimateheatingandair.com",
+          "kind": "independent site"
+        }
+      ],
+      "opportunity": 0.0
+    },
+    {
+      "city": "Payette",
+      "state": "ID",
+      "county": "Payette",
+      "population": 8536,
+      "zips": 1,
+      "niche": "Plumbing",
+      "sub_service": "leak detection",
+      "query": "leak detection Payette ID",
+      "payout": 104.74,
+      "pricing": "geo",
+      "bundle_value": 104.74,
+      "niches_here": [
+        {
+          "niche": "Plumbing",
+          "payout": 104.74,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 2,
+        "pseo": 2,
+        "national": 0,
+        "emd": 3,
+        "directory": 2,
+        "forum": 0,
+        "other_local": 2,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 55,
+        "pack_median_reviews": 42
+      },
+      "occupants": [
+        {
+          "host": "allcountyplumbingtv.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "m.yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "payette-id.myabcplumber.com",
+          "kind": "pSEO subdomain + city EMD"
+        },
+        {
+          "host": "idealplumbingidaho.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "westernhvac.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "homeadvisor.com",
+          "kind": "directory"
+        },
+        {
+          "host": "cityofpayette.com",
+          "kind": "city EMD"
+        },
+        {
+          "host": "ktvb.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "payette-id.hecplumbing.com",
+          "kind": "pSEO subdomain + city EMD"
+        }
+      ],
+      "opportunity": 0.0
+    },
+    {
+      "city": "Tucker",
+      "state": "GA",
+      "county": "DeKalb",
+      "population": 37123,
+      "zips": 1,
+      "niche": "Plumbing",
+      "sub_service": "leak detection",
+      "query": "leak detection Tucker GA",
+      "payout": 103.95,
+      "pricing": "geo",
+      "bundle_value": 103.95,
+      "niches_here": [
+        {
+          "niche": "Plumbing",
+          "payout": 103.95,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 5,
+        "pseo": 1,
+        "national": 0,
+        "emd": 2,
+        "directory": 1,
+        "forum": 0,
+        "other_local": 0,
+        "results": 6,
+        "pack_size": 3,
+        "pack_top_reviews": 321,
+        "pack_median_reviews": 36
+      },
+      "occupants": [
+        {
+          "host": "mtsplumbingandheating.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "manta.com",
+          "kind": "directory"
+        },
+        {
+          "host": "cambridgeplumbings.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "tuckerplumbingpros.com",
+          "kind": "city EMD + dedicated page"
+        },
+        {
+          "host": "ppsplumbingservices.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "leak-water-damage-ga-tucker-ga.netlify.app",
+          "kind": "pSEO subdomain + city EMD + dedicated page"
+        }
+      ],
+      "opportunity": 0.0
+    },
+    {
+      "city": "Duluth",
+      "state": "GA",
+      "county": "Gwinnett",
+      "population": 32426,
+      "zips": 1,
+      "niche": "Plumbing",
+      "sub_service": "leak detection",
+      "query": "leak detection Duluth GA",
+      "payout": 103.95,
+      "pricing": "geo",
+      "bundle_value": 103.95,
+      "niches_here": [
+        {
+          "niche": "Plumbing",
+          "payout": 103.95,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 9,
+        "pseo": 1,
+        "national": 0,
+        "emd": 1,
+        "directory": 0,
+        "forum": 0,
+        "other_local": 0,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 83,
+        "pack_median_reviews": 63
+      },
+      "occupants": [
+        {
+          "host": "alertplumber.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "alpharettagaplumbing.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "emergency-leakdetection.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "cambridgeplumbings.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "jensenplumbingservice.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "duluth-ga.johnsplumbingllc.com",
+          "kind": "pSEO subdomain + city EMD + dedicated page"
+        },
+        {
+          "host": "cambridgeplumbings.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "plumber-san-pedro.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "alertplumber.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 0.0
+    },
+    {
+      "city": "Woodstock",
+      "state": "GA",
+      "county": "Cherokee",
+      "population": 37381,
+      "zips": 2,
+      "niche": "Plumbing",
+      "sub_service": "leak detection",
+      "query": "leak detection Woodstock GA",
+      "payout": 103.95,
+      "pricing": "geo",
+      "bundle_value": 103.95,
+      "niches_here": [
+        {
+          "niche": "Plumbing",
+          "payout": 103.95,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 5,
+        "pseo": 0,
+        "national": 0,
+        "emd": 1,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 1,
+        "results": 9,
+        "pack_size": 4,
+        "pack_top_reviews": 8100,
+        "pack_median_reviews": 321
+      },
+      "occupants": [
+        {
+          "host": "m.yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "woodstockslableakdetection.com",
+          "kind": "city EMD + dedicated page"
+        },
+        {
+          "host": "americanleakdetection.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "ngleakdetection.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "plumbnplumber.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "locklearplumbing.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        },
+        {
+          "host": "valu-riteplumbing.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 0.0
+    }
+  ],
+  "top_candidates_unscanned": [
+    {
+      "city": "Broomfield",
+      "state": "CO",
+      "county": "Broomfield",
+      "pop": 76304,
+      "zips": 2,
+      "top_niche": "Plumbing",
+      "top_payout": 108.67,
+      "bundle_value": 108.67,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 108.67,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Westminster",
+      "state": "CO",
+      "county": "Adams",
+      "pop": 115484,
+      "zips": 2,
+      "top_niche": "Plumbing",
+      "top_payout": 108.67,
+      "bundle_value": 108.67,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 108.67,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Littleton",
+      "state": "CO",
+      "county": "Arapahoe",
+      "pop": 44710,
+      "zips": 5,
+      "top_niche": "Plumbing",
+      "top_payout": 108.67,
+      "bundle_value": 108.67,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 108.67,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Golden",
+      "state": "CO",
+      "county": "Jefferson",
+      "pop": 20417,
+      "zips": 1,
+      "top_niche": "Plumbing",
+      "top_payout": 108.67,
+      "bundle_value": 108.67,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 108.67,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Longmont",
+      "state": "CO",
+      "county": "Boulder",
+      "pop": 102512,
+      "zips": 3,
+      "top_niche": "Plumbing",
+      "top_payout": 108.67,
+      "bundle_value": 108.67,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 108.67,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Erie",
+      "state": "CO",
+      "county": "Weld",
+      "pop": 33808,
+      "zips": 1,
+      "top_niche": "Plumbing",
+      "top_payout": 108.67,
+      "bundle_value": 108.67,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 108.67,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Camp Hill",
+      "state": "PA",
+      "county": "Cumberland",
+      "pop": 8169,
+      "zips": 1,
+      "top_niche": "Plumbing",
+      "top_payout": 108.5,
+      "bundle_value": 108.5,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 108.5,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Elizabethtown",
+      "state": "PA",
+      "county": "Lancaster",
+      "pop": 11925,
+      "zips": 1,
+      "top_niche": "Plumbing",
+      "top_payout": 108.5,
+      "bundle_value": 108.5,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 108.5,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Hershey",
+      "state": "PA",
+      "county": "Dauphin",
+      "pop": 14242,
+      "zips": 1,
+      "top_niche": "Plumbing",
+      "top_payout": 108.5,
+      "bundle_value": 108.5,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 108.5,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Lebanon",
+      "state": "PA",
+      "county": "Lebanon",
+      "pop": 74675,
+      "zips": 2,
+      "top_niche": "Plumbing",
+      "top_payout": 108.5,
+      "bundle_value": 108.5,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 108.5,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Mechanicsburg",
+      "state": "PA",
+      "county": "Cumberland",
+      "pop": 9720,
+      "zips": 2,
+      "top_niche": "Plumbing",
+      "top_payout": 108.5,
+      "bundle_value": 108.5,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 108.5,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Middletown",
+      "state": "PA",
+      "county": "Dauphin",
+      "pop": 9632,
+      "zips": 1,
+      "top_niche": "Plumbing",
+      "top_payout": 108.5,
+      "bundle_value": 108.5,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 108.5,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Dover",
+      "state": "PA",
+      "county": "York",
+      "pop": 15485,
+      "zips": 1,
+      "top_niche": "Plumbing",
+      "top_payout": 108.5,
+      "bundle_value": 108.5,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 108.5,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Hanover",
+      "state": "PA",
+      "county": "York",
+      "pop": 16584,
+      "zips": 1,
+      "top_niche": "Plumbing",
+      "top_payout": 108.5,
+      "bundle_value": 108.5,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 108.5,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Columbia",
+      "state": "PA",
+      "county": "Lancaster",
+      "pop": 10278,
+      "zips": 1,
+      "top_niche": "Plumbing",
+      "top_payout": 108.5,
+      "bundle_value": 108.5,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 108.5,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Ephrata",
+      "state": "PA",
+      "county": "Lancaster",
+      "pop": 13772,
+      "zips": 1,
+      "top_niche": "Plumbing",
+      "top_payout": 108.5,
+      "bundle_value": 108.5,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 108.5,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Lititz",
+      "state": "PA",
+      "county": "Lancaster",
+      "pop": 9619,
+      "zips": 1,
+      "top_niche": "Plumbing",
+      "top_payout": 108.5,
+      "bundle_value": 108.5,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 108.5,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Millersville",
+      "state": "PA",
+      "county": "Lancaster",
+      "pop": 8982,
+      "zips": 1,
+      "top_niche": "Plumbing",
+      "top_payout": 108.5,
+      "bundle_value": 108.5,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 108.5,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Mount Joy",
+      "state": "PA",
+      "county": "Lancaster",
+      "pop": 8344,
+      "zips": 1,
+      "top_niche": "Plumbing",
+      "top_payout": 108.5,
+      "bundle_value": 108.5,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 108.5,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Willow Street",
+      "state": "PA",
+      "county": "Lancaster",
+      "pop": 9647,
+      "zips": 1,
+      "top_niche": "Plumbing",
+      "top_payout": 108.5,
+      "bundle_value": 108.5,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 108.5,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Emmett",
+      "state": "ID",
+      "county": "Gem",
+      "pop": 8275,
+      "zips": 1,
+      "top_niche": "Plumbing",
+      "top_payout": 104.74,
+      "bundle_value": 104.74,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 104.74,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Payette",
+      "state": "ID",
+      "county": "Payette",
+      "pop": 8536,
+      "zips": 1,
+      "top_niche": "Plumbing",
+      "top_payout": 104.74,
+      "bundle_value": 104.74,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 104.74,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Alpharetta",
+      "state": "GA",
+      "county": "Fulton",
+      "pop": 66855,
+      "zips": 3,
+      "top_niche": "Plumbing",
+      "top_payout": 103.95,
+      "bundle_value": 103.95,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 103.95,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Suwanee",
+      "state": "GA",
+      "county": "Gwinnett",
+      "pop": 22349,
+      "zips": 1,
+      "top_niche": "Plumbing",
+      "top_payout": 103.95,
+      "bundle_value": 103.95,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 103.95,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Decatur",
+      "state": "GA",
+      "county": "DeKalb",
+      "pop": 24518,
+      "zips": 3,
+      "top_niche": "Plumbing",
+      "top_payout": 103.95,
+      "bundle_value": 103.95,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 103.95,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Cumming",
+      "state": "GA",
+      "county": "Forsyth",
+      "pop": 8469,
+      "zips": 1,
+      "top_niche": "Plumbing",
+      "top_payout": 103.95,
+      "bundle_value": 103.95,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 103.95,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Marietta",
+      "state": "GA",
+      "county": "Cobb",
+      "pop": 62263,
+      "zips": 4,
+      "top_niche": "Plumbing",
+      "top_payout": 103.95,
+      "bundle_value": 103.95,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 103.95,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Roswell",
+      "state": "GA",
+      "county": "Fulton",
+      "pop": 92621,
+      "zips": 2,
+      "top_niche": "Plumbing",
+      "top_payout": 103.95,
+      "bundle_value": 103.95,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 103.95,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Tucker",
+      "state": "GA",
+      "county": "DeKalb",
+      "pop": 37123,
+      "zips": 1,
+      "top_niche": "Plumbing",
+      "top_payout": 103.95,
+      "bundle_value": 103.95,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 103.95,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Duluth",
+      "state": "GA",
+      "county": "Gwinnett",
+      "pop": 32426,
+      "zips": 1,
+      "top_niche": "Plumbing",
+      "top_payout": 103.95,
+      "bundle_value": 103.95,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 103.95,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Acworth",
+      "state": "GA",
+      "county": "Cobb",
+      "pop": 22473,
+      "zips": 1,
+      "top_niche": "Plumbing",
+      "top_payout": 103.95,
+      "bundle_value": 103.95,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 103.95,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Austell",
+      "state": "GA",
+      "county": "Cobb",
+      "pop": 8447,
+      "zips": 2,
+      "top_niche": "Plumbing",
+      "top_payout": 103.95,
+      "bundle_value": 103.95,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 103.95,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Canton",
+      "state": "GA",
+      "county": "Cherokee",
+      "pop": 35741,
+      "zips": 1,
+      "top_niche": "Plumbing",
+      "top_payout": 103.95,
+      "bundle_value": 103.95,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 103.95,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Cartersville",
+      "state": "GA",
+      "county": "Bartow",
+      "pop": 24074,
+      "zips": 1,
+      "top_niche": "Plumbing",
+      "top_payout": 103.95,
+      "bundle_value": 103.95,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 103.95,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Powder Springs",
+      "state": "GA",
+      "county": "Cobb",
+      "pop": 18009,
+      "zips": 1,
+      "top_niche": "Plumbing",
+      "top_payout": 103.95,
+      "bundle_value": 103.95,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 103.95,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Woodstock",
+      "state": "GA",
+      "county": "Cherokee",
+      "pop": 37381,
+      "zips": 2,
+      "top_niche": "Plumbing",
+      "top_payout": 103.95,
+      "bundle_value": 103.95,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 103.95,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Parker",
+      "state": "CO",
+      "county": "Douglas",
+      "pop": 61783,
+      "zips": 1,
+      "top_niche": "Plumbing",
+      "top_payout": 103.84,
+      "bundle_value": 103.84,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 103.84,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Brighton",
+      "state": "CO",
+      "county": "Adams",
+      "pop": 42059,
+      "zips": 2,
+      "top_niche": "Plumbing",
+      "top_payout": 103.84,
+      "bundle_value": 103.84,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 103.84,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Eagle",
+      "state": "ID",
+      "county": "Ada",
+      "pop": 32855,
+      "zips": 1,
+      "top_niche": "Plumbing",
+      "top_payout": 102.69,
+      "bundle_value": 102.69,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 102.69,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Berthoud",
+      "state": "CO",
+      "county": "Larimer",
+      "pop": 12411,
+      "zips": 1,
+      "top_niche": "Plumbing",
+      "top_payout": 101.5,
+      "bundle_value": 101.5,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 101.5,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Firestone",
+      "state": "CO",
+      "county": "Weld",
+      "pop": 18049,
+      "zips": 1,
+      "top_niche": "Plumbing",
+      "top_payout": 101.5,
+      "bundle_value": 101.5,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 101.5,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Frederick",
+      "state": "CO",
+      "county": "Weld",
+      "pop": 16651,
+      "zips": 1,
+      "top_niche": "Plumbing",
+      "top_payout": 101.5,
+      "bundle_value": 101.5,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 101.5,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Johnstown",
+      "state": "CO",
+      "county": "Weld",
+      "pop": 18883,
+      "zips": 1,
+      "top_niche": "Plumbing",
+      "top_payout": 101.5,
+      "bundle_value": 101.5,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 101.5,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Loveland",
+      "state": "CO",
+      "county": "Larimer",
+      "pop": 78410,
+      "zips": 3,
+      "top_niche": "Plumbing",
+      "top_payout": 101.5,
+      "bundle_value": 101.5,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 101.5,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Milliken",
+      "state": "CO",
+      "county": "Weld",
+      "pop": 8871,
+      "zips": 1,
+      "top_niche": "Plumbing",
+      "top_payout": 101.5,
+      "bundle_value": 101.5,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 101.5,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Timnath",
+      "state": "CO",
+      "county": "Larimer",
+      "pop": 8941,
+      "zips": 1,
+      "top_niche": "Plumbing",
+      "top_payout": 101.5,
+      "bundle_value": 101.5,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 101.5,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Windsor",
+      "state": "CO",
+      "county": "Weld",
+      "pop": 37914,
+      "zips": 2,
+      "top_niche": "Plumbing",
+      "top_payout": 101.5,
+      "bundle_value": 101.5,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 101.5,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Evans",
+      "state": "CO",
+      "county": "Weld",
+      "pop": 22396,
+      "zips": 1,
+      "top_niche": "Plumbing",
+      "top_payout": 101.5,
+      "bundle_value": 101.5,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 101.5,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Fort Lupton",
+      "state": "CO",
+      "county": "Weld",
+      "pop": 8897,
+      "zips": 1,
+      "top_niche": "Plumbing",
+      "top_payout": 101.5,
+      "bundle_value": 101.5,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 101.5,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Caldwell",
+      "state": "ID",
+      "county": "Canyon",
+      "pop": 66516,
+      "zips": 1,
+      "top_niche": "Plumbing",
+      "top_payout": 100.41,
+      "bundle_value": 100.41,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 100.41,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Norcross",
+      "state": "GA",
+      "county": "Gwinnett",
+      "pop": 18007,
+      "zips": 1,
+      "top_niche": "Plumbing",
+      "top_payout": 99.33,
+      "bundle_value": 99.33,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 99.33,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Kennesaw",
+      "state": "GA",
+      "county": "Cobb",
+      "pop": 34605,
+      "zips": 2,
+      "top_niche": "Plumbing",
+      "top_payout": 99.33,
+      "bundle_value": 99.33,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 99.33,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Dallas",
+      "state": "GA",
+      "county": "Paulding",
+      "pop": 14714,
+      "zips": 1,
+      "top_niche": "Plumbing",
+      "top_payout": 99.33,
+      "bundle_value": 99.33,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 99.33,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Castle Rock",
+      "state": "CO",
+      "county": "Douglas",
+      "pop": 79123,
+      "zips": 1,
+      "top_niche": "Plumbing",
+      "top_payout": 93.94,
+      "bundle_value": 93.94,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 93.94,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Englewood",
+      "state": "CO",
+      "county": "Arapahoe",
+      "pop": 34129,
+      "zips": 1,
+      "top_niche": "Plumbing",
+      "top_payout": 91.81,
+      "bundle_value": 91.81,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 91.81,
+          "pricing": "geo"
+        }
+      ]
+    }
+  ]
+}
