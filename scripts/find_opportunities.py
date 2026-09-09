@@ -96,65 +96,204 @@ SUBS_PER_NICHE  = int(os.environ.get("SUBS_PER_NICHE", "3") or 3)
 # ── Sub-services per niche ────────────────────────────────────────────────
 # The head term ("plumbing Boise") is never the target — it is always taken.
 # These are the queries an unranked site can realistically enter on.
+# ─────────────────────────────────────────────────────────────────────────────
+# SUB-SERVICES — from 5,000+ real calls, not from guesses
+#
+# These used to be my own list of plausible-sounding terms. They are now the
+# specific services the mentor's Call Intelligence recorded across 20 niches,
+# ordered by EARNING POWER (call volume x the share of those calls that
+# actually paid), and rewritten from taxonomy labels into the phrasing someone
+# would type into Google.
+#
+# The guessed list was wrong in both directions. It led with "hydro jetting",
+# "sump pump repair" and "frozen pipe repair"; the call data puts leak
+# detection, drain cleaning and sewer line repair at the top, and shows
+# "drain snaking" and "sewer backup" converting at 100% while sump pumps paid
+# on 18% of 11 calls. A term nobody rings about cannot be rescued by a weak
+# SERP, so the SERP budget should never have been spent on it.
+#
+# The number in each comment is (calls, % of those calls that paid).
 SUB_SERVICES = {
-    "Plumbing": ["drain cleaning", "hydro jetting", "sewer line repair",
-                 "sewer camera inspection", "slab leak detection",
-                 "burst pipe repair", "water heater repair",
-                 "sump pump repair", "toilet repair", "repiping",
-                 "gas line repair", "frozen pipe repair"],
-    "HVAC": ["ac repair", "furnace repair", "heat pump repair",
-             "duct cleaning", "ac installation", "thermostat installation",
-             "emergency hvac repair", "mini split installation"],
-    "Roofing": ["roof leak repair", "storm damage roof repair",
-                "hail damage roof repair", "roof replacement",
-                "emergency roof tarping", "flat roof repair",
-                "roof inspection", "shingle replacement"],
-    "Electrical": ["panel upgrade", "electrical rewiring", "ev charger installation",
-                   "generator installation", "outlet repair",
-                   "emergency electrician", "ceiling fan installation"],
-    "Pest Control": ["rodent removal", "bed bug treatment", "termite inspection",
-                     "wildlife removal", "wasp nest removal", "ant control",
-                     "cockroach extermination", "mosquito control"],
-    "Water Damage": ["water damage restoration", "sewage backup cleanup",
-                     "basement flooding cleanup", "crawl space water removal",
-                     "ceiling water damage repair", "emergency water extraction",
-                     "structural drying"],
-    "Mold Removal": ["mold remediation", "black mold removal",
-                     "crawl space mold removal", "attic mold removal",
-                     "mold inspection"],
-    "Gutters": ["gutter cleaning", "gutter repair", "gutter guard installation",
-                "gutter replacement", "downspout repair"],
-    "Garage Door": ["garage door spring repair", "garage door opener repair",
-                    "garage door off track", "garage door cable repair"],
-    "Foundation Repair": ["foundation crack repair", "basement waterproofing",
-                          "crawl space encapsulation", "pier and beam repair"],
-    "Tree Services": ["emergency tree removal", "storm damage tree removal",
-                      "tree stump removal", "tree trimming"],
-    "Appliance": ["refrigerator repair", "washer repair", "dryer repair",
-                  "dishwasher repair", "oven repair"],
-    "Siding": ["siding repair", "siding replacement", "storm damage siding repair"],
-    "Waterproofing": ["basement waterproofing", "foundation waterproofing",
-                      "french drain installation", "sump pump installation"],
-    "Biohazard": ["biohazard cleanup", "crime scene cleanup",
-                  "hoarding cleanup", "unattended death cleanup"],
-    "Fire Damage Removal": ["fire damage restoration", "smoke damage cleanup",
-                            "soot removal", "board up services"],
-    "Bathroom Remodeling": ["bathroom remodel", "shower replacement",
-                            "tub to shower conversion", "walk in tub installation",
-                            "bathroom renovation"],
-    "Kitchen": ["kitchen remodel", "kitchen cabinet refacing",
-                "countertop installation", "kitchen renovation"],
-    "Painting": ["interior painting", "exterior painting",
-                 "cabinet painting", "house painters"],
-    "Deck": ["deck building", "deck repair", "deck staining",
-             "composite deck installation"],
-    "Landscaping": ["landscaping services", "sod installation",
-                    "retaining wall installation", "irrigation installation"],
-    "Solar": ["solar panel installation", "solar panel repair",
-              "residential solar installation"],
-    "Roofing CPL": ["roof replacement", "roof leak repair",
-                    "storm damage roof repair", "roof inspection"],
+    # 1,064 calls · 79% paid · 45% urgent — the strongest Call niche on both feeds
+    "Plumbing": [
+        "leak detection",            # 119, 77%
+        "drain cleaning",            #  56, 93%
+        "sewer line repair",         #  44, 93%
+        "clogged drain repair",      #  45, 78%
+        "water heater leak repair",  #  48, 69%
+        "faucet repair",             #  44, 82%
+        "slab leak repair",          #  33, 85%
+        "water line repair",         #  28, 86%
+        "toilet repair",             #  32, 75%
+        "sewer backup cleanup",      #  19, 100%
+        "drain snaking",             #  20, 100%
+        "ceiling leak repair",       #  20, 85%
+        "tankless water heater repair",  # 20, 90%
+        "water softener installation",   # 23, 91%
+    ],
+    # 274 calls · 72% paid — highest Call median payout ($38.06)
+    "HVAC": [
+        "ac repair",                 # 41, 76%
+        "hvac tune up",              # 37, 76%
+        "mini split repair",         # 44, 59%
+        "ac not cooling",            # 18, 83%
+        "hvac replacement",          # 33, 55%
+        "furnace repair",            # 12, 83%
+        "central ac repair",         #  7, 86%
+        "air duct cleaning",         #  4, 100%
+        "ac drain line clog",        #  5, 100%
+    ],
+    # 159 calls · 61% paid · 32,251 ZIPs — widest Call coverage
+    "Roofing": [
+        "roof leak repair",          # 37, 97%
+        "roof repair",               # 34, 50%
+        "roof replacement",          # 16, 75%
+        "roof inspection",           # 15, 60%
+        "shingle repair",            # 10, 80%
+        "missing shingle repair",    #  3, 100%
+        "tile roof replacement",     #  3, 100%
+    ],
+    # 109 calls · 81% paid · 49% booked — best conversion of any niche
+    "Electrical": [
+        "outlet repair",             # 17, 100%
+        "house rewiring",            # 13, 69%
+        "light fixture installation",# 10, 80%
+        "electrical panel repair",   #  4, 50%
+        "ev charger installation",   #  4, 100%
+        "partial power outage",      #  3, 100%
+        "range wiring",              #  5, 100%
+    ],
+    # 1,115 calls but only 51% paid / 15% booked, and a FLAT $42.50 everywhere
+    "Pest Control": [
+        "rodent control",            # 109, 59%
+        "wasp nest removal",         #  84, 61%
+        "ant control",               #  64, 63%
+        "cockroach exterminator",    #  41, 66%
+        "carpenter ant treatment",   #  23, 74%
+        "rodent droppings cleanup",  #  21, 71%
+        "spider control",            #  27, 52%
+        "termite treatment",         #  40, 35%
+    ],
+    # CPL, median $205 — by far the highest payout in the feed
+    "Water Damage": [
+        "ceiling water damage repair",  # 14, 86%
+        "water damage restoration",     #  3, 100%
+        "mold remediation",             # 11, 73%
+        "mold inspection",              #  9, 44%
+    ],
+    "Mold Removal": [
+        "mold remediation", "mold inspection", "black mold removal",
+        "attic mold removal", "crawl space mold removal",
+    ],
+    # 1,056 calls · median payout $9.63 — the clearest volume trap in the feed
+    "Tree Services": [
+        "tree removal",              # 195, 71%
+        "tree trimming",             # 168, 67%
+        "storm damage tree removal", #  88, 75%
+        "stump grinding",            #  51, 84%
+        "tree branch removal",       #  78, 68%
+        "emergency tree removal",    #  17, 88%
+        "land clearing",             #  13, 85%
+    ],
+    "Gutters": [
+        "gutter cleaning",           # 36, 42%
+        "gutter repair",             # 13, 77%
+        "ice dam removal",           # 30, 30%
+        "gutter replacement",        #  6, 67%
+        "gutter guard installation", #  6, 33%
+    ],
+    "Painting": [
+        "interior painting",         # 23, 78%
+        "exterior painting",         # 16, 75%
+        "cabinet painting",          #  3, 100%
+        "lead paint removal",        #  3, 100%
+        "deck staining",
+    ],
+    "Landscaping": [
+        "lawn mowing",               # 39, 62%
+        "weed control",              # 23, 87%
+        "hedge trimming",            # 18, 72%
+        "sprinkler repair",          # 11, 82%
+        "yard cleanup",              # 13, 77%
+        "mulch installation",        #  6, 100%
+    ],
+    # 1,148 calls — the MOST of any niche — on a median payout of $6.88
+    "Appliance": [
+        "refrigerator repair", "washer repair", "dryer repair",
+        "dishwasher repair", "oven repair",
+    ],
+    "Garage Door": [
+        "garage door repair", "garage door spring replacement",
+        "garage door opener repair", "garage door off track",
+    ],
+    "Foundation Repair": [
+        "foundation repair", "foundation crack repair",
+        "basement wall repair", "house leveling",
+    ],
+    "Waterproofing": [
+        "basement waterproofing", "crawl space encapsulation",
+        "french drain installation", "sump pump installation",
+    ],
+    "Siding": [
+        "siding repair", "siding replacement", "vinyl siding installation",
+    ],
+    "Bathroom Remodeling": [
+        "bathroom remodel", "tub to shower conversion", "walk in shower installation",
+    ],
+    "Kitchen": [
+        "kitchen remodel", "kitchen cabinet refacing", "countertop installation",
+    ],
+    "Deck": ["deck repair", "deck building", "deck staining"],
+    "Solar": ["solar panel installation", "solar panel repair"],
+    "Fire Damage Removal": [
+        "fire damage restoration", "smoke damage cleanup", "soot removal",
+    ],
+    "Biohazard": [
+        "biohazard cleanup", "crime scene cleanup", "hoarding cleanup",
+    ],
 }
+
+# ─────────────────────────────────────────────────────────────────────────────
+# NICHE ECONOMICS — what a call in this niche is actually worth
+#
+# The coverage feed's `top_payout` is the single best ZIP in the country, and
+# reading it as "the payout" is how Plumbing looks like $221.95 when its median
+# is $34.38 — a 6x error that pointed at the wrong niche entirely. These are
+# the MEDIAN payout from /api/niche_summary.json, multiplied by the share of
+# that niche's calls that actually paid, from Call Intelligence.
+#
+# The ranking it produces is not the ranking by call volume. The three niches
+# with the MOST calls in the whole feed — Appliance (1,148), Pest Control
+# (1,115) and Tree Services (1,056) — sit at $4.88, $21.68 and $6.64. Volume
+# is what a niche looks like; this is what it pays.
+#
+#            (payout_type, median_payout, paid_pct, revenue_per_call)
+NICHE_ECONOMICS = {
+    ("Water Damage",  "CPL"):  (205.00, 71, 145.55),
+    ("Garage Door",   "CPL"):  ( 74.00, 66,  48.84),
+    ("Plumbing",      "CPL"):  ( 45.00, 79,  35.55),
+    ("Painting",      "CPL"):  ( 38.50, 80,  30.80),
+    ("HVAC",          "Call"): ( 38.06, 72,  27.40),
+    ("Plumbing",      "Call"): ( 34.38, 79,  27.16),
+    ("Landscaping",   "CPL"):  ( 34.00, 79,  26.86),
+    ("Roofing",       "Call"): ( 41.25, 61,  25.16),
+    ("Pest Control",  "Call"): ( 42.50, 51,  21.68),
+    ("Electrical",    "Call"): ( 23.27, 81,  18.85),
+    ("Gutters",       "Call"): ( 32.50, 45,  14.62),
+    ("Tree Services", "Call"): (  9.63, 69,   6.64),
+    ("Appliance",     "Call"): (  6.88, 71,   4.88),
+}
+
+# Below this, a SERP credit spent on the niche cannot pay for itself: even a
+# wide-open first page only wins calls that are worth a few dollars each.
+MIN_REV_PER_CALL = float(os.environ.get("MIN_REV_PER_CALL", "15") or 15)
+
+
+def revenue_per_call(niche, ptype):
+    """What one call in this niche is worth, or None when we have no call data."""
+    hit = NICHE_ECONOMICS.get((niche, ptype))
+    return hit[2] if hit else None
+
 
 # A niche with no entry here generates no queries, so its cities drop out of
 # stage 4 without a word. Bathroom Remodeling — a Call niche across 11,090
@@ -298,6 +437,7 @@ def price_modes(rows):
 
 def shortlist(rows, pricing):
     print("── STAGE 2: revenue filter ────────────────────────────")
+    drop_econ = {}
     keep = []
     for r in rows:
         if not r["city"] or not r["niche"]:
@@ -306,13 +446,27 @@ def shortlist(rows, pricing):
             continue
         if r["payout"] < MIN_PAYOUT:
             continue
+        # Economics gate. MIN_PAYOUT only asks what the buyer pays; this asks
+        # what a call is actually WORTH once the share that never pays is taken
+        # out. Appliance clears a $35 payout filter on its best ZIPs while its
+        # median is $6.88 and it is the highest-volume niche in the feed — the
+        # exact shape that wastes a SERP budget. Niches with no call data pass
+        # through untouched, so this can only ever remove a known-bad one.
+        _rev = revenue_per_call(r["niche"], r["ptype"])
+        if _rev is not None and _rev < MIN_REV_PER_CALL:
+            drop_econ[r["niche"]] = drop_econ.get(r["niche"], 0) + 1
+            continue
         if not (MIN_POP <= r["pop"] <= MAX_POP):
             continue
         if NICHES and r["niche"] not in NICHES:
             continue
         keep.append(r)
-    print(f"   payout ≥ ${MIN_PAYOUT:g} · pop {MIN_POP:,}-{MAX_POP:,} "
-          f"· type {PAYOUT_T}")
+    print(f"   payout ≥ ${MIN_PAYOUT:g} · rev/call ≥ ${MIN_REV_PER_CALL:g} "
+          f"· pop {MIN_POP:,}-{MAX_POP:,} · type {PAYOUT_T}")
+    for _n, _c in sorted(drop_econ.items(), key=lambda kv: -kv[1]):
+        _e = NICHE_ECONOMICS.get((_n, PAYOUT_T))
+        print(f"   ⛔ {_n:<16} {_c:>7,} rows dropped — ${_e[2]:.2f}/call "
+              f"(median ${_e[0]:.2f} x {_e[1]}% paid)")
     print(f"   ✅ {len(rows):,} → {len(keep):,} rows\n")
 
     print("── STAGE 3: city rollup + bundles ─────────────────────")
