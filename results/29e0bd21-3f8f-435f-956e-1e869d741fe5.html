@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEOblogy</title>
+<style>
+  :root {
+    --ink: #14181c;
+    --muted: #6b6560;
+    --line: #dcdad3;
+    --paper: #fdfcfa;
+    --bg: #f6f5f2;
+    --accent: #0b5d5a;
+    --accent-soft: #e3f0ef;
+    --mono: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Menlo, Consolas, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    line-height: 1.55;
+  }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 36px 20px 70px; }
+  header {
+    position: relative;
+    border-bottom: 2px dashed var(--line);
+    padding-bottom: 22px;
+    margin-bottom: 30px;
+  }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  header h1 { font-size: 26px; margin: 0 0 6px; }
+  header .subtitle { color: var(--muted); font-size: 14px; }
+  header .generated { font-family: var(--mono); color: var(--muted); font-size: 11px; margin-top: 12px; }
+  .stamp {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    line-height: 1.3;
+    text-align: center;
+    color: var(--accent);
+    border: 2px solid var(--accent);
+    border-radius: 6px;
+    padding: 6px 10px;
+    transform: rotate(4deg);
+  }
+  .stat-bar { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 36px; }
+  .stat {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 12px 16px;
+    flex: 1;
+    min-width: 110px;
+    text-align: center;
+  }
+  .stat-num { font-family: var(--mono); font-size: 20px; font-weight: 700; color: var(--accent); }
+  .stat-label { font-size: 11px; color: var(--muted); margin-top: 3px; }
+  section { margin-bottom: 40px; }
+  section > h2 {
+    font-family: var(--mono);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 9px;
+    margin-bottom: 16px;
+  }
+  .card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    padding: 16px 18px;
+    margin-bottom: 12px;
+  }
+  .card-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; flex-wrap: wrap; }
+  .card h3 { margin: 0; font-size: 15px; }
+  .badges { display: flex; gap: 6px; flex-wrap: wrap; }
+  .badge { font-family: var(--mono); font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 4px; white-space: nowrap; }
+  .intent-badge { background: var(--accent-soft); color: var(--accent); }
+  .meta-line { font-size: 13px; color: var(--muted); margin-top: 7px; }
+  .reasoning { font-size: 14px; margin-top: 9px; margin-bottom: 0; }
+  .ad-preview { margin-top: 11px; background: var(--bg); border: 1px dashed var(--line); border-radius: 6px; padding: 10px 13px; }
+  .ad-headline { color: #1a0dab; font-size: 14px; font-weight: 600; }
+  .ad-description { color: #4d5156; font-size: 13px; margin-top: 3px; }
+  .faq { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 11px 15px; margin-bottom: 7px; }
+  .faq summary { cursor: pointer; font-weight: 600; font-size: 14px; }
+  .faq summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .faq p { font-size: 14px; color: var(--muted); margin: 9px 0 2px; }
+  .chip-wrap { display: flex; flex-wrap: wrap; gap: 7px; }
+  .chip { background: var(--accent-soft); color: var(--accent); font-size: 12px; padding: 5px 11px; border-radius: 999px; }
+  .empty { color: var(--muted); font-style: italic; font-size: 14px; }
+  .campaign-block { margin-bottom: 26px; }
+  .campaign-head { font-family: var(--mono); font-size: 13px; font-weight: 700; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+  .kw-vol { color: var(--muted); font-size: 11px; }
+  .neg-line { color: #9c2b1f; }
+  footer { text-align: center; font-family: var(--mono); color: var(--muted); font-size: 11px; margin-top: 56px; }
+  @media (max-width: 480px) {
+    .stamp { position: static; display: inline-block; margin-top: 12px; transform: rotate(-1deg); }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="eyebrow">Keyword Strategy Report</div>
+    <h1>SEOblogy</h1>
+    <div class="subtitle">White label SEO, Google Ads and multilingual website
+                     fulfilment for small digital agencies — the agency keeps
+                     the client and their own branding, we build the work
+                     invisibly &middot; N/A</div>
+    <div class="generated">Generated 10 Sep 2026, 15:03 UTC</div>
+    <div class="stamp">2 HIGH<br>PRIORITY</div>
+  </header>
+
+  <div class="stat-bar"><div class="stat"><div class="stat-num">2780</div><div class="stat-label">Keywords Analyzed</div></div><div class="stat"><div class="stat-num">1</div><div class="stat-label">Campaigns</div></div><div class="stat"><div class="stat-num">4</div><div class="stat-label">Ad Groups</div></div><div class="stat"><div class="stat-num">62</div><div class="stat-label">Keywords</div></div><div class="stat"><div class="stat-num">39</div><div class="stat-label">Intent Expansions</div></div><div class="stat"><div class="stat-num">4</div><div class="stat-label">Landing Pages</div></div></div>
+
+  
+  <section>
+    <h2>Campaign &amp; Ad Group Structure</h2>
+    
+    <div class="campaign-block">
+      <div class="campaign-head">📣 Campaign: White Label Automation Tools <span class="badge" style="color:#92400e;background:#fef0dc">HIGH</span></div>
+      
+        <div class="card">
+          <div class="card-head">
+            <h3>White Label Google Ads Campaign Automation</h3>
+            <div class="badges"><span class="badge" style="color:#92400e;background:#fef0dc">HIGH</span><span class="badge intent-badge">EXACT</span></div>
+          </div>
+          <p class="reasoning">Agencies searching to buy or outsource Google Ads management/campaign setup they can white-label to their own clients.</p>
+          <div class="meta-line">Volume: <strong>3500/mo</strong> &middot; Avg score: <strong>78.3</strong> &middot; 10 keywords</div>
+          <div class="meta-line">Keywords: google ads management near me <span class='kw-vol'>(1000)</span>, google ads management services near me <span class='kw-vol'>(110)</span>, google ads campaign setup <span class='kw-vol'>(720)</span>, adword agency <span class='kw-vol'>(880)</span>, ads setup <span class='kw-vol'>(210)</span>, google ads landing page design <span class='kw-vol'>(50)</span>, google shopping ads management services <span class='kw-vol'>(30)</span>, google ads management pricing <span class='kw-vol'>(320)</span>, google ads management cost <span class='kw-vol'>(70)</span>, google ads management gold coast <span class='kw-vol'>(110)</span></div>
+          <div class='meta-line'>🆕 Intent expansions:</div><div class='chip-wrap'><span class="chip">white label google ads management for agencies</span><span class="chip">white label ppc management service</span><span class="chip">google ads fulfillment for agencies</span><span class="chip">outsource google ads management</span><span class="chip">reseller ppc management</span><span class="chip">google ads management for digital agencies</span><span class="chip">white label ppc reseller program</span><span class="chip">automated google ads campaign builder</span><span class="chip">google ads management software for agencies</span><span class="chip">hire white label google ads manager</span></div>
+          <div class='meta-line neg-line'>🚫 Negatives (anti-cannibalization): click fraud, seo reseller, white label seo, static website, website builder, web design near me, schema, app, average, bots, budget, click, clicks, companies, contractor, contractors, creation, creator, custom, detection, development, electrical, fast, fraud, from, generator, html, invalid, jekyll, loading, local, monitoring, moz, multilingual, partner, plan, plans, platform, prevention, private, protect, protection, provider, site, static, stop, studio, tool, trades, usa, web, wix, wordpress</div>
+        </div>
+        <div class="card">
+          <div class="card-head">
+            <h3>Click Fraud Protection</h3>
+            <div class="badges"><span class="badge" style="color:#6b5a3a;background:#f2ede0">MEDIUM</span><span class="badge intent-badge">EXACT</span></div>
+          </div>
+          <p class="reasoning">Advertisers/agencies searching for a tool or service to stop invalid clicks and protect ad spend.</p>
+          <div class="meta-line">Volume: <strong>480/mo</strong> &middot; Avg score: <strong>68.2</strong> &middot; 5 keywords</div>
+          <div class="meta-line">Keywords: click fraud protection software <span class='kw-vol'>(170)</span>, click fraud protection <span class='kw-vol'>(140)</span>, ad fraud protection <span class='kw-vol'>(50)</span>, click fraud detection software <span class='kw-vol'>(90)</span>, best click fraud protection <span class='kw-vol'>(30)</span></div>
+          <div class='meta-line'>🆕 Intent expansions:</div><div class='chip-wrap'><span class="chip">click fraud protection for agencies</span><span class="chip">stop invalid clicks google ads</span><span class="chip">click fraud prevention tool</span><span class="chip">ppc click fraud protection service</span><span class="chip">click fraud protection pricing</span><span class="chip">invalid click protection software</span><span class="chip">click fraud monitoring tool</span><span class="chip">protect google ads budget from bots</span><span class="chip">click fraud protection for small business</span></div>
+          <div class='meta-line neg-line'>🚫 Negatives (anti-cannibalization): google ads management, ppc management, seo reseller, website builder, web design, adword, app, automated, average, campaign, coast, companies, contractor, contractors, creation, creator, custom, development, electrical, fast, generator, gold, html, jekyll, landing, loading, local, management, manager, moz, multilingual, page, partner, plan, plans, platform, private, provider, setup, shopping, site, static, studio, trades, usa, web, wix, wordpress</div>
+        </div>
+        <div class="card">
+          <div class="card-head">
+            <h3>SEO Automation Website Builds</h3>
+            <div class="badges"><span class="badge" style="color:#92400e;background:#fef0dc">HIGH</span><span class="badge intent-badge">EXACT</span></div>
+          </div>
+          <p class="reasoning">Agencies searching for a white-label/reseller SEO program to fulfill client SEO work under their own brand.</p>
+          <div class="meta-line">Volume: <strong>5520/mo</strong> &middot; Avg score: <strong>80.1</strong> &middot; 14 keywords</div>
+          <div class="meta-line">Keywords: white label seo companies <span class='kw-vol'>(480)</span>, white label local seo services <span class='kw-vol'>(260)</span>, white label local seo <span class='kw-vol'>(720)</span>, seo reseller program <span class='kw-vol'>(720)</span>, seo reseller plan <span class='kw-vol'>(720)</span>, seo resellers program <span class='kw-vol'>(720)</span>, seo reseller plans <span class='kw-vol'>(720)</span>, private label seo services <span class='kw-vol'>(170)</span>, best white label seo services <span class='kw-vol'>(140)</span>, seo white labeling <span class='kw-vol'>(390)</span>, best white label seo companies <span class='kw-vol'>(260)</span>, white label seo platform <span class='kw-vol'>(140)</span>, seo reseller usa <span class='kw-vol'>(50)</span>, moz local white label <span class='kw-vol'>(30)</span></div>
+          <div class='meta-line'>🆕 Intent expansions:</div><div class='chip-wrap'><span class="chip">white label seo reseller program cost</span><span class="chip">white label seo fulfillment services</span><span class="chip">seo reseller program for agencies</span><span class="chip">outsource seo services white label</span><span class="chip">white label seo agency partner</span><span class="chip">private label seo fulfillment</span><span class="chip">seo reseller pricing plans</span><span class="chip">white label seo website builds</span><span class="chip">hire white label seo provider</span><span class="chip">seo reseller program for digital agencies</span></div>
+          <div class='meta-line neg-line'>🚫 Negatives (anti-cannibalization): click fraud, google ads management, static website builder, web design near me, adword, app, automated, average, bots, budget, campaign, click, clicks, coast, contractor, contractors, creation, creator, custom, detection, development, electrical, fast, fraud, from, generator, gold, html, invalid, jekyll, landing, loading, management, manager, monitoring, multilingual, page, prevention, protect, protection, setup, shopping, site, static, stop, studio, tool, trades, web, wix, wordpress</div>
+        </div>
+        <div class="card">
+          <div class="card-head">
+            <h3>Static Website Builds For Service Businesses</h3>
+            <div class="badges"><span class="badge" style="color:#6b5a3a;background:#f2ede0">MEDIUM</span><span class="badge intent-badge">PHRASE</span></div>
+          </div>
+          <p class="reasoning">Businesses and agencies searching for a website builder/design solution for small or service-based businesses.</p>
+          <div class="meta-line">Volume: <strong>61060/mo</strong> &middot; Avg score: <strong>76.8</strong> &middot; 33 keywords</div>
+          <div class="meta-line">Keywords: custom web design near me <span class='kw-vol'>(210)</span>, best web design agencies near me <span class='kw-vol'>(260)</span>, static website generator <span class='kw-vol'>(6600)</span>, static site builder <span class='kw-vol'>(6600)</span>, static website creator <span class='kw-vol'>(6600)</span>, small business web design near me <span class='kw-vol'>(140)</span>, custom website design near me <span class='kw-vol'>(260)</span>, wix multilingual app <span class='kw-vol'>(140)</span>, website design and development company near me <span class='kw-vol'>(30)</span>, electrical services website <span class='kw-vol'>(50)</span>, jekyll website builder <span class='kw-vol'>(90)</span>, jekyll site builder <span class='kw-vol'>(90)</span>, web design studio near me <span class='kw-vol'>(50)</span>, website builder for agencies <span class='kw-vol'>(390)</span>, best website builder for seo <span class='kw-vol'>(590)</span>, best web builder for seo <span class='kw-vol'>(590)</span>, best site builder for seo <span class='kw-vol'>(590)</span>, contractor website services <span class='kw-vol'>(170)</span>, website builders for small business <span class='kw-vol'>(9900)</span>, website creation for small business <span class='kw-vol'>(9900)</span>, small business website design near me <span class='kw-vol'>(110)</span>, average cost of website design for small business <span class='kw-vol'>(590)</span>, small business website designer near me <span class='kw-vol'>(40)</span>, custom websites for small businesses <span class='kw-vol'>(90)</span>, custom small business website <span class='kw-vol'>(90)</span>, small business web design agency <span class='kw-vol'>(170)</span>, small business website design agency <span class='kw-vol'>(170)</span>, top website builders for small business <span class='kw-vol'>(8100)</span>, web design cost for small business <span class='kw-vol'>(210)</span>, best website builder for contractors <span class='kw-vol'>(40)</span>, website design company near me <span class='kw-vol'>(8100)</span>, small business website development company <span class='kw-vol'>(50)</span>, small business web development company <span class='kw-vol'>(50)</span></div>
+          <div class='meta-line'>🆕 Intent expansions:</div><div class='chip-wrap'><span class="chip">static website builder for agencies</span><span class="chip">white label website builds for agencies</span><span class="chip">static html website for service business</span><span class="chip">multilingual website builder for agencies</span><span class="chip">website fulfillment for digital agencies</span><span class="chip">static site builder no wordpress</span><span class="chip">website builder for contractors and trades</span><span class="chip">fast loading static website for small business</span><span class="chip">website design fulfillment service</span><span class="chip">agency website builder white label</span></div>
+          <div class='meta-line neg-line'>🚫 Negatives (anti-cannibalization): click fraud, google ads management, seo reseller, ppc management, adword, automated, bots, budget, campaign, click, clicks, coast, companies, detection, fraud, from, gold, invalid, landing, local, management, manager, monitoring, moz, page, partner, plan, plans, platform, prevention, private, protect, protection, provider, setup, shopping, stop, tool, usa</div>
+        </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Landing Pages (website generator inputs)</h2>
+    
+        <div class="card">
+          <div class="card-head">
+            <h3>White Label Google Ads Campaign Automation</h3>
+            <span class="badge intent-badge">//</span>
+          </div>
+          <div class="meta-line">Main service: <strong>White Label Google Ads Campaign Automation</strong> &middot; Industry: White label SEO, Google Ads and multilin</div>
+          <div class="meta-line">Sub-services (page sections): Keyword Research &amp; Clustering, Negative Keyword Protection, RSA Ad Copywriting, Matched Landing Page Builds, Smart Location Bidding, Live API Campaign Push</div>
+          <div class="meta-line">Covers ad groups: White Label Google Ads Campaign Automation</div>
+        </div>
+        <div class="card">
+          <div class="card-head">
+            <h3>Click Fraud Protection</h3>
+            <span class="badge intent-badge">//</span>
+          </div>
+          <div class="meta-line">Main service: <strong>Click Fraud Protection</strong> &middot; Industry: White label SEO, Google Ads and multilin</div>
+          <div class="meta-line">Sub-services (page sections): Ghost Bot Detection, Subnet Network Blocking, Real-Time Click Analysis, Automated IP Exclusion, Client Dashboard Reporting, Multi-Account Protection</div>
+          <div class="meta-line">Covers ad groups: Click Fraud Protection</div>
+        </div>
+        <div class="card">
+          <div class="card-head">
+            <h3>SEO Automation Website Builds</h3>
+            <span class="badge intent-badge">//</span>
+          </div>
+          <div class="meta-line">Main service: <strong>SEO Automation Website Builds</strong> &middot; Industry: White label SEO, Google Ads and multilin</div>
+          <div class="meta-line">Sub-services (page sections): Keyword Research &amp; Scoring, Silo Architecture Design, Schema Markup Generation, Static Site Build &amp; Deployment, FAQ Content From Real Queries, Internal Link Verification</div>
+          <div class="meta-line">Covers ad groups: SEO Automation Website Builds</div>
+        </div>
+        <div class="card">
+          <div class="card-head">
+            <h3>Static Website Builds For Service Businesses</h3>
+            <span class="badge intent-badge">//</span>
+          </div>
+          <div class="meta-line">Main service: <strong>Static Website Builds For Service Businesses</strong> &middot; Industry: White label SEO, Google Ads and multilin</div>
+          <div class="meta-line">Sub-services (page sections): Ad Landing Page Build, Full 20+ Page Site, Topic Cluster Site, Multi-City Service Site, FAQ-Driven Blog Build, Multilingual Site Deployment</div>
+          <div class="meta-line">Covers ad groups: Static Website Builds For Service Businesses</div>
+        </div>
+  </section>
+
+  <section>
+    <h2>Voice-search / question keywords (SEO content, not ads)</h2>
+    <div class="chip-wrap"><span class="chip">how to set up remarketing ads</span><span class="chip">keyword planner is a keyword research tool that provides</span><span class="chip">how to create google ads campaign</span><span class="chip">how to create a google ad campaign</span><span class="chip">how to set up a google ad campaign</span><span class="chip">a tool that can help with keyword research is</span><span class="chip">how to setup google display ads</span><span class="chip">how to set up a search campaign</span><span class="chip">how to set up ppc</span><span class="chip">how to set up a google remarketing campaign</span><span class="chip">how to set up a google search campaign</span><span class="chip">how to create a new campaign in google ads</span><span class="chip">how to create a google adwords account</span><span class="chip">how to create effective google ads</span><span class="chip">how to set up google shopping ads</span><span class="chip">how to set up google ads campaign</span><span class="chip">how to setup google ads campaign</span><span class="chip">how to create a remarketing campaign in google ads</span><span class="chip">how to set up adwords campaign</span><span class="chip">how to set up a paid search campaign</span></div>
+  </section>
+
+  <section>
+    <h2>Strategy Notes</h2>
+    <p class="reasoning">Since the four ad groups map to four already-live pages, keywords were siloed strictly by which page&#x27;s offer actually matches the query — the huge volume of generic Semrush/Ahrefs/keyword-tool searches was excluded as it doesn&#x27;t match any live white-label service. High-CPC, single-intent groups (Google Ads Automation, Click Fraud, SEO Reseller) were set to exact for efficiency, while the broader Static Website Builds theme stays on phrase for discovery.</p>
+  </section>
+
+  <footer>SEOblogy &middot; Keyword Strategy Report</footer>
+
+</div>
+</body>
+</html>
