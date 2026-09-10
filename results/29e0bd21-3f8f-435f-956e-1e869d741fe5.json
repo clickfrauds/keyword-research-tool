@@ -1,0 +1,5006 @@
+{
+  "business": {
+    "name": "SEOblogy",
+    "niche": "White label SEO, Google Ads and multilingual website\n                     fulfilment for small digital agencies — the agency keeps\n                     the client and their own branding, we build the work\n                     invisibly",
+    "location": "N/A"
+  },
+  "model_used": "claude-sonnet-5",
+  "campaigns": [
+    {
+      "name": "White Label Automation Tools",
+      "priority": "high"
+    }
+  ],
+  "existing_account_mode": false,
+  "fixed_pages_mode": true,
+  "budget": {
+    "daily_budget": 53480,
+    "currency": "PKR",
+    "median_bid": 3565,
+    "top_bid": 16163,
+    "clicks_per_day": 15.0,
+    "monthly_volume": 70560,
+    "basis": "3565 PKR median Max CPC x 15.0 clicks/day"
+  },
+  "new_page_opportunities": [
+    {
+      "suggested_page": "AI Keyword Research / SEO Software Tool",
+      "keyword_ids": [
+        3,
+        4,
+        7,
+        27,
+        63,
+        64,
+        65,
+        86
+      ],
+      "monthly_volume": 74100,
+      "why": "massive existing demand for Semrush/Ahrefs-style keyword research tools that SEOblogy's own research engine could capture with a comparison/alternative landing page."
+    },
+    {
+      "suggested_page": "PPC Keyword Planner Alternative Tool",
+      "keyword_ids": [
+        59,
+        60,
+        110,
+        185,
+        186
+      ],
+      "monthly_volume": 40900,
+      "why": "high-volume searches for Google Ads keyword planning tools suggest an opportunity to position SEOblogy's automation engine as a PPC research alternative."
+    },
+    {
+      "suggested_page": "Contractor & Trade Business Lead-Gen Websites",
+      "keyword_ids": [
+        133,
+        144,
+        166,
+        176,
+        293,
+        330,
+        362,
+        397
+      ],
+      "monthly_volume": 2610,
+      "why": "a distinct construction/contractor vertical searching for websites and bid platforms that no current page addresses but shows steady commercial intent."
+    }
+  ],
+  "existing_ad_groups": [],
+  "negatives_for_existing_groups": {},
+  "ad_groups": [
+    {
+      "name": "White Label Google Ads Campaign Automation",
+      "campaign": "White Label Automation Tools",
+      "language": "en",
+      "theme": "Agencies searching to buy or outsource Google Ads management/campaign setup they can white-label to their own clients.",
+      "match_type": "exact",
+      "match_type_reason": "top-of-page bids run extremely high (up to $36k+ CPC range) and the theme is one unambiguous purchase intent — hiring/au",
+      "priority": "high",
+      "bid_multiplier": 1.2,
+      "bid_currency": "PKR",
+      "negative_keywords": [
+        "click fraud",
+        "seo reseller",
+        "white label seo",
+        "static website",
+        "website builder",
+        "web design near me",
+        "schema",
+        "app",
+        "average",
+        "bots",
+        "budget",
+        "click",
+        "clicks",
+        "companies",
+        "contractor",
+        "contractors",
+        "creation",
+        "creator",
+        "custom",
+        "detection",
+        "development",
+        "electrical",
+        "fast",
+        "fraud",
+        "from",
+        "generator",
+        "html",
+        "invalid",
+        "jekyll",
+        "loading",
+        "local",
+        "monitoring",
+        "moz",
+        "multilingual",
+        "partner",
+        "plan",
+        "plans",
+        "platform",
+        "prevention",
+        "private",
+        "protect",
+        "protection",
+        "provider",
+        "site",
+        "static",
+        "stop",
+        "studio",
+        "tool",
+        "trades",
+        "usa",
+        "web",
+        "wix",
+        "wordpress"
+      ],
+      "intent_expansion_keywords": [
+        "white label google ads management for agencies",
+        "white label ppc management service",
+        "google ads fulfillment for agencies",
+        "outsource google ads management",
+        "reseller ppc management",
+        "google ads management for digital agencies",
+        "white label ppc reseller program",
+        "automated google ads campaign builder",
+        "google ads management software for agencies",
+        "hire white label google ads manager"
+      ],
+      "keywords": [
+        {
+          "keyword": "google ads management near me",
+          "variants": [],
+          "avg_monthly_searches": 1000,
+          "competition": "LOW",
+          "competition_index": 2,
+          "cpc_range": "656.4-11837.96",
+          "trend": "GROWING",
+          "peak_months": "Mar/Apr/Jun/Jul",
+          "intent": "commercial",
+          "flags": [
+            "local"
+          ],
+          "score": 111.8,
+          "suggested_bid_exact": 5591,
+          "suggested_bid_phrase": 4753,
+          "suggested_bid_broad": 3914,
+          "suggested_bid": 5591,
+          "bid_currency": "PKR"
+        },
+        {
+          "keyword": "google ads management services near me",
+          "variants": [],
+          "avg_monthly_searches": 110,
+          "competition": "LOW",
+          "competition_index": 4,
+          "cpc_range": "4673.52-12978.35",
+          "trend": "GROWING",
+          "peak_months": "Mar/Apr/May/Jun/Jul",
+          "intent": "transactional",
+          "flags": [
+            "local"
+          ],
+          "score": 101.9,
+          "suggested_bid_exact": 10644,
+          "suggested_bid_phrase": 9047,
+          "suggested_bid_broad": 7451,
+          "suggested_bid": 10644,
+          "bid_currency": "PKR"
+        },
+        {
+          "keyword": "google ads campaign setup",
+          "variants": [],
+          "avg_monthly_searches": 720,
+          "competition": "LOW",
+          "competition_index": 1,
+          "cpc_range": "832.81-36528.31",
+          "trend": "SEASONAL",
+          "peak_months": "Jul",
+          "intent": "commercial",
+          "flags": [],
+          "score": 82.5,
+          "suggested_bid_exact": 16163,
+          "suggested_bid_phrase": 13738,
+          "suggested_bid_broad": 11314,
+          "suggested_bid": 16163,
+          "bid_currency": "PKR"
+        },
+        {
+          "keyword": "adword agency",
+          "variants": [],
+          "avg_monthly_searches": 880,
+          "competition": "LOW",
+          "competition_index": 9,
+          "cpc_range": "704.46-14848.89",
+          "trend": "SEASONAL",
+          "peak_months": "Mar",
+          "intent": "commercial",
+          "flags": [],
+          "score": 80.6,
+          "suggested_bid_exact": 7397,
+          "suggested_bid_phrase": 6287,
+          "suggested_bid_broad": 5178,
+          "suggested_bid": 7397,
+          "bid_currency": "PKR"
+        },
+        {
+          "keyword": "ads setup",
+          "variants": [],
+          "avg_monthly_searches": 210,
+          "competition": "LOW",
+          "competition_index": 14,
+          "cpc_range": "200.34-4552.95",
+          "trend": "STABLE",
+          "peak_months": "Aug/Oct/Nov/Dec/Jan/Feb/Mar/Apr/May/Jun",
+          "intent": "commercial",
+          "flags": [],
+          "score": 73.5,
+          "suggested_bid_exact": 2361,
+          "suggested_bid_phrase": 2007,
+          "suggested_bid_broad": 1653,
+          "suggested_bid": 2361,
+          "bid_currency": "PKR"
+        },
+        {
+          "keyword": "google ads landing page design",
+          "variants": [],
+          "avg_monthly_searches": 50,
+          "competition": "LOW",
+          "competition_index": 8,
+          "cpc_range": "0.0-0.0",
+          "trend": "GROWING",
+          "peak_months": "Jan/Feb",
+          "intent": "commercial",
+          "flags": [],
+          "score": 69.6,
+          "suggested_bid": 3565,
+          "suggested_bid_exact": 3565,
+          "suggested_bid_phrase": 3565,
+          "suggested_bid_broad": 3565,
+          "bid_source": "campaign_median_fallback"
+        },
+        {
+          "keyword": "google shopping ads management services",
+          "variants": [],
+          "avg_monthly_searches": 30,
+          "competition": "LOW",
+          "competition_index": 0,
+          "cpc_range": "0.0-0.0",
+          "trend": "GROWING",
+          "peak_months": "May",
+          "intent": "transactional",
+          "flags": [],
+          "score": 67.5,
+          "suggested_bid": 3565,
+          "suggested_bid_exact": 3565,
+          "suggested_bid_phrase": 3565,
+          "suggested_bid_broad": 3565,
+          "bid_source": "campaign_median_fallback"
+        },
+        {
+          "keyword": "google ads management pricing",
+          "variants": [],
+          "avg_monthly_searches": 320,
+          "competition": "LOW",
+          "competition_index": 31,
+          "cpc_range": "632.62-7721.7",
+          "trend": "SEASONAL",
+          "peak_months": "Oct/Nov/Dec",
+          "intent": "commercial",
+          "flags": [],
+          "score": 66.9,
+          "suggested_bid_exact": 4791,
+          "suggested_bid_phrase": 4073,
+          "suggested_bid_broad": 3354,
+          "suggested_bid": 4791,
+          "bid_currency": "PKR"
+        },
+        {
+          "keyword": "google ads management cost",
+          "variants": [],
+          "avg_monthly_searches": 70,
+          "competition": "LOW",
+          "competition_index": 19,
+          "cpc_range": "974.66-8059.29",
+          "trend": "SEASONAL",
+          "peak_months": "Sep/May",
+          "intent": "transactional",
+          "flags": [],
+          "score": 65.4,
+          "suggested_bid_exact": 5510,
+          "suggested_bid_phrase": 4683,
+          "suggested_bid_broad": 3857,
+          "suggested_bid": 5510,
+          "bid_currency": "PKR"
+        },
+        {
+          "keyword": "google ads management gold coast",
+          "variants": [],
+          "avg_monthly_searches": 110,
+          "competition": "LOW",
+          "competition_index": 16,
+          "cpc_range": "0.0-0.0",
+          "trend": "SEASONAL",
+          "peak_months": "Oct/Nov/Dec/Jan",
+          "intent": "commercial",
+          "flags": [],
+          "score": 63.6,
+          "suggested_bid": 3565,
+          "suggested_bid_exact": 3565,
+          "suggested_bid_phrase": 3565,
+          "suggested_bid_broad": 3565,
+          "bid_source": "campaign_median_fallback"
+        }
+      ],
+      "total_volume": 3500,
+      "avg_score": 78.3,
+      "auto_silo_negatives": [
+        "app",
+        "average",
+        "bots",
+        "budget",
+        "click",
+        "clicks",
+        "companies",
+        "contractor",
+        "contractors",
+        "creation",
+        "creator",
+        "custom",
+        "detection",
+        "development",
+        "electrical",
+        "fast",
+        "fraud",
+        "from",
+        "generator",
+        "html",
+        "invalid",
+        "jekyll",
+        "loading",
+        "local",
+        "monitoring",
+        "moz",
+        "multilingual",
+        "partner",
+        "plan",
+        "plans",
+        "platform",
+        "prevention",
+        "private",
+        "protect",
+        "protection",
+        "provider",
+        "site",
+        "static",
+        "stop",
+        "studio",
+        "tool",
+        "trades",
+        "usa",
+        "web",
+        "wix",
+        "wordpress"
+      ]
+    },
+    {
+      "name": "Click Fraud Protection",
+      "campaign": "White Label Automation Tools",
+      "language": "en",
+      "theme": "Advertisers/agencies searching for a tool or service to stop invalid clicks and protect ad spend.",
+      "match_type": "exact",
+      "match_type_reason": "highest CPCs in the entire dataset (up to $13k+) paired with one unambiguous intent — buying click-fraud protection — so",
+      "priority": "medium",
+      "bid_multiplier": 1.2,
+      "bid_currency": "PKR",
+      "negative_keywords": [
+        "google ads management",
+        "ppc management",
+        "seo reseller",
+        "website builder",
+        "web design",
+        "adword",
+        "app",
+        "automated",
+        "average",
+        "campaign",
+        "coast",
+        "companies",
+        "contractor",
+        "contractors",
+        "creation",
+        "creator",
+        "custom",
+        "development",
+        "electrical",
+        "fast",
+        "generator",
+        "gold",
+        "html",
+        "jekyll",
+        "landing",
+        "loading",
+        "local",
+        "management",
+        "manager",
+        "moz",
+        "multilingual",
+        "page",
+        "partner",
+        "plan",
+        "plans",
+        "platform",
+        "private",
+        "provider",
+        "setup",
+        "shopping",
+        "site",
+        "static",
+        "studio",
+        "trades",
+        "usa",
+        "web",
+        "wix",
+        "wordpress"
+      ],
+      "intent_expansion_keywords": [
+        "click fraud protection for agencies",
+        "stop invalid clicks google ads",
+        "click fraud prevention tool",
+        "ppc click fraud protection service",
+        "click fraud protection pricing",
+        "invalid click protection software",
+        "click fraud monitoring tool",
+        "protect google ads budget from bots",
+        "click fraud protection for small business"
+      ],
+      "keywords": [
+        {
+          "keyword": "click fraud protection software",
+          "variants": [],
+          "avg_monthly_searches": 170,
+          "competition": "LOW",
+          "competition_index": 3,
+          "cpc_range": "0.0-0.0",
+          "trend": "SEASONAL",
+          "peak_months": "Sep/Jan",
+          "intent": "commercial",
+          "flags": [],
+          "score": 71.6,
+          "suggested_bid": 3565,
+          "suggested_bid_exact": 3565,
+          "suggested_bid_phrase": 3565,
+          "suggested_bid_broad": 3565,
+          "bid_source": "campaign_median_fallback"
+        },
+        {
+          "keyword": "click fraud protection",
+          "variants": [],
+          "avg_monthly_searches": 140,
+          "competition": "MEDIUM",
+          "competition_index": 37,
+          "cpc_range": "3499.32-13171.85",
+          "trend": "GROWING",
+          "peak_months": "Apr/Jul",
+          "intent": "commercial",
+          "flags": [],
+          "score": 71.4,
+          "suggested_bid_exact": 9979,
+          "suggested_bid_phrase": 8483,
+          "suggested_bid_broad": 6986,
+          "suggested_bid": 9979,
+          "bid_currency": "PKR"
+        },
+        {
+          "keyword": "ad fraud protection",
+          "variants": [],
+          "avg_monthly_searches": 50,
+          "competition": "LOW",
+          "competition_index": 3,
+          "cpc_range": "0.0-0.0",
+          "trend": "GROWING",
+          "peak_months": "Jan",
+          "intent": "commercial",
+          "flags": [],
+          "score": 71.3,
+          "suggested_bid": 3565,
+          "suggested_bid_exact": 3565,
+          "suggested_bid_phrase": 3565,
+          "suggested_bid_broad": 3565,
+          "bid_source": "campaign_median_fallback"
+        },
+        {
+          "keyword": "click fraud detection software",
+          "variants": [],
+          "avg_monthly_searches": 90,
+          "competition": "LOW",
+          "competition_index": 6,
+          "cpc_range": "0.0-0.0",
+          "trend": "SEASONAL",
+          "peak_months": "Feb/Mar",
+          "intent": "commercial",
+          "flags": [],
+          "score": 64.3,
+          "suggested_bid": 3565,
+          "suggested_bid_exact": 3565,
+          "suggested_bid_phrase": 3565,
+          "suggested_bid_broad": 3565,
+          "bid_source": "campaign_median_fallback"
+        },
+        {
+          "keyword": "best click fraud protection",
+          "variants": [],
+          "avg_monthly_searches": 30,
+          "competition": "LOW",
+          "competition_index": 9,
+          "cpc_range": "0.0-0.0",
+          "trend": "GROWING",
+          "peak_months": "Feb/Mar",
+          "intent": "commercial",
+          "flags": [],
+          "score": 62.6,
+          "suggested_bid": 3565,
+          "suggested_bid_exact": 3565,
+          "suggested_bid_phrase": 3565,
+          "suggested_bid_broad": 3565,
+          "bid_source": "campaign_median_fallback"
+        }
+      ],
+      "total_volume": 480,
+      "avg_score": 68.2,
+      "auto_silo_negatives": [
+        "adword",
+        "app",
+        "automated",
+        "average",
+        "campaign",
+        "coast",
+        "companies",
+        "contractor",
+        "contractors",
+        "creation",
+        "creator",
+        "custom",
+        "development",
+        "electrical",
+        "fast",
+        "generator",
+        "gold",
+        "html",
+        "jekyll",
+        "landing",
+        "loading",
+        "local",
+        "management",
+        "manager",
+        "moz",
+        "multilingual",
+        "page",
+        "partner",
+        "plan",
+        "plans",
+        "platform",
+        "private",
+        "provider",
+        "setup",
+        "shopping",
+        "site",
+        "static",
+        "studio",
+        "trades",
+        "usa",
+        "web",
+        "wix",
+        "wordpress"
+      ]
+    },
+    {
+      "name": "SEO Automation Website Builds",
+      "campaign": "White Label Automation Tools",
+      "language": "en",
+      "theme": "Agencies searching for a white-label/reseller SEO program to fulfill client SEO work under their own brand.",
+      "match_type": "exact",
+      "match_type_reason": "very high CPCs (up to $10k+) on a single, unambiguous purchase intent — finding/becoming a white-label SEO reseller — so",
+      "priority": "high",
+      "bid_multiplier": 1.15,
+      "bid_currency": "PKR",
+      "negative_keywords": [
+        "click fraud",
+        "google ads management",
+        "static website builder",
+        "web design near me",
+        "adword",
+        "app",
+        "automated",
+        "average",
+        "bots",
+        "budget",
+        "campaign",
+        "click",
+        "clicks",
+        "coast",
+        "contractor",
+        "contractors",
+        "creation",
+        "creator",
+        "custom",
+        "detection",
+        "development",
+        "electrical",
+        "fast",
+        "fraud",
+        "from",
+        "generator",
+        "gold",
+        "html",
+        "invalid",
+        "jekyll",
+        "landing",
+        "loading",
+        "management",
+        "manager",
+        "monitoring",
+        "multilingual",
+        "page",
+        "prevention",
+        "protect",
+        "protection",
+        "setup",
+        "shopping",
+        "site",
+        "static",
+        "stop",
+        "studio",
+        "tool",
+        "trades",
+        "web",
+        "wix",
+        "wordpress"
+      ],
+      "intent_expansion_keywords": [
+        "white label seo reseller program cost",
+        "white label seo fulfillment services",
+        "seo reseller program for agencies",
+        "outsource seo services white label",
+        "white label seo agency partner",
+        "private label seo fulfillment",
+        "seo reseller pricing plans",
+        "white label seo website builds",
+        "hire white label seo provider",
+        "seo reseller program for digital agencies"
+      ],
+      "keywords": [
+        {
+          "keyword": "white label seo companies",
+          "variants": [],
+          "avg_monthly_searches": 480,
+          "competition": "LOW",
+          "competition_index": 6,
+          "cpc_range": "2776.05-9529.73",
+          "trend": "GROWING",
+          "peak_months": "Mar",
+          "intent": "commercial",
+          "flags": [],
+          "score": 94.8,
+          "suggested_bid_exact": 6097,
+          "suggested_bid_phrase": 5183,
+          "suggested_bid_broad": 4268,
+          "suggested_bid": 6097,
+          "bid_currency": "PKR"
+        },
+        {
+          "keyword": "white label local seo services",
+          "variants": [
+            "local seo white label services"
+          ],
+          "avg_monthly_searches": 260,
+          "competition": "LOW",
+          "competition_index": 8,
+          "cpc_range": "1710.05-8919.45",
+          "trend": "SEASONAL",
+          "peak_months": "Mar/May",
+          "intent": "transactional",
+          "flags": [
+            "local"
+          ],
+          "score": 91.9,
+          "suggested_bid_exact": 5904,
+          "suggested_bid_phrase": 5018,
+          "suggested_bid_broad": 4133,
+          "suggested_bid": 5904,
+          "bid_currency": "PKR"
+        },
+        {
+          "keyword": "white label local seo",
+          "variants": [
+            "white label seo local"
+          ],
+          "avg_monthly_searches": 720,
+          "competition": "LOW",
+          "competition_index": 4,
+          "cpc_range": "2323.09-10271.38",
+          "trend": "SEASONAL",
+          "peak_months": "Mar",
+          "intent": "commercial",
+          "flags": [
+            "local"
+          ],
+          "score": 89.5,
+          "suggested_bid_exact": 6017,
+          "suggested_bid_phrase": 5114,
+          "suggested_bid_broad": 4212,
+          "suggested_bid": 6017,
+          "bid_currency": "PKR"
+        },
+        {
+          "keyword": "seo reseller program",
+          "variants": [],
+          "avg_monthly_searches": 720,
+          "competition": "LOW",
+          "competition_index": 1,
+          "cpc_range": "1034.09-4364.97",
+          "trend": "SEASONAL",
+          "peak_months": "Mar",
+          "intent": "commercial",
+          "flags": [],
+          "score": 82.5,
+          "suggested_bid_exact": 2545,
+          "suggested_bid_phrase": 2163,
+          "suggested_bid_broad": 1782,
+          "suggested_bid": 2545,
+          "bid_currency": "PKR"
+        },
+        {
+          "keyword": "seo reseller plan",
+          "variants": [],
+          "avg_monthly_searches": 720,
+          "competition": "LOW",
+          "competition_index": 1,
+          "cpc_range": "1034.09-4364.97",
+          "trend": "SEASONAL",
+          "peak_months": "Mar",
+          "intent": "commercial",
+          "flags": [],
+          "score": 82.5,
+          "suggested_bid_exact": 2545,
+          "suggested_bid_phrase": 2163,
+          "suggested_bid_broad": 1782,
+          "suggested_bid": 2545,
+          "bid_currency": "PKR"
+        },
+        {
+          "keyword": "seo resellers program",
+          "variants": [],
+          "avg_monthly_searches": 720,
+          "competition": "LOW",
+          "competition_index": 1,
+          "cpc_range": "1034.09-4364.97",
+          "trend": "SEASONAL",
+          "peak_months": "Mar",
+          "intent": "commercial",
+          "flags": [],
+          "score": 82.5,
+          "suggested_bid_exact": 2545,
+          "suggested_bid_phrase": 2163,
+          "suggested_bid_broad": 1782,
+          "suggested_bid": 2545,
+          "bid_currency": "PKR"
+        },
+        {
+          "keyword": "seo reseller plans",
+          "variants": [],
+          "avg_monthly_searches": 720,
+          "competition": "LOW",
+          "competition_index": 1,
+          "cpc_range": "1034.09-4364.97",
+          "trend": "SEASONAL",
+          "peak_months": "Mar",
+          "intent": "commercial",
+          "flags": [],
+          "score": 82.5,
+          "suggested_bid_exact": 2545,
+          "suggested_bid_phrase": 2163,
+          "suggested_bid_broad": 1782,
+          "suggested_bid": 2545,
+          "bid_currency": "PKR"
+        },
+        {
+          "keyword": "private label seo services",
+          "variants": [],
+          "avg_monthly_searches": 170,
+          "competition": "LOW",
+          "competition_index": 1,
+          "cpc_range": "0.0-0.0",
+          "trend": "SEASONAL",
+          "peak_months": "Aug/Mar/Apr/May",
+          "intent": "transactional",
+          "flags": [],
+          "score": 82.1,
+          "suggested_bid": 3565,
+          "suggested_bid_exact": 3565,
+          "suggested_bid_phrase": 3565,
+          "suggested_bid_broad": 3565,
+          "bid_source": "campaign_median_fallback"
+        },
+        {
+          "keyword": "best white label seo services",
+          "variants": [],
+          "avg_monthly_searches": 140,
+          "competition": "LOW",
+          "competition_index": 2,
+          "cpc_range": "0.0-0.0",
+          "trend": "SEASONAL",
+          "peak_months": "Mar/May",
+          "intent": "transactional",
+          "flags": [],
+          "score": 79.7,
+          "suggested_bid": 3565,
+          "suggested_bid_exact": 3565,
+          "suggested_bid_phrase": 3565,
+          "suggested_bid_broad": 3565,
+          "bid_source": "campaign_median_fallback"
+        },
+        {
+          "keyword": "seo white labeling",
+          "variants": [],
+          "avg_monthly_searches": 390,
+          "competition": "LOW",
+          "competition_index": 4,
+          "cpc_range": "728.25-8369.6",
+          "trend": "SEASONAL",
+          "peak_months": "Mar/Jul",
+          "intent": "commercial",
+          "flags": [],
+          "score": 77.8,
+          "suggested_bid_exact": 4054,
+          "suggested_bid_phrase": 3446,
+          "suggested_bid_broad": 2838,
+          "suggested_bid": 4054,
+          "bid_currency": "PKR"
+        },
+        {
+          "keyword": "best white label seo companies",
+          "variants": [],
+          "avg_monthly_searches": 260,
+          "competition": "LOW",
+          "competition_index": 5,
+          "cpc_range": "4328.45-10094.58",
+          "trend": "SEASONAL",
+          "peak_months": "Aug/Mar/May",
+          "intent": "commercial",
+          "flags": [],
+          "score": 74.5,
+          "suggested_bid_exact": 7431,
+          "suggested_bid_phrase": 6317,
+          "suggested_bid_broad": 5202,
+          "suggested_bid": 7431,
+          "bid_currency": "PKR"
+        },
+        {
+          "keyword": "white label seo platform",
+          "variants": [],
+          "avg_monthly_searches": 140,
+          "competition": "LOW",
+          "competition_index": 1,
+          "cpc_range": "5215.74-8782.48",
+          "trend": "SEASONAL",
+          "peak_months": "Aug/Mar/Jul",
+          "intent": "commercial",
+          "flags": [],
+          "score": 70.4,
+          "suggested_bid_exact": 7450,
+          "suggested_bid_phrase": 6333,
+          "suggested_bid_broad": 5215,
+          "suggested_bid": 7450,
+          "bid_currency": "PKR"
+        },
+        {
+          "keyword": "seo reseller usa",
+          "variants": [],
+          "avg_monthly_searches": 50,
+          "competition": "LOW",
+          "competition_index": 0,
+          "cpc_range": "0.0-0.0",
+          "trend": "GROWING",
+          "peak_months": "Dec/May",
+          "intent": "commercial",
+          "flags": [],
+          "score": 65.7,
+          "suggested_bid": 3565,
+          "suggested_bid_exact": 3565,
+          "suggested_bid_phrase": 3565,
+          "suggested_bid_broad": 3565,
+          "bid_source": "campaign_median_fallback"
+        },
+        {
+          "keyword": "moz local white label",
+          "variants": [],
+          "avg_monthly_searches": 30,
+          "competition": "LOW",
+          "competition_index": 0,
+          "cpc_range": "0.0-0.0",
+          "trend": "GROWING",
+          "peak_months": "Feb",
+          "intent": "commercial",
+          "flags": [
+            "local"
+          ],
+          "score": 65.3,
+          "suggested_bid": 3565,
+          "suggested_bid_exact": 3565,
+          "suggested_bid_phrase": 3565,
+          "suggested_bid_broad": 3565,
+          "bid_source": "campaign_median_fallback"
+        }
+      ],
+      "total_volume": 5520,
+      "avg_score": 80.1,
+      "auto_silo_negatives": [
+        "adword",
+        "app",
+        "automated",
+        "average",
+        "bots",
+        "budget",
+        "campaign",
+        "click",
+        "clicks",
+        "coast",
+        "contractor",
+        "contractors",
+        "creation",
+        "creator",
+        "custom",
+        "detection",
+        "development",
+        "electrical",
+        "fast",
+        "fraud",
+        "from",
+        "generator",
+        "gold",
+        "html",
+        "invalid",
+        "jekyll",
+        "landing",
+        "loading",
+        "management",
+        "manager",
+        "monitoring",
+        "multilingual",
+        "page",
+        "prevention",
+        "protect",
+        "protection",
+        "setup",
+        "shopping",
+        "site",
+        "static",
+        "stop",
+        "studio",
+        "tool",
+        "trades",
+        "web",
+        "wix",
+        "wordpress"
+      ]
+    },
+    {
+      "name": "Static Website Builds For Service Businesses",
+      "campaign": "White Label Automation Tools",
+      "language": "en",
+      "theme": "Businesses and agencies searching for a website builder/design solution for small or service-based businesses.",
+      "match_type": "phrase",
+      "match_type_reason": "default: discovery on a new campaign — this theme mixes builder-tool searches, local design intent and pricing queries, ",
+      "priority": "medium",
+      "bid_multiplier": 1.0,
+      "bid_currency": "PKR",
+      "negative_keywords": [
+        "click fraud",
+        "google ads management",
+        "seo reseller",
+        "ppc management",
+        "adword",
+        "automated",
+        "bots",
+        "budget",
+        "campaign",
+        "click",
+        "clicks",
+        "coast",
+        "companies",
+        "detection",
+        "fraud",
+        "from",
+        "gold",
+        "invalid",
+        "landing",
+        "local",
+        "management",
+        "manager",
+        "monitoring",
+        "moz",
+        "page",
+        "partner",
+        "plan",
+        "plans",
+        "platform",
+        "prevention",
+        "private",
+        "protect",
+        "protection",
+        "provider",
+        "setup",
+        "shopping",
+        "stop",
+        "tool",
+        "usa"
+      ],
+      "intent_expansion_keywords": [
+        "static website builder for agencies",
+        "white label website builds for agencies",
+        "static html website for service business",
+        "multilingual website builder for agencies",
+        "website fulfillment for digital agencies",
+        "static site builder no wordpress",
+        "website builder for contractors and trades",
+        "fast loading static website for small business",
+        "website design fulfillment service",
+        "agency website builder white label"
+      ],
+      "keywords": [
+        {
+          "keyword": "custom web design near me",
+          "variants": [],
+          "avg_monthly_searches": 210,
+          "competition": "LOW",
+          "competition_index": 2,
+          "cpc_range": "3875.62-6450.85",
+          "trend": "GROWING",
+          "peak_months": "Feb/Mar",
+          "intent": "transactional",
+          "flags": [
+            "local"
+          ],
+          "score": 111.7,
+          "suggested_bid_exact": 5517,
+          "suggested_bid_phrase": 4690,
+          "suggested_bid_broad": 3862,
+          "suggested_bid": 4690,
+          "bid_currency": "PKR"
+        },
+        {
+          "keyword": "best web design agencies near me",
+          "variants": [],
+          "avg_monthly_searches": 260,
+          "competition": "LOW",
+          "competition_index": 4,
+          "cpc_range": "705.19-1808.58",
+          "trend": "GROWING",
+          "peak_months": "Feb",
+          "intent": "commercial",
+          "flags": [
+            "local"
+          ],
+          "score": 99.7,
+          "suggested_bid_exact": 1109,
+          "suggested_bid_phrase": 943,
+          "suggested_bid_broad": 776,
+          "suggested_bid": 943,
+          "bid_currency": "PKR"
+        },
+        {
+          "keyword": "static website generator",
+          "variants": [
+            "website static generator"
+          ],
+          "avg_monthly_searches": 6600,
+          "competition": "LOW",
+          "competition_index": 7,
+          "cpc_range": "178.89-1732.23",
+          "trend": "STABLE",
+          "peak_months": "Aug/Sep/Oct/Nov/Jan/Feb/Mar/Apr/Jul",
+          "intent": "commercial",
+          "flags": [],
+          "score": 93.8,
+          "suggested_bid_exact": 766,
+          "suggested_bid_phrase": 651,
+          "suggested_bid_broad": 536,
+          "suggested_bid": 651,
+          "bid_currency": "PKR"
+        },
+        {
+          "keyword": "static site builder",
+          "variants": [],
+          "avg_monthly_searches": 6600,
+          "competition": "LOW",
+          "competition_index": 7,
+          "cpc_range": "178.89-1732.23",
+          "trend": "STABLE",
+          "peak_months": "Aug/Sep/Oct/Nov/Jan/Feb/Mar/Apr/Jul",
+          "intent": "commercial",
+          "flags": [],
+          "score": 93.8,
+          "suggested_bid_exact": 766,
+          "suggested_bid_phrase": 651,
+          "suggested_bid_broad": 536,
+          "suggested_bid": 651,
+          "bid_currency": "PKR"
+        },
+        {
+          "keyword": "static website creator",
+          "variants": [],
+          "avg_monthly_searches": 6600,
+          "competition": "LOW",
+          "competition_index": 7,
+          "cpc_range": "178.89-1732.23",
+          "trend": "STABLE",
+          "peak_months": "Aug/Sep/Oct/Nov/Jan/Feb/Mar/Apr/Jul",
+          "intent": "commercial",
+          "flags": [],
+          "score": 93.8,
+          "suggested_bid_exact": 766,
+          "suggested_bid_phrase": 651,
+          "suggested_bid_broad": 536,
+          "suggested_bid": 651,
+          "bid_currency": "PKR"
+        },
+        {
+          "keyword": "small business web design near me",
+          "variants": [],
+          "avg_monthly_searches": 140,
+          "competition": "LOW",
+          "competition_index": 5,
+          "cpc_range": "1281.3-3801.61",
+          "trend": "GROWING",
+          "peak_months": "Jun",
+          "intent": "commercial",
+          "flags": [
+            "local"
+          ],
+          "score": 92.1,
+          "suggested_bid_exact": 2214,
+          "suggested_bid_phrase": 1882,
+          "suggested_bid_broad": 1550,
+          "suggested_bid": 1882,
+          "bid_currency": "PKR"
+        },
+        {
+          "keyword": "custom website design near me",
+          "variants": [],
+          "avg_monthly_searches": 260,
+          "competition": "LOW",
+          "competition_index": 17,
+          "cpc_range": "1110.42-5395.4",
+          "trend": "SEASONAL",
+          "peak_months": "Sep/Jan/Feb/Mar/Apr",
+          "intent": "transactional",
+          "flags": [
+            "local"
+          ],
+          "score": 88.0,
+          "suggested_bid_exact": 3337,
+          "suggested_bid_phrase": 2836,
+          "suggested_bid_broad": 2336,
+          "suggested_bid": 2836,
+          "bid_currency": "PKR"
+        },
+        {
+          "keyword": "wix multilingual app",
+          "variants": [],
+          "avg_monthly_searches": 140,
+          "competition": "LOW",
+          "competition_index": 4,
+          "cpc_range": "1042.92-3622.09",
+          "trend": "GROWING",
+          "peak_months": "Jan/May/Jun/Jul",
+          "intent": "commercial",
+          "flags": [],
+          "score": 84.1,
+          "suggested_bid_exact": 1987,
+          "suggested_bid_phrase": 1689,
+          "suggested_bid_broad": 1391,
+          "suggested_bid": 1689,
+          "bid_currency": "PKR"
+        },
+        {
+          "keyword": "website design and development company near me",
+          "variants": [],
+          "avg_monthly_searches": 30,
+          "competition": "LOW",
+          "competition_index": 10,
+          "cpc_range": "57.16-3278.2",
+          "trend": "GROWING",
+          "peak_months": "Nov/Jan/Feb/Jul",
+          "intent": "transactional",
+          "flags": [
+            "local"
+          ],
+          "score": 77.9,
+          "suggested_bid_exact": 1510,
+          "suggested_bid_phrase": 1284,
+          "suggested_bid_broad": 1057,
+          "suggested_bid": 1284,
+          "bid_currency": "PKR"
+        },
+        {
+          "keyword": "electrical services website",
+          "variants": [],
+          "avg_monthly_searches": 50,
+          "competition": "LOW",
+          "competition_index": 16,
+          "cpc_range": "81.84-1566.79",
+          "trend": "GROWING",
+          "peak_months": "Sep/Jan/Feb/May/Jun",
+          "intent": "transactional",
+          "flags": [],
+          "score": 76.2,
+          "suggested_bid_exact": 801,
+          "suggested_bid_phrase": 681,
+          "suggested_bid_broad": 561,
+          "suggested_bid": 681,
+          "bid_currency": "PKR"
+        },
+        {
+          "keyword": "jekyll website builder",
+          "variants": [],
+          "avg_monthly_searches": 90,
+          "competition": "LOW",
+          "competition_index": 12,
+          "cpc_range": "443.11-5407.5",
+          "trend": "GROWING",
+          "peak_months": "Apr",
+          "intent": "commercial",
+          "flags": [],
+          "score": 75.6,
+          "suggested_bid_exact": 2419,
+          "suggested_bid_phrase": 2056,
+          "suggested_bid_broad": 1693,
+          "suggested_bid": 2056,
+          "bid_currency": "PKR"
+        },
+        {
+          "keyword": "jekyll site builder",
+          "variants": [],
+          "avg_monthly_searches": 90,
+          "competition": "LOW",
+          "competition_index": 12,
+          "cpc_range": "443.11-5407.5",
+          "trend": "GROWING",
+          "peak_months": "Apr",
+          "intent": "commercial",
+          "flags": [],
+          "score": 75.6,
+          "suggested_bid_exact": 2419,
+          "suggested_bid_phrase": 2056,
+          "suggested_bid_broad": 1693,
+          "suggested_bid": 2056,
+          "bid_currency": "PKR"
+        },
+        {
+          "keyword": "web design studio near me",
+          "variants": [],
+          "avg_monthly_searches": 50,
+          "competition": "LOW",
+          "competition_index": 11,
+          "cpc_range": "159.28-1329.03",
+          "trend": "GROWING",
+          "peak_months": "Feb",
+          "intent": "commercial",
+          "flags": [
+            "local"
+          ],
+          "score": 75.5,
+          "suggested_bid_exact": 620,
+          "suggested_bid_phrase": 527,
+          "suggested_bid_broad": 434,
+          "suggested_bid": 527,
+          "bid_currency": "PKR"
+        },
+        {
+          "keyword": "website builder for agencies",
+          "variants": [],
+          "avg_monthly_searches": 390,
+          "competition": "MEDIUM",
+          "competition_index": 49,
+          "cpc_range": "164.36-2648.35",
+          "trend": "GROWING",
+          "peak_months": "Mar/Apr",
+          "intent": "commercial",
+          "flags": [],
+          "score": 74.7,
+          "suggested_bid_exact": 1521,
+          "suggested_bid_phrase": 1293,
+          "suggested_bid_broad": 1064,
+          "suggested_bid": 1293,
+          "bid_currency": "PKR"
+        },
+        {
+          "keyword": "best website builder for seo",
+          "variants": [],
+          "avg_monthly_searches": 590,
+          "competition": "LOW",
+          "competition_index": 24,
+          "cpc_range": "1033.05-8120.38",
+          "trend": "SEASONAL",
+          "peak_months": "Aug/Sep/Mar/Apr/May",
+          "intent": "commercial",
+          "flags": [],
+          "score": 72.9,
+          "suggested_bid_exact": 4194,
+          "suggested_bid_phrase": 3565,
+          "suggested_bid_broad": 2936,
+          "suggested_bid": 3565,
+          "bid_currency": "PKR"
+        },
+        {
+          "keyword": "best web builder for seo",
+          "variants": [],
+          "avg_monthly_searches": 590,
+          "competition": "LOW",
+          "competition_index": 24,
+          "cpc_range": "1033.05-8120.38",
+          "trend": "SEASONAL",
+          "peak_months": "Aug/Sep/Mar/Apr/May",
+          "intent": "commercial",
+          "flags": [],
+          "score": 72.9,
+          "suggested_bid_exact": 4194,
+          "suggested_bid_phrase": 3565,
+          "suggested_bid_broad": 2936,
+          "suggested_bid": 3565,
+          "bid_currency": "PKR"
+        },
+        {
+          "keyword": "best site builder for seo",
+          "variants": [
+            "best seo site builder"
+          ],
+          "avg_monthly_searches": 590,
+          "competition": "LOW",
+          "competition_index": 24,
+          "cpc_range": "1033.05-8120.38",
+          "trend": "SEASONAL",
+          "peak_months": "Aug/Sep/Mar/Apr/May",
+          "intent": "commercial",
+          "flags": [],
+          "score": 72.9,
+          "suggested_bid_exact": 4194,
+          "suggested_bid_phrase": 3565,
+          "suggested_bid_broad": 2936,
+          "suggested_bid": 3565,
+          "bid_currency": "PKR"
+        },
+        {
+          "keyword": "contractor website services",
+          "variants": [],
+          "avg_monthly_searches": 170,
+          "competition": "LOW",
+          "competition_index": 26,
+          "cpc_range": "1282.87-7458.94",
+          "trend": "SEASONAL",
+          "peak_months": "Jul",
+          "intent": "transactional",
+          "flags": [],
+          "score": 72.9,
+          "suggested_bid_exact": 4700,
+          "suggested_bid_phrase": 3995,
+          "suggested_bid_broad": 3290,
+          "suggested_bid": 3995,
+          "bid_currency": "PKR"
+        },
+        {
+          "keyword": "website builders for small business",
+          "variants": [],
+          "avg_monthly_searches": 9900,
+          "competition": "MEDIUM",
+          "competition_index": 49,
+          "cpc_range": "1679.51-10191.45",
+          "trend": "SEASONAL",
+          "peak_months": "Feb/Mar",
+          "intent": "commercial",
+          "flags": [],
+          "score": 72.8,
+          "suggested_bid_exact": 6327,
+          "suggested_bid_phrase": 5378,
+          "suggested_bid_broad": 4429,
+          "suggested_bid": 5378,
+          "bid_currency": "PKR"
+        },
+        {
+          "keyword": "website creation for small business",
+          "variants": [
+            "website creation small business"
+          ],
+          "avg_monthly_searches": 9900,
+          "competition": "MEDIUM",
+          "competition_index": 49,
+          "cpc_range": "1679.51-10191.45",
+          "trend": "SEASONAL",
+          "peak_months": "Feb/Mar",
+          "intent": "commercial",
+          "flags": [],
+          "score": 72.8,
+          "suggested_bid_exact": 6327,
+          "suggested_bid_phrase": 5378,
+          "suggested_bid_broad": 4429,
+          "suggested_bid": 5378,
+          "bid_currency": "PKR"
+        },
+        {
+          "keyword": "small business website design near me",
+          "variants": [
+            "website design for small business near me"
+          ],
+          "avg_monthly_searches": 110,
+          "competition": "LOW",
+          "competition_index": 9,
+          "cpc_range": "1041.79-12962.53",
+          "trend": "SEASONAL",
+          "peak_months": "Dec",
+          "intent": "commercial",
+          "flags": [
+            "local"
+          ],
+          "score": 72.4,
+          "suggested_bid_exact": 5643,
+          "suggested_bid_phrase": 4797,
+          "suggested_bid_broad": 3950,
+          "suggested_bid": 4797,
+          "bid_currency": "PKR"
+        },
+        {
+          "keyword": "average cost of website design for small business",
+          "variants": [],
+          "avg_monthly_searches": 590,
+          "competition": "MEDIUM",
+          "competition_index": 50,
+          "cpc_range": "564.47-3378.13",
+          "trend": "SEASONAL",
+          "peak_months": "Sep/Mar/May",
+          "intent": "transactional",
+          "flags": [],
+          "score": 72.0,
+          "suggested_bid_exact": 2429,
+          "suggested_bid_phrase": 2064,
+          "suggested_bid_broad": 1700,
+          "suggested_bid": 2064,
+          "bid_currency": "PKR"
+        },
+        {
+          "keyword": "small business website designer near me",
+          "variants": [],
+          "avg_monthly_searches": 40,
+          "competition": "LOW",
+          "competition_index": 13,
+          "cpc_range": "5235.0-11219.17",
+          "trend": "GROWING",
+          "peak_months": "Mar",
+          "intent": "commercial",
+          "flags": [
+            "local"
+          ],
+          "score": 71.6,
+          "suggested_bid_exact": 7641,
+          "suggested_bid_phrase": 6495,
+          "suggested_bid_broad": 5348,
+          "suggested_bid": 6495,
+          "bid_currency": "PKR"
+        },
+        {
+          "keyword": "custom websites for small businesses",
+          "variants": [],
+          "avg_monthly_searches": 90,
+          "competition": "LOW",
+          "competition_index": 14,
+          "cpc_range": "1499.46-7208.2",
+          "trend": "SEASONAL",
+          "peak_months": "Sep/May",
+          "intent": "transactional",
+          "flags": [],
+          "score": 70.3,
+          "suggested_bid_exact": 4390,
+          "suggested_bid_phrase": 3731,
+          "suggested_bid_broad": 3073,
+          "suggested_bid": 3731,
+          "bid_currency": "PKR"
+        },
+        {
+          "keyword": "custom small business website",
+          "variants": [],
+          "avg_monthly_searches": 90,
+          "competition": "LOW",
+          "competition_index": 14,
+          "cpc_range": "1499.46-7208.2",
+          "trend": "SEASONAL",
+          "peak_months": "Sep/May",
+          "intent": "transactional",
+          "flags": [],
+          "score": 70.3,
+          "suggested_bid_exact": 4390,
+          "suggested_bid_phrase": 3731,
+          "suggested_bid_broad": 3073,
+          "suggested_bid": 3731,
+          "bid_currency": "PKR"
+        },
+        {
+          "keyword": "small business web design agency",
+          "variants": [
+            "web design agency for small business"
+          ],
+          "avg_monthly_searches": 170,
+          "competition": "LOW",
+          "competition_index": 9,
+          "cpc_range": "811.0-3166.57",
+          "trend": "SEASONAL",
+          "peak_months": "Sep/Oct/May/Jul",
+          "intent": "commercial",
+          "flags": [],
+          "score": 69.7,
+          "suggested_bid_exact": 1720,
+          "suggested_bid_phrase": 1462,
+          "suggested_bid_broad": 1204,
+          "suggested_bid": 1462,
+          "bid_currency": "PKR"
+        },
+        {
+          "keyword": "small business website design agency",
+          "variants": [],
+          "avg_monthly_searches": 170,
+          "competition": "LOW",
+          "competition_index": 9,
+          "cpc_range": "811.0-3166.57",
+          "trend": "SEASONAL",
+          "peak_months": "Sep/Oct/May/Jul",
+          "intent": "commercial",
+          "flags": [],
+          "score": 69.7,
+          "suggested_bid_exact": 1720,
+          "suggested_bid_phrase": 1462,
+          "suggested_bid_broad": 1204,
+          "suggested_bid": 1462,
+          "bid_currency": "PKR"
+        },
+        {
+          "keyword": "top website builders for small business",
+          "variants": [],
+          "avg_monthly_searches": 8100,
+          "competition": "HIGH",
+          "competition_index": 69,
+          "cpc_range": "1408.39-10384.09",
+          "trend": "STABLE",
+          "peak_months": "Sep/Oct/Jan/Feb/Mar",
+          "intent": "commercial",
+          "flags": [],
+          "score": 67.3,
+          "suggested_bid_exact": 7027,
+          "suggested_bid_phrase": 5973,
+          "suggested_bid_broad": 4919,
+          "suggested_bid": 5973,
+          "bid_currency": "PKR"
+        },
+        {
+          "keyword": "web design cost for small business",
+          "variants": [],
+          "avg_monthly_searches": 210,
+          "competition": "MEDIUM",
+          "competition_index": 48,
+          "cpc_range": "96.32-3110.66",
+          "trend": "SEASONAL",
+          "peak_months": "Sep/Mar/Apr/May/Jun",
+          "intent": "transactional",
+          "flags": [],
+          "score": 66.4,
+          "suggested_bid_exact": 1990,
+          "suggested_bid_phrase": 1691,
+          "suggested_bid_broad": 1393,
+          "suggested_bid": 1691,
+          "bid_currency": "PKR"
+        },
+        {
+          "keyword": "best website builder for contractors",
+          "variants": [],
+          "avg_monthly_searches": 40,
+          "competition": "LOW",
+          "competition_index": 10,
+          "cpc_range": "3310.9-17640.02",
+          "trend": "GROWING",
+          "peak_months": "Jul",
+          "intent": "commercial",
+          "flags": [],
+          "score": 66.0,
+          "suggested_bid_exact": 8899,
+          "suggested_bid_phrase": 7564,
+          "suggested_bid_broad": 6229,
+          "suggested_bid": 7564,
+          "bid_currency": "PKR"
+        },
+        {
+          "keyword": "website design company near me",
+          "variants": [],
+          "avg_monthly_searches": 8100,
+          "competition": "LOW",
+          "competition_index": 10,
+          "cpc_range": "177.4-5829.7",
+          "trend": "DECLINING",
+          "peak_months": "Sep",
+          "intent": "transactional",
+          "flags": [
+            "local"
+          ],
+          "score": 64.1,
+          "suggested_bid_exact": 2739,
+          "suggested_bid_phrase": 2328,
+          "suggested_bid_broad": 1917,
+          "suggested_bid": 2328,
+          "bid_currency": "PKR"
+        },
+        {
+          "keyword": "small business website development company",
+          "variants": [],
+          "avg_monthly_searches": 50,
+          "competition": "LOW",
+          "competition_index": 0,
+          "cpc_range": "0.0-0.0",
+          "trend": "SEASONAL",
+          "peak_months": "Jul",
+          "intent": "transactional",
+          "flags": [],
+          "score": 61.7,
+          "suggested_bid": 3565,
+          "suggested_bid_exact": 3565,
+          "suggested_bid_phrase": 3565,
+          "suggested_bid_broad": 3565,
+          "bid_source": "campaign_median_fallback"
+        },
+        {
+          "keyword": "small business web development company",
+          "variants": [],
+          "avg_monthly_searches": 50,
+          "competition": "LOW",
+          "competition_index": 0,
+          "cpc_range": "0.0-0.0",
+          "trend": "SEASONAL",
+          "peak_months": "Jul",
+          "intent": "transactional",
+          "flags": [],
+          "score": 61.7,
+          "suggested_bid": 3565,
+          "suggested_bid_exact": 3565,
+          "suggested_bid_phrase": 3565,
+          "suggested_bid_broad": 3565,
+          "bid_source": "campaign_median_fallback"
+        }
+      ],
+      "total_volume": 61060,
+      "avg_score": 76.8,
+      "auto_silo_negatives": [
+        "adword",
+        "automated",
+        "bots",
+        "budget",
+        "campaign",
+        "click",
+        "clicks",
+        "coast",
+        "companies",
+        "detection",
+        "fraud",
+        "from",
+        "gold",
+        "invalid",
+        "landing",
+        "local",
+        "management",
+        "manager",
+        "monitoring",
+        "moz",
+        "page",
+        "partner",
+        "plan",
+        "plans",
+        "platform",
+        "prevention",
+        "private",
+        "protect",
+        "protection",
+        "provider",
+        "setup",
+        "shopping",
+        "stop",
+        "tool",
+        "usa"
+      ]
+    }
+  ],
+  "landing_pages": [
+    {
+      "page_name": "White Label Google Ads Campaign Automation",
+      "url_slug": "",
+      "final_url": "https://seoblogy.com/tools/google-ads-builder/",
+      "language": "en",
+      "service_name": "White Label Google Ads Campaign Automation",
+      "industry": "White label SEO, Google Ads and multilin",
+      "sub_services": [
+        "Keyword Research & Clustering",
+        "Negative Keyword Protection",
+        "RSA Ad Copywriting",
+        "Matched Landing Page Builds",
+        "Smart Location Bidding",
+        "Live API Campaign Push"
+      ],
+      "ad_groups_covered": [
+        "White Label Google Ads Campaign Automation"
+      ],
+      "anchors": [
+        "sysvid-google-ads",
+        "how-it-works",
+        "terminal-log",
+        "example",
+        "get-started"
+      ],
+      "sitelink_mode": "anchors",
+      "sitelink_targets": [
+        "https://seoblogy.com/tools/google-ads-builder/#sysvid-google-ads",
+        "https://seoblogy.com/tools/google-ads-builder/#how-it-works",
+        "https://seoblogy.com/tools/google-ads-builder/#terminal-log",
+        "https://seoblogy.com/tools/google-ads-builder/#example"
+      ],
+      "sitelink_labels": [],
+      "verdict": "strong",
+      "h1": "More Customers From Google. Less Wasted Budget.",
+      "h2": [
+        "One keyword research run — a Google Ads campaign and the pages behind it",
+        "Six Stages, One Automated Run",
+        "Everything In Your Master Campaign File",
+        "The Negative-Keyword Guard Script",
+        "Your Account, Our Manager Link, One API Push",
+        "Every File From The Build",
+        "One Research Run, A Complete Campaign",
+        "A Page Per Ad Group — Built & Deployed Free",
+        "Download A Real Build. Open The Live Pages.",
+        "You Do 10 Minutes. We Do The Rest.",
+        "Let Us Manage It — And Guard Every Click",
+        "A Lead Machine — For Less Than One Bad Week Of Ads.",
+        "Ready To Make The Phone Ring?"
+      ],
+      "h3": [
+        "Why it matters",
+        "Landing pages — open them live",
+        "Want the SaaS-level code?",
+        "Start My Campaign"
+      ]
+    },
+    {
+      "page_name": "Click Fraud Protection",
+      "url_slug": "",
+      "final_url": "https://seoblogy.com/tools/click-fraud-protection/",
+      "language": "en",
+      "service_name": "Click Fraud Protection",
+      "industry": "White label SEO, Google Ads and multilin",
+      "sub_services": [
+        "Ghost Bot Detection",
+        "Subnet Network Blocking",
+        "Real-Time Click Analysis",
+        "Automated IP Exclusion",
+        "Client Dashboard Reporting",
+        "Multi-Account Protection"
+      ],
+      "ad_groups_covered": [
+        "Click Fraud Protection"
+      ],
+      "anchors": [
+        "sysvid-click-fraud",
+        "how-it-works",
+        "terminal-log",
+        "get-protected"
+      ],
+      "sitelink_mode": "anchors",
+      "sitelink_targets": [
+        "https://seoblogy.com/tools/click-fraud-protection/#sysvid-click-fraud",
+        "https://seoblogy.com/tools/click-fraud-protection/#how-it-works",
+        "https://seoblogy.com/tools/click-fraud-protection/#terminal-log",
+        "https://seoblogy.com/tools/click-fraud-protection/#get-protected"
+      ],
+      "sitelink_labels": [],
+      "verdict": "strong",
+      "h1": "Stop Paying For Invalid Clicks Protect Your Budget.",
+      "h2": [
+        "Click-fraud protection that never blocks a real customer",
+        "How We Stop Invalid Clicks",
+        "Watch It Block Invalid Clicks Live",
+        "Full Visibility — Every Click, Every Account",
+        "Built Different. Blocks More.",
+        "Simple Setup. We Do the Work.",
+        "Simple Per-Account Pricing. No Surprises.",
+        "What Our Clients Say",
+        "Ready to Stop Invalid Clicks?"
+      ],
+      "h3": [
+        "Get Protected Today"
+      ]
+    },
+    {
+      "page_name": "SEO Automation Website Builds",
+      "url_slug": "",
+      "final_url": "https://seoblogy.com/tools/seo-automation/",
+      "language": "en",
+      "service_name": "SEO Automation Website Builds",
+      "industry": "White label SEO, Google Ads and multilin",
+      "sub_services": [
+        "Keyword Research & Scoring",
+        "Silo Architecture Design",
+        "Schema Markup Generation",
+        "Static Site Build & Deployment",
+        "FAQ Content From Real Queries",
+        "Internal Link Verification"
+      ],
+      "ad_groups_covered": [
+        "SEO Automation Website Builds"
+      ],
+      "anchors": [
+        "sysvid-seo-automation",
+        "how-it-works",
+        "terminal-log",
+        "roofing",
+        "get-started"
+      ],
+      "sitelink_mode": "anchors",
+      "sitelink_targets": [
+        "https://seoblogy.com/tools/seo-automation/#sysvid-seo-automation",
+        "https://seoblogy.com/tools/seo-automation/#how-it-works",
+        "https://seoblogy.com/tools/seo-automation/#terminal-log",
+        "https://seoblogy.com/tools/seo-automation/#roofing"
+      ],
+      "sitelink_labels": [],
+      "verdict": "weak",
+      "h1": "Every Page Backed By Real Search Volume.",
+      "h2": [
+        "One service list — a full website where every page has its own search demand",
+        "Research First. Pages Second.",
+        "You Can Watch It Choose The Keywords",
+        "A Pretty Five-Page Site Is Not An SEO Site",
+        "One Research Run, A Complete Website",
+        "Nothing Is A Black Box",
+        "Built For Your Trade, Not A Generic Template",
+        "One Industry, Mapped End To End",
+        "You Do 10 Minutes. We Do The Rest.",
+        "Organic Takes Months. Ads Take Days.",
+        "One Build Fee. No Monthly Platform.",
+        "Stop Guessing What To Publish."
+      ],
+      "h3": [
+        "Why this matters",
+        "Built by this pipeline — open them live",
+        "Get My Site Plan"
+      ]
+    },
+    {
+      "page_name": "Static Website Builds For Service Businesses",
+      "url_slug": "",
+      "final_url": "https://seoblogy.com/tools/website-builder/",
+      "language": "en",
+      "service_name": "Static Website Builds For Service Businesses",
+      "industry": "White label SEO, Google Ads and multilin",
+      "sub_services": [
+        "Ad Landing Page Build",
+        "Full 20+ Page Site",
+        "Topic Cluster Site",
+        "Multi-City Service Site",
+        "FAQ-Driven Blog Build",
+        "Multilingual Site Deployment"
+      ],
+      "ad_groups_covered": [
+        "Static Website Builds For Service Businesses"
+      ],
+      "anchors": [
+        "sysvid-website-builder",
+        "compare",
+        "get-started"
+      ],
+      "sitelink_mode": "anchors",
+      "sitelink_targets": [
+        "https://seoblogy.com/tools/website-builder/#sysvid-website-builder",
+        "https://seoblogy.com/tools/website-builder/#compare",
+        "https://seoblogy.com/tools/website-builder/#get-started"
+      ],
+      "sitelink_labels": [],
+      "verdict": "strong",
+      "h1": "No WordPress. No Plugins. Nothing To Hack.",
+      "h2": [
+        "One list of services — a finished, SEO-complete website that deploys itself",
+        "Three Ways A Service Business Website Fails",
+        "Static HTML. That's The Whole Trick.",
+        "Three Ways To Get A Website Built",
+        "From A Hacked WordPress To Static Files",
+        "One Build, Your Market's Language",
+        "Six Builds, Six Straight Answers",
+        "A Website Is One Piece",
+        "You Do 10 Minutes. We Do The Rest.",
+        "One Build Fee. No Monthly Anything.",
+        "A Website That Earns Its Keep."
+      ],
+      "h3": [
+        "Get My Website"
+      ]
+    }
+  ],
+  "uncovered_ad_groups": [],
+  "notes": "Since the four ad groups map to four already-live pages, keywords were siloed strictly by which page's offer actually matches the query — the huge volume of generic Semrush/Ahrefs/keyword-tool searches was excluded as it doesn't match any live white-label service. High-CPC, single-intent groups (Google Ads Automation, Click Fraud, SEO Reseller) were set to exact for efficiency, while the broader Static Website Builds theme stays on phrase for discovery.",
+  "excluded_keyword_ids": [
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    19,
+    20,
+    21,
+    22,
+    23,
+    25,
+    26,
+    27,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    40,
+    41,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65,
+    66,
+    67,
+    69,
+    70,
+    71,
+    72,
+    73,
+    74,
+    75,
+    76,
+    77,
+    78,
+    79,
+    80,
+    81,
+    82,
+    83,
+    84,
+    85,
+    86,
+    87,
+    88,
+    89,
+    90,
+    91,
+    92,
+    93,
+    95,
+    96,
+    97,
+    98,
+    99,
+    100,
+    101,
+    102,
+    103,
+    104,
+    105,
+    106,
+    107,
+    108,
+    109,
+    110,
+    111,
+    117,
+    118,
+    119,
+    121,
+    122,
+    123,
+    124,
+    125,
+    126,
+    127,
+    128,
+    129,
+    130,
+    131,
+    133,
+    134,
+    135,
+    136,
+    137,
+    138,
+    139,
+    141,
+    142,
+    143,
+    144,
+    145,
+    146,
+    147,
+    148,
+    149,
+    150,
+    152,
+    154,
+    155,
+    156,
+    157,
+    158,
+    159,
+    160,
+    161,
+    162,
+    163,
+    164,
+    165,
+    166,
+    167,
+    168,
+    169,
+    171,
+    172,
+    173,
+    174,
+    175,
+    176,
+    177,
+    178,
+    181,
+    183,
+    184,
+    185,
+    186,
+    187,
+    188,
+    189,
+    190,
+    193,
+    194,
+    195,
+    196,
+    197,
+    198,
+    199,
+    200,
+    201,
+    202,
+    203,
+    205,
+    206,
+    207,
+    208,
+    209,
+    210,
+    211,
+    215,
+    219,
+    220,
+    221,
+    222,
+    223,
+    224,
+    226,
+    227,
+    228,
+    229,
+    230,
+    231,
+    232,
+    234,
+    235,
+    237,
+    238,
+    240,
+    241,
+    243,
+    244,
+    245,
+    247,
+    248,
+    249,
+    250,
+    251,
+    252,
+    253,
+    254,
+    255,
+    256,
+    257,
+    258,
+    259,
+    260,
+    261,
+    263,
+    264,
+    267,
+    268,
+    271,
+    273,
+    274,
+    275,
+    276,
+    277,
+    278,
+    279,
+    280,
+    281,
+    282,
+    283,
+    284,
+    285,
+    286,
+    287,
+    288,
+    289,
+    290,
+    291,
+    292,
+    293,
+    294,
+    295,
+    296,
+    298,
+    300,
+    301,
+    302,
+    303,
+    304,
+    306,
+    307,
+    308,
+    310,
+    311,
+    312,
+    313,
+    314,
+    315,
+    316,
+    317,
+    318,
+    319,
+    320,
+    322,
+    323,
+    324,
+    325,
+    326,
+    327,
+    328,
+    329,
+    330,
+    331,
+    333,
+    334,
+    335,
+    336,
+    339,
+    340,
+    341,
+    342,
+    343,
+    344,
+    345,
+    346,
+    347,
+    348,
+    349,
+    350,
+    352,
+    353,
+    354,
+    356,
+    357,
+    358,
+    359,
+    361,
+    362,
+    363,
+    364,
+    365,
+    366,
+    367,
+    368,
+    369,
+    370,
+    371,
+    372,
+    373,
+    374,
+    376,
+    377,
+    378,
+    379,
+    380,
+    381,
+    382,
+    383,
+    384,
+    385,
+    386,
+    387,
+    388,
+    389,
+    390,
+    391,
+    392,
+    393,
+    396,
+    397,
+    398,
+    399,
+    400
+  ],
+  "unassigned_keywords": [],
+  "seo_content_keywords": [
+    {
+      "keyword": "semrush keyword magic tool",
+      "volume": 6600,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush seo checker",
+      "volume": 4400,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "serp track",
+      "volume": 2400,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "search engine keyword tracker",
+      "volume": 1900,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "sem rush com",
+      "volume": 6600,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "seo keyword tracker",
+      "volume": 1600,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush domain overview",
+      "volume": 1900,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush on page seo checker",
+      "volume": 1000,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush keyword overview",
+      "volume": 1000,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush website traffic checker",
+      "volume": 1300,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "google trends for keyword research",
+      "volume": 880,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush free keyword tool",
+      "volume": 1000,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush keyword gap tool",
+      "volume": 720,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush website audit",
+      "volume": 1000,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "wix seo wiz",
+      "volume": 3600,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush keyword rank checker",
+      "volume": 1900,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "free keyword volume checker",
+      "volume": 880,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush position tracking tool",
+      "volume": 390,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush api cost",
+      "volume": 880,
+      "intent": "transactional",
+      "flags": []
+    },
+    {
+      "keyword": "semrush keyword gap",
+      "volume": 390,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush authority score checker",
+      "volume": 390,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush log in",
+      "volume": 18100,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "seo search keywords",
+      "volume": 22200,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "seo keyword analysis",
+      "volume": 22200,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "search engine optimization keyword analysis",
+      "volume": 22200,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "ahrefs keyword generator",
+      "volume": 14800,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "seo keyword competition analysis",
+      "volume": 320,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "seo keywords tool",
+      "volume": 720,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "free keyword generator",
+      "volume": 4400,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "ahrefs keyword",
+      "volume": 3600,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush keyword gap analysis",
+      "volume": 260,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "ahref keyword generator free",
+      "volume": 260,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "ahrefs keyword research",
+      "volume": 2900,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "ahref keyword research",
+      "volume": 2900,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush serp analysis",
+      "volume": 720,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "keyword research tool for seo",
+      "volume": 6600,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "seo keyword search tool",
+      "volume": 6600,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "seo keyword analysis tools",
+      "volume": 6600,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "keywords search tool seo",
+      "volume": 6600,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "seo tool keyword analysis",
+      "volume": 6600,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "seo tools keyword search",
+      "volume": 6600,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "tools for keyword research seo",
+      "volume": 6600,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "free keyword tool wordstream",
+      "volume": 3600,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush competitor analysis",
+      "volume": 3600,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush competitor research",
+      "volume": 3600,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "competitive analysis semrush",
+      "volume": 3600,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush backlink checker",
+      "volume": 4400,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "google ads keyword planner",
+      "volume": 18100,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "google ads key planner",
+      "volume": 18100,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "youtube keyword research tool",
+      "volume": 1600,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush traffic checker",
+      "volume": 6600,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "keyword research tool",
+      "volume": 18100,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "keyword search tool",
+      "volume": 18100,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "kw research tool",
+      "volume": 18100,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "ahrefs keyword explorer",
+      "volume": 2900,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "ahrefs kw explorer",
+      "volume": 2900,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "keyword difficulty checker",
+      "volume": 4400,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "ahrefs free keyword generator",
+      "volume": 4400,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush authority checker",
+      "volume": 260,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "pinterest keyword research tool",
+      "volume": 210,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "ranked keyword search",
+      "volume": 1900,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "local keyword research",
+      "volume": 720,
+      "intent": "commercial",
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "local seo keyword research",
+      "volume": 480,
+      "intent": "commercial",
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "semrush keyword magic",
+      "volume": 210,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "best rank tracking tools",
+      "volume": 1600,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "schema for websites",
+      "volume": 1600,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush subscription cost",
+      "volume": 110,
+      "intent": "transactional",
+      "flags": []
+    },
+    {
+      "keyword": "semrush api key",
+      "volume": 210,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush keyword tool",
+      "volume": 1300,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush ppc tool",
+      "volume": 140,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush owner",
+      "volume": 140,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush ownership",
+      "volume": 140,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush brand monitoring",
+      "volume": 210,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush keyword research tool",
+      "volume": 8100,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "keyword ranking checker free",
+      "volume": 2400,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "ubersuggest keyword research",
+      "volume": 1000,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "serp keyword tool",
+      "volume": 1000,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "wix seo expert",
+      "volume": 320,
+      "intent": "transactional",
+      "flags": []
+    },
+    {
+      "keyword": "position tracking semrush",
+      "volume": 1900,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "keyword toolio",
+      "volume": 720,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "ubersuggest keyword research tool",
+      "volume": 140,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "ecommerce website development company near me",
+      "volume": 40,
+      "intent": "transactional",
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "ahrefs keyword planner",
+      "volume": 1000,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "ahref keyword planner",
+      "volume": 1000,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "keyword ranking analyzer",
+      "volume": 1000,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush bulk analysis",
+      "volume": 170,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush api pricing",
+      "volume": 880,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "ubersuggest free",
+      "volume": 720,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "google keyword planner sign in",
+      "volume": 170,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush api",
+      "volume": 3600,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush seo",
+      "volume": 4400,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush courses",
+      "volume": 1000,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "keyword tracker free",
+      "volume": 1000,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "best free keyword research tool",
+      "volume": 1900,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "best free keyword search tools",
+      "volume": 1900,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush cost per month",
+      "volume": 90,
+      "intent": "transactional",
+      "flags": []
+    },
+    {
+      "keyword": "google keyword planner keyword research",
+      "volume": 2900,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "keyword seo tool",
+      "volume": 1000,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "google keyword tracking",
+      "volume": 1600,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush authority score",
+      "volume": 720,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush pricing",
+      "volume": 9900,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush backlink gap tool",
+      "volume": 210,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush keyword planner",
+      "volume": 3600,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush seo score",
+      "volume": 170,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "price of semrush",
+      "volume": 70,
+      "intent": "transactional",
+      "flags": []
+    },
+    {
+      "keyword": "keyword difficulty semrush",
+      "volume": 320,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush free keyword research tool",
+      "volume": 110,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "free seo keyword search",
+      "volume": 1000,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "seo keyword research free",
+      "volume": 1000,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "free keyword search engine optimization",
+      "volume": 1000,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush guru",
+      "volume": 1000,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush guru plan",
+      "volume": 390,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "site contractors",
+      "volume": 880,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "seo keyword lookup",
+      "volume": 1900,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush free backlink checker",
+      "volume": 480,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "rank tracker keyword research",
+      "volume": 170,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "webmaster keyword tools",
+      "volume": 170,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "spyfu competitor analysis",
+      "volume": 110,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "keyword research analysis",
+      "volume": 480,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush monthly pricing",
+      "volume": 90,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "free keyword difficulty checker",
+      "volume": 590,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "ahref keywords generator",
+      "volume": 90,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "the site contracting",
+      "volume": 90,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "tool keyword",
+      "volume": 480,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "ahrefs keyword explorer free",
+      "volume": 480,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "google adwords keywords",
+      "volume": 720,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush pro plan",
+      "volume": 1300,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush audit tool",
+      "volume": 110,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "uber suggest keyword research",
+      "volume": 110,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "ahrefs semrush",
+      "volume": 1300,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "google adwords keyword tool",
+      "volume": 720,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "google ad planner keyword tool",
+      "volume": 720,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "google ad words keywords tool",
+      "volume": 720,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "google ppc keyword tool",
+      "volume": 720,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush seo toolkit",
+      "volume": 720,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "ahrefs youtube keyword tool",
+      "volume": 320,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "ahref youtube keyword tool",
+      "volume": 320,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush subscription price",
+      "volume": 40,
+      "intent": "transactional",
+      "flags": []
+    },
+    {
+      "keyword": "seo keyword planner",
+      "volume": 720,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush pricing plans",
+      "volume": 590,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush pricing plan",
+      "volume": 590,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "google keyword planner cost",
+      "volume": 40,
+      "intent": "transactional",
+      "flags": []
+    },
+    {
+      "keyword": "contractor on site",
+      "volume": 90,
+      "intent": "transactional",
+      "flags": []
+    },
+    {
+      "keyword": "seo monitor keyword tool",
+      "volume": 880,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush my reports",
+      "volume": 90,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush keyword ranking",
+      "volume": 390,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush headquarters",
+      "volume": 170,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "moz keyword",
+      "volume": 320,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "google search volume tool",
+      "volume": 210,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "free keyword difficulty tool",
+      "volume": 260,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "vidiq keyword research tool",
+      "volume": 260,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "site work contractors",
+      "volume": 1000,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "free keyword generator tool",
+      "volume": 260,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush backlink analysis",
+      "volume": 260,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush api docs",
+      "volume": 70,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush paid search",
+      "volume": 90,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "etsy research tool",
+      "volume": 590,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "google ads keyword research",
+      "volume": 480,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "google ads keyword planner tool",
+      "volume": 320,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "ahrefs free keyword",
+      "volume": 260,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "google keyword discovery tool",
+      "volume": 260,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush search console",
+      "volume": 90,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "ubersuggest api",
+      "volume": 390,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "yt keyword research",
+      "volume": 70,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "ahrefs keyword generator tool",
+      "volume": 70,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush enterprise",
+      "volume": 880,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush site explorer",
+      "volume": 90,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "free backlink generator for website",
+      "volume": 110,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "free backlink generator sites",
+      "volume": 110,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "keyword extractor from website",
+      "volume": 260,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "free seo keyword planner",
+      "volume": 260,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "keyword explorer ahref",
+      "volume": 260,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "ubersuggest website traffic checker",
+      "volume": 70,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush free plan",
+      "volume": 170,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush top websites",
+      "volume": 210,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "keyword explorer free",
+      "volume": 720,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "ubersuggest com",
+      "volume": 720,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "google keyword planner sign up",
+      "volume": 320,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush content marketing",
+      "volume": 260,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "kwfinder by mangools",
+      "volume": 210,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "keyword research for pinterest",
+      "volume": 70,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush pro",
+      "volume": 390,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "backlink generator tool",
+      "volume": 720,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "google word tracker",
+      "volume": 140,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush content gap analysis",
+      "volume": 90,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "site semrush com",
+      "volume": 90,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush signup",
+      "volume": 260,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush business plan",
+      "volume": 210,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "udemy semrush",
+      "volume": 90,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush competitor keyword research",
+      "volume": 170,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "keyword difficulty checker tool",
+      "volume": 170,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "keyword research and analysis for seo",
+      "volume": 170,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "seo word search tool",
+      "volume": 170,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush guru price",
+      "volume": 70,
+      "intent": "transactional",
+      "flags": []
+    },
+    {
+      "keyword": "free keyword search",
+      "volume": 480,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush organic research",
+      "volume": 170,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "moz keyword difficulty checker",
+      "volume": 110,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "ahrefs content gap",
+      "volume": 170,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "google play keyword tool",
+      "volume": 50,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "answer the public keyword research",
+      "volume": 210,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "search volume tool",
+      "volume": 260,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush monthly plan",
+      "volume": 70,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "google keyword surfer",
+      "volume": 70,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "adwords semrush",
+      "volume": 170,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "seo book keyword suggestion tool",
+      "volume": 70,
+      "intent": "transactional",
+      "flags": []
+    },
+    {
+      "keyword": "keyword analysis tools",
+      "volume": 320,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush overview",
+      "volume": 140,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush blackfriday",
+      "volume": 320,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "keyword research free",
+      "volume": 590,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "a href keyword research free",
+      "volume": 90,
+      "intent": "commercial",
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "semrush audit",
+      "volume": 390,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "ahrefs keyword search",
+      "volume": 210,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "ahref keyword search",
+      "volume": 210,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "keyword clustering seo",
+      "volume": 140,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "ahrefs youtube keyword",
+      "volume": 140,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "ahrefs competitor research",
+      "volume": 140,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "keyword difficulty analysis",
+      "volume": 140,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "keyword search engine ranking tool",
+      "volume": 140,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "keyword search volume checker free",
+      "volume": 140,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush charges",
+      "volume": 70,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "find best keywords for seo",
+      "volume": 170,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "free keyword research tool ahrefs",
+      "volume": 140,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "keyword analyzer tool",
+      "volume": 140,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush pronunciation",
+      "volume": 170,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "ahrefs keyword volume",
+      "volume": 140,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush founder",
+      "volume": 260,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "seo keyword recommendations",
+      "volume": 260,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush keyword intent",
+      "volume": 260,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush google shopping",
+      "volume": 70,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "ahrefs free keyword checker",
+      "volume": 140,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "neil patel keyword tool",
+      "volume": 260,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "google local business schema",
+      "volume": 70,
+      "intent": "commercial",
+      "flags": [
+        "local"
+      ]
+    },
+    {
+      "keyword": "wix seo learning hub",
+      "volume": 40,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush organic traffic",
+      "volume": 50,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush used for",
+      "volume": 90,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush education",
+      "volume": 140,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "best seo html structure",
+      "volume": 40,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "website seo keyword research tool",
+      "volume": 110,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "best keyword difficulty tool",
+      "volume": 110,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "seo website keyword analysis",
+      "volume": 110,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "top keywords from search engines",
+      "volume": 110,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "top keywords search engines",
+      "volume": 110,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "find competitors seo keywords",
+      "volume": 110,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush organic research tool",
+      "volume": 90,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "web developer contractor",
+      "volume": 90,
+      "intent": "transactional",
+      "flags": []
+    },
+    {
+      "keyword": "wayne griffin electric website",
+      "volume": 90,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "wayne j griffin electric website",
+      "volume": 90,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "seobook tool",
+      "volume": 140,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "keyword research apps",
+      "volume": 170,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "search engine keyword research",
+      "volume": 110,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "keyword search planner",
+      "volume": 170,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush packages",
+      "volume": 110,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush organic keywords",
+      "volume": 110,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush domain analysis",
+      "volume": 110,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush digital marketing",
+      "volume": 140,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush social tracker",
+      "volume": 110,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "google keyword planner exact search volume",
+      "volume": 40,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush website checker",
+      "volume": 140,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "google ads for pest control",
+      "volume": 110,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush domain analytics",
+      "volume": 110,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "spyfu tool",
+      "volume": 90,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush om",
+      "volume": 70,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "ahref free keyword checker",
+      "volume": 170,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "seo keyword difficulty tools",
+      "volume": 170,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "ubersuggest website audit",
+      "volume": 90,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "google ads keyword search",
+      "volume": 210,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "seo stack keyword tool",
+      "volume": 40,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "wix website optimization",
+      "volume": 40,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush paid plan",
+      "volume": 110,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "search engine keyword tool",
+      "volume": 90,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "keyword traffic tool free",
+      "volume": 90,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush neil patel",
+      "volume": 90,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "accurate keyword search volume",
+      "volume": 90,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "keyword gap analysis ahrefs",
+      "volume": 90,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "seo keyword tool online",
+      "volume": 90,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "improve seo wix",
+      "volume": 90,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "contractors state license board cslb website",
+      "volume": 70,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush search intent",
+      "volume": 50,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush score",
+      "volume": 90,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "ahrefs search volume",
+      "volume": 90,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "ahrefs com keyword research",
+      "volume": 90,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush deals",
+      "volume": 210,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush sem",
+      "volume": 90,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush com pricing",
+      "volume": 170,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush domain check",
+      "volume": 170,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush check website traffic",
+      "volume": 50,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "ahrefs keywords research",
+      "volume": 90,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "flipkart keyword planner",
+      "volume": 30,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "free keyword traffic estimator",
+      "volume": 30,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "free keyword research tool india",
+      "volume": 40,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "search volume keyword planner",
+      "volume": 110,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "pinterest keyword research tool free",
+      "volume": 30,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush traffic analysis",
+      "volume": 70,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush on page seo",
+      "volume": 140,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "google search console keyword planner",
+      "volume": 90,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush price increase",
+      "volume": 40,
+      "intent": "transactional",
+      "flags": []
+    },
+    {
+      "keyword": "semrush free audit",
+      "volume": 90,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "best free keyword research tool for seo",
+      "volume": 40,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "free seo keyword analyzer",
+      "volume": 30,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush keyword volume",
+      "volume": 90,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush advertising research",
+      "volume": 170,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "spyfu keyword research tool",
+      "volume": 110,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "contract bidding websites",
+      "volume": 210,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush domain",
+      "volume": 140,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "ubersuggest ai",
+      "volume": 140,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush for nonprofits",
+      "volume": 90,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "allintitle keyword research",
+      "volume": 90,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush is",
+      "volume": 90,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "keyword analyzer semrush",
+      "volume": 40,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "keyword tool api",
+      "volume": 170,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush keyword search volume",
+      "volume": 90,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "google adwords seo tool",
+      "volume": 70,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "vidiq keyword search",
+      "volume": 70,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "ahrefs youtube keyword research",
+      "volume": 70,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "keyword competition analyzer",
+      "volume": 70,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "good keyword research tool",
+      "volume": 30,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush online",
+      "volume": 90,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush documentation",
+      "volume": 50,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush long tail keyword",
+      "volume": 110,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush competitive intelligence",
+      "volume": 110,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "find keywords for website free",
+      "volume": 110,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "ahrefs competitor research tools",
+      "volume": 110,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush long tail keywords",
+      "volume": 110,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "using semrush",
+      "volume": 70,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "ahrefs keyword explorer tool",
+      "volume": 70,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush referral",
+      "volume": 70,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "search keyword optimization",
+      "volume": 70,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "best focus keyphrase",
+      "volume": 30,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "keyword researcher pro",
+      "volume": 90,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush keyword finder",
+      "volume": 70,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "website backlink generator",
+      "volume": 110,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "backlink generator sites",
+      "volume": 110,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "adwords research",
+      "volume": 70,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "lsi graph tool",
+      "volume": 30,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "contractor website developer",
+      "volume": 70,
+      "intent": "transactional",
+      "flags": []
+    },
+    {
+      "keyword": "semrush com academy",
+      "volume": 110,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "google keyword search volume checker",
+      "volume": 70,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "free keywords finder",
+      "volume": 70,
+      "intent": "commercial",
+      "flags": []
+    },
+    {
+      "keyword": "semrush seo guide",
+      "volume": 320,
+      "intent": "informational",
+      "flags": []
+    },
+    {
+      "keyword": "keyword research tips",
+      "volume": 210,
+      "intent": "informational",
+      "flags": []
+    },
+    {
+      "keyword": "semrush what is it",
+      "volume": 210,
+      "intent": "informational",
+      "flags": []
+    },
+    {
+      "keyword": "semrush what is",
+      "volume": 90,
+      "intent": "informational",
+      "flags": []
+    },
+    {
+      "keyword": "semrush keyword research guide",
+      "volume": 40,
+      "intent": "informational",
+      "flags": []
+    },
+    {
+      "keyword": "difference between semrush and ahrefs",
+      "volume": 70,
+      "intent": "informational",
+      "flags": []
+    },
+    {
+      "keyword": "semrush how to use",
+      "volume": 90,
+      "intent": "informational",
+      "flags": []
+    },
+    {
+      "keyword": "how to set up remarketing ads",
+      "volume": 50,
+      "intent": "question",
+      "flags": [
+        "voice"
+      ]
+    },
+    {
+      "keyword": "semrush seo ideas",
+      "volume": 20,
+      "intent": "informational",
+      "flags": []
+    },
+    {
+      "keyword": "semrush how to",
+      "volume": 70,
+      "intent": "informational",
+      "flags": []
+    },
+    {
+      "keyword": "keyword ideas ahrefs",
+      "volume": 50,
+      "intent": "informational",
+      "flags": []
+    },
+    {
+      "keyword": "ahrefs how to do keyword research",
+      "volume": 40,
+      "intent": "informational",
+      "flags": []
+    },
+    {
+      "keyword": "how to create google ads campaign",
+      "volume": 170,
+      "intent": "question",
+      "flags": [
+        "voice"
+      ]
+    },
+    {
+      "keyword": "seo keyword ideas",
+      "volume": 880,
+      "intent": "informational",
+      "flags": []
+    },
+    {
+      "keyword": "seo keyword research guide",
+      "volume": 20,
+      "intent": "informational",
+      "flags": []
+    },
+    {
+      "keyword": "semrush intent types",
+      "volume": 10,
+      "intent": "informational",
+      "flags": []
+    },
+    {
+      "keyword": "how to create a google ad campaign",
+      "volume": 50,
+      "intent": "question",
+      "flags": [
+        "voice",
+        "local"
+      ]
+    },
+    {
+      "keyword": "find keyword ideas",
+      "volume": 140,
+      "intent": "informational",
+      "flags": []
+    },
+    {
+      "keyword": "how to set up a google ad campaign",
+      "volume": 30,
+      "intent": "question",
+      "flags": [
+        "voice",
+        "local"
+      ]
+    },
+    {
+      "keyword": "semrush content ideas",
+      "volume": 10,
+      "intent": "informational",
+      "flags": []
+    },
+    {
+      "keyword": "how to setup google display ads",
+      "volume": 20,
+      "intent": "question",
+      "flags": [
+        "voice"
+      ]
+    },
+    {
+      "keyword": "google keyword planner how to use",
+      "volume": 90,
+      "intent": "informational",
+      "flags": []
+    },
+    {
+      "keyword": "semrush user guide",
+      "volume": 10,
+      "intent": "informational",
+      "flags": []
+    },
+    {
+      "keyword": "ahrefs keyword research guide",
+      "volume": 50,
+      "intent": "informational",
+      "flags": []
+    },
+    {
+      "keyword": "seo keyword research tips",
+      "volume": 70,
+      "intent": "informational",
+      "flags": []
+    },
+    {
+      "keyword": "semrush what is seo",
+      "volume": 70,
+      "intent": "informational",
+      "flags": []
+    },
+    {
+      "keyword": "neil patel seo tips",
+      "volume": 10,
+      "intent": "informational",
+      "flags": []
+    },
+    {
+      "keyword": "google adwords keyword ideas",
+      "volume": 10,
+      "intent": "informational",
+      "flags": []
+    },
+    {
+      "keyword": "keyword research for content ideas",
+      "volume": 10,
+      "intent": "informational",
+      "flags": []
+    },
+    {
+      "keyword": "keyword research for seo the definitive guide",
+      "volume": 10,
+      "intent": "informational",
+      "flags": []
+    },
+    {
+      "keyword": "semrush how it works",
+      "volume": 10,
+      "intent": "informational",
+      "flags": []
+    },
+    {
+      "keyword": "free keyword ideas",
+      "volume": 10,
+      "intent": "informational",
+      "flags": []
+    },
+    {
+      "keyword": "how to set up a search campaign",
+      "volume": 10,
+      "intent": "question",
+      "flags": [
+        "voice",
+        "local"
+      ]
+    },
+    {
+      "keyword": "moz keyword research guide",
+      "volume": 50,
+      "intent": "informational",
+      "flags": []
+    },
+    {
+      "keyword": "seo keyword tips",
+      "volume": 50,
+      "intent": "informational",
+      "flags": []
+    },
+    {
+      "keyword": "how to set up ppc",
+      "volume": 10,
+      "intent": "question",
+      "flags": [
+        "voice"
+      ]
+    },
+    {
+      "keyword": "free keyword ideas generator",
+      "volume": 30,
+      "intent": "informational",
+      "flags": []
+    },
+    {
+      "keyword": "how to set up a google remarketing campaign",
+      "volume": 10,
+      "intent": "question",
+      "flags": [
+        "voice",
+        "local"
+      ]
+    },
+    {
+      "keyword": "how to set up a google search campaign",
+      "volume": 10,
+      "intent": "question",
+      "flags": [
+        "voice",
+        "local"
+      ]
+    },
+    {
+      "keyword": "keyword research ideas",
+      "volume": 20,
+      "intent": "informational",
+      "flags": []
+    },
+    {
+      "keyword": "how to create a new campaign in google ads",
+      "volume": 10,
+      "intent": "question",
+      "flags": [
+        "voice",
+        "local"
+      ]
+    },
+    {
+      "keyword": "how to create a google adwords account",
+      "volume": 10,
+      "intent": "question",
+      "flags": [
+        "voice",
+        "local"
+      ]
+    },
+    {
+      "keyword": "how to create effective google ads",
+      "volume": 10,
+      "intent": "question",
+      "flags": [
+        "voice"
+      ]
+    },
+    {
+      "keyword": "google keyword planner keyword ideas",
+      "volume": 10,
+      "intent": "informational",
+      "flags": []
+    },
+    {
+      "keyword": "how to set up google shopping ads",
+      "volume": 50,
+      "intent": "question",
+      "flags": [
+        "voice"
+      ]
+    },
+    {
+      "keyword": "how to set up google ads campaign",
+      "volume": 90,
+      "intent": "question",
+      "flags": [
+        "voice"
+      ]
+    },
+    {
+      "keyword": "how to setup google ads campaign",
+      "volume": 90,
+      "intent": "question",
+      "flags": [
+        "voice"
+      ]
+    },
+    {
+      "keyword": "how to create a remarketing campaign in google ads",
+      "volume": 30,
+      "intent": "question",
+      "flags": [
+        "voice",
+        "local"
+      ]
+    },
+    {
+      "keyword": "how to set up adwords campaign",
+      "volume": 10,
+      "intent": "question",
+      "flags": [
+        "voice"
+      ]
+    },
+    {
+      "keyword": "how to set up a paid search campaign",
+      "volume": 10,
+      "intent": "question",
+      "flags": [
+        "voice",
+        "local"
+      ]
+    },
+    {
+      "keyword": "how to set up google pay per click",
+      "volume": 10,
+      "intent": "question",
+      "flags": [
+        "voice"
+      ]
+    },
+    {
+      "keyword": "how to set up a display campaign in google ads",
+      "volume": 10,
+      "intent": "question",
+      "flags": [
+        "voice",
+        "local"
+      ]
+    },
+    {
+      "keyword": "how to set up a successful google adwords campaign",
+      "volume": 10,
+      "intent": "question",
+      "flags": [
+        "voice",
+        "local"
+      ]
+    },
+    {
+      "keyword": "how to setup a google display network campaign",
+      "volume": 10,
+      "intent": "question",
+      "flags": [
+        "voice",
+        "local"
+      ]
+    },
+    {
+      "keyword": "how to set up retargeting ads on google",
+      "volume": 30,
+      "intent": "question",
+      "flags": [
+        "voice"
+      ]
+    },
+    {
+      "keyword": "how to create google shopping ads",
+      "volume": 30,
+      "intent": "question",
+      "flags": [
+        "voice"
+      ]
+    },
+    {
+      "keyword": "how to set up remarketing in google ads",
+      "volume": 20,
+      "intent": "question",
+      "flags": [
+        "voice"
+      ]
+    },
+    {
+      "keyword": "how to set up google adwords campaign",
+      "volume": 30,
+      "intent": "question",
+      "flags": [
+        "voice"
+      ]
+    },
+    {
+      "keyword": "how to set up a google shopping campaign",
+      "volume": 20,
+      "intent": "question",
+      "flags": [
+        "voice",
+        "local"
+      ]
+    },
+    {
+      "keyword": "semrush how to do keyword research",
+      "volume": 10,
+      "intent": "informational",
+      "flags": []
+    },
+    {
+      "keyword": "difference between moz and semrush",
+      "volume": 10,
+      "intent": "informational",
+      "flags": []
+    },
+    {
+      "keyword": "ubersuggest how to use",
+      "volume": 10,
+      "intent": "informational",
+      "flags": []
+    },
+    {
+      "keyword": "keyword planner ideas",
+      "volume": 10,
+      "intent": "informational",
+      "flags": []
+    },
+    {
+      "keyword": "keyword ideas for website",
+      "volume": 10,
+      "intent": "informational",
+      "flags": []
+    },
+    {
+      "keyword": "how to set up a remarketing campaign in google ads",
+      "volume": 10,
+      "intent": "question",
+      "flags": [
+        "voice",
+        "local"
+      ]
+    },
+    {
+      "keyword": "how to set up ppc campaign in google",
+      "volume": 20,
+      "intent": "question",
+      "flags": [
+        "voice"
+      ]
+    },
+    {
+      "keyword": "best diy website builder for seo",
+      "volume": 10,
+      "intent": "informational",
+      "flags": []
+    },
+    {
+      "keyword": "semrush tips",
+      "volume": 10,
+      "intent": "informational",
+      "flags": []
+    },
+    {
+      "keyword": "how to set up remarketing",
+      "volume": 10,
+      "intent": "question",
+      "flags": [
+        "voice"
+      ]
+    },
+    {
+      "keyword": "how to create a successful google adwords campaign",
+      "volume": 10,
+      "intent": "question",
+      "flags": [
+        "voice",
+        "local"
+      ]
+    },
+    {
+      "keyword": "how to create best google adwords campaign",
+      "volume": 10,
+      "intent": "question",
+      "flags": [
+        "voice"
+      ]
+    },
+    {
+      "keyword": "how to create search campaign google ads",
+      "volume": 10,
+      "intent": "question",
+      "flags": [
+        "voice"
+      ]
+    },
+    {
+      "keyword": "how to set up google campaign",
+      "volume": 10,
+      "intent": "question",
+      "flags": [
+        "voice"
+      ]
+    }
+  ],
+  "voice_search_questions": [
+    "how to set up remarketing ads",
+    "keyword planner is a keyword research tool that provides",
+    "how to create google ads campaign",
+    "how to create a google ad campaign",
+    "how to set up a google ad campaign",
+    "a tool that can help with keyword research is",
+    "how to setup google display ads",
+    "how to set up a search campaign",
+    "how to set up ppc",
+    "how to set up a google remarketing campaign",
+    "how to set up a google search campaign",
+    "how to create a new campaign in google ads",
+    "how to create a google adwords account",
+    "how to create effective google ads",
+    "how to set up google shopping ads",
+    "how to set up google ads campaign",
+    "how to setup google ads campaign",
+    "how to create a remarketing campaign in google ads",
+    "how to set up adwords campaign",
+    "how to set up a paid search campaign",
+    "how to set up google pay per click",
+    "how to set up a display campaign in google ads",
+    "how to set up a successful google adwords campaign",
+    "how to setup a google display network campaign",
+    "how to set up retargeting ads on google",
+    "how to create google shopping ads",
+    "how to set up remarketing in google ads",
+    "how to set up google adwords campaign",
+    "how to set up a google shopping campaign",
+    "how to set up a remarketing campaign in google ads",
+    "how to set up ppc campaign in google",
+    "how to set up remarketing",
+    "how to create a successful google adwords campaign",
+    "how to create best google adwords campaign",
+    "how to create search campaign google ads",
+    "how to set up google campaign"
+  ],
+  "local_intent_keywords": [
+    "google ads management near me",
+    "custom web design near me",
+    "google ads management services near me",
+    "best web design agencies near me",
+    "small business web design near me",
+    "white label local seo services",
+    "white label local seo",
+    "custom website design near me",
+    "local keyword research",
+    "local seo keyword research",
+    "ecommerce website development company near me",
+    "website design and development company near me",
+    "web design studio near me",
+    "small business website design near me",
+    "small business website designer near me",
+    "a href keyword research free",
+    "google local business schema",
+    "moz local white label",
+    "website design company near me"
+  ],
+  "google_ads_targets": [
+    {
+      "cluster_topic": "White Label Google Ads Campaign Automation",
+      "recommended_keywords": [
+        "google ads management near me",
+        "google ads management services near me",
+        "google ads campaign setup",
+        "adword agency",
+        "ads setup",
+        "google ads landing page design",
+        "google shopping ads management services",
+        "google ads management pricing",
+        "google ads management cost",
+        "google ads management gold coast"
+      ],
+      "suggested_bid_range": "2361-16163 PKR",
+      "intent": "transactional",
+      "suggested_match_type": "exact",
+      "priority": "high",
+      "trend": "SEASONAL",
+      "seasonal_schedule": "Jul",
+      "reasoning": "Agencies searching to buy or outsource Google Ads management/campaign setup they can white-label to their own clients."
+    },
+    {
+      "cluster_topic": "Click Fraud Protection",
+      "recommended_keywords": [
+        "click fraud protection software",
+        "click fraud protection",
+        "ad fraud protection",
+        "click fraud detection software",
+        "best click fraud protection"
+      ],
+      "suggested_bid_range": "3565-9979 PKR",
+      "intent": "transactional",
+      "suggested_match_type": "exact",
+      "priority": "medium",
+      "trend": "GROWING",
+      "seasonal_schedule": "Sep/Jan",
+      "reasoning": "Advertisers/agencies searching for a tool or service to stop invalid clicks and protect ad spend."
+    },
+    {
+      "cluster_topic": "SEO Automation Website Builds",
+      "recommended_keywords": [
+        "white label seo companies",
+        "white label local seo services",
+        "white label local seo",
+        "seo reseller program",
+        "seo reseller plan",
+        "seo resellers program",
+        "seo reseller plans",
+        "private label seo services",
+        "best white label seo services",
+        "seo white labeling",
+        "best white label seo companies",
+        "white label seo platform",
+        "seo reseller usa",
+        "moz local white label"
+      ],
+      "suggested_bid_range": "2545-7450 PKR",
+      "intent": "transactional",
+      "suggested_match_type": "exact",
+      "priority": "high",
+      "trend": "SEASONAL",
+      "seasonal_schedule": "Mar/May",
+      "reasoning": "Agencies searching for a white-label/reseller SEO program to fulfill client SEO work under their own brand."
+    },
+    {
+      "cluster_topic": "Static Website Builds For Service Businesses",
+      "recommended_keywords": [
+        "custom web design near me",
+        "best web design agencies near me",
+        "static website generator",
+        "static site builder",
+        "static website creator",
+        "small business web design near me",
+        "custom website design near me",
+        "wix multilingual app",
+        "website design and development company near me",
+        "electrical services website",
+        "jekyll website builder",
+        "jekyll site builder",
+        "web design studio near me",
+        "website builder for agencies",
+        "best website builder for seo",
+        "best web builder for seo",
+        "best site builder for seo",
+        "contractor website services",
+        "website builders for small business",
+        "website creation for small business",
+        "small business website design near me",
+        "average cost of website design for small business",
+        "small business website designer near me",
+        "custom websites for small businesses",
+        "custom small business website",
+        "small business web design agency",
+        "small business website design agency",
+        "top website builders for small business",
+        "web design cost for small business",
+        "best website builder for contractors",
+        "website design company near me",
+        "small business website development company",
+        "small business web development company"
+      ],
+      "suggested_bid_range": "527-7564 PKR",
+      "intent": "transactional",
+      "suggested_match_type": "phrase",
+      "priority": "medium",
+      "trend": "SEASONAL",
+      "seasonal_schedule": "Sep/Jan/Feb/Mar/Apr",
+      "reasoning": "Businesses and agencies searching for a website builder/design solution for small or service-based businesses."
+    }
+  ],
+  "faqs": [],
+  "people_also_ask": [],
+  "content_briefs": []
+}
