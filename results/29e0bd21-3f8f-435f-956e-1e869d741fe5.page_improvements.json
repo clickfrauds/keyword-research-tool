@@ -1,0 +1,26 @@
+{
+  "note": "Content only — every URL stays exactly as it is, so nothing in the campaign has to move.",
+  "pages": [
+    {
+      "url": "https://seoblogy.com/tools/seo-automation/",
+      "page_name": "SEO Automation Website Builds",
+      "verdict": "weak",
+      "word_count": 2006,
+      "issues": [
+        "Page is aimed at end businesses buying a site build, not agencies looking to white-label SEO fulfilment — it never mentions reselling, client delivery under another brand, or agency partnership terms",
+        "No pricing, no case studies or client results, no testimonials to build trust for a technical/expensive purchase",
+        "CTA is a generic 'Get My Site Plan' button with no form — high-intent ad clicks have no low-friction way to convert",
+        "Operator seeds like 'white label seo', 'seo reseller program', 'outsource seo for agencies', 'seo fulfilment for agencies' are unsupported: the copy never says 'your branding', 'your client', or describes a reseller/partner relationship",
+        "No mention of Google Ads or multilingual website fulfilment, despite these being core to the business per the niche description"
+      ],
+      "improvements": [
+        "Add a section explicitly addressing agencies: 'we build it, you deliver it under your brand to your client' to earn the white-label/reseller seed terms",
+        "Add a pricing or package overview section so agency buyers can gauge fit before clicking through",
+        "Add a lead-capture form alongside the phone number to reduce friction for agency prospects who won't cold-call",
+        "Add client/agency testimonials or case studies showing white-labeled results",
+        "Add explicit mention of Google Ads and multilingual fulfilment services with a short section on each, since the business offers more than SEO site builds"
+      ],
+      "keep_url": true
+    }
+  ]
+}
