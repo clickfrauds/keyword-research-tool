@@ -1,0 +1,61 @@
+name: SERP Shape
+
+# Before writing an article, ask who already holds the page. Ten of the first
+# thirteen articles on arizonahomeservicepros.com were written without asking,
+# and target SERPs that are walls of YouTube and Reddit.
+#
+# One SerpApi credit per query.
+
+on:
+  workflow_dispatch:
+    inputs:
+      queries:
+        description: "One query per line — the exact thing a person would type"
+        required: true
+        type: string
+      serp_gl:
+        description: "Country for the search"
+        required: false
+        default: "us"
+      request_id:
+        description: "Name for the results file"
+        required: false
+        default: ""
+
+jobs:
+  shape:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Write the query list
+        run: |
+          cat > queries.txt <<'QUERIES_EOF'
+          ${{ github.event.inputs.queries }}
+          QUERIES_EOF
+          echo "— queries —"
+          grep -c . queries.txt || true
+
+      - name: Check who holds each SERP
+        env:
+          SERPAPI_API_KEY: ${{ secrets.SERPAPI_API_KEY }}
+          SERP_GL: ${{ github.event.inputs.serp_gl }}
+        run: python -u scripts/serp_shape.py --file queries.txt
+
+      - name: Job summary
+        if: always()
+        run: cat serp_shape.md >> "$GITHUB_STEP_SUMMARY" || true
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: serp-shape${{ github.event.inputs.request_id && format('-{0}', github.event.inputs.request_id) || '' }}
+          path: |
+            serp_shape.csv
+            serp_shape.md
+          retention-days: 30
