@@ -1,0 +1,438 @@
+zip,city,county,payout,population
+85006,Phoenix,Maricopa,86.63,4121103
+85021,Phoenix,Maricopa,86.63,4121103
+85051,Phoenix,Maricopa,86.63,4121103
+85255,Scottsdale,Maricopa,86.63,243821
+85326,Buckeye,Maricopa,86.63,104923
+85340,Litchfield Park,Maricopa,86.63,6916
+85345,Peoria,Maricopa,86.63,196906
+85003,Phoenix,Maricopa,84.7,4121103
+85019,Phoenix,Maricopa,84.7,4121103
+85338,Goodyear,Maricopa,83.74,107645
+85015,Phoenix,Maricopa,82.78,4121103
+85282,Tempe,Maricopa,82.78,188065
+85044,Phoenix,Maricopa,78.75,4121103
+85073,Phoenix,Maricopa,78.75,4121103
+85381,Peoria,Maricopa,78.75,196906
+85001,Phoenix,Maricopa,77.49,4121103
+85016,Phoenix,Maricopa,77.49,4121103
+85037,Phoenix,Maricopa,77.49,4121103
+85041,Phoenix,Maricopa,77.49,4121103
+85128,Coolidge,Pinal,77.49,16636
+85224,Chandler,Maricopa,77.49,280136
+85248,Chandler,Maricopa,77.49,280136
+85268,Fountain Hills,Maricopa,77.49,23789
+85209,Mesa,Maricopa,77.17,511764
+85383,Peoria,Maricopa,75.77,196906
+85017,Phoenix,Maricopa,75.6,4121103
+85250,Scottsdale,Maricopa,75.25,243821
+85253,Paradise Valley,Maricopa,75.25,12611
+85286,Chandler,Maricopa,75.25,280136
+85138,Maricopa,Pinal,74.05,72459
+85225,Chandler,Maricopa,74.05,280136
+85303,Glendale,Maricopa,73.75,252833
+85374,Surprise,Maricopa,73.75,154948
+85210,Mesa,Maricopa,72.24,511764
+85004,Phoenix,Maricopa,70.88,4121103
+85008,Phoenix,Maricopa,70.88,4121103
+85024,Phoenix,Maricopa,70.88,4121103
+85029,Phoenix,Maricopa,70.88,4121103
+85208,Mesa,Maricopa,70.88,511764
+85249,Chandler,Maricopa,70.88,280136
+85323,Avondale,Maricopa,70.88,92477
+85339,Laveen,Maricopa,70.88,836
+85704,Tucson,Pima,70.88,890860
+85705,Tucson,Pima,70.88,890860
+85708,Tucson,Pima,70.88,890860
+85254,Scottsdale,Maricopa,69.3,243821
+85745,Tucson,Pima,68.51,890860
+85042,Phoenix,Maricopa,67.72,4121103
+85212,Mesa,Maricopa,67.72,511764
+85258,Scottsdale,Maricopa,67.72,243821
+85288,Tempe,Maricopa,67.72,188065
+85295,Gilbert,Maricopa,67.72,280262
+85701,Tucson,Pima,67.72,890860
+85748,Tucson,Pima,67.72,890860
+85629,Sahuarita,Pima,65.47,35862
+85706,Tucson,Pima,64.89,890860
+85710,Tucson,Pima,64.89,890860
+85711,Tucson,Pima,64.89,890860
+85713,Tucson,Pima,64.89,890860
+85719,Tucson,Pima,64.89,890860
+85735,Tucson,Pima,64.89,890860
+85737,Tucson,Pima,64.89,890860
+85739,Tucson,Pima,64.89,890860
+85741,Tucson,Pima,64.89,890860
+85746,Tucson,Pima,64.89,890860
+85750,Tucson,Pima,64.89,890860
+85120,Apache Junction,Pinal,64.58,41058
+85122,Casa Grande,Pinal,64.58,60905
+85143,San Tan Valley,Pinal,64.58,109189
+85715,Tucson,Pima,63.45,890860
+85251,Scottsdale,Maricopa,63.0,243821
+85306,Glendale,Maricopa,63.0,252833
+85641,Vail,Pima,62.73,16315
+85756,Tucson,Pima,62.73,890860
+85716,Tucson,Pima,62.01,890860
+85722,Tucson,Pima,62.01,890860
+85755,Tucson,Pima,62.01,890860
+85707,Tucson,Pima,61.88,890860
+85709,Tucson,Pima,61.88,890860
+85712,Tucson,Pima,61.88,890860
+85714,Tucson,Pima,61.88,890860
+85718,Tucson,Pima,61.88,890860
+85721,Tucson,Pima,61.88,890860
+85723,Tucson,Pima,61.88,890860
+85730,Tucson,Pima,61.88,890860
+85747,Tucson,Pima,61.88,890860
+85749,Tucson,Pima,61.88,890860
+85020,Phoenix,Maricopa,61.7,4121103
+85296,Gilbert,Maricopa,61.7,280262
+85331,Cave Creek,Maricopa,61.7,5091
+85373,Sun City,Maricopa,61.6,37486
+85023,Phoenix,Maricopa,59.85,4121103
+85087,New River,Maricopa,59.85,18240
+85653,Marana,Pima,59.85,56938
+85738,Catalina,Pima,58.27,6489
+85050,Phoenix,Maricopa,57.85,4121103
+85614,Green Valley,Pima,57.19,22114
+86401,Kingman,Mohave,56.98,34375
+86403,Lake Havasu City,Mohave,56.98,58359
+86406,Lake Havasu City,Mohave,56.98,58359
+86429,Bullhead City,Mohave,56.98,42496
+86438,Yucca,Mohave,56.98,75
+86442,Bullhead City,Mohave,56.98,42496
+85140,San Tan Valley,Pinal,56.38,109189
+85035,Phoenix,Maricopa,56.11,4121103
+85736,Tucson,Pima,56.0,890860
+85742,Tucson,Pima,56.0,890860
+85743,Tucson,Pima,56.0,890860
+86409,Kingman,Mohave,54.39,34375
+86413,Golden Valley,Mohave,54.39,8567
+85201,Mesa,Maricopa,54.14,511764
+85262,Scottsdale,Maricopa,54.14,243821
+85305,Glendale,Maricopa,54.14,252833
+85353,Tolleson,Maricopa,54.14,7668
+85623,Oracle,Pinal,53.55,3146
+85640,Tumacacori,Santa Cruz,53.55,22017
+85658,Marana,Pima,53.55,56938
+85757,Tucson,Pima,53.55,890860
+85646,Tubac,Santa Cruz,51.77,1294
+85601,Arivaca,Pima,51.17,268
+86404,Lake Havasu City,Mohave,50.82,58359
+85193,Casa Grande,Pinal,50.4,60905
+85194,Casa Grande,Pinal,50.4,60905
+86312,Prescott Valley,Yavapai,50.4,98921
+85118,Gold Canyon,Pinal,49.14,13107
+85009,Phoenix,Maricopa,48.83,4121103
+85012,Phoenix,Maricopa,48.83,4121103
+85014,Phoenix,Maricopa,48.83,4121103
+85018,Phoenix,Maricopa,48.83,4121103
+85022,Phoenix,Maricopa,48.83,4121103
+85027,Phoenix,Maricopa,48.83,4121103
+85032,Phoenix,Maricopa,48.83,4121103
+85034,Phoenix,Maricopa,48.83,4121103
+85040,Phoenix,Maricopa,48.83,4121103
+85053,Phoenix,Maricopa,48.83,4121103
+85065,Phoenix,Maricopa,48.83,4121103
+85085,Phoenix,Maricopa,48.83,4121103
+85086,Phoenix,Maricopa,48.83,4121103
+85142,Queen Creek,Maricopa,48.83,71867
+85202,Mesa,Maricopa,48.83,511764
+85203,Mesa,Maricopa,48.83,511764
+85204,Mesa,Maricopa,48.83,511764
+85205,Mesa,Maricopa,48.83,511764
+85226,Chandler,Maricopa,48.83,280136
+85233,Gilbert,Maricopa,48.83,280262
+85234,Gilbert,Maricopa,48.83,280262
+85259,Scottsdale,Maricopa,48.83,243821
+85260,Scottsdale,Maricopa,48.83,243821
+85263,Rio Verde,Maricopa,48.83,2261
+85280,Tempe,Maricopa,48.83,188065
+85281,Tempe,Maricopa,48.83,188065
+85297,Gilbert,Maricopa,48.83,280262
+85298,Gilbert,Maricopa,48.83,280262
+85301,Glendale,Maricopa,48.83,252833
+85302,Glendale,Maricopa,48.83,252833
+85308,Glendale,Maricopa,48.83,252833
+85309,Luke Air Force Base,Maricopa,48.83,252833
+85311,Glendale,Maricopa,48.83,252833
+85318,Glendale,Maricopa,48.83,252833
+85327,Cave Creek,Maricopa,48.83,5091
+85335,El Mirage,Maricopa,48.83,36088
+85343,Palo Verde,Coconino,48.83,
+85351,Sun City,Maricopa,48.83,37486
+85354,Tonopah,Maricopa,48.83,
+85355,Waddell,Maricopa,48.83,252833
+85361,Wittmann,Maricopa,48.83,631
+85372,Sun City,Maricopa,48.83,37486
+85375,Sun City West,Maricopa,48.83,27425
+85378,Surprise,Maricopa,48.83,154948
+85379,Surprise,Maricopa,48.83,154948
+85382,Peoria,Maricopa,48.83,196906
+85385,Peoria,Maricopa,48.83,196906
+85387,Surprise,Maricopa,48.83,154948
+85388,Surprise,Maricopa,48.83,154948
+85390,Wickenburg,Maricopa,48.83,8059
+85392,Avondale,Maricopa,48.83,92477
+85395,Goodyear,Maricopa,48.83,107645
+85396,Buckeye,Maricopa,48.83,104923
+85033,Phoenix,Maricopa,48.23,4121103
+85054,Phoenix,Maricopa,48.23,4121103
+86303,Prescott,Yavapai,48.16,47400
+86314,Prescott Valley,Yavapai,48.16,98921
+85045,Phoenix,Maricopa,47.74,4121103
+85083,Phoenix,Maricopa,47.74,4121103
+85236,Higley,Maricopa,47.74,280262
+85257,Scottsdale,Maricopa,47.74,243821
+85269,Fountain Hills,Maricopa,47.74,23789
+85277,Mesa,Maricopa,47.74,511764
+85304,Glendale,Maricopa,47.74,252833
+85307,Glendale,Maricopa,47.74,252833
+85358,Wickenburg,Maricopa,47.74,8059
+85141,Picacho,Pinal,46.96,297
+85173,Superior,Pinal,46.96,2535
+85007,Phoenix,Maricopa,46.66,4121103
+85043,Phoenix,Maricopa,46.66,4121103
+85048,Phoenix,Maricopa,46.66,4121103
+85206,Mesa,Maricopa,46.66,511764
+85207,Mesa,Maricopa,46.66,511764
+85256,Scottsdale,Maricopa,46.66,243821
+85283,Tempe,Maricopa,46.66,188065
+85299,Gilbert,Maricopa,46.66,280262
+85119,Apache Junction,Pinal,46.2,41058
+85131,Eloy,Pinal,46.2,17433
+85132,Florence,Pinal,46.2,25570
+85213,Mesa,Maricopa,46.2,511764
+85215,Mesa,Maricopa,46.2,511764
+85284,Tempe,Maricopa,46.2,188065
+85363,Youngtown,Maricopa,46.2,7015
+85377,Carefree,Maricopa,46.2,3683
+86439,Bullhead City,Mohave,45.67,42496
+86440,Mohave Valley,Mohave,45.67,2555
+86301,Prescott,Yavapai,45.5,47400
+86302,Prescott,Yavapai,45.5,47400
+86304,Prescott,Yavapai,45.5,47400
+86305,Prescott,Yavapai,45.5,47400
+86313,Prescott,Yavapai,45.5,47400
+86315,Prescott Valley,Yavapai,45.5,98921
+86322,Camp Verde,Yavapai,45.5,12521
+86323,Chino Valley,Yavapai,45.5,13602
+86325,Cornville,Yavapai,45.5,3618
+86326,Cottonwood,Yavapai,45.5,12580
+86327,Dewey,Yavapai,45.5,98921
+86333,Mayer,Yavapai,45.5,791
+86336,Sedona,Yavapai,45.5,9777
+86339,Sedona,Yavapai,45.5,9777
+86340,Sedona,Yavapai,45.5,9777
+86341,Sedona,Yavapai,45.5,9777
+86342,Lake Montezuma,Yavapai,45.5,4929
+86351,Sedona,Yavapai,45.5,9777
+85002,Phoenix,Maricopa,42.63,4121103
+85005,Phoenix,Maricopa,42.63,4121103
+85010,Phoenix,Maricopa,42.63,4121103
+85011,Phoenix,Maricopa,42.63,4121103
+85013,Phoenix,Maricopa,42.63,4121103
+85025,Phoenix,Maricopa,42.63,4121103
+85026,Phoenix,Maricopa,42.63,4121103
+85028,Phoenix,Maricopa,42.63,4121103
+85030,Phoenix,Maricopa,42.63,4121103
+85031,Phoenix,Maricopa,42.63,4121103
+85036,Phoenix,Maricopa,42.63,4121103
+85038,Phoenix,Maricopa,42.63,4121103
+85039,Phoenix,Maricopa,42.63,4121103
+85046,Phoenix,Maricopa,42.63,4121103
+85060,Phoenix,Maricopa,42.63,4121103
+85061,Phoenix,Maricopa,42.63,4121103
+85062,Phoenix,Maricopa,42.63,4121103
+85063,Phoenix,Maricopa,42.63,4121103
+85064,Phoenix,Maricopa,42.63,4121103
+85066,Phoenix,Maricopa,42.63,4121103
+85067,Phoenix,Maricopa,42.63,4121103
+85068,Phoenix,Maricopa,42.63,4121103
+85069,Phoenix,Maricopa,42.63,4121103
+85070,Phoenix,Maricopa,42.63,4121103
+85071,Phoenix,Maricopa,42.63,4121103
+85072,Phoenix,Maricopa,42.63,4121103
+85074,Phoenix,Maricopa,42.63,4121103
+85075,Phoenix,Maricopa,42.63,4121103
+85076,Phoenix,Maricopa,42.63,4121103
+85078,Phoenix,Maricopa,42.63,4121103
+85079,Phoenix,Maricopa,42.63,4121103
+85080,Phoenix,Maricopa,42.63,4121103
+85082,Phoenix,Maricopa,42.63,4121103
+85097,New River,Maricopa,42.63,18240
+85098,Phoenix,Maricopa,42.63,4121103
+85127,Chandler Heights,Coconino,42.63,
+85190,Tortilla Flat,Coconino,42.63,
+85211,Mesa,Maricopa,42.63,511764
+85214,Mesa,Maricopa,42.63,511764
+85216,Mesa,Maricopa,42.63,511764
+85244,Chandler,Maricopa,42.63,280136
+85246,Chandler,Maricopa,42.63,280136
+85252,Scottsdale,Maricopa,42.63,243821
+85261,Scottsdale,Maricopa,42.63,243821
+85264,Fort McDowell,Coconino,42.63,
+85266,Scottsdale,Maricopa,42.63,243821
+85267,Scottsdale,Maricopa,42.63,243821
+85271,Scottsdale,Maricopa,42.63,243821
+85274,Mesa,Maricopa,42.63,511764
+85275,Mesa,Maricopa,42.63,511764
+85285,Tempe,Maricopa,42.63,188065
+85287,Tempe,Maricopa,42.63,188065
+85310,Glendale,Maricopa,42.63,252833
+85312,Glendale,Maricopa,42.63,252833
+85320,Aguila,Maricopa,42.63,284
+85322,Arlington,Maricopa,42.63,37
+85329,Cashion,Maricopa,42.63,92477
+85337,Gila Bend,Maricopa,42.63,1363
+85342,Morristown,Maricopa,42.63,138
+85376,Sun City West,Maricopa,42.63,27425
+85380,Peoria,Maricopa,42.63,196906
+86441,Dolan Springs,Mohave,40.63,1341
+85144,San Tan Valley,Pinal,39.9,109189
+86405,Lake Havasu City,Mohave,39.88,58359
+86426,Fort Mohave,Mohave,39.88,15715
+86430,Bullhead City,Mohave,39.88,42496
+86436,Topock,Mohave,39.88,
+85344,Parker,La Paz,39.38,3388
+86434,Peach Springs,Mohave,39.38,1234
+85346,Quartzsite,La Paz,38.85,1877
+85751,Tucson,Pima,34.65,890860
+85602,Benson,Cochise,32.28,5417
+86016,Gray Mountain,Coconino,31.63,
+86018,Parks,Coconino,31.63,1706
+86023,Grand Canyon,Coconino,31.63,1599
+86320,Ash Fork,Yavapai,31.63,458
+86334,Paulden,Yavapai,31.63,4795
+85332,Congress,Yavapai,31.5,1491
+85362,Yarnell,Yavapai,31.5,638
+85901,Show Low,Navajo,31.5,12102
+85931,Forest Lakes,Coconino,31.5,
+85937,Snowflake,Navajo,31.5,6444
+86003,Flagstaff,Coconino,31.5,81235
+86005,Flagstaff,Coconino,31.5,81235
+86020,Cameron,Coconino,31.5,782
+86035,Leupp,Coconino,31.5,882
+86036,Marble Canyon,Coconino,31.5,504
+86040,Page,Coconino,31.5,7345
+86044,Tonalea,Coconino,31.5,205
+86045,Tuba City,Coconino,31.5,7960
+86046,Williams,Coconino,31.5,3369
+86052,North Rim,Coconino,31.5,
+86053,Kaibeto,Coconino,31.5,1661
+86321,Bagdad,Yavapai,31.5,2814
+86332,Kirkland,Yavapai,31.5,1101
+86337,Seligman,Yavapai,31.5,549
+86338,Skull Valley,Coconino,31.5,
+86343,Crown King,Coconino,31.5,
+86435,Supai,Coconino,31.5,
+85622,Green Valley,Pima,31.49,22114
+85541,Payson,Gila,30.91,16622
+85117,Apache Junction,Pinal,30.8,41058
+85121,Bapchule,Pinal,30.8,1697
+85123,Arizona City,Pinal,30.8,9543
+85130,Casa Grande,Pinal,30.8,60905
+85137,Kearny,Pinal,30.8,2109
+85139,Maricopa,Pinal,30.8,72459
+85145,Red Rock,Pinal,30.8,3277
+85147,Sacaton,Pinal,30.8,3429
+85172,Stanfield,Pinal,30.8,646
+85191,Valley Farms,Pinal,30.8,16636
+85618,Mammoth,Pinal,30.8,1191
+85631,San Manuel,Pinal,30.8,3491
+85325,Bouse,La Paz,30.53,1203
+85912,White Mountain Lake,Navajo,30.1,2910
+85928,Heber,Coconino,30.1,
+86329,Humboldt,Yavapai,28.88,4501
+85178,Apache Junction,Pinal,27.56,41058
+85911,Cibecue,Navajo,27.5,2228
+85920,Alpine,Apache,27.5,55
+85923,Clay Springs,Navajo,27.5,338
+85924,Concho,Apache,27.5,
+85925,Eagar,Apache,27.5,4416
+85927,Greer,Apache,27.5,
+85929,Lakeside,Navajo,27.5,4101
+85930,McNary,Apache,27.5,919
+85932,Nutrioso,Apache,27.5,427
+85933,Overgaard,Navajo,27.5,3621
+85934,Pinedale,Navajo,27.5,594
+85935,Pinetop,Navajo,27.5,4101
+85936,Saint Johns,Apache,27.5,3395
+85938,Springerville,Apache,27.5,2008
+85939,Taylor,Navajo,27.5,4183
+85940,Vernon,Apache,27.5,247
+85942,Woodruff,Navajo,27.5,8
+86025,Holbrook,Navajo,27.5,4858
+85619,Mount Lemmon,Pima,26.95,
+85724,Tucson,Pima,26.95,890860
+85744,Tucson,Pima,26.95,890860
+85775,Tucson,Pima,26.95,890860
+86335,Rimrock,Yavapai,25.52,4929
+85341,Lukeville,Coconino,24.53,
+85324,Black Canyon City,Yavapai,21.0,2181
+85544,Pine,Gila,21.0,1740
+86001,Flagstaff,Coconino,21.0,81235
+86004,Flagstaff,Coconino,21.0,81235
+86011,Flagstaff,Coconino,21.0,81235
+86015,Bellemont,Coconino,21.0,1701
+86017,Munds Park,Coconino,21.0,608
+86024,Happy Jack,Coconino,21.0,992
+86038,Mormon Lake,Coconino,21.0,153
+86324,Clarkdale,Yavapai,21.0,4758
+86331,Jerome,Yavapai,21.0,231
+85643,Willcox,Cochise,20.48,3222
+85637,Sonoita,Santa Cruz,20.28,663
+85645,Amado,Santa Cruz,20.28,53
+85654,Rillito,Pima,20.28,
+85702,Tucson,Pima,20.28,890860
+85703,Tucson,Pima,20.28,890860
+85717,Tucson,Pima,20.28,890860
+85720,Tucson,Pima,20.28,890860
+85725,Tucson,Pima,20.28,890860
+85726,Tucson,Pima,20.28,890860
+85728,Tucson,Pima,20.28,890860
+85731,Tucson,Pima,20.28,890860
+85732,Tucson,Pima,20.28,890860
+85733,Tucson,Pima,20.28,890860
+85734,Tucson,Pima,20.28,890860
+85740,Tucson,Pima,20.28,890860
+85752,Tucson,Pima,20.28,890860
+85754,Tucson,Pima,20.28,890860
+85501,Globe,Gila,20.02,7195
+86443,Temple Bar Marina,Coconino,19.52,
+86506,Houck,Apache,19.52,707
+86042,Polacca,Navajo,19.25,1459
+85364,Yuma,Yuma,18.83,145839
+85635,Sierra Vista,Cochise,18.74,45155
+85530,Bylas,Graham,17.88,1551
+85531,Central,Graham,17.88,657
+85533,Clifton,Greenlee,17.88,3822
+85534,Duncan,Greenlee,17.88,969
+85535,Eden,Coconino,17.88,
+85536,Fort Thomas,Graham,17.88,313
+85539,Miami,Gila,17.88,1405
+85540,Morenci,Greenlee,17.88,1673
+85542,Peridot,Gila,17.88,999
+85543,Pima,Graham,17.88,2995
+85546,Safford,Graham,17.88,10239
+85551,Solomon,Graham,17.88,321
+85552,Thatcher,Graham,17.88,5439
+85605,Bowie,Cochise,17.88,384
+85606,Cochise,Coconino,17.88,
+85625,Pearce,Cochise,17.88,611
+85632,San Simon,Cochise,17.88,244
+85616,Huachuca City,Cochise,17.32,1614
+86514,Teec Nos Pos,Apache,17.17,712
+85613,Fort Huachuca,Cochise,17.15,45155
+85615,Hereford,Cochise,17.15,14330
+85624,Patagonia,Santa Cruz,17.15,946
+85633,Sasabe,Coconino,17.15,
+85638,Tombstone,Cochise,17.15,1026
+85650,Sierra Vista,Cochise,17.15,45155
+85333,Dateland,Yuma,16.62,206
+85627,Pomerene,Coconino,16.47,
+86412,Hualapai,Coconino,14.0,
+86427,Fort Mohave,Mohave,14.0,15715
+86437,Valentine,Mohave,14.0,25
+85634,Sells,Pima,10.21,1935

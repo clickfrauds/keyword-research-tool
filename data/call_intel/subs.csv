@@ -1,0 +1,92 @@
+niche|sub_service|calls|paid_pct|booked_pct
+pest control|rodents|246|55|14
+pest control|stinging insects|208|56|13
+pest control|general pest control|175|51|19
+pest control|ants|108|67|13
+pest control|occasional invaders|92|36|10
+pest control|termites|61|33|11
+pest control|cockroaches|55|65|25
+pest control|inspection|53|43|28
+pest control|wildlife|53|26|0
+pest control|fleas & ticks|29|45|10
+pest control|bed bugs|26|42|27
+pest control|moles & gophers|9|0|0
+plumbing|leak detection|321|78|45
+plumbing|drain cleaning|208|87|48
+plumbing|water heater|102|75|27
+plumbing|fixtures|91|76|41
+plumbing|sewer & septic|86|95|27
+plumbing|plumbing repairs|54|67|50
+plumbing|pipe repair & repiping|43|95|58
+plumbing|toilet|38|79|63
+plumbing|water treatment|35|77|34
+plumbing|garbage disposal|22|73|50
+plumbing|gas line|19|79|63
+plumbing|emergency plumbing|19|63|37
+plumbing|sump & ejector pumps|11|18|0
+plumbing|water pressure|8|38|38
+plumbing|bathroom & kitchen plumbing|7|57|43
+appliance repair|refrigerator|342|72|47
+appliance repair|washer|260|79|48
+appliance repair|dryer|161|79|52
+appliance repair|oven & stove|98|66|43
+appliance repair|appliance repair|89|51|18
+appliance repair|service scheduling|68|50|35
+appliance repair|pricing|45|71|9
+appliance repair|dishwasher|33|85|48
+appliance repair|service area|20|50|0
+appliance repair|microwave|15|67|13
+appliance repair|outdoor appliances|9|67|67
+appliance repair|garbage disposal|8|63|38
+tree services|tree removal|451|71|21
+tree services|tree trimming|262|68|27
+tree services|tree services|204|60|21
+tree services|tree health|65|74|15
+tree services|stump grinding|52|85|17
+tree services|land clearing|16|88|31
+tree services|wood & mulch|6|100|0
+hvac|air conditioning|161|75|32
+hvac|hvac install|46|57|13
+hvac|hvac maintenance|45|71|36
+hvac|heating|14|86|43
+hvac|duct work|8|100|25
+lawncare & landscaping|landscaping|86|78|0
+lawncare & landscaping|lawn maintenance|45|67|0
+lawncare & landscaping|weed control|26|88|15
+lawncare & landscaping|beds & trimming|24|79|0
+lawncare & landscaping|irrigation|22|82|27
+lawncare & landscaping|cleanup|19|68|0
+lawncare & landscaping|lawn install|11|100|0
+lawncare & landscaping|landscape design|9|100|0
+lawncare & landscaping|drainage|3|100|0
+roofing|roof repair|105|63|31
+roofing|roof replacement|24|79|67
+roofing|roof inspection|16|63|44
+roofing|roof cleaning|14|14|0
+gutters|gutters|52|46|17
+gutters|gutter cleaning|41|41|17
+gutters|ice & winter|33|27|3
+gutters|gutter repair|24|63|63
+gutters|gutter install|12|67|67
+gutters|gutter guards|6|33|83
+pool services|pool services|44|66|18
+pool services|pool leak|41|68|12
+pool services|pool maintenance|14|71|43
+pool services|pool equipment|5|60|40
+pool services|spa & hot tub|4|0|0
+painting|painting|50|82|24
+painting|interior painting|28|75|43
+painting|exterior painting|22|82|27
+electrical|outlets & switches|34|100|47
+electrical|electrical|25|80|44
+electrical|wiring|25|68|76
+electrical|lighting|13|69|54
+electrical|panel & power|12|67|0
+window repair|window repair|33|33|9
+window repair|replacement|22|50|14
+window repair|glass|13|31|0
+window repair|frame|9|0|0
+window repair|hardware|4|75|0
+water damage|mold|35|54|20
+water damage|water damage|21|90|71
+water damage|restoration|12|83|42

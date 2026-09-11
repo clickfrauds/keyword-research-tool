@@ -1,0 +1,121 @@
+city,state,payout,avg_payout,zips,population,county
+Broomfield,CO,108.67,87.355,4,76304,Broomfield
+Erie,CO,108.67,108.67,1,33808,Weld
+Golden,CO,108.67,63.5375,4,20417,Jefferson
+Littleton,CO,108.67,72.730625,16,44710,Arapahoe
+Longmont,CO,108.67,97.7875,4,102512,Boulder
+Westminster,CO,108.67,71.805,4,115484,Adams
+Camp Hill,PA,108.5,49.4375,4,8169,Cumberland
+Columbia,PA,108.5,108.5,1,10278,Lancaster
+Dover,PA,108.5,108.5,1,15485,York
+Elizabethtown,PA,108.5,108.5,1,11925,Lancaster
+Ephrata,PA,108.5,108.5,1,13772,Lancaster
+Hanover,PA,108.5,63.5,5,16584,York
+Hershey,PA,108.5,108.5,1,14242,Dauphin
+Lebanon,PA,108.5,108.5,2,74675,Lebanon
+Lititz,PA,108.5,108.5,1,9619,Lancaster
+Mechanicsburg,PA,108.5,108.5,2,9720,Cumberland
+Middletown,PA,108.5,108.5,1,9632,Dauphin
+Millersville,PA,108.5,108.5,1,8982,Lancaster
+Mount Joy,PA,108.5,108.5,1,8344,Lancaster
+Willow Street,PA,108.5,108.5,1,9647,Lancaster
+Emmett,ID,104.74,104.74,1,8275,Gem
+Payette,ID,104.74,104.74,1,8536,Payette
+Acworth,GA,103.95,94.6,2,22473,Cobb
+Alpharetta,GA,103.95,90.42,5,66855,Fulton
+Austell,GA,103.95,103.95,2,8447,Cobb
+Canton,GA,103.95,82.31666666666666,3,35741,Cherokee
+Cartersville,GA,103.95,94.6,2,24074,Bartow
+Cumming,GA,103.95,85.64,3,8469,Forsyth
+Decatur,GA,103.95,76.44375,8,24518,DeKalb
+Duluth,GA,103.95,70.84,5,32426,Gwinnett
+Marietta,GA,103.95,77.67785714285715,14,62263,Cobb
+Powder Springs,GA,103.95,103.95,1,18009,Cobb
+Roswell,GA,103.95,86.09333333333332,3,92621,Fulton
+Suwanee,GA,103.95,103.95,1,22349,Gwinnett
+Tucker,GA,103.95,94.6,2,37123,DeKalb
+Woodstock,GA,103.95,103.95,2,37381,Cherokee
+Brighton,CO,103.84,96.40666666666668,3,42059,Adams
+Parker,CO,103.84,93.86,2,61783,Douglas
+Eagle,ID,102.69,102.69,1,32855,Ada
+Berthoud,CO,101.5,101.5,1,12411,Larimer
+Evans,CO,101.5,101.5,1,22396,Weld
+Firestone,CO,101.5,101.5,1,18049,Weld
+Fort Lupton,CO,101.5,101.5,1,8897,Weld
+Frederick,CO,101.5,101.5,1,16651,Weld
+Johnstown,CO,101.5,101.5,1,18883,Weld
+Loveland,CO,101.5,101.5,3,78410,Larimer
+Milliken,CO,101.5,101.5,1,8871,Weld
+Timnath,CO,101.5,101.5,1,8941,Larimer
+Windsor,CO,101.5,101.5,2,37914,Weld
+Caldwell,ID,100.41,74.30333333333333,3,66516,Canyon
+Dallas,GA,99.33,92.28999999999999,2,14714,Paulding
+Kennesaw,GA,99.33,74.9075,4,34605,Cobb
+Norcross,GA,99.33,66.56800000000001,5,18007,Gwinnett
+Castle Rock,CO,93.94,87.23333333333333,3,79123,Douglas
+Ontario,OR,93.31,93.31,1,11842,Malheur
+Englewood,CO,91.81,67.87714285714286,7,34129,Arapahoe
+Monument,CO,88.2,88.2,1,11735,El Paso
+Boulder City,NV,87.5,65.625,2,14919,Clark
+Buckeye,AZ,86.63,67.72999999999999,2,104923,Maricopa
+Middleton,ID,86.63,86.63,1,10649,Canyon
+Mableton,GA,85.25,85.25,1,77678,Cobb
+Peachtree Corners,GA,85.25,85.25,1,42373,Gwinnett
+Smyrna,GA,85.25,75.16666666666667,3,56633,Cobb
+Star,ID,84.7,84.7,1,14745,Ada
+Commerce City,CO,83.88,57.339999999999996,2,66445,Adams
+Dupont,CO,83.88,83.88,1,8453,Adams
+Evergreen,CO,83.88,58.785,2,8602,Jefferson
+Lafayette,CO,83.88,83.88,1,99552,Boulder
+Lone Tree,CO,83.88,83.88,1,14147,Douglas
+Louisville,CO,83.88,83.88,1,20786,Boulder
+Wheat Ridge,CO,83.88,57.339999999999996,2,32070,Jefferson
+Goodyear,AZ,83.74,66.285,2,107645,Maricopa
+Garden City,ID,82.78,82.78,1,12654,Ada
+Albany,OR,78.75,73.75,2,65601,Linn
+Buford,GA,78.75,70.83333333333333,3,17997,Gwinnett
+Coolidge,AZ,77.49,77.49,1,16636,Pinal
+Fountain Hills,AZ,77.49,62.614999999999995,2,23789,Maricopa
+Graham,NC,77.17,77.17,1,18048,Alamance
+Beaverton,OR,75.6,59.722,10,97812,Washington
+Douglasville,GA,75.6,67.62,4,37536,Douglas
+Fairburn,GA,75.6,75.6,1,16831,Fulton
+Fairview,OR,75.6,75.6,1,10735,Multnomah
+Griffin,GA,75.6,70.875,2,23761,Spalding
+Hillsboro,OR,75.6,58.099999999999994,3,108231,Washington
+Lilburn,GA,75.6,65.3,2,15390,Gwinnett
+Fountain,CO,75.25,75.25,1,29300,El Paso
+Paradise Valley,AZ,75.25,75.25,1,12611,Maricopa
+Maricopa,AZ,74.05,52.425,2,72459,Pinal
+Gibsonville,NC,73.75,73.75,1,9467,Guilford
+Lake Oswego,OR,73.08,62.79,2,40381,Clackamas
+Clarkston,GA,72.45,72.45,1,14557,DeKalb
+Fort Myers,FL,72.45,54.168,15,95051,Lee
+Naples,FL,72.45,59.51705882352941,17,19704,Collier
+Thomasville,NC,72.45,56.435,2,27321,Davidson
+Clackamas,OR,72.24,72.24,1,26738,Clackamas
+Happy Valley,OR,72.24,72.24,1,26738,Clackamas
+Avondale,AZ,70.88,59.855,2,92477,Maricopa
+Deerfield Beach,FL,70.88,66.79333333333334,3,88093,Broward
+Newton Upper Falls,MA,70.88,70.88,1,89044,Middlesex
+Quincy,MA,70.88,59.629999999999995,4,102114,Norfolk
+Tualatin,OR,70.88,70.88,1,27763,Washington
+West Linn,OR,70.88,70.88,1,26935,Clackamas
+Wilsonville,OR,70.88,70.88,1,26974,Clackamas
+Woodburn,OR,70.88,70.88,1,27875,Marion
+Mebane,NC,70.03,70.03,1,19538,Alamance
+Raynham,MA,70.03,70.03,1,60433,Bristol
+Glen Allen,VA,70.0,39.03333333333333,3,17551,Henrico
+Henrico,VA,70.0,49.708571428571425,7,49183,Henrico
+Mechanicsville,VA,70.0,70.0,2,38683,Hanover
+Midlothian,VA,70.0,37.71333333333333,3,19120,Chesterfield
+Williamsburg,VA,70.0,46.0,4,97985,Williamsburg
+Gibsonton,FL,69.3,69.3,1,18754,Hillsborough
+Pompano Beach,FL,69.3,66.041875,16,114147,Broward
+Boca Raton,FL,68.78,65.505625,16,100234,Palm Beach
+Boynton Beach,FL,68.78,66.09333333333333,9,81435,Palm Beach
+Lake Worth,FL,68.78,66.26125,8,62146,Palm Beach
+Palm Beach,FL,68.78,68.78,1,9348,Palm Beach
+Palm Beach Gardens,FL,68.78,66.765,2,60959,Palm Beach
+Dallas,OR,68.75,68.75,1,17531,Polk
+Independence,OR,68.75,68.75,1,10199,Polk
