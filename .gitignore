@@ -4,3 +4,7 @@ __pycache__/
 # serp_shape run output — belongs in the workflow artifact, not the repo
 serp_shape.csv
 serp_shape.md
+
+# opportunity_score run output — belongs in the workflow artifact
+opportunity_score.csv
+opportunity_score.md

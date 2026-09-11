@@ -1,0 +1,78 @@
+name: Opportunity Score
+
+# score = monthly searches  x  revenue per call  x  winnable
+#
+# Any of the three at zero makes the whole thing zero. A wide-open SERP on a
+# $4.88 niche is not an opportunity, and neither is a $220 payout behind a wall
+# of YouTube.
+#
+# Volume and revenue are free, so they rank the field first. SerpApi credits
+# are spent last and only on the top `max_serp` — which is why the default is
+# 30 rather than "however many candidates there are".
+
+on:
+  workflow_dispatch:
+    inputs:
+      niche:
+        description: "Niche from the call data — plumbing, hvac, roofing, electrical, water damage, gutters, painting, pest control"
+        required: true
+        default: "plumbing"
+      max_serp:
+        description: "SerpApi credits to spend (30 keeps a run inside a free monthly quota)"
+        required: false
+        default: "30"
+      min_calls:
+        description: "Ignore services with fewer recorded calls than this"
+        required: false
+        default: "8"
+      min_volume:
+        description: "Ignore queries under this many monthly searches (0 = keep all)"
+        required: false
+        default: "0"
+      request_id:
+        description: "Name for the results file"
+        required: false
+        default: ""
+
+jobs:
+  score:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - run: pip install -r requirements.txt
+
+      - name: Score the candidates
+        env:
+          SERPAPI_API_KEY: ${{ secrets.SERPAPI_API_KEY }}
+          GOOGLE_ADS_DEVELOPER_TOKEN: ${{ secrets.GOOGLE_ADS_DEVELOPER_TOKEN }}
+          GOOGLE_ADS_CLIENT_ID: ${{ secrets.GOOGLE_ADS_CLIENT_ID }}
+          GOOGLE_ADS_CLIENT_SECRET: ${{ secrets.GOOGLE_ADS_CLIENT_SECRET }}
+          GOOGLE_ADS_REFRESH_TOKEN: ${{ secrets.GOOGLE_ADS_REFRESH_TOKEN }}
+          GOOGLE_ADS_LOGIN_CUSTOMER_ID: ${{ secrets.GOOGLE_ADS_LOGIN_CUSTOMER_ID }}
+          GOOGLE_ADS_CUSTOMER_ID: ${{ secrets.GOOGLE_ADS_CUSTOMER_ID }}
+          GOOGLE_ADS_USE_PROTO_PLUS: "true"
+        run: |
+          python -u scripts/opportunity_score.py \
+            --niche "${{ github.event.inputs.niche }}" \
+            --max-serp "${{ github.event.inputs.max_serp }}" \
+            --min-calls "${{ github.event.inputs.min_calls }}" \
+            --min-volume "${{ github.event.inputs.min_volume }}"
+
+      - name: Job summary
+        if: always()
+        run: cat opportunity_score.md >> "$GITHUB_STEP_SUMMARY" || true
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: opportunity-score${{ github.event.inputs.request_id && format('-{0}', github.event.inputs.request_id) || '' }}
+          path: |
+            opportunity_score.csv
+            opportunity_score.md
+          retention-days: 30
