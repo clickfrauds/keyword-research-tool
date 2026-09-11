@@ -251,7 +251,10 @@ def serp_verdict(query):
 
 
 WINNABLE = {"WINNABLE": 1.0, "MIXED": 0.4, "BIG BRAND": 0.15,
-            "CROWDED": 0.1, "FORUM WALL": 0.0, "VIDEO WALL": 0.0}
+            "CROWDED": 0.1, "FORUM WALL": 0.0, "VIDEO WALL": 0.0,
+            # Listed rather than left to the .get() default, so that an
+            # unknown verdict scoring 0 stays a bug and not a silent policy.
+            "BRAND WALL": 0.0}
 
 
 def main():
@@ -263,6 +266,14 @@ def main():
     ap.add_argument("--min-calls", type=int, default=8,
                     help="ignore services below this many recorded calls")
     ap.add_argument("--min-volume", type=int, default=0)
+    ap.add_argument("--min-revenue", type=float, default=15.0,
+                    help="drop services paying less than this per call. The "
+                         "plumbing run put sump pump at $7.35 in the GO list "
+                         "twice; an article earning a fifth of the median is "
+                         "not worth the same week of work.")
+    ap.add_argument("--min-write-volume", type=int, default=100,
+                    help="a GO needs at least this many monthly searches. "
+                         "Ranking #1 on 20 a month is not an outcome.")
     ap.add_argument("--no-volume", action="store_true",
                     help="score on revenue x winnable when the Planner is "
                          "unavailable. The ranking is much weaker — the paid "
@@ -285,11 +296,19 @@ def main():
     print(f"2. median payout     ${med:.2f}" if med else "2. median payout     unknown")
 
     cands = {}
+    skipped_cheap = []
     for s in spec:
         base = clean_service(s["specific_service"])
         if len(base) < 4:
             continue
         rev = (med or 1.0) * s["paid_pct"] / 100
+        # Dropped here rather than at the end, so a service this cheap never
+        # reaches the paid step. Sump pump converts at 22% of the median and
+        # took two SerpApi credits in the plumbing run to be recommended twice
+        # at $7.35 a call.
+        if rev < a.min_revenue:
+            skipped_cheap.append((s["specific_service"], rev))
+            continue
         shapes = list(SHAPES)
         if a.geo:
             shapes += [g.replace("{geo}", a.geo.lower()) for g in GEO_SHAPES]
@@ -302,6 +321,10 @@ def main():
                 cands[q] = {"query": q, "service": s["specific_service"],
                             "calls": s["calls"], "paid_pct": s["paid_pct"],
                             "urgent_pct": s["urgent_pct"], "revenue": rev}
+    if skipped_cheap:
+        worst = sorted(skipped_cheap, key=lambda t: t[1])
+        print(f"   {len(skipped_cheap)} service(s) under ${a.min_revenue:.0f}/call "
+              f"left out, e.g. {worst[0][0]} at ${worst[0][1]:.2f}")
     print(f"3. query candidates  {len(cands)}")
 
     vols = keyword_volumes(list(cands), a.geo or None)
@@ -348,9 +371,20 @@ def main():
         print(f"{i:3}. {mark} {c['query'][:44]:46}{c['volume']:>6}"
               f"  ${c['revenue']:>5.2f}  {v['verdict']:11}{c['score']:>7}")
 
+    # Volume floor as well as a verdict. The plumbing run marked GO on
+    # "signs you need drain cleaning" at 20 searches a month and "faucet repair
+    # cost" at 30 — winnable, and worth almost nothing won.
     go = sorted([c for c in checked if c.get("score", 0) > 0
-                 and c.get("verdict") in ("WINNABLE", "MIXED")],
+                 and c.get("verdict") in ("WINNABLE", "MIXED")
+                 and c["volume"] >= a.min_write_volume],
                 key=lambda c: -c["score"])
+    thin = [c for c in checked
+            if c.get("verdict") in ("WINNABLE", "MIXED")
+            and c["volume"] < a.min_write_volume]
+    if thin:
+        print(f"\n   {len(thin)} winnable but under {a.min_write_volume} "
+              f"searches/mo, not listed as GO: "
+              + ", ".join(f"{c['query']} ({c['volume']})" for c in thin[:4]))
 
     cols = ["query", "service", "volume", "revenue", "score", "verdict", "why",
             "calls", "paid_pct", "urgent_pct", "top3"]

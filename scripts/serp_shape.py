@@ -85,6 +85,40 @@ INSTITUTIONAL = ("water.com", "dws.", "waterdistrict", "waterauthority",
                  "pentair", "zurn.com", "sensus.com", "badgermeter")
 
 
+# "independent site" was doing too much work. It meant "a site I could not
+# name", and the WINNABLE rules read it as "a small site like mine, so the slot
+# is reachable". Checked against the domains that actually came back in the
+# plumbing run, it was holding merriam-webster.com, servpro.com, homewyse.com,
+# thermomate.com, rinnai.us and menards.com — a dictionary, a national
+# franchise, a cost aggregator, two manufacturers and a retailer. None of them
+# is evidence that a new site can rank; every one of them is evidence it
+# cannot.
+MANUFACTURER = ("rinnai", "navien", "noritz", "rheem", "bradfordwhite", "aosmith",
+                "stiebel", "eemax", "takagi", "thermomate", "moen", "delta",
+                "kohler", "americanstandard", "pfister", "insinkerator",
+                "zoeller", "libertypumps", "wayne", "ridgid", "culligan",
+                "pelicanwater", "springwell", "aquasana", "kinetico")
+
+# A price/estimate database. They rank on a dataset nobody can reproduce.
+AGGREGATOR = ("homewyse", "homeguide", "fixr", "homeadvisor", "costhelper",
+              "improvenet", "manta", "porch.com", "buildzoom", "houzz",
+              "remodelingcalculator", "thervo")
+
+# A franchise with hundreds of locations is not a local contractor, whatever
+# its domain says. Checked before TRADE_WORDS, which would call every one of
+# these a contractor on the strength of "rooter" or "plumbing".
+FRANCHISE = ("rotorooter", "mrrooter", "benjaminfranklinplumbing", "rescuerooter",
+             "arsrescuerooter", "servpro", "roto-rooter", "mrhandyman",
+             "onehourair", "aireserv", "punctualplumber", "zoomdrain",
+             "wind riverenvironmental", "milestone", "leaf home", "leafhome")
+
+# Reference works and encyclopaedias. merriam-webster.com came back at #1 for
+# "how much does drain snaking cost", which says the query is being read as a
+# definition, not a price.
+REFERENCE = ("merriam-webster", "wikipedia", "britannica", "dictionary.com",
+             "thefreedictionary", "collinsdictionary", "vocabulary.com")
+
+
 def classify_host(host):
     h = host.lower()
     h = h[4:] if h.startswith("www.") else h
@@ -96,6 +130,14 @@ def classify_host(host):
         return "institutional"
     if any(d in h for d in INSTITUTIONAL):
         return "institutional"
+    if any(d in h for d in REFERENCE):
+        return "reference"
+    if any(d in h for d in FRANCHISE):
+        return "franchise"
+    if any(d in h for d in AGGREGATOR):
+        return "aggregator"
+    if any(d in h for d in MANUFACTURER):
+        return "manufacturer"
     if any(w in h for w in TRADE_WORDS):
         return "local contractor"
     return "independent site"
@@ -149,11 +191,28 @@ def shape(data):
     indie = counts.get("independent site", 0)
     brand = counts.get("big brand", 0)
 
+    # Sites that hold a page on something a new site cannot assemble: a product
+    # line, a price database nobody else has, a national footprint, a
+    # dictionary entry. Counted across the top 3, because that is the band
+    # being competed for.
+    walled = sum(1 for k in kinds[:3]
+                 if k in ("manufacturer", "aggregator", "franchise",
+                          "reference", "directory", "institutional"))
+
     # Checked before the walls on purpose. "slab leak repair cost arizona" has
     # asapplumbingaz.com and thearizonaplumber.net in the first two places and
     # a video block further down; reading the block first threw away the best
     # opening in the batch.
-    if first_trade is not None and first_trade <= 2:
+    # Before anything else. "tankless water heater cost" came back WINNABLE on
+    # a top 3 of manufacturers — 33,100 searches a month, and not one slot a
+    # plumbing site could take. Two of these in the first three places means
+    # Google is answering with the product, the database or the brand, and a
+    # contractor further down is the exception that proves it.
+    if walled >= 2:
+        verdict, why = "BRAND WALL", (
+            f"{walled} of the top 3 are manufacturers, aggregators, franchises "
+            "or reference sites")
+    elif first_trade is not None and first_trade <= 2:
         verdict, why = "WINNABLE", (f"a contractor's site at #{first_trade + 1}"
                                     + (f", {trade} in the top 10" if trade > 1 else ""))
     elif has_video_block and video + forum >= 2:
@@ -180,9 +239,15 @@ def shape(data):
         "verdict": verdict, "why": why,
         "video": video, "forum": forum, "directory": counts.get("directory", 0),
         "big_brand": brand, "independent": indie, "contractor": trade,
+        "walled_top3": walled,
         "institutional": kinds.count("institutional"),
         "video_block": int(has_video_block), "forums_block": int(has_discussions),
-        "top3": " | ".join(
+        # Joined with a middle dot, not a pipe: this string is printed
+        # straight into a markdown table, where "|" opens a new cell. Every
+        # row of the plumbing summary showed only its #1 result — #2 and #3
+        # were parsed as extra columns and dropped, which are exactly the two
+        # the verdict turns on.
+        "top3": " · ".join(
             (urllib.parse.urlparse(r.get("link", "")).netloc or "?").replace("www.", "")
             for r in top[:3]),
     }
