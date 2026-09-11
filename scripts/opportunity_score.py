@@ -82,11 +82,21 @@ GEO_SHAPES = [
 
 
 def clean_service(name):
-    """'faucet / valve / fixture repair' -> 'faucet repair'."""
-    s = name.lower()
-    s = re.split(r"\s*[/(]", s)[0].strip()
-    s = re.sub(r"\s+", " ", s)
-    return s
+    """'faucet / valve / fixture repair' -> 'faucet repair'.
+
+    The call log writes alternatives with slashes, and the head noun sits at
+    the very end: in 'irrigation / sprinkler leak' only the last segment
+    carries 'leak'. Keeping just the first segment is what turned that into
+    the base 'irrigation', and 'kitchen / bathroom drain' into 'kitchen' —
+    which is how a run spent credits ranking 'irrigation cost' and
+    'kitchen cost'. Take the first alternative and give it the head noun back.
+    """
+    s = re.sub(r"\s+", " ", re.split(r"\s*\(", name.lower())[0]).strip()
+    parts = [p.strip() for p in s.split("/") if p.strip()]
+    if len(parts) < 2:
+        return s
+    head = parts[-1].split()[1:]          # last segment minus its own modifier
+    return " ".join([parts[0]] + head).strip()
 
 
 def load_specifics(niche):
