@@ -30,10 +30,15 @@ WHAT IT WILL NOT TOUCH
     table touched here is client_keys, and only its four label columns.
 
 IDEMPOTENT
-  Matching is by exact conversion action name. A second run finds what
-  the first run made and re-reads the labels instead of creating twins —
-  duplicate actions would split the conversion data and quietly wreck
-  Smart Bidding.
+  Matching is by conversion action name, compared the way Google compares
+  it: case-insensitively, whitespace-collapsed, and counting REMOVED
+  actions, which still own their names. A second run finds what the first
+  run made and re-reads the labels instead of creating twins — duplicate
+  actions would split the conversion data and quietly wreck Smart Bidding.
+
+  A name held by a REMOVED action can never be recreated. That one is
+  reported and left out of the mutate; the mutate is atomic, so including
+  it would take the other two down with it.
 
 SAFETY MODEL
   CONV_MODE=validate (default): Google checks every operation and reports
@@ -136,23 +141,51 @@ def gaql_escape(s):
     return s.replace("\\", "\\\\").replace("'", "\\'")
 
 
+def _norm_name(s):
+    """Collapse whitespace and case — how Google compares, not how GAQL does."""
+    return " ".join(str(s or "").split()).lower()
+
+
 def fetch_actions(svc, names):
-    """name -> {resource_name, id, snippets[]} for the actions that exist."""
-    name_list = "','".join(gaql_escape(n) for n in names)
+    """name -> {resource_name, id, real_name, status, snippets[]}.
+
+    Matched the way Google's own uniqueness check matches: case-insensitively,
+    whitespace-collapsed, and including REMOVED actions.
+
+    The previous query filtered on `name IN (...)` — which GAQL compares
+    case-sensitively — and on `status != 'REMOVED'`. Google's uniqueness check
+    is neither of those things: a REMOVED action still holds its name, and a
+    manually created "Phone call click" blocks "Phone Call Click". So an action
+    could exist, be invisible here, and then make the create fail with "The
+    specified conversion action name already exists" — with the caller having
+    just logged that nothing existed. Measured on account 9906499431.
+
+    Since the mutate is atomic, one such collision rejected all three actions,
+    so the account ended up with none.
+    """
+    wanted = {_norm_name(n): n for n in names}
     query = (
         "SELECT conversion_action.resource_name, conversion_action.id, "
         "conversion_action.name, conversion_action.status, "
         "conversion_action.tag_snippets "
-        "FROM conversion_action "
-        f"WHERE conversion_action.name IN ('{name_list}') "
-        "AND conversion_action.status != 'REMOVED'"
+        "FROM conversion_action"
     )
     found = {}
     for row in svc.search(customer_id=PUSH_CUSTOMER_ID, query=query):
         ca = row.conversion_action
-        found[ca.name] = {
+        key = wanted.get(_norm_name(ca.name))
+        if not key:
+            continue
+        status = getattr(ca.status, "name", None) or str(ca.status)
+        # A live action always wins over a removed one holding the same name.
+        prev = found.get(key)
+        if prev and prev["status"] != "REMOVED":
+            continue
+        found[key] = {
             "resource_name": ca.resource_name,
             "id": ca.id,
+            "real_name": ca.name,
+            "status": status,
             "snippets": [
                 (getattr(sn, "event_snippet", "") or "")
                 for sn in (ca.tag_snippets or [])
@@ -424,9 +457,26 @@ def run_one(client, svc, ca_svc, row, validate, GoogleAdsException):
         log(f"❌ {name}: could not read conversion actions — {str(e)[:100]}")
         return "read failed"
 
-    for n in existing:
-        log(f"   already exists: {n}")
-    missing = [n for n in ACTIONS if n not in existing]
+    # A REMOVED action still owns its name in Google's eyes, so recreating it
+    # can never succeed. Say so and leave it out of the mutate, rather than
+    # letting one dead name take the other two down with it.
+    blocked = {}
+    for n, info in existing.items():
+        if info["status"] == "REMOVED":
+            blocked[n] = info
+            log(f"   ⛔ name held by a REMOVED action: {info['real_name']!r} "
+                f"(id {info['id']}) — Google will refuse to recreate it. "
+                f"Restore it in the UI, or rename the dead one.")
+        elif info["real_name"] != n:
+            log(f"   already exists as {info['real_name']!r} — matched {n!r}")
+        else:
+            log(f"   already exists: {n}")
+
+    usable = {n: i for n, i in existing.items() if n not in blocked}
+    missing = [n for n in ACTIONS if n not in usable and n not in blocked]
+    if blocked:
+        log(f"⚠️ {name}: skipping {len(blocked)} name(s) already taken by a "
+            f"removed action: " + ", ".join(sorted(blocked)))
 
     if missing:
         ops = [build_create_op(client, n, ACTIONS[n]) for n in missing]
@@ -453,13 +503,21 @@ def run_one(client, svc, ca_svc, row, validate, GoogleAdsException):
         else:
             log(f"✅ Created {len(missing)}: " + ", ".join(missing))
             existing = fetch_actions(svc, list(ACTIONS.keys()))
+            usable = {n: i for n, i in existing.items()
+                      if i["status"] != "REMOVED"}
+    elif blocked:
+        log("⚠️ Nothing created — every missing name is held by a removed "
+            "action. Labels below cover only what is live.")
     else:
         log("✅ All three already present — nothing to create.")
 
     results = {"customer_id": PUSH_CUSTOMER_ID, "website_name": name,
                "aw_id": None, "actions": {}}
     for n, spec in ACTIONS.items():
-        info = existing.get(n)
+        # usable, not existing: a REMOVED action still carries a tag snippet,
+        # and writing its label onto the client row would put a dead label in
+        # the middleware — conversions fired against it are silently dropped.
+        info = usable.get(n)
         if not info:
             results["actions"][n] = {"column": spec["column"], "label": None}
             continue
