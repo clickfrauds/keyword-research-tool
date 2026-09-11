@@ -25,6 +25,10 @@ on:
         description: "Ignore services with fewer recorded calls than this"
         required: false
         default: "8"
+      geo:
+        description: "State or city to qualify queries with, e.g. Arizona. Leave blank for nationwide informational queries"
+        required: false
+        default: ""
       min_volume:
         description: "Ignore queries under this many monthly searches (0 = keep all)"
         required: false
@@ -62,7 +66,7 @@ jobs:
             --niche "${{ github.event.inputs.niche }}" \
             --max-serp "${{ github.event.inputs.max_serp }}" \
             --min-calls "${{ github.event.inputs.min_calls }}" \
-            --min-volume "${{ github.event.inputs.min_volume }}"
+            --min-volume "${{ github.event.inputs.min_volume }}"             --geo "${{ github.event.inputs.geo }}"
 
       - name: Job summary
         if: always()

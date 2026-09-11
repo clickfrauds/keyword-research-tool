@@ -68,6 +68,18 @@ SHAPES = [
     "{s} vs replacement",
 ]
 
+# With --geo. The nationwide shapes above are the default because ZIP routing
+# means content does not have to name a place to earn from it, and the openings
+# found so far are informational. But "slab leak repair cost arizona" was the
+# strongest candidate of the last batch and no shape above can produce it — a
+# state-qualified query is a different, usually thinner, SERP and deserves to
+# be asked about rather than assumed closed.
+GEO_SHAPES = [
+    "{s} {geo}",
+    "{s} cost {geo}",
+    "{s} near me {geo}",
+]
+
 
 def clean_service(name):
     """'faucet / valve / fixture repair' -> 'faucet repair'."""
@@ -110,7 +122,26 @@ def median_payout(niche, ptype="Call"):
     return None
 
 
-def keyword_volumes(queries, geo_id=None):
+def geo_target_id(client, name):
+    """Ask Google for the id rather than hardcoding one. A wrong constant does
+    not error — it silently returns volumes for the wrong place."""
+    try:
+        svc = client.get_service("GeoTargetConstantService")
+        req = client.get_type("SuggestGeoTargetConstantsRequest")
+        req.locale = "en"
+        req.country_code = "US"
+        req.location_names.names.append(name)
+        for s in svc.suggest_geo_target_constants(request=req).geo_target_constant_suggestions:
+            g = s.geo_target_constant
+            if g.target_type in ("State", "Province", "City", "Country"):
+                print(f"   geo: {g.canonical_name} ({g.target_type})")
+                return g.resource_name.split("/")[-1]
+    except Exception as e:
+        print(f"   geo lookup failed ({str(e)[:60]}) — using United States")
+    return None
+
+
+def keyword_volumes(queries, geo_name=None):
     """Monthly searches from the Ads Keyword Planner. Free, but it needs the
     five GOOGLE_ADS_* secrets; without them every query scores volume 0 and the
     run still finishes, ranked on revenue alone."""
@@ -125,6 +156,7 @@ def keyword_volumes(queries, geo_id=None):
         return {}
     try:
         client = GoogleAdsClient.load_from_env(version="v18")
+        geo_id = geo_target_id(client, geo_name) if geo_name else None
         svc = client.get_service("KeywordPlanIdeaService")
         req = client.get_type("GenerateKeywordHistoricalMetricsRequest")
         req.customer_id = cust
@@ -169,10 +201,14 @@ def main():
     ap.add_argument("--min-calls", type=int, default=8,
                     help="ignore services below this many recorded calls")
     ap.add_argument("--min-volume", type=int, default=0)
+    ap.add_argument("--geo", default="",
+                    help="state or city to qualify queries with, e.g. Arizona. "
+                         "Empty = nationwide informational queries")
     ap.add_argument("--ptype", default="Call")
     a = ap.parse_args()
 
-    print(f"\n── {a.niche} · max {a.max_serp} SerpApi credits ──\n")
+    where = a.geo or "nationwide"
+    print(f"\n── {a.niche} · {where} · max {a.max_serp} SerpApi credits ──\n")
 
     spec = [s for s in load_specifics(a.niche) if s["calls"] >= a.min_calls]
     if not spec:
@@ -188,7 +224,10 @@ def main():
         if len(base) < 4:
             continue
         rev = (med or 1.0) * s["paid_pct"] / 100
-        for shape in SHAPES:
+        shapes = list(SHAPES)
+        if a.geo:
+            shapes += [g.replace("{geo}", a.geo.lower()) for g in GEO_SHAPES]
+        for shape in shapes:
             q = shape.format(s=base)
             if len(q.split()) > 9:
                 continue
@@ -199,7 +238,7 @@ def main():
                             "urgent_pct": s["urgent_pct"], "revenue": rev}
     print(f"3. query candidates  {len(cands)}")
 
-    vols = keyword_volumes(list(cands))
+    vols = keyword_volumes(list(cands), a.geo or None)
     for q, c in cands.items():
         c["volume"] = vols.get(q.lower(), 0)
     have_vol = sum(1 for c in cands.values() if c["volume"])
