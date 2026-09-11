@@ -53,10 +53,20 @@ which matters on a duration-billed offer.
 services inside a niche earn: plumbing's `sewer & septic` pays on 95% of calls
 while `sump & ejector pumps` pays on 18% of 11.
 
-## What is NOT here
+## The phrase layer
 
-The phrase level — every recorded call's wording, with `urgency`, `outcome`
-and `paid` flags. It is ~756 KB and lives only in the dashboard. The specific
-services derived from it are already baked into `SUB_SERVICES`, but the raw
-phrases are what article topics should be written from, so recapture them with
-`extract_call_intel.js` in this folder when they are needed again.
+`phrases.csv` is all 5,831 recorded calls — the exact wording, with `urgency`,
+`outcome` and `paid` on each one. 67% of them paid; 30% were not routine.
+
+This is the layer article topics should be written from. Batch 1 on
+arizonahomeservicepros.com was written from my paraphrase of these instead,
+and 10 of its 13 titles turned out to target SERPs that are walls of YouTube
+and Reddit — the topics were plausible, but nobody had checked what the
+callers actually say or what already ranks for it.
+
+`specifics.csv` sits between subs and phrases: 587 specific services with the
+same three percentages, which is where "sewer backup pays on 100% of 19 calls"
+and "sump pumps pay on 18% of 11" become visible.
+
+Recapture with `extract_call_intel.js` when the numbers age — the dashboard is
+the only source and it is behind a login.

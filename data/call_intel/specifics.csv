@@ -1,0 +1,588 @@
+niche,sub_service,specific_service,calls,paid_pct,booked_pct,urgent_pct
+pest control,rodents,mice / rat control,109,59,16,20
+pest control,rodents,rodent droppings cleanup,21,71,29,29
+pest control,rodents,mice in attic / walls,20,40,0,15
+pest control,rodents,rodent exclusion / proofing,19,32,16,32
+pest control,rodents,dead rodent removal,12,50,25,50
+pest control,rodents,rodent in vehicle,10,90,0,10
+pest control,rodents,mice and ant control,9,67,0,0
+pest control,rodents,dead animal removal,6,0,0,50
+pest control,rodents,rodent and wildlife control,5,100,0,0
+pest control,rodents,scorpion exclusion,3,0,0,0
+pest control,rodents,rodent abatement survey,3,0,0,0
+pest control,rodents,humane mice removal,3,100,0,0
+pest control,rodents,snake and rodent control,3,0,0,0
+pest control,rodents,mice extermination,3,0,100,100
+pest control,rodents,yellow jackets and mice,3,100,0,0
+pest control,rodents,mice/rat control (recurring),3,100,0,0
+pest control,rodents,rodent control (garage),3,67,0,0
+pest control,rodents,wildlife exclusion inspection,2,0,0,0
+pest control,rodents,"rodent control (mice/rats, duplex)",2,100,100,100
+pest control,rodents,rodent/field rat control,2,100,0,0
+pest control,rodents,rodent damage cleanup / sanitation,2,100,0,0
+pest control,rodents,bugs & mouse (commercial store),2,0,0,0
+pest control,rodents,squirrel removal (in wall),1,0,0,0
+pest control,stinging insects,wasp nest removal,84,61,17,26
+pest control,stinging insects,wasp removal,26,54,19,15
+pest control,stinging insects,bee / carpenter bee removal,25,48,12,56
+pest control,stinging insects,hornet nest removal,22,55,9,55
+pest control,stinging insects,bee removal,15,53,20,67
+pest control,stinging insects,yellow jacket removal,13,69,0,0
+pest control,stinging insects,hornet removal,4,0,0,0
+pest control,stinging insects,honey bee removal,3,0,0,0
+pest control,stinging insects,in-ground bee nest / stinging insects,3,67,0,0
+pest control,stinging insects,bee swarm removal,2,0,0,100
+pest control,stinging insects,ground wasp control,2,100,0,0
+pest control,stinging insects,bee/wasp removal (follow-up on prior request),2,100,0,0
+pest control,stinging insects,bee removal (attic),2,100,0,100
+pest control,stinging insects,wasp control + unknown pest,2,0,0,0
+pest control,stinging insects,yellowjacket control,2,100,0,0
+pest control,stinging insects,wasp and spider control,1,0,0,0
+pest control,general pest control,general pest / bug spray,136,56,23,32
+pest control,general pest control,pest control,23,48,13,35
+pest control,general pest control,honeybee removal,5,0,0,0
+pest control,general pest control,preventive pest treatment,4,0,0,0
+pest control,general pest control,insect control,3,100,0,0
+pest control,general pest control,post-infestation sanitization cleanup,2,0,0,0
+pest control,general pest control,bug extermination,1,0,0,0
+pest control,general pest control,exterior pest control,1,0,0,0
+pest control,ants,ant control,64,62,17,31
+pest control,ants,carpenter ants,23,74,0,39
+pest control,ants,sugar / little black ants,4,75,75,0
+pest control,ants,scorpion and ant control,3,100,0,0
+pest control,ants,roach and ant control,3,100,0,0
+pest control,ants,ant extermination,3,100,0,0
+pest control,ants,ant & wasp control,3,67,0,67
+pest control,ants,ant and spider control,3,0,0,0
+pest control,ants,ant and termite control,1,0,0,0
+pest control,ants,ant control (inside and outside),1,100,0,0
+pest control,occasional invaders,spider control,27,52,22,26
+pest control,occasional invaders,beetle / clover mite control,11,36,0,0
+pest control,occasional invaders,moth control,10,90,30,30
+pest control,occasional invaders,fly / gnat control,8,12,0,0
+pest control,occasional invaders,scorpion control,6,50,0,0
+pest control,occasional invaders,fly control,6,0,0,0
+pest control,occasional invaders,powderpost beetle treatment,5,0,0,0
+pest control,occasional invaders,maggot removal,3,0,0,100
+pest control,occasional invaders,flying insect control,3,0,0,0
+pest control,occasional invaders,gecko / lizard control,2,0,0,0
+pest control,occasional invaders,lizard removal,2,0,0,0
+pest control,occasional invaders,silverfish / earwig control,2,0,0,0
+pest control,occasional invaders,earwig control,2,0,0,0
+pest control,occasional invaders,powder post beetle fumigation,2,0,0,0
+pest control,occasional invaders,drain fly treatment,1,0,0,0
+pest control,occasional invaders,gecko control,1,100,0,0
+pest control,occasional invaders,fruit fly control,1,100,0,0
+pest control,termites,termite control,40,35,12,15
+pest control,termites,termite fumigation,5,40,40,0
+pest control,termites,WDO / termite inspection report,2,0,0,0
+pest control,termites,wdo inspection,2,0,0,0
+pest control,termites,termite protection,2,0,0,0
+pest control,termites,termite treatment (waiting on referral tech),2,0,0,0
+pest control,termites,termite treatment (subterranean),2,100,0,0
+pest control,termites,termite foundation pretreatment (new construction),2,100,0,0
+pest control,termites,termite treatment (tree),2,0,0,0
+pest control,termites,drywood termites,1,0,0,0
+pest control,termites,dry wood termites,1,0,0,0
+pest control,cockroaches,cockroach control,41,66,20,22
+pest control,cockroaches,roach extermination,6,100,50,50
+pest control,cockroaches,german cockroach control,6,50,50,0
+pest control,cockroaches,cockroach infestation,1,0,0,0
+pest control,cockroaches,roaches and spiders,1,0,0,0
+pest control,inspection,pest identification / inspection,47,43,26,26
+pest control,inspection,pest inspection,6,50,50,0
+pest control,wildlife,wildlife removal,17,29,0,6
+pest control,wildlife,stray animal removal,16,56,0,19
+pest control,wildlife,snake removal,6,0,0,50
+pest control,wildlife,raccoon / opossum / skunk removal,5,0,0,0
+pest control,wildlife,bat removal,3,0,0,100
+pest control,wildlife,bird / pigeon control,2,0,0,0
+pest control,wildlife,animal removal,1,0,0,0
+pest control,wildlife,skunk removal (trapped),1,0,0,0
+pest control,wildlife,wildlife rescue (baby bunny in window well),1,0,0,0
+pest control,wildlife,snake removal (rattlesnake),1,0,0,100
+pest control,fleas & ticks,flea treatment,15,60,20,80
+pest control,fleas & ticks,tick / mosquito control,9,44,0,0
+pest control,fleas & ticks,flea infestation,3,0,0,100
+pest control,fleas & ticks,spider and tick control,2,0,0,0
+pest control,bed bugs,bed bug treatment,26,42,27,50
+pest control,moles & gophers,mole / gopher control,6,0,0,0
+pest control,moles & gophers,gopher control,2,0,0,0
+pest control,moles & gophers,mole control,1,0,0,0
+plumbing,leak detection,leak detection,119,77,45,34
+plumbing,leak detection,water meter / high-bill leak,39,77,62,38
+plumbing,leak detection,slab leak,33,85,33,55
+plumbing,leak detection,water service line leak,28,86,50,43
+plumbing,leak detection,commercial leak detection,22,36,9,55
+plumbing,leak detection,ceiling / wall leak,20,85,75,45
+plumbing,leak detection,under-house / crawlspace leak,12,83,83,67
+plumbing,leak detection,irrigation / sprinkler leak,11,100,55,0
+plumbing,leak detection,underground / buried line leak,9,33,0,67
+plumbing,leak detection,pool / spa leak,6,100,0,0
+plumbing,leak detection,yard / meter-box leak,5,100,40,0
+plumbing,leak detection,attic leak,3,100,100,100
+plumbing,leak detection,main line clog,3,100,0,100
+plumbing,leak detection,yard drain cleaning,3,100,0,0
+plumbing,leak detection,underground pipe leak,3,100,0,100
+plumbing,leak detection,commercial floor drain overflow & lift pump repair,2,100,100,100
+plumbing,leak detection,main line clearing,1,0,0,0
+plumbing,leak detection,sewer line epoxy lining under slab,1,100,0,0
+plumbing,leak detection,water leak detection (incl. pool),1,100,0,0
+plumbing,drain cleaning,drain cleaning,56,93,55,45
+plumbing,drain cleaning,clogged drain / unclog,45,78,42,44
+plumbing,drain cleaning,drain snaking / cabling,20,100,45,55
+plumbing,drain cleaning,hydro jetting,20,85,15,55
+plumbing,drain cleaning,kitchen / sink drain clog,15,100,80,20
+plumbing,drain cleaning,sewer drain cleaning,6,100,50,100
+plumbing,drain cleaning,drain line leak,6,100,50,50
+plumbing,drain cleaning,drain pipe repair,6,100,100,50
+plumbing,drain cleaning,shower / tub drain clog,5,100,60,60
+plumbing,drain cleaning,dishwasher air-gap leak,3,100,0,0
+plumbing,drain cleaning,French drain service,3,0,0,0
+plumbing,drain cleaning,mainline drain cleaning,3,100,100,100
+plumbing,drain cleaning,commercial drain service,3,100,0,100
+plumbing,drain cleaning,drain grate removal,3,100,0,100
+plumbing,drain cleaning,pipe blockage,2,0,0,0
+plumbing,drain cleaning,mainline blockage clearing,2,100,0,0
+plumbing,drain cleaning,main drain clog,2,0,0,100
+plumbing,drain cleaning,drain cleaning (clogged ground drain),2,0,100,0
+plumbing,drain cleaning,clogged main sewer line backing up/flooding,2,100,100,100
+plumbing,drain cleaning,slow drain / clogged bathroom sink,2,100,100,0
+plumbing,drain cleaning,broken drain line repair,1,100,100,0
+plumbing,drain cleaning,water backing up under tub/shower,1,0,0,100
+plumbing,water heater,water heater leak,48,69,40,69
+plumbing,water heater,tankless flush / descale,22,91,18,0
+plumbing,water heater,tankless water heater,20,90,20,0
+plumbing,water heater,outdoor water leak,3,0,0,100
+plumbing,water heater,water heater not heating,2,0,0,0
+plumbing,water heater,water heater service & flush,2,100,0,0
+plumbing,water heater,water heater flood/replacement,2,100,0,100
+plumbing,water heater,water heater replacement (gas to heat pump),1,0,0,0
+plumbing,water heater,water heater repair (tank),1,0,0,0
+plumbing,water heater,water heater repair estimate (error code),1,100,100,0
+plumbing,fixtures,faucet / valve / fixture repair,44,82,45,52
+plumbing,fixtures,faucet repair,7,86,43,0
+plumbing,fixtures,shower valve / showerhead leak,6,50,50,0
+plumbing,fixtures,burst / broken supply valve,6,50,50,100
+plumbing,fixtures,bathtub faucet repair,5,100,40,100
+plumbing,fixtures,toilet supply valve,3,0,100,100
+plumbing,fixtures,faucet cartridge replacement,3,100,0,100
+plumbing,fixtures,toilet fill valve,3,100,100,0
+plumbing,fixtures,utility / laundry sink leak,3,100,0,100
+plumbing,fixtures,burst pipe repair,3,100,0,100
+plumbing,fixtures,outdoor spigot repair,2,100,0,100
+plumbing,fixtures,water softener valve replacement/reinstall,2,100,0,0
+plumbing,fixtures,broken water valve/pipe - no water,2,0,0,100
+plumbing,fixtures,leaking valve behind washing machine,2,0,0,100
+plumbing,sewer & septic,sewer line repair,44,93,32,39
+plumbing,sewer & septic,sewer backup,19,100,16,89
+plumbing,sewer & septic,septic service,10,90,60,40
+plumbing,sewer & septic,main sewer cleaning,6,100,0,100
+plumbing,sewer & septic,sewer lateral replacement (trenchless),3,100,0,0
+plumbing,sewer & septic,sewage ejector pump replacement,2,100,0,0
+plumbing,sewer & septic,sewer camera / locate,2,100,0,0
+plumbing,plumbing repairs,plumbing installation,10,60,90,10
+plumbing,plumbing repairs,pipe leak repair,8,62,100,100
+plumbing,plumbing repairs,leak repair,6,33,33,67
+plumbing,plumbing repairs,plumbing consultation,3,100,0,0
+plumbing,plumbing repairs,sink plumbing reconnection,3,100,0,100
+plumbing,plumbing repairs,water main replacement,3,100,100,100
+plumbing,plumbing repairs,whole house repiping,3,100,100,0
+plumbing,plumbing repairs,new construction plumbing,3,100,0,0
+plumbing,plumbing repairs,grease trap pumping,3,100,0,0
+plumbing,plumbing repairs,bathroom leak repair,2,0,0,100
+plumbing,plumbing repairs,plumbing service (property management),2,100,0,0
+plumbing,plumbing repairs,bathtub/shower installation,2,0,0,0
+plumbing,plumbing repairs,leaking pipe (downstairs),2,0,100,0
+plumbing,plumbing repairs,bathroom plumbing,2,100,0,100
+plumbing,plumbing repairs,plumbing quote (unspecified),1,100,0,100
+plumbing,plumbing repairs,plumbing (mother's house),1,0,0,100
+plumbing,water treatment,water softener / filtration,23,91,39,13
+plumbing,water treatment,water conditioner repair,6,83,33,0
+plumbing,water treatment,backflow testing,5,20,20,0
+plumbing,water treatment,whole home water filtration installation,1,0,0,0
+plumbing,pipe repair & repiping,cracked / broken pipe repair,17,100,82,71
+plumbing,pipe repair & repiping,repipe / galvanized replacement,9,89,33,33
+plumbing,pipe repair & repiping,copper pipe repair,8,100,100,25
+plumbing,pipe repair & repiping,pipe replacement,4,100,0,75
+plumbing,pipe repair & repiping,trenchless pipe lining,3,100,0,0
+plumbing,pipe repair & repiping,galvanized pipe replacement,1,0,0,0
+plumbing,pipe repair & repiping,whole house re-pipe estimate,1,100,0,0
+plumbing,toilet,toilet repair / install,32,75,56,56
+plumbing,toilet,toilet leak / running toilet,3,100,100,100
+plumbing,toilet,"drain clog/backup (kitchen sink, shower, toilet)",2,100,100,0
+plumbing,toilet,toilet wax ring replacement,1,100,100,0
+plumbing,garbage disposal,garbage disposal repair / replace,22,73,50,50
+plumbing,gas line,gas leak,9,56,44,22
+plumbing,gas line,gas line inspection / install,7,100,71,29
+plumbing,gas line,gas fireplace / insert,3,100,100,0
+plumbing,emergency plumbing,emergency plumbing dispatch,19,63,37,100
+plumbing,sump & ejector pumps,sump / ejector pump,9,22,0,56
+plumbing,sump & ejector pumps,sump pump failure / basement water,2,0,0,100
+plumbing,water pressure,low water pressure,8,38,38,62
+plumbing,bathroom & kitchen plumbing,shower / tub install,3,0,100,0
+plumbing,bathroom & kitchen plumbing,jetted tub repair,2,100,0,0
+plumbing,bathroom & kitchen plumbing,jetted bathtub repair,2,100,0,0
+appliance repair,refrigerator,refrigerator repair,129,74,38,40
+appliance repair,refrigerator,refrigerator not cooling,46,72,70,43
+appliance repair,refrigerator,freezer repair,39,77,49,49
+appliance repair,refrigerator,ice maker repair,30,50,37,23
+appliance repair,refrigerator,refrigerator leaking water,20,85,65,65
+appliance repair,refrigerator,refrigerator leak repair,12,100,75,75
+appliance repair,refrigerator,freezer not freezing,11,73,55,45
+appliance repair,refrigerator,refrigerator and dishwasher repair,5,60,0,0
+appliance repair,refrigerator,refrigerator fan motor repair (lg),4,50,0,0
+appliance repair,refrigerator,refrigerator frost repair,3,100,100,100
+appliance repair,refrigerator,refrigerator and stove repair,3,100,100,0
+appliance repair,refrigerator,refrigerator mold / cleaning,3,0,0,0
+appliance repair,refrigerator,mini fridge repair (frigidaire),3,0,100,0
+appliance repair,refrigerator,ice machine repair,2,100,0,100
+appliance repair,refrigerator,refrigerator repair (follow-up on tech),2,0,0,0
+appliance repair,refrigerator,refrigerator & microwave repair,2,100,100,0
+appliance repair,refrigerator,refrigerator repair (loud noise),2,100,100,0
+appliance repair,refrigerator,outdoor refrigerator temperature issue,2,0,0,0
+appliance repair,refrigerator,"refrigerator repair (sears, freezer drawer won't close)",2,100,0,0
+appliance repair,refrigerator,refrigerator repair (thermostat),2,100,0,100
+appliance repair,refrigerator,commercial refrigerator repair,2,100,100,100
+appliance repair,refrigerator,mini fridge repair (burnt wiring),2,100,0,0
+appliance repair,refrigerator,refrigerator repair (runs constantly / over-freezing),2,100,0,0
+appliance repair,refrigerator,refrigerator temperature alarm (freezer),2,100,100,0
+appliance repair,refrigerator,refrigerator/cooler repair,2,0,0,100
+appliance repair,refrigerator,refrigerator door repair,2,100,0,100
+appliance repair,refrigerator,refrigerator repair (samsung),2,100,100,100
+appliance repair,refrigerator,refrigerator repair (same-day),2,100,0,100
+appliance repair,refrigerator,refrigerator repair (appointment confirmation),1,0,100,0
+appliance repair,refrigerator,refrigerator repair (misroute confusion),1,0,100,0
+appliance repair,refrigerator,refrigerator error code (side-by-side),1,100,100,0
+appliance repair,refrigerator,refrigerator compressor repair,1,100,0,0
+appliance repair,washer,washer repair,103,76,47,26
+appliance repair,washer,washing machine repair,53,70,53,26
+appliance repair,washer,washer not draining,27,93,70,0
+appliance repair,washer,washer leaking,16,81,25,0
+appliance repair,washer,washer and dryer repair,8,75,38,62
+appliance repair,washer,washer repair (not spinning),8,100,50,0
+appliance repair,washer,washer leak repair,6,100,0,0
+appliance repair,washer,washer shaking / off balance,6,67,67,0
+appliance repair,washer,washer drain pump,6,100,50,0
+appliance repair,washer,washer hoses,3,100,0,0
+appliance repair,washer,washer seal replacement,3,0,0,0
+appliance repair,washer,dishwasher stuck in drain mode,2,100,100,0
+appliance repair,washer,dishwasher removal / sink drain leak,2,100,0,0
+appliance repair,washer,washer repair inquiry (whirlpool),2,100,0,0
+appliance repair,washer,washer shaking/ur code (samsung),2,100,0,0
+appliance repair,washer,washer repair (f5 lock error),2,100,100,0
+appliance repair,washer,stove/dishwasher/garbage disposal repair,2,100,100,100
+appliance repair,washer,stove & washer repair,2,100,0,0
+appliance repair,washer,washer agitator repair,1,100,0,0
+appliance repair,washer,washer repair (frigidaire),1,100,100,100
+appliance repair,washer,front loader washer door error,1,100,100,0
+appliance repair,washer,washer gasket replacement,1,0,0,0
+appliance repair,washer,dishwasher drain line repair (bosch),1,100,100,0
+appliance repair,washer,commercial dishwasher repair (hobart),1,100,100,0
+appliance repair,washer,washer error code (ac6),1,100,100,0
+appliance repair,dryer,dryer repair,77,78,56,22
+appliance repair,dryer,dryer not heating,42,79,55,17
+appliance repair,dryer,"dryer repair (maytag, not drying/noise)",7,71,29,0
+appliance repair,dryer,dryer repair (belt replacement),6,100,0,0
+appliance repair,dryer,dryer repair (won't start/clicking),5,100,0,0
+appliance repair,dryer,electric dryer repair (loud noise),4,75,50,0
+appliance repair,dryer,dryer burning smell,3,100,100,100
+appliance repair,dryer,dryer service (existing appt lookup),2,100,0,0
+appliance repair,dryer,commercial dryer repair (speed queen),2,100,100,0
+appliance repair,dryer,dryer vent / lint cleaning,2,100,100,0
+appliance repair,dryer,"dryer repair (pulley/motor, samsung)",2,0,100,0
+appliance repair,dryer,dryer repair appointment verification,2,100,0,0
+appliance repair,dryer,dryer repair (temp sensor / won't start),2,100,100,0
+appliance repair,dryer,gas dryer repair (kenmore),2,0,0,0
+appliance repair,dryer,electric dryer repair (heating element),2,50,50,0
+appliance repair,dryer,commercial dryer repair (not drying),1,100,100,0
+appliance repair,oven & stove,oven / range repair,50,70,40,14
+appliance repair,oven & stove,stove repair,13,54,54,31
+appliance repair,oven & stove,oven repair,10,80,80,0
+appliance repair,oven & stove,gas oven repair,5,100,40,100
+appliance repair,oven & stove,wall oven repair,4,50,0,0
+appliance repair,oven & stove,cooktop cleaning,3,0,0,0
+appliance repair,oven & stove,"pizza oven repair (faulds, commercial)",2,0,0,100
+appliance repair,oven & stove,gas range repair,2,100,0,0
+appliance repair,oven & stove,commercial oven repair (coil error),2,100,100,0
+appliance repair,oven & stove,electric stove repair (short/smoke),2,100,100,100
+appliance repair,oven & stove,oven element replacement,1,0,0,0
+appliance repair,oven & stove,oven repair (f1e0 code),1,100,100,0
+appliance repair,oven & stove,oven door glass replacement,1,0,0,0
+appliance repair,oven & stove,over-the-range microwave repair,1,100,0,0
+appliance repair,oven & stove,downdraft range hood repair (best brand),1,0,0,0
+appliance repair,appliance repair,appliance repair (type not stated),56,57,20,41
+appliance repair,appliance repair,appliance repair,17,35,18,65
+appliance repair,appliance repair,appliance diagnosis,5,0,40,0
+appliance repair,appliance repair,kegerator repair,3,100,0,0
+appliance repair,appliance repair,door gasket replacement,3,100,0,0
+appliance repair,appliance repair,commercial refrigeration repair (open-air cooler),2,0,0,0
+appliance repair,appliance repair,multi-appliance inspection (property management),1,100,0,0
+appliance repair,appliance repair,technician arrival time inquiry (existing appt),1,0,0,0
+appliance repair,appliance repair,looking for appliance repair company,1,0,0,0
+appliance repair,service scheduling,appointment / service confirmation,65,51,35,31
+appliance repair,service scheduling,appointment reschedule,1,100,100,0
+appliance repair,service scheduling,scheduling callback,1,0,0,0
+appliance repair,service scheduling,existing appointment coordination,1,0,0,0
+appliance repair,pricing,repair pricing / diagnostic fee question,44,73,9,25
+appliance repair,pricing,appliance service pricing inquiry,1,0,0,100
+appliance repair,dishwasher,dishwasher repair,33,85,48,12
+appliance repair,service area,service area / coverage question,19,47,0,32
+appliance repair,service area,service area inquiry,1,100,0,100
+appliance repair,microwave,microwave repair,14,64,14,21
+appliance repair,microwave,microwave door replacement (whirlpool),1,100,0,100
+appliance repair,outdoor appliances,grill repair,6,50,50,0
+appliance repair,outdoor appliances,gas grill repair,3,100,100,0
+appliance repair,garbage disposal,garbage disposal repair,8,62,38,38
+tree services,tree removal,tree removal,195,71,17,25
+tree services,tree removal,storm / fallen tree removal,88,75,19,81
+tree services,tree removal,backyard tree removal,52,58,23,6
+tree services,tree removal,large / tall tree removal,28,71,57,21
+tree services,tree removal,emergency tree removal,17,88,0,100
+tree services,tree removal,tree trimming/removal,12,83,17,17
+tree services,tree removal,tree removal & stump grinding,11,64,0,0
+tree services,tree removal,tree limb removal,10,40,60,60
+tree services,tree removal,branch removal,5,0,0,60
+tree services,tree removal,tree root removal,5,100,60,0
+tree services,tree removal,stump removal,4,100,0,0
+tree services,tree removal,tree removal assessment,3,100,0,0
+tree services,tree removal,moss removal,2,100,100,0
+tree services,tree removal,storm-downed sycamore assessment (right/brace),2,100,0,100
+tree services,tree removal,tree removal (2 bradford pears),2,100,100,0
+tree services,tree removal,storm branch removal & tree maintenance,2,100,100,0
+tree services,tree removal,large oak tree removal (dropping branches),2,100,0,100
+tree services,tree removal,tree & brush removal for fence install,2,100,0,0
+tree services,tree removal,storm-downed tree removal off power lines,2,100,0,100
+tree services,tree removal,fallen limb removal,1,0,0,100
+tree services,tree removal,storm damage cleanup,1,0,0,0
+tree services,tree removal,limb removal,1,0,0,0
+tree services,tree removal,dead tree removal,1,0,0,0
+tree services,tree removal,ivy removal,1,100,0,0
+tree services,tree removal,hanging limb removal (over power line),1,0,0,100
+tree services,tree removal,tree removal (two trees),1,0,0,0
+tree services,tree trimming,tree trimming / pruning,168,67,26,12
+tree services,tree trimming,branches over roof / house,78,68,24,44
+tree services,tree trimming,oak tree trimming,3,100,100,0
+tree services,tree trimming,hedge / shrub trimming,2,100,0,0
+tree services,tree trimming,"tree trimming (overhanging, permits)",2,100,0,0
+tree services,tree trimming,tree trimming appointment confirmation,2,0,0,0
+tree services,tree trimming,tree pruning near power line/roof,2,100,100,0
+tree services,tree trimming,pine tree trimming,2,100,100,0
+tree services,tree trimming,tree pruning (city park),1,100,0,0
+tree services,tree trimming,tree appraisal (trimmed in error),1,0,0,100
+tree services,tree trimming,tree trimming (branches on roof),1,100,0,0
+tree services,tree services,tree estimate / consultation,167,62,24,17
+tree services,tree services,tree inspection,22,50,14,36
+tree services,tree services,tree cutting,5,100,0,0
+tree services,tree services,tree cleanup,3,0,0,0
+tree services,tree services,tree netting,2,0,0,0
+tree services,tree services,tree pest/ant treatment (live oak),2,100,0,0
+tree services,tree services,tree limb/branch haul-off,2,100,0,0
+tree services,tree services,tree service (unspecified),1,0,0,0
+tree services,tree health,tree disease / health assessment,52,71,13,48
+tree services,tree health,tree disease diagnosis,3,100,100,100
+tree services,tree health,arborist assessment,3,100,0,100
+tree services,tree health,tree risk assessment,3,100,0,100
+tree services,tree health,arborist report,2,0,0,100
+tree services,tree health,arborist diagnosis/treatment for dying pecan tree,2,100,0,0
+tree services,stump grinding,stump grinding / removal,51,84,18,18
+tree services,stump grinding,tree stump slice cutting,1,100,0,0
+tree services,land clearing,land / lot clearing,13,85,38,0
+tree services,land clearing,brush chipping,3,100,0,0
+tree services,wood & mulch,wood chips / firewood / mulch,6,100,0,50
+hvac,air conditioning,mini-split repair,44,59,45,20
+hvac,air conditioning,AC repair,41,76,10,24
+hvac,air conditioning,AC not cooling,18,83,67,78
+hvac,air conditioning,ac repair,10,100,60,60
+hvac,air conditioning,central ac repair,7,86,43,86
+hvac,air conditioning,condensate drain clog,5,100,60,60
+hvac,air conditioning,hvac system replacement,5,100,0,0
+hvac,air conditioning,window ac installation,3,0,0,100
+hvac,air conditioning,compressor valve replacement,3,100,0,0
+hvac,air conditioning,ac repair (needs freon),3,0,100,100
+hvac,air conditioning,package unit repair,3,100,0,0
+hvac,air conditioning,ac condenser refrigerant recharge,2,100,0,0
+hvac,air conditioning,ac maintenance/tune-up,2,100,0,0
+hvac,air conditioning,refrigerant/freon recharge,2,100,0,0
+hvac,air conditioning,window ac unit cleaning,2,100,0,0
+hvac,air conditioning,through-wall (ptac) ac repair,2,100,0,0
+hvac,air conditioning,hvac leak (water pooling),2,100,0,100
+hvac,air conditioning,ac repair (condensate/discharge line),2,100,0,0
+hvac,air conditioning,air conditioning repair,1,0,0,100
+hvac,air conditioning,ac repair (central air not working),1,0,0,100
+hvac,air conditioning,ac repair (unit shutting off),1,100,100,100
+hvac,air conditioning,gas fireplace pilot relight,1,0,0,0
+hvac,air conditioning,split ac estimate,1,100,0,0
+hvac,hvac install,HVAC install / replacement,33,55,9,9
+hvac,hvac install,erv installation,8,62,38,0
+hvac,hvac install,gas flue installation,3,100,0,0
+hvac,hvac install,exhaust vent installation,2,0,0,0
+hvac,hvac maintenance,HVAC tune-up / inspection,37,76,32,22
+hvac,hvac maintenance,mini-split cleaning & maintenance,6,67,67,33
+hvac,hvac maintenance,system inspection,2,0,0,0
+hvac,heating,furnace / heater repair,12,83,33,17
+hvac,heating,boiler repair (no hot water),2,100,100,100
+hvac,duct work,air duct cleaning,4,100,50,0
+hvac,duct work,duct cleaning,2,100,0,0
+hvac,duct work,duct repair / sealing,2,100,0,0
+lawncare & landscaping,landscaping,landscaping estimate,68,76,0,28
+lawncare & landscaping,landscaping,lawn maintenance,6,50,0,0
+lawncare & landscaping,landscaping,landscape maintenance,3,100,0,0
+lawncare & landscaping,landscaping,wood chip delivery,3,100,0,0
+lawncare & landscaping,landscaping,monthly lawn maintenance,2,100,0,0
+lawncare & landscaping,landscaping,lawn care & maintenance,2,100,0,0
+lawncare & landscaping,landscaping,lawn fertilization,1,100,0,0
+lawncare & landscaping,landscaping,yard waste removal,1,100,0,0
+lawncare & landscaping,lawn maintenance,lawn mowing,39,62,0,31
+lawncare & landscaping,lawn maintenance,aeration / dethatching,3,100,0,0
+lawncare & landscaping,lawn maintenance,lawn aeration,3,100,0,0
+lawncare & landscaping,weed control,weed / poison ivy control,23,87,9,0
+lawncare & landscaping,weed control,weed pulling,2,100,100,0
+lawncare & landscaping,weed control,weeding and mulching,1,100,0,0
+lawncare & landscaping,beds & trimming,shrub / hedge trimming,18,72,0,17
+lawncare & landscaping,beds & trimming,mulch / bed edging,6,100,0,0
+lawncare & landscaping,cleanup,yard cleanup / debris removal,13,77,0,69
+lawncare & landscaping,cleanup,lawn cleanup,6,50,0,50
+lawncare & landscaping,irrigation,irrigation / sprinkler service,11,82,27,45
+lawncare & landscaping,irrigation,sprinkler repair,6,100,50,0
+lawncare & landscaping,irrigation,irrigation valve repair,3,100,0,100
+lawncare & landscaping,irrigation,irrigation service,2,0,0,100
+lawncare & landscaping,lawn install,seeding / sod install,4,100,0,0
+lawncare & landscaping,lawn install,artificial turf install,4,100,0,0
+lawncare & landscaping,lawn install,lawn seeding,3,100,0,0
+lawncare & landscaping,landscape design,landscape installation / design,6,100,0,50
+lawncare & landscaping,landscape design,landscape installation,3,100,0,100
+lawncare & landscaping,drainage,french drain / drainage,3,100,0,0
+roofing,roof repair,roof leak repair,37,97,41,100
+roofing,roof repair,roof repair,34,50,29,15
+roofing,roof repair,shingle repair,10,80,50,50
+roofing,roof repair,roof and gutter cleaning,4,50,0,0
+roofing,roof repair,roof measurement,3,0,0,0
+roofing,roof repair,roof patch repair,3,0,0,0
+roofing,roof repair,missing shingle repair,3,100,100,0
+roofing,roof repair,flashing repair,3,0,0,0
+roofing,roof repair,roof flashing repair,3,0,0,0
+roofing,roof repair,ridge shingle repair,2,0,0,0
+roofing,roof repair,fascia / soffit repair,1,0,0,0
+roofing,roof repair,fascia replacement,1,0,0,0
+roofing,roof repair,emergency roof repair,1,0,0,100
+roofing,roof replacement,roof replacement / re-roof,16,75,56,31
+roofing,roof replacement,tile roof replacement,3,100,100,0
+roofing,roof replacement,commercial roof replacement (slate to metal),3,67,67,0
+roofing,roof replacement,"full roof replacement (+decking, gutters, attic)",2,100,100,0
+roofing,roof inspection,roof inspection / estimate,15,60,40,20
+roofing,roof inspection,roof inspection (suspected bad install),1,100,100,0
+roofing,roof cleaning,moss removal / roof cleaning,8,25,0,0
+roofing,roof cleaning,roof cleaning,4,0,0,0
+roofing,roof cleaning,moss removal,2,0,0,0
+gutters,gutters,gutter estimate,49,43,18,18
+gutters,gutters,gutter brightening,3,100,0,0
+gutters,gutter cleaning,gutter cleaning,36,42,14,17
+gutters,gutter cleaning,downspout cleaning,3,0,0,0
+gutters,gutter cleaning,gutter cleaning / gutter guard estimate,2,100,100,0
+gutters,ice & winter,ice dam removal,30,30,3,40
+gutters,ice & winter,icicle removal,2,0,0,0
+gutters,ice & winter,gutter ice steam cleaning,1,0,0,0
+gutters,gutter repair,gutter repair / reattach,13,77,69,46
+gutters,gutter repair,gutter repair,6,50,100,50
+gutters,gutter repair,downspout repair,3,0,0,0
+gutters,gutter repair,seamless metal gutter repair,2,100,0,0
+gutters,gutter install,gutter replacement / new gutters,6,67,67,50
+gutters,gutter install,gutter replacement,6,67,67,50
+gutters,gutter guards,gutter guards / leaf covers,6,33,83,0
+pool services,pool leak,pool leak detection / repair,35,63,14,29
+pool services,pool leak,leak detection,6,100,0,50
+pool services,pool services,pool estimate,42,64,19,31
+pool services,pool services,trenchless pipe lining,2,100,0,0
+pool services,pool maintenance,pool cleaning / service,9,78,33,33
+pool services,pool maintenance,sewer cleanout locating,3,100,100,100
+pool services,pool maintenance,drain line cleaning,2,0,0,0
+pool services,pool equipment,pool pump / filter / heater repair,5,60,40,60
+pool services,spa & hot tub,jacuzzi / hot tub repair,2,0,0,0
+pool services,spa & hot tub,jacuzzi repair,2,0,0,0
+painting,painting,painting estimate,40,78,30,20
+painting,painting,shelf painting,3,100,0,100
+painting,painting,latex mask painting,3,100,0,0
+painting,painting,lead paint removal,3,100,0,0
+painting,painting,house numbers painted on curb,1,100,0,0
+painting,interior painting,interior painting,23,78,39,13
+painting,interior painting,cabinet painting,3,100,100,0
+painting,interior painting,exterior trim painting,2,0,0,0
+painting,exterior painting,exterior / stucco painting,16,75,19,0
+painting,exterior painting,exterior house painting,3,100,0,0
+painting,exterior painting,deck painting,3,100,100,0
+electrical,outlets & switches,outlet / switch repair,17,100,47,35
+electrical,outlets & switches,outlet repair,9,100,11,67
+electrical,outlets & switches,"outlet/circuit repair (gfci, lost power)",3,100,100,0
+electrical,outlets & switches,ev charger outlet troubleshooting (grounding),2,100,100,0
+electrical,outlets & switches,three-way switch repair (laundry room light),2,100,100,0
+electrical,outlets & switches,outlet & ceiling light installation,1,100,0,0
+electrical,electrical,electrical estimate,20,75,45,20
+electrical,electrical,ev charger repair,4,100,50,0
+electrical,electrical,time clock installation,1,100,0,0
+electrical,wiring,new circuit / rewiring,13,69,85,8
+electrical,wiring,range wiring,5,100,60,0
+electrical,wiring,garage wiring,3,100,100,0
+electrical,wiring,dead circuit repair,2,0,100,0
+electrical,wiring,water heater wiring,1,0,0,0
+electrical,wiring,rewiring service,1,0,0,100
+electrical,lighting,lighting install / repair,10,80,60,0
+electrical,lighting,recessed lighting repair (dim lights),2,0,0,0
+electrical,lighting,outdoor lighting timer replacement,1,100,100,0
+electrical,panel & power,panel / breaker repair,4,50,0,0
+electrical,panel & power,partial power loss,3,100,0,100
+electrical,panel & power,partial power outage,3,100,0,100
+electrical,panel & power,electrical panel inspection,2,0,0,0
+window repair,window repair,window repair estimate,24,46,12,12
+window repair,window repair,wasp removal,3,0,0,0
+window repair,window repair,mold remediation,3,0,0,0
+window repair,window repair,ice dam removal,3,0,0,100
+window repair,replacement,window replacement,22,50,14,0
+window repair,glass,window glass / pane repair,10,20,0,0
+window repair,glass,broken window glass replacement,2,100,0,0
+window repair,glass,glass block window installation,1,0,0,0
+window repair,frame,window sill / frame repair,9,0,0,33
+window repair,hardware,window crank / hardware repair,4,75,0,0
+water damage,mold,mold remediation,11,73,45,0
+water damage,mold,mold treatment,10,50,0,0
+water damage,mold,mold testing / inspection,9,44,22,0
+water damage,mold,mold inspection / salvageability question,2,0,0,0
+water damage,mold,mold & bird-dropping cleanup,2,100,0,0
+water damage,mold,mold removal from closet,1,0,0,0
+water damage,water damage,ceiling water damage,14,86,79,64
+water damage,water damage,water damage restoration,3,100,0,100
+water damage,water damage,roof/ceiling water leak,2,100,100,100
+water damage,water damage,"emergency water extraction (bathroom leak, collapsed ceiling)",2,100,100,100
+water damage,restoration,restoration estimate,12,83,42,25
+carpet & rug cleaning,rug cleaning,area / oriental rug cleaning,11,27,0,0
+carpet & rug cleaning,rug cleaning,rug cleaning,5,0,0,0
+carpet & rug cleaning,cleaning,cleaning estimate,11,27,0,0
+carpet & rug cleaning,cleaning,leak detection,3,100,0,100
+carpet & rug cleaning,carpet cleaning,carpet cleaning,5,100,0,60
+carpet & rug cleaning,carpet cleaning,"carpet stretching, seaming & new install",2,100,0,0
+garage door,garage door,garage door repair,21,57,76,48
+garage door,garage door,appliance repair,2,100,0,100
+garage door,repair,off-track / won't open,5,100,100,100
+garage door,repair,garage door won't open,2,100,100,100
+garage door,spring & cable,garage door spring / cable,2,0,100,100
+remodeling,bathroom,bathroom remodel,8,100,25,0
+remodeling,bathroom,tub resurfacing,3,100,0,0
+remodeling,remodeling,remodel estimate,10,100,50,0
+remodeling,remodeling,exterior remodeling,2,100,0,0
+remodeling,whole home,whole-home renovation,5,100,100,0
+cleaning services,sanitizing,rodent droppings / biohazard cleanup,5,40,0,0
+cleaning services,sanitizing,post-pest-control sanitization/cleaning,2,100,0,0
+cleaning services,cleaning,cleaning estimate,7,57,0,0
+cleaning services,house cleaning,house / maid cleaning,2,100,0,0
+cleaning services,house cleaning,house cleaning,2,100,0,0
+handyman & structural,handyman,attic humidity/ventilation problem,2,0,0,0
+handyman & structural,handyman,aluminum fence repair (bent bars),2,100,100,0
+handyman & structural,handyman,concrete dumpster rental,2,0,0,0
+handyman & structural,handyman,awning replacement,1,0,0,0
+handyman & structural,handyman,wood fence repair,1,0,0,0
+handyman & structural,small repairs,caulking / sealing,3,0,0,0
+handyman & structural,small repairs,caulking repair,3,0,0,0
+handyman & structural,structural,floor joist / structural repair,2,0,0,0
+carpentry & decks,decks,deck leak / waterproofing,3,0,0,0
+electronics repair,tv repair,TV / LED panel repair,1,0,0,0
+electronics repair,tv repair,tv led repair,1,0,0,0

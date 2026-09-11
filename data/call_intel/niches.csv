@@ -1,21 +1,21 @@
-niche|calls|subs|specifics|paid_pct|booked_pct|urgent_pct
-appliance repair|1148|12|111|71|42|28
-pest control|1115|12|110|51|15|25
-plumbing|1064|15|114|79|43|45
-tree services|1056|7|56|69|22|29
-hvac|274|5|35|72|30|28
-lawncare & landscaping|245|9|28|79|4|25
-gutters|168|6|15|45|27|25
-roofing|159|4|22|61|35|35
-electrical|109|5|22|81|49|22
-pool services|108|5|10|65|19|32
-painting|100|3|11|80|30|14
-window repair|81|5|10|36|7|11
-water damage|68|3|11|71|40|28
-carpet & rug cleaning|37|3|6|43|0|16
-garage door|32|3|5|66|78|66
-remodeling|28|3|5|100|43|0
-cleaning services|18|3|5|67|0|0
-handyman & structural|16|3|8|13|13|0
-carpentry & decks|3|1|1|0|0|0
-electronics repair|2|1|2|0|0|0
+niche,calls,subs,specifics,paid_pct,booked_pct,urgent_pct
+pest control,1115,12,110,51,15,25
+plumbing,1064,15,114,79,43,45
+appliance repair,1148,12,111,71,42,28
+tree services,1056,7,56,69,22,29
+hvac,274,5,35,72,30,28
+lawncare & landscaping,245,9,28,79,4,25
+roofing,159,4,22,61,35,35
+gutters,168,6,15,45,27,25
+pool services,108,5,10,65,19,32
+painting,100,3,11,80,30,14
+electrical,109,5,22,81,49,22
+window repair,81,5,10,36,7,11
+water damage,68,3,11,71,40,28
+carpet & rug cleaning,37,3,6,43,0,16
+garage door,32,3,5,66,78,66
+remodeling,28,3,5,100,43,0
+cleaning services,18,3,5,67,0,0
+handyman & structural,16,3,8,12,12,0
+carpentry & decks,3,1,1,0,0,0
+electronics repair,2,1,2,0,0,0
