@@ -66,7 +66,8 @@ jobs:
             --niche "${{ github.event.inputs.niche }}" \
             --max-serp "${{ github.event.inputs.max_serp }}" \
             --min-calls "${{ github.event.inputs.min_calls }}" \
-            --min-volume "${{ github.event.inputs.min_volume }}"             --geo "${{ github.event.inputs.geo }}"
+            --min-volume "${{ github.event.inputs.min_volume }}" \
+            --geo "${{ github.event.inputs.geo }}"
 
       - name: Job summary
         if: always()

@@ -147,15 +147,19 @@ def keyword_volumes(queries, geo_name=None):
     run still finishes, ranked on revenue alone."""
     cust = os.environ.get("GOOGLE_ADS_CUSTOMER_ID", "").strip()
     if not cust:
-        print("   no GOOGLE_ADS_CUSTOMER_ID — volumes stay 0")
-        return {}
+        print("   no GOOGLE_ADS_CUSTOMER_ID")
+        return None
     try:
         from google.ads.googleads.client import GoogleAdsClient
     except ImportError:
-        print("   google-ads not installed — volumes stay 0")
-        return {}
+        print("   google-ads not installed")
+        return None
     try:
-        client = GoogleAdsClient.load_from_env(version="v18")
+        # No version pin. requirements.txt asks for google-ads unpinned, so CI
+        # installs the current release, and Google retires old API versions —
+        # v18 was gone, which is how a whole run came back with zero volumes.
+        # Every other script in this repo lets the library pick; so does this.
+        client = GoogleAdsClient.load_from_env()
         geo_id = geo_target_id(client, geo_name) if geo_name else None
         svc = client.get_service("KeywordPlanIdeaService")
         req = client.get_type("GenerateKeywordHistoricalMetricsRequest")
@@ -171,8 +175,8 @@ def keyword_volumes(queries, geo_name=None):
             out[r.text.lower()] = int(m.avg_monthly_searches or 0) if m else 0
         return out
     except Exception as e:
-        print(f"   Ads Planner failed ({str(e)[:90]}) — volumes stay 0")
-        return {}
+        print(f"   Ads Planner failed ({str(e)[:90]})")
+        return None
 
 
 def serp_verdict(query):
@@ -201,6 +205,10 @@ def main():
     ap.add_argument("--min-calls", type=int, default=8,
                     help="ignore services below this many recorded calls")
     ap.add_argument("--min-volume", type=int, default=0)
+    ap.add_argument("--no-volume", action="store_true",
+                    help="score on revenue x winnable when the Planner is "
+                         "unavailable. The ranking is much weaker — the paid "
+                         "step then picks near-arbitrarily.")
     ap.add_argument("--geo", default="",
                     help="state or city to qualify queries with, e.g. Arizona. "
                          "Empty = nationwide informational queries")
@@ -239,10 +247,28 @@ def main():
     print(f"3. query candidates  {len(cands)}")
 
     vols = keyword_volumes(list(cands), a.geo or None)
+    if vols is None:
+        # Stop here. Volume is what orders the list, and the payout is nearly
+        # flat across one niche, so without it "the top 30" is just the first
+        # 30 in dict order — which is how a run spent 30 credits on "irrigation
+        # cost" and "kitchen cost". A failed lookup must cost nothing.
+        print("\n   volumes could not be read — stopping before the paid step.")
+        print("   Without volume the ranking is arbitrary and the credits are"
+              " wasted on whichever candidates happen to come first.")
+        print("   Pass --no-volume to score on revenue x winnable alone.")
+        if not a.no_volume:
+            return
+        vols = {}
     for q, c in cands.items():
         c["volume"] = vols.get(q.lower(), 0)
     have_vol = sum(1 for c in cands.values() if c["volume"])
     print(f"4. with volume       {have_vol}/{len(cands)}")
+    if not have_vol and not a.no_volume:
+        print("\n   every candidate came back at 0 searches — stopping.")
+        print("   That is the Planner answering, not failing, but a field of"
+              " zeros ranks no better than a failure. Widen --niche or --geo,")
+        print("   or pass --no-volume to score without it.")
+        return
 
     # Rank on the free signals, then spend credits on the top of that list.
     rank = sorted(cands.values(),
