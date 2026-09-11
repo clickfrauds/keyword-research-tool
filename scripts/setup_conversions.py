@@ -47,6 +47,9 @@ SAFETY MODEL
   CONV_MODE=live: creates whatever is missing.
 
 Env : PUSH_CUSTOMER_ID (required), CONV_MODE (validate|live),
+      RESTORE_REMOVED (off by default — switch a REMOVED action back on so
+        its name is usable again; it edits the client's account, so it is
+        never implied by CONV_MODE=live),
       GOOGLE_ADS_* client env vars, GOOGLE_ADS_LOGIN_CUSTOMER_ID (MCC),
       PRIMARY_CONVERSIONS (which actions feed bidding; default
         "phone,form" — add whatsapp where it is the main channel),
@@ -67,6 +70,10 @@ if hasattr(sys.stdout, "reconfigure"):
 
 PUSH_CUSTOMER_ID = "".join(c for c in os.environ.get("PUSH_CUSTOMER_ID", "") if c.isdigit())
 CONV_MODE = os.environ.get("CONV_MODE", "validate").strip().lower()
+# Off by default: re-enabling an action the client deliberately removed is a
+# change to their account, not a detail of this script's bookkeeping.
+RESTORE_REMOVED = os.environ.get("RESTORE_REMOVED", "").strip().lower() in (
+    "1", "true", "yes", "on")
 
 ADMIN_API_URL = os.environ.get("ADMIN_API_URL", "").strip().rstrip("/")
 ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD", "")
@@ -472,6 +479,39 @@ def run_one(client, svc, ca_svc, row, validate, GoogleAdsException):
         else:
             log(f"   already exists: {n}")
 
+    # Opt-in: ask Google to put the dead action back. It is the same action the
+    # account already had, so nothing splits and no history is lost — but it
+    # does change the client's account, which is why it never happens by
+    # default. If Google refuses, say so and carry on with the rest.
+    if blocked and RESTORE_REMOVED and not validate:
+        # Imported here, like the rest of the SDK: this module has to stay
+        # importable on a machine that has no google-ads installed.
+        from google.api_core import protobuf_helpers
+        ops = []
+        for n, info in blocked.items():
+            op = client.get_type("ConversionActionOperation")
+            op.update.resource_name = info["resource_name"]
+            op.update.status = client.enums.ConversionActionStatusEnum.ENABLED
+            client.copy_from(op.update_mask,
+                             protobuf_helpers.field_mask(None, op.update._pb))
+            ops.append(op)
+        try:
+            req = client.get_type("MutateConversionActionsRequest")
+            req.customer_id = PUSH_CUSTOMER_ID
+            req.operations.extend(ops)
+            ca_svc.mutate_conversion_actions(request=req)
+            log(f"♻️  Restored {len(ops)}: " + ", ".join(sorted(blocked)))
+            existing = fetch_actions(svc, list(ACTIONS.keys()))
+            blocked = {n: i for n, i in existing.items()
+                       if i["status"] == "REMOVED"}
+        except GoogleAdsException as e:
+            for err in e.failure.errors[:3]:
+                log(f"❌ {name}: restore refused — {err.message}")
+            log("   Google does not allow this action to be re-enabled. Rename "
+                "the dead one in the Ads UI instead; the name then frees up.")
+        except Exception as e:
+            log(f"❌ {name}: restore failed — {str(e)[:120]}")
+
     usable = {n: i for n, i in existing.items() if n not in blocked}
     missing = [n for n in ACTIONS if n not in usable and n not in blocked]
     if blocked:
@@ -542,11 +582,24 @@ def run_one(client, svc, ca_svc, row, validate, GoogleAdsException):
 
     ALL_RESULTS.append(results)
 
-    if results["aw_id"] and all(results["actions"][n].get("label") for n in ACTIONS):
+    # Write back whatever is real, not only a full set. The endpoint updates
+    # just the columns it is given, so two good labels land and the third
+    # column is left alone. Holding all three back because one name is stuck
+    # behind a REMOVED action strands the two that work: the account has
+    # tracking Google will accept, and the middleware still ships with none.
+    have = [n for n in ACTIONS if results["actions"][n].get("label")]
+    if results["aw_id"] and have:
         if validate:
             return "validated"
+        complete = len(have) == len(ACTIONS)
         if write_back(results, row):
-            return "labels written"
+            if complete:
+                return "labels written"
+            log("")
+            log("   ⚠️  Wrote %d of %d labels. Missing: %s"
+                % (len(have), len(ACTIONS),
+                   ", ".join(n for n in ACTIONS if n not in have)))
+            return "partial — %d/%d labels" % (len(have), len(ACTIONS))
         # Google has the actions and the labels; the row does not. Nothing
         # needs creating again — say so, and say where the labels are, because
         # the artifact has them and they can be pasted in by hand.
@@ -559,6 +612,11 @@ def run_one(client, svc, ca_svc, row, validate, GoogleAdsException):
         return "row not updated"
     if validate:
         return "validated"
+    # "not minted yet" promises a re-run will fix it. A name held by a REMOVED
+    # action is never going to mint, so say that instead of sending someone
+    # back to the same button.
+    if blocked:
+        return "blocked by removed action(s): " + ", ".join(sorted(blocked))
     return "labels not minted yet"
 
 
@@ -627,6 +685,19 @@ def main():
         log("   snippets yet. Nothing is wrong and nothing needs creating again —")
         log("   re-run in create mode in a few minutes and it will find what it")
         log("   made and read the labels off it.")
+
+    if any(st.startswith("blocked by removed") for _, st in summary):
+        log("")
+        log("⛔ A conversion action name is held by a REMOVED action. Google")
+        log("   will not let the name be reused, so re-running this changes")
+        log("   nothing — the label can never be minted while that name is")
+        log("   taken. Two ways out, both one-time:")
+        log("     1. Re-run with restore_removed: yes. This asks Google to set")
+        log("        the dead action back to ENABLED and reads its label. It is")
+        log("        the same action the account already had, so no data splits.")
+        log("     2. Or in the Ads UI: Goals > Conversions > Summary, show")
+        log("        Removed, and rename the dead one. The name frees up and the")
+        log("        next run creates a fresh action under it.")
 
     log("")
     log("⚠️ Ab Google Ads me purani GA4-imported conversions ko Remove ya "

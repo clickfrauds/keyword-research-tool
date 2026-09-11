@@ -28,6 +28,19 @@ on:
         description: "Which actions feed bidding. Default phone,form. Use phone,whatsapp,form where WhatsApp is how customers actually make contact"
         required: false
         default: 'phone,form'
+      restore_removed:
+        # A conversion action that was removed keeps its name, so the name can
+        # never be reused — re-running create mode against it changes nothing.
+        # This asks Google to switch the dead action back on and reads its
+        # label, which is why it is off unless someone chooses it: it edits the
+        # client's account rather than only reading it.
+        description: "Switch a REMOVED conversion action back on so its name can be used again (only if a run reported one)"
+        required: false
+        default: 'no'
+        type: choice
+        options:
+          - 'no'
+          - 'yes'
       mode:
         # The option text is the whole warning. "check" on its own reads like
         # "check it works", and it has now been run three times in a row by
@@ -70,6 +83,7 @@ jobs:
           # without silently turning every run into a no-op.
           CONV_MODE: ${{ startsWith(github.event.inputs.mode, 'create') && 'live' || 'validate' }}
           PRIMARY_CONVERSIONS: ${{ github.event.inputs.primary_conversions }}
+          RESTORE_REMOVED: ${{ github.event.inputs.restore_removed }}
         run: python scripts/setup_conversions.py
 
       - uses: actions/upload-artifact@v4
