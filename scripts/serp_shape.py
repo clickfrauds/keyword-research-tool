@@ -37,6 +37,7 @@ import argparse
 import csv
 import json
 import os
+import re
 import sys
 import urllib.error
 import urllib.parse
@@ -160,11 +161,36 @@ def main():
     ap.add_argument("--file", help="one query per line")
     a = ap.parse_args()
 
-    qs = list(a.queries)
+    def split_queries(text):
+        """Accept newlines, semicolons or pipes between queries.
+
+        GitHub renders a workflow_dispatch `type: string` input as a
+        single-line box, so ten pasted lines arrive as one long line. The
+        first run spent a credit searching that whole list as one query and
+        reported it, reasonably enough, as a VIDEO WALL. Any of the three
+        separators now works, so a list the browser has flattened onto one
+        line still splits correctly.
+        """
+        parts = re.split(r"[\n;|]+", text)
+        return [p.strip() for p in parts
+                if p.strip() and not p.lstrip().startswith("#")]
+
+    qs = []
+    for raw in a.queries:
+        qs += split_queries(raw)
     if a.file:
         with open(a.file, encoding="utf-8") as fh:
-            qs += [l.strip() for l in fh if l.strip() and not l.startswith("#")]
+            qs += split_queries(fh.read())
     qs = [q for i, q in enumerate(qs) if q not in qs[:i]]
+
+    # A query nobody would type is almost always several run together.
+    runaway = [q for q in qs if len(q.split()) > 12]
+    if runaway:
+        print("WARNING: these look like several queries run together \u2014 "
+              "separate them with ; or one per line:")
+        for q in runaway:
+            print(f"         {q[:86]}")
+        print()
     if not qs:
         ap.error("give at least one query, or --file")
     if not KEY:

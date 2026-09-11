@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
     inputs:
       queries:
-        description: "One query per line — the exact thing a person would type"
+        description: "Queries separated by ;  (GitHub flattens this box to one line, so semicolons are what actually survive)"
         required: true
         type: string
       serp_gl:
