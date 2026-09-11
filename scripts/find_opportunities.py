@@ -256,43 +256,73 @@ SUB_SERVICES = {
 # ─────────────────────────────────────────────────────────────────────────────
 # NICHE ECONOMICS — what a call in this niche is actually worth
 #
-# The coverage feed's `top_payout` is the single best ZIP in the country, and
-# reading it as "the payout" is how Plumbing looks like $221.95 when its median
-# is $34.38 — a 6x error that pointed at the wrong niche entirely. These are
-# the MEDIAN payout from /api/niche_summary.json, multiplied by the share of
-# that niche's calls that actually paid, from Call Intelligence.
+# revenue per call = median payout x the share of calls that actually pay.
 #
-# The ranking it produces is not the ranking by call volume. The three niches
-# with the MOST calls in the whole feed — Appliance (1,148), Pest Control
-# (1,115) and Tree Services (1,056) — sit at $4.88, $21.68 and $6.64. Volume
-# is what a niche looks like; this is what it pays.
+# Both halves used to be a hardcoded table sitting next to a CSV holding the
+# same numbers, which is two copies of one fact waiting to disagree. Now each
+# half comes from the place that owns it:
 #
-#            (payout_type, median_payout, paid_pct, revenue_per_call)
-NICHE_ECONOMICS = {
-    ("Water Damage",  "CPL"):  (205.00, 71, 145.55),
-    ("Garage Door",   "CPL"):  ( 74.00, 66,  48.84),
-    ("Plumbing",      "CPL"):  ( 45.00, 79,  35.55),
-    ("Painting",      "CPL"):  ( 38.50, 80,  30.80),
-    ("HVAC",          "Call"): ( 38.06, 72,  27.40),
-    ("Plumbing",      "Call"): ( 34.38, 79,  27.16),
-    ("Landscaping",   "CPL"):  ( 34.00, 79,  26.86),
-    ("Roofing",       "Call"): ( 41.25, 61,  25.16),
-    ("Pest Control",  "Call"): ( 42.50, 51,  21.68),
-    ("Electrical",    "Call"): ( 23.27, 81,  18.85),
-    ("Gutters",       "Call"): ( 32.50, 45,  14.62),
-    ("Tree Services", "Call"): (  9.63, 69,   6.64),
-    ("Appliance",     "Call"): (  6.88, 71,   4.88),
+#   median payout  LIVE from /api/niche_summary.json, so a rate change shows
+#                  up on the next run with nothing to edit
+#   paid %         data/call_intel/niches.csv, a dated snapshot of the Call
+#                  Intelligence dashboard — it needs a login and is not an
+#                  API, so it cannot be fetched (see that folder's README and
+#                  extract_call_intel.js for the refresh)
+#
+# Reading the feed's `top_payout` as the payout is what this replaced: it is
+# the single best ZIP in the country, and on it Plumbing reads $221.95 against
+# a median of $34.38. The ranking that falls out is not the ranking by call
+# volume — the three highest-volume niches in the feed, Appliance (1,148
+# calls), Pest Control (1,115) and Tree Services (1,056), come out at $4.88,
+# $21.68 and $6.64 a call.
+
+# The two feeds name some niches differently.
+_CI_ALIAS = {
+    "hvac": "HVAC",                 # .title() gives "Hvac"; the feed says HVAC
+    "appliance repair": "Appliance",
+    "lawncare & landscaping": "Landscaping",
+    "water damage": "Water Damage",
+    "pest control": "Pest Control",
+    "tree services": "Tree Services",
+    "garage door": "Garage Door",
 }
 
 # Below this, a SERP credit spent on the niche cannot pay for itself: even a
-# wide-open first page only wins calls that are worth a few dollars each.
+# wide-open first page only wins calls worth a few dollars each.
 MIN_REV_PER_CALL = float(os.environ.get("MIN_REV_PER_CALL", "15") or 15)
+
+_PAID_PCT = {}          # coverage-feed niche name -> paid %
+_MEDIAN = {}            # (niche, ptype) -> median payout, filled in stage 1
+
+
+def load_call_intel():
+    """paid % per niche from the snapshot CSV. Fail-open: without it the
+    economics gate simply does not fire, exactly as before it existed."""
+    path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                        "..", "data", "call_intel", "niches.csv")
+    if not os.path.isfile(path):
+        print(f"   ⚠️ {os.path.basename(path)} missing — economics gate off")
+        return
+    with open(path, encoding="utf-8") as fh:
+        for row in csv.DictReader(fh, delimiter="|"):
+            raw = (row.get("niche") or "").strip().lower()
+            if not raw:
+                continue
+            name = _CI_ALIAS.get(raw, raw.title())
+            try:
+                _PAID_PCT[name] = int(row["paid_pct"])
+            except (KeyError, TypeError, ValueError):
+                continue
+    print(f"   📞 call intel: paid% for {len(_PAID_PCT)} niches")
 
 
 def revenue_per_call(niche, ptype):
-    """What one call in this niche is worth, or None when we have no call data."""
-    hit = NICHE_ECONOMICS.get((niche, ptype))
-    return hit[2] if hit else None
+    """What one call is worth, or None when either half is unknown."""
+    med = _MEDIAN.get((niche, ptype))
+    paid = _PAID_PCT.get(niche)
+    if med is None or paid is None:
+        return None
+    return med * paid / 100.0
 
 
 # A niche with no entry here generates no queries, so its cities drop out of
@@ -373,6 +403,18 @@ def pull_coverage():
         return None, []
     print(f"   📅 dataset {meta.get('data_date')} · "
           f"{meta.get('niche_count')} niches · {meta.get('coverage_rows')} rows")
+
+    # Median payout per niche, live. meta.json only carries top_payout, which
+    # is one ZIP and six times the median on Plumbing.
+    summary = j(f"{BASE}/api/niche_summary.json")
+    for row in ((summary or {}).get("niches") or []):
+        try:
+            _MEDIAN[(row["niche"], row["payout_type"])] = float(row["median"])
+        except (KeyError, TypeError, ValueError):
+            continue
+    if _MEDIAN:
+        print(f"   💵 median payout for {len(_MEDIAN)} niche/type pairs")
+    load_call_intel()
 
     states = STATES or [s["state_id"] for s in (j(f"{BASE}/api/states.json") or [])]
     if not states:
@@ -464,9 +506,9 @@ def shortlist(rows, pricing):
     print(f"   payout ≥ ${MIN_PAYOUT:g} · rev/call ≥ ${MIN_REV_PER_CALL:g} "
           f"· pop {MIN_POP:,}-{MAX_POP:,} · type {PAYOUT_T}")
     for _n, _c in sorted(drop_econ.items(), key=lambda kv: -kv[1]):
-        _e = NICHE_ECONOMICS.get((_n, PAYOUT_T))
-        print(f"   ⛔ {_n:<16} {_c:>7,} rows dropped — ${_e[2]:.2f}/call "
-              f"(median ${_e[0]:.2f} x {_e[1]}% paid)")
+        print(f"   ⛔ {_n:<16} {_c:>7,} rows dropped — "
+              f"${revenue_per_call(_n, PAYOUT_T):.2f}/call "
+              f"(median ${_MEDIAN[(_n, PAYOUT_T)]:.2f} x {_PAID_PCT[_n]}% paid)")
     print(f"   ✅ {len(rows):,} → {len(keep):,} rows\n")
 
     print("── STAGE 3: city rollup + bundles ─────────────────────")
