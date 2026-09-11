@@ -1,2 +1,6 @@
 __pycache__/
 *.pyc
+
+# serp_shape run output — belongs in the workflow artifact, not the repo
+serp_shape.csv
+serp_shape.md
