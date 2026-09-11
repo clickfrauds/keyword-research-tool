@@ -171,39 +171,70 @@ def keyword_volumes(queries, geo_name=None):
     except ImportError:
         print("   google-ads not installed")
         return None
-    try:
-        # No version pin. requirements.txt asks for google-ads unpinned, so CI
-        # installs the current release, and Google retires old API versions —
-        # v18 was gone, which is how a whole run came back with zero volumes.
-        # Every other script in this repo lets the library pick; so does this.
-        client = GoogleAdsClient.load_from_env()
-        geo_id = geo_target_id(client, geo_name) if geo_name else None
-        svc = client.get_service("KeywordPlanIdeaService")
-        req = client.get_type("GenerateKeywordHistoricalMetricsRequest")
-        req.customer_id = cust
-        req.keywords.extend(queries[:10000])
-        req.language = "languageConstants/1000"          # English
-        req.geo_target_constants.append(
-            f"geoTargetConstants/{geo_id or 2840}")      # 2840 = United States
-        resp = svc.generate_keyword_historical_metrics(request=req)
-        out = {}
-        for r in resp.results:
-            m = r.keyword_metrics
-            out[r.text.lower()] = int(m.avg_monthly_searches or 0) if m else 0
+
+    def attempt(with_login):
+        env_key = "GOOGLE_ADS_LOGIN_CUSTOMER_ID"
+        saved = os.environ.pop(env_key, None) if not with_login else None
+        try:
+            # No version pin. requirements.txt asks for google-ads unpinned,
+            # so CI installs the current release and Google retires old API
+            # versions — v18 was gone, which is how a whole run came back with
+            # zero volumes. Every other script here lets the library pick.
+            client = GoogleAdsClient.load_from_env()
+            geo_id = geo_target_id(client, geo_name) if geo_name else None
+            svc = client.get_service("KeywordPlanIdeaService")
+            req = client.get_type("GenerateKeywordHistoricalMetricsRequest")
+            req.customer_id = cust
+            req.keywords.extend(queries[:10000])
+            req.language = "languageConstants/1000"          # English
+            req.geo_target_constants.append(
+                f"geoTargetConstants/{geo_id or 2840}")      # 2840 = US
+            resp = svc.generate_keyword_historical_metrics(request=req)
+            out = {}
+            for r in resp.results:
+                m = r.keyword_metrics
+                out[r.text.lower()] = int(m.avg_monthly_searches or 0) if m else 0
+            return out, None
+        except Exception as e:
+            return None, str(e)
+        finally:
+            if saved is not None:
+                os.environ[env_key] = saved
+
+    login = re.sub(r"\D", "", os.environ.get("GOOGLE_ADS_LOGIN_CUSTOMER_ID", ""))
+
+    # Try with the manager id, then without. The two Ads calls that already
+    # work in this repo — keyword_pipeline's planner steps and
+    # keyword_research_workflow — pass GOOGLE_ADS_CUSTOMER_ID and no manager
+    # id at all, while this workflow passed both. A manager id that does not
+    # actually sit above the account fails exactly the same way a genuinely
+    # missing permission does, so the message cannot tell them apart. Ads
+    # calls are free; asking twice costs nothing and settles it.
+    out, err = attempt(with_login=bool(login))
+    if out is None and login and ("PERMISSION_DENIED" in err
+                                  or "doesn't have permission" in err):
+        print("   denied with the manager id — retrying without it")
+        out, err2 = attempt(with_login=False)
+        if out is not None:
+            print("   worked without it. GOOGLE_ADS_LOGIN_CUSTOMER_ID does not"
+                  " manage this account — drop it from the workflow.")
+            return out
+        err = err2
+    if out is not None:
         return out
-    except Exception as e:
-        msg = str(e)
-        print(f"   Ads Planner failed ({msg[:90]})")
-        if "PERMISSION_DENIED" in msg or "doesn't have permission" in msg:
-            login = re.sub(r"\D", "",
-                           os.environ.get("GOOGLE_ADS_LOGIN_CUSTOMER_ID", ""))
-            print(f"   customer id: {len(cust)} digits · "
-                  f"login customer id: {len(login) or 'not set'} digits")
-            print("   Both must be 10 digits. GOOGLE_ADS_CUSTOMER_ID is the "
-                  "account the keywords are pulled for;")
-            print("   GOOGLE_ADS_LOGIN_CUSTOMER_ID is the manager (MCC) above "
-                  "it, and is required when they differ.")
-        return None
+
+    print(f"   Ads Planner failed ({err[:90]})")
+    if "PERMISSION_DENIED" in err or "doesn't have permission" in err:
+        print(f"   customer id: {len(cust)} digits · "
+              f"login customer id: {len(login) or 'not set'} digits")
+        print("   Both must be 10 digits. GOOGLE_ADS_CUSTOMER_ID is the "
+              "account the keywords are pulled for;")
+        print("   GOOGLE_ADS_LOGIN_CUSTOMER_ID is the manager (MCC) above it, "
+              "and is required only when they differ.")
+        print("   Neither combination was accepted, so check in the Ads UI "
+              "that this account exists and is not itself a manager —")
+        print("   the Keyword Planner cannot be queried on a manager account.")
+    return None
 
 
 def serp_verdict(query):
