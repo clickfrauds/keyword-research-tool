@@ -155,7 +155,14 @@ def keyword_volumes(queries, geo_name=None):
     """Monthly searches from the Ads Keyword Planner. Free, but it needs the
     five GOOGLE_ADS_* secrets; without them every query scores volume 0 and the
     run still finishes, ranked on revenue alone."""
-    cust = os.environ.get("GOOGLE_ADS_CUSTOMER_ID", "").strip()
+    # Digits only. keyword_research.py has stripped dashes since it was
+    # written; this script only stripped whitespace, so a secret stored as
+    # 123-456-7890 went into the request verbatim. The library validates
+    # login_customer_id and would have raised on a dashed one, but the
+    # request's customer_id gets no such check — it just becomes a customer
+    # Google cannot resolve, and the API answers PERMISSION_DENIED rather
+    # than saying the id is malformed.
+    cust = re.sub(r"\D", "", os.environ.get("GOOGLE_ADS_CUSTOMER_ID", ""))
     if not cust:
         print("   no GOOGLE_ADS_CUSTOMER_ID")
         return None
@@ -185,7 +192,17 @@ def keyword_volumes(queries, geo_name=None):
             out[r.text.lower()] = int(m.avg_monthly_searches or 0) if m else 0
         return out
     except Exception as e:
-        print(f"   Ads Planner failed ({str(e)[:90]})")
+        msg = str(e)
+        print(f"   Ads Planner failed ({msg[:90]})")
+        if "PERMISSION_DENIED" in msg or "doesn't have permission" in msg:
+            login = re.sub(r"\D", "",
+                           os.environ.get("GOOGLE_ADS_LOGIN_CUSTOMER_ID", ""))
+            print(f"   customer id: {len(cust)} digits · "
+                  f"login customer id: {len(login) or 'not set'} digits")
+            print("   Both must be 10 digits. GOOGLE_ADS_CUSTOMER_ID is the "
+                  "account the keywords are pulled for;")
+            print("   GOOGLE_ADS_LOGIN_CUSTOMER_ID is the manager (MCC) above "
+                  "it, and is required when they differ.")
         return None
 
 
