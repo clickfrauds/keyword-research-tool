@@ -68,6 +68,23 @@ BIGBRAND = ("rheem.com", "aosmith.com", "bradfordwhite.com", "navien.com",
             "rocketmortgage.com", "epa.gov", "energy.gov")
 
 
+# A contractor's own site is the signal worth having: if one has earned a top
+# spot, a site like this one can. Testing for trade words in the domain finds
+# them; the alternative — "anything not on a blocklist" — counted Hawaii's
+# Department of Water Supply and California Water Service as proof that
+# "how to tell if a water leak is inside or outside" was winnable.
+TRADE_WORDS = ("plumb", "rooter", "drain", "sewer", "septic", "hvac", "heating",
+               "cooling", "airconditioning", "restoration", "leakdetection",
+               "waterheater", "repipe", "pipe", "mechanical", "contracting")
+
+# Utilities, government and product manufacturers rank on authority a new site
+# cannot borrow. Their presence is not evidence of an opening.
+INSTITUTIONAL = ("water.com", "dws.", "waterdistrict", "waterauthority",
+                 "wateragency", "waterworks.", "publicworks", "utilities.",
+                 "firstalert", "petersenproducts", "bmagmeter", "watts.com",
+                 "pentair", "zurn.com", "sensus.com", "badgermeter")
+
+
 def classify_host(host):
     h = host.lower()
     h = h[4:] if h.startswith("www.") else h
@@ -75,6 +92,12 @@ def classify_host(host):
                         (DIRECTORY, "directory"), (BIGBRAND, "big brand")):
         if any(d in h for d in group):
             return name
+    if h.endswith((".gov", ".edu", ".mil")) or ".gov." in h or ".edu." in h:
+        return "institutional"
+    if any(d in h for d in INSTITUTIONAL):
+        return "institutional"
+    if any(w in h for w in TRADE_WORDS):
+        return "local contractor"
     return "independent site"
 
 
@@ -115,19 +138,29 @@ def shape(data):
     has_video_block = bool(data.get("inline_videos") or data.get("short_videos"))
     has_discussions = bool(data.get("discussions_and_forums"))
 
+    first_trade = next((i for i, k in enumerate(kinds)
+                        if k == "local contractor"), None)
     first_independent = next((i for i, k in enumerate(kinds)
-                              if k == "independent site"), None)
+                              if k in ("local contractor", "independent site")), None)
+    trade = kinds.count("local contractor")
 
     video = counts.get("video", 0)
     forum = counts.get("forum", 0)
     indie = counts.get("independent site", 0)
     brand = counts.get("big brand", 0)
 
-    if has_video_block and video + forum >= 2:
+    # Checked before the walls on purpose. "slab leak repair cost arizona" has
+    # asapplumbingaz.com and thearizonaplumber.net in the first two places and
+    # a video block further down; reading the block first threw away the best
+    # opening in the batch.
+    if first_trade is not None and first_trade <= 2:
+        verdict, why = "WINNABLE", (f"a contractor's site at #{first_trade + 1}"
+                                    + (f", {trade} in the top 10" if trade > 1 else ""))
+    elif has_video_block and video + forum >= 2:
         verdict, why = "VIDEO WALL", "video block on top, and video/forum below it"
     elif forum >= 3 or (has_discussions and forum >= 2):
         verdict, why = "FORUM WALL", f"{forum} forum results in the top 10"
-    elif first_independent is not None and first_independent <= 1:
+    elif first_independent is not None and first_independent <= 1 and trade:
         # Position beats count. One contractor's blog at #1 is the strongest
         # evidence there is that this slot is reachable — requiring a second
         # one called "tree roots in sewer line signs" CROWDED when a local
@@ -146,7 +179,8 @@ def shape(data):
     return {
         "verdict": verdict, "why": why,
         "video": video, "forum": forum, "directory": counts.get("directory", 0),
-        "big_brand": brand, "independent": indie,
+        "big_brand": brand, "independent": indie, "contractor": trade,
+        "institutional": kinds.count("institutional"),
         "video_block": int(has_video_block), "forums_block": int(has_discussions),
         "top3": " | ".join(
             (urllib.parse.urlparse(r.get("link", "")).netloc or "?").replace("www.", "")
