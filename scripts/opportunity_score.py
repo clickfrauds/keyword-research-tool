@@ -31,6 +31,7 @@ Usage
 """
 
 import argparse
+import collections
 import csv
 import json
 import os
@@ -130,6 +131,90 @@ def median_payout(niche, ptype="Call"):
         if n["niche"].lower() == want.lower() and n["payout_type"] == ptype:
             return float(n["median"])
     return None
+
+
+def all_payouts(ptype="Call"):
+    """Every niche's payout row from the coverage feed, keyed by lower name."""
+    try:
+        with urllib.request.urlopen(
+                f"{COVERAGE}/api/niche_summary.json", timeout=30) as r:
+            data = json.loads(r.read().decode("utf-8", "replace"))
+    except Exception as e:
+        sys.exit(f"coverage feed unreachable ({e})")
+    return {n["niche"].lower(): n for n in data.get("niches", [])
+            if n["payout_type"] == ptype}
+
+
+def rank_niches(min_calls, min_revenue, ptype="Call"):
+    """Which niche to build next.
+
+    Everything else in this file answers "what should I write inside a niche".
+    Nothing answered "which niche", and the answer is not the obvious one: the
+    two niches with the most recorded calls pay the least per call, so the call
+    log alone points straight at the worst two.
+    """
+    pay = all_payouts(ptype)
+    rows = []
+    with open(os.path.join(CALL_INTEL, "niches.csv"), encoding="utf-8") as fh:
+        niches = list(csv.DictReader(fh))
+
+    usable = collections.Counter()
+    with open(os.path.join(CALL_INTEL, "specifics.csv"), encoding="utf-8") as fh:
+        for r in csv.DictReader(fh):
+            if int(r["calls"] or 0) >= min_calls:
+                usable[r["niche"]] += 1
+
+    for r in niches:
+        name = r["niche"]
+        row = pay.get(NICHE_ALIAS.get(name.lower(), name).lower()) or pay.get(name.lower())
+        if not row:
+            continue
+        med = float(row["median"])
+        paid = int(r["paid_pct"] or 0)
+        eff = med * paid / 100
+        mx = float(row["max"] or 0)
+        rows.append({
+            "niche": name, "calls": int(r["calls"] or 0),
+            "services": usable[name], "payout": med, "paid_pct": paid,
+            "per_call": eff, "spread": (mx / med) if med else 0,
+        })
+
+    rows.sort(key=lambda x: -x["per_call"])
+
+    print(f"\n── which niche to build next · {ptype} payouts ──\n")
+    print(f"{'niche':22s} {'calls':>6s} {'svcs':>5s} {'payout':>8s} "
+          f"{'paid':>5s} {'$/call':>8s} {'geo':>6s}")
+    print("-" * 72)
+    for x in rows:
+        note = ""
+        if x["per_call"] < min_revenue:
+            note = f"  under ${min_revenue:.0f} — skip"
+        elif x["services"] < 8:
+            note = "  thin data"
+        print(f"{x['niche'][:21]:22s} {x['calls']:>6d} {x['services']:>5d} "
+              f"${x['payout']:>7.2f} {x['paid_pct']:>4d}% ${x['per_call']:>7.2f} "
+              f"{x['spread']:>5.1f}x{note}")
+
+    ready = [x for x in rows if x["per_call"] >= min_revenue and x["services"] >= 8]
+    print()
+    if ready:
+        print("Enough data and enough money, best first:")
+        for x in ready:
+            print(f"   {x['niche']} — ${x['per_call']:.2f}/call, "
+                  f"{x['services']} services, {x['calls']} calls")
+        print(f"\n   Next: --niche \"{ready[0]['niche']}\"")
+    else:
+        print("   Nothing clears both bars. Lower --min-calls, or collect more"
+              " call data before committing to a niche.")
+
+    print("\n   geo column = best ZIP / median. Above ~2x the payout depends"
+          " heavily on where")
+    print("   the caller is, so check the coverage map before choosing a metro."
+          " At 1.0x")
+    print("   every ZIP pays the same and location does not affect revenue at"
+          " all.")
+    return rows
+
 
 
 def geo_target_id(client, name):
@@ -266,6 +351,9 @@ def main():
     ap.add_argument("--min-calls", type=int, default=8,
                     help="ignore services below this many recorded calls")
     ap.add_argument("--min-volume", type=int, default=0)
+    ap.add_argument("--rank-niches", action="store_true",
+                    help="rank every niche in the call data by what a call is "
+                         "actually worth, and stop. Spends no SerpApi credits.")
     ap.add_argument("--min-revenue", type=float, default=15.0,
                     help="drop services paying less than this per call. The "
                          "plumbing run put sump pump at $7.35 in the GO list "
@@ -284,8 +372,16 @@ def main():
     ap.add_argument("--ptype", default="Call")
     a = ap.parse_args()
 
+    # Before the run header: --rank-niches answers a different question
+    # and spends no credits, so announcing a niche and a credit budget
+    # first is just noise.
+    if a.rank_niches:
+        rank_niches(a.min_calls, a.min_revenue, a.ptype)
+        return
+
     where = a.geo or "nationwide"
     print(f"\n── {a.niche} · {where} · max {a.max_serp} SerpApi credits ──\n")
+
 
     spec = [s for s in load_specifics(a.niche) if s["calls"] >= a.min_calls]
     if not spec:

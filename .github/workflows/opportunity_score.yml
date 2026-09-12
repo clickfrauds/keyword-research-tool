@@ -25,6 +25,10 @@ on:
         description: "Ignore services with fewer recorded calls than this"
         required: false
         default: "8"
+      rank_niches:
+        description: "Type yes to rank every niche by what a call is worth and stop. Spends no SerpApi credits. Ignores the niche field."
+        required: false
+        default: ""
       geo:
         description: "State or city to qualify queries with, e.g. Arizona. Leave blank for nationwide informational queries"
         required: false
@@ -67,7 +71,8 @@ jobs:
             --max-serp "${{ github.event.inputs.max_serp }}" \
             --min-calls "${{ github.event.inputs.min_calls }}" \
             --min-volume "${{ github.event.inputs.min_volume }}" \
-            --geo "${{ github.event.inputs.geo }}"
+            --geo "${{ github.event.inputs.geo }}" \
+            ${{ github.event.inputs.rank_niches == 'yes' && '--rank-niches' || '' }}
 
       - name: Job summary
         if: always()
