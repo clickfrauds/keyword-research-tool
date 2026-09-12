@@ -43,6 +43,10 @@ import urllib.request
 
 HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CALL_INTEL = os.path.join(HERE, "data", "call_intel")
+#: Roughly how many ZIP codes the US has. Only used to turn an offer's ZIP
+#: count into a share, so precision here does not matter much.
+US_ZIPS = 41700
+
 COVERAGE = os.environ.get("COVERAGE_BASE",
                           "https://leadsmart-coverage.netlify.app").rstrip("/")
 SERP_KEY = os.environ.get("SERPAPI_API_KEY", "").strip()
@@ -293,20 +297,28 @@ def rank_niches(min_calls, min_revenue, ptype="Call"):
             continue
         med = float(row["median"])
         paid = int(r["paid_pct"] or 0)
-        eff = med * paid / 100
+        # Coverage is the third multiplier and the one that is easy to miss.
+        # An offer only buys calls from ZIPs it covers; a caller from anywhere
+        # else is worth nothing, however good the payout and the paid rate.
+        # Plumbing covers ~25,000 of ~41,700 US ZIPs, so ~40% of callers have
+        # no buyer at all — and HVAC, which looks like the best niche on payout
+        # alone, covers 53%.
+        cov = int(row.get("zips") or 0) / US_ZIPS
+        eff = med * paid / 100 * cov
         mx = float(row["max"] or 0)
         rows.append({
             "niche": name, "calls": int(r["calls"] or 0),
             "services": usable[name], "payout": med, "paid_pct": paid,
-            "per_call": eff, "spread": (mx / med) if med else 0,
+            "coverage": cov, "per_call": eff,
+            "spread": (mx / med) if med else 0,
         })
 
     rows.sort(key=lambda x: -x["per_call"])
 
     print(f"\n── which niche to build next · {ptype} payouts ──\n")
     print(f"{'niche':22s} {'calls':>6s} {'svcs':>5s} {'payout':>8s} "
-          f"{'paid':>5s} {'$/call':>8s} {'geo':>6s}")
-    print("-" * 72)
+          f"{'paid':>5s} {'zips':>5s} {'$/call':>8s} {'geo':>6s}")
+    print("-" * 80)
     for x in rows:
         note = ""
         if x["per_call"] < min_revenue:
@@ -314,8 +326,8 @@ def rank_niches(min_calls, min_revenue, ptype="Call"):
         elif x["services"] < 8:
             note = "  thin data"
         print(f"{x['niche'][:21]:22s} {x['calls']:>6d} {x['services']:>5d} "
-              f"${x['payout']:>7.2f} {x['paid_pct']:>4d}% ${x['per_call']:>7.2f} "
-              f"{x['spread']:>5.1f}x{note}")
+              f"${x['payout']:>7.2f} {x['paid_pct']:>4d}% {x['coverage']:>4.0%} "
+              f"${x['per_call']:>7.2f} {x['spread']:>5.1f}x{note}")
 
     ready = [x for x in rows if x["per_call"] >= min_revenue and x["services"] >= 8]
     print()
@@ -323,12 +335,17 @@ def rank_niches(min_calls, min_revenue, ptype="Call"):
         print("Enough data and enough money, best first:")
         for x in ready:
             print(f"   {x['niche']} — ${x['per_call']:.2f}/call, "
-                  f"{x['services']} services, {x['calls']} calls")
+                  f"{x['coverage']:.0%} of ZIPs, {x['services']} services, "
+                  f"{x['calls']} calls")
         print(f"\n   Next: --niche \"{ready[0]['niche']}\"")
     else:
         print("   Nothing clears both bars. Lower --min-calls, or collect more"
               " call data before committing to a niche.")
 
+    print("\n   $/call = payout x paid rate x ZIP coverage. An offer only buys"
+          " calls from ZIPs it")
+    print("   covers, so a caller from anywhere else earns nothing whatever the"
+          " payout is.")
     print("\n   geo column = best ZIP / median. Above ~2x the payout depends"
           " heavily on where")
     print("   the caller is, so check the coverage map before choosing a metro."
