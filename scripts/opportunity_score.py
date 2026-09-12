@@ -189,18 +189,52 @@ def clean_service(name):
 
 
 def load_specifics(niche):
+    """Rows for one niche, with the same service counted once.
+
+    The call log writes a service however the agent typed it, so "AC repair",
+    "ac repair" and "ac repair (needs freon)" are three rows for one thing.
+    clean_service() collapses them to the same query anyway, and the caller
+    keeps whichever row claims the higher revenue — so the 10-call row at 100%
+    paid displaced the 41-call row at 76%, and the payout for the niche's
+    biggest service came from a quarter of its calls.
+
+    It is worse elsewhere: tree removal's 195 calls at 71% lost to a 2-call row
+    at 100%, and refrigerator repair's 129 calls to another 2-call row. Rates
+    off two calls are noise, and they were setting the revenue that decides
+    both the $15 gate and the ranking.
+
+    Merging on the same key clean_service() uses, weighting the rates by calls,
+    makes the rate come from every call recorded for that service.
+    """
     p = os.path.join(CALL_INTEL, "specifics.csv")
     if not os.path.isfile(p):
         sys.exit(f"missing {p} — run extract_call_intel.js first")
-    out = []
+
+    groups = collections.OrderedDict()
     with open(p, encoding="utf-8") as fh:
         for r in csv.DictReader(fh):
             if r["niche"].lower() != niche.lower():
                 continue
-            r["calls"] = int(r["calls"])
-            r["paid_pct"] = int(r["paid_pct"])
-            r["urgent_pct"] = int(r.get("urgent_pct") or 0)
-            out.append(r)
+            calls = int(r["calls"] or 0)
+            key = clean_service(r["specific_service"])
+            g = groups.get(key)
+            if g is None:
+                g = groups[key] = {**r, "calls": 0, "_paid": 0.0, "_urg": 0.0,
+                                   "_names": []}
+            g["calls"] += calls
+            g["_paid"] += calls * int(r["paid_pct"] or 0)
+            g["_urg"] += calls * int(r.get("urgent_pct") or 0)
+            g["_names"].append(r["specific_service"])
+
+    out = []
+    for g in groups.values():
+        n = g["calls"] or 1
+        g["paid_pct"] = round(g["_paid"] / n)
+        g["urgent_pct"] = round(g["_urg"] / n)
+        # Report the longest spelling — it reads best in the results table.
+        g["specific_service"] = max(g.pop("_names"), key=len)
+        g.pop("_paid"); g.pop("_urg")
+        out.append(g)
     return out
 
 
