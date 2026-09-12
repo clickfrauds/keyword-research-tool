@@ -61,13 +61,101 @@ NICHE_ALIAS = {
 # dashboard files a call; "faucet repair cost" is what a person types. These
 # turn one into the other, and the shapes are the ones that survived a SERP
 # check rather than the ones that sounded right.
+# Two of these were written while the only niche was plumbing, and both carry
+# that assumption into every other one: "when to call a plumber for mice
+# control" and "mice control vs replacement" are not questions anyone asks.
+# Two of five shapes wasted, and each would have spent a SerpApi credit proving
+# it. The trade name and the last shape now come from the niche.
 SHAPES = [
     "{s} cost",
     "how much does {s} cost",
     "signs you need {s}",
-    "when to call a plumber for {s}",
-    "{s} vs replacement",
+    "when to call {pro} for {s}",
 ]
+
+#: What the caller would call the person they need. Falls back to "pro", which
+#: is clumsy but never wrong.
+TRADE_PRO = {
+    "plumbing": "plumber",
+    "hvac": "hvac technician",
+    "roofing": "roofer",
+    "electrical": "electrician",
+    "pest control": "exterminator",
+    "tree services": "tree service",
+    "appliance repair": "appliance repair technician",
+    "gutters": "gutter company",
+    "water damage": "water damage company",
+    "painting": "painter",
+    "window repair": "window repair company",
+    "garage door": "garage door company",
+    "pool services": "pool service",
+    "lawncare & landscaping": "landscaper",
+    "carpet & rug cleaning": "carpet cleaner",
+    "remodeling": "contractor",
+    "cleaning services": "cleaning service",
+    "handyman & structural": "handyman",
+}
+
+#: The fifth shape, per niche. Repair-or-replace only makes sense where there
+#: is a unit to replace; for pest control the same intent is removal, and for a
+#: service that is performed rather than installed it is frequency.
+LAST_SHAPE = {
+    "pest control": "how to get rid of {bare}",
+    "tree services": "when to remove {bare}",
+    "lawncare & landscaping": "how often {s}",
+    "cleaning services": "how often {s}",
+    "carpet & rug cleaning": "how often {s}",
+    "painting": "how often {s}",
+}
+DEFAULT_LAST_SHAPE = "{s} vs replacement"
+
+
+#: Words a service name ends in that describe the work, not the thing. "how to
+#: get rid of mice control" is not a query; "how to get rid of mice" is. Only
+#: trimmed for shapes that ask about the problem itself.
+_WORK_TAIL = ("control", "removal", "treatment", "extermination", "exterminating",
+              "service", "services", "cleaning", "repair", "inspection")
+
+
+#: Already plural, so adding an s makes a word nobody types.
+_ALREADY_PLURAL = {"mice", "lice", "geese", "deer", "fish", "silverfish",
+                   "termites", "ants", "roaches", "wasps", "fleas", "bees"}
+
+
+def bare_subject(service):
+    """The thing itself, plural, with the word for the work taken off the end.
+
+    "how to get rid of mice control" is not a query and neither is "how to get
+    rid of bed bug" — that shape always asks about more than one.
+    """
+    words = service.split()
+    while len(words) > 1 and words[-1].lower() in _WORK_TAIL:
+        words.pop()
+    if words:
+        last = words[-1].lower()
+        if not last.endswith("s") and last not in _ALREADY_PLURAL:
+            # -ch/-sh/-x/-z take -es: "cockroachs" is not a word.
+            words[-1] = last + ("es" if last.endswith(("ch", "sh", "x", "z"))
+                                else "s")
+    return " ".join(words)
+
+
+def _article(word):
+    """a/an. "a exterminator" and "a hvac technician" both read as typos, and a
+    query with a typo in it is not the query anyone searched."""
+    return "an" if word[:1].lower() in "aeiou" or word[:4].lower() == "hvac" else "a"
+
+
+def niche_shapes(niche):
+    """SHAPES with the niche's own trade name and closing question.
+
+    Returns format strings taking {s}; a shape needing the bare subject takes
+    {bare} as well, so the caller passes both.
+    """
+    pro = TRADE_PRO.get(niche.lower(), "pro")
+    last = LAST_SHAPE.get(niche.lower(), DEFAULT_LAST_SHAPE)
+    out = [sh.replace("{pro}", f"{_article(pro)} {pro}") for sh in SHAPES]
+    return out + [last]
 
 # With --geo. The nationwide shapes above are the default because ZIP routing
 # means content does not have to name a place to earn from it, and the openings
@@ -405,11 +493,11 @@ def main():
         if rev < a.min_revenue:
             skipped_cheap.append((s["specific_service"], rev))
             continue
-        shapes = list(SHAPES)
+        shapes = niche_shapes(a.niche)
         if a.geo:
             shapes += [g.replace("{geo}", a.geo.lower()) for g in GEO_SHAPES]
         for shape in shapes:
-            q = shape.format(s=base)
+            q = shape.format(s=base, bare=bare_subject(base))
             if len(q.split()) > 9:
                 continue
             prev = cands.get(q)
