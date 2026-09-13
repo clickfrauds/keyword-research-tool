@@ -1,0 +1,81 @@
+name: City x Service Volume
+
+# "We have 30 cities and 33 services. Where do the first 30 pages go?"
+#
+# Nothing here answered that. mode5_areas comes closest but takes ONE service
+# and spends most of its work finding neighbourhoods INSIDE a city, which is
+# the wrong half when the cities themselves are what is being compared.
+#
+# Every "{service} {city} {ST}" pair goes to the Keyword Planner in a single
+# request, so this costs nothing and spends no SerpApi credits.
+
+on:
+  workflow_dispatch:
+    inputs:
+      cities:
+        description: "Cities, comma-separated"
+        required: true
+        default: "Phoenix, Tucson, Mesa, Gilbert, Chandler, Glendale, Scottsdale, Peoria, Tempe, Surprise, Buckeye, Goodyear, San Tan Valley, Yuma, Avondale, Queen Creek, Maricopa, Flagstaff, Casa Grande, Marana, Lake Havasu City, Prescott Valley, Prescott, Oro Valley, Apache Junction, Sierra Vista, Bullhead City, San Luis"
+      services:
+        description: "Services, comma-separated"
+        required: true
+        default: "leak detection, drain cleaning, sewer line repair, water heater repair, slab leak repair, emergency plumber"
+      state:
+        description: "Two-letter state appended to every query (callers type it, so the query should carry it)"
+        required: false
+        default: "AZ"
+      geo:
+        description: "Geo target for the volume lookup, e.g. Arizona. Blank = whole United States"
+        required: false
+        default: "Arizona"
+      min_volume:
+        description: "A city/service pair below this is not worth a page"
+        required: false
+        default: "20"
+      request_id:
+        description: "Name for the results file"
+        required: false
+        default: ""
+
+jobs:
+  volume:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - run: pip install -r requirements.txt
+
+      - name: Measure every city/service pair
+        env:
+          GOOGLE_ADS_DEVELOPER_TOKEN: ${{ secrets.GOOGLE_ADS_DEVELOPER_TOKEN }}
+          GOOGLE_ADS_CLIENT_ID: ${{ secrets.GOOGLE_ADS_CLIENT_ID }}
+          GOOGLE_ADS_CLIENT_SECRET: ${{ secrets.GOOGLE_ADS_CLIENT_SECRET }}
+          GOOGLE_ADS_REFRESH_TOKEN: ${{ secrets.GOOGLE_ADS_REFRESH_TOKEN }}
+          GOOGLE_ADS_LOGIN_CUSTOMER_ID: ${{ secrets.GOOGLE_ADS_LOGIN_CUSTOMER_ID }}
+          GOOGLE_ADS_CUSTOMER_ID: ${{ secrets.GOOGLE_ADS_CUSTOMER_ID }}
+          GOOGLE_ADS_USE_PROTO_PLUS: "true"
+        run: |
+          python -u scripts/city_service_volume.py \
+            --cities "${{ github.event.inputs.cities }}" \
+            --services "${{ github.event.inputs.services }}" \
+            --state "${{ github.event.inputs.state }}" \
+            --geo "${{ github.event.inputs.geo }}" \
+            --min-volume "${{ github.event.inputs.min_volume }}"
+
+      - name: Job summary
+        if: always()
+        run: cat city_service_volume.md >> "$GITHUB_STEP_SUMMARY" || true
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: city-service-volume${{ github.event.inputs.request_id && format('-{0}', github.event.inputs.request_id) || '' }}
+          path: |
+            city_service_volume.csv
+            city_service_volume.md
+          retention-days: 30
