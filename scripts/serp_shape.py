@@ -215,29 +215,25 @@ def shape(data):
                           "reference", "directory", "institutional"))
 
     # A map pack means the first screen belongs to businesses with premises.
-    # Judged before everything else, because on these queries the organic list
-    # is what is left over rather than what is being competed for.
+    # Decided before everything else, because on these queries the organic
+    # list is what is left over rather than what is being competed for.
+    #
+    # This sets a verdict and falls through to the single return at the end
+    # rather than returning here: an early return gave these rows fewer keys
+    # than every other verdict, and csv.DictWriter takes its columns from the
+    # first row -- so a run whose first query hit a map pack died at the CSV
+    # write, after all its credits were spent.
+    _map_verdict = None
     if n_local >= 3:
-        directory = sum(1 for k in kinds[:5] if k in ("directory", "forum"))
-        if directory >= 3:
-            verdict, why = "MAP PACK + DIRECTORIES", (
-                f"{n_local} in the map pack, and {directory} of the top 5 "
-                "organic are directories")
+        _directory = sum(1 for k in kinds[:5] if k in ("directory", "forum"))
+        if _directory >= 3:
+            _map_verdict = ("MAP PACK + DIRECTORIES",
+                            f"{n_local} in the map pack, and {_directory} of "
+                            "the top 5 organic are directories")
         else:
-            verdict, why = "MAP PACK", (
-                f"{n_local} businesses above organic"
-                + (", ads too" if has_ads else ""))
-        return {
-            "verdict": verdict, "why": why,
-            "map_pack": n_local,
-        "video_block": int(has_video_block), "forums_block": int(has_discussions),
-            "map_pack": n_local,
-            "big_brand": brand, "independent": indie, "contractor": trade,
-            "walled_top3": walled,
-            "top3": " \u00b7 ".join(
-                (urllib.parse.urlparse(r.get("link", "")).netloc or "?").replace("www.", "")
-                for r in top[:3]),
-        }
+            _map_verdict = ("MAP PACK",
+                            f"{n_local} businesses above organic"
+                            + (", ads too" if has_ads else ""))
 
     # Checked before the walls on purpose. "slab leak repair cost arizona" has
     # asapplumbingaz.com and thearizonaplumber.net in the first two places and
@@ -248,7 +244,9 @@ def shape(data):
     # plumbing site could take. Two of these in the first three places means
     # Google is answering with the product, the database or the brand, and a
     # contractor further down is the exception that proves it.
-    if walled >= 2:
+    if _map_verdict:
+        verdict, why = _map_verdict
+    elif walled >= 2:
         verdict, why = "BRAND WALL", (
             f"{walled} of the top 3 are manufacturers, aggregators, franchises "
             "or reference sites")
@@ -281,6 +279,7 @@ def shape(data):
         "big_brand": brand, "independent": indie, "contractor": trade,
         "walled_top3": walled,
         "institutional": kinds.count("institutional"),
+        "map_pack": n_local,
         "video_block": int(has_video_block), "forums_block": int(has_discussions),
         # Joined with a middle dot, not a pipe: this string is printed
         # straight into a markdown table, where "|" opens a new cell. Every
@@ -291,6 +290,20 @@ def shape(data):
             (urllib.parse.urlparse(r.get("link", "")).netloc or "?").replace("www.", "")
             for r in top[:3]),
     }
+
+
+#: Console markers. Anything not listed prints a dot rather than raising.
+MARKS = {
+    "WINNABLE": "✅",
+    "MIXED": "🟡",
+    "BIG BRAND": "🟠",
+    "MAP PACK": "🗺️",
+    "MAP PACK + DIRECTORIES": "❌",
+    "BRAND WALL": "❌",
+    "FORUM WALL": "❌",
+    "VIDEO WALL": "❌",
+    "CROWDED": "❌",
+}
 
 
 def main():
@@ -347,8 +360,11 @@ def main():
             rows.append({"query": q, "verdict": "ERROR", "why": err[:80]})
             continue
         s = shape(data)
-        mark = {"WINNABLE": "✅", "MIXED": "🟡", "BIG BRAND": "🟠",
-                "FORUM WALL": "❌", "VIDEO WALL": "❌", "CROWDED": "❌"}[s["verdict"]]
+        # .get(), not [] -- this crashed the whole run on KeyError: 'MAP PACK'
+        # AFTER all 20 SerpApi credits were spent, because a verdict was added
+        # to shape() and not here. The marker is decoration; a missing one must
+        # never cost a finished run its results.
+        mark = MARKS.get(s["verdict"], "•")
         print(f"{i:3}. {mark} {s['verdict']:11} {q[:46]:48} {s['top3'][:52]}")
         rows.append({"query": q, **s})
 
