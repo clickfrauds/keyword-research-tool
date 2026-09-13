@@ -623,9 +623,26 @@ def _add_proximity(results):
                 hits = _nominatim(f"{q}, {TARGET_LOCATION}", limit=5)
                 want = _nrm(q)
                 for h in hits or []:
-                    if want in _nrm(h.get("display_name", "")):
-                        best = h
-                        break
+                    if want not in _nrm(h.get("display_name", "")):
+                        continue
+                    # It has to be a PLACE, not a road or a building that
+                    # happens to carry the name. Asked for "Kingman, Phoenix,
+                    # United States" — a location that does not exist — OSM
+                    # returned something inside Phoenix whose display_name
+                    # contained "Kingman", and the name test passed. Seven of
+                    # twenty Arizona areas were placed 72-292 km from where
+                    # they are, all of them clustered on Phoenix, and the
+                    # proximity pass then reported Kingman as 2.7 km from
+                    # Payson when it is 330 km. That distance goes onto the
+                    # page as a sentence a reader can check.
+                    cls = str(h.get("class", "")).lower()
+                    typ = str(h.get("type", "")).lower()
+                    if cls and cls not in ("place", "boundary"):
+                        print(f"   ↷ {a['area']}: OSM hit is a {cls}/{typ}, "
+                              f"not a place — skipped")
+                        continue
+                    best = h
+                    break
                 if best:
                     break
                 time.sleep(1.2)
