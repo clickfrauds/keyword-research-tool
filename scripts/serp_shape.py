@@ -368,10 +368,31 @@ def main():
         print(f"{i:3}. {mark} {s['verdict']:11} {q[:46]:48} {s['top3'][:52]}")
         rows.append({"query": q, **s})
 
+    # Columns from every row, not from the first one. An errored query only
+    # carries query/verdict/why, so a run whose FIRST query failed wrote a
+    # three-column header and then died on the rows behind it -- and when the
+    # SerpApi quota runs out, every query fails, so the first one certainly
+    # does. That turned "no credits left" into a crash with no output at all,
+    # when the honest result was a file full of ERROR rows saying exactly that.
+    fields, seen = [], set()
+    for r in rows:
+        for k in r:
+            if k not in seen:
+                seen.add(k)
+                fields.append(k)
     with open("serp_shape.csv", "w", newline="", encoding="utf-8") as fh:
-        w = csv.DictWriter(fh, fieldnames=list(rows[0].keys()))
+        w = csv.DictWriter(fh, fieldnames=fields, restval="",
+                           extrasaction="ignore")
         w.writeheader()
         w.writerows(rows)
+
+    errs = [r for r in rows if r.get("verdict") == "ERROR"]
+    if errs:
+        print(f"\n   {len(errs)} of {len(rows)} queries failed.")
+        if len(errs) == len(rows):
+            print("   Every one failed - that is usually the SerpApi quota, "
+                  "not the queries.")
+            print(f"   First error: {errs[0].get('why', '')[:70]}")
 
     win = [r for r in rows if r.get("verdict") in ("WINNABLE", "MIXED")]
     with open("serp_shape.md", "w", encoding="utf-8") as fh:
