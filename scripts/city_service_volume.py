@@ -152,24 +152,52 @@ def main():
 
     cities = split_list(a.cities)
     services = split_list(a.services)
-    tail = f" {a.state.strip().lower()}" if a.state.strip() else ""
+    st = a.state.strip().lower()
 
-    print(f"\n-- {len(cities)} cities x {len(services)} services "
-          f"= {len(cities) * len(services)} queries, 1 Ads request, "
-          f"0 SerpApi credits --\n")
-
-    pairs = {}
+    # Both spellings, because guessing wrong silently halves every number.
+    # The first run appended "az" to all 924 queries and reported Phoenix at
+    # 860 searches a month across 33 services -- far too little for a city of
+    # 1.7 million, because "leak detection phoenix az" is a narrower phrase
+    # than "leak detection phoenix". Asking for both costs one more request at
+    # most, and the difference is itself worth knowing: it says how this
+    # market actually types.
+    variants = {}
     for c in cities:
         for s in services:
-            pairs[f"{s.lower()} {c.lower()}{tail}"] = (c, s)
+            plain = f"{s.lower()} {c.lower()}"
+            variants[plain] = (c, s, "plain")
+            if st:
+                variants[f"{plain} {st}"] = (c, s, "state")
 
-    vols = volumes(list(pairs), a.geo or None)
+    n_pairs = len(cities) * len(services)
+    print(f"\n-- {len(cities)} cities x {len(services)} services "
+          f"= {n_pairs} pairs, {len(variants)} queries, "
+          f"0 SerpApi credits --\n")
+
+    vols = volumes(list(variants), a.geo or None)
     if vols is None:
         sys.exit("\n   no volumes - nothing to report.")
 
     grid = {c: {} for c in cities}
-    for q, (c, s) in pairs.items():
-        grid[c][s] = vols.get(q, 0)
+    shape = {c: {} for c in cities}
+    won = {"plain": 0, "state": 0}
+    for q, (c, s, kind) in variants.items():
+        v = vols.get(q, 0)
+        if v > grid[c].get(s, -1):
+            grid[c][s] = v
+            shape[c][s] = kind
+    for c in cities:
+        for s in services:
+            if grid[c].get(s, 0) > 0:
+                won[shape[c][s]] += 1
+
+    if st and (won["plain"] or won["state"]):
+        total = won["plain"] + won["state"]
+        print(f"   query shape: '{{service}} {{city}}' wins {won['plain']}/{total}, "
+              f"'... {st}' wins {won['state']}/{total}")
+        if won["plain"] > won["state"] * 2:
+            print(f"   -> people here mostly leave '{st}' off. "
+                  f"Titles and pages should match that.")
 
     city_total = {c: sum(v.values()) for c, v in grid.items()}
     svc_total = {s: sum(grid[c].get(s, 0) for c in cities) for s in services}
@@ -199,7 +227,7 @@ def main():
              if grid[c].get(s, 0) >= a.min_volume]
     build.sort(key=lambda t: -t[2])
     print(f"\n{len(build)} city/service pairs clear {a.min_volume}/mo "
-          f"out of {len(pairs)}.")
+          f"out of {n_pairs}.")
     if build:
         print("\nTop 30 pages to build first:")
         for c, s, v in build[:30]:
@@ -247,7 +275,7 @@ def main():
         fh.write("# City x service volume\n\n")
         fh.write(f"{len(cities)} cities, {len(services)} services, "
                  f"floor {a.min_volume}/mo. "
-                 f"**{len(build)} of {len(pairs)}** pairs are worth a page.\n\n")
+                 f"**{len(build)} of {n_pairs}** pairs are worth a page.\n\n")
 
         if build:
             fh.write("## Build these first\n\n| # | page | searches/mo |\n")

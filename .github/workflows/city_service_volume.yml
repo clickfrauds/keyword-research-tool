@@ -19,7 +19,7 @@ on:
       services:
         description: "Services, comma-separated"
         required: true
-        default: "leak detection, drain cleaning, faucet repair, water heater repair, clogged drain repair, sewer line repair, water meter leak detection, slab leak repair, toilet repair, water line repair, water softener installation, commercial leak detection, tankless water heater flush, garbage disposal repair, ceiling leak repair, drain snaking, hydro jetting, tankless water heater installation, sewer backup cleanup, emergency plumber, cracked pipe repair, kitchen drain cleaning, crawlspace leak detection, irrigation leak repair, septic tank service, plumbing installation, underground pipe leak repair, whole house repiping, gas leak detection, sump pump repair, pipe leak repair, copper pipe repair, low water pressure repair"
+        default: "plumber, plumbing, plumbing services, plumbing company, plumbing repair, emergency plumber, 24 hour plumber, residential plumber, commercial plumber, licensed plumber, drain cleaning, drain cleaning service, sewer cleaning, rooter service, water heater repair, water heater installation, water heater replacement, leak detection, slab leak repair, sewer line repair, toilet repair, faucet repair, garbage disposal repair, water softener installation, tankless water heater installation, hydro jetting, repiping, gas line repair, sump pump repair, bathroom plumbing, kitchen plumbing, pipe repair, backflow testing"
       state:
         description: "Two-letter state appended to every query (callers type it, so the query should carry it)"
         required: false
