@@ -78,6 +78,13 @@ def volumes(queries, geo_name=None):
             req.customer_id = cust
             req.keywords.extend(chunk)
             req.language = "languageConstants/1000"          # English
+            # Google Search only. The API default is GOOGLE_SEARCH_AND_PARTNERS,
+            # which folds in thousands of partner sites and inflates every
+            # number -- and the Keyword Planner UI defaults to "Google", so the
+            # tool and the screenshot disagreed. Every older script in this repo
+            # already sets this; the two I wrote did not.
+            req.keyword_plan_network = (
+                client.enums.KeywordPlanNetworkEnum.GOOGLE_SEARCH)
             req.geo_target_constants.append(
                 f"geoTargetConstants/{geo_id or 2840}")      # 2840 = US
             resp = svc.generate_keyword_historical_metrics(request=req)
