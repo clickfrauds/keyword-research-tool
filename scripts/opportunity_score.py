@@ -478,7 +478,15 @@ WINNABLE = {"WINNABLE": 1.0, "MIXED": 0.4, "BIG BRAND": 0.15,
             "CROWDED": 0.1, "FORUM WALL": 0.0, "VIDEO WALL": 0.0,
             # Listed rather than left to the .get() default, so that an
             # unknown verdict scoring 0 stays a bug and not a silent policy.
-            "BRAND WALL": 0.0}
+            "BRAND WALL": 0.0,
+            # A map pack takes the first screen and a referral service with no
+            # premises cannot be in it. Organic still exists underneath, so
+            # this is not zero -- but it is a fraction of what the same volume
+            # is worth on a query with no pack.
+            "MAP PACK": 0.2,
+            # Pack on top and the organic list below it is Yelp, Angi and
+            # Thumbtack. What is left is not worth the week.
+            "MAP PACK + DIRECTORIES": 0.05}
 
 
 def main():

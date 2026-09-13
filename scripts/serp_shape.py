@@ -180,6 +180,21 @@ def shape(data):
     has_video_block = bool(data.get("inline_videos") or data.get("short_videos"))
     has_discussions = bool(data.get("discussions_and_forums"))
 
+    # The map pack. Three businesses and a map, above every organic result,
+    # and this classifier was not looking at it at all -- which is why 20 of
+    # 20 "plumber <city>" queries came back WINNABLE. On a query like that a
+    # contractor in the top three is not an opening, it is the definition of
+    # the result: of course plumbers rank for "plumber phoenix".
+    #
+    # It matters more here than for most sites. A pay-per-call referral
+    # service has no premises, so it cannot be in the pack at all, and
+    # inventing an address to get in is the exact thing that got a previous
+    # site's Google profile flagged. Whatever the pack takes is off the table.
+    n_local = len(data.get("local_results", {}).get("places", [])
+                  if isinstance(data.get("local_results"), dict)
+                  else data.get("local_results") or [])
+    has_ads = bool(data.get("ads") or data.get("shopping_results"))
+
     first_trade = next((i for i, k in enumerate(kinds)
                         if k == "local contractor"), None)
     first_independent = next((i for i, k in enumerate(kinds)
@@ -198,6 +213,31 @@ def shape(data):
     walled = sum(1 for k in kinds[:3]
                  if k in ("manufacturer", "aggregator", "franchise",
                           "reference", "directory", "institutional"))
+
+    # A map pack means the first screen belongs to businesses with premises.
+    # Judged before everything else, because on these queries the organic list
+    # is what is left over rather than what is being competed for.
+    if n_local >= 3:
+        directory = sum(1 for k in kinds[:5] if k in ("directory", "forum"))
+        if directory >= 3:
+            verdict, why = "MAP PACK + DIRECTORIES", (
+                f"{n_local} in the map pack, and {directory} of the top 5 "
+                "organic are directories")
+        else:
+            verdict, why = "MAP PACK", (
+                f"{n_local} businesses above organic"
+                + (", ads too" if has_ads else ""))
+        return {
+            "verdict": verdict, "why": why,
+            "map_pack": n_local,
+        "video_block": int(has_video_block), "forums_block": int(has_discussions),
+            "map_pack": n_local,
+            "big_brand": brand, "independent": indie, "contractor": trade,
+            "walled_top3": walled,
+            "top3": " \u00b7 ".join(
+                (urllib.parse.urlparse(r.get("link", "")).netloc or "?").replace("www.", "")
+                for r in top[:3]),
+        }
 
     # Checked before the walls on purpose. "slab leak repair cost arizona" has
     # asapplumbingaz.com and thearizonaplumber.net in the first two places and

@@ -51,10 +51,21 @@ jobs:
         if: always()
         run: cat serp_shape.md >> "$GITHUB_STEP_SUMMARY" || true
 
+      - name: Clean the request id
+        id: rid
+        # GitHub rejects : " < > | * ? \\ / CR LF in artifact names, and the
+        # upload runs AFTER the work is paid for -- a typo in this box should
+        # not throw away a finished run.
+        run: |
+          raw='${{ github.event.inputs.request_id }}'
+          clean=$(printf '%s' "$raw" | tr -c 'A-Za-z0-9._-' '-' \
+                  | sed 's/-\\+/-/g; s/^-//; s/-$//')
+          echo "value=$clean" >> "$GITHUB_OUTPUT"
+
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: serp-shape${{ github.event.inputs.request_id && format('-{0}', github.event.inputs.request_id) || '' }}
+          name: serp-shape${{ steps.rid.outputs.value && format('-{0}', steps.rid.outputs.value) || '' }}
           path: |
             serp_shape.csv
             serp_shape.md
