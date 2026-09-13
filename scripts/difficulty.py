@@ -16,8 +16,8 @@ same SerpApi response already being paid for:
                         whole businesses; an inner page or a blog post there
                         means the slot is held by A PAGE, and a page can be
                         beaten by a better page
-  exact-match domain    plumberphoenix.com holds an advantage that cannot be
-                        outwritten
+  exact-match domain    a small CTR and anchor-text edge, not a ranking
+                        boost -- Google removed that in 2012
   directories           Yelp and Angi are not beatable and not leavable
   national franchise    Roto-Rooter has a national link profile
   forum result          Google is choosing discussion over pages
@@ -175,9 +175,17 @@ def difficulty(data, query):
         score -= 5; why.append("one beatable page in the top 3")
 
     # ── exact-match domains ───────────────────────────────────────────────
+    # Small on purpose. Google's 2012 EMD update removed the direct ranking
+    # boost, so a matching domain in the top 3 is ranking on its content and
+    # links -- and those are already counted above as homepages, reviews and
+    # franchises. Scoring it at 14 was counting the same strength twice, the
+    # second time for a reason that stopped being true over a decade ago.
+    #
+    # What survives is CTR and anchor text: people click a domain that matches
+    # what they typed, and people link to it using those words. Real, small.
     emds = [_host(r.get("link")) for r in top3 if _emd(_host(r.get("link")), query)]
     if emds:
-        score += 14; why.append(f"exact-match domain: {emds[0]}")
+        score += 4; why.append(f"exact-match domain: {emds[0]} (small edge)")
 
     # ── who else is holding slots ─────────────────────────────────────────
     hosts = [_host(r.get("link")) for r in organic]
