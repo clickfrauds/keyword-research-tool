@@ -11,7 +11,7 @@ on:
       niche_description:
         default: ''
       target_location:
-        description: "CITY, COUNTRY — e.g. 'Dubai, UAE'. The country is required: the geo list is per-country."
+        description: "CITY or STATE, COUNTRY — 'Dubai, UAE' for districts of a city; 'Arizona, United States' for separate towns. Every keyword is scoped to this geo, so asking for a town's demand from inside another city measures the wrong people."
         default: ''
       primary_service:
         description: "The one service these area pages sell — e.g. 'washing machine repair'"
@@ -20,8 +20,11 @@ on:
         description: "Keep an area only at/above this monthly volume. Planner's lowest bucket is 10, so 20 is the first number that means real demand."
         default: '20'
       max_areas:
-        description: "LEAVE BLANK to research the whole city (recommended — 103 areas ≈ 5 min). A number here caps the run and leaves the rest unmeasured."
+        description: "LEAVE BLANK to research the whole area (recommended). Budget ~4s per area: a city of 103 takes ~7 min, a STATE of 360 takes ~30 min. A number here caps the run and leaves the rest unmeasured, not proven empty."
         default: ''
+      ads_call_delay:
+        description: "Seconds between Planner calls (default 3). Lower it to go faster; if you start seeing 'rate limit — waiting' lines, put it back."
+        default: '3'
       extra_areas:
         description: "Extra area names to measure, comma-separated. Google cannot target Deira, Bur Dubai, Al Karama or JLT, but people search them — list any the plan is missing."
         default: ''
@@ -34,7 +37,12 @@ permissions:
 jobs:
   area-plan:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    # 360 areas at one Planner call each, plus the 3s spacing between them, is
+    # 27-36 minutes for the research step alone -- before geocoding the
+    # survivors and before the enrichment batches. 45 minutes killed the job
+    # mid-run, and a killed job never reaches "Publish result JSON", so every
+    # area already measured (and the API quota already spent on it) is lost.
+    timeout-minutes: 180
     steps:
       - uses: actions/checkout@v4
 
@@ -76,7 +84,15 @@ jobs:
           MAX_AREAS: ${{ github.event.inputs.max_areas }}
           EXTRA_AREAS: ${{ github.event.inputs.extra_areas }}
           LANGUAGE: ${{ github.event.inputs.language }}
-        run: python scripts/generate_area_plan.py
+          # Seconds between Planner calls. 3 is the safe default; on a small
+          # city it is the difference between a 2-minute run and a 6-minute one.
+          ADS_CALL_DELAY: ${{ github.event.inputs.ads_call_delay }}
+        # -u, or Python block-buffers stdout into ~8KB chunks because CI is a
+        # pipe, not a terminal. At ~90 chars a line that is ~90 areas, and at
+        # 3s an area the log sits frozen for 4-5 minutes at a time while the
+        # run is in fact progressing normally. Every other workflow here
+        # already runs unbuffered.
+        run: python -u scripts/generate_area_plan.py
 
       - name: Publish result JSON (raw link for the builder)
         env:
