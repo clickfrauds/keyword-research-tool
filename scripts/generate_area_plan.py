@@ -784,7 +784,17 @@ def _enrich_areas(results, vocab=None):
             '  "headings": 5-7 H2s, each BUILT FROM one of the related keywords so '
             "the section it opens answers a search someone actually makes. Readable, "
             "not keyword-stuffed. If the area has neighbours, let one heading cover "
-            "them.\n\n"
+            "them.\n"
+            # The related demand contains competitor brand searches, because
+            # people really do type a plumber's company name. Built into an H2
+            # that produced "Local Plumbers vs E&S Plumbing Flagstaff" -- a
+            # real licensed contractor named in a heading on a referral site,
+            # in a comparison whose facts nobody has. The keyword is real
+            # demand; it is just not a heading this site gets to write.
+            "    NEVER build a heading around a named company, even though some "
+            "of the related demand is company names people search. No \"X vs "
+            "[Company]\", no \"alternatives to [Company]\". Comparing two "
+            "methods, materials or service types is fine and often good.\n\n"
             + ("ALREADY USED as H2s on other area pages in this same build - do "
                "NOT reuse them or their shape; each area's headings must be "
                "recognisably about THAT area:\n  "
