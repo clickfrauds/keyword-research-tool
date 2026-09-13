@@ -1,0 +1,70 @@
+name: Difficulty (5 levels)
+
+# "Is this winnable?" was the wrong question. WINNABLE came back 20/20, then
+# MAP PACK came back 20/20 — a signal that never varies carries no
+# information. This asks how HARD each page is instead, and sorts the answers
+# into five bands.
+#
+# One SerpApi credit per query.
+
+on:
+  workflow_dispatch:
+    inputs:
+      queries:
+        description: "Queries separated by ;  (GitHub flattens this box to one line, so semicolons are what survive)"
+        required: true
+        type: string
+      serp_gl:
+        description: "Country for the search"
+        required: false
+        default: "us"
+      request_id:
+        description: "Name for the results file"
+        required: false
+        default: ""
+
+jobs:
+  difficulty:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Write the query list
+        run: |
+          cat > queries.txt <<'QUERIES_EOF'
+          ${{ github.event.inputs.queries }}
+          QUERIES_EOF
+
+      - name: Score each page
+        env:
+          SERPAPI_API_KEY: ${{ secrets.SERPAPI_API_KEY }}
+          SERP_GL: ${{ github.event.inputs.serp_gl }}
+        run: python -u scripts/difficulty.py --file queries.txt
+
+      - name: Job summary
+        if: always()
+        run: cat difficulty.md >> "$GITHUB_STEP_SUMMARY" || true
+
+      - name: Clean the request id
+        id: rid
+        # GitHub rejects : " < > | * ? \ / CR LF in artifact names, and the
+        # upload runs AFTER the work is paid for.
+        run: |
+          raw='${{ github.event.inputs.request_id }}'
+          clean=$(printf '%s' "$raw" | tr -c 'A-Za-z0-9._-' '-' \
+                  | sed 's/-\+/-/g; s/^-//; s/-$//')
+          echo "value=$clean" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: difficulty${{ steps.rid.outputs.value && format('-{0}', steps.rid.outputs.value) || '' }}
+          path: |
+            difficulty.csv
+            difficulty.md
+          retention-days: 30
