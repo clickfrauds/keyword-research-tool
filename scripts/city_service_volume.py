@@ -28,8 +28,19 @@ import sys
 HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
+#: Most the Planner will accept in one GenerateKeywordHistoricalMetrics call.
+BATCH = 10000
+
+
 def volumes(queries, geo_name=None):
-    """Monthly searches for every query, in one request. None if Ads fails."""
+    """Monthly searches for every query. None if Ads fails.
+
+    Batched, because the request cap is 10,000 keywords and the obvious
+    `queries[:10000]` drops the rest without saying so -- a 300-city run would
+    have reported confidently on the first third and left the other 200 cities
+    reading zero, which is indistinguishable from "no demand". Ads calls are
+    free, so the only cost of another request is a second or two.
+    """
     cust = re.sub(r"\D", "", os.environ.get("GOOGLE_ADS_CUSTOMER_ID", ""))
     if not cust:
         print("   no GOOGLE_ADS_CUSTOMER_ID")
@@ -40,7 +51,7 @@ def volumes(queries, geo_name=None):
         print("   google-ads not installed")
         return None
 
-    def attempt(with_login):
+    def attempt(with_login, chunk):
         key = "GOOGLE_ADS_LOGIN_CUSTOMER_ID"
         saved = os.environ.pop(key, None) if not with_login else None
         try:
@@ -65,7 +76,7 @@ def volumes(queries, geo_name=None):
             svc = client.get_service("KeywordPlanIdeaService")
             req = client.get_type("GenerateKeywordHistoricalMetricsRequest")
             req.customer_id = cust
-            req.keywords.extend(queries[:10000])
+            req.keywords.extend(chunk)
             req.language = "languageConstants/1000"          # English
             req.geo_target_constants.append(
                 f"geoTargetConstants/{geo_id or 2840}")      # 2840 = US
@@ -82,23 +93,40 @@ def volumes(queries, geo_name=None):
                 os.environ[key] = saved
 
     login = re.sub(r"\D", "", os.environ.get("GOOGLE_ADS_LOGIN_CUSTOMER_ID", ""))
-    out, err = attempt(with_login=bool(login))
-    # A manager id that does not sit above the account fails exactly like a
-    # real missing permission; the message cannot tell them apart, and Ads
-    # calls are free, so ask twice rather than guess.
-    if out is None and login and ("PERMISSION_DENIED" in err
-                                  or "doesn't have permission" in err):
-        print("   denied with the manager id - retrying without it")
-        out, err2 = attempt(with_login=False)
-        if out is not None:
-            print("   worked without it. GOOGLE_ADS_LOGIN_CUSTOMER_ID does not"
-                  " manage this account.")
-            return out
-        err = err2
-    if out is not None:
-        return out
-    print(f"   Ads Planner failed ({err[:100]})")
-    return None
+    chunks = [queries[i:i + BATCH] for i in range(0, len(queries), BATCH)]
+    if len(chunks) > 1:
+        print(f"   {len(queries)} queries -> {len(chunks)} requests "
+              f"({BATCH} per request)")
+
+    use_login = bool(login)
+    merged = {}
+    for n, chunk in enumerate(chunks, 1):
+        out, err = attempt(use_login, chunk)
+        # A manager id that does not sit above the account fails exactly like
+        # a real missing permission; the message cannot tell them apart, and
+        # Ads calls are free, so ask twice rather than guess. Only on the
+        # first chunk -- after that the answer is known.
+        if out is None and use_login and ("PERMISSION_DENIED" in err
+                                          or "doesn't have permission" in err):
+            print("   denied with the manager id - retrying without it")
+            out, err2 = attempt(False, chunk)
+            if out is not None:
+                print("   worked without it. GOOGLE_ADS_LOGIN_CUSTOMER_ID does"
+                      " not manage this account.")
+                use_login = False
+            else:
+                err = err2
+        if out is None:
+            print(f"   Ads Planner failed on request {n}/{len(chunks)} "
+                  f"({err[:90]})")
+            # Partial data is worse than none: the missing half reads as zero
+            # demand, which is a real answer this run did not earn.
+            return None
+        merged.update(out)
+        if len(chunks) > 1:
+            print(f"   request {n}/{len(chunks)} ok "
+                  f"({len(merged)} of {len(queries)})")
+    return merged
 
 
 def split_list(text):
@@ -177,14 +205,37 @@ def main():
         for c, s, v in build[:30]:
             print(f"   {v:>6d}  {s} in {c}")
 
-    with open(os.path.join(HERE, "city_service_volume.csv"), "w",
+    # Two files, because they answer different questions. The matrix is what
+    # you open in a spreadsheet and read across; the page list is what you
+    # work down.
+    with open(os.path.join(HERE, "city_service_matrix.csv"), "w",
               newline="", encoding="utf-8") as fh:
         w = csv.writer(fh)
-        w.writerow(["city", "service", "volume", "build"])
-        for c in ranked_cities:
-            for s in ranked_svcs:
-                v = grid[c].get(s, 0)
-                w.writerow([c, s, v, "yes" if v >= a.min_volume else ""])
+        # demand_rank, not population_rank: these are ranked by searches, and
+        # the two orders are not the same -- that difference is the finding.
+        w.writerow(["city", "demand_rank", "total_per_mo",
+                    "pairs_over_floor"] + ranked_svcs)
+        for i, c in enumerate(ranked_cities, 1):
+            strong = sum(1 for v in grid[c].values() if v >= a.min_volume)
+            w.writerow([c, i, city_total[c], strong] +
+                       [grid[c].get(s, 0) for s in ranked_svcs])
+        # A totals row, so the sheet can be sorted by column without losing it
+        w.writerow(["TOTAL", "", sum(city_total.values()),
+                    len(build)] + [svc_total[s] for s in ranked_svcs])
+
+    with open(os.path.join(HERE, "city_service_pages.csv"), "w",
+              newline="", encoding="utf-8") as fh:
+        w = csv.writer(fh)
+        w.writerow(["rank", "city", "service", "volume", "build",
+                    "suggested_url"])
+        allpairs = sorted(((c, s, grid[c].get(s, 0))
+                           for c in cities for s in services),
+                          key=lambda t: -t[2])
+        for i, (c, s, v) in enumerate(allpairs, 1):
+            slug_city = re.sub(r"[^a-z0-9]+", "-", c.lower()).strip("-")
+            slug_svc = re.sub(r"[^a-z0-9]+", "-", s.lower()).strip("-")
+            w.writerow([i, c, s, v, "yes" if v >= a.min_volume else "",
+                        f"/{slug_city}/{slug_svc}/"])
 
     # A grid of 30 cities by 33 services is 35 markdown columns, which no one
     # can read and GitHub renders as a horizontal scrollbar. Past ten services
@@ -235,7 +286,7 @@ def main():
         else:
             fh.write(f"\n## Per city\n\nTop services in each city. "
                      f"The full {len(cities)}x{len(services)} grid is in the "
-                     f"CSV.\n\n")
+                     f"matrix CSV.\n\n")
             for c in ranked_cities:
                 rows = sorted(grid[c].items(), key=lambda kv: -kv[1])
                 over = [r for r in rows if r[1] >= a.min_volume]
@@ -248,7 +299,9 @@ def main():
                     fh.write(f"  nothing over {a.min_volume}/mo - "
                              f"best was {rows[0][0]} ({rows[0][1]})\n\n")
 
-    print("\ncity_service_volume.csv - city_service_volume.md")
+    print("\ncity_service_matrix.csv  (the grid, for a spreadsheet)")
+    print("city_service_pages.csv   (every pair ranked, with its URL)")
+    print("city_service_volume.md   (the summary)")
 
 
 if __name__ == "__main__":
