@@ -1,0 +1,2853 @@
+{
+  "business": {
+    "name": "Arizona Home Service Pros",
+    "niche": "plumbing referral and dispatch service connecting homeowners with licensed local plumbers",
+    "location": "Phoenix, United States"
+  },
+  "language": "",
+  "primary_service": "plumber",
+  "research": {
+    "areas_checked": 31,
+    "areas_kept": 20,
+    "min_volume": 20,
+    "note": "Google Keyword Planner reports no value between 1 and 9 — its lowest bucket is 10. Areas below the threshold were measured and found without demand; building pages for them would be doorway pages."
+  },
+  "mode5_pseo": {
+    "central_entity": "plumber in Phoenix, United States",
+    "source_context": "plumbing referral and dispatch service connecting homeowners with licensed local plumbers",
+    "areas": [
+      {
+        "area": "Flagstaff",
+        "keywords": [
+          {
+            "keyword": "plumber flagstaff",
+            "volume": 70,
+            "kd": 100,
+            "cpc_low": 9405.35,
+            "cpc_high": 21268.7,
+            "trend": "SEASONAL",
+            "peak_months": "Apr"
+          },
+          {
+            "keyword": "plumbers in flagstaff arizona",
+            "volume": 70,
+            "kd": 100,
+            "cpc_low": 9405.35,
+            "cpc_high": 21268.7,
+            "trend": "SEASONAL",
+            "peak_months": "Apr"
+          },
+          {
+            "keyword": "emergency plumber flagstaff",
+            "volume": 10,
+            "kd": 100,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "GROWING",
+            "peak_months": "Mar/Jul/Aug/Sep"
+          },
+          {
+            "keyword": "e&s plumbing flagstaff",
+            "volume": 10,
+            "kd": 50,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "SEASONAL",
+            "peak_months": "Feb/Jul/Sep/Oct/Dec"
+          },
+          {
+            "keyword": "your plumber flagstaff",
+            "volume": 10,
+            "kd": 43,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "SEASONAL",
+            "peak_months": "Feb/Apr/Jun/Sep/Nov"
+          },
+          {
+            "keyword": "best plumbers in flagstaff",
+            "volume": 10,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "GROWING",
+            "peak_months": "Jun/Jul"
+          },
+          {
+            "keyword": "davidson plumbing flagstaff",
+            "volume": 10,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "STABLE",
+            "peak_months": ""
+          },
+          {
+            "keyword": "harpers plumbing flagstaff",
+            "volume": 10,
+            "kd": 89,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "STABLE",
+            "peak_months": "Feb/Apr/May/Jun/Aug/Sep/Oct/Dec"
+          },
+          {
+            "keyword": "plumbing companies flagstaff",
+            "volume": 10,
+            "kd": 100,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "GROWING",
+            "peak_months": "Apr/Aug/Sep"
+          }
+        ],
+        "related_keywords": [
+          {
+            "keyword": "plumbing contractors flagstaff az",
+            "volume": 10,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "GROWING",
+            "peak_months": "Feb/Jul"
+          }
+        ],
+        "total_volume": 210,
+        "primary_keyword": {
+          "keyword": "plumber flagstaff",
+          "volume": 70,
+          "kd": 100,
+          "cpc_low": 9405.35,
+          "cpc_high": 21268.7,
+          "trend": "SEASONAL",
+          "peak_months": "Apr"
+        },
+        "demand": "measured",
+        "coordinates": {
+          "lat": 35.1961991,
+          "lng": -111.6473146
+        },
+        "nearby_areas": [],
+        "questions": [
+          {
+            "q": "How much does emergency plumbing cost in Flagstaff during winter freeze events?",
+            "answer_angle": "State typical emergency dispatch fee ranges and note surge pricing during frozen-pipe season at Flagstaff's elevation."
+          },
+          {
+            "q": "Can a dispatched plumber handle frozen or burst pipes in older Flagstaff homes?",
+            "answer_angle": "Confirm technicians handle frozen pipe thawing and burst pipe repair common in Flagstaff's older, high-elevation construction."
+          },
+          {
+            "q": "How fast can a plumber reach a home near NAU or downtown Flagstaff?",
+            "answer_angle": "Give a concrete response-time window for the Flagstaff service radius."
+          },
+          {
+            "q": "Is E&S Plumbing the only option for emergency service in Flagstaff, or are there other licensed plumbers?",
+            "answer_angle": "Name E&S Plumbing Flagstaff as one of several licensed local providers the dispatch network can connect homeowners with."
+          },
+          {
+            "q": "Do Flagstaff plumbers work on well water systems or only city water?",
+            "answer_angle": "Clarify that dispatched plumbers service both municipal and well-fed households in outlying Flagstaff areas."
+          },
+          {
+            "q": "What should I do if my water heater fails during a Flagstaff cold snap?",
+            "answer_angle": "Outline immediate steps and confirm same-day water heater repair availability in freezing conditions."
+          }
+        ],
+        "entities": [
+          "e&s plumbing flagstaff",
+          "water heater repair",
+          "frozen pipes",
+          "burst pipe repair",
+          "plumbing leak detection",
+          "kitchen plumbing",
+          "24 hour emergency plumbing",
+          "Arizona ROC contractor license",
+          "well water systems",
+          "plumbing contractors flagstaff az"
+        ],
+        "headings": [
+          "Emergency Plumber Flagstaff: 24/7 Response Times",
+          "Plumbing Contractors in Flagstaff, AZ: Licensing & Requirements",
+          "Water Heater Repair Near Flagstaff Homes",
+          "Plumbing Leak Detection for Flagstaff's Older Buildings",
+          "Local Plumbers vs E&S Plumbing Flagstaff",
+          "Kitchen Plumbing Repairs in Flagstaff"
+        ],
+        "attributes": [
+          {
+            "attribute": "local",
+            "covers": "Explain how Flagstaff's high elevation and cold winters cause frozen and burst pipes that other Phoenix-area content ignores."
+          },
+          {
+            "attribute": "cost",
+            "covers": "State emergency and standard service price ranges, noting winter surge pricing."
+          },
+          {
+            "attribute": "timeline",
+            "covers": "Give expected dispatch and arrival times for Flagstaff addresses."
+          },
+          {
+            "attribute": "requirement",
+            "covers": "Confirm all matched plumbers hold active Arizona ROC licensing and insurance."
+          },
+          {
+            "attribute": "comparison",
+            "covers": "Position the dispatch network against known local player E&S Plumbing, explaining added choice and vetting."
+          },
+          {
+            "attribute": "maintenance",
+            "covers": "Advise on preventing frozen pipes and leak detection checks before winter."
+          }
+        ]
+      },
+      {
+        "area": "Yuma",
+        "keywords": [
+          {
+            "keyword": "plumber yuma",
+            "volume": 40,
+            "kd": 40,
+            "cpc_low": 4088.5,
+            "cpc_high": 12493.04,
+            "trend": "GROWING",
+            "peak_months": "Feb/Apr/Aug/Sep"
+          },
+          {
+            "keyword": "plumbers in yuma az",
+            "volume": 40,
+            "kd": 40,
+            "cpc_low": 4088.5,
+            "cpc_high": 12493.04,
+            "trend": "GROWING",
+            "peak_months": "Feb/Apr/Aug/Sep"
+          },
+          {
+            "keyword": "all affordable plumbing yuma",
+            "volume": 10,
+            "kd": 50,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "STABLE",
+            "peak_months": ""
+          },
+          {
+            "keyword": "area plumbing yuma",
+            "volume": 10,
+            "kd": 76,
+            "cpc_low": 5133.36,
+            "cpc_high": 11483.99,
+            "trend": "STABLE",
+            "peak_months": ""
+          },
+          {
+            "keyword": "phd plumbing yuma",
+            "volume": 10,
+            "kd": 4,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "STABLE",
+            "peak_months": ""
+          },
+          {
+            "keyword": "plumbing companies in yuma az",
+            "volume": 10,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "DECLINING",
+            "peak_months": "Mar/Jun/Oct/Dec"
+          }
+        ],
+        "related_keywords": [
+          {
+            "keyword": "milos plumbing yuma az",
+            "volume": 10,
+            "kd": 86,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "STABLE",
+            "peak_months": "Mar/May/Jun/Aug/Sep/Nov/Dec"
+          },
+          {
+            "keyword": "jorge's plumbing yuma az",
+            "volume": 10,
+            "kd": 79,
+            "cpc_low": 6525.97,
+            "cpc_high": 17436.33,
+            "trend": "GROWING",
+            "peak_months": "Feb/Mar/Apr/May/Jun/Aug/Sep/Oct"
+          },
+          {
+            "keyword": "affordable plumbing yuma az",
+            "volume": 10,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "GROWING",
+            "peak_months": "May/Jul/Aug/Oct"
+          },
+          {
+            "keyword": "all affordable plumbing yuma arizona",
+            "volume": 10,
+            "kd": 50,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "STABLE",
+            "peak_months": ""
+          },
+          {
+            "keyword": "all affordable plumbing yuma az",
+            "volume": 10,
+            "kd": 50,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "STABLE",
+            "peak_months": ""
+          },
+          {
+            "keyword": "area plumbing yuma az",
+            "volume": 10,
+            "kd": 76,
+            "cpc_low": 5133.36,
+            "cpc_high": 11483.99,
+            "trend": "STABLE",
+            "peak_months": ""
+          },
+          {
+            "keyword": "westar plumbing yuma az",
+            "volume": 10,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "DECLINING",
+            "peak_months": "Apr/Jun/Oct/Dec"
+          },
+          {
+            "keyword": "yuma best plumbing",
+            "volume": 10,
+            "kd": 38,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "GROWING",
+            "peak_months": "Feb/Apr/May/Jun/Jul/Sep/Nov"
+          },
+          {
+            "keyword": "plumbing contractors yuma az",
+            "volume": 0,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "UNKNOWN",
+            "peak_months": ""
+          }
+        ],
+        "total_volume": 120,
+        "primary_keyword": {
+          "keyword": "plumber yuma",
+          "volume": 40,
+          "kd": 40,
+          "cpc_low": 4088.5,
+          "cpc_high": 12493.04,
+          "trend": "GROWING",
+          "peak_months": "Feb/Apr/Aug/Sep"
+        },
+        "demand": "measured",
+        "coordinates": {
+          "lat": 33.4349186,
+          "lng": -112.105254
+        },
+        "nearby_areas": [
+          {
+            "area": "Casa Grande",
+            "km": 6.6
+          }
+        ],
+        "questions": [
+          {
+            "q": "How much do local Yuma plumbers charge compared to Affordable Plumbing Yuma AZ?",
+            "answer_angle": "Give a price range and show the dispatch service matches licensed local pros at competitive, transparent rates."
+          },
+          {
+            "q": "Is there a 24-hour emergency plumber in Yuma for weekend or holiday leaks?",
+            "answer_angle": "Confirm round-the-clock emergency dispatch availability with a stated response window."
+          },
+          {
+            "q": "Can a Yuma plumber also serve Casa Grande homeowners quickly?",
+            "answer_angle": "State that coverage extends to nearby Casa Grande, roughly 6.6km away, with similar response times."
+          },
+          {
+            "q": "Are Milo's Plumbing or Jorge's Plumbing licensed and insured in Yuma AZ?",
+            "answer_angle": "Confirm dispatch only connects homeowners with licensed, insured Arizona plumbers, naming these known local brands as examples."
+          },
+          {
+            "q": "What plumbing issues are common in Yuma's desert climate homes?",
+            "answer_angle": "Mention hard water buildup, water heater strain, and pipe corrosion typical of Yuma's desert conditions."
+          },
+          {
+            "q": "How quickly can a plumber fix a water heater in Yuma during summer heat?",
+            "answer_angle": "State same-day water heater repair turnaround given high summer demand."
+          }
+        ],
+        "entities": [
+          "milos plumbing yuma az",
+          "jorge's plumbing yuma az",
+          "all affordable plumbing yuma az",
+          "area plumbing yuma az",
+          "water heater repair",
+          "plumbing leak detection",
+          "kitchen plumbing",
+          "hard water buildup",
+          "24 hour emergency plumbing",
+          "Arizona ROC contractor license"
+        ],
+        "headings": [
+          "Emergency Plumber Yuma: 24-Hour Availability",
+          "All Affordable Plumbing Yuma AZ vs Other Local Options",
+          "Water Heater Repair Near Me in Yuma's Desert Heat",
+          "Plumbing Leak Detection for Yuma Homes",
+          "Serving Yuma and Nearby Casa Grande Homeowners",
+          "Local Plumbers Near Me: Milo's, Jorge's & Area Plumbing Compared"
+        ],
+        "attributes": [
+          {
+            "attribute": "cost",
+            "covers": "Compare typical charges against named local competitors like All Affordable Plumbing and Area Plumbing Yuma."
+          },
+          {
+            "attribute": "local",
+            "covers": "Address desert-climate issues like hard water and heat-strained water heaters specific to Yuma."
+          },
+          {
+            "attribute": "timeline",
+            "covers": "State emergency response times for Yuma and nearby Casa Grande."
+          },
+          {
+            "attribute": "requirement",
+            "covers": "Confirm licensing and insurance verification for every matched plumber, including named local firms."
+          },
+          {
+            "attribute": "comparison",
+            "covers": "Explain how dispatch differs from calling Milo's or Jorge's Plumbing directly, in coverage and choice."
+          }
+        ]
+      },
+      {
+        "area": "Apache Junction",
+        "keywords": [
+          {
+            "keyword": "plumber apache junction",
+            "volume": 50,
+            "kd": 93,
+            "cpc_low": 20174.86,
+            "cpc_high": 35452.93,
+            "trend": "SEASONAL",
+            "peak_months": "Apr/Sep/Nov"
+          },
+          {
+            "keyword": "plumbers in apache junction az",
+            "volume": 50,
+            "kd": 93,
+            "cpc_low": 20174.86,
+            "cpc_high": 35452.93,
+            "trend": "SEASONAL",
+            "peak_months": "Apr/Sep/Nov"
+          }
+        ],
+        "related_keywords": [],
+        "total_volume": 100,
+        "primary_keyword": {
+          "keyword": "plumber apache junction",
+          "volume": 50,
+          "kd": 93,
+          "cpc_low": 20174.86,
+          "cpc_high": 35452.93,
+          "trend": "SEASONAL",
+          "peak_months": "Apr/Sep/Nov"
+        },
+        "demand": "measured",
+        "questions": [
+          {
+            "q": "How much does a plumber cost in Apache Junction for emergency repairs?",
+            "answer_angle": "Give a clear price range for emergency dispatch fees in Apache Junction."
+          },
+          {
+            "q": "Is there a 24 hour plumber available in Apache Junction for weekend leaks?",
+            "answer_angle": "Confirm 24/7 dispatch coverage with expected arrival time."
+          },
+          {
+            "q": "Can a plumber in Apache Junction handle hard water and mineral buildup issues?",
+            "answer_angle": "State that technicians address hard-water scale in pipes and water heaters common to the area's groundwater."
+          },
+          {
+            "q": "How fast can a plumber reach homes near the Superstition Mountains area of Apache Junction?",
+            "answer_angle": "Give a specific response-time estimate for the Apache Junction service radius."
+          },
+          {
+            "q": "Do Apache Junction plumbers work on manufactured or mobile homes?",
+            "answer_angle": "Confirm coverage of manufactured and mobile home plumbing systems common in Apache Junction."
+          },
+          {
+            "q": "What licensing should I check before hiring a plumber in Apache Junction, AZ?",
+            "answer_angle": "Explain how to verify Arizona ROC license and insurance before booking."
+          }
+        ],
+        "entities": [
+          "water heater repair",
+          "plumbing leak detection",
+          "kitchen plumbing",
+          "pipe repair",
+          "hard water scale buildup",
+          "mobile/manufactured home plumbing",
+          "Arizona ROC contractor license",
+          "24 hour emergency plumbing",
+          "drain clog repair"
+        ],
+        "headings": [
+          "Emergency Plumber Apache Junction: 24/7 Response",
+          "Plumbers in Apache Junction, AZ: Licensing You Should Verify",
+          "Water Heater Repair Near Me for Apache Junction Homes",
+          "Plumbing Leak Detection & Hard Water Solutions",
+          "Kitchen Plumbing Repairs in Apache Junction",
+          "Local Plumber Near Me: What Response Times to Expect"
+        ],
+        "attributes": [
+          {
+            "attribute": "cost",
+            "covers": "State typical emergency and standard service pricing for Apache Junction."
+          },
+          {
+            "attribute": "timeline",
+            "covers": "Give expected dispatch and arrival windows for the area."
+          },
+          {
+            "attribute": "requirement",
+            "covers": "Explain how to verify a plumber's Arizona ROC license and insurance before booking."
+          },
+          {
+            "attribute": "local",
+            "covers": "Address hard water scale and manufactured-home plumbing issues typical of Apache Junction housing stock."
+          },
+          {
+            "attribute": "maintenance",
+            "covers": "Cover leak detection and scale-prevention tips to avoid future pipe damage."
+          }
+        ]
+      },
+      {
+        "area": "Casa Grande",
+        "keywords": [
+          {
+            "keyword": "plumber casa grande",
+            "volume": 30,
+            "kd": 100,
+            "cpc_low": 8994.79,
+            "cpc_high": 25347.25,
+            "trend": "DECLINING",
+            "peak_months": "Jul/Oct/Dec"
+          },
+          {
+            "keyword": "plumbers in casa grande arizona",
+            "volume": 30,
+            "kd": 100,
+            "cpc_low": 8994.79,
+            "cpc_high": 25347.25,
+            "trend": "DECLINING",
+            "peak_months": "Jul/Oct/Dec"
+          },
+          {
+            "keyword": "just plumbing casa grande",
+            "volume": 10,
+            "kd": 39,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "STABLE",
+            "peak_months": ""
+          },
+          {
+            "keyword": "pt plumbing casa grande",
+            "volume": 10,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "DECLINING",
+            "peak_months": "Feb/Mar/Apr/Jun/Jul/Oct/Nov/Dec"
+          }
+        ],
+        "related_keywords": [],
+        "total_volume": 80,
+        "primary_keyword": {
+          "keyword": "plumber casa grande",
+          "volume": 30,
+          "kd": 100,
+          "cpc_low": 8994.79,
+          "cpc_high": 25347.25,
+          "trend": "DECLINING",
+          "peak_months": "Jul/Oct/Dec"
+        },
+        "demand": "measured",
+        "coordinates": {
+          "lat": 33.4660365,
+          "lng": -112.0452518
+        },
+        "nearby_areas": [
+          {
+            "area": "Yuma",
+            "km": 6.6
+          },
+          {
+            "area": "Sierra Vista",
+            "km": 8.0
+          }
+        ],
+        "questions": [
+          {
+            "q": "How much does Just Plumbing or PT Plumbing charge in Casa Grande compared to a dispatch service?",
+            "answer_angle": "Give a cost comparison and explain the dispatch network's transparent, competitive rate structure."
+          },
+          {
+            "q": "Is there a 24-hour emergency plumber available in Casa Grande for burst pipes?",
+            "answer_angle": "Confirm round-the-clock emergency dispatch with a stated response timeline."
+          },
+          {
+            "q": "Can Casa Grande plumbers also serve nearby Yuma or Sierra Vista homeowners?",
+            "answer_angle": "State that coverage extends to Yuma (6.6km) and Sierra Vista (8.0km) with comparable response times."
+          },
+          {
+            "q": "What plumbing issues are common in Casa Grande's growing new-build subdivisions?",
+            "answer_angle": "Mention fixture installation and water heater setup problems typical of new construction in Casa Grande."
+          },
+          {
+            "q": "Are PT Plumbing and Just Plumbing licensed and insured in Arizona?",
+            "answer_angle": "Confirm dispatch verifies Arizona ROC license and insurance for all connected plumbers, including these named local companies."
+          },
+          {
+            "q": "How fast can a plumber reach Casa Grande homes off I-10?",
+            "answer_angle": "Give a response-time estimate based on the town's layout along I-10."
+          }
+        ],
+        "entities": [
+          "just plumbing casa grande",
+          "pt plumbing casa grande",
+          "water heater repair",
+          "plumbing leak detection",
+          "kitchen plumbing",
+          "new construction plumbing",
+          "fixture installation",
+          "Arizona ROC contractor license",
+          "24 hour emergency plumbing",
+          "pipe repair"
+        ],
+        "headings": [
+          "Emergency Plumber Casa Grande: 24-Hour Response",
+          "Just Plumbing & PT Plumbing Casa Grande: How They Compare",
+          "Water Heater Repair Near Me in Casa Grande",
+          "Plumbing Leak Detection for New Casa Grande Construction",
+          "Serving Casa Grande, Yuma & Sierra Vista Homeowners",
+          "Kitchen Plumbing Services in Casa Grande"
+        ],
+        "attributes": [
+          {
+            "attribute": "cost",
+            "covers": "Compare pricing against named local firms Just Plumbing and PT Plumbing."
+          },
+          {
+            "attribute": "timeline",
+            "covers": "State emergency response times for Casa Grande and its neighbouring towns."
+          },
+          {
+            "attribute": "requirement",
+            "covers": "Confirm Arizona ROC licensing and insurance verification for every matched plumber."
+          },
+          {
+            "attribute": "local",
+            "covers": "Address new-construction plumbing needs tied to Casa Grande's growth along I-10."
+          },
+          {
+            "attribute": "comparison",
+            "covers": "Explain how dispatch differs from calling Just Plumbing or PT Plumbing directly, in coverage and choice."
+          }
+        ]
+      },
+      {
+        "area": "Fountain Hills",
+        "keywords": [
+          {
+            "keyword": "plumber fountain hills",
+            "volume": 20,
+            "kd": 37,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "DECLINING",
+            "peak_months": "Apr/Oct"
+          },
+          {
+            "keyword": "plumbers in fountain hills az",
+            "volume": 20,
+            "kd": 37,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "DECLINING",
+            "peak_months": "Apr/Oct"
+          },
+          {
+            "keyword": "yoder plumbing fountain hills",
+            "volume": 10,
+            "kd": 52,
+            "cpc_low": 7927.68,
+            "cpc_high": 21199.29,
+            "trend": "GROWING",
+            "peak_months": "Feb/Mar/Apr/May/Jul/Aug/Sep/Oct/Nov"
+          },
+          {
+            "keyword": "water heater repair fountain hills",
+            "volume": 10,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "GROWING",
+            "peak_months": "Apr/Aug/Sep"
+          }
+        ],
+        "related_keywords": [],
+        "total_volume": 60,
+        "primary_keyword": {
+          "keyword": "plumber fountain hills",
+          "volume": 20,
+          "kd": 37,
+          "cpc_low": 0.0,
+          "cpc_high": 0.0,
+          "trend": "DECLINING",
+          "peak_months": "Apr/Oct"
+        },
+        "demand": "measured"
+      },
+      {
+        "area": "Arcadia",
+        "keywords": [
+          {
+            "keyword": "plumber arcadia",
+            "volume": 10,
+            "kd": 89,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "STABLE",
+            "peak_months": ""
+          },
+          {
+            "keyword": "arroyo plumbing arcadia",
+            "volume": 10,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "UNKNOWN",
+            "peak_months": "Apr"
+          },
+          {
+            "keyword": "emergency plumber arcadia",
+            "volume": 10,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "UNKNOWN",
+            "peak_months": "Feb"
+          },
+          {
+            "keyword": "plumbing services arcadia",
+            "volume": 10,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "DECLINING",
+            "peak_months": "Jun/Aug/Oct/Nov"
+          }
+        ],
+        "related_keywords": [
+          {
+            "keyword": "plumber arcadia ca",
+            "volume": 10,
+            "kd": 89,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "STABLE",
+            "peak_months": ""
+          },
+          {
+            "keyword": "plumbing services arcadia ca",
+            "volume": 10,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "DECLINING",
+            "peak_months": "Jun/Aug/Oct/Nov"
+          }
+        ],
+        "total_volume": 40,
+        "primary_keyword": {
+          "keyword": "plumber arcadia",
+          "volume": 10,
+          "kd": 89,
+          "cpc_low": 0.0,
+          "cpc_high": 0.0,
+          "trend": "STABLE",
+          "peak_months": ""
+        },
+        "demand": "measured",
+        "coordinates": {
+          "lat": 33.4945321,
+          "lng": -111.9608036
+        },
+        "nearby_areas": [
+          {
+            "area": "Sierra Vista",
+            "km": 6.4
+          }
+        ]
+      },
+      {
+        "area": "Kingman",
+        "keywords": [
+          {
+            "keyword": "plumber kingman",
+            "volume": 20,
+            "kd": 77,
+            "cpc_low": 5419.85,
+            "cpc_high": 11380.76,
+            "trend": "SEASONAL",
+            "peak_months": "Jun/Sep/Nov/Dec"
+          },
+          {
+            "keyword": "plumbers in kingman",
+            "volume": 20,
+            "kd": 77,
+            "cpc_low": 5419.85,
+            "cpc_high": 11380.76,
+            "trend": "SEASONAL",
+            "peak_months": "Jun/Sep/Nov/Dec"
+          }
+        ],
+        "related_keywords": [
+          {
+            "keyword": "plumbers kingman az",
+            "volume": 20,
+            "kd": 77,
+            "cpc_low": 5419.85,
+            "cpc_high": 11380.76,
+            "trend": "SEASONAL",
+            "peak_months": "Jun/Sep/Nov/Dec"
+          },
+          {
+            "keyword": "kingman plumbers",
+            "volume": 20,
+            "kd": 77,
+            "cpc_low": 5419.85,
+            "cpc_high": 11380.76,
+            "trend": "SEASONAL",
+            "peak_months": "Jun/Sep/Nov/Dec"
+          },
+          {
+            "keyword": "true love plumbing kingman arizona",
+            "volume": 10,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "DECLINING",
+            "peak_months": "Feb/Mar/Jun/Aug/Oct/Nov/Dec"
+          },
+          {
+            "keyword": "benjamin franklin plumbing kingman az",
+            "volume": 10,
+            "kd": 86,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "GROWING",
+            "peak_months": "Apr/Jul/Aug/Sep/Oct/Dec"
+          },
+          {
+            "keyword": "j and j plumbing kingman az",
+            "volume": 10,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "DECLINING",
+            "peak_months": "Nov"
+          }
+        ],
+        "total_volume": 40,
+        "primary_keyword": {
+          "keyword": "plumber kingman",
+          "volume": 20,
+          "kd": 77,
+          "cpc_low": 5419.85,
+          "cpc_high": 11380.76,
+          "trend": "SEASONAL",
+          "peak_months": "Jun/Sep/Nov/Dec"
+        },
+        "demand": "measured",
+        "coordinates": {
+          "lat": 33.4192568,
+          "lng": -112.2499305
+        },
+        "nearby_areas": [
+          {
+            "area": "Payson",
+            "km": 2.7
+          },
+          {
+            "area": "Sun City",
+            "km": 4.8
+          },
+          {
+            "area": "Avondale",
+            "km": 5.4
+          },
+          {
+            "area": "Maricopa",
+            "km": 7.2
+          }
+        ]
+      },
+      {
+        "area": "Prescott Valley",
+        "keywords": [
+          {
+            "keyword": "plumber prescott valley",
+            "volume": 20,
+            "kd": 86,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "DECLINING",
+            "peak_months": "Apr/Jul/Oct/Nov"
+          },
+          {
+            "keyword": "emergency plumber prescott valley",
+            "volume": 10,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "DECLINING",
+            "peak_months": "Dec"
+          },
+          {
+            "keyword": "water heater repair prescott valley",
+            "volume": 10,
+            "kd": 86,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "GROWING",
+            "peak_months": "Sep"
+          }
+        ],
+        "related_keywords": [
+          {
+            "keyword": "plumber prescott valley az",
+            "volume": 20,
+            "kd": 86,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "DECLINING",
+            "peak_months": "Apr/Jul/Oct/Nov"
+          }
+        ],
+        "total_volume": 40,
+        "primary_keyword": {
+          "keyword": "plumber prescott valley",
+          "volume": 20,
+          "kd": 86,
+          "cpc_low": 0.0,
+          "cpc_high": 0.0,
+          "trend": "DECLINING",
+          "peak_months": "Apr/Jul/Oct/Nov"
+        },
+        "demand": "measured"
+      },
+      {
+        "area": "Sun City",
+        "keywords": [
+          {
+            "keyword": "plumber sun city",
+            "volume": 20,
+            "kd": 84,
+            "cpc_low": 21801.97,
+            "cpc_high": 38867.22,
+            "trend": "DECLINING",
+            "peak_months": "Feb/Apr/Oct"
+          },
+          {
+            "keyword": "plumbers in sun city",
+            "volume": 20,
+            "kd": 84,
+            "cpc_low": 21801.97,
+            "cpc_high": 38867.22,
+            "trend": "DECLINING",
+            "peak_months": "Feb/Apr/Oct"
+          }
+        ],
+        "related_keywords": [
+          {
+            "keyword": "plumbers sun city az",
+            "volume": 20,
+            "kd": 84,
+            "cpc_low": 21801.97,
+            "cpc_high": 38867.22,
+            "trend": "DECLINING",
+            "peak_months": "Feb/Apr/Oct"
+          }
+        ],
+        "total_volume": 40,
+        "primary_keyword": {
+          "keyword": "plumber sun city",
+          "volume": 20,
+          "kd": 84,
+          "cpc_low": 21801.97,
+          "cpc_high": 38867.22,
+          "trend": "DECLINING",
+          "peak_months": "Feb/Apr/Oct"
+        },
+        "demand": "measured",
+        "coordinates": {
+          "lat": 33.391114,
+          "lng": -112.210257
+        },
+        "nearby_areas": [
+          {
+            "area": "Maricopa",
+            "km": 3.5
+          },
+          {
+            "area": "Kingman",
+            "km": 4.8
+          },
+          {
+            "area": "Payson",
+            "km": 7.1
+          }
+        ],
+        "questions": [
+          {
+            "q": "Do plumbers serving Sun City have experience with the galvanized and copper pipe common in 1960s-70s original construction?",
+            "answer_angle": "State direct experience replacing galvanized/copper pipe typical of Sun City's original build era."
+          },
+          {
+            "q": "How quickly can an emergency plumber reach a Sun City home, especially for a retiree living alone?",
+            "answer_angle": "Give a specific dispatch time window for Sun City emergency calls."
+          },
+          {
+            "q": "How much does water heater repair cost for a typical Sun City home?",
+            "answer_angle": "Provide a repair vs replace cost range for the standard water heater size found in Sun City units."
+          },
+          {
+            "q": "Can a plumber get through Sun City's gated, age-restricted community access?",
+            "answer_angle": "Explain the gate/entry process dispatchers coordinate for age-restricted community access."
+          },
+          {
+            "q": "Do plumbers in Sun City offer senior discounts?",
+            "answer_angle": "State clearly whether senior pricing or discounts are available."
+          },
+          {
+            "q": "How does Sun City coverage compare to nearby Maricopa, Kingman, and Payson dispatch times?",
+            "answer_angle": "Compare typical response times across Sun City and its three real neighboring areas."
+          }
+        ],
+        "entities": [
+          "water heater",
+          "galvanized pipe",
+          "copper pipe",
+          "slab leak",
+          "sewer line",
+          "water softener",
+          "leak detection",
+          "sump pump",
+          "garbage disposal",
+          "hose bib",
+          "backflow preventer",
+          "kitchen plumbing"
+        ],
+        "headings": [
+          "Plumber Sun City AZ: Same-Day Dispatch",
+          "Water Heater Repair Near Sun City's Retirement Communities",
+          "Plumbing Leak Detection in Sun City's Original Homes",
+          "Emergency Plumber Near Me: Response Times for Sun City Residents",
+          "Kitchen Plumbing Repairs for Sun City Homes",
+          "Serving Sun City and Nearby Maricopa, Kingman & Payson"
+        ],
+        "attributes": [
+          {
+            "attribute": "local",
+            "covers": "State that service covers Sun City's gated age-restricted community plus Maricopa, Kingman, and Payson."
+          },
+          {
+            "attribute": "cost",
+            "covers": "Give typical price ranges for water heater repair and general plumbing repair in Sun City homes."
+          },
+          {
+            "attribute": "maintenance",
+            "covers": "Explain Arizona hard water mineral buildup effects on Sun City's older pipes and softener upkeep."
+          },
+          {
+            "attribute": "process",
+            "covers": "Describe how dispatch matches a licensed local plumber and same-day scheduling works."
+          },
+          {
+            "attribute": "warranty",
+            "covers": "State whether repairs carry a workmanship warranty."
+          }
+        ]
+      },
+      {
+        "area": "Avondale",
+        "keywords": [
+          {
+            "keyword": "plumber avondale",
+            "volume": 30,
+            "kd": 83,
+            "cpc_low": 17452.95,
+            "cpc_high": 45327.84,
+            "trend": "DECLINING",
+            "peak_months": "Jul/Oct"
+          },
+          {
+            "keyword": "emergency plumber avondale",
+            "volume": 10,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "SEASONAL",
+            "peak_months": "Feb/Jul/Dec"
+          }
+        ],
+        "related_keywords": [
+          {
+            "keyword": "avondale plumbing contractors",
+            "volume": 10,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "UNKNOWN",
+            "peak_months": "Feb"
+          },
+          {
+            "keyword": "avondale plumbing services",
+            "volume": 10,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "GROWING",
+            "peak_months": "Feb/May/Aug"
+          }
+        ],
+        "total_volume": 40,
+        "primary_keyword": {
+          "keyword": "plumber avondale",
+          "volume": 30,
+          "kd": 83,
+          "cpc_low": 17452.95,
+          "cpc_high": 45327.84,
+          "trend": "DECLINING",
+          "peak_months": "Jul/Oct"
+        },
+        "demand": "measured",
+        "coordinates": {
+          "lat": 33.4660636,
+          "lng": -112.26706
+        },
+        "nearby_areas": [
+          {
+            "area": "Payson",
+            "km": 5.2
+          },
+          {
+            "area": "Kingman",
+            "km": 5.4
+          }
+        ],
+        "questions": [
+          {
+            "q": "Are avondale plumbing contractors licensed and insured under Arizona ROC rules?",
+            "answer_angle": "Explain how to verify an Avondale contractor's ROC license and insurance before booking."
+          },
+          {
+            "q": "How fast can an emergency plumber reach a home in Avondale?",
+            "answer_angle": "State the typical arrival window for emergency plumber calls in Avondale."
+          },
+          {
+            "q": "What plumbing problems are common in Avondale's newer PEX and slab-foundation homes?",
+            "answer_angle": "Name PEX pipe issues and slab leaks typical of Avondale's newer construction."
+          },
+          {
+            "q": "How much do avondale plumbing services cost for a water heater repair?",
+            "answer_angle": "Give a specific cost range for water heater repair in Avondale."
+          },
+          {
+            "q": "Do avondale plumbing services also cover nearby Payson and Kingman?",
+            "answer_angle": "Confirm coverage area extends to Payson and Kingman."
+          },
+          {
+            "q": "Do local plumbing companies in Avondale offer a repair warranty?",
+            "answer_angle": "State whether workmanship or parts warranties apply to Avondale jobs."
+          }
+        ],
+        "entities": [
+          "PEX pipe",
+          "slab leak",
+          "water heater",
+          "tankless water heater",
+          "sewer line camera inspection",
+          "water softener",
+          "backflow preventer",
+          "garbage disposal",
+          "hose bib",
+          "water pressure regulator",
+          "leak detection",
+          "kitchen plumbing"
+        ],
+        "headings": [
+          "Avondale Plumbing Contractors: Licensing & Insurance to Verify",
+          "Avondale Plumbing Services: What's Included in an Emergency Call",
+          "Water Heater Repair Near Me for Avondale's Growing Neighborhoods",
+          "Plumbing Leak Detection in Avondale's Newer Slab Homes",
+          "Emergency Plumber Avondale: How Fast Can They Get to You?",
+          "Serving Avondale and Nearby Payson & Kingman"
+        ],
+        "attributes": [
+          {
+            "attribute": "requirement",
+            "covers": "Explain how to confirm ROC license and insurance for avondale plumbing contractors before hiring."
+          },
+          {
+            "attribute": "cost",
+            "covers": "State typical price ranges for emergency plumbing services and water heater repair in Avondale."
+          },
+          {
+            "attribute": "timeline",
+            "covers": "Give expected response time for emergency plumber calls in Avondale."
+          },
+          {
+            "attribute": "local",
+            "covers": "State that coverage extends from Avondale to Payson and Kingman."
+          },
+          {
+            "attribute": "comparison",
+            "covers": "Compare avondale plumbing contractors against national chain plumbers on price and speed."
+          }
+        ]
+      },
+      {
+        "area": "Payson",
+        "keywords": [
+          {
+            "keyword": "plumber payson",
+            "volume": 20,
+            "kd": 56,
+            "cpc_low": 3332.53,
+            "cpc_high": 13187.09,
+            "trend": "STABLE",
+            "peak_months": "Apr/Jul/Aug/Oct/Nov"
+          },
+          {
+            "keyword": "plumbers in payson az",
+            "volume": 20,
+            "kd": 56,
+            "cpc_low": 3332.53,
+            "cpc_high": 13187.09,
+            "trend": "STABLE",
+            "peak_months": "Apr/Jul/Aug/Oct/Nov"
+          }
+        ],
+        "related_keywords": [
+          {
+            "keyword": "payson plumbers",
+            "volume": 20,
+            "kd": 56,
+            "cpc_low": 3332.53,
+            "cpc_high": 13187.09,
+            "trend": "STABLE",
+            "peak_months": "Apr/Jul/Aug/Oct/Nov"
+          },
+          {
+            "keyword": "bud's plumbing payson az",
+            "volume": 10,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "DECLINING",
+            "peak_months": ""
+          },
+          {
+            "keyword": "reliable plumbing payson az",
+            "volume": 10,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "DECLINING",
+            "peak_months": "Feb/Apr/Jun/Jul/Oct/Nov"
+          },
+          {
+            "keyword": "bud's plumbing payson arizona",
+            "volume": 10,
+            "kd": 79,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "GROWING",
+            "peak_months": "Apr/May/Sep"
+          }
+        ],
+        "total_volume": 40,
+        "primary_keyword": {
+          "keyword": "plumber payson",
+          "volume": 20,
+          "kd": 56,
+          "cpc_low": 3332.53,
+          "cpc_high": 13187.09,
+          "trend": "STABLE",
+          "peak_months": "Apr/Jul/Aug/Oct/Nov"
+        },
+        "demand": "measured",
+        "coordinates": {
+          "lat": 33.4204814,
+          "lng": -112.2784979
+        },
+        "nearby_areas": [
+          {
+            "area": "Kingman",
+            "km": 2.7
+          },
+          {
+            "area": "Avondale",
+            "km": 5.2
+          },
+          {
+            "area": "Sun City",
+            "km": 7.1
+          }
+        ],
+        "questions": [
+          {
+            "q": "Do Payson plumbers work with well water systems and septic tanks common outside city lines?",
+            "answer_angle": "Confirm hands-on experience servicing well water systems and septic tanks in Payson."
+          },
+          {
+            "q": "How quickly can a plumber reach Payson given its distance from the Phoenix metro?",
+            "answer_angle": "State realistic travel time and dispatch radius for reaching Payson."
+          },
+          {
+            "q": "How do Bud's Plumbing and Reliable Plumbing in Payson AZ compare on price and availability?",
+            "answer_angle": "Directly compare these two named local providers on pricing and response."
+          },
+          {
+            "q": "Can a plumber fix frozen or burst pipes during Payson's colder winter nights?",
+            "answer_angle": "Address freeze-related pipe bursts tied to Payson's higher elevation climate."
+          },
+          {
+            "q": "How much does water heater repair typically cost in Payson?",
+            "answer_angle": "Give a specific cost range for water heater repair in Payson homes."
+          },
+          {
+            "q": "Is emergency plumbing available in Payson on nights and weekends?",
+            "answer_angle": "State weekend/night emergency availability for Payson calls."
+          }
+        ],
+        "entities": [
+          "well water system",
+          "septic tank",
+          "frozen pipes",
+          "pipe insulation",
+          "water heater",
+          "sewer line",
+          "leak detection",
+          "water softener",
+          "sump pump",
+          "backflow preventer",
+          "kitchen plumbing",
+          "PEX pipe"
+        ],
+        "headings": [
+          "Plumbers in Payson, AZ: Well Water & Septic Experience",
+          "Bud's Plumbing vs Reliable Plumbing Payson AZ: How They Compare",
+          "Emergency Plumber Payson: Response Times From the Valley",
+          "Frozen Pipe Repair for Payson's Higher-Elevation Homes",
+          "Water Heater Repair Near Payson Homes",
+          "Serving Payson, Avondale & Sun City Homeowners"
+        ],
+        "attributes": [
+          {
+            "attribute": "local",
+            "covers": "Describe rural mountain service area coverage including well and septic capability around Payson."
+          },
+          {
+            "attribute": "comparison",
+            "covers": "Compare Bud's Plumbing and Reliable Plumbing Payson AZ on pricing and reputation."
+          },
+          {
+            "attribute": "cost",
+            "covers": "Give price ranges for common repairs like water heater and leak fixes in Payson."
+          },
+          {
+            "attribute": "maintenance",
+            "covers": "Explain freeze protection and pipe insulation advice for Payson's colder winters."
+          },
+          {
+            "attribute": "timeline",
+            "covers": "State emergency response time accounting for Payson's distance from the Phoenix valley."
+          }
+        ]
+      },
+      {
+        "area": "Alhambra",
+        "keywords": [
+          {
+            "keyword": "plumber alhambra",
+            "volume": 10,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "DECLINING",
+            "peak_months": "Feb/Nov"
+          },
+          {
+            "keyword": "plumber in alhambra ca",
+            "volume": 10,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "DECLINING",
+            "peak_months": "Feb/Nov"
+          },
+          {
+            "keyword": "plumbers in alhambra",
+            "volume": 10,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "DECLINING",
+            "peak_months": "Feb/Nov"
+          }
+        ],
+        "related_keywords": [],
+        "total_volume": 30,
+        "primary_keyword": {
+          "keyword": "plumber alhambra",
+          "volume": 10,
+          "kd": 0,
+          "cpc_low": 0.0,
+          "cpc_high": 0.0,
+          "trend": "DECLINING",
+          "peak_months": "Feb/Nov"
+        },
+        "demand": "measured",
+        "coordinates": {
+          "lat": 33.5235919,
+          "lng": -112.1109295
+        },
+        "nearby_areas": [
+          {
+            "area": "Peoria",
+            "km": 7.4
+          }
+        ],
+        "questions": [
+          {
+            "q": "Do plumbers serving Alhambra handle the cast iron and clay sewer lines found in this older Phoenix neighborhood?",
+            "answer_angle": "Confirm experience with cast iron/clay sewer line repair typical of Alhambra's older homes."
+          },
+          {
+            "q": "How fast is emergency plumber response for an Alhambra address?",
+            "answer_angle": "State a specific response time window for Alhambra emergency calls."
+          },
+          {
+            "q": "What does kitchen plumbing repair typically cost for an Alhambra home?",
+            "answer_angle": "Give a cost range for common kitchen plumbing repairs in Alhambra."
+          },
+          {
+            "q": "Does the same plumber that serves Alhambra also cover nearby Peoria?",
+            "answer_angle": "Confirm service area overlap between Alhambra and Peoria."
+          },
+          {
+            "q": "How do I verify a plumber's Arizona ROC license before booking in Alhambra?",
+            "answer_angle": "Explain the ROC license lookup process before hiring in Alhambra."
+          },
+          {
+            "q": "Are free estimates available for water heater replacement in Alhambra?",
+            "answer_angle": "State whether free estimates are offered for Alhambra water heater jobs."
+          }
+        ],
+        "entities": [
+          "cast iron pipe",
+          "sewer line",
+          "water heater",
+          "garbage disposal",
+          "kitchen faucet",
+          "leak detection",
+          "water softener",
+          "backflow preventer",
+          "PEX pipe",
+          "hose bib",
+          "sump pump",
+          "tankless water heater"
+        ],
+        "headings": [
+          "Plumber in Alhambra: Licensing You Should Verify",
+          "Water Heater Repair Near Me for Alhambra Homes",
+          "Plumbing Leak Detection for Alhambra's Older Sewer Lines",
+          "Kitchen Plumbing Repairs in Alhambra",
+          "Emergency Plumber Alhambra: What to Expect",
+          "Serving Alhambra and Nearby Peoria Homeowners"
+        ],
+        "attributes": [
+          {
+            "attribute": "requirement",
+            "covers": "Explain how to verify an Arizona ROC license number before hiring a plumber in Alhambra."
+          },
+          {
+            "attribute": "cost",
+            "covers": "Give price ranges for kitchen plumbing repairs and water heater service in Alhambra."
+          },
+          {
+            "attribute": "local",
+            "covers": "State that service area covers Alhambra and nearby Peoria."
+          },
+          {
+            "attribute": "timeline",
+            "covers": "State expected emergency response time for Alhambra addresses."
+          },
+          {
+            "attribute": "maintenance",
+            "covers": "Address upkeep of cast iron sewer lines common in Alhambra's older housing stock."
+          }
+        ]
+      },
+      {
+        "area": "Deer Valley",
+        "keywords": [
+          {
+            "keyword": "plumber deer valley",
+            "volume": 30,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "DECLINING",
+            "peak_months": "Oct/Nov/Dec"
+          }
+        ],
+        "related_keywords": [
+          {
+            "keyword": "deer valley plumbing contractors",
+            "volume": 40,
+            "kd": 16,
+            "cpc_low": 1770.43,
+            "cpc_high": 9139.46,
+            "trend": "DECLINING",
+            "peak_months": "May/Oct/Nov"
+          }
+        ],
+        "total_volume": 30,
+        "primary_keyword": {
+          "keyword": "plumber deer valley",
+          "volume": 30,
+          "kd": 0,
+          "cpc_low": 0.0,
+          "cpc_high": 0.0,
+          "trend": "DECLINING",
+          "peak_months": "Oct/Nov/Dec"
+        },
+        "demand": "measured",
+        "coordinates": {
+          "lat": 33.686086,
+          "lng": -112.1185607
+        },
+        "nearby_areas": [],
+        "questions": [
+          {
+            "q": "How fast can a plumber reach Deer Valley for a burst pipe or water heater emergency?",
+            "answer_angle": "State the real dispatch window (e.g., under 60 minutes) for Deer Valley's Phoenix zip codes and confirm 24/7 coverage."
+          },
+          {
+            "q": "Do Deer Valley's newer slab-built homes have specific leak detection needs?",
+            "answer_angle": "Explain that slab foundations common in Deer Valley subdivisions require electronic leak detection rather than exploratory digging."
+          },
+          {
+            "q": "What does a typical kitchen plumbing repair cost in Deer Valley?",
+            "answer_angle": "Give a realistic price range for faucet, disposal, and under-sink leak repairs in the area."
+          },
+          {
+            "q": "Are plumbers dispatched to Deer Valley licensed and insured under Arizona ROC rules?",
+            "answer_angle": "Confirm ROC license number checks and insurance verification are part of the vetting process."
+          },
+          {
+            "q": "Can the same plumber handle both an emergency call and water heater maintenance in Deer Valley?",
+            "answer_angle": "State that dispatched pros cover both emergency repair and scheduled maintenance in one visit."
+          },
+          {
+            "q": "Is a 24 hour plumber actually available overnight in Deer Valley?",
+            "answer_angle": "Confirm true after-hours dispatch availability, not just daytime scheduling with a callback."
+          }
+        ],
+        "entities": [
+          "liberty plumbing",
+          "ferguson plumbing",
+          "water heater",
+          "tankless water heater",
+          "slab leak",
+          "sewer line",
+          "garbage disposal",
+          "kitchen faucet",
+          "leak detection equipment",
+          "ROC license",
+          "hose bib",
+          "water softener"
+        ],
+        "headings": [
+          "Deer Valley Plumbing Contractors: What to Check Before You Hire",
+          "Ferguson Plumbing Near Me vs Local Deer Valley Dispatch: How It Works",
+          "Water Heater Repair Near Me in Deer Valley's Master-Planned Communities",
+          "Plumbing Leak Detection for Deer Valley Slab Foundations",
+          "24 Hour Plumber Near Me: Overnight Dispatch to Deer Valley",
+          "Kitchen Plumbing Repairs for Deer Valley Homes"
+        ],
+        "attributes": [
+          {
+            "attribute": "response time",
+            "covers": "State the actual dispatch window for Deer Valley addresses and confirm 24/7 emergency availability."
+          },
+          {
+            "attribute": "cost",
+            "covers": "Give price ranges for common jobs like water heater repair and kitchen leak fixes in the area."
+          },
+          {
+            "attribute": "requirement",
+            "covers": "Explain the ROC licensing and insurance checks every dispatched plumber must pass."
+          },
+          {
+            "attribute": "local",
+            "covers": "Address slab-foundation leak detection specific to Deer Valley's housing stock."
+          },
+          {
+            "attribute": "process",
+            "covers": "Describe how a homeowner requests dispatch and gets matched to the nearest available licensed plumber."
+          }
+        ]
+      },
+      {
+        "area": "Bullhead City",
+        "keywords": [
+          {
+            "keyword": "plumber bullhead city",
+            "volume": 10,
+            "kd": 88,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "SEASONAL",
+            "peak_months": "Mar"
+          },
+          {
+            "keyword": "gonzo plumbing bullhead city",
+            "volume": 10,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "UNKNOWN",
+            "peak_months": "Mar/May"
+          },
+          {
+            "keyword": "plumbers in bullhead city az",
+            "volume": 10,
+            "kd": 88,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "SEASONAL",
+            "peak_months": "Mar"
+          }
+        ],
+        "related_keywords": [
+          {
+            "keyword": "craig plumbing bullhead city az",
+            "volume": 0,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "UNKNOWN",
+            "peak_months": ""
+          },
+          {
+            "keyword": "ace plumbing bullhead city az",
+            "volume": 0,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "UNKNOWN",
+            "peak_months": ""
+          }
+        ],
+        "total_volume": 30,
+        "primary_keyword": {
+          "keyword": "plumber bullhead city",
+          "volume": 10,
+          "kd": 88,
+          "cpc_low": 0.0,
+          "cpc_high": 0.0,
+          "trend": "SEASONAL",
+          "peak_months": "Mar"
+        },
+        "demand": "measured",
+        "questions": [
+          {
+            "q": "How does hard water from the Colorado River affect Bullhead City plumbing?",
+            "answer_angle": "Explain mineral buildup's effect on water heaters and pipes and recommend descaling or softener installs."
+          },
+          {
+            "q": "Is Craig Plumbing, Gonzo Plumbing, or Ace Plumbing the better call for an emergency in Bullhead City?",
+            "answer_angle": "Compare the named local providers and state that dispatch routes to whichever licensed pro is closest and available fastest."
+          },
+          {
+            "q": "Can a plumber service Bullhead City's mobile home parks and RV communities?",
+            "answer_angle": "Confirm coverage of manufactured housing and RV hookups, common in the area."
+          },
+          {
+            "q": "What does water heater repair cost in Bullhead City given hard water damage?",
+            "answer_angle": "Give a price range that accounts for extra descaling or anode rod replacement from mineral buildup."
+          },
+          {
+            "q": "How fast can an emergency plumber reach neighborhoods near the river in Bullhead City?",
+            "answer_angle": "State the response time window across the city's river-adjacent and inland areas."
+          },
+          {
+            "q": "Are Bullhead City plumbers licensed under Arizona ROC standards?",
+            "answer_angle": "Confirm license and insurance verification before any dispatch."
+          }
+        ],
+        "entities": [
+          "hard water",
+          "water softener",
+          "mineral buildup",
+          "tankless water heater",
+          "sewer line",
+          "mobile home plumbing",
+          "RV park hookups",
+          "gonzo plumbing",
+          "craig plumbing",
+          "ace plumbing",
+          "ROC license",
+          "water heater anode rod"
+        ],
+        "headings": [
+          "Gonzo Plumbing, Craig Plumbing & Ace Plumbing Bullhead City: How Dispatch Compares",
+          "Hard Water & Mineral Buildup: Water Heater Repair Near Me in Bullhead City",
+          "Emergency Plumber Near Me: Response Times Along the Colorado River",
+          "Plumbing Services for Bullhead City Mobile Home & RV Communities",
+          "Plumbing Repair Services for Bullhead City's Hard Water Damage",
+          "Local Plumbers in Bullhead City: Licensing to Verify"
+        ],
+        "attributes": [
+          {
+            "attribute": "comparison",
+            "covers": "Compare Gonzo Plumbing, Craig Plumbing, and Ace Plumbing and explain how dispatch selects among them."
+          },
+          {
+            "attribute": "local",
+            "covers": "Address the Colorado River's hard water and its effect on pipes and water heaters."
+          },
+          {
+            "attribute": "cost",
+            "covers": "Give cost ranges for hard-water-related repairs like descaling and water heater servicing."
+          },
+          {
+            "attribute": "response time",
+            "covers": "State realistic arrival windows for river-side versus inland Bullhead City addresses."
+          },
+          {
+            "attribute": "requirement",
+            "covers": "Confirm ROC licensing and insurance checks for every dispatched plumber."
+          }
+        ]
+      },
+      {
+        "area": "Sierra Vista",
+        "keywords": [
+          {
+            "keyword": "plumber sierra vista",
+            "volume": 20,
+            "kd": 82,
+            "cpc_low": 2536.35,
+            "cpc_high": 12493.04,
+            "trend": "STABLE",
+            "peak_months": ""
+          },
+          {
+            "keyword": "emergency plumber sierra vista",
+            "volume": 10,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "UNKNOWN",
+            "peak_months": "Mar"
+          }
+        ],
+        "related_keywords": [
+          {
+            "keyword": "plumbing sierra vista az",
+            "volume": 20,
+            "kd": 82,
+            "cpc_low": 2536.35,
+            "cpc_high": 12493.04,
+            "trend": "STABLE",
+            "peak_months": ""
+          },
+          {
+            "keyword": "plumbers sierra vista arizona",
+            "volume": 10,
+            "kd": 25,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "GROWING",
+            "peak_months": "Sep"
+          },
+          {
+            "keyword": "sierra vista plumbing inc",
+            "volume": 10,
+            "kd": 86,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "GROWING",
+            "peak_months": "Feb/Mar/Jun/Jul/Aug/Sep"
+          },
+          {
+            "keyword": "huachuca plumbing sierra vista az",
+            "volume": 0,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "UNKNOWN",
+            "peak_months": ""
+          }
+        ],
+        "total_volume": 30,
+        "primary_keyword": {
+          "keyword": "plumber sierra vista",
+          "volume": 20,
+          "kd": 82,
+          "cpc_low": 2536.35,
+          "cpc_high": 12493.04,
+          "trend": "STABLE",
+          "peak_months": ""
+        },
+        "demand": "measured",
+        "coordinates": {
+          "lat": 33.5324676,
+          "lng": -112.0130416
+        },
+        "nearby_areas": [
+          {
+            "area": "Arcadia",
+            "km": 6.4
+          },
+          {
+            "area": "Casa Grande",
+            "km": 8.0
+          }
+        ],
+        "questions": [
+          {
+            "q": "How fast can an emergency plumber reach Sierra Vista homes near Fort Huachuca?",
+            "answer_angle": "State the dispatch window covering both the base-adjacent neighborhoods and greater Sierra Vista."
+          },
+          {
+            "q": "How does Sierra Vista Plumbing Inc compare to Huachuca Plumbing for emergency repairs?",
+            "answer_angle": "Compare the two named local companies and explain dispatch routes to whichever licensed pro is fastest."
+          },
+          {
+            "q": "Do Sierra Vista's older homes have specific plumbing leak issues?",
+            "answer_angle": "Note galvanized pipe and cast iron sewer line problems common in older Sierra Vista housing and the leak detection used."
+          },
+          {
+            "q": "What does emergency plumbing cost in Sierra Vista, AZ?",
+            "answer_angle": "Give a price range for after-hours and weekend emergency calls."
+          },
+          {
+            "q": "Can plumbers dispatched to Sierra Vista also cover nearby Arcadia and Casa Grande?",
+            "answer_angle": "Confirm the service radius extends to those neighboring towns."
+          },
+          {
+            "q": "Are plumbers serving Sierra Vista licensed for work on military-adjacent housing?",
+            "answer_angle": "Confirm ROC licensing and insurance requirements apply regardless of housing type."
+          }
+        ],
+        "entities": [
+          "Sierra Vista Plumbing Inc",
+          "Huachuca Plumbing",
+          "galvanized pipe",
+          "cast iron sewer line",
+          "water heater",
+          "leak detection equipment",
+          "sewer camera inspection",
+          "ROC license",
+          "water pressure regulator",
+          "hose bib",
+          "kitchen plumbing fixtures"
+        ],
+        "headings": [
+          "Sierra Vista Plumbing Inc vs Huachuca Plumbing: How They Compare",
+          "Emergency Plumber Sierra Vista: Response Times Near Fort Huachuca",
+          "Plumbing Sierra Vista AZ: Leak Detection for Older Homes",
+          "Water Heater Repair Near Me for Sierra Vista Households",
+          "Plumbers Sierra Vista Arizona: Licensing & Insurance to Verify",
+          "Serving Sierra Vista and Nearby Arcadia & Casa Grande"
+        ],
+        "attributes": [
+          {
+            "attribute": "comparison",
+            "covers": "Compare Sierra Vista Plumbing Inc and Huachuca Plumbing and explain how dispatch selects the fastest available licensed pro."
+          },
+          {
+            "attribute": "response time",
+            "covers": "State realistic arrival times for Sierra Vista including areas near Fort Huachuca."
+          },
+          {
+            "attribute": "local",
+            "covers": "Address galvanized pipe and cast iron sewer issues typical of Sierra Vista's older housing stock."
+          },
+          {
+            "attribute": "cost",
+            "covers": "Give a price range for emergency and after-hours plumbing calls in the area."
+          },
+          {
+            "attribute": "coverage",
+            "covers": "Confirm service extends to neighboring Arcadia and Casa Grande."
+          }
+        ]
+      },
+      {
+        "area": "Maricopa",
+        "keywords": [
+          {
+            "keyword": "plumber maricopa",
+            "volume": 20,
+            "kd": 100,
+            "cpc_low": 13117.94,
+            "cpc_high": 33314.76,
+            "trend": "STABLE",
+            "peak_months": "Feb/Jul/Sep/Nov/Dec"
+          },
+          {
+            "keyword": "plumbers of maricopa",
+            "volume": 10,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "DECLINING",
+            "peak_months": "Nov/Dec"
+          }
+        ],
+        "related_keywords": [
+          {
+            "keyword": "plumbers maricopa az",
+            "volume": 20,
+            "kd": 100,
+            "cpc_low": 13117.94,
+            "cpc_high": 33314.76,
+            "trend": "STABLE",
+            "peak_months": "Feb/Jul/Sep/Nov/Dec"
+          },
+          {
+            "keyword": "my maricopa plumber maricopa az",
+            "volume": 20,
+            "kd": 55,
+            "cpc_low": 5156.29,
+            "cpc_high": 12353.17,
+            "trend": "DECLINING",
+            "peak_months": "Oct"
+          }
+        ],
+        "total_volume": 30,
+        "primary_keyword": {
+          "keyword": "plumber maricopa",
+          "volume": 20,
+          "kd": 100,
+          "cpc_low": 13117.94,
+          "cpc_high": 33314.76,
+          "trend": "STABLE",
+          "peak_months": "Feb/Jul/Sep/Nov/Dec"
+        },
+        "demand": "measured",
+        "coordinates": {
+          "lat": 33.360581,
+          "lng": -112.2174395
+        },
+        "nearby_areas": [
+          {
+            "area": "Sun City",
+            "km": 3.5
+          },
+          {
+            "area": "Kingman",
+            "km": 7.2
+          }
+        ],
+        "questions": [
+          {
+            "q": "How does My Maricopa Plumber compare to other plumbers of Maricopa for emergency dispatch?",
+            "answer_angle": "Compare the named local provider to general Maricopa plumbers and explain dispatch matches the fastest licensed pro available."
+          },
+          {
+            "q": "How fast can an emergency plumber reach Maricopa's newer subdivisions?",
+            "answer_angle": "State response times accounting for Maricopa's rapid residential growth and distance from central Phoenix."
+          },
+          {
+            "q": "Do Maricopa's newer slab-built homes have specific leak detection needs?",
+            "answer_angle": "Explain slab leak detection methods suited to Maricopa's newer PEX and slab construction."
+          },
+          {
+            "q": "What's the cost of water heater repair in Maricopa, AZ?",
+            "answer_angle": "Give a typical price range for water heater repair and replacement in the area."
+          },
+          {
+            "q": "Can a plumber dispatched to Maricopa also service nearby Sun City and Kingman?",
+            "answer_angle": "Confirm the coverage radius reaches those neighboring areas."
+          },
+          {
+            "q": "Are Maricopa plumbers licensed under Arizona's ROC requirements?",
+            "answer_angle": "Confirm ROC license and insurance verification for every dispatched plumber."
+          }
+        ],
+        "entities": [
+          "my maricopa plumber",
+          "plumbers maricopa az",
+          "slab leak",
+          "water heater",
+          "tankless water heater",
+          "sewer line",
+          "kitchen plumbing",
+          "ROC license",
+          "PEX piping",
+          "water softener",
+          "garbage disposal",
+          "leak detection equipment"
+        ],
+        "headings": [
+          "My Maricopa Plumber vs Other Plumbers of Maricopa: What to Know",
+          "Emergency Plumber Near Me: Response Times for Maricopa's New Subdivisions",
+          "Plumbing Leak Detection for Maricopa's Newer Slab Homes",
+          "Water Heater Repair Near Me for Maricopa Households",
+          "Kitchen Plumbing Repairs for Maricopa Homes",
+          "Serving Maricopa and Nearby Sun City & Kingman"
+        ],
+        "attributes": [
+          {
+            "attribute": "comparison",
+            "covers": "Compare My Maricopa Plumber against other plumbers of Maricopa and explain the dispatch selection process."
+          },
+          {
+            "attribute": "response time",
+            "covers": "State realistic arrival windows for Maricopa's fast-growing subdivisions."
+          },
+          {
+            "attribute": "local",
+            "covers": "Address slab leak detection needs specific to Maricopa's newer PEX-piped construction."
+          },
+          {
+            "attribute": "cost",
+            "covers": "Give a price range for water heater repair and common plumbing fixes in Maricopa."
+          },
+          {
+            "attribute": "coverage",
+            "covers": "Confirm service extends to neighboring Sun City and Kingman."
+          }
+        ]
+      },
+      {
+        "area": "Green Valley",
+        "keywords": [
+          {
+            "keyword": "plumber green valley",
+            "volume": 20,
+            "kd": 100,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "DECLINING",
+            "peak_months": "Feb/Apr/May/Oct/Dec"
+          }
+        ],
+        "related_keywords": [],
+        "total_volume": 20,
+        "primary_keyword": {
+          "keyword": "plumber green valley",
+          "volume": 20,
+          "kd": 100,
+          "cpc_low": 0.0,
+          "cpc_high": 0.0,
+          "trend": "DECLINING",
+          "peak_months": "Feb/Apr/May/Oct/Dec"
+        },
+        "demand": "measured",
+        "coordinates": {
+          "lat": 33.3948515,
+          "lng": -112.0097429
+        },
+        "nearby_areas": []
+      },
+      {
+        "area": "Lake Havasu City",
+        "keywords": [
+          {
+            "keyword": "plumber lake havasu city",
+            "volume": 10,
+            "kd": 71,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "DECLINING",
+            "peak_months": "Oct"
+          },
+          {
+            "keyword": "plumbers in lake havasu city arizona",
+            "volume": 10,
+            "kd": 71,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "DECLINING",
+            "peak_months": "Oct"
+          }
+        ],
+        "related_keywords": [
+          {
+            "keyword": "plumbers lake havasu",
+            "volume": 10,
+            "kd": 71,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "DECLINING",
+            "peak_months": "Oct"
+          },
+          {
+            "keyword": "affordable plumbing lake havasu",
+            "volume": 10,
+            "kd": 86,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "GROWING",
+            "peak_months": "Mar/May/Sep"
+          },
+          {
+            "keyword": "pruitt's plumbing lake havasu",
+            "volume": 10,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "UNKNOWN",
+            "peak_months": "Mar/May"
+          },
+          {
+            "keyword": "van rooy plumbing lake havasu",
+            "volume": 10,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "SEASONAL",
+            "peak_months": "Feb/Mar/Apr/May/Aug/Nov"
+          },
+          {
+            "keyword": "plumbers in lake havasu",
+            "volume": 10,
+            "kd": 71,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "DECLINING",
+            "peak_months": "Oct"
+          }
+        ],
+        "total_volume": 20,
+        "primary_keyword": {
+          "keyword": "plumber lake havasu city",
+          "volume": 10,
+          "kd": 71,
+          "cpc_low": 0.0,
+          "cpc_high": 0.0,
+          "trend": "DECLINING",
+          "peak_months": "Oct"
+        },
+        "demand": "measured"
+      },
+      {
+        "area": "Peoria",
+        "keywords": [
+          {
+            "keyword": "plumber peoria",
+            "volume": 20,
+            "kd": 45,
+            "cpc_low": 16254.28,
+            "cpc_high": 30721.76,
+            "trend": "DECLINING",
+            "peak_months": "Oct/Nov"
+          }
+        ],
+        "related_keywords": [
+          {
+            "keyword": "plumbers peoria il",
+            "volume": 20,
+            "kd": 45,
+            "cpc_low": 16254.28,
+            "cpc_high": 30721.76,
+            "trend": "DECLINING",
+            "peak_months": "Oct/Nov"
+          },
+          {
+            "keyword": "emergency plumber peoria il",
+            "volume": 10,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "SEASONAL",
+            "peak_months": "May/Aug/Nov"
+          },
+          {
+            "keyword": "24 hour plumber peoria il",
+            "volume": 10,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "GROWING",
+            "peak_months": "Sep"
+          },
+          {
+            "keyword": "peoria plumbing repair",
+            "volume": 10,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "GROWING",
+            "peak_months": "May/Jun/Jul"
+          },
+          {
+            "keyword": "peoria plumbing services",
+            "volume": 10,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "SEASONAL",
+            "peak_months": "Aug/Nov"
+          },
+          {
+            "keyword": "plumbing companies peoria il",
+            "volume": 10,
+            "kd": 33,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "GROWING",
+            "peak_months": "Mar/Apr/May/Jun/Jul/Aug/Sep/Oct/Nov"
+          },
+          {
+            "keyword": "paluska plumbing peoria il",
+            "volume": 0,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "UNKNOWN",
+            "peak_months": ""
+          },
+          {
+            "keyword": "plumbers peoria heights il",
+            "volume": 0,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "UNKNOWN",
+            "peak_months": ""
+          },
+          {
+            "keyword": "plumbing services peoria il",
+            "volume": 0,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "UNKNOWN",
+            "peak_months": ""
+          },
+          {
+            "keyword": "residential plumbers peoria il",
+            "volume": 0,
+            "kd": 0,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "UNKNOWN",
+            "peak_months": ""
+          }
+        ],
+        "total_volume": 20,
+        "primary_keyword": {
+          "keyword": "plumber peoria",
+          "volume": 20,
+          "kd": 45,
+          "cpc_low": 16254.28,
+          "cpc_high": 30721.76,
+          "trend": "DECLINING",
+          "peak_months": "Oct/Nov"
+        },
+        "demand": "measured",
+        "coordinates": {
+          "lat": 33.5829066,
+          "lng": -112.1462527
+        },
+        "nearby_areas": [
+          {
+            "area": "Alhambra",
+            "km": 7.4
+          }
+        ]
+      },
+      {
+        "area": "San Tan Valley",
+        "keywords": [
+          {
+            "keyword": "plumber san tan valley",
+            "volume": 10,
+            "kd": 100,
+            "cpc_low": 15308.0,
+            "cpc_high": 48934.8,
+            "trend": "DECLINING",
+            "peak_months": "Oct/Nov/Dec"
+          },
+          {
+            "keyword": "plumbers in san tan valley az",
+            "volume": 10,
+            "kd": 95,
+            "cpc_low": 0.0,
+            "cpc_high": 0.0,
+            "trend": "GROWING",
+            "peak_months": ""
+          }
+        ],
+        "related_keywords": [],
+        "total_volume": 20,
+        "primary_keyword": {
+          "keyword": "plumber san tan valley",
+          "volume": 10,
+          "kd": 100,
+          "cpc_low": 15308.0,
+          "cpc_high": 48934.8,
+          "trend": "DECLINING",
+          "peak_months": "Oct/Nov/Dec"
+        },
+        "demand": "measured"
+      }
+    ],
+    "cities_in_data": [],
+    "recommended_city_targets": [
+      "Phoenix, United States"
+    ],
+    "geo_area_candidates": [
+      "Paradise Valley",
+      "Downtown",
+      "Alhambra",
+      "Central City",
+      "Deer Valley",
+      "North Gateway",
+      "Rio Vista",
+      "Arcadia",
+      "Desert Ridge",
+      "Stetson Valley",
+      "Paradise Valley Oasis",
+      "Tatum Ranch",
+      "Kingman",
+      "Bullhead City",
+      "Green Valley",
+      "Lake Havasu City",
+      "Flagstaff",
+      "Yuma",
+      "Casa Grande",
+      "Sierra Vista",
+      "Maricopa",
+      "Apache Junction",
+      "Prescott Valley",
+      "Peoria",
+      "Buckeye",
+      "Sun City",
+      "San Tan Valley",
+      "Avondale",
+      "Payson",
+      "Fountain Hills",
+      "Anthem"
+    ],
+    "service_keywords": [
+      {
+        "keyword": "plumber",
+        "volume": 5400,
+        "kd": 13,
+        "trend": "GROWING",
+        "variant_of": "plumber",
+        "is_canonical": true
+      },
+      {
+        "keyword": "plumbers near me",
+        "volume": 3600,
+        "kd": 40,
+        "trend": "STABLE",
+        "variant_of": "plumbers near me",
+        "is_canonical": true
+      },
+      {
+        "keyword": "plumbers close to me",
+        "volume": 3600,
+        "kd": 40,
+        "trend": "STABLE",
+        "variant_of": "plumbers near me",
+        "is_canonical": false
+      },
+      {
+        "keyword": "near me plumber",
+        "volume": 3600,
+        "kd": 40,
+        "trend": "STABLE",
+        "variant_of": "plumbers near me",
+        "is_canonical": false
+      },
+      {
+        "keyword": "phoenix plumbing",
+        "volume": 2400,
+        "kd": 68,
+        "trend": "DECLINING",
+        "variant_of": "phoenix plumbing",
+        "is_canonical": true
+      },
+      {
+        "keyword": "emergency plumber near me",
+        "volume": 480,
+        "kd": 25,
+        "trend": "SEASONAL",
+        "variant_of": "emergency plumber near me",
+        "is_canonical": true
+      },
+      {
+        "keyword": "emergency plumber",
+        "volume": 480,
+        "kd": 18,
+        "trend": "GROWING",
+        "variant_of": "emergency plumber",
+        "is_canonical": true
+      },
+      {
+        "keyword": "liberty plumbing",
+        "volume": 480,
+        "kd": 38,
+        "trend": "GROWING",
+        "variant_of": "liberty plumbing",
+        "is_canonical": true
+      },
+      {
+        "keyword": "plumbing services",
+        "volume": 320,
+        "kd": 22,
+        "trend": "DECLINING",
+        "variant_of": "plumbing services",
+        "is_canonical": true
+      },
+      {
+        "keyword": "plumbing companies",
+        "volume": 320,
+        "kd": 19,
+        "trend": "GROWING",
+        "variant_of": "plumbing companies",
+        "is_canonical": true
+      },
+      {
+        "keyword": "water heater repair near me",
+        "volume": 260,
+        "kd": 20,
+        "trend": "SEASONAL",
+        "variant_of": "water heater repair near me",
+        "is_canonical": true
+      },
+      {
+        "keyword": "plumbing services near me",
+        "volume": 210,
+        "kd": 57,
+        "trend": "DECLINING",
+        "variant_of": "plumbing services near me",
+        "is_canonical": true
+      },
+      {
+        "keyword": "emergency plumbing services",
+        "volume": 210,
+        "kd": 11,
+        "trend": "DECLINING",
+        "variant_of": "emergency plumbing services",
+        "is_canonical": true
+      },
+      {
+        "keyword": "ferguson plumbing near me",
+        "volume": 210,
+        "kd": 45,
+        "trend": "SEASONAL",
+        "variant_of": "ferguson plumbing near me",
+        "is_canonical": true
+      },
+      {
+        "keyword": "plumbing repair",
+        "volume": 210,
+        "kd": 26,
+        "trend": "DECLINING",
+        "variant_of": "plumbing repair",
+        "is_canonical": true
+      },
+      {
+        "keyword": "plumbing companies near me",
+        "volume": 170,
+        "kd": 78,
+        "trend": "GROWING",
+        "variant_of": "plumbing companies near me",
+        "is_canonical": true
+      },
+      {
+        "keyword": "local plumber near me",
+        "volume": 170,
+        "kd": 97,
+        "trend": "GROWING",
+        "variant_of": "local plumber near me",
+        "is_canonical": true
+      },
+      {
+        "keyword": "plumbing repair services",
+        "volume": 170,
+        "kd": 35,
+        "trend": "DECLINING",
+        "variant_of": "plumbing repair services",
+        "is_canonical": true
+      },
+      {
+        "keyword": "24 hour plumber near me",
+        "volume": 140,
+        "kd": 24,
+        "trend": "GROWING",
+        "variant_of": "24 hour plumber near me",
+        "is_canonical": true
+      },
+      {
+        "keyword": "plumbing leak detection",
+        "volume": 110,
+        "kd": 31,
+        "trend": "DECLINING",
+        "variant_of": "plumbing leak detection",
+        "is_canonical": true
+      },
+      {
+        "keyword": "kitchen plumbing",
+        "volume": 110,
+        "kd": 0,
+        "trend": "DECLINING",
+        "variant_of": "kitchen plumbing",
+        "is_canonical": true
+      },
+      {
+        "keyword": "local plumbers",
+        "volume": 90,
+        "kd": 49,
+        "trend": "GROWING",
+        "variant_of": "local plumbers",
+        "is_canonical": true
+      },
+      {
+        "keyword": "cheap plumbers near me",
+        "volume": 90,
+        "kd": 100,
+        "trend": "STABLE",
+        "variant_of": "cheap plumbers near me",
+        "is_canonical": true
+      },
+      {
+        "keyword": "emergency plumbing services near me",
+        "volume": 90,
+        "kd": 28,
+        "trend": "GROWING",
+        "variant_of": "emergency plumbing services near me",
+        "is_canonical": true
+      },
+      {
+        "keyword": "rheem water heater repair",
+        "volume": 90,
+        "kd": 20,
+        "trend": "DECLINING",
+        "variant_of": "rheem water heater repair",
+        "is_canonical": true
+      },
+      {
+        "keyword": "west coast plumbing",
+        "volume": 90,
+        "kd": 48,
+        "trend": "GROWING",
+        "variant_of": "west coast plumbing",
+        "is_canonical": true
+      },
+      {
+        "keyword": "affordable plumbers near me",
+        "volume": 90,
+        "kd": 100,
+        "trend": "STABLE",
+        "variant_of": "cheap plumbers near me",
+        "is_canonical": false
+      },
+      {
+        "keyword": "commercial plumbing",
+        "volume": 90,
+        "kd": 49,
+        "trend": "GROWING",
+        "variant_of": "local plumbers",
+        "is_canonical": false
+      },
+      {
+        "keyword": "affordable plumbing",
+        "volume": 70,
+        "kd": 30,
+        "trend": "GROWING",
+        "variant_of": "affordable plumbing",
+        "is_canonical": true
+      },
+      {
+        "keyword": "plumbing contractors near me",
+        "volume": 70,
+        "kd": 46,
+        "trend": "DECLINING",
+        "variant_of": "plumbing contractors near me",
+        "is_canonical": true
+      },
+      {
+        "keyword": "hydrojet plumbing",
+        "volume": 70,
+        "kd": 57,
+        "trend": "DECLINING",
+        "variant_of": "hydrojet plumbing",
+        "is_canonical": true
+      },
+      {
+        "keyword": "shower drain clogged",
+        "volume": 70,
+        "kd": 95,
+        "trend": "STABLE",
+        "variant_of": "shower drain clogged",
+        "is_canonical": true
+      },
+      {
+        "keyword": "tankless water heater repair",
+        "volume": 70,
+        "kd": 12,
+        "trend": "DECLINING",
+        "variant_of": "tankless water heater repair",
+        "is_canonical": true
+      },
+      {
+        "keyword": "toilet plumber",
+        "volume": 70,
+        "kd": 87,
+        "trend": "DECLINING",
+        "variant_of": "toilet plumber",
+        "is_canonical": true
+      },
+      {
+        "keyword": "sewer replacement",
+        "volume": 70,
+        "kd": 18,
+        "trend": "DECLINING",
+        "variant_of": "sewer replacement",
+        "is_canonical": true
+      },
+      {
+        "keyword": "bathroom plumbing",
+        "volume": 70,
+        "kd": 37,
+        "trend": "DECLINING",
+        "variant_of": "bathroom plumbing",
+        "is_canonical": true
+      },
+      {
+        "keyword": "tub faucet replacement",
+        "volume": 70,
+        "kd": 100,
+        "trend": "STABLE",
+        "variant_of": "tub faucet replacement",
+        "is_canonical": true
+      },
+      {
+        "keyword": "pecks plumbing",
+        "volume": 70,
+        "kd": 45,
+        "trend": "STABLE",
+        "variant_of": "pecks plumbing",
+        "is_canonical": true
+      },
+      {
+        "keyword": "plumbing maintenance services",
+        "volume": 70,
+        "kd": 100,
+        "trend": "DECLINING",
+        "variant_of": "tub faucet replacement",
+        "is_canonical": false
+      },
+      {
+        "keyword": "best plumbers near me",
+        "volume": 50,
+        "kd": 72,
+        "trend": "SEASONAL",
+        "variant_of": "best plumbers near me",
+        "is_canonical": true
+      },
+      {
+        "keyword": "plumbing repair near me",
+        "volume": 50,
+        "kd": 20,
+        "trend": "GROWING",
+        "variant_of": "plumbing repair near me",
+        "is_canonical": true
+      },
+      {
+        "keyword": "commercial plumbers near me",
+        "volume": 50,
+        "kd": 78,
+        "trend": "GROWING",
+        "variant_of": "commercial plumbers near me",
+        "is_canonical": true
+      },
+      {
+        "keyword": "gas water heater repair",
+        "volume": 50,
+        "kd": 16,
+        "trend": "STABLE",
+        "variant_of": "gas water heater repair",
+        "is_canonical": true
+      },
+      {
+        "keyword": "kitchen sink drain",
+        "volume": 50,
+        "kd": 97,
+        "trend": "STABLE",
+        "variant_of": "kitchen sink drain",
+        "is_canonical": true
+      },
+      {
+        "keyword": "emergency plumbing repair",
+        "volume": 50,
+        "kd": 23,
+        "trend": "DECLINING",
+        "variant_of": "emergency plumbing repair",
+        "is_canonical": true
+      },
+      {
+        "keyword": "pink plumbing",
+        "volume": 50,
+        "kd": 57,
+        "trend": "STABLE",
+        "variant_of": "pink plumbing",
+        "is_canonical": true
+      },
+      {
+        "keyword": "water heater expansion tank installation",
+        "volume": 50,
+        "kd": 14,
+        "trend": "DECLINING",
+        "variant_of": "water heater expansion tank installation",
+        "is_canonical": true
+      },
+      {
+        "keyword": "good plumbers near me",
+        "volume": 50,
+        "kd": 72,
+        "trend": "SEASONAL",
+        "variant_of": "best plumbers near me",
+        "is_canonical": false
+      },
+      {
+        "keyword": "best rated plumbers near me",
+        "volume": 50,
+        "kd": 72,
+        "trend": "SEASONAL",
+        "variant_of": "best plumbers near me",
+        "is_canonical": false
+      },
+      {
+        "keyword": "roto rooter plumbing",
+        "volume": 40,
+        "kd": 67,
+        "trend": "DECLINING",
+        "variant_of": "roto rooter plumbing",
+        "is_canonical": true
+      },
+      {
+        "keyword": "blocked toilet plumber",
+        "volume": 40,
+        "kd": 41,
+        "trend": "DECLINING",
+        "variant_of": "blocked toilet plumber",
+        "is_canonical": true
+      },
+      {
+        "keyword": "licensed plumber",
+        "volume": 40,
+        "kd": 13,
+        "trend": "GROWING",
+        "variant_of": "licensed plumber",
+        "is_canonical": true
+      },
+      {
+        "keyword": "plumbing frozen pipes",
+        "volume": 40,
+        "kd": 2,
+        "trend": "DECLINING",
+        "variant_of": "plumbing frozen pipes",
+        "is_canonical": true
+      },
+      {
+        "keyword": "plumbing contractor",
+        "volume": 40,
+        "kd": 8,
+        "trend": "GROWING",
+        "variant_of": "plumbing contractor",
+        "is_canonical": true
+      },
+      {
+        "keyword": "pro plumbing",
+        "volume": 40,
+        "kd": 40,
+        "trend": "DECLINING",
+        "variant_of": "pro plumbing",
+        "is_canonical": true
+      },
+      {
+        "keyword": "snaking a shower drain",
+        "volume": 40,
+        "kd": 100,
+        "trend": "STABLE",
+        "variant_of": "snaking a shower drain",
+        "is_canonical": true
+      },
+      {
+        "keyword": "pfister bathtub faucet",
+        "volume": 40,
+        "kd": 96,
+        "trend": "STABLE",
+        "variant_of": "pfister bathtub faucet",
+        "is_canonical": true
+      },
+      {
+        "keyword": "plumbing line",
+        "volume": 40,
+        "kd": 6,
+        "trend": "STABLE",
+        "variant_of": "plumbing line",
+        "is_canonical": true
+      },
+      {
+        "keyword": "pvc plumbing pipe",
+        "volume": 40,
+        "kd": 10,
+        "trend": "SEASONAL",
+        "variant_of": "pvc plumbing pipe",
+        "is_canonical": true
+      },
+      {
+        "keyword": "professional plumber",
+        "volume": 40,
+        "kd": 40,
+        "trend": "DECLINING",
+        "variant_of": "pro plumbing",
+        "is_canonical": false
+      }
+    ],
+    "partial": false,
+    "notes": "20 of 31 areas in Phoenix, United States have their own measured demand for 'plumber'."
+  }
+}
