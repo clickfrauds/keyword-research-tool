@@ -779,17 +779,41 @@ def _enrich_areas(results, vocab=None):
             '"entities":["..."],"headings":["..."],'
             '"attributes":[{"attribute":"cost","covers":"..."}]}}'
         )
-        try:
-            msg = anthropic.Anthropic().messages.create(
-                model="claude-sonnet-5", max_tokens=8000,
-                messages=[{"role": "user", "content": prompt}],
-            )
-            m = re.search(r"\{.*\}", _reply_text(msg), re.S)
-            data = json.loads(m.group(0)) if m else {}
-        except Exception as e:
-            names = ", ".join(a["area"] for a in chunk)
-            print(f"   ⚠️ Batch failed ({str(e)[:70]}) — {names} keep the builder's "
-                  f"own questions.")
+        # Retried, and with room to finish. One attempt at 8000 tokens left 8 of
+        # 20 Arizona areas with no questions, entities, headings or attributes
+        # at all — two whole batches, 40% of the plan, and the builder then
+        # writes those pages from a place name and a keyword.
+        #
+        # Four areas at 6 questions with answer angles, 14 entities, 7 headings
+        # and 7 attributes runs past 8000 tokens, the reply stops mid-string,
+        # and json.loads raises on the truncation. A truncated reply is not a
+        # permanent failure, so it is worth asking again; max_tokens is raised
+        # so it usually does not happen, and a stopped reply is reported as
+        # what it is rather than as a parse error.
+        data = None
+        for attempt in range(1, 4):
+            try:
+                msg = anthropic.Anthropic().messages.create(
+                    model="claude-sonnet-5", max_tokens=16000,
+                    messages=[{"role": "user", "content": prompt}],
+                )
+                if getattr(msg, "stop_reason", "") == "max_tokens":
+                    raise ValueError("reply hit max_tokens and was cut off")
+                m = re.search(r"\{.*\}", _reply_text(msg), re.S)
+                if not m:
+                    raise ValueError("no JSON object in the reply")
+                data = json.loads(m.group(0))
+                break
+            except Exception as e:
+                if attempt == 3:
+                    names = ", ".join(a["area"] for a in chunk)
+                    print(f"   ⚠️ Batch failed 3x ({str(e)[:60]}) — {names} keep "
+                          f"the builder's own questions.")
+                else:
+                    print(f"   ↻ batch attempt {attempt}/3 failed "
+                          f"({str(e)[:50]}) — retrying")
+                    time.sleep(2 * attempt)
+        if data is None:
             continue
         for a in chunk:
             got = data.get(a["area"]) or {}
