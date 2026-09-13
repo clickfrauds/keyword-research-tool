@@ -186,22 +186,67 @@ def main():
                 v = grid[c].get(s, 0)
                 w.writerow([c, s, v, "yes" if v >= a.min_volume else ""])
 
+    # A grid of 30 cities by 33 services is 35 markdown columns, which no one
+    # can read and GitHub renders as a horizontal scrollbar. Past ten services
+    # the same numbers go out per city instead, strongest first -- which is the
+    # shape the answer is wanted in anyway: what do I build in this city.
+    WIDE_MAX = 10
     with open(os.path.join(HERE, "city_service_volume.md"), "w",
               encoding="utf-8") as fh:
-        fh.write(f"# City x service volume\n\n")
+        fh.write("# City x service volume\n\n")
         fh.write(f"{len(cities)} cities, {len(services)} services, "
                  f"floor {a.min_volume}/mo. "
                  f"**{len(build)} of {len(pairs)}** pairs are worth a page.\n\n")
-        fh.write("| city | " + " | ".join(ranked_svcs) + " | total |\n")
-        fh.write("|" + "---|" * (len(ranked_svcs) + 2) + "\n")
+
+        if build:
+            fh.write("## Build these first\n\n| # | page | searches/mo |\n")
+            fh.write("|---|---|---|\n")
+            for i, (c, s, v) in enumerate(build[:50], 1):
+                fh.write(f"| {i} | {s} in {c} | {v} |\n")
+            if len(build) > 50:
+                fh.write(f"\n...and {len(build) - 50} more in the CSV.\n")
+            fh.write("\n")
+
+        fh.write("## Cities\n\n| city | total/mo | pairs over floor |"
+                 " best service |\n|---|---|---|---|\n")
         for c in ranked_cities:
-            cells = []
-            for s in ranked_svcs:
-                v = grid[c].get(s, 0)
-                cells.append(f"**{v}**" if v >= a.min_volume else str(v))
-            fh.write(f"| {c} | " + " | ".join(cells) +
-                     f" | {city_total[c]} |\n")
-        fh.write("\nBold = clears the floor and is worth a page.\n")
+            strong = sum(1 for v in grid[c].values() if v >= a.min_volume)
+            best = max(grid[c].items(), key=lambda kv: kv[1]) if grid[c] else ("", 0)
+            fh.write(f"| {c} | {city_total[c]} | {strong} | "
+                     f"{best[0]} ({best[1]}) |\n")
+
+        fh.write("\n## Services\n\n| service | total/mo | cities over floor |"
+                 "\n|---|---|---|\n")
+        for s in ranked_svcs:
+            n = sum(1 for c in cities if grid[c].get(s, 0) >= a.min_volume)
+            fh.write(f"| {s} | {svc_total[s]} | {n} |\n")
+
+        if len(services) <= WIDE_MAX:
+            fh.write("\n## Full grid\n\n")
+            fh.write("| city | " + " | ".join(ranked_svcs) + " | total |\n")
+            fh.write("|" + "---|" * (len(ranked_svcs) + 2) + "\n")
+            for c in ranked_cities:
+                cells = [(f"**{grid[c].get(s, 0)}**"
+                          if grid[c].get(s, 0) >= a.min_volume
+                          else str(grid[c].get(s, 0))) for s in ranked_svcs]
+                fh.write(f"| {c} | " + " | ".join(cells) +
+                         f" | {city_total[c]} |\n")
+            fh.write("\nBold = clears the floor and is worth a page.\n")
+        else:
+            fh.write(f"\n## Per city\n\nTop services in each city. "
+                     f"The full {len(cities)}x{len(services)} grid is in the "
+                     f"CSV.\n\n")
+            for c in ranked_cities:
+                rows = sorted(grid[c].items(), key=lambda kv: -kv[1])
+                over = [r for r in rows if r[1] >= a.min_volume]
+                fh.write(f"**{c}** - {city_total[c]}/mo total, "
+                         f"{len(over)} worth building\n\n")
+                if over:
+                    fh.write("  " + " · ".join(f"{s} ({v})"
+                                               for s, v in over[:12]) + "\n\n")
+                else:
+                    fh.write(f"  nothing over {a.min_volume}/mo - "
+                             f"best was {rows[0][0]} ({rows[0][1]})\n\n")
 
     print("\ncity_service_volume.csv - city_service_volume.md")
 
