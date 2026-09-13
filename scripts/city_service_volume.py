@@ -129,6 +129,39 @@ def volumes(queries, geo_name=None):
     return merged
 
 
+#: Terms that are one page, not several. "plumber phoenix", "plumbing company
+#: phoenix" and "plumbing services phoenix" return the same SERP with the same
+#: intent -- publishing three pages for them is the cannibalisation this whole
+#: exercise is trying to avoid. The first run counted them as three separate
+#: opportunities and put 137 pairs over the floor when the real page count was
+#: 94: three quarters of Phoenix's volume and nine tenths of Bullhead City's
+#: sits in this one group.
+SYNONYMS = [
+    # the generic "I need a plumber" page
+    ["plumber", "plumbing", "plumbing company", "plumbing services",
+     "plumbing repair", "residential plumber", "licensed plumber",
+     "local plumber", "plumbing contractor"],
+    # urgency is a different page, and a different headline
+    ["emergency plumber", "24 hour plumber", "24/7 plumber",
+     "same day plumber"],
+    ["water heater repair", "water heater replacement", "hot water heater repair"],
+    ["water heater installation", "water heater install"],
+    ["drain cleaning", "drain cleaning service", "drain unclogging",
+     "clogged drain repair", "drain snaking", "rooter service"],
+    ["sewer line repair", "sewer cleaning", "sewer repair"],
+    ["leak detection", "water leak detection"],
+    ["repiping", "whole house repiping", "repipe"],
+]
+
+
+def canonical(service, groups=None):
+    """The page a service belongs to. Its own name when it stands alone."""
+    for group in (groups or SYNONYMS):
+        if service.lower() in group:
+            return group[0]
+    return service
+
+
 def split_list(text):
     return [x.strip() for x in re.split(r"[,\n;|]", text or "") if x.strip()]
 
@@ -198,6 +231,24 @@ def main():
         if won["plain"] > won["state"] * 2:
             print(f"   -> people here mostly leave '{st}' off. "
                   f"Titles and pages should match that.")
+
+    # One entry per PAGE, keeping the strongest term in each synonym group --
+    # that term is what the page should be titled for, and its volume is what
+    # the page is actually competing for.
+    merged = {c: {} for c in cities}
+    for c in cities:
+        for svc, v in grid[c].items():
+            page = canonical(svc)
+            if v > merged[c].get(page, -1):
+                merged[c][page] = v
+    folded = sum(len(grid[c]) - len(merged[c]) for c in cities)
+    if folded:
+        print(f"   {folded} city/term pairs folded into synonym pages "
+              f"(plumber = plumbing company = plumbing services, and so on)")
+    grid = merged
+    services = sorted({p for c in cities for p in grid[c]},
+                      key=lambda p: -sum(grid[c].get(p, 0) for c in cities))
+    n_pairs = len(cities) * len(services)
 
     city_total = {c: sum(v.values()) for c, v in grid.items()}
     svc_total = {s: sum(grid[c].get(s, 0) for c in cities) for s in services}
