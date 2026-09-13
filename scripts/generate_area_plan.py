@@ -714,7 +714,25 @@ def _enrich_areas(results, vocab=None):
         for a in chunk:
             kws = [k["keyword"] for k in a.get("keywords", [])][:4]
             rel = [k["keyword"] for k in a.get("related_keywords", [])][:6]
-            rel += [k["keyword"] for k in (vocab or [])][:14]
+            # Canonical terms FIRST. _service_vocabulary already groups Google's
+            # close variants and marks one of each — its own comment says the
+            # marking exists "so the builder can take one per group when it
+            # wants variety" — and this, the one place that needed variety, was
+            # ignoring it and slicing the raw list.
+            #
+            # The head group is the whole top of that list: "washing machine
+            # repair", "fix washing machine", "laundry machine repair", "washer
+            # fixer" and four more all sit at 6600/mo because Google counts them
+            # as one keyword. So [:14] was nine phrasings of the same thing plus
+            # five brands, handed to every area identically -- and the prompt
+            # says "take the entities from the related demand above". Twelve
+            # Dubai areas came back with 18 distinct entities between them,
+            # seven of which appeared on all twelve, and not one entity unique
+            # to a single area. Entities that repeat on every page are the
+            # doorway signal they were added to prevent.
+            _canon = [k["keyword"] for k in (vocab or []) if k.get("is_canonical", True)]
+            _var = [k["keyword"] for k in (vocab or []) if not k.get("is_canonical", True)]
+            rel += (_canon + _var)[:20]
             near = ", ".join(f'{n["area"]} ({n["km"]}km)'
                              for n in (a.get("nearby_areas") or [])[:3])
             brief.append(f'- {a["area"]} ({a["total_volume"]}/mo)\n'
@@ -735,7 +753,11 @@ def _enrich_areas(results, vocab=None):
             "generic questions that would suit any area.\n"
             '  "entities": 8-14 concrete things the page must mention for topical '
             "authority — brands, parts, fault codes, standards, appliance types. "
-            "Take them from the related demand above; do not invent products.\n"
+            "Prefer the related demand above; do not invent products. A different "
+            f"way of saying \"{PRIMARY_SERVICE}\" is NOT an entity — skip every "
+            "phrasing of the service itself. If the demand list gives you fewer "
+            "than eight real ones, name the parts and faults this trade actually "
+            "deals with rather than padding with synonyms.\n"
             '  "attributes": 4-6 ANGLES this page is incomplete without — cost, '
             "timeline, process, requirement, comparison, maintenance, warranty, "
             "local. Choose each one because the keywords or questions above show "
