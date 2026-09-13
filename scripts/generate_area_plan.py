@@ -531,6 +531,113 @@ def resolve_areas():
         return []
 
 
+# ── Competitor business names ────────────────────────────────────────────
+# The Planner measures what people type, and people type a plumber's company
+# name: Arizona's vocabulary came back with "liberty plumbing" at 880/mo,
+# roto rooter, red's, pecks, dean's. That vocabulary is handed to the
+# enrichment prompt as "related demand" and the prompt says every heading must
+# be built from one, so the plan shipped 26 headings and 33 entities naming
+# real licensed contractors -- on a referral site, in comparisons nobody has
+# the facts for.
+#
+# The searches are real demand and stay in the keyword data. They are just not
+# something the pages get to be written around.
+_CO_WORD = {
+    "plumbing", "plumber", "plumbers", "heating", "cooling", "hvac", "air",
+    "electric", "electrical", "roofing", "mechanical", "rooter", "restoration",
+    "exterminating", "pest", "landscaping", "contracting", "contractors",
+}
+_CO_SUFFIX = {
+    "inc", "llc", "ltd", "corp", "corporation", "co", "company", "bros",
+    "brothers", "sons", "group", "enterprises", "holdings",
+}
+_DESCRIPTOR = {
+    "a", "an", "the", "and", "or", "of", "in", "for", "to", "at", "on", "near",
+    "my", "your", "our", "his", "her", "their", "its",
+    "emergency", "urgent", "24", "24/7", "same", "day", "night", "weekend",
+    "after", "hours", "hour", "local", "locals", "nearby", "area", "areas",
+    "national", "nationwide", "statewide", "regional", "big", "small",
+    "independent", "franchise", "franchised", "chain", "corporate",
+    "professional", "pro", "pros", "expert", "experts", "master", "journeyman",
+    "licensed", "insured", "bonded", "certified", "qualified", "registered",
+    "trusted", "reliable", "reputable", "experienced", "top", "best", "good",
+    "cheap", "affordable", "budget", "low", "cost", "free", "quality",
+    "residential", "commercial", "domestic", "industrial", "municipal",
+    "home", "homes", "house", "houses", "household", "apartment", "condo",
+    "mobile", "manufactured", "modular", "rv", "hoa", "rental", "rentals",
+    "vacation", "seasonal", "new", "old", "older", "existing", "historic",
+    "construction", "remodel", "remodeling", "renovation", "retrofit",
+    "general", "full", "complete", "basic", "standard", "custom", "specialty",
+    "water", "gas", "sewer", "drain", "drainage", "septic", "well", "slab",
+    "pipe", "piping", "repipe", "repiping", "leak", "line", "lines",
+    "trenchless", "bathroom", "kitchen", "laundry", "outdoor", "indoor",
+    "underground", "hydrojet", "hydro", "jetting", "rough-in", "fixture",
+    "fixtures", "repair", "repairs", "installation", "install", "replacement",
+    "maintenance", "inspection", "cleaning", "service", "services",
+    "solutions", "dispatch", "referral", "network", "directory",
+    "marketplace", "platform", "diy", "self", "yourself", "vs", "versus",
+    "detection", "pool", "basement", "property", "crawl", "space", "yard",
+    "garden", "irrigation", "backflow", "softener", "heater", "boiler",
+    "24-hour", "24hour", "all", "any", "every", "one", "two",
+    "what", "when", "why", "how", "which", "who", "where", "whose",
+    "me", "us", "you", "we", "they", "this", "that", "these", "those",
+    "hr", "hrs", "min", "mins", "minute", "minutes", "rated", "reviewed",
+    "reviews", "review", "star", "stars", "recommended", "approved",
+    "toilet", "toilets", "sink", "sinks", "faucet", "faucets", "shower",
+    "showers", "tub", "bathtub", "disposal", "garbage", "tankless", "tank",
+    "sump", "valve", "meter", "filtration", "sprinkler", "blocked",
+    "clogged", "clog", "burst", "frozen", "broken", "leaking", "running",
+    "dripping", "overflowing", "backed", "blockage",
+}
+
+
+def _trading_name(text, places=()):
+    """The competitor's business name inside `text`, or "".
+
+    A trading name is "<a name> <a trade word>" -- Liberty Plumbing, Van Rooy
+    Plumbing, Roto Rooter -- or anything with an explicit corporate suffix.
+    What makes it a name and not a description is that the word in front of
+    the trade word describes nothing: "emergency plumbing" says what the work
+    is, "Liberty Plumbing" says who does it. Targeted town names are allowed
+    in front, so "chandler plumbing" stays a place.
+    """
+    toks = re.findall(r"[A-Za-z0-9&'\.\-]+", text or "")
+    low = [t.lower().strip(".") for t in toks]
+    pw = {w.lower() for p in (places or ()) for w in re.findall(r"[A-Za-z]+", str(p))}
+
+    def desc(w):
+        return w in _DESCRIPTOR or all(x in _DESCRIPTOR for x in w.split("-") if x)
+
+    for i, w in enumerate(low):
+        if w not in _CO_WORD or i == 0:
+            continue
+        prev = low[i - 1]
+        if i + 1 < len(low) and low[i + 1] in _CO_SUFFIX and not desc(prev):
+            return " ".join(toks[i - 1:i + 2])
+        if desc(prev) or prev in _CO_WORD or prev in pw or prev.isdigit():
+            continue
+        start = i - 1
+        if (start - 1 >= 0 and not desc(low[start - 1])
+                and low[start - 1] not in pw and not low[start - 1].isdigit()
+                and low[start - 1] not in _CO_WORD):
+            start -= 1
+        return " ".join(toks[start:i + 1])
+    return ""
+
+
+def _without_competitors(items, places, what, key=None):
+    """Strip anything naming a competing business, and say what went."""
+    out, gone = [], []
+    for x in items:
+        who = _trading_name(str(key(x) if key else x), places)
+        (gone if who else out).append(x if not who else (x, who))
+    if gone:
+        names = sorted({w for _, w in gone})
+        print(f"   \u23ed  {len(gone)} {what} named a competing business "
+              f"({', '.join(names)[:80]}) \u2014 dropped")
+    return out
+
+
 def _service_vocabulary(ideas_for, area_names_norm):
     """The service's own long-tail for this city — brands, parts, faults.
 
@@ -587,6 +694,8 @@ def _service_vocabulary(ideas_for, area_names_norm):
             r["variant_of"] = members[0]["keyword"]
             r["is_canonical"] = (rank == 0)
     rows.sort(key=lambda r: (-r["volume"], not r["is_canonical"]))
+    rows = _without_competitors(rows, [TARGET_LOCATION], "service keywords",
+                                key=lambda r: r.get("keyword", ""))
     print(f"   📚 Service vocabulary: {len(rows)} supporting keywords for every page "
           f"({len(groups)} distinct, the rest are Google's own close variants)")
     return rows[:60]
@@ -852,6 +961,9 @@ def _enrich_areas(results, vocab=None):
             # call mein aa jata hai, koi extra API kharcha nahi.
             attrs = [a2 for a2 in (got.get("attributes") or [])
                      if isinstance(a2, dict) and str(a2.get("attribute", "")).strip()]
+            _pl = [x["area"] for x in results] + [TARGET_LOCATION]
+            ents = _without_competitors(ents, _pl, f'entities on {a["area"]}')
+            heads = _without_competitors(heads, _pl, f'headings on {a["area"]}')
             if qs or ents or heads or attrs:
                 a["questions"] = qs[:6]
                 a["entities"] = ents[:14]
