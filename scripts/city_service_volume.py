@@ -331,7 +331,13 @@ def main():
     with open(os.path.join(HERE, "city_service_volume.md"), "w",
               encoding="utf-8") as fh:
         fh.write("# City x service volume\n\n")
-        fh.write(f"{len(cities)} cities, {len(services)} services, "
+        # Say BOTH counts. "22 services" after being given 33 reads like
+        # the tool dropped eleven; it folded them into synonym pages,
+        # which is a different thing and worth saying out loud.
+        _given = len(split_list(a.services))
+        _fold = (f"{_given} terms folded into {len(services)} pages"
+                 if _given != len(services) else f"{len(services)} services")
+        fh.write(f"{len(cities)} cities, {_fold}, "
                  f"floor {a.min_volume}/mo. "
                  f"**{len(build)} of {n_pairs}** pairs are worth a page.\n\n")
 
