@@ -442,7 +442,20 @@
      "lat": 32.2228765,
      "lng": -110.974847
     },
-    "nearby_areas": [],
+    "nearby_areas": [
+     {
+      "area": "Oro Valley",
+      "km": 19.8
+     },
+     {
+      "area": "Marana",
+      "km": 33.5
+     },
+     {
+      "area": "Vail",
+      "km": 35.2
+     }
+    ],
     "questions": [
      {
       "q": "How much does emergency plumbing cost in Tucson at night or on weekends?",
@@ -938,7 +951,24 @@
      "lat": 33.4484367,
      "lng": -112.074141
     },
-    "nearby_areas": [],
+    "nearby_areas": [
+     {
+      "area": "Tempe",
+      "km": 12.7
+     },
+     {
+      "area": "Glendale",
+      "km": 14.4
+     },
+     {
+      "area": "Scottsdale",
+      "km": 14.7
+     },
+     {
+      "area": "Paradise Valley",
+      "km": 14.8
+     }
+    ],
     "questions": [
      {
       "q": "How much does a plumber in Phoenix charge for emergency calls?",
@@ -1256,6 +1286,18 @@
      {
       "area": "Gilbert",
       "km": 8.0
+     },
+     {
+      "area": "Tempe",
+      "km": 10.1
+     },
+     {
+      "area": "Chandler",
+      "km": 12.1
+     },
+     {
+      "area": "Scottsdale",
+      "km": 12.4
      }
     ],
     "questions": [
@@ -1400,7 +1442,16 @@
      "lat": 35.1449998,
      "lng": -114.5627804
     },
-    "nearby_areas": [],
+    "nearby_areas": [
+     {
+      "area": "Fort Mohave",
+      "km": 14.5
+     },
+     {
+      "area": "Golden Valley",
+      "km": 32.5
+     }
+    ],
     "questions": [
      {
       "q": "How much does a plumber in Bullhead City charge compared to Craig Plumbing or Ace Plumbing?",
@@ -1548,7 +1599,12 @@
      "lat": 35.1895921,
      "lng": -114.0532996
     },
-    "nearby_areas": [],
+    "nearby_areas": [
+     {
+      "area": "Golden Valley",
+      "km": 15.3
+     }
+    ],
     "questions": [
      {
       "q": "Do plumbers in Kingman service manufactured and mobile homes?",
@@ -1892,6 +1948,18 @@
      {
       "area": "Gilbert",
       "km": 7.1
+     },
+     {
+      "area": "Mesa",
+      "km": 12.1
+     },
+     {
+      "area": "Tempe",
+      "km": 16.1
+     },
+     {
+      "area": "Queen Creek",
+      "km": 20.3
      }
     ],
     "questions": [
@@ -2236,7 +2304,16 @@
      "lat": 32.8772834,
      "lng": -111.7536818
     },
-    "nearby_areas": [],
+    "nearby_areas": [
+     {
+      "area": "San Tan Valley",
+      "km": 37.1
+     },
+     {
+      "area": "Florence",
+      "km": 38.2
+     }
+    ],
     "questions": [
      {
       "q": "Is Just Plumbing or PT Plumbing the better choice for my repair in Casa Grande?",
@@ -2427,7 +2504,12 @@
      "lat": 35.1987522,
      "lng": -111.651822
     },
-    "nearby_areas": [],
+    "nearby_areas": [
+     {
+      "area": "Sedona",
+      "km": 38.0
+     }
+    ],
     "questions": [
      {
       "q": "Is Davidson Plumbing the best option in Flagstaff or are there alternatives?",
@@ -2688,6 +2770,14 @@
      {
       "area": "Tempe",
       "km": 7.7
+     },
+     {
+      "area": "Mesa",
+      "km": 12.4
+     },
+     {
+      "area": "Phoenix",
+      "km": 14.7
      }
     ],
     "questions": [
@@ -2906,6 +2996,14 @@
      {
       "area": "Mesa",
       "km": 8.0
+     },
+     {
+      "area": "Tempe",
+      "km": 16.2
+     },
+     {
+      "area": "Queen Creek",
+      "km": 18.5
      }
     ],
     "questions": [
@@ -3008,7 +3106,12 @@
      "lat": 31.8484548,
      "lng": -111.0265945
     },
-    "nearby_areas": [],
+    "nearby_areas": [
+     {
+      "area": "Vail",
+      "km": 35.9
+     }
+    ],
     "questions": [
      {
       "q": "Do plumbers in Green Valley service age-restricted communities like GVR?",
@@ -3270,7 +3373,16 @@
      "lat": 34.539984,
      "lng": -112.468812
     },
-    "nearby_areas": [],
+    "nearby_areas": [
+     {
+      "area": "Prescott Valley",
+      "km": 13.8
+     },
+     {
+      "area": "Chino Valley",
+      "km": 24.2
+     }
+    ],
     "questions": [
      {
       "q": "Do plumbers handle frozen or burst pipes during Prescott's cold winters?",
@@ -3458,6 +3570,18 @@
      {
       "area": "Scottsdale",
       "km": 7.7
+     },
+     {
+      "area": "Mesa",
+      "km": 10.1
+     },
+     {
+      "area": "Paradise Valley",
+      "km": 11.9
+     },
+     {
+      "area": "Phoenix",
+      "km": 12.7
      }
     ],
     "questions": [
@@ -3568,7 +3692,24 @@
      "lat": 33.4150485,
      "lng": -111.549577
     },
-    "nearby_areas": [],
+    "nearby_areas": [
+     {
+      "area": "Queen Creek",
+      "km": 20.1
+     },
+     {
+      "area": "Gilbert",
+      "km": 23.3
+     },
+     {
+      "area": "Mesa",
+      "km": 26.2
+     },
+     {
+      "area": "San Tan Valley",
+      "km": 26.4
+     }
+    ],
     "questions": [
      {
       "q": "Do plumbers in Apache Junction repair manufactured and mobile home plumbing common in the area?",
@@ -3715,7 +3856,12 @@
      "lat": 31.5647691,
      "lng": -110.2742994
     },
-    "nearby_areas": [],
+    "nearby_areas": [
+     {
+      "area": "Elgin",
+      "km": 22.6
+     }
+    ],
     "questions": [
      {
       "q": "Does a plumbing referral service send licensed plumbers to Fort Huachuca military housing?",
@@ -3822,7 +3968,24 @@
      "lat": 33.2483858,
      "lng": -111.634158
     },
-    "nearby_areas": [],
+    "nearby_areas": [
+     {
+      "area": "San Tan Valley",
+      "km": 8.9
+     },
+     {
+      "area": "Gilbert",
+      "km": 18.5
+     },
+     {
+      "area": "Apache Junction",
+      "km": 20.1
+     },
+     {
+      "area": "Chandler",
+      "km": 20.3
+     }
+    ],
     "questions": [
      {
       "q": "Does a plumber cover new-construction neighborhoods like Meridian or Ironwood Crossing in Queen Creek?",
@@ -4017,6 +4180,18 @@
      {
       "area": "Peoria",
       "km": 6.7
+     },
+     {
+      "area": "Tolleson",
+      "km": 12.0
+     },
+     {
+      "area": "Sun City",
+      "km": 12.3
+     },
+     {
+      "area": "Phoenix",
+      "km": 14.4
      }
     ],
     "questions": [
@@ -4287,6 +4462,14 @@
      {
       "area": "Peoria",
       "km": 5.7
+     },
+     {
+      "area": "Surprise",
+      "km": 8.3
+     },
+     {
+      "area": "Sun City West",
+      "km": 8.8
      }
     ],
     "questions": [
@@ -4415,7 +4598,24 @@
      "lat": 33.34883,
      "lng": -112.49123
     },
-    "nearby_areas": [],
+    "nearby_areas": [
+     {
+      "area": "Buckeye",
+      "km": 8.9
+     },
+     {
+      "area": "Avondale",
+      "km": 16.3
+     },
+     {
+      "area": "Litchfield Park",
+      "km": 20.3
+     },
+     {
+      "area": "Tolleson",
+      "km": 24.3
+     }
+    ],
     "questions": [
      {
       "q": "How fast can a plumber actually reach Maricopa given its distance from central Phoenix?",
@@ -4538,7 +4738,24 @@
      "lat": 33.6117105,
      "lng": -111.717361
     },
-    "nearby_areas": [],
+    "nearby_areas": [
+     {
+      "area": "Paradise Valley",
+      "km": 23.3
+     },
+     {
+      "area": "Scottsdale",
+      "km": 23.3
+     },
+     {
+      "area": "Mesa",
+      "km": 24.3
+     },
+     {
+      "area": "Apache Junction",
+      "km": 26.8
+     }
+    ],
     "questions": [
      {
       "q": "How does Fountain Hills' hillside terrain affect sewer and drain repairs?",
@@ -4669,7 +4886,20 @@
      "lat": 34.5950776,
      "lng": -112.3338634
     },
-    "nearby_areas": [],
+    "nearby_areas": [
+     {
+      "area": "Prescott",
+      "km": 13.8
+     },
+     {
+      "area": "Chino Valley",
+      "km": 21.1
+     },
+     {
+      "area": "Cottonwood",
+      "km": 32.8
+     }
+    ],
     "questions": [
      {
       "q": "How does Prescott Valley's higher elevation affect pipe freezing in winter?",
@@ -4778,6 +5008,18 @@
      {
       "area": "Carefree",
       "km": 3.3
+     },
+     {
+      "area": "Fountain Hills",
+      "km": 32.8
+     },
+     {
+      "area": "Paradise Valley",
+      "km": 33.5
+     },
+     {
+      "area": "Scottsdale",
+      "km": 37.8
      }
     ],
     "questions": [
@@ -4888,7 +5130,24 @@
      "lat": 33.1798079,
      "lng": -111.5849201
     },
-    "nearby_areas": [],
+    "nearby_areas": [
+     {
+      "area": "Queen Creek",
+      "km": 8.9
+     },
+     {
+      "area": "Florence",
+      "km": 24.7
+     },
+     {
+      "area": "Apache Junction",
+      "km": 26.4
+     },
+     {
+      "area": "Gilbert",
+      "km": 27.0
+     }
+    ],
     "questions": [
      {
       "q": "How fast can a plumber reach me given how spread out San Tan Valley is?",
@@ -5019,6 +5278,18 @@
      {
       "area": "Litchfield Park",
       "km": 6.5
+     },
+     {
+      "area": "Tolleson",
+      "km": 8.5
+     },
+     {
+      "area": "Maricopa",
+      "km": 16.3
+     },
+     {
+      "area": "Glendale",
+      "km": 19.0
      }
     ],
     "questions": [
@@ -5166,7 +5437,16 @@
      "lat": 34.8688613,
      "lng": -111.7614394
     },
-    "nearby_areas": [],
+    "nearby_areas": [
+     {
+      "area": "Cottonwood",
+      "km": 27.8
+     },
+     {
+      "area": "Flagstaff",
+      "km": 38.0
+     }
+    ],
     "questions": [
      {
       "q": "Can a plumber service a Sedona vacation rental between guest checkouts on short notice?",
@@ -5284,7 +5564,16 @@
      "lat": 32.4000525,
      "lng": -110.955317
     },
-    "nearby_areas": [],
+    "nearby_areas": [
+     {
+      "area": "Tucson",
+      "km": 19.8
+     },
+     {
+      "area": "Marana",
+      "km": 24.6
+     }
+    ],
     "questions": [
      {
       "q": "Do Oro Valley HOA communities require licensed plumbers for permitted work?",
@@ -5408,7 +5697,20 @@
      "lat": 34.7475612,
      "lng": -112.0272397
     },
-    "nearby_areas": [],
+    "nearby_areas": [
+     {
+      "area": "Sedona",
+      "km": 27.8
+     },
+     {
+      "area": "Prescott Valley",
+      "km": 32.8
+     },
+     {
+      "area": "Chino Valley",
+      "km": 39.0
+     }
+    ],
     "questions": [
      {
       "q": "Do Cottonwood homes on well water need different water heater maintenance?",
@@ -5757,7 +6059,12 @@
      "lat": 33.3994784,
      "lng": -110.8707655
     },
-    "nearby_areas": [],
+    "nearby_areas": [
+     {
+      "area": "San Carlos",
+      "km": 37.9
+     }
+    ],
     "questions": [
      {
       "q": "Can a plumber fix a leak in a Miami condo without violating the association's rules?",
@@ -5912,6 +6219,14 @@
      {
       "area": "El Mirage",
       "km": 4.4
+     },
+     {
+      "area": "Sun City",
+      "km": 8.3
+     },
+     {
+      "area": "Peoria",
+      "km": 13.3
      }
     ],
     "questions": [
@@ -6061,7 +6376,20 @@
      "lat": 34.7575227,
      "lng": -112.45378
     },
-    "nearby_areas": [],
+    "nearby_areas": [
+     {
+      "area": "Prescott Valley",
+      "km": 21.1
+     },
+     {
+      "area": "Prescott",
+      "km": 24.2
+     },
+     {
+      "area": "Cottonwood",
+      "km": 39.0
+     }
+    ],
     "questions": [
      {
       "q": "Do Chino Valley homes on well water need special plumbing maintenance?",
@@ -6174,6 +6502,18 @@
      {
       "area": "Cave Creek",
       "km": 3.3
+     },
+     {
+      "area": "Fountain Hills",
+      "km": 29.9
+     },
+     {
+      "area": "Paradise Valley",
+      "km": 32.4
+     },
+     {
+      "area": "Scottsdale",
+      "km": 36.5
      }
     ],
     "questions": [
@@ -6311,7 +6651,16 @@
      "lat": 32.4483736,
      "lng": -111.211475
     },
-    "nearby_areas": [],
+    "nearby_areas": [
+     {
+      "area": "Oro Valley",
+      "km": 24.6
+     },
+     {
+      "area": "Tucson",
+      "km": 33.5
+     }
+    ],
     "questions": [
      {
       "q": "Do new Marana subdivisions need a plumbing inspection before move-in?",
@@ -6419,7 +6768,16 @@
      "lat": 35.2216745,
      "lng": -114.2175543
     },
-    "nearby_areas": [],
+    "nearby_areas": [
+     {
+      "area": "Kingman",
+      "km": 15.3
+     },
+     {
+      "area": "Bullhead City",
+      "km": 32.5
+     }
+    ],
     "questions": [
      {
       "q": "Does your plumber service well water systems and septic tanks common in Golden Valley?",
@@ -6530,6 +6888,18 @@
      {
       "area": "Avondale",
       "km": 6.5
+     },
+     {
+      "area": "Tolleson",
+      "km": 10.4
+     },
+     {
+      "area": "El Mirage",
+      "km": 13.7
+     },
+     {
+      "area": "Peoria",
+      "km": 14.8
      }
     ],
     "questions": [
@@ -6736,6 +7106,14 @@
      {
       "area": "Glendale",
       "km": 6.7
+     },
+     {
+      "area": "El Mirage",
+      "km": 8.8
+     },
+     {
+      "area": "Surprise",
+      "km": 13.3
      }
     ],
     "questions": [
@@ -6986,6 +7364,14 @@
      {
       "area": "El Mirage",
       "km": 6.5
+     },
+     {
+      "area": "Sun City",
+      "km": 8.8
+     },
+     {
+      "area": "Peoria",
+      "km": 14.4
      }
     ],
     "questions": [
@@ -7111,6 +7497,10 @@
      {
       "area": "Sun City West",
       "km": 6.5
+     },
+     {
+      "area": "Peoria",
+      "km": 8.8
      }
     ],
     "questions": [
@@ -7295,7 +7685,12 @@
      "lat": 31.650702,
      "lng": -110.4901427
     },
-    "nearby_areas": [],
+    "nearby_areas": [
+     {
+      "area": "Sierra Vista",
+      "km": 22.6
+     }
+    ],
     "questions": [
      {
       "q": "Is there a difference between plumbing coverage for Elgin and South Elgin?",
@@ -7410,7 +7805,24 @@
      "lat": 33.4500497,
      "lng": -112.259309
     },
-    "nearby_areas": [],
+    "nearby_areas": [
+     {
+      "area": "Avondale",
+      "km": 8.5
+     },
+     {
+      "area": "Litchfield Park",
+      "km": 10.4
+     },
+     {
+      "area": "Glendale",
+      "km": 12.0
+     },
+     {
+      "area": "Peoria",
+      "km": 14.7
+     }
+    ],
     "questions": [
      {
       "q": "How fast can a plumber reach Tolleson for a burst pipe emergency?",
@@ -7529,7 +7941,24 @@
      "lat": 33.3703197,
      "lng": -112.583776
     },
-    "nearby_areas": [],
+    "nearby_areas": [
+     {
+      "area": "Maricopa",
+      "km": 8.9
+     },
+     {
+      "area": "Avondale",
+      "km": 22.9
+     },
+     {
+      "area": "Litchfield Park",
+      "km": 25.0
+     },
+     {
+      "area": "Tolleson",
+      "km": 31.4
+     }
+    ],
     "questions": [
      {
       "q": "How fast can a plumber reach new Buckeye subdivisions?",
@@ -7714,7 +8143,20 @@
      "lat": 33.0314508,
      "lng": -111.387343
     },
-    "nearby_areas": [],
+    "nearby_areas": [
+     {
+      "area": "San Tan Valley",
+      "km": 24.7
+     },
+     {
+      "area": "Queen Creek",
+      "km": 33.3
+     },
+     {
+      "area": "Casa Grande",
+      "km": 38.2
+     }
+    ],
     "questions": [
      {
       "q": "How fast can a plumber reach Florence AZ from the Phoenix metro area?",
@@ -7838,6 +8280,18 @@
      {
       "area": "Scottsdale",
       "km": 4.8
+     },
+     {
+      "area": "Tempe",
+      "km": 11.9
+     },
+     {
+      "area": "Phoenix",
+      "km": 14.8
+     },
+     {
+      "area": "Mesa",
+      "km": 17.1
      }
     ],
     "questions": [
@@ -8078,7 +8532,12 @@
      "lat": 35.0175869,
      "lng": -114.5978815
     },
-    "nearby_areas": [],
+    "nearby_areas": [
+     {
+      "area": "Bullhead City",
+      "km": 14.5
+     }
+    ],
     "questions": [
      {
       "q": "Can a plumber repair pipes in a manufactured or mobile home in Fort Mohave?",
@@ -8216,7 +8675,20 @@
      "lat": 33.8550559,
      "lng": -112.6134132
     },
-    "nearby_areas": [],
+    "nearby_areas": [
+     {
+      "area": "Sun City West",
+      "km": 31.8
+     },
+     {
+      "area": "Surprise",
+      "km": 33.8
+     },
+     {
+      "area": "El Mirage",
+      "km": 37.9
+     }
+    ],
     "questions": [
      {
       "q": "Is there a plumber near me in Morristown, Arizona, not Morristown, New Jersey?",
@@ -8345,7 +8817,12 @@
      "lat": 33.35075,
      "lng": -110.4670301
     },
-    "nearby_areas": [],
+    "nearby_areas": [
+     {
+      "area": "Miami",
+      "km": 37.9
+     }
+    ],
     "questions": [
      {
       "q": "Is there a plumber who services San Carlos, Arizona, and not San Carlos, California?",
@@ -8465,7 +8942,16 @@
      "lat": 32.0100705,
      "lng": -110.6975281
     },
-    "nearby_areas": [],
+    "nearby_areas": [
+     {
+      "area": "Tucson",
+      "km": 35.2
+     },
+     {
+      "area": "Green Valley",
+      "km": 35.9
+     }
+    ],
     "questions": [
      {
       "q": "How fast can a plumber reach rural Vail addresses off Colossal Cave Road?",
@@ -9324,7 +9810,8 @@
   "partial": false,
   "notes": [
    "61 of 360 areas in Arizona, United States have their own measured demand for 'plumber'.",
-   "Cleaned 2026-09-13: dropped Goodyear (the site's own city — homepage plus 15 live -goodyear service pages) and 9 Phoenix/Tucson neighbourhoods; removed 8 competitor company names from the service vocabulary, 53 from area entities and 25 from area headings. Per-area keyword measurements are untouched."
+   "Cleaned 2026-09-13: dropped Goodyear (the site's own city — homepage plus 15 live -goodyear service pages) and 9 Phoenix/Tucson neighbourhoods; removed 8 competitor company names from the service vocabulary, 53 from area entities and 25 from area headings. Per-area keyword measurements are untouched.",
+   "Neighbours recomputed at 39.9km (median town spacing 14.5km); the original 8km radius was set for city districts and left 35 of 51 Arizona pages without one."
   ]
  }
 }
