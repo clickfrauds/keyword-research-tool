@@ -1031,6 +1031,48 @@ def peak_months(monthly):
     return "/".join(names[m] for m in sorted(hot) if m in names)
 
 
+def _cpc_conversion(client, customer_id, country_code):
+    """(multiplier, cpc_currency, account_currency, note) for CPC values.
+
+    Keyword Planner returns bids in the Ads ACCOUNT's currency, whatever market
+    is being researched. The account behind this tool bills in PKR, so an
+    Arizona plan came back with cpc_high 34,587 for "plumbers in tucson arizona"
+    -- about $125 -- and every consumer that compares a CPC against a dollar
+    figure read all 51 areas as wildly expensive.
+
+    For a US target the plan is written in USD. The account's currency is asked
+    of the API rather than assumed, and the rate is fetched at run time; if
+    either fails, values stay in the account currency and the plan says so
+    instead of pretending they are dollars.
+    """
+    acct = (os.environ.get("ADS_ACCOUNT_CURRENCY") or "").strip().upper()
+    if not acct:
+        try:
+            ga = client.get_service("GoogleAdsService")
+            for row in ga.search(customer_id=customer_id,
+                                 query="SELECT customer.currency_code FROM customer LIMIT 1"):
+                acct = str(row.customer.currency_code or "").upper()
+                break
+        except Exception as e:
+            print(f"   ⚠️ Could not read the Ads account currency ({str(e)[:60]})")
+    if not acct:
+        return 1.0, "", "", "account currency unknown - CPC left as returned"
+    want = "USD" if str(country_code or "").upper() in ("US", "USA") else acct
+    if acct == want:
+        return 1.0, want, acct, ""
+    try:
+        import urllib.request
+        with urllib.request.urlopen(f"https://open.er-api.com/v6/latest/{acct}", timeout=15) as r:
+            data = json.load(r)
+        rate = float(data["rates"][want])
+        note = f"converted {acct}->{want} at {rate:.6f} ({data.get('time_last_update_utc', '')[:16]})"
+        print(f"   💱 CPC: account bills in {acct}; plan written in {want} (1 {acct} = {rate:.6f} {want})")
+        return rate, want, acct, note
+    except Exception as e:
+        print(f"   ⚠️ No {acct}->{want} rate ({str(e)[:50]}) - CPC stays in {acct}")
+        return 1.0, acct, acct, f"no {acct}->{want} rate; CPC in {acct}"
+
+
 def main():
     if not TARGET_LOCATION:
         print("❌ TARGET_LOCATION is required (use a CITY — that is what returns sub-areas).")
@@ -1141,6 +1183,11 @@ def main():
     except Exception:
         pass
     print(f"🌍 Geo target: {location_id or 'none (country-wide)'} | language {lang_id}")
+    try:
+        _cc_for_fx = cc
+    except NameError:
+        _cc_for_fx = ""
+    CPC_MULT, CPC_CUR, CPC_ACCT, CPC_NOTE = _cpc_conversion(client, CUSTOMER_ID, _cc_for_fx)
 
     def ideas_for(seed):
         req = client.get_type("GenerateKeywordIdeasRequest")
@@ -1220,8 +1267,8 @@ def main():
                 "keyword": idea.text,
                 "volume": vol,
                 "kd": m.competition_index or 0,
-                "cpc_low": round((m.low_top_of_page_bid_micros or 0) / 1_000_000, 2),
-                "cpc_high": round((m.high_top_of_page_bid_micros or 0) / 1_000_000, 2),
+                "cpc_low": round((m.low_top_of_page_bid_micros or 0) / 1_000_000 * CPC_MULT, 2),
+                "cpc_high": round((m.high_top_of_page_bid_micros or 0) / 1_000_000 * CPC_MULT, 2),
                 "trend": classify_trend([x.monthly_searches for x in monthly]),
                 "peak_months": peak_months(monthly),
             }
@@ -1303,6 +1350,10 @@ def main():
             "areas_checked": len(areas),
             "areas_kept": len(results),
             "min_volume": MIN_AREA_VOLUME,
+            # What currency every cpc_low / cpc_high in this file is in.
+            "cpc_currency": CPC_CUR,
+            "cpc_account_currency": CPC_ACCT,
+            "cpc_note": CPC_NOTE,
             "note": ("Google Keyword Planner reports no value between 1 and 9 — its lowest "
                      "bucket is 10. Areas below the threshold were measured and found "
                      "without demand; building pages for them would be doorway pages."),
