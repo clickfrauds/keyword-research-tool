@@ -603,7 +603,15 @@ def _trading_name(text, places=()):
     """
     toks = re.findall(r"[A-Za-z0-9&'\.\-]+", text or "")
     low = [t.lower().strip(".") for t in toks]
-    pw = {w.lower() for p in (places or ()) for w in re.findall(r"[A-Za-z]+", str(p))}
+    # Whole place names, not their words. Splitting "Red Rock" into "red" and
+    # "rock" let "red plumbing prescott" through as a place, and "Sun City"
+    # would have done the same for any "Sun Plumbing".
+    _pp = {" ".join(re.findall(r"[a-z0-9]+", str(p).lower())) for p in (places or ())}
+    _pp.discard("")
+
+    def _place_ends_at(i):
+        """True when a whole place name ends at token i (inclusive)."""
+        return i >= 0 and any(" ".join(low[j:i + 1]) in _pp for j in range(max(0, i - 3), i + 1))
 
     def desc(w):
         return w in _DESCRIPTOR or all(x in _DESCRIPTOR for x in w.split("-") if x)
@@ -614,11 +622,11 @@ def _trading_name(text, places=()):
         prev = low[i - 1]
         if i + 1 < len(low) and low[i + 1] in _CO_SUFFIX and not desc(prev):
             return " ".join(toks[i - 1:i + 2])
-        if desc(prev) or prev in _CO_WORD or prev in pw or prev.isdigit():
+        if desc(prev) or prev in _CO_WORD or _place_ends_at(i - 1) or prev.isdigit():
             continue
         start = i - 1
         if (start - 1 >= 0 and not desc(low[start - 1])
-                and low[start - 1] not in pw and not low[start - 1].isdigit()
+                and not _place_ends_at(start - 1) and not low[start - 1].isdigit()
                 and low[start - 1] not in _CO_WORD):
             start -= 1
         return " ".join(toks[start:i + 1])
