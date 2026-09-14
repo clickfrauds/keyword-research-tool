@@ -784,6 +784,29 @@ def _add_proximity(results):
              * math.sin(dlon / 2) ** 2)
         return 2 * r * math.asin(math.sqrt(h))
 
+    # The radius has to follow the geography of the build, not be fixed.
+    # 8km was set on Dubai, where the areas are districts of one city and
+    # anything further is across town. Arizona's are separate towns: its median
+    # nearest neighbour is 14.5km, so at 8km 35 of 51 pages -- Tucson, Phoenix,
+    # Kingman, Flagstaff, Yuma, every one of the top pages -- had no neighbour
+    # at all, and Flagstaff never learned Sedona is 38km down the road.
+    #
+    # So measure the spacing first. When areas sit within 8km of each other at
+    # the median, this is a city of districts and the radius stays exactly
+    # where it was. When they are further apart it is a region of towns, and
+    # the radius scales with how far apart towns actually are there, capped so
+    # a lone town is never paired with one two hundred kilometres away.
+    radius = NEARBY_MAX_KM
+    if not os.environ.get("NEARBY_MAX_KM") and len(pts) >= 3:
+        _nn = sorted(min(km(p, q) for m, q in pts.items() if m != n)
+                     for n, p in pts.items())
+        _med = _nn[len(_nn) // 2]
+        if _med > NEARBY_MAX_KM:
+            radius = round(min(45.0, 2.75 * _med), 1)
+            print(f"   📐 Areas sit {_med:.1f}km apart at the median -- separate "
+                  f"towns, not districts. Neighbour radius {NEARBY_MAX_KM:.0f}km "
+                  f"-> {radius}km.")
+
     for a in results:
         me = pts.get(a["area"])
         if not me:
@@ -794,10 +817,10 @@ def _add_proximity(results):
         # across the city. A page calling those "neighbouring" is not doing local
         # SEO, it is padding. Beyond the radius there simply is no neighbour.
         a["nearby_areas"] = [{"area": n, "km": d} for d, n in near[:4]
-                             if d <= NEARBY_MAX_KM]
+                             if d <= radius]
     _with = sum(1 for a in results if a.get("nearby_areas"))
     print(f"   📍 Proximity mapped for {len(pts)}/{len(results)} areas; "
-          f"{_with} have a neighbour within {NEARBY_MAX_KM}km")
+          f"{_with} have a neighbour within {radius}km")
 
 
 def _enrich_areas(results, vocab=None):
