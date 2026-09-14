@@ -32,6 +32,42 @@ HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BATCH = 10000
 
 
+_GEO_ALIASES = {"uae": "United Arab Emirates", "ksa": "Saudi Arabia",
+                "uk": "United Kingdom", "usa": "United States", "us": "United States"}
+
+
+def resolve_geo(client, geo_name):
+    """Geo target id for free text ('Arizona', 'United Arab Emirates',
+    'Dubai, UAE') or a numeric id passed straight through. None if unresolved.
+
+    The lookup used to send country_code="US" with every request, so anything
+    outside the US either matched nothing or matched a US place of that name,
+    and the run then quietly measured the whole United States. Dubai's numbers
+    came back an order of magnitude low and nothing said why.
+    """
+    text = str(geo_name or "").strip()
+    if re.fullmatch(r"\d+", text):
+        print(f"   geo: id {text} (given)")
+        return text
+    parts = [p.strip() for p in text.split(",") if p.strip()]
+    tries = [text] + parts + [_GEO_ALIASES[p.lower()] for p in parts
+                              if p.lower() in _GEO_ALIASES]
+    try:
+        svc = client.get_service("GeoTargetConstantService")
+        for name in dict.fromkeys(tries):
+            req = client.get_type("SuggestGeoTargetConstantsRequest")
+            req.locale = "en"
+            req.location_names.names.append(name)
+            for sug in svc.suggest_geo_target_constants(
+                    request=req).geo_target_constant_suggestions:
+                g = sug.geo_target_constant
+                print(f"   geo: {g.canonical_name} ({g.target_type}, id {g.id})")
+                return str(g.id)
+    except Exception as e:
+        print(f"   geo lookup failed ({str(e)[:80]})")
+    return None
+
+
 def volumes(queries, geo_name=None):
     """Monthly searches for every query. None if Ads fails.
 
@@ -58,21 +94,13 @@ def volumes(queries, geo_name=None):
             client = GoogleAdsClient.load_from_env()
             geo_id = None
             if geo_name:
-                try:
-                    svc = client.get_service("GeoTargetConstantService")
-                    req = client.get_type("SuggestGeoTargetConstantsRequest")
-                    req.locale = "en"
-                    req.country_code = "US"
-                    req.location_names.names.append(geo_name)
-                    for sug in svc.suggest_geo_target_constants(
-                            request=req).geo_target_constant_suggestions:
-                        g = sug.geo_target_constant
-                        if g.target_type in ("State", "Province", "City", "Country"):
-                            print(f"   geo: {g.canonical_name}")
-                            geo_id = g.resource_name.split("/")[-1]
-                            break
-                except Exception as e:
-                    print(f"   geo lookup failed ({str(e)[:50]}) - using US")
+                geo_id = resolve_geo(client, geo_name)
+                if geo_id is None:
+                    # Never fall back to the US here. That fallback is how a
+                    # Dubai run reported "plumber dubai" at 140/mo: it was
+                    # measuring Americans typing it.
+                    return None, (f"could not resolve --geo '{geo_name}'. Try the "
+                                  f"country name, or a numeric id (UAE = 2784)")
             svc = client.get_service("KeywordPlanIdeaService")
             req = client.get_type("GenerateKeywordHistoricalMetricsRequest")
             req.customer_id = cust
@@ -212,15 +240,28 @@ def main():
                     help="two-letter state appended to every query, e.g. AZ. "
                          "Callers type it, so the query should carry it.")
     ap.add_argument("--geo", default="",
-                    help="geo target for the volume lookup, e.g. Arizona. "
-                         "Blank = United States.")
+                    help="where the searchers are: 'Arizona', 'United Arab "
+                         "Emirates', 'Dubai, UAE', or a numeric geo id (UAE = "
+                         "2784). Blank = United States.")
     ap.add_argument("--min-volume", type=int, default=20,
                     help="a city/service pair below this is not worth a page")
     a = ap.parse_args()
 
     cities = split_list(a.cities)
     services = split_list(a.services)
+    # A service list pasted from a chat answer carries the answer's own lines.
+    # The Dubai run measured "Here are all the service names extracted from the
+    # menu URLs" and "comma-separated:  Home" as services. No service name has
+    # a colon or runs past six words.
+    junk = [s for s in services if ":" in s or len(s.split()) > 6]
+    if junk:
+        print(f"   dropped {len(junk)} entries that are not service names: "
+              + "; ".join(j[:40] for j in junk))
+        services = [s for s in services if s not in junk]
     st = a.state.strip().lower()
+    if not a.geo.strip():
+        print("   no --geo: volumes are for the United States. Any other "
+              "country needs --geo, or every number is Americans searching.")
 
     # Both spellings, because guessing wrong silently halves every number.
     # The first run appended "az" to all 924 queries and reported Phoenix at
