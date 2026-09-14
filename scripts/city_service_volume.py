@@ -158,6 +158,34 @@ SYNONYMS = [
     ["sewer line repair", "sewer cleaning", "sewer repair"],
     ["leak detection", "water leak detection"],
     ["repiping", "whole house repiping", "repipe"],
+
+    # HVAC and pest control. These groups were plumbing-only, so an HVAC run
+    # would have counted "ac repair", "air conditioning repair" and "hvac
+    # repair" as three pages. Demand that is one page's gets split three ways,
+    # each town looks a third as strong, and a vertical that clears the "10
+    # towns at 500/mo" bar could fail it on arithmetic alone. Same rule as
+    # plumber = plumbing company = plumbing services: one intent, one page.
+    ["ac repair", "air conditioning repair", "air conditioner repair",
+     "hvac repair", "hvac service", "hvac company", "hvac contractor",
+     "ac service", "air conditioning service", "ac company",
+     "heating and cooling"],
+    ["emergency ac repair", "24 hour ac repair", "24/7 ac repair",
+     "emergency hvac repair", "same day ac repair"],
+    ["ac installation", "air conditioning installation", "ac replacement",
+     "ac unit replacement", "hvac installation", "new ac unit"],
+    ["furnace repair", "heating repair", "heater repair"],
+    ["heat pump repair", "heat pump service"],
+    ["duct cleaning", "air duct cleaning"],
+
+    ["pest control", "exterminator", "pest control service",
+     "pest control company", "exterminator service", "pest exterminator"],
+    ["termite treatment", "termite control", "termite exterminator"],
+    ["bed bug treatment", "bed bug exterminator", "bed bug removal"],
+    ["rodent control", "rodent removal", "rat exterminator",
+     "mouse exterminator"],
+    # Arizona bark scorpions are the state's own pest problem, and a page
+    # built on it is the kind of local detail a national template never has.
+    ["scorpion control", "scorpion exterminator", "scorpion pest control"],
 ]
 
 
