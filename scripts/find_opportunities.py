@@ -324,7 +324,14 @@ def load_call_intel():
         print(f"   ⚠️ {os.path.basename(path)} missing — economics gate off")
         return
     with open(path, encoding="utf-8") as fh:
-        for row in csv.DictReader(fh, delimiter="|"):
+        # The snapshot is comma-separated. Read with delimiter="|" every row
+        # was one unsplit column, no niche ever matched, and the gate printed
+        # "paid% for 0 niches" and let Appliance ($4.88 a call) through on
+        # every run. Take the delimiter from the header instead of assuming.
+        head = fh.readline()
+        fh.seek(0)
+        delim = "|" if head.count("|") > head.count(",") else ","
+        for row in csv.DictReader(fh, delimiter=delim):
             raw = (row.get("niche") or "").strip().lower()
             if not raw:
                 continue
@@ -334,6 +341,8 @@ def load_call_intel():
             except (KeyError, TypeError, ValueError):
                 continue
     print(f"   📞 call intel: paid% for {len(_PAID_PCT)} niches")
+    if not _PAID_PCT:
+        print("   ⚠️ call intel parsed to nothing — economics gate is OFF this run")
 
 
 def revenue_per_call(niche, ptype):
@@ -1313,7 +1322,10 @@ def write(meta, cands, scored, pricing=None):
                   "under a taken head term is not an open market.", "",
                   "| Verdict | City | Niche | Payout | Searches/mo | Why |",
                   "|---|---|---|---|---|---|"]
-        for c in [c for c in city_rows if c["verdict"] != "STOP"][:25]:
+        _open = [c for c in city_rows if c["verdict"] != "STOP"]
+        if not _open:
+            lines.append("| — | *every scanned city is STOP* | | | | |")
+        for c in _open[:25]:
             lines.append(f"| **{c['verdict']}** | {c['city']}, {c['state']} | {c['niche']} "
                          f"| ${c['payout']:.2f} | {c['volume'] if c['volume'] is not None else '?'} "
                          f"| {'<br>'.join(c['why'][:3])} |")
