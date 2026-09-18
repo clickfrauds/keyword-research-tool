@@ -1,0 +1,583 @@
+{
+  "pricing_model_by_niche": {
+    "Electrical (Call)": {
+      "distinct": 33,
+      "mode": "geo"
+    },
+    "Appliance (Call)": {
+      "distinct": 53,
+      "mode": "geo"
+    },
+    "Gutters (Call)": {
+      "distinct": 1,
+      "mode": "flat"
+    },
+    "Waterproofing (CPL)": {
+      "distinct": 7,
+      "mode": "geo"
+    },
+    "HVAC (Call)": {
+      "distinct": 68,
+      "mode": "geo"
+    },
+    "Water Damage (CPL)": {
+      "distinct": 9,
+      "mode": "geo"
+    },
+    "Bathroom Remodeling (Call)": {
+      "distinct": 39,
+      "mode": "geo"
+    },
+    "Pest Control (Call)": {
+      "distinct": 2,
+      "mode": "flat"
+    },
+    "Fire Damage Removal (CPL)": {
+      "distinct": 4,
+      "mode": "geo"
+    },
+    "Roofing (Call)": {
+      "distinct": 95,
+      "mode": "geo"
+    },
+    "Plumbing (Call)": {
+      "distinct": 77,
+      "mode": "geo"
+    },
+    "Biohazard (CPL)": {
+      "distinct": 3,
+      "mode": "flat"
+    },
+    "Siding (CPL)": {
+      "distinct": 5,
+      "mode": "geo"
+    },
+    "Mold Removal (CPL)": {
+      "distinct": 3,
+      "mode": "flat"
+    },
+    "Tree Services (Call)": {
+      "distinct": 9,
+      "mode": "geo"
+    },
+    "Plumbing (CPL)": {
+      "distinct": 13,
+      "mode": "geo"
+    },
+    "Kitchen (CPL)": {
+      "distinct": 2,
+      "mode": "flat"
+    },
+    "Garage Door (CPL)": {
+      "distinct": 4,
+      "mode": "geo"
+    },
+    "Painting (CPL)": {
+      "distinct": 3,
+      "mode": "flat"
+    },
+    "Deck (CPL)": {
+      "distinct": 1,
+      "mode": "flat"
+    },
+    "Foundation Repair (CPL)": {
+      "distinct": 1,
+      "mode": "flat"
+    }
+  },
+  "generated": "2026-09-18 18:10 UTC",
+  "dataset_date": "2026-09-18",
+  "filters": {
+    "payout_type": "Call",
+    "min_payout": 80.0,
+    "population": [
+      8000,
+      150000
+    ],
+    "niches": [
+      "Plumbing"
+    ],
+    "states": [
+      "PA"
+    ],
+    "min_bundle_niches": 1
+  },
+  "candidate_cities": 7,
+  "serp_scanned": 4,
+  "serp_credits": {
+    "spent": 2,
+    "cached": 2,
+    "failed": 0
+  },
+  "verdict_counts": {
+    "GO": 0,
+    "WATCH": 0,
+    "STOP": 4
+  },
+  "cities": [
+    {
+      "city": "Camp Hill",
+      "state": "PA",
+      "county": "Cumberland",
+      "population": 8169,
+      "niche": "Plumbing",
+      "payout": 108.5,
+      "volume": 320,
+      "bundle_value": 108.5,
+      "verdict": "STOP",
+      "why": [
+        "`plumber Camp Hill PA`: 4 dedicated plumbing pages"
+      ],
+      "queries": [
+        {
+          "query": "plumber Camp Hill PA",
+          "serp_score": 26,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 9027.2
+    },
+    {
+      "city": "Hanover",
+      "state": "PA",
+      "county": "York",
+      "population": 16584,
+      "niche": "Plumbing",
+      "payout": 108.5,
+      "volume": 210,
+      "bundle_value": 108.5,
+      "verdict": "STOP",
+      "why": [
+        "`plumber Hanover PA`: 3 dedicated plumbing pages"
+      ],
+      "queries": [
+        {
+          "query": "plumber Hanover PA",
+          "serp_score": 34,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 7746.9
+    },
+    {
+      "city": "Lebanon",
+      "state": "PA",
+      "county": "Lebanon",
+      "population": 74675,
+      "niche": "Plumbing",
+      "payout": 108.5,
+      "volume": 260,
+      "bundle_value": 108.5,
+      "verdict": "STOP",
+      "why": [
+        "`plumber Lebanon PA`: 5 dedicated plumbing pages"
+      ],
+      "queries": [
+        {
+          "query": "plumber Lebanon PA",
+          "serp_score": 18,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 5077.8
+    },
+    {
+      "city": "Mechanicsburg",
+      "state": "PA",
+      "county": "Cumberland",
+      "population": 9720,
+      "niche": "Plumbing",
+      "payout": 108.5,
+      "volume": 320,
+      "bundle_value": 108.5,
+      "verdict": "STOP",
+      "why": [
+        "`plumber Mechanicsburg PA`: 4 dedicated plumbing pages; map pack at 822 reviews"
+      ],
+      "queries": [
+        {
+          "query": "plumber Mechanicsburg PA",
+          "serp_score": 14,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 4860.8
+    }
+  ],
+  "launch_plan": [],
+  "opportunities": [
+    {
+      "city": "Camp Hill",
+      "state": "PA",
+      "county": "Cumberland",
+      "population": 8169,
+      "zips": 1,
+      "niche": "Plumbing",
+      "sub_service": "plumber",
+      "query": "plumber Camp Hill PA",
+      "payout": 108.5,
+      "pricing": "geo",
+      "bundle_value": 108.5,
+      "niches_here": [
+        {
+          "niche": "Plumbing",
+          "payout": 108.5,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 26,
+      "serp_breakdown": {
+        "dedicated": 4,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 2,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 2802,
+        "pack_median_reviews": 130
+      },
+      "occupants": [
+        {
+          "host": "cropfbrothers.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "rotorooter.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "ezimmerman.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "leggettinc.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "neffsvilleph.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "prontoplumbing.com",
+          "kind": "independent site"
+        }
+      ],
+      "opportunity": 28.21,
+      "volume": 320,
+      "value": 9027.2,
+      "verdict": "STOP",
+      "why": [
+        "4 dedicated plumbing pages"
+      ]
+    },
+    {
+      "city": "Hanover",
+      "state": "PA",
+      "county": "York",
+      "population": 16584,
+      "zips": 1,
+      "niche": "Plumbing",
+      "sub_service": "plumber",
+      "query": "plumber Hanover PA",
+      "payout": 108.5,
+      "pricing": "geo",
+      "bundle_value": 108.5,
+      "niches_here": [
+        {
+          "niche": "Plumbing",
+          "payout": 108.5,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 34,
+      "serp_breakdown": {
+        "dedicated": 3,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 3,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 646,
+        "pack_median_reviews": 252
+      },
+      "occupants": [
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "czappmechanical.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "georgehbixlerinc.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "dewildasinandson.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "allisonsplumbingheatingandac.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "homeadvisor.com",
+          "kind": "directory"
+        },
+        {
+          "host": "davidsonplumbing.biz",
+          "kind": "independent site"
+        },
+        {
+          "host": "wengerservices.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 36.89,
+      "volume": 210,
+      "value": 7746.9,
+      "verdict": "STOP",
+      "why": [
+        "3 dedicated plumbing pages"
+      ]
+    },
+    {
+      "city": "Lebanon",
+      "state": "PA",
+      "county": "Lebanon",
+      "population": 74675,
+      "zips": 2,
+      "niche": "Plumbing",
+      "sub_service": "plumber",
+      "query": "plumber Lebanon PA",
+      "payout": 108.5,
+      "pricing": "geo",
+      "bundle_value": 108.5,
+      "niches_here": [
+        {
+          "niche": "Plumbing",
+          "payout": 108.5,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 18,
+      "serp_breakdown": {
+        "dedicated": 5,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 1,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 239,
+        "pack_median_reviews": 82
+      },
+      "occupants": [
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "rotorooter.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "gfbowman.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "neffsvilleph.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "angi.com",
+          "kind": "directory"
+        },
+        {
+          "host": "ehwms.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "beckcreekplumbing.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "hallerent.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 19.53,
+      "volume": 260,
+      "value": 5077.8,
+      "verdict": "STOP",
+      "why": [
+        "5 dedicated plumbing pages"
+      ]
+    },
+    {
+      "city": "Mechanicsburg",
+      "state": "PA",
+      "county": "Cumberland",
+      "population": 9720,
+      "zips": 2,
+      "niche": "Plumbing",
+      "sub_service": "plumber",
+      "query": "plumber Mechanicsburg PA",
+      "payout": 108.5,
+      "pricing": "geo",
+      "bundle_value": 108.5,
+      "niches_here": [
+        {
+          "niche": "Plumbing",
+          "payout": 108.5,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 14,
+      "serp_breakdown": {
+        "dedicated": 4,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 2,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 1584,
+        "pack_median_reviews": 822
+      },
+      "occupants": [
+        {
+          "host": "rotorooter.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "centralpennplumbing.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "angi.com",
+          "kind": "directory"
+        },
+        {
+          "host": "hlstonebergerplumbing.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "hbmcclure.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "ezimmerman.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        },
+        {
+          "host": "717homeservices.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 15.19,
+      "volume": 320,
+      "value": 4860.8,
+      "verdict": "STOP",
+      "why": [
+        "4 dedicated plumbing pages",
+        "map pack at 822 reviews"
+      ]
+    }
+  ],
+  "top_candidates_unscanned": [
+    {
+      "city": "Elizabethtown",
+      "state": "PA",
+      "county": "Lancaster",
+      "pop": 11925,
+      "zips": 1,
+      "top_niche": "Plumbing",
+      "top_payout": 108.5,
+      "bundle_value": 108.5,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 108.5,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 110
+    },
+    {
+      "city": "Ephrata",
+      "state": "PA",
+      "county": "Lancaster",
+      "pop": 13772,
+      "zips": 1,
+      "top_niche": "Plumbing",
+      "top_payout": 108.5,
+      "bundle_value": 108.5,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 108.5,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 110
+    },
+    {
+      "city": "Lititz",
+      "state": "PA",
+      "county": "Lancaster",
+      "pop": 9619,
+      "zips": 1,
+      "top_niche": "Plumbing",
+      "top_payout": 108.5,
+      "bundle_value": 108.5,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 108.5,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 110
+    }
+  ]
+}
