@@ -99,6 +99,8 @@ FILES_TO_PUSH = [
     ("opportunities.json", "opportunities.json"),
     ("opportunities.csv", "opportunities.csv"),
     ("opportunity_report.md", "opportunities.md"),
+    # GO cities with the Mode 5 Area Plan + builder forms already filled in
+    ("launch_plan.json", "launch_plan.json"),
     # LAST on purpose — the readiness marker (see note above).
     ("keyword_strategy_report.html", "html"),
     # Existing-pages runs: the pages that need content work, and the labels

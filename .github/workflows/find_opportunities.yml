@@ -42,9 +42,9 @@ on:
         required: false
         default: '1'
       max_serp_checks:
-        description: "⚠️ THE MONEY KNOB — one SerpApi credit each. 120 is a cheap first pass; raise it once the filters are tuned."
+        description: "⚠️ THE MONEY KNOB — max SerpApi credits this run may spend. SERPs already read in the last 30 days are free (cache) and do not count."
         required: false
-        default: '120'
+        default: '60'
       niches_per_city:
         description: "How many of a city's niches to SERP-test. 1 = deep read on its best offer. 3 = is this city open across the whole bundle?"
         required: false
@@ -55,7 +55,12 @@ on:
         default: '3'
       min_volume:
         description: "Free demand gate (Keyword Planner): drop cities whose '{trade} {city}' search is under this per month. 0 = measure only."
+        required: false
         default: '100'
+      serp_reserve:
+        description: "Credits the scan must leave on the SerpApi account (for hand checks / a Difficulty run). The balance is read first, so the scan can never empty it."
+        required: false
+        default: '10'
       request_id:
         description: "Run id for the published raw link. Blank = manual-<run_id>."
         required: false
@@ -71,7 +76,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v4
+      # Shared SerpApi cache (scripts/serp_client.py). Every SerpApi workflow
+      # restores and saves the same cache, so a SERP bought by one run is free
+      # to the next -- on a 250-search plan that is the difference between one
+      # scan a month and several.
+      - name: Restore SERP cache
+        uses: actions/cache/restore@v4
+        with:
+          path: .serp_cache
+          key: serp-cache-${{ github.run_id }}
+          restore-keys: serp-cache-
+
+
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
@@ -100,6 +117,7 @@ jobs:
           NICHES_PER_CITY:   ${{ github.event.inputs.niches_per_city }}
           SUBS_PER_NICHE:    ${{ github.event.inputs.subs_per_niche }}
           MIN_VOLUME:        ${{ github.event.inputs.min_volume }}
+          SERP_RESERVE:      ${{ github.event.inputs.serp_reserve }}
           # Stage 3.5 (demand) — free Keyword Planner calls; unset = skipped
           GOOGLE_ADS_DEVELOPER_TOKEN:   ${{ secrets.GOOGLE_ADS_DEVELOPER_TOKEN }}
           GOOGLE_ADS_CLIENT_ID:         ${{ secrets.GOOGLE_ADS_CLIENT_ID }}
@@ -111,6 +129,14 @@ jobs:
           SERP_GL:           us
           SERP_DEBUG_N:      '5'
         run: python -u scripts/find_opportunities.py
+
+      # Saved even when the run fails: the credits were spent either way.
+      - name: Save SERP cache
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: .serp_cache
+          key: serp-cache-${{ github.run_id }}
 
       - name: Show the report in the run log
         if: always()
@@ -136,6 +162,7 @@ jobs:
             opportunities.json
             opportunities.csv
             opportunity_report.md
+            launch_plan.json
             serp_debug.json
           retention-days: 30
           if-no-files-found: warn

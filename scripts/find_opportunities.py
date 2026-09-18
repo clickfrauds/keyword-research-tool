@@ -14,8 +14,8 @@ financial sense:
     STAGE 2  revenue filter           free      (payout / population band)
     STAGE 3  city rollup + bundles    free      (one site, many niches)
     STAGE 3.5 search demand           free      (Keyword Planner; MIN_VOLUME)
-    STAGE 4  SERP scan                COSTS     (SerpApi, hard-capped)
-    STAGE 5  score, rank, publish     free
+    STAGE 4  SERP scan                COSTS     (SerpApi, hard-capped, cached)
+    STAGE 5  verdict + launch plan    free      (GO / WATCH / STOP, builder forms)
 
 Stages 1-3 are free and cut 280,000 rows to a few hundred candidates.
 Only then does anything paid run, and MAX_SERP_CHECKS caps that. Running
@@ -55,7 +55,11 @@ Env (all optional except the SERP stage):
   SERPAPI_API_KEY    without it stages 1-3 still run and publish
   SERP_GL            default us
 
-Out: opportunities.json, opportunities.csv, opportunity_report.md
+  SERP_RESERVE       default 10 — credits never spent, kept for hand checks
+  SERP_CACHE_DAYS    default 30 — a cached SERP younger than this is free
+
+Out: opportunities.json, opportunities.csv, opportunity_report.md,
+     launch_plan.json (the GO cities with every form filled in)
 """
 
 import os
@@ -97,6 +101,14 @@ SUBS_PER_NICHE  = int(os.environ.get("SUBS_PER_NICHE", "3") or 3)
 # broad "{trade} {city}" search is under this is dropped before any SERP
 # credit is spent on it. 0 = measure and report, drop nothing.
 MIN_VOLUME      = int(os.environ.get("MIN_VOLUME", "0") or 0)
+# Credits the scan leaves on the account. The cross-check that follows every
+# run — typing the top cities into Google by hand, or a Difficulty run on one
+# of them — needs a few, and a scan that spends the balance to zero leaves
+# nothing to confirm its own answer with.
+SERP_RESERVE    = int(os.environ.get("SERP_RESERVE", "10") or 0)
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import serp_client  # noqa: E402  (shared cache + balance, see that file)
 
 # ── Sub-services per niche ────────────────────────────────────────────────
 # In a metro the head term is always taken, and these are the queries an
@@ -684,35 +696,20 @@ def _serp_once(query, location, mode):
             params["uule"] = _uule(location)
         else:
             params["location"] = location
-    q = urllib.parse.urlencode(params)
     global _LAST_UNSUPPORTED
     _LAST_UNSUPPORTED = False
-    try:
-        with urllib.request.urlopen(f"https://serpapi.com/search?{q}", timeout=40) as r:
-            data = json.loads(r.read().decode("utf-8", "replace"))
-        if data.get("error"):
-            _serp_err(f"SerpApi: {data['error']}")
-            return None
+    # Through the shared client: a SERP already read by any workflow in the
+    # last SERP_CACHE_DAYS comes back from disk and costs nothing.
+    data, err, _cached = serp_client.fetch(params)
+    if data is not None:
         return data
-    except urllib.error.HTTPError as e:
-        # Read the body. "HTTP Error 400: Bad Request" on its own says nothing
-        # about WHICH parameter was rejected, and 200 identical copies of it
-        # said nothing 200 times.
-        detail = ""
-        try:
-            detail = json.loads(e.read().decode("utf-8", "replace")).get("error", "")
-        except Exception:
-            pass
-        if "unsupported" in detail.lower() and "location" in detail.lower():
-            # Recoverable: retried with uule by the caller, so it is not a
-            # real failure and should not be counted as one.
-            _LAST_UNSUPPORTED = True
-            return None
-        _serp_err(f"HTTP {e.code} — {detail or 'no detail returned'}")
+    if err and "unsupported" in err.lower() and "location" in err.lower():
+        # Recoverable: retried with uule by the caller, so it is not a
+        # real failure and should not be counted as one.
+        _LAST_UNSUPPORTED = True
         return None
-    except Exception as e:
-        _serp_err(str(e)[:90])
-        return None
+    _serp_err(err or "no response")
+    return None
 
 
 _SERP_ERRS = {}
@@ -768,6 +765,15 @@ def score_serp(data, service, city):
     _topic = {w for w in re.split(r"\W+", service.lower()) if len(w) > 3 and w not in _generic}
     if re.search(r"\b(ac|hvac|a/c)\b", service.lower()):
         _topic |= {"hvac", "air conditioning", "cooling", "heating", "air condition"}
+    # The broad trade terms name the tradesman; the pages that answer them
+    # name the trade. "plumber kingman" is answered by "Kingman Plumbing Co.",
+    # and with only "plumber" to match, an ordinary local page one read as
+    # off-topic and the city's most important query was thrown away.
+    for _w, _alt in (("plumber", {"plumbing"}), ("electrician", {"electrical", "electric"}),
+                     ("roofer", {"roofing", "roof"}), ("painters", {"painting", "painter"}),
+                     ("installer", {"install"}), ("builder", {"build"})):
+        if _w in _topic:
+            _topic |= _alt
     _hits = sum(1 for r in results
                 if any(t in f"{r.get('title', '')} {r.get('link', '')} {r.get('snippet', '')}".lower()
                        for t in _topic))
@@ -945,22 +951,54 @@ def scan(cands):
                 passes.append((ni * 100 + si, c, nrec["niche"], nrec["payout"],
                                nrec.get("pricing", "?"), sub))
     passes.sort(key=lambda p: p[0])
-    jobs = [p[1:] for p in passes][:MAX_SERP]
-    print(f"   {len(jobs)} queries (cap {MAX_SERP}) · "
+
+    # The cap is on CREDITS, not queries. Cached SERPs are free, so a re-run
+    # with a higher cap pays only for the cities the last run never reached.
+    # The account balance is read first (free) so the scan can never be the
+    # thing that empties it.
+    budget = MAX_SERP
+    left = serp_client.searches_left(SERP_KEY)
+    if left is not None:
+        usable = max(0, left - SERP_RESERVE)
+        print(f"   💳 SerpApi balance {left} · reserve {SERP_RESERVE} · usable {usable}")
+        if usable < budget:
+            print(f"   ⚠️ cap lowered {budget} → {usable} to keep the reserve")
+            budget = usable
+    else:
+        print("   💳 SerpApi balance unreadable — using the cap as given")
+    # Several cities share a spelling across states only in theory; the same
+    # (query, location) twice in one run is always a wasted credit.
+    _seen, jobs = set(), []
+    for p in passes:
+        k = (p[5], p[1]["city"], p[1]["state"])
+        if k not in _seen:
+            _seen.add(k)
+            jobs.append(p[1:])
+    print(f"   {len(jobs)} queries queued · credit cap {budget} · "
           f"{NICHES_PER_CITY} niche(s) × {SUBS_PER_NICHE} sub(s) per city")
     if _MISSING_SUBS:
         print(f"   ⚠️ no sub-services defined for {sorted(_MISSING_SUBS)} — "
               f"those cities were skipped. Add them to SUB_SERVICES.")
-    if len(jobs) < len(cands):
-        print(f"   ℹ️ cap reached: the top {len(jobs)} cities by bundle value "
-              f"were tested on their best niche. {len(cands) - len(jobs)} "
-              f"candidates went untested — raise max_serp_checks to reach them.")
 
     found, raw_dump = [], []
+    _tested = set()
     for i, (c, niche_name, niche_payout, niche_pricing, sub) in enumerate(jobs, 1):
+        if serp_client.stats()["spent"] >= budget:
+            _untested = len({(x[0]["city"], x[0]["state"]) for x in jobs[i - 1:]} - _tested)
+            print(f"   ⏹️ credit cap {budget} reached after {i - 1} queries — "
+                  f"{_untested} cities untested. Re-run with a higher cap: the "
+                  f"{i - 1} already read come from cache for free.")
+            break
+        _tested.add((c["city"], c["state"]))
         query = f"{sub} {c['city']} {c['state']}"
         loc   = f"{c['city']}, {STATE_NAMES.get(c['state'], c['state'])}, United States"
+        _spent_before = serp_client.stats()["spent"]
         data  = serp(query, loc)
+        c.setdefault("_scanned", []).append(sub)
+        if _QUOTA_HIT:
+            print(f"   ⏹️ SerpApi quota exhausted after {i} queries — "
+                  f"{len(found)} scored and kept. ({_QUOTA_HIT[0]})")
+            break
 
         # Keep the first few responses verbatim. Four hand-checks in a row
         # found heavy occupation — pSEO subdomains, dedicated pages, city
@@ -1019,9 +1057,10 @@ def scan(cands):
             break
 
         if i % 10 == 0 or i == len(jobs):
-            print(f"   🔎 {i}/{len(jobs)} · best so far "
+            print(f"   🔎 {i}/{len(jobs)} · {serp_client.stats()['spent']} credits · best so far "
                   f"{max((f['opportunity'] for f in found), default=0):.0f}")
-        time.sleep(0.7)
+        if serp_client.stats()["spent"] > _spent_before:
+            time.sleep(0.7)   # pace live calls only; cache hits need none
 
     if raw_dump:
         with open("serp_debug.json", "w", encoding="utf-8") as f:
@@ -1029,7 +1068,7 @@ def scan(cands):
         print(f"   🧪 wrote serp_debug.json — {len(raw_dump)} raw responses")
 
     found.sort(key=lambda f: (-(f["value"] or 0), -f["opportunity"]))
-    print(f"   ✅ {len(found)} scored")
+    print(f"   ✅ {len(found)} scored · {serp_client.summary_line()}")
     if _SERP_ERRS:
         print("   Failure summary:")
         for msg, n in sorted(_SERP_ERRS.items(), key=lambda kv: -kv[1]):
@@ -1039,9 +1078,174 @@ def scan(cands):
 
 
 # ══════════════════════════════════════════════════════════════════
+# STAGE 5a — verdict per city
+# ══════════════════════════════════════════════════════════════════
+# The report used to print the rules ("STOP on any EMD…") and leave the reader
+# to apply them to thirty rows by eye. Every one of those rules is mechanical,
+# so the scan applies them itself and says GO, WATCH or STOP with the reason.
+#
+# A city is judged on its WORST scored query, not its best. One open
+# sub-service under a head term held by four dedicated pages is not an open
+# market — it is one page's worth of traffic. Conservative on purpose: a
+# false GO costs a domain and a build, a false STOP costs nothing.
+GO_SCORE    = int(os.environ.get("GO_SCORE", "60") or 60)
+GO_VOLUME   = int(os.environ.get("GO_VOLUME", "100") or 100)
+
+
+def verdict(o):
+    """(label, [reasons]) for one scored query."""
+    b = o["serp_breakdown"]
+    why = []
+    if b.get("emd"):
+        why.append(f"{b['emd']} city EMD on page one")
+    if b.get("pseo"):
+        why.append(f"{b['pseo']} programmatic subdomain(s)")
+    if b.get("dedicated", 0) >= 2:
+        why.append(f"{b['dedicated']} dedicated {o['niche'].lower()} pages")
+    if b.get("pack_median_reviews", 0) >= 500:
+        why.append(f"map pack at {b['pack_median_reviews']} reviews")
+    if why:
+        return "STOP", why
+    vol = o.get("volume")
+    if b.get("dedicated", 0) == 1:
+        why.append("1 dedicated page already")
+    if b.get("pack_median_reviews", 0) >= 200:
+        why.append(f"map pack at {b['pack_median_reviews']} reviews")
+    if o["serp_score"] < GO_SCORE:
+        why.append(f"SERP {o['serp_score']} < {GO_SCORE}")
+    if vol is None:
+        why.append("search volume not measured")
+    elif vol < GO_VOLUME:
+        why.append(f"only {vol} searches/mo")
+    if why:
+        return "WATCH", why
+    return "GO", [f"SERP {o['serp_score']}, 0 dedicated, {vol}/mo"]
+
+
+_RANK = {"STOP": 0, "WATCH": 1, "GO": 2}
+
+
+def city_verdicts(scored):
+    """Roll the per-query verdicts up to one line per city (worst query wins)."""
+    cities = {}
+    for o in scored:
+        o["verdict"], o["why"] = verdict(o)
+        k = (o["city"], o["state"])
+        c = cities.get(k)
+        if c is None:
+            cities[k] = c = {
+                "city": o["city"], "state": o["state"], "county": o["county"],
+                "population": o["population"], "niche": o["niche"],
+                "payout": o["payout"], "volume": o.get("volume"),
+                "bundle_value": o["bundle_value"], "verdict": "GO", "why": [],
+                "queries": [], "best_value": 0,
+            }
+        c["queries"].append({"query": o["query"], "serp_score": o["serp_score"],
+                             "verdict": o["verdict"]})
+        c["best_value"] = max(c["best_value"], o.get("value") or 0)
+        if _RANK[o["verdict"]] < _RANK[c["verdict"]]:
+            c["verdict"], c["why"] = o["verdict"], [f"`{o['query']}`: " + "; ".join(o["why"])]
+        elif o["verdict"] == c["verdict"] and o["verdict"] != "GO":
+            c["why"].append(f"`{o['query']}`: " + "; ".join(o["why"]))
+        elif o["verdict"] == "GO" and not c["why"]:
+            c["why"] = o["why"]
+    out = list(cities.values())
+    out.sort(key=lambda c: (-_RANK[c["verdict"]], -c["best_value"], -c["payout"]))
+    return out
+
+
+# ══════════════════════════════════════════════════════════════════
+# STAGE 5b — launch plan (the handoff to the website builder)
+# ══════════════════════════════════════════════════════════════════
+# A GO row is worth nothing until it is a site. The path from here is always
+# the same three forms, and every value in them is already known at this
+# point — so the scan fills them in rather than leaving them to be retyped
+# (and mistyped: a sub-service as primary_service measures the wrong demand,
+# a city-scoped target_location misses every neighbouring town).
+#
+#   1. keyword tool · Mode 5 Area Plan   → areas + real keywords (free)
+#   2. website builder · Mode 5          → the state site, one page per area
+#   3. website builder · Mode 2 (later)  → service pages under the best hubs,
+#                                          only once GSC shows impressions
+TRADE_WORD = {
+    "Plumbing": "Plumber", "HVAC": "HVAC", "Electrical": "Electrician",
+    "Roofing": "Roofer", "Pest Control": "Pest Control", "Garage Door": "Garage Door",
+    "Water Damage": "Water Damage", "Tree Services": "Tree Service",
+}
+
+
+def launch_plan(city_rows):
+    plans = []
+    by_state = {}
+    for c in city_rows:
+        if c["verdict"] in ("GO", "WATCH"):
+            by_state.setdefault((c["state"], c["niche"]), []).append(c)
+    for (st, niche), rows in by_state.items():
+        go = [r for r in rows if r["verdict"] == "GO"]
+        if not go:
+            continue
+        state_name = STATE_NAMES.get(st, st)
+        term = BROAD.get(niche, niche.lower())
+        trade = TRADE_WORD.get(niche, niche)
+        names = [r["city"] for r in go] + [r["city"] for r in rows if r["verdict"] == "WATCH"]
+        # One city on its own is an area page on a state site, not a site: a
+        # single-town domain has nowhere to grow when the next open town turns
+        # up one county over. Three or more open towns is the Arizona shape.
+        shape = ("state site — Mode 5 area pages (the arizonahomeservicepros.com pattern)"
+                 if len(names) >= 3 else
+                 f"add {', '.join(names)} as area page(s) on a {state_name} state site")
+        plans.append({
+            "state": st, "state_name": state_name, "niche": niche,
+            "go_cities": [r["city"] for r in go],
+            "watch_cities": [r["city"] for r in rows if r["verdict"] == "WATCH"],
+            "monthly_searches": sum((r["volume"] or 0) for r in rows),
+            "best_payout": max(r["payout"] for r in rows),
+            "shape": shape,
+            "manual_check": [
+                "https://www.google.com/search?" + urllib.parse.urlencode(
+                    {"q": f"{term} {r['city']} {st}"}) for r in go[:5]],
+            "forms": {
+                "1_keyword_tool_mode5_area_plan": {
+                    "business_name": f"{state_name} {trade} Pros",
+                    "niche_description": f"{niche.lower()} referral service connecting homeowners with licensed local pros",
+                    "target_location": f"{state_name}, United States",
+                    "primary_service": term,
+                    "min_area_volume": "20",
+                    "max_areas": "",
+                    "extra_areas": ", ".join(names),
+                },
+                "2_builder_mode5": {
+                    "mode": "5",
+                    "business_name": f"{state_name} {trade} Pros",
+                    "industry": trade.lower() if trade != "HVAC" else "hvac",
+                    "main_service": trade,
+                    # The call-earning services, in earning order (SUB_SERVICES)
+                    "sub_services": ", ".join(x.title() for x in SUB_SERVICES.get(niche, [])[:8]),
+                    "city": state_name,
+                    "country": "United States",
+                    "phone": "<LeadSmart tracking number>",
+                    "domain": "<new domain>",
+                    "extras": {
+                        "pseo_plan_url": "<raw .mode5.json link from step 3>",
+                        "site_profile": "pay_per_call",
+                        "footer_credit": "no",
+                        "footer_sitemap_link": "no",
+                    },
+                },
+            },
+        })
+    plans.sort(key=lambda p: (-len(p["go_cities"]), -p["monthly_searches"]))
+    return plans
+
+
+# ══════════════════════════════════════════════════════════════════
 # STAGE 5 — output
 # ══════════════════════════════════════════════════════════════════
 def write(meta, cands, scored, pricing=None):
+    city_rows = city_verdicts(scored)
+    plans = launch_plan(city_rows)
+    n_by = {v: sum(1 for c in city_rows if c["verdict"] == v) for v in ("GO", "WATCH", "STOP")}
+    untested = [c for c in cands if not c.get("_scanned")]
     payload = {
         "pricing_model_by_niche": {
             f"{n} ({p})": v for (n, p), v in (pricing or {}).items()
@@ -1055,27 +1259,34 @@ def write(meta, cands, scored, pricing=None):
         },
         "candidate_cities": len(cands),
         "serp_scanned":     len(scored),
+        "serp_credits":     serp_client.stats(),
+        "verdict_counts":   n_by,
+        "cities":           city_rows,
+        "launch_plan":      plans,
         "opportunities":    scored[:200],
         "top_candidates_unscanned": [
             {**{k: c[k] for k in ("city", "state", "county", "pop", "zips",
                                   "top_niche", "top_payout", "bundle_value", "niche_list")},
              "volume": c.get("volume")}
-            for c in cands[:200]
+            for c in untested[:200]
         ],
     }
     with open("opportunities.json", "w", encoding="utf-8") as f:
         json.dump(payload, f, indent=2)
+    with open("launch_plan.json", "w", encoding="utf-8") as f:
+        json.dump(plans, f, indent=2)
 
     with open("opportunities.csv", "w", newline="", encoding="utf-8") as f:
         w = csv.writer(f)
-        w.writerow(["rank", "value", "volume", "opportunity", "serp_score", "payout", "pricing",
+        w.writerow(["rank", "verdict", "why", "value", "volume", "opportunity", "serp_score", "payout", "pricing",
                     "bundle_value", "niche", "sub_service", "city", "state",
                     "county", "population", "zips", "dedicated", "emd", "pseo",
                     "national", "other_local", "directory", "pack_size",
                     "pack_median_reviews", "query", "occupants"])
         for i, o in enumerate(scored[:200], 1):
             b = o["serp_breakdown"]
-            w.writerow([i, o.get("value"), o.get("volume"), o["opportunity"], o["serp_score"], o["payout"],
+            w.writerow([i, o.get("verdict"), "; ".join(o.get("why") or []),
+                        o.get("value"), o.get("volume"), o["opportunity"], o["serp_score"], o["payout"],
                         o.get("pricing", "?"),
                         o["bundle_value"], o["niche"], o["sub_service"],
                         o["city"], o["state"], o["county"], o["population"],
@@ -1091,11 +1302,78 @@ def write(meta, cands, scored, pricing=None):
         f"- Dataset **{(meta or {}).get('data_date')}** · scanned {time.strftime('%Y-%m-%d')}",
         f"- Filters: `{PAYOUT_T}` · payout ≥ **${MIN_PAYOUT:g}** · "
         f"population **{MIN_POP:,}–{MAX_POP:,}** · niches **{', '.join(NICHES) or 'all'}**",
-        f"- **{len(cands):,}** candidate cities · **{len(scored)}** SERP-scored",
+        f"- **{len(cands):,}** candidate cities · **{len(scored)}** SERP-scored · "
+        f"{serp_client.summary_line()}",
+        f"- Verdict by city: **{n_by['GO']} GO** · {n_by['WATCH']} WATCH · {n_by['STOP']} STOP",
         "",
     ]
+    if city_rows:
+        lines += ["## Verdict by city", "",
+                  "Judged on the city's **worst** scored query — one open sub-service "
+                  "under a taken head term is not an open market.", "",
+                  "| Verdict | City | Niche | Payout | Searches/mo | Why |",
+                  "|---|---|---|---|---|---|"]
+        for c in [c for c in city_rows if c["verdict"] != "STOP"][:25]:
+            lines.append(f"| **{c['verdict']}** | {c['city']}, {c['state']} | {c['niche']} "
+                         f"| ${c['payout']:.2f} | {c['volume'] if c['volume'] is not None else '?'} "
+                         f"| {'<br>'.join(c['why'][:3])} |")
+        stops = [c for c in city_rows if c["verdict"] == "STOP"]
+        if stops:
+            lines += ["", f"<details><summary>{len(stops)} STOP cities</summary>", "",
+                      "| City | Why |", "|---|---|"]
+            for c in stops[:60]:
+                lines.append(f"| {c['city']}, {c['state']} | {c['why'][0] if c['why'] else ''} |")
+            lines += ["", "</details>"]
+        lines.append("")
+    if plans:
+        lines += ["## Launch plan", "",
+                  "Every value below is already filled in and is also in "
+                  "`launch_plan.json`. Do the steps in order; each one is a gate.", ""]
+        for pl in plans[:5]:
+            f1 = pl["forms"]["1_keyword_tool_mode5_area_plan"]
+            f2 = pl["forms"]["2_builder_mode5"]
+            lines += [f"### {pl['state_name']} · {pl['niche']}",
+                      "",
+                      f"- **GO:** {', '.join(pl['go_cities'])}"
+                      + (f" · WATCH: {', '.join(pl['watch_cities'])}" if pl["watch_cities"] else ""),
+                      f"- {pl['monthly_searches']:,} searches/mo across these towns · best payout ${pl['best_payout']:.2f}",
+                      f"- Shape: {pl['shape']}",
+                      "",
+                      "1. **Confirm by eye** (free, 2 minutes) — page one should hold "
+                      "directories and out-of-town sites, not local pages built for the town:",
+                      *[f"   - {u}" for u in pl["manual_check"]],
+                      "2. **Confirm with LeadSmart** — the ZIPs are bought for this niche "
+                      "at call (not CPL), the billable duration, and the hours the buyer answers.",
+                      "3. **Keyword tool → Mode 5 Area Plan**",
+                      "",
+                      "   | Field | Value |", "   |---|---|",
+                      *[f"   | {k} | `{v}` |" for k, v in f1.items() if v != ""],
+                      "",
+                      "4. **Website builder → Mode 5** with the `.mode5.json` link from step 3",
+                      "",
+                      "   | Field | Value |", "   |---|---|",
+                      *[f"   | {k} | `{v}` |" for k, v in f2.items() if k != "extras"],
+                      f"   | extras | `{json.dumps(f2['extras'])}` |",
+                      "",
+                      "5. **After 3-4 weeks in GSC** — Mode 2 service pages under the area "
+                      "hubs that show impressions (the Mesa/Phoenix pattern, `m2_merge.py`).",
+                      ""]
+    elif scored:
+        lines += ["## Launch plan", "",
+                  "No city passed as GO. Nothing here is worth a domain yet — widen "
+                  "`states`, lower `min_payout`, or try another niche. WATCH rows are "
+                  "for a site that already exists in that state, not a new one.", ""]
+    if untested and scored:
+        lines += [f"## Not yet scanned ({len(untested)} cities)", "",
+                  "Next run: raise `max_serp_checks` — every SERP above comes from "
+                  "cache for free, so the credits go only to these.", "",
+                  "| City | Niche | Payout | Searches/mo |", "|---|---|---|---|"]
+        for c in untested[:15]:
+            lines.append(f"| {c['city']}, {c['state']} | {c['top_niche']} | ${c['top_payout']:.2f} "
+                         f"| {c.get('volume') if c.get('volume') is not None else '?'} |")
+        lines.append("")
     if scored:
-        lines += ["## Top 30 by opportunity", "",
+        lines += ["## All scored queries (top 30)", "",
                   "| # | Opp | SERP | Payout | Searches/mo | Pack | Query | Occupied by |",
                   "|---|---|---|---|---|---|---|---|"]
         for i, o in enumerate(scored[:30], 1):
@@ -1133,9 +1411,9 @@ def write(meta, cands, scored, pricing=None):
                   "at 2am. A 9-to-5 buyer drops exactly the traffic that converts "
                   "best.",
                   "",
-                  "Search volume is the third gate this scan skips — run the "
-                  "**Mode 5 Area Plan** workflow on the winning city with the "
-                  "*broad* service (not a sub-service) and `min_area_volume: 20`."]
+                  "Search volume is measured here only for the broad trade term. "
+                  "The Mode 5 Area Plan in the launch plan measures every town and "
+                  "keyword before a page is written."]
     else:
         lines += ["## Candidate cities (no SERP key — revenue side only)", "",
                   "| # | City | Niches | Top payout | Bundle | Pop | ZIPs |",
@@ -1153,7 +1431,9 @@ def write(meta, cands, scored, pricing=None):
         f.write("\n".join(lines) + "\n")
 
     print("── STAGE 5: written ───────────────────────────────────")
-    print("   📄 opportunities.json · opportunities.csv · opportunity_report.md")
+    print("   📄 opportunities.json · opportunities.csv · opportunity_report.md · launch_plan.json")
+    print(f"   🧭 {n_by['GO']} GO · {n_by['WATCH']} WATCH · {n_by['STOP']} STOP · "
+          f"{len(plans)} launch plan(s)")
 
 
 def main():
@@ -1172,8 +1452,8 @@ def main():
     if scored:
         print("\n🏆 TOP 10")
         for i, o in enumerate(scored[:10], 1):
-            print(f"  {i:2}. {o['opportunity']:6.0f}  SERP {o['serp_score']:3}  "
-                  f"${o['payout']:7.2f}  {o['query']}")
+            print(f"  {i:2}. {o.get('verdict', '?'):5}  SERP {o['serp_score']:3}  "
+                  f"${o['payout']:7.2f}  {str(o.get('volume', '?')):>5}/mo  {o['query']}")
     elif cands:
         print("\n🏆 TOP 10 CITIES (revenue side only)")
         for i, c in enumerate(cands[:10], 1):

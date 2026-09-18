@@ -872,12 +872,15 @@ def _serp_urls(keyword, gl, hl, num=10):
     if not key:
         return None
     try:
-        import urllib.parse, urllib.request
-        q = urllib.parse.urlencode({"engine": "google", "q": keyword,
-                                    "num": num, "gl": gl or "us",
-                                    "hl": hl or "en", "api_key": key})
-        with urllib.request.urlopen(f"https://serpapi.com/search?{q}", timeout=30) as r:
-            data = json.loads(r.read().decode("utf-8", "replace"))
+        # Shared cache (scripts/serp_client.py): a re-run of the same plan, or
+        # a query another workflow already read, costs no credit.
+        import serp_client
+        data, _err, _cached = serp_client.fetch({"engine": "google", "q": keyword,
+                                                 "num": num, "gl": gl or "us",
+                                                 "hl": hl or "en", "api_key": key},
+                                                timeout=30)
+        if data is None:
+            return None
         out = []
         for res in (data.get("organic_results") or [])[:num]:
             u = str(res.get("link") or "")

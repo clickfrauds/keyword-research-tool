@@ -8,3 +8,6 @@ serp_shape.md
 # opportunity_score run output — belongs in the workflow artifact
 opportunity_score.csv
 opportunity_score.md
+
+# SerpApi response cache (carried between runs by actions/cache)
+.serp_cache/

@@ -29,6 +29,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # Shared SerpApi cache (scripts/serp_client.py). Every SerpApi workflow
+      # restores and saves the same cache, so a SERP bought by one run is free
+      # to the next -- on a 250-search plan that is the difference between one
+      # scan a month and several.
+      - name: Restore SERP cache
+        uses: actions/cache/restore@v4
+        with:
+          path: .serp_cache
+          key: serp-cache-${{ github.run_id }}
+          restore-keys: serp-cache-
+
+
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
@@ -61,6 +73,14 @@ jobs:
           clean=$(printf '%s' "$raw" | tr -c 'A-Za-z0-9._-' '-' \
                   | sed 's/-\\+/-/g; s/^-//; s/-$//')
           echo "value=$clean" >> "$GITHUB_OUTPUT"
+
+      # Saved even when the run fails: the credits were spent either way.
+      - name: Save SERP cache
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: .serp_cache
+          key: serp-cache-${{ github.run_id }}
 
       - uses: actions/upload-artifact@v4
         if: always()

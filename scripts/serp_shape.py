@@ -42,6 +42,8 @@ import sys
 import urllib.error
 import urllib.parse
 import urllib.request
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import serp_client  # shared SerpApi cache: a SERP any workflow read recently is free
 
 KEY = os.environ.get("SERPAPI_API_KEY", "").strip()
 GL = os.environ.get("SERP_GL", "us")
@@ -144,26 +146,12 @@ def classify_host(host):
 
 
 def serp(query):
-    q = urllib.parse.urlencode({
+    data, err, _cached = serp_client.fetch({
         "engine": "google", "q": query, "gl": GL,
         "google_domain": GOOGLE_DOMAIN, "hl": "en", "num": "20",
         "api_key": KEY,
     })
-    try:
-        with urllib.request.urlopen(f"https://serpapi.com/search?{q}", timeout=40) as r:
-            data = json.loads(r.read().decode("utf-8", "replace"))
-    except urllib.error.HTTPError as e:
-        detail = ""
-        try:
-            detail = json.loads(e.read().decode("utf-8", "replace")).get("error", "")
-        except Exception:
-            pass
-        return None, f"HTTP {e.code} {detail}".strip()
-    except Exception as e:
-        return None, str(e)[:120]
-    if data.get("error"):
-        return None, data["error"]
-    return data, None
+    return data, err
 
 
 def shape(data):
