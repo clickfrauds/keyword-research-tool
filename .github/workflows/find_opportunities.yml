@@ -161,6 +161,7 @@ jobs:
           path: |
             opportunities.json
             opportunities.csv
+            opportunity_report.html
             opportunity_report.md
             launch_plan.json
             serp_debug.json

@@ -312,6 +312,9 @@ _CI_ALIAS = {
 MIN_REV_PER_CALL = float(os.environ.get("MIN_REV_PER_CALL", "15") or 15)
 
 _PAID_PCT = {}          # coverage-feed niche name -> paid %
+# How many survived each stage, for the report's funnel. Without it a run that
+# ends in "0 GO" cannot say whether the market is closed or the filters were.
+_FUNNEL = {}
 _MEDIAN = {}            # (niche, ptype) -> median payout, filled in stage 1
 
 
@@ -474,6 +477,7 @@ def pull_coverage():
         if i % 10 == 0 or i == len(states):
             print(f"   📦 {i}/{len(states)} states · {len(rows):,} rows")
     print(f"   ✅ {len(rows):,} coverage rows\n")
+    _FUNNEL["coverage rows"] = len(rows)
     return meta, rows
 
 
@@ -517,28 +521,36 @@ def shortlist(rows, pricing):
             continue
         if r["payout"] < MIN_PAYOUT:
             continue
+        # Niche filter before the economics gate, so the gate's report lists
+        # only niches this run asked about, not every cheap niche in the feed.
+        if NICHES and r["niche"] not in NICHES:
+            continue
         # Economics gate. MIN_PAYOUT only asks what the buyer pays; this asks
         # what a call is actually WORTH once the share that never pays is taken
         # out. Appliance clears a $35 payout filter on its best ZIPs while its
         # median is $6.88 and it is the highest-volume niche in the feed — the
         # exact shape that wastes a SERP budget. Niches with no call data pass
         # through untouched, so this can only ever remove a known-bad one.
-        _rev = revenue_per_call(r["niche"], r["ptype"])
+        # Call rows only: paid % is the share of CALLS that paid. Applied to a
+        # CPL row it would judge a lead by a call statistic.
+        _rev = revenue_per_call(r["niche"], r["ptype"]) if r["ptype"] == "Call" else None
         if _rev is not None and _rev < MIN_REV_PER_CALL:
-            drop_econ[r["niche"]] = drop_econ.get(r["niche"], 0) + 1
+            d = drop_econ.setdefault(r["niche"], {"rows": 0, "rev": _rev})
+            d["rows"] += 1
             continue
         if not (MIN_POP <= r["pop"] <= MAX_POP):
-            continue
-        if NICHES and r["niche"] not in NICHES:
             continue
         keep.append(r)
     print(f"   payout ≥ ${MIN_PAYOUT:g} · rev/call ≥ ${MIN_REV_PER_CALL:g} "
           f"· pop {MIN_POP:,}-{MAX_POP:,} · type {PAYOUT_T}")
-    for _n, _c in sorted(drop_econ.items(), key=lambda kv: -kv[1]):
-        print(f"   ⛔ {_n:<16} {_c:>7,} rows dropped — "
-              f"${revenue_per_call(_n, PAYOUT_T):.2f}/call "
-              f"(median ${_MEDIAN[(_n, PAYOUT_T)]:.2f} x {_PAID_PCT[_n]}% paid)")
+    # The old line looked the median up under PAYOUT_T, which is "both" on a
+    # both-types run — a KeyError the moment the gate first fired.
+    for _n, _d in sorted(drop_econ.items(), key=lambda kv: -kv[1]["rows"]):
+        print(f"   ⛔ {_n:<16} {_d['rows']:>7,} rows dropped — "
+              f"${_d['rev']:.2f}/call ({_PAID_PCT.get(_n, '?')}% of calls paid)")
+    _FUNNEL["economics dropped"] = {n: round(d["rev"], 2) for n, d in drop_econ.items()}
     print(f"   ✅ {len(rows):,} → {len(keep):,} rows\n")
+    _FUNNEL["rows after payout/pop filter"] = len(keep)
 
     print("── STAGE 3: city rollup + bundles ─────────────────────")
     cities = {}
@@ -577,6 +589,7 @@ def shortlist(rows, pricing):
     out.sort(key=lambda c: -c["bundle_value"])
     multi = sum(1 for c in out if len(c["niche_list"]) > 1)
     print(f"   ✅ {len(out):,} candidate cities · {multi:,} with 2+ niches\n")
+    _FUNNEL["candidate cities"] = len(out)
     return out
 
 
@@ -640,6 +653,7 @@ def demand(cands):
     keep.sort(key=lambda c: -((c.get("volume") or 0) * c["bundle_value"]))
     print(f"   measured {measured} cities · min {MIN_VOLUME}/mo · "
           f"{len(cands)} → {len(keep)} kept")
+    _FUNNEL["cities with enough searches"] = len(keep)
     for c in keep[:10]:
         print(f"      {c.get('volume', '?'):>6}/mo  ${c['top_payout']:.0f}  {c['city']}, {c['state']}")
     print()
@@ -1284,6 +1298,10 @@ def write(meta, cands, scored, pricing=None):
         json.dump(payload, f, indent=2)
     with open("launch_plan.json", "w", encoding="utf-8") as f:
         json.dump(plans, f, indent=2)
+    try:
+        write_html(payload, scored, untested)
+    except Exception as e:  # the report is a view; it must never fail the run
+        print(f"   ⚠️ html report skipped: {e}")
 
     with open("opportunities.csv", "w", newline="", encoding="utf-8") as f:
         w = csv.writer(f)
@@ -1443,9 +1461,185 @@ def write(meta, cands, scored, pricing=None):
         f.write("\n".join(lines) + "\n")
 
     print("── STAGE 5: written ───────────────────────────────────")
-    print("   📄 opportunities.json · opportunities.csv · opportunity_report.md · launch_plan.json")
+    print("   📄 opportunity_report.html · opportunities.json · opportunities.csv · "
+          "opportunity_report.md · launch_plan.json")
     print(f"   🧭 {n_by['GO']} GO · {n_by['WATCH']} WATCH · {n_by['STOP']} STOP · "
           f"{len(plans)} launch plan(s)")
+
+
+# ══════════════════════════════════════════════════════════════════
+# STAGE 5c — the readable report (opportunity_report.html)
+# ══════════════════════════════════════════════════════════════════
+# The markdown is for the Actions summary. Opened anywhere else it is a wall of
+# pipes and <details> tags, so the decision — which cities, why, what to do
+# next — is rendered as one self-contained page: no scripts, no external
+# files, opens from the downloaded artifact in any browser.
+_CSS = """
+:root{--bg:#f6f7f9;--card:#fff;--ink:#16202b;--mute:#5d6b7a;--line:#e1e5ea;
+--go:#127a3e;--gobg:#e3f4ea;--watch:#8a5a00;--watchbg:#fbf0d9;--stop:#b3261e;--stopbg:#fbe5e3;--acc:#1f5fbf}
+@media(prefers-color-scheme:dark){:root{--bg:#11161c;--card:#1a2129;--ink:#e6ebf0;--mute:#98a6b5;--line:#2c3643;
+--go:#5fd08d;--gobg:#16301f;--watch:#f0c060;--watchbg:#352a12;--stop:#ff8a80;--stopbg:#3a1a18;--acc:#7fb0ff}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);
+font:15px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:1060px;margin:0 auto;padding:24px 16px 60px}
+h1{font-size:1.6rem;margin:0 0 4px}h2{font-size:1.15rem;margin:34px 0 10px}h3{font-size:1rem;margin:18px 0 6px}
+.sub{color:var(--mute);margin:0 0 18px}.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px 18px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.tile b{display:block;font-size:1.5rem;font-variant-numeric:tabular-nums}.tile span{color:var(--mute);font-size:.85rem}
+.answer{border-left:5px solid var(--acc);padding:14px 18px;background:var(--card);border-radius:8px;font-size:1.02rem}
+.funnel{display:flex;flex-wrap:wrap;gap:6px;align-items:center;color:var(--mute);font-size:.9rem}
+.funnel b{color:var(--ink);font-variant-numeric:tabular-nums}
+.scroll{overflow-x:auto}table{width:100%;border-collapse:collapse;font-size:.92rem}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--mute);font-weight:600;font-size:.8rem;text-transform:uppercase;letter-spacing:.04em}
+td.n{font-variant-numeric:tabular-nums;white-space:nowrap}
+.chip{display:inline-block;padding:2px 9px;border-radius:99px;font-weight:700;font-size:.78rem;letter-spacing:.03em}
+.GO{color:var(--go);background:var(--gobg)}.WATCH{color:var(--watch);background:var(--watchbg)}.STOP{color:var(--stop);background:var(--stopbg)}
+ul.occ{margin:4px 0 0;padding-left:18px;color:var(--mute);font-size:.85rem}
+a{color:var(--acc)}code{background:var(--bg);border:1px solid var(--line);border-radius:4px;padding:1px 5px;font-size:.88em}
+.legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px}
+.legend div{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-size:.9rem}
+ol.steps li{margin:6px 0}.muted{color:var(--mute)}
+"""
+
+
+def write_html(payload, scored, untested):
+    from html import escape as E
+    cities = payload["cities"]
+    plans = payload["launch_plan"]
+    vc = payload["verdict_counts"]
+    cr = payload["serp_credits"]
+    f = payload["filters"]
+    by_city = {}
+    for o in scored:
+        by_city.setdefault((o["city"], o["state"]), []).append(o)
+
+    # The one-paragraph answer. Everything else on the page supports it.
+    if vc["GO"]:
+        answer = (f"<b>{vc['GO']} {'city is' if vc['GO'] == 1 else 'cities are'} open.</b> "
+                  f"Check them by eye (links below), confirm the ZIPs with LeadSmart, then "
+                  f"follow the launch plan — every form is already filled in.")
+    elif vc["WATCH"]:
+        answer = (f"<b>No city is clearly open.</b> {vc['WATCH']} are borderline (WATCH): "
+                  f"worth an area page on a site you already run in that state, "
+                  f"not a new domain.")
+    elif cities:
+        answer = ("<b>Every city scanned is taken.</b> Local companies already have "
+                  "pages built for these towns. Nothing here is worth a domain — "
+                  "scan the untested cities below, or another niche or state.")
+    else:
+        answer = ("<b>Nothing was SERP-checked.</b> Either the filters left no city, "
+                  "or no SerpApi key/credits were available. The funnel below shows where "
+                  "the cities went.")
+
+    fun = []
+    for k in ("coverage rows", "rows after payout/pop filter", "candidate cities",
+              "cities with enough searches"):
+        if k in _FUNNEL:
+            fun.append(f"<span><b>{_FUNNEL[k]:,}</b> {E(k)}</span>")
+    fun.append(f"<span><b>{len(cities)}</b> cities SERP-checked</span>")
+    fun.append(f"<span><b>{vc['GO']}</b> GO</span>")
+    dropped = _FUNNEL.get("economics dropped") or {}
+
+    h = ["<!doctype html><html lang='en'><head><meta charset='utf-8'>",
+         "<meta name='viewport' content='width=device-width,initial-scale=1'>",
+         f"<title>Opportunity Scan {E(str(payload.get('dataset_date') or ''))}</title>",
+         f"<style>{_CSS}</style></head><body><main>",
+         "<h1>Opportunity scan</h1>",
+         f"<p class='sub'>{E(', '.join(f['niches']) if isinstance(f['niches'], list) else 'All niches')} · "
+         f"{E(', '.join(f['states']) if isinstance(f['states'], list) else 'all states')} · "
+         f"{E(f['payout_type'])} payout ≥ ${f['min_payout']:g} · "
+         f"population {f['population'][0]:,}–{f['population'][1]:,} · data {E(str(payload.get('dataset_date')))} · "
+         f"run {E(payload['generated'])}</p>",
+         f"<div class='answer'>{answer}</div>",
+         "<h2>At a glance</h2><div class='tiles'>",
+         f"<div class='tile'><b class='chip GO' style='font-size:1.3rem'>{vc['GO']}</b><span>GO — open, build here</span></div>",
+         f"<div class='tile'><b class='chip WATCH' style='font-size:1.3rem'>{vc['WATCH']}</b><span>WATCH — borderline</span></div>",
+         f"<div class='tile'><b class='chip STOP' style='font-size:1.3rem'>{vc['STOP']}</b><span>STOP — already taken</span></div>",
+         f"<div class='tile'><b>{cr.get('spent', 0)}</b><span>SerpApi credits spent</span></div>",
+         f"<div class='tile'><b>{cr.get('cached', 0)}</b><span>SERPs free from cache</span></div>",
+         f"<div class='tile'><b>{len(untested)}</b><span>cities not yet checked</span></div>",
+         "</div>",
+         "<h2>How the cities were narrowed</h2>",
+         "<div class='card'><div class='funnel'>" + " → ".join(fun) + "</div>"]
+    if dropped:
+        h.append("<p class='muted' style='margin:10px 0 0'>Removed as not worth a call: "
+                 + ", ".join(f"{E(n)} (${v:.2f}/call)" for n, v in dropped.items()) + "</p>")
+    h.append("</div>")
+
+    # ── verdict table ───────────────────────────────────────────────────
+    h.append("<h2>Every city checked</h2>")
+    if cities:
+        h += ["<div class='card scroll'><table><thead><tr><th>Verdict</th><th>City</th>"
+              "<th>Payout</th><th>Searches/mo</th><th>Why</th><th>Who holds page one</th></tr></thead><tbody>"]
+        for c in cities:
+            occ = []
+            for o in by_city.get((c["city"], c["state"]), []):
+                for x in o["occupants"]:
+                    if x["kind"] not in ("directory", "social profile", "forum"):
+                        occ.append(f"{E(x['host'])} <span class='muted'>({E(x['kind'])})</span>")
+            occ = list(dict.fromkeys(occ))[:6]
+            why = "<br>".join(E(w.replace("`", "")) for w in c["why"][:3])
+            q = c["queries"][0]["query"] if c["queries"] else ""
+            link = "https://www.google.com/search?" + urllib.parse.urlencode({"q": q})
+            h.append(
+                f"<tr><td><span class='chip {c['verdict']}'>{c['verdict']}</span></td>"
+                f"<td><b>{E(c['city'])}, {E(c['state'])}</b><br><a href='{E(link)}' target='_blank' rel='noopener'>see on Google</a></td>"
+                f"<td class='n'>${c['payout']:.2f}</td>"
+                f"<td class='n'>{c['volume'] if c['volume'] is not None else '?'}</td>"
+                f"<td>{why}</td>"
+                f"<td>{'<ul class=occ><li>' + '</li><li>'.join(occ) + '</li></ul>' if occ else '<span class=muted>only directories</span>'}</td></tr>")
+        h.append("</tbody></table></div>")
+    else:
+        h.append("<p class='muted'>No city was SERP-checked in this run.</p>")
+
+    # ── launch plan ─────────────────────────────────────────────────────
+    if plans:
+        h.append("<h2>Launch plan</h2>")
+        for pl in plans[:5]:
+            f1 = pl["forms"]["1_keyword_tool_mode5_area_plan"]
+            f2 = pl["forms"]["2_builder_mode5"]
+            rows1 = "".join(f"<tr><td>{E(k)}</td><td><code>{E(str(v))}</code></td></tr>" for k, v in f1.items() if v != "")
+            rows2 = "".join(f"<tr><td>{E(k)}</td><td><code>{E(json.dumps(v) if isinstance(v, dict) else str(v))}</code></td></tr>"
+                            for k, v in f2.items())
+            h += [f"<div class='card' style='margin-bottom:14px'><h3>{E(pl['state_name'])} · {E(pl['niche'])}</h3>",
+                  f"<p><span class='chip GO'>GO</span> {E(', '.join(pl['go_cities']))}"
+                  + (f" &nbsp;<span class='chip WATCH'>WATCH</span> {E(', '.join(pl['watch_cities']))}" if pl["watch_cities"] else "")
+                  + f"<br><span class='muted'>{pl['monthly_searches']:,} searches/mo · best payout ${pl['best_payout']:.2f} · {E(pl['shape'])}</span></p>",
+                  "<ol class='steps'>",
+                  "<li><b>Look yourself</b> (free): page one should be directories and out-of-town sites, not pages built for the town. "
+                  + " · ".join(f"<a href='{E(u)}' target='_blank' rel='noopener'>{E(urllib.parse.parse_qs(urllib.parse.urlparse(u).query)['q'][0])}</a>" for u in pl["manual_check"]) + "</li>",
+                  "<li><b>Ask LeadSmart</b>: are these ZIPs bought for this niche on calls, what call length pays, and what hours the buyer answers.</li>",
+                  f"<li><b>Keyword tool → Mode 5 Area Plan</b><div class='scroll'><table>{rows1}</table></div></li>",
+                  f"<li><b>Website builder → Mode 5</b> with the <code>.mode5.json</code> link from step 3<div class='scroll'><table>{rows2}</table></div></li>",
+                  "<li><b>After 3–4 weeks</b>: Mode 2 service pages under the area pages that show impressions in Search Console.</li>",
+                  "</ol></div>"]
+
+    # ── untested ────────────────────────────────────────────────────────
+    if untested and cities:
+        h += [f"<h2>Not checked yet ({len(untested)})</h2>",
+              "<p class='muted'>Next run: raise <code>max_serp_checks</code>. Cities already checked come back free from cache, so credits go only to these.</p>",
+              "<div class='card scroll'><table><thead><tr><th>City</th><th>Niche</th><th>Payout</th><th>Searches/mo</th></tr></thead><tbody>"]
+        for c in untested[:25]:
+            h.append(f"<tr><td>{E(c['city'])}, {E(c['state'])}</td><td>{E(c['top_niche'])}</td>"
+                     f"<td class='n'>${c['top_payout']:.2f}</td><td class='n'>{c.get('volume') if c.get('volume') is not None else '?'}</td></tr>")
+        h.append("</tbody></table></div>")
+
+    h += ["<h2>What the verdicts mean</h2><div class='legend'>",
+          "<div><span class='chip GO'>GO</span> Every query checked is open: no city domain, no page network, "
+          f"no local company with a page for this town, SERP score ≥ {GO_SCORE}, at least {GO_VOLUME} searches a month.</div>",
+          "<div><span class='chip WATCH'>WATCH</span> Close but not clean — one competitor page, a strong map pack, "
+          "a low score or low/unknown searches. Fine as an extra area page, not a new domain.</div>",
+          "<div><span class='chip STOP'>STOP</span> A city domain, a programmatic network, two or more local pages "
+          "built for this town, or a map pack at 500+ reviews. A new site will not get past them.</div>",
+          "</div>",
+          "<p class='muted' style='margin-top:18px'>A city is judged on its worst query. Population figures come from the "
+          "coverage feed and are often the nearest large city's, so searches/mo is the demand number to trust. "
+          "Before buying a domain, LeadSmart must confirm the call length that pays and the buyer's hours — no data feed has those.</p>",
+          "</main></body></html>"]
+    with open("opportunity_report.html", "w", encoding="utf-8") as fh:
+        fh.write("\n".join(h))
 
 
 def main():
