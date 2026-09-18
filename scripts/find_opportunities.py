@@ -679,6 +679,27 @@ def score_serp(data, service, city):
     if not results:
         return None
 
+    # GUARD — is page one even about the service? hvac-az-01 ranked
+    # "hvac tune up Scottsdale AZ" #1 on a page of tune.com, acousticguitar.com
+    # and apps.apple.com, "ac repair Chandler AZ" #4 on gottman.com and
+    # arpa-e.energy.gov, and Rio Rico, Sierra Vista and Cortaro all on the same
+    # list of az.gov pages. None of those results mention air conditioning, so
+    # none of them is a competitor, and a page with no competitors scored as
+    # wide open. Google did not answer the query that was asked; refuse it.
+    # Only the words that name the trade. "repair" and "tune" match
+    # gottman.com's "repair attempts" and tune.com as happily as an AC page.
+    _generic = {"repair", "repairs", "service", "services", "installation", "install",
+                "replacement", "replace", "tune", "cost", "near", "company", "emergency",
+                "maintenance", "inspection", "cleaning", "upgrade", "removal", "local"}
+    _topic = {w for w in re.split(r"\W+", service.lower()) if len(w) > 3 and w not in _generic}
+    if re.search(r"\b(ac|hvac|a/c)\b", service.lower()):
+        _topic |= {"hvac", "air conditioning", "cooling", "heating", "air condition"}
+    _hits = sum(1 for r in results
+                if any(t in f"{r.get('title', '')} {r.get('link', '')} {r.get('snippet', '')}".lower()
+                       for t in _topic))
+    if _topic and _hits < 3:
+        return None
+
     # GATE 07 — map pack. In most local service niches the pack takes the
     # majority of the clicks, so an open organic SERP sitting under three
     # 500-review businesses is not the opportunity it looks like. This rides
