@@ -1,0 +1,5065 @@
+{
+  "pricing_model_by_niche": {
+    "Plumbing (CPL)": {
+      "distinct": 1,
+      "mode": "flat"
+    },
+    "Electrical (Call)": {
+      "distinct": 24,
+      "mode": "geo"
+    },
+    "Appliance (Call)": {
+      "distinct": 32,
+      "mode": "geo"
+    },
+    "HVAC (Call)": {
+      "distinct": 37,
+      "mode": "geo"
+    },
+    "Water Damage (CPL)": {
+      "distinct": 1,
+      "mode": "flat"
+    },
+    "Bathroom Remodeling (Call)": {
+      "distinct": 23,
+      "mode": "geo"
+    },
+    "Mold Removal (CPL)": {
+      "distinct": 1,
+      "mode": "flat"
+    },
+    "Pest Control (Call)": {
+      "distinct": 1,
+      "mode": "flat"
+    },
+    "Fire Damage Removal (CPL)": {
+      "distinct": 3,
+      "mode": "flat"
+    },
+    "Roofing (Call)": {
+      "distinct": 32,
+      "mode": "geo"
+    },
+    "Plumbing (Call)": {
+      "distinct": 84,
+      "mode": "geo"
+    },
+    "Biohazard (CPL)": {
+      "distinct": 1,
+      "mode": "flat"
+    },
+    "Gutters (Call)": {
+      "distinct": 1,
+      "mode": "flat"
+    },
+    "Kitchen (CPL)": {
+      "distinct": 1,
+      "mode": "flat"
+    },
+    "Garage Door (CPL)": {
+      "distinct": 1,
+      "mode": "flat"
+    },
+    "Tree Services (Call)": {
+      "distinct": 1,
+      "mode": "flat"
+    }
+  },
+  "generated": "2026-09-18 16:38 UTC",
+  "dataset_date": "2026-09-17",
+  "filters": {
+    "payout_type": "Call",
+    "min_payout": 35.0,
+    "population": [
+      15000,
+      400000
+    ],
+    "niches": [
+      "HVAC"
+    ],
+    "states": [
+      "AZ"
+    ],
+    "min_bundle_niches": 1
+  },
+  "candidate_cities": 44,
+  "serp_scanned": 58,
+  "opportunities": [
+    {
+      "city": "Scottsdale",
+      "state": "AZ",
+      "county": "Maricopa",
+      "population": 243821,
+      "zips": 15,
+      "niche": "HVAC",
+      "sub_service": "hvac tune up",
+      "query": "hvac tune up Scottsdale AZ",
+      "payout": 75.6,
+      "pricing": "geo",
+      "bundle_value": 75.6,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 75.6,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 92,
+      "serp_breakdown": {
+        "dedicated": 0,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 3,
+        "forum": 1,
+        "other_local": 5,
+        "results": 9,
+        "pack_size": 4,
+        "pack_top_reviews": 5300,
+        "pack_median_reviews": 2345
+      },
+      "occupants": [
+        {
+          "host": "gohunt.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "youtube.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "reddit.com",
+          "kind": "forum"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "youtube.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "acousticguitar.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "tune.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "apps.apple.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "tuneandfairweather.com",
+          "kind": "independent site"
+        }
+      ],
+      "opportunity": 69.55
+    },
+    {
+      "city": "Waddell",
+      "state": "AZ",
+      "county": "Maricopa",
+      "population": 252833,
+      "zips": 1,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair Waddell AZ",
+      "payout": 60.95,
+      "pricing": "geo",
+      "bundle_value": 60.95,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 60.95,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 100,
+      "serp_breakdown": {
+        "dedicated": 0,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 7,
+        "forum": 0,
+        "other_local": 2,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 225,
+        "pack_median_reviews": 123
+      },
+      "occupants": [
+        {
+          "host": "youtube.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "youtube.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "youtube.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "youtube.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "arpa-e.energy.gov",
+          "kind": "independent site"
+        },
+        {
+          "host": "gottman.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "youtube.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "youtube.com",
+          "kind": "social profile"
+        }
+      ],
+      "opportunity": 60.95
+    },
+    {
+      "city": "Waddell",
+      "state": "AZ",
+      "county": "Maricopa",
+      "population": 252833,
+      "zips": 1,
+      "niche": "HVAC",
+      "sub_service": "hvac tune up",
+      "query": "hvac tune up Waddell AZ",
+      "payout": 60.95,
+      "pricing": "geo",
+      "bundle_value": 60.95,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 60.95,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 100,
+      "serp_breakdown": {
+        "dedicated": 0,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 4,
+        "forum": 1,
+        "other_local": 4,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 123,
+        "pack_median_reviews": 69
+      },
+      "occupants": [
+        {
+          "host": "youtube.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "pontotoctech.edu",
+          "kind": "independent site"
+        },
+        {
+          "host": "youtube.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "vaisala.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "youtube.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "fscj.edu",
+          "kind": "independent site"
+        },
+        {
+          "host": "lamarpa.edu",
+          "kind": "independent site"
+        },
+        {
+          "host": "reddit.com",
+          "kind": "forum"
+        },
+        {
+          "host": "youtube.com",
+          "kind": "social profile"
+        }
+      ],
+      "opportunity": 60.95
+    },
+    {
+      "city": "Chandler",
+      "state": "AZ",
+      "county": "Maricopa",
+      "population": 280136,
+      "zips": 8,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair Chandler AZ",
+      "payout": 63.0,
+      "pricing": "geo",
+      "bundle_value": 63.0,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 63.0,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 88,
+      "serp_breakdown": {
+        "dedicated": 0,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 5,
+        "forum": 0,
+        "other_local": 4,
+        "results": 9,
+        "pack_size": 4,
+        "pack_top_reviews": 1800,
+        "pack_median_reviews": 988
+      },
+      "occupants": [
+        {
+          "host": "youtube.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "youtube.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "youtube.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "arpa-e.energy.gov",
+          "kind": "independent site"
+        },
+        {
+          "host": "gottman.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "gottman.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "youtube.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "comment.org",
+          "kind": "independent site"
+        }
+      ],
+      "opportunity": 55.44
+    },
+    {
+      "city": "Cashion",
+      "state": "AZ",
+      "county": "Maricopa",
+      "population": 92477,
+      "zips": 1,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair Cashion AZ",
+      "payout": 53.21,
+      "pricing": "geo",
+      "bundle_value": 53.21,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 53.21,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 92,
+      "serp_breakdown": {
+        "dedicated": 0,
+        "pseo": 0,
+        "national": 1,
+        "emd": 0,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 5,
+        "results": 9,
+        "pack_size": 4,
+        "pack_top_reviews": 7100,
+        "pack_median_reviews": 14
+      },
+      "occupants": [
+        {
+          "host": "homedepot.com",
+          "kind": "national brand"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "arizonaacandheating.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "wiiautorepair.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "cluffmechanical.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "affordableavondaleacrepair.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "viking-hvac.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "yellowpages.com",
+          "kind": "directory"
+        }
+      ],
+      "opportunity": 48.95
+    },
+    {
+      "city": "Rio Rico",
+      "state": "AZ",
+      "county": "Santa Cruz",
+      "population": 22017,
+      "zips": 1,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair Rio Rico AZ",
+      "payout": 52.25,
+      "pricing": "geo",
+      "bundle_value": 52.25,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 52.25,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 84,
+      "serp_breakdown": {
+        "dedicated": 0,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 1,
+        "forum": 0,
+        "other_local": 8,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 53,
+        "pack_median_reviews": 12
+      },
+      "occupants": [
+        {
+          "host": "irc.az.gov",
+          "kind": "independent site"
+        },
+        {
+          "host": "azdot.gov",
+          "kind": "independent site"
+        },
+        {
+          "host": "youtube.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "wildlandfire.az.gov",
+          "kind": "independent site"
+        },
+        {
+          "host": "az.gov",
+          "kind": "independent site"
+        },
+        {
+          "host": "azbn.boardsofnursing.org",
+          "kind": "independent site"
+        },
+        {
+          "host": "azsos.gov",
+          "kind": "independent site"
+        },
+        {
+          "host": "kidsa-z.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "difi.az.gov",
+          "kind": "independent site"
+        }
+      ],
+      "opportunity": 43.89
+    },
+    {
+      "city": "Sierra Vista",
+      "state": "AZ",
+      "county": "Cochise",
+      "population": 45155,
+      "zips": 4,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair Sierra Vista AZ",
+      "payout": 52.25,
+      "pricing": "geo",
+      "bundle_value": 52.25,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 52.25,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 80,
+      "serp_breakdown": {
+        "dedicated": 0,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 6,
+        "results": 9,
+        "pack_size": 4,
+        "pack_top_reviews": 1200,
+        "pack_median_reviews": 885
+      },
+      "occupants": [
+        {
+          "host": "youtube.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "irc.az.gov",
+          "kind": "independent site"
+        },
+        {
+          "host": "azdot.gov",
+          "kind": "independent site"
+        },
+        {
+          "host": "youtube.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "open.spotify.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "youtube.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "wildlandfire.az.gov",
+          "kind": "independent site"
+        },
+        {
+          "host": "az.gov",
+          "kind": "independent site"
+        },
+        {
+          "host": "azbn.boardsofnursing.org",
+          "kind": "independent site"
+        }
+      ],
+      "opportunity": 41.8
+    },
+    {
+      "city": "Cortaro",
+      "state": "AZ",
+      "county": "Pima",
+      "population": 56938,
+      "zips": 1,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair Cortaro AZ",
+      "payout": 55.0,
+      "pricing": "geo",
+      "bundle_value": 55.0,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 55.0,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 66,
+      "serp_breakdown": {
+        "dedicated": 0,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 1,
+        "forum": 0,
+        "other_local": 8,
+        "results": 9,
+        "pack_size": 4,
+        "pack_top_reviews": 13000,
+        "pack_median_reviews": 1779
+      },
+      "occupants": [
+        {
+          "host": "irc.az.gov",
+          "kind": "independent site"
+        },
+        {
+          "host": "azdot.gov",
+          "kind": "independent site"
+        },
+        {
+          "host": "youtube.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "wildlandfire.az.gov",
+          "kind": "independent site"
+        },
+        {
+          "host": "az.gov",
+          "kind": "independent site"
+        },
+        {
+          "host": "azbn.boardsofnursing.org",
+          "kind": "independent site"
+        },
+        {
+          "host": "azsos.gov",
+          "kind": "independent site"
+        },
+        {
+          "host": "kidsa-z.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "difi.az.gov",
+          "kind": "independent site"
+        }
+      ],
+      "opportunity": 36.3
+    },
+    {
+      "city": "Higley",
+      "state": "AZ",
+      "county": "Maricopa",
+      "population": 280262,
+      "zips": 1,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair Higley AZ",
+      "payout": 45.5,
+      "pricing": "geo",
+      "bundle_value": 45.5,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 45.5,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 58,
+      "serp_breakdown": {
+        "dedicated": 1,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 2,
+        "forum": 0,
+        "other_local": 6,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 1078,
+        "pack_median_reviews": 375
+      },
+      "occupants": [
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "serviceexperts.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "justcalljohns.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "simplythebestac.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "cbac.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "guildquality.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "pineappleairaz.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "felixappliancerepair.net",
+          "kind": "independent site"
+        }
+      ],
+      "opportunity": 26.39
+    },
+    {
+      "city": "Prescott Valley",
+      "state": "AZ",
+      "county": "Yavapai",
+      "population": 98921,
+      "zips": 3,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair Prescott Valley AZ",
+      "payout": 57.75,
+      "pricing": "geo",
+      "bundle_value": 57.75,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 57.75,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 34,
+      "serp_breakdown": {
+        "dedicated": 3,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 2,
+        "forum": 0,
+        "other_local": 3,
+        "results": 8,
+        "pack_size": 3,
+        "pack_top_reviews": 2177,
+        "pack_median_reviews": 407
+      },
+      "occupants": [
+        {
+          "host": "junglecatheatingandcooling.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "advantagehomeperformance.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "moyershvac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "nazair.net",
+          "kind": "independent site"
+        },
+        {
+          "host": "kirbyautomotiveaz.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "acmedicaz.com",
+          "kind": "independent site"
+        }
+      ],
+      "opportunity": 19.64
+    },
+    {
+      "city": "Fort Huachuca",
+      "state": "AZ",
+      "county": "Cochise",
+      "population": 45155,
+      "zips": 2,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair Fort Huachuca AZ",
+      "payout": 52.25,
+      "pricing": "geo",
+      "bundle_value": 52.25,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 52.25,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 35,
+      "serp_breakdown": {
+        "dedicated": 2,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 4,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 820,
+        "pack_median_reviews": 119
+      },
+      "occupants": [
+        {
+          "host": "temp-con.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "onehourheatandair.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "homeyou.com",
+          "kind": "directory"
+        },
+        {
+          "host": "autologicaz.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "yellowpages.com",
+          "kind": "directory"
+        },
+        {
+          "host": "vista-pros.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "struseplumbing.net",
+          "kind": "independent site"
+        },
+        {
+          "host": "m.yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "precisioncomfortac.com",
+          "kind": "independent site"
+        }
+      ],
+      "opportunity": 18.29
+    },
+    {
+      "city": "Sun City West",
+      "state": "AZ",
+      "county": "Maricopa",
+      "population": 27425,
+      "zips": 2,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair Sun City West AZ",
+      "payout": 45.5,
+      "pricing": "geo",
+      "bundle_value": 45.5,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 45.5,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 35,
+      "serp_breakdown": {
+        "dedicated": 3,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 3,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 58,
+        "pack_median_reviews": 7
+      },
+      "occupants": [
+        {
+          "host": "trane.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "bellairconditioningaz.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "morehartac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "homedepot.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "angi.com",
+          "kind": "directory"
+        },
+        {
+          "host": "alaskanac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "championair.com",
+          "kind": "independent site"
+        }
+      ],
+      "opportunity": 15.92
+    },
+    {
+      "city": "Fountain Hills",
+      "state": "AZ",
+      "county": "Maricopa",
+      "population": 23789,
+      "zips": 2,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair Fountain Hills AZ",
+      "payout": 49.0,
+      "pricing": "geo",
+      "bundle_value": 49.0,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 49.0,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 32,
+      "serp_breakdown": {
+        "dedicated": 4,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 2,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 578,
+        "pack_median_reviews": 41
+      },
+      "occupants": [
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "redmountainair.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "shadrachplumbingcooling.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "larsonairaz.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "angi.com",
+          "kind": "directory"
+        },
+        {
+          "host": "fhairconditioning.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "masonproservices.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "asavingsair.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 15.68
+    },
+    {
+      "city": "Fort Mohave",
+      "state": "AZ",
+      "county": "Mohave",
+      "population": 15715,
+      "zips": 1,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair Fort Mohave AZ",
+      "payout": 40.7,
+      "pricing": "geo",
+      "bundle_value": 40.7,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 40.7,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 32,
+      "serp_breakdown": {
+        "dedicated": 4,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 2,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 336,
+        "pack_median_reviews": 54
+      },
+      "occupants": [
+        {
+          "host": "aircontrolaz.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "advtireautorepair.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "horizonairconditioning.net",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "angi.com",
+          "kind": "directory"
+        },
+        {
+          "host": "bychoiceair.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "addairincaz.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "us-ac.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 13.02
+    },
+    {
+      "city": "Douglas",
+      "state": "AZ",
+      "county": "Cochise",
+      "population": 15981,
+      "zips": 3,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair Douglas AZ",
+      "payout": 52.25,
+      "pricing": "geo",
+      "bundle_value": 52.25,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 52.25,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 22,
+      "serp_breakdown": {
+        "dedicated": 5,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 4,
+        "forum": 0,
+        "other_local": 0,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 24,
+        "pack_median_reviews": 18
+      },
+      "occupants": [
+        {
+          "host": "homedepot.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "mountainviewac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        },
+        {
+          "host": "onehourheatandair.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "walmart.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "struseplumbing.net",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "angi.com",
+          "kind": "directory"
+        }
+      ],
+      "opportunity": 11.49
+    },
+    {
+      "city": "Nogales",
+      "state": "AZ",
+      "county": "Santa Cruz",
+      "population": 19841,
+      "zips": 1,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair Nogales AZ",
+      "payout": 52.25,
+      "pricing": "geo",
+      "bundle_value": 52.25,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 52.25,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 22,
+      "serp_breakdown": {
+        "dedicated": 5,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 4,
+        "forum": 0,
+        "other_local": 0,
+        "results": 9,
+        "pack_size": 4,
+        "pack_top_reviews": 42,
+        "pack_median_reviews": 31
+      },
+      "occupants": [
+        {
+          "host": "bustamanterefrigeration.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "frontierheatingandcooling.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "alaskanac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "homedepot.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "leyvarefrigerationllc.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "homeadvisor.com",
+          "kind": "directory"
+        },
+        {
+          "host": "angi.com",
+          "kind": "directory"
+        }
+      ],
+      "opportunity": 11.49
+    },
+    {
+      "city": "Apache Junction",
+      "state": "AZ",
+      "county": "Pinal",
+      "population": 41058,
+      "zips": 3,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair Apache Junction AZ",
+      "payout": 53.21,
+      "pricing": "geo",
+      "bundle_value": 53.21,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 53.21,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 20,
+      "serp_breakdown": {
+        "dedicated": 4,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 2,
+        "results": 9,
+        "pack_size": 4,
+        "pack_top_reviews": 1800,
+        "pack_median_reviews": 225
+      },
+      "occupants": [
+        {
+          "host": "superstitioncooling.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "azequitech.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "masonproservices.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "alaskanac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "therusticwrench.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "angi.com",
+          "kind": "directory"
+        },
+        {
+          "host": "bumblebeeairconditioning.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 10.64
+    },
+    {
+      "city": "New River",
+      "state": "AZ",
+      "county": "Maricopa",
+      "population": 18240,
+      "zips": 1,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair New River AZ",
+      "payout": 45.5,
+      "pricing": "geo",
+      "bundle_value": 45.5,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 45.5,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 22,
+      "serp_breakdown": {
+        "dedicated": 5,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 4,
+        "forum": 0,
+        "other_local": 0,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 346,
+        "pack_median_reviews": 4
+      },
+      "occupants": [
+        {
+          "host": "larsonairaz.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "servicekingllc.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "morehartac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "veteransacphx.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "goettlshdm.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "xtremeairaz.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "mapquest.com",
+          "kind": "directory"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        }
+      ],
+      "opportunity": 10.01
+    },
+    {
+      "city": "Lake Havasu City",
+      "state": "AZ",
+      "county": "Mohave",
+      "population": 58359,
+      "zips": 3,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair Lake Havasu City AZ",
+      "payout": 51.8,
+      "pricing": "geo",
+      "bundle_value": 51.8,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 51.8,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 14,
+      "serp_breakdown": {
+        "dedicated": 4,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 2,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 4125,
+        "pack_median_reviews": 1094
+      },
+      "occupants": [
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "allamericanairlhc.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "aircontrolaz.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "semperairsolutions.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "fayetteac.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "joesautorvtruck.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "theweathermanac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "angi.com",
+          "kind": "directory"
+        }
+      ],
+      "opportunity": 7.25
+    },
+    {
+      "city": "Coolidge",
+      "state": "AZ",
+      "county": "Pinal",
+      "population": 16636,
+      "zips": 1,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair Coolidge AZ",
+      "payout": 53.21,
+      "pricing": "geo",
+      "bundle_value": 53.21,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 53.21,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 10,
+      "serp_breakdown": {
+        "dedicated": 4,
+        "pseo": 0,
+        "national": 0,
+        "emd": 1,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 1,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 564,
+        "pack_median_reviews": 128
+      },
+      "occupants": [
+        {
+          "host": "heatingandac.net",
+          "kind": "independent site"
+        },
+        {
+          "host": "business.coolidgechamber.org",
+          "kind": "city EMD"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "getyourbucksworth.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "maxairconditioningandheating.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "alaskanac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "azmonsterair.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 5.32
+    },
+    {
+      "city": "Vail",
+      "state": "AZ",
+      "county": "Pima",
+      "population": 16315,
+      "zips": 1,
+      "niche": "HVAC",
+      "sub_service": "hvac tune up",
+      "query": "hvac tune up Vail AZ",
+      "payout": 79.1,
+      "pricing": "geo",
+      "bundle_value": 79.1,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 79.1,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 6,
+      "serp_breakdown": {
+        "dedicated": 6,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 2,
+        "forum": 0,
+        "other_local": 2,
+        "results": 10,
+        "pack_size": 0,
+        "pack_top_reviews": 0,
+        "pack_median_reviews": 0
+      },
+      "occupants": [
+        {
+          "host": "dandhac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "grizzlycomforts.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "homedepot.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "ritewayac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "m.yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "onehourheatandair.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "greenvalleycooling.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "pro.peakzi.me",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "goettl.com",
+          "kind": "independent site"
+        }
+      ],
+      "opportunity": 4.75
+    },
+    {
+      "city": "San Tan Valley",
+      "state": "AZ",
+      "county": "Pinal",
+      "population": 109189,
+      "zips": 3,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair San Tan Valley AZ",
+      "payout": 60.95,
+      "pricing": "geo",
+      "bundle_value": 60.95,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 60.95,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 6,
+      "serp_breakdown": {
+        "dedicated": 5,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 1,
+        "results": 9,
+        "pack_size": 4,
+        "pack_top_reviews": 1800,
+        "pack_median_reviews": 245
+      },
+      "occupants": [
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "santanair.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "theacdoctors.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "redmountainair.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "parkerandsons.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "alaskanac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        },
+        {
+          "host": "northernairac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        }
+      ],
+      "opportunity": 3.66
+    },
+    {
+      "city": "Vail",
+      "state": "AZ",
+      "county": "Pima",
+      "population": 16315,
+      "zips": 1,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair Vail AZ",
+      "payout": 79.1,
+      "pricing": "geo",
+      "bundle_value": 79.1,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 79.1,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 4,
+      "serp_breakdown": {
+        "dedicated": 6,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 0,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 206,
+        "pack_median_reviews": 11
+      },
+      "occupants": [
+        {
+          "host": "grizzlycomforts.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "greenvalleycooling.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "dandhac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "coolwillys.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "hamstrahvac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "cummingsplumbingtucsonaz.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "homeadvisor.com",
+          "kind": "directory"
+        }
+      ],
+      "opportunity": 3.16
+    },
+    {
+      "city": "Avondale",
+      "state": "AZ",
+      "county": "Maricopa",
+      "population": 92477,
+      "zips": 2,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair Avondale AZ",
+      "payout": 70.88,
+      "pricing": "geo",
+      "bundle_value": 70.88,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 70.88,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 4,
+      "serp_breakdown": {
+        "dedicated": 6,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 0,
+        "results": 9,
+        "pack_size": 4,
+        "pack_top_reviews": 735,
+        "pack_median_reviews": 14
+      },
+      "occupants": [
+        {
+          "host": "alaskanac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "homedepot.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "aztrademasters.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "parkerandsons.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "angi.com",
+          "kind": "directory"
+        },
+        {
+          "host": "cbrothers.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "viking-hvac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        }
+      ],
+      "opportunity": 2.84
+    },
+    {
+      "city": "Scottsdale",
+      "state": "AZ",
+      "county": "Maricopa",
+      "population": 243821,
+      "zips": 15,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair Scottsdale AZ",
+      "payout": 75.6,
+      "pricing": "geo",
+      "bundle_value": 75.6,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 75.6,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 7,
+        "pseo": 0,
+        "national": 0,
+        "emd": 1,
+        "directory": 2,
+        "forum": 0,
+        "other_local": 0,
+        "results": 9,
+        "pack_size": 4,
+        "pack_top_reviews": 5200,
+        "pack_median_reviews": 2345
+      },
+      "occupants": [
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "acbyj.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "varsityzone.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "larsonairaz.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "scottsdaleair.com",
+          "kind": "city EMD + dedicated page"
+        },
+        {
+          "host": "accurateairac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "championair.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "rescueoneair.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "angi.com",
+          "kind": "directory"
+        }
+      ],
+      "opportunity": 0.0
+    },
+    {
+      "city": "Peoria",
+      "state": "AZ",
+      "county": "Maricopa",
+      "population": 196906,
+      "zips": 6,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair Peoria AZ",
+      "payout": 75.6,
+      "pricing": "geo",
+      "bundle_value": 75.6,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 75.6,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 6,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 2,
+        "forum": 0,
+        "other_local": 0,
+        "results": 8,
+        "pack_size": 3,
+        "pack_top_reviews": 8106,
+        "pack_median_reviews": 932
+      },
+      "occupants": [
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "acsolutionsinc.net",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "homedepot.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "parkerandsons.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "nemechanicalllc.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "coolzoneair.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "collinscomfort.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 0.0
+    },
+    {
+      "city": "Glendale",
+      "state": "AZ",
+      "county": "Maricopa",
+      "population": 252833,
+      "zips": 12,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair Glendale AZ",
+      "payout": 70.88,
+      "pricing": "geo",
+      "bundle_value": 70.88,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 70.88,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 7,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 1,
+        "forum": 0,
+        "other_local": 0,
+        "results": 8,
+        "pack_size": 3,
+        "pack_top_reviews": 143,
+        "pack_median_reviews": 27
+      },
+      "occupants": [
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "airtimeaz.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "wilhelmautomotive.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "advantagehomeperformance.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "abideac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "larsonairaz.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "homeguide.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "cluffmechanical.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 0.0
+    },
+    {
+      "city": "Goodyear",
+      "state": "AZ",
+      "county": "Maricopa",
+      "population": 107645,
+      "zips": 2,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair Goodyear AZ",
+      "payout": 70.88,
+      "pricing": "geo",
+      "bundle_value": 70.88,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 70.88,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 7,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 1,
+        "forum": 0,
+        "other_local": 1,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 2070,
+        "pack_median_reviews": 16
+      },
+      "occupants": [
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "aqualityhvac.org",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "emergencyair.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "litchfieldauto.net",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "bellairconditioningaz.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "guildquality.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "parkerandsons.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "champsfamilyautomotive.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "rescueoneair.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 0.0
+    },
+    {
+      "city": "Gilbert",
+      "state": "AZ",
+      "county": "Maricopa",
+      "population": 280262,
+      "zips": 7,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair Gilbert AZ",
+      "payout": 64.58,
+      "pricing": "geo",
+      "bundle_value": 64.58,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 64.58,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 5,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 1,
+        "results": 9,
+        "pack_size": 4,
+        "pack_top_reviews": 1800,
+        "pack_median_reviews": 735
+      },
+      "occupants": [
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "justcalljohns.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "oliveairandheating.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "simplythebestac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "guildquality.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "serviceexperts.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "ritewayac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "angi.com",
+          "kind": "directory"
+        }
+      ],
+      "opportunity": 0.0
+    },
+    {
+      "city": "Surprise",
+      "state": "AZ",
+      "county": "Maricopa",
+      "population": 154948,
+      "zips": 5,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair Surprise AZ",
+      "payout": 63.0,
+      "pricing": "geo",
+      "bundle_value": 63.0,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 63.0,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 6,
+        "pseo": 0,
+        "national": 0,
+        "emd": 1,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 0,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 19,
+        "pack_median_reviews": 4
+      },
+      "occupants": [
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "grandcanyonac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "air-zona.net",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "cbac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "aamcosurprise.com",
+          "kind": "city EMD + dedicated page"
+        },
+        {
+          "host": "coolblew.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "angi.com",
+          "kind": "directory"
+        },
+        {
+          "host": "bradfordheatcool.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 0.0
+    },
+    {
+      "city": "Tempe",
+      "state": "AZ",
+      "county": "Maricopa",
+      "population": 188065,
+      "zips": 8,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair Tempe AZ",
+      "payout": 60.95,
+      "pricing": "geo",
+      "bundle_value": 60.95,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 60.95,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 6,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 2,
+        "forum": 0,
+        "other_local": 0,
+        "results": 8,
+        "pack_size": 4,
+        "pack_top_reviews": 5200,
+        "pack_median_reviews": 2299
+      },
+      "occupants": [
+        {
+          "host": "theacdoctors.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "larsonairaz.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "rescueoneair.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "azautoair.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "sonoransunac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "azhomeservices.group",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 0.0
+    },
+    {
+      "city": "Green Valley",
+      "state": "AZ",
+      "county": "Pima",
+      "population": 22114,
+      "zips": 1,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair Green Valley AZ",
+      "payout": 59.85,
+      "pricing": "geo",
+      "bundle_value": 59.85,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 59.85,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 5,
+        "pseo": 0,
+        "national": 0,
+        "emd": 1,
+        "directory": 2,
+        "forum": 0,
+        "other_local": 1,
+        "results": 8,
+        "pack_size": 3,
+        "pack_top_reviews": 5260,
+        "pack_median_reviews": 1650
+      },
+      "occupants": [
+        {
+          "host": "greenvalleycooling.com",
+          "kind": "city EMD + dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "dandhac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "jmsautomotiverepair.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "ritewayac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "local.gvnews.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "angi.com",
+          "kind": "directory"
+        },
+        {
+          "host": "oasiscoolingheating.com",
+          "kind": "independent site"
+        }
+      ],
+      "opportunity": 0.0
+    },
+    {
+      "city": "Flagstaff",
+      "state": "AZ",
+      "county": "Coconino",
+      "population": 81235,
+      "zips": 6,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair Flagstaff AZ",
+      "payout": 59.85,
+      "pricing": "geo",
+      "bundle_value": 59.85,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 59.85,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 6,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 2,
+        "forum": 0,
+        "other_local": 1,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 253,
+        "pack_median_reviews": 197
+      },
+      "occupants": [
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "goettlshdm.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "campbellsheatingandcooling.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "intermountainaz.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "confidentcomfort.net",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "executiveaz.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "aireserv.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "homedepot.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 0.0
+    },
+    {
+      "city": "Dewey",
+      "state": "AZ",
+      "county": "Yavapai",
+      "population": 98921,
+      "zips": 1,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair Dewey AZ",
+      "payout": 59.85,
+      "pricing": "geo",
+      "bundle_value": 59.85,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 59.85,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 7,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 0,
+        "results": 10,
+        "pack_size": 0,
+        "pack_top_reviews": 0,
+        "pack_median_reviews": 0
+      },
+      "occupants": [
+        {
+          "host": "aireserv.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "goettlshdm.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "onehourheatandair.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "lennox.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "yavmech.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "moyershvac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "namesandnumbers.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "youtube.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "connollyelectric.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 0.0
+    },
+    {
+      "city": "Prescott",
+      "state": "AZ",
+      "county": "Yavapai",
+      "population": 47400,
+      "zips": 6,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair Prescott AZ",
+      "payout": 57.75,
+      "pricing": "geo",
+      "bundle_value": 57.75,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 57.75,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 3,
+        "pseo": 1,
+        "national": 0,
+        "emd": 2,
+        "directory": 5,
+        "forum": 0,
+        "other_local": 1,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 783,
+        "pack_median_reviews": 419
+      },
+      "occupants": [
+        {
+          "host": "prescott-az.gov",
+          "kind": "pSEO subdomain + city EMD + dedicated page"
+        },
+        {
+          "host": "youtube.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "en.wikipedia.org",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "youtube.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "espn.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "youtube.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "prescott.com",
+          "kind": "city EMD + dedicated page"
+        },
+        {
+          "host": "youtube.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "instagram.com",
+          "kind": "social profile"
+        }
+      ],
+      "opportunity": 0.0
+    },
+    {
+      "city": "Queen Creek",
+      "state": "AZ",
+      "county": "Maricopa",
+      "population": 71867,
+      "zips": 1,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair Queen Creek AZ",
+      "payout": 56.38,
+      "pricing": "geo",
+      "bundle_value": 56.38,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 56.38,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 6,
+        "pseo": 0,
+        "national": 0,
+        "emd": 1,
+        "directory": 2,
+        "forum": 1,
+        "other_local": 0,
+        "results": 9,
+        "pack_size": 4,
+        "pack_top_reviews": 5300,
+        "pack_median_reviews": 896
+      },
+      "occupants": [
+        {
+          "host": "eagleairacrepair.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "reddit.com",
+          "kind": "forum"
+        },
+        {
+          "host": "angelaircooling.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "aamcoqueencreek.com",
+          "kind": "city EMD + dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "parkerandsons.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "innovativeac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "azhomeservices.group",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 0.0
+    },
+    {
+      "city": "Florence",
+      "state": "AZ",
+      "county": "Pinal",
+      "population": 25570,
+      "zips": 1,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair Florence AZ",
+      "payout": 53.21,
+      "pricing": "geo",
+      "bundle_value": 53.21,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 53.21,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 6,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 2,
+        "forum": 0,
+        "other_local": 0,
+        "results": 8,
+        "pack_size": 4,
+        "pack_top_reviews": 1824,
+        "pack_median_reviews": 1800
+      },
+      "occupants": [
+        {
+          "host": "eandjchvac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "teamairzona.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "alaskanac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "eagleairacrepair.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "ferrellair.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "norrisair.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 0.0
+    },
+    {
+      "city": "Valley Farms",
+      "state": "AZ",
+      "county": "Pinal",
+      "population": 16636,
+      "zips": 1,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair Valley Farms AZ",
+      "payout": 53.21,
+      "pricing": "geo",
+      "bundle_value": 53.21,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 53.21,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 3,
+        "pseo": 1,
+        "national": 0,
+        "emd": 1,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 3,
+        "results": 9,
+        "pack_size": 4,
+        "pack_top_reviews": 1824,
+        "pack_median_reviews": 735
+      },
+      "occupants": [
+        {
+          "host": "valley-farms-az.hvacservicesspringlake.com",
+          "kind": "pSEO subdomain + city EMD + dedicated page"
+        },
+        {
+          "host": "homeadvisor.pro",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "azvalleyservices.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "arizonarefrigerantrepair.shop",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "callarizonavalley.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "skybluehvac.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "youtube.com",
+          "kind": "social profile"
+        }
+      ],
+      "opportunity": 0.0
+    },
+    {
+      "city": "Sahuarita",
+      "state": "AZ",
+      "county": "Pima",
+      "population": 35862,
+      "zips": 1,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair Sahuarita AZ",
+      "payout": 52.25,
+      "pricing": "geo",
+      "bundle_value": 52.25,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 52.25,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 6,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 2,
+        "forum": 0,
+        "other_local": 1,
+        "results": 9,
+        "pack_size": 4,
+        "pack_top_reviews": 408,
+        "pack_median_reviews": 18
+      },
+      "occupants": [
+        {
+          "host": "greenvalleycooling.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "onehourheatandair.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "brakemasters.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "oscarscooling.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "ritewayac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "hamstrahvac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "angi.com",
+          "kind": "directory"
+        },
+        {
+          "host": "viking-hvac.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 0.0
+    },
+    {
+      "city": "Marana",
+      "state": "AZ",
+      "county": "Pima",
+      "population": 56938,
+      "zips": 2,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair Marana AZ",
+      "payout": 52.25,
+      "pricing": "geo",
+      "bundle_value": 52.25,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 52.25,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 6,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 0,
+        "results": 9,
+        "pack_size": 4,
+        "pack_top_reviews": 13000,
+        "pack_median_reviews": 126
+      },
+      "occupants": [
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "ritewayac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "brakemax.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "picturerockscooling.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "prideoftucson.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "onehourheatandair.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "homedepot.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "coolwillys.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 0.0
+    },
+    {
+      "city": "Bullhead City",
+      "state": "AZ",
+      "county": "Mohave",
+      "population": 42496,
+      "zips": 2,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair Bullhead City AZ",
+      "payout": 51.8,
+      "pricing": "geo",
+      "bundle_value": 51.8,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 51.8,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 5,
+        "pseo": 0,
+        "national": 0,
+        "emd": 1,
+        "directory": 4,
+        "forum": 0,
+        "other_local": 0,
+        "results": 9,
+        "pack_size": 4,
+        "pack_top_reviews": 1372,
+        "pack_median_reviews": 552
+      },
+      "occupants": [
+        {
+          "host": "aircontrolaz.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "autorepairbullheadcity.com",
+          "kind": "city EMD + dedicated page"
+        },
+        {
+          "host": "onehourheatandair.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "ambientedge.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        },
+        {
+          "host": "bychoiceair.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        }
+      ],
+      "opportunity": 0.0
+    },
+    {
+      "city": "Casa Grande",
+      "state": "AZ",
+      "county": "Pinal",
+      "population": 60905,
+      "zips": 4,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair Casa Grande AZ",
+      "payout": 50.75,
+      "pricing": "geo",
+      "bundle_value": 50.75,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 50.75,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 6,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 0,
+        "results": 9,
+        "pack_size": 4,
+        "pack_top_reviews": 1402,
+        "pack_median_reviews": 735
+      },
+      "occupants": [
+        {
+          "host": "alandrileys.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "desertsunhvac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "firestonecompleteautocare.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "brewersac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "midstaterefrig.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "heroacandheat.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "angi.com",
+          "kind": "directory"
+        }
+      ],
+      "opportunity": 0.0
+    },
+    {
+      "city": "Maricopa",
+      "state": "AZ",
+      "county": "Pinal",
+      "population": 72459,
+      "zips": 2,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair Maricopa AZ",
+      "payout": 45.5,
+      "pricing": "geo",
+      "bundle_value": 45.5,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 45.5,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 5,
+        "pseo": 0,
+        "national": 0,
+        "emd": 1,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 1,
+        "results": 9,
+        "pack_size": 4,
+        "pack_top_reviews": 1751,
+        "pack_median_reviews": 735
+      },
+      "occupants": [
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "911-ac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "felixappliancerepair.net",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "aamcomaricopa.com",
+          "kind": "city EMD + dedicated page"
+        },
+        {
+          "host": "eastvalleymechanical.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "curtsmech.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "koolineplumbing.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        }
+      ],
+      "opportunity": 0.0
+    },
+    {
+      "city": "Buckeye",
+      "state": "AZ",
+      "county": "Maricopa",
+      "population": 104923,
+      "zips": 2,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair Buckeye AZ",
+      "payout": 45.5,
+      "pricing": "geo",
+      "bundle_value": 45.5,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 45.5,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 6,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 2,
+        "forum": 0,
+        "other_local": 1,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 218,
+        "pack_median_reviews": 110
+      },
+      "occupants": [
+        {
+          "host": "arizonaacandheating.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "cloud9coolheat.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "emergencyair.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "parkerandsons.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "grandcanyonac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "cluffmechanical.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "elijahair.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 0.0
+    },
+    {
+      "city": "El Mirage",
+      "state": "AZ",
+      "county": "Maricopa",
+      "population": 36088,
+      "zips": 1,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair El Mirage AZ",
+      "payout": 45.5,
+      "pricing": "geo",
+      "bundle_value": 45.5,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 45.5,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 7,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 0,
+        "results": 10,
+        "pack_size": 3,
+        "pack_top_reviews": 31,
+        "pack_median_reviews": 5
+      },
+      "occupants": [
+        {
+          "host": "4himcooling.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "arizonaacandheating.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "homedepot.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "alaskanac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "cluffmechanical.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "xtremeairaz.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "mapquest.com",
+          "kind": "directory"
+        },
+        {
+          "host": "angi.com",
+          "kind": "directory"
+        },
+        {
+          "host": "fixitfrankie.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 0.0
+    },
+    {
+      "city": "Sun City",
+      "state": "AZ",
+      "county": "Maricopa",
+      "population": 37486,
+      "zips": 3,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair Sun City AZ",
+      "payout": 45.5,
+      "pricing": "geo",
+      "bundle_value": 45.5,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 45.5,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 7,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 2,
+        "forum": 0,
+        "other_local": 0,
+        "results": 9,
+        "pack_size": 4,
+        "pack_top_reviews": 735,
+        "pack_median_reviews": 50
+      },
+      "occupants": [
+        {
+          "host": "bellairconditioningaz.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "championair.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "parkerandsons.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "angi.com",
+          "kind": "directory"
+        },
+        {
+          "host": "morehartac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "ritewayac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "trustedpros.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "grandcanyonac.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 0.0
+    },
+    {
+      "city": "Peoria",
+      "state": "AZ",
+      "county": "Maricopa",
+      "population": 196906,
+      "zips": 6,
+      "niche": "HVAC",
+      "sub_service": "hvac tune up",
+      "query": "hvac tune up Peoria AZ",
+      "payout": 75.6,
+      "pricing": "geo",
+      "bundle_value": 75.6,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 75.6,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 7,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 2,
+        "forum": 0,
+        "other_local": 0,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 1660,
+        "pack_median_reviews": 932
+      },
+      "occupants": [
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "acsolutionsinc.net",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "parkerandsons.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "homedepot.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "coolzoneair.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "cbrothers.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "nemechanicalllc.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "championair.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 0.0
+    },
+    {
+      "city": "Glendale",
+      "state": "AZ",
+      "county": "Maricopa",
+      "population": 252833,
+      "zips": 12,
+      "niche": "HVAC",
+      "sub_service": "hvac tune up",
+      "query": "hvac tune up Glendale AZ",
+      "payout": 70.88,
+      "pricing": "geo",
+      "bundle_value": 70.88,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 70.88,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 7,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 2,
+        "forum": 0,
+        "other_local": 0,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 143,
+        "pack_median_reviews": 27
+      },
+      "occupants": [
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "advantagehomeperformance.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "sundancehvac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "westernskymechanical.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "larsonairaz.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "cbrothers.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "bleuwaveacrepair.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "thumbtack.com",
+          "kind": "directory"
+        },
+        {
+          "host": "aztrademasters.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 0.0
+    },
+    {
+      "city": "Avondale",
+      "state": "AZ",
+      "county": "Maricopa",
+      "population": 92477,
+      "zips": 2,
+      "niche": "HVAC",
+      "sub_service": "hvac tune up",
+      "query": "hvac tune up Avondale AZ",
+      "payout": 70.88,
+      "pricing": "geo",
+      "bundle_value": 70.88,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 70.88,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 7,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 2,
+        "forum": 0,
+        "other_local": 0,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 1582,
+        "pack_median_reviews": 14
+      },
+      "occupants": [
+        {
+          "host": "homedepot.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "aztrademasters.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "callautumn.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "elindioac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "bradfordheatcool.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "homeguide.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "bleuwaveacrepair.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 0.0
+    },
+    {
+      "city": "Goodyear",
+      "state": "AZ",
+      "county": "Maricopa",
+      "population": 107645,
+      "zips": 2,
+      "niche": "HVAC",
+      "sub_service": "hvac tune up",
+      "query": "hvac tune up Goodyear AZ",
+      "payout": 70.88,
+      "pricing": "geo",
+      "bundle_value": 70.88,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 70.88,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 7,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 1,
+        "forum": 0,
+        "other_local": 1,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 2070,
+        "pack_median_reviews": 111
+      },
+      "occupants": [
+        {
+          "host": "aqualityhvac.org",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "emergencyair.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "myefficientair.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "homedepot.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "cbrothers.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "parkerandsons.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "homeguide.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "norrisair.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 0.0
+    },
+    {
+      "city": "Gilbert",
+      "state": "AZ",
+      "county": "Maricopa",
+      "population": 280262,
+      "zips": 7,
+      "niche": "HVAC",
+      "sub_service": "hvac tune up",
+      "query": "hvac tune up Gilbert AZ",
+      "payout": 64.58,
+      "pricing": "geo",
+      "bundle_value": 64.58,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 64.58,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 6,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 0,
+        "results": 9,
+        "pack_size": 4,
+        "pack_top_reviews": 1800,
+        "pack_median_reviews": 1078
+      },
+      "occupants": [
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "simplythebestac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "ritewayac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "collinscomfort.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "serviceexperts.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "bumblebeeairconditioning.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "oliveairandheating.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "angi.com",
+          "kind": "directory"
+        }
+      ],
+      "opportunity": 0.0
+    },
+    {
+      "city": "Chandler",
+      "state": "AZ",
+      "county": "Maricopa",
+      "population": 280136,
+      "zips": 8,
+      "niche": "HVAC",
+      "sub_service": "hvac tune up",
+      "query": "hvac tune up Chandler AZ",
+      "payout": 63.0,
+      "pricing": "geo",
+      "bundle_value": 63.0,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 63.0,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 6,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 2,
+        "forum": 0,
+        "other_local": 1,
+        "results": 9,
+        "pack_size": 4,
+        "pack_top_reviews": 1800,
+        "pack_median_reviews": 932
+      },
+      "occupants": [
+        {
+          "host": "climateprollc.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "collinscomfort.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "emergencyair.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "shac.co",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "larsonairaz.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "aztrademasters.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "thumbtack.com",
+          "kind": "directory"
+        },
+        {
+          "host": "championair.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 0.0
+    },
+    {
+      "city": "Surprise",
+      "state": "AZ",
+      "county": "Maricopa",
+      "population": 154948,
+      "zips": 5,
+      "niche": "HVAC",
+      "sub_service": "hvac tune up",
+      "query": "hvac tune up Surprise AZ",
+      "payout": 63.0,
+      "pricing": "geo",
+      "bundle_value": 63.0,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 63.0,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 6,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 0,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 407,
+        "pack_median_reviews": 308
+      },
+      "occupants": [
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "air-zona.net",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "bradfordheatcool.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "jaycoxac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "coolblew.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "parkerandsons.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "aztrademasters.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "angi.com",
+          "kind": "directory"
+        }
+      ],
+      "opportunity": 0.0
+    },
+    {
+      "city": "Tempe",
+      "state": "AZ",
+      "county": "Maricopa",
+      "population": 188065,
+      "zips": 8,
+      "niche": "HVAC",
+      "sub_service": "hvac tune up",
+      "query": "hvac tune up Tempe AZ",
+      "payout": 60.95,
+      "pricing": "geo",
+      "bundle_value": 60.95,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 60.95,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 8,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 1,
+        "forum": 1,
+        "other_local": 0,
+        "results": 10,
+        "pack_size": 0,
+        "pack_top_reviews": 0,
+        "pack_median_reviews": 0
+      },
+      "occupants": [
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "larsonairaz.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "accurateairac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "reddit.com",
+          "kind": "forum"
+        },
+        {
+          "host": "theacdoctors.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "sonoransunac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "rescueoneair.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "simplythebestac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "azhomeservices.group",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "local.yahoo.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 0.0
+    },
+    {
+      "city": "Green Valley",
+      "state": "AZ",
+      "county": "Pima",
+      "population": 22114,
+      "zips": 1,
+      "niche": "HVAC",
+      "sub_service": "hvac tune up",
+      "query": "hvac tune up Green Valley AZ",
+      "payout": 59.85,
+      "pricing": "geo",
+      "bundle_value": 59.85,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 59.85,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 7,
+        "pseo": 0,
+        "national": 0,
+        "emd": 2,
+        "directory": 2,
+        "forum": 0,
+        "other_local": 0,
+        "results": 9,
+        "pack_size": 4,
+        "pack_top_reviews": 13000,
+        "pack_median_reviews": 5260
+      },
+      "occupants": [
+        {
+          "host": "greenvalleycooling.com",
+          "kind": "city EMD + dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "dandhac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "ritewayac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "angi.com",
+          "kind": "directory"
+        },
+        {
+          "host": "hamstrahvac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "greenvalleycooling.com",
+          "kind": "city EMD + dedicated page"
+        },
+        {
+          "host": "local.gvnews.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "alaskanac.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 0.0
+    },
+    {
+      "city": "Flagstaff",
+      "state": "AZ",
+      "county": "Coconino",
+      "population": 81235,
+      "zips": 6,
+      "niche": "HVAC",
+      "sub_service": "hvac tune up",
+      "query": "hvac tune up Flagstaff AZ",
+      "payout": 59.85,
+      "pricing": "geo",
+      "bundle_value": 59.85,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 59.85,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 6,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 0,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 253,
+        "pack_median_reviews": 197
+      },
+      "occupants": [
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "aireserv.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "goettlshdm.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "homedepot.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "trane.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "elementnaz.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "intermountainaz.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "angi.com",
+          "kind": "directory"
+        }
+      ],
+      "opportunity": 0.0
+    },
+    {
+      "city": "Dewey",
+      "state": "AZ",
+      "county": "Yavapai",
+      "population": 98921,
+      "zips": 1,
+      "niche": "HVAC",
+      "sub_service": "hvac tune up",
+      "query": "hvac tune up Dewey AZ",
+      "payout": 59.85,
+      "pricing": "geo",
+      "bundle_value": 59.85,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 59.85,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 7,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 1,
+        "forum": 0,
+        "other_local": 1,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 1265,
+        "pack_median_reviews": 38
+      },
+      "occupants": [
+        {
+          "host": "goettlshdm.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "connollyelectric.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "onehourheatandair.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "yavmech.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "nazair.net",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "moyershvac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "goettlshdm.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "prescott-air.com",
+          "kind": "independent site"
+        }
+      ],
+      "opportunity": 0.0
+    },
+    {
+      "city": "Prescott",
+      "state": "AZ",
+      "county": "Yavapai",
+      "population": 47400,
+      "zips": 6,
+      "niche": "HVAC",
+      "sub_service": "hvac tune up",
+      "query": "hvac tune up Prescott AZ",
+      "payout": 57.75,
+      "pricing": "geo",
+      "bundle_value": 57.75,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 57.75,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 6,
+        "pseo": 0,
+        "national": 0,
+        "emd": 1,
+        "directory": 2,
+        "forum": 0,
+        "other_local": 1,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 783,
+        "pack_median_reviews": 419
+      },
+      "occupants": [
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "prescott-air.com",
+          "kind": "city EMD + dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "onehourheatandair.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "goettlshdm.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "acmedicaz.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "advantagehomeperformance.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "nazair.net",
+          "kind": "independent site"
+        },
+        {
+          "host": "homedepot.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 0.0
+    }
+  ],
+  "top_candidates_unscanned": [
+    {
+      "city": "Vail",
+      "state": "AZ",
+      "county": "Pima",
+      "pop": 16315,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 79.1,
+      "bundle_value": 79.1,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 79.1,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Scottsdale",
+      "state": "AZ",
+      "county": "Maricopa",
+      "pop": 243821,
+      "zips": 15,
+      "top_niche": "HVAC",
+      "top_payout": 75.6,
+      "bundle_value": 75.6,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 75.6,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Peoria",
+      "state": "AZ",
+      "county": "Maricopa",
+      "pop": 196906,
+      "zips": 6,
+      "top_niche": "HVAC",
+      "top_payout": 75.6,
+      "bundle_value": 75.6,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 75.6,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Glendale",
+      "state": "AZ",
+      "county": "Maricopa",
+      "pop": 252833,
+      "zips": 12,
+      "top_niche": "HVAC",
+      "top_payout": 70.88,
+      "bundle_value": 70.88,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 70.88,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Avondale",
+      "state": "AZ",
+      "county": "Maricopa",
+      "pop": 92477,
+      "zips": 2,
+      "top_niche": "HVAC",
+      "top_payout": 70.88,
+      "bundle_value": 70.88,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 70.88,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Goodyear",
+      "state": "AZ",
+      "county": "Maricopa",
+      "pop": 107645,
+      "zips": 2,
+      "top_niche": "HVAC",
+      "top_payout": 70.88,
+      "bundle_value": 70.88,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 70.88,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Gilbert",
+      "state": "AZ",
+      "county": "Maricopa",
+      "pop": 280262,
+      "zips": 7,
+      "top_niche": "HVAC",
+      "top_payout": 64.58,
+      "bundle_value": 64.58,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 64.58,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Chandler",
+      "state": "AZ",
+      "county": "Maricopa",
+      "pop": 280136,
+      "zips": 8,
+      "top_niche": "HVAC",
+      "top_payout": 63.0,
+      "bundle_value": 63.0,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 63.0,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Surprise",
+      "state": "AZ",
+      "county": "Maricopa",
+      "pop": 154948,
+      "zips": 5,
+      "top_niche": "HVAC",
+      "top_payout": 63.0,
+      "bundle_value": 63.0,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 63.0,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "San Tan Valley",
+      "state": "AZ",
+      "county": "Pinal",
+      "pop": 109189,
+      "zips": 3,
+      "top_niche": "HVAC",
+      "top_payout": 60.95,
+      "bundle_value": 60.95,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 60.95,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Tempe",
+      "state": "AZ",
+      "county": "Maricopa",
+      "pop": 188065,
+      "zips": 8,
+      "top_niche": "HVAC",
+      "top_payout": 60.95,
+      "bundle_value": 60.95,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 60.95,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Waddell",
+      "state": "AZ",
+      "county": "Maricopa",
+      "pop": 252833,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 60.95,
+      "bundle_value": 60.95,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 60.95,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Green Valley",
+      "state": "AZ",
+      "county": "Pima",
+      "pop": 22114,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 59.85,
+      "bundle_value": 59.85,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 59.85,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Flagstaff",
+      "state": "AZ",
+      "county": "Coconino",
+      "pop": 81235,
+      "zips": 6,
+      "top_niche": "HVAC",
+      "top_payout": 59.85,
+      "bundle_value": 59.85,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 59.85,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Dewey",
+      "state": "AZ",
+      "county": "Yavapai",
+      "pop": 98921,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 59.85,
+      "bundle_value": 59.85,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 59.85,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Prescott",
+      "state": "AZ",
+      "county": "Yavapai",
+      "pop": 47400,
+      "zips": 6,
+      "top_niche": "HVAC",
+      "top_payout": 57.75,
+      "bundle_value": 57.75,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 57.75,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Prescott Valley",
+      "state": "AZ",
+      "county": "Yavapai",
+      "pop": 98921,
+      "zips": 3,
+      "top_niche": "HVAC",
+      "top_payout": 57.75,
+      "bundle_value": 57.75,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 57.75,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Queen Creek",
+      "state": "AZ",
+      "county": "Maricopa",
+      "pop": 71867,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 56.38,
+      "bundle_value": 56.38,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 56.38,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Cortaro",
+      "state": "AZ",
+      "county": "Pima",
+      "pop": 56938,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 55.0,
+      "bundle_value": 55.0,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 55.0,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Apache Junction",
+      "state": "AZ",
+      "county": "Pinal",
+      "pop": 41058,
+      "zips": 3,
+      "top_niche": "HVAC",
+      "top_payout": 53.21,
+      "bundle_value": 53.21,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 53.21,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Coolidge",
+      "state": "AZ",
+      "county": "Pinal",
+      "pop": 16636,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 53.21,
+      "bundle_value": 53.21,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 53.21,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Florence",
+      "state": "AZ",
+      "county": "Pinal",
+      "pop": 25570,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 53.21,
+      "bundle_value": 53.21,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 53.21,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Valley Farms",
+      "state": "AZ",
+      "county": "Pinal",
+      "pop": 16636,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 53.21,
+      "bundle_value": 53.21,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 53.21,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Cashion",
+      "state": "AZ",
+      "county": "Maricopa",
+      "pop": 92477,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 53.21,
+      "bundle_value": 53.21,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 53.21,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Douglas",
+      "state": "AZ",
+      "county": "Cochise",
+      "pop": 15981,
+      "zips": 3,
+      "top_niche": "HVAC",
+      "top_payout": 52.25,
+      "bundle_value": 52.25,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 52.25,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Fort Huachuca",
+      "state": "AZ",
+      "county": "Cochise",
+      "pop": 45155,
+      "zips": 2,
+      "top_niche": "HVAC",
+      "top_payout": 52.25,
+      "bundle_value": 52.25,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 52.25,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Nogales",
+      "state": "AZ",
+      "county": "Santa Cruz",
+      "pop": 19841,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 52.25,
+      "bundle_value": 52.25,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 52.25,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Sahuarita",
+      "state": "AZ",
+      "county": "Pima",
+      "pop": 35862,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 52.25,
+      "bundle_value": 52.25,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 52.25,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Sierra Vista",
+      "state": "AZ",
+      "county": "Cochise",
+      "pop": 45155,
+      "zips": 4,
+      "top_niche": "HVAC",
+      "top_payout": 52.25,
+      "bundle_value": 52.25,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 52.25,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Rio Rico",
+      "state": "AZ",
+      "county": "Santa Cruz",
+      "pop": 22017,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 52.25,
+      "bundle_value": 52.25,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 52.25,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Marana",
+      "state": "AZ",
+      "county": "Pima",
+      "pop": 56938,
+      "zips": 2,
+      "top_niche": "HVAC",
+      "top_payout": 52.25,
+      "bundle_value": 52.25,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 52.25,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Lake Havasu City",
+      "state": "AZ",
+      "county": "Mohave",
+      "pop": 58359,
+      "zips": 3,
+      "top_niche": "HVAC",
+      "top_payout": 51.8,
+      "bundle_value": 51.8,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 51.8,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Bullhead City",
+      "state": "AZ",
+      "county": "Mohave",
+      "pop": 42496,
+      "zips": 2,
+      "top_niche": "HVAC",
+      "top_payout": 51.8,
+      "bundle_value": 51.8,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 51.8,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Casa Grande",
+      "state": "AZ",
+      "county": "Pinal",
+      "pop": 60905,
+      "zips": 4,
+      "top_niche": "HVAC",
+      "top_payout": 50.75,
+      "bundle_value": 50.75,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 50.75,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Fountain Hills",
+      "state": "AZ",
+      "county": "Maricopa",
+      "pop": 23789,
+      "zips": 2,
+      "top_niche": "HVAC",
+      "top_payout": 49.0,
+      "bundle_value": 49.0,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 49.0,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "New River",
+      "state": "AZ",
+      "county": "Maricopa",
+      "pop": 18240,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 45.5,
+      "bundle_value": 45.5,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 45.5,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Maricopa",
+      "state": "AZ",
+      "county": "Pinal",
+      "pop": 72459,
+      "zips": 2,
+      "top_niche": "HVAC",
+      "top_payout": 45.5,
+      "bundle_value": 45.5,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 45.5,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Higley",
+      "state": "AZ",
+      "county": "Maricopa",
+      "pop": 280262,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 45.5,
+      "bundle_value": 45.5,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 45.5,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Luke Air Force Base",
+      "state": "AZ",
+      "county": "Maricopa",
+      "pop": 252833,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 45.5,
+      "bundle_value": 45.5,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 45.5,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Buckeye",
+      "state": "AZ",
+      "county": "Maricopa",
+      "pop": 104923,
+      "zips": 2,
+      "top_niche": "HVAC",
+      "top_payout": 45.5,
+      "bundle_value": 45.5,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 45.5,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "El Mirage",
+      "state": "AZ",
+      "county": "Maricopa",
+      "pop": 36088,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 45.5,
+      "bundle_value": 45.5,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 45.5,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Sun City",
+      "state": "AZ",
+      "county": "Maricopa",
+      "pop": 37486,
+      "zips": 3,
+      "top_niche": "HVAC",
+      "top_payout": 45.5,
+      "bundle_value": 45.5,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 45.5,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Sun City West",
+      "state": "AZ",
+      "county": "Maricopa",
+      "pop": 27425,
+      "zips": 2,
+      "top_niche": "HVAC",
+      "top_payout": 45.5,
+      "bundle_value": 45.5,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 45.5,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Fort Mohave",
+      "state": "AZ",
+      "county": "Mohave",
+      "pop": 15715,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 40.7,
+      "bundle_value": 40.7,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 40.7,
+          "pricing": "geo"
+        }
+      ]
+    }
+  ]
+}
