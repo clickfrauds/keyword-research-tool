@@ -699,6 +699,16 @@ def score_serp(data, service, city):
                        for t in _topic))
     if _topic and _hits < 3:
         return None
+    # Same failure, different costume: hvac-midwest-01 put "ac repair Lees
+    # Summit MO" first on seven YouTube videos, Wikipedia and acsaf.org. The
+    # video titles say "AC repair", so the check above passes, but a page one
+    # made of videos and encyclopaedias is Google answering a how-to, not a
+    # local hire -- and it says nothing about who holds the local results.
+    _media = sum(1 for r in results
+                 if re.search(r"(youtube\.com|youtu\.be|wikipedia\.org|tiktok\.com|instagram\.com)",
+                              str(r.get("link", "")).lower()))
+    if _media >= 4:
+        return None
 
     # GATE 07 — map pack. In most local service niches the pack takes the
     # majority of the clicks, so an open organic SERP sitting under three
