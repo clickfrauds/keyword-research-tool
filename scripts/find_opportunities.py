@@ -13,6 +13,7 @@ financial sense:
     STAGE 1  pull coverage            free      (static JSON, no key)
     STAGE 2  revenue filter           free      (payout / population band)
     STAGE 3  city rollup + bundles    free      (one site, many niches)
+    STAGE 3.5 search demand           free      (Keyword Planner; MIN_VOLUME)
     STAGE 4  SERP scan                COSTS     (SerpApi, hard-capped)
     STAGE 5  score, rank, publish     free
 
@@ -92,10 +93,17 @@ SERP_DEBUG_N  = int(os.environ.get("SERP_DEBUG_N", "3") or 3)
 # several offers, or only one? Both matter, at different points.
 NICHES_PER_CITY = int(os.environ.get("NICHES_PER_CITY", "1") or 1)
 SUBS_PER_NICHE  = int(os.environ.get("SUBS_PER_NICHE", "3") or 3)
+# Demand gate (free — Google Ads Keyword Planner, not SerpApi). A city whose
+# broad "{trade} {city}" search is under this is dropped before any SERP
+# credit is spent on it. 0 = measure and report, drop nothing.
+MIN_VOLUME      = int(os.environ.get("MIN_VOLUME", "0") or 0)
 
 # ── Sub-services per niche ────────────────────────────────────────────────
-# The head term ("plumbing Boise") is never the target — it is always taken.
-# These are the queries an unranked site can realistically enter on.
+# In a metro the head term is always taken, and these are the queries an
+# unranked site can enter on. In a town of 20-80k it is the other way round:
+# nearly all the demand is the head term ("plumber kingman" 880/mo, every
+# Kingman sub-service 0-10), so the scan tests BROAD[niche] first (see
+# STAGE 3.5) and these after it.
 # ─────────────────────────────────────────────────────────────────────────────
 # SUB-SERVICES — from 5,000+ real calls, not from guesses
 #
@@ -552,6 +560,72 @@ def shortlist(rows, pricing):
 
 
 # ══════════════════════════════════════════════════════════════════
+# STAGE 3.5 — demand (free: Google Ads Keyword Planner)
+# ══════════════════════════════════════════════════════════════════
+# What people in a small town actually type is the trade, not the job:
+# Arizona's matrix has "plumber kingman" at 880/mo and every Kingman
+# sub-service at 0-10. Scanning "leak detection Kingman AZ" measured a SERP
+# nobody sees. The broad term is what the demand check sums and what the SERP
+# scan tests first.
+BROAD = {
+    "Plumbing": "plumber", "HVAC": "ac repair", "Electrical": "electrician",
+    "Roofing": "roofer", "Pest Control": "pest control", "Appliance": "appliance repair",
+    "Gutters": "gutter cleaning", "Garage Door": "garage door repair",
+    "Tree Services": "tree service", "Water Damage": "water damage restoration",
+    "Bathroom Remodeling": "bathroom remodel", "Painting": "painters",
+    "Mold Removal": "mold removal", "Foundation Repair": "foundation repair",
+    "Siding": "siding contractor", "Kitchen": "kitchen remodel", "Deck": "deck builder",
+    "Waterproofing": "basement waterproofing", "Fire Damage Removal": "fire damage restoration",
+    "Biohazard": "biohazard cleanup", "Solar": "solar installer",
+}
+
+
+def demand(cands):
+    """Monthly searches for each city's broad trade term; drop below MIN_VOLUME.
+
+    Fail-open: without Google Ads credentials, or on any API error, every
+    candidate goes through unmeasured, exactly as before.
+    """
+    print("── STAGE 3.5: search demand (Keyword Planner) ─────────")
+    if not os.environ.get("GOOGLE_ADS_CUSTOMER_ID"):
+        print("   ℹ️ no Google Ads credentials — demand not measured.\n")
+        return cands
+    try:
+        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+        from city_service_volume import volumes
+    except Exception as e:
+        print(f"   ⚠️ volume module unavailable ({e}) — demand not measured.\n")
+        return cands
+    by_state = {}
+    for c in cands:
+        term = BROAD.get(c["top_niche"])
+        if not term:
+            continue
+        c["_q"] = [f"{term} {c['city']} {c['state']}".lower(), f"{term} {c['city']}".lower()]
+        by_state.setdefault(c["state"], []).append(c)
+    measured = 0
+    for st, group in by_state.items():
+        qs = sorted({q for c in group for q in c["_q"]})
+        vol = volumes(qs, STATE_NAMES.get(st, st))
+        if vol is None:
+            print(f"   ⚠️ {st}: volume lookup failed — kept unmeasured")
+            continue
+        for c in group:
+            c["volume"] = max(vol.get(q, 0) for q in c["_q"])
+            measured += 1
+    keep = [c for c in cands if c.get("volume") is None or c["volume"] >= MIN_VOLUME]
+    # Expected revenue first: payout alone put 1-ZIP places like Waddell at the
+    # top; searches x payout puts the markets that actually ring first.
+    keep.sort(key=lambda c: -((c.get("volume") or 0) * c["bundle_value"]))
+    print(f"   measured {measured} cities · min {MIN_VOLUME}/mo · "
+          f"{len(cands)} → {len(keep)} kept")
+    for c in keep[:10]:
+        print(f"      {c.get('volume', '?'):>6}/mo  ${c['top_payout']:.0f}  {c['city']}, {c['state']}")
+    print()
+    return keep
+
+
+# ══════════════════════════════════════════════════════════════════
 # STAGE 4 — SERP scan (the only stage that costs money)
 # ══════════════════════════════════════════════════════════════════
 _UULE_KEY = ("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
@@ -863,7 +937,11 @@ def scan(cands):
             if nrec["niche"] not in SUB_SERVICES:
                 _MISSING_SUBS.add(nrec["niche"])
                 continue
-            for si, sub in enumerate(SUB_SERVICES.get(nrec["niche"], [])[:SUBS_PER_NICHE]):
+            _subs = SUB_SERVICES.get(nrec["niche"], [])
+            _b = BROAD.get(nrec["niche"])
+            if _b and _b not in _subs:
+                _subs = [_b] + _subs
+            for si, sub in enumerate(_subs[:SUBS_PER_NICHE]):
                 passes.append((ni * 100 + si, c, nrec["niche"], nrec["payout"],
                                nrec.get("pricing", "?"), sub))
     passes.sort(key=lambda p: p[0])
@@ -923,6 +1001,9 @@ def scan(cands):
             # SERP on a $12 payout is not an opportunity, and neither is a
             # $160 payout behind six dedicated pages.
             "opportunity": round(sc / 100 * c["bundle_value"], 2),
+            "volume": c.get("volume"),
+            # openness x payout x searches: the monthly money a page here can reach
+            "value": round(sc / 100 * c["bundle_value"] * (c.get("volume") or 0), 1),
         })
         if _QUOTA_HIT:
             print(f"   ⏹️ SerpApi quota exhausted after {i} queries — "
@@ -947,7 +1028,7 @@ def scan(cands):
             json.dump(raw_dump, f, indent=2)
         print(f"   🧪 wrote serp_debug.json — {len(raw_dump)} raw responses")
 
-    found.sort(key=lambda f: -f["opportunity"])
+    found.sort(key=lambda f: (-(f["value"] or 0), -f["opportunity"]))
     print(f"   ✅ {len(found)} scored")
     if _SERP_ERRS:
         print("   Failure summary:")
@@ -976,8 +1057,9 @@ def write(meta, cands, scored, pricing=None):
         "serp_scanned":     len(scored),
         "opportunities":    scored[:200],
         "top_candidates_unscanned": [
-            {k: c[k] for k in ("city", "state", "county", "pop", "zips",
-                               "top_niche", "top_payout", "bundle_value", "niche_list")}
+            {**{k: c[k] for k in ("city", "state", "county", "pop", "zips",
+                                  "top_niche", "top_payout", "bundle_value", "niche_list")},
+             "volume": c.get("volume")}
             for c in cands[:200]
         ],
     }
@@ -986,14 +1068,14 @@ def write(meta, cands, scored, pricing=None):
 
     with open("opportunities.csv", "w", newline="", encoding="utf-8") as f:
         w = csv.writer(f)
-        w.writerow(["rank", "opportunity", "serp_score", "payout", "pricing",
+        w.writerow(["rank", "value", "volume", "opportunity", "serp_score", "payout", "pricing",
                     "bundle_value", "niche", "sub_service", "city", "state",
                     "county", "population", "zips", "dedicated", "emd", "pseo",
                     "national", "other_local", "directory", "pack_size",
                     "pack_median_reviews", "query", "occupants"])
         for i, o in enumerate(scored[:200], 1):
             b = o["serp_breakdown"]
-            w.writerow([i, o["opportunity"], o["serp_score"], o["payout"],
+            w.writerow([i, o.get("value"), o.get("volume"), o["opportunity"], o["serp_score"], o["payout"],
                         o.get("pricing", "?"),
                         o["bundle_value"], o["niche"], o["sub_service"],
                         o["city"], o["state"], o["county"], o["population"],
@@ -1014,7 +1096,7 @@ def write(meta, cands, scored, pricing=None):
     ]
     if scored:
         lines += ["## Top 30 by opportunity", "",
-                  "| # | Opp | SERP | Payout | Pricing | Pack | Query | Occupied by |",
+                  "| # | Opp | SERP | Payout | Searches/mo | Pack | Query | Occupied by |",
                   "|---|---|---|---|---|---|---|---|"]
         for i, o in enumerate(scored[:30], 1):
             b = o["serp_breakdown"]
@@ -1024,7 +1106,7 @@ def write(meta, cands, scored, pricing=None):
             pk = (f"{b.get('pack_size',0)}× {b.get('pack_median_reviews',0)} rev"
                   if b.get("pack_size") else "none")
             lines.append(f"| {i} | **{o['opportunity']:.0f}** | {o['serp_score']} "
-                         f"| ${o['payout']:.2f} | {o.get('pricing','?')} | {pk} "
+                         f"| ${o['payout']:.2f} | {o.get('volume') if o.get('volume') is not None else '?'} | {pk} "
                          f"| `{o['query']}` | {occ} |")
         lines += ["", "### Reading a row",
                   "",
@@ -1083,6 +1165,7 @@ def main():
         return
     pricing = price_modes(rows)
     cands   = shortlist(rows, pricing)
+    cands   = demand(cands)
     scored  = scan(cands)
     write(meta, cands, scored, pricing)
 

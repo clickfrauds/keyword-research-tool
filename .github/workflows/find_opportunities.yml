@@ -53,6 +53,9 @@ on:
         description: "Sub-services tested per niche. 3 = confident read. 1 = stretch the same budget over 3x more cities."
         required: false
         default: '3'
+      min_volume:
+        description: "Free demand gate (Keyword Planner): drop cities whose '{trade} {city}' search is under this per month. 0 = measure only."
+        default: '100'
       request_id:
         description: "Run id for the published raw link. Blank = manual-<run_id>."
         required: false
@@ -71,6 +74,9 @@ jobs:
       - uses: actions/setup-python@v4
         with:
           python-version: '3.11'
+
+      - name: Install Keyword Planner client (stage 3.5 only)
+        run: pip install --quiet google-ads || echo 'google-ads not installed — demand stage will be skipped'
 
       - name: Resolve request id
         id: reqid
@@ -93,6 +99,15 @@ jobs:
           MAX_SERP_CHECKS:   ${{ github.event.inputs.max_serp_checks }}
           NICHES_PER_CITY:   ${{ github.event.inputs.niches_per_city }}
           SUBS_PER_NICHE:    ${{ github.event.inputs.subs_per_niche }}
+          MIN_VOLUME:        ${{ github.event.inputs.min_volume }}
+          # Stage 3.5 (demand) — free Keyword Planner calls; unset = skipped
+          GOOGLE_ADS_DEVELOPER_TOKEN:   ${{ secrets.GOOGLE_ADS_DEVELOPER_TOKEN }}
+          GOOGLE_ADS_CLIENT_ID:         ${{ secrets.GOOGLE_ADS_CLIENT_ID }}
+          GOOGLE_ADS_CLIENT_SECRET:     ${{ secrets.GOOGLE_ADS_CLIENT_SECRET }}
+          GOOGLE_ADS_REFRESH_TOKEN:     ${{ secrets.GOOGLE_ADS_REFRESH_TOKEN }}
+          GOOGLE_ADS_LOGIN_CUSTOMER_ID: ${{ secrets.GOOGLE_ADS_LOGIN_CUSTOMER_ID }}
+          GOOGLE_ADS_CUSTOMER_ID:       ${{ secrets.GOOGLE_ADS_CUSTOMER_ID }}
+          GOOGLE_ADS_USE_PROTO_PLUS:    'True'
           SERP_GL:           us
           SERP_DEBUG_N:      '5'
         run: python -u scripts/find_opportunities.py
