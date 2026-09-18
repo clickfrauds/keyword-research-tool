@@ -1,0 +1,4547 @@
+{
+  "pricing_model_by_niche": {
+    "Electrical (Call)": {
+      "distinct": 69,
+      "mode": "geo"
+    },
+    "Appliance (Call)": {
+      "distinct": 71,
+      "mode": "geo"
+    },
+    "Gutters (Call)": {
+      "distinct": 1,
+      "mode": "flat"
+    },
+    "Waterproofing (CPL)": {
+      "distinct": 2,
+      "mode": "flat"
+    },
+    "HVAC (Call)": {
+      "distinct": 149,
+      "mode": "geo"
+    },
+    "Bathroom Remodeling (Call)": {
+      "distinct": 92,
+      "mode": "geo"
+    },
+    "Pest Control (Call)": {
+      "distinct": 2,
+      "mode": "flat"
+    },
+    "Roofing (Call)": {
+      "distinct": 181,
+      "mode": "geo"
+    },
+    "Plumbing (Call)": {
+      "distinct": 253,
+      "mode": "geo"
+    },
+    "Biohazard (CPL)": {
+      "distinct": 7,
+      "mode": "geo"
+    },
+    "Garage Door (CPL)": {
+      "distinct": 3,
+      "mode": "flat"
+    },
+    "Mold Removal (CPL)": {
+      "distinct": 9,
+      "mode": "geo"
+    },
+    "Painting (CPL)": {
+      "distinct": 3,
+      "mode": "flat"
+    },
+    "Fire Damage Removal (CPL)": {
+      "distinct": 9,
+      "mode": "geo"
+    },
+    "Siding (CPL)": {
+      "distinct": 9,
+      "mode": "geo"
+    },
+    "Plumbing (CPL)": {
+      "distinct": 8,
+      "mode": "geo"
+    },
+    "Water Damage (CPL)": {
+      "distinct": 25,
+      "mode": "geo"
+    },
+    "Tree Services (Call)": {
+      "distinct": 6,
+      "mode": "geo"
+    },
+    "Deck (CPL)": {
+      "distinct": 1,
+      "mode": "flat"
+    },
+    "Kitchen (CPL)": {
+      "distinct": 1,
+      "mode": "flat"
+    },
+    "Foundation Repair (CPL)": {
+      "distinct": 1,
+      "mode": "flat"
+    }
+  },
+  "generated": "2026-09-18 17:05 UTC",
+  "dataset_date": "2026-09-17",
+  "filters": {
+    "payout_type": "Call",
+    "min_payout": 35.0,
+    "population": [
+      15000,
+      200000
+    ],
+    "niches": [
+      "HVAC"
+    ],
+    "states": [
+      "IN",
+      "KY",
+      "OH",
+      "MO"
+    ],
+    "min_bundle_niches": 1
+  },
+  "candidate_cities": 110,
+  "serp_scanned": 35,
+  "opportunities": [
+    {
+      "city": "Lees Summit",
+      "state": "MO",
+      "county": "Jackson",
+      "population": 103656,
+      "zips": 6,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair Lees Summit MO",
+      "payout": 59.5,
+      "pricing": "geo",
+      "bundle_value": 59.5,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 59.5,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 96,
+      "serp_breakdown": {
+        "dedicated": 0,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 7,
+        "forum": 0,
+        "other_local": 2,
+        "results": 9,
+        "pack_size": 4,
+        "pack_top_reviews": 2438,
+        "pack_median_reviews": 1951
+      },
+      "occupants": [
+        {
+          "host": "youtube.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "youtube.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "youtube.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "acsaf.org",
+          "kind": "independent site"
+        },
+        {
+          "host": "en.wikipedia.org",
+          "kind": "independent site"
+        },
+        {
+          "host": "youtube.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "youtube.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "youtube.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "youtube.com",
+          "kind": "social profile"
+        }
+      ],
+      "opportunity": 57.12
+    },
+    {
+      "city": "Oxford",
+      "state": "OH",
+      "county": "Butler",
+      "population": 21753,
+      "zips": 1,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair Oxford OH",
+      "payout": 70.0,
+      "pricing": "geo",
+      "bundle_value": 70.0,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 70.0,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 35,
+      "serp_breakdown": {
+        "dedicated": 4,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 4,
+        "forum": 0,
+        "other_local": 1,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 50,
+        "pack_median_reviews": 12
+      },
+      "occupants": [
+        {
+          "host": "bryant.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "thomasgalbraith.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "rouseheatingandair.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "angi.com",
+          "kind": "directory"
+        },
+        {
+          "host": "bbplumbingheating.biz",
+          "kind": "independent site"
+        },
+        {
+          "host": "logan-inc.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        }
+      ],
+      "opportunity": 24.5
+    },
+    {
+      "city": "New Castle",
+      "state": "IN",
+      "county": "Henry",
+      "population": 17367,
+      "zips": 1,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair New Castle IN",
+      "payout": 64.58,
+      "pricing": "geo",
+      "bundle_value": 64.58,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 64.58,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 18,
+      "serp_breakdown": {
+        "dedicated": 4,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 4,
+        "forum": 0,
+        "other_local": 1,
+        "results": 9,
+        "pack_size": 4,
+        "pack_top_reviews": 1108,
+        "pack_median_reviews": 1100
+      },
+      "occupants": [
+        {
+          "host": "summersphc.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "calljakes.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "northerncomfortsystems.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        },
+        {
+          "host": "mrssolutions.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "homedepot.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "mapquest.com",
+          "kind": "directory"
+        }
+      ],
+      "opportunity": 11.62
+    },
+    {
+      "city": "Anderson",
+      "state": "IN",
+      "county": "Madison",
+      "population": 80597,
+      "zips": 6,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair Anderson IN",
+      "payout": 72.45,
+      "pricing": "geo",
+      "bundle_value": 72.45,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 72.45,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 14,
+      "serp_breakdown": {
+        "dedicated": 4,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 2,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 1302,
+        "pack_median_reviews": 741
+      },
+      "occupants": [
+        {
+          "host": "summersphc.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "williamscomfortair.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "nardcoheating.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "reederhvac.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "angi.com",
+          "kind": "directory"
+        },
+        {
+          "host": "fullermohlerhvac.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "callhomeheroes.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 10.14
+    },
+    {
+      "city": "Nicholasville",
+      "state": "KY",
+      "county": "Jessamine",
+      "population": 32197,
+      "zips": 2,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair Nicholasville KY",
+      "payout": 56.0,
+      "pricing": "geo",
+      "bundle_value": 56.0,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 56.0,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 18,
+      "serp_breakdown": {
+        "dedicated": 5,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 1,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 121,
+        "pack_median_reviews": 23
+      },
+      "occupants": [
+        {
+          "host": "donnierowe.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "valuehvacservices.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "aireserv.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "cbac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "stivers-hvac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "angi.com",
+          "kind": "directory"
+        },
+        {
+          "host": "stewartac.com",
+          "kind": "independent site"
+        }
+      ],
+      "opportunity": 10.08
+    },
+    {
+      "city": "Grain Valley",
+      "state": "MO",
+      "county": "Jackson",
+      "population": 16271,
+      "zips": 1,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair Grain Valley MO",
+      "payout": 59.5,
+      "pricing": "geo",
+      "bundle_value": 59.5,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 59.5,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 16,
+      "serp_breakdown": {
+        "dedicated": 4,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 2,
+        "forum": 0,
+        "other_local": 3,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 616,
+        "pack_median_reviews": 479
+      },
+      "occupants": [
+        {
+          "host": "apexhvackc.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "summithckc.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "sargentautodiesel.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "edcoaire.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "climatecontrolkc.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "lunaheatingcooling.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "homeadvisor.com",
+          "kind": "directory"
+        },
+        {
+          "host": "sbroauto.com",
+          "kind": "independent site"
+        }
+      ],
+      "opportunity": 9.52
+    },
+    {
+      "city": "Miamisburg",
+      "state": "OH",
+      "county": "Montgomery",
+      "population": 19948,
+      "zips": 2,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair Miamisburg OH",
+      "payout": 70.0,
+      "pricing": "geo",
+      "bundle_value": 70.0,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 70.0,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 6,
+      "serp_breakdown": {
+        "dedicated": 6,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 2,
+        "forum": 0,
+        "other_local": 2,
+        "results": 10,
+        "pack_size": 0,
+        "pack_top_reviews": 0,
+        "pack_median_reviews": 0
+      },
+      "occupants": [
+        {
+          "host": "mcair.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "thomasgalbraith.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "cappshvac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "logan-inc.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "geteco.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "legacyhvac.pro",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "seiterservices.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "airtron.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 4.2
+    },
+    {
+      "city": "Shelbyville",
+      "state": "IN",
+      "county": "Shelby",
+      "population": 20296,
+      "zips": 1,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair Shelbyville IN",
+      "payout": 66.41,
+      "pricing": "geo",
+      "bundle_value": 66.41,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 66.41,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 6,
+      "serp_breakdown": {
+        "dedicated": 6,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 2,
+        "forum": 0,
+        "other_local": 2,
+        "results": 10,
+        "pack_size": 0,
+        "pack_top_reviews": 0,
+        "pack_median_reviews": 0
+      },
+      "occupants": [
+        {
+          "host": "qualitycomfort247.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "williamscomfortair.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "peoplesheatingcooling.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "christianelectricllc.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "midas.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yougetmoore.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "kightsqualityair.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "hicksairhvac.com",
+          "kind": "independent site"
+        }
+      ],
+      "opportunity": 3.98
+    },
+    {
+      "city": "Winchester",
+      "state": "KY",
+      "county": "Clark",
+      "population": 19213,
+      "zips": 1,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair Winchester KY",
+      "payout": 58.59,
+      "pricing": "geo",
+      "bundle_value": 58.59,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 58.59,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 4,
+      "serp_breakdown": {
+        "dedicated": 6,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 0,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 61,
+        "pack_median_reviews": 54
+      },
+      "occupants": [
+        {
+          "host": "bryant.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "stivers-hvac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "wisetechheatingcooling.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "justcallnextlevel.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "thornberrybros.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "angi.com",
+          "kind": "directory"
+        },
+        {
+          "host": "pureheatingandair.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 2.34
+    },
+    {
+      "city": "Fishers",
+      "state": "IN",
+      "county": "Hamilton",
+      "population": 102337,
+      "zips": 3,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair Fishers IN",
+      "payout": 94.5,
+      "pricing": "geo",
+      "bundle_value": 94.5,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 94.5,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 7,
+        "pseo": 0,
+        "national": 0,
+        "emd": 1,
+        "directory": 2,
+        "forum": 0,
+        "other_local": 0,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 1051,
+        "pack_median_reviews": 559
+      },
+      "occupants": [
+        {
+          "host": "airtron.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "actionairfishers.com",
+          "kind": "city EMD + dedicated page"
+        },
+        {
+          "host": "yorksqualityair.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "varsityzone.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "summersphc.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "callhomeheroes.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "calljakes.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 0.0
+    },
+    {
+      "city": "Noblesville",
+      "state": "IN",
+      "county": "Hamilton",
+      "population": 73362,
+      "zips": 3,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair Noblesville IN",
+      "payout": 94.5,
+      "pricing": "geo",
+      "bundle_value": 94.5,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 94.5,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 6,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 1,
+        "forum": 0,
+        "other_local": 1,
+        "results": 8,
+        "pack_size": 3,
+        "pack_top_reviews": 1072,
+        "pack_median_reviews": 167
+      },
+      "occupants": [
+        {
+          "host": "williamscomfortair.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "summersphc.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "airtron.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "eandjheatingandcooling.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "callhomeheroes.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "calljakes.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yorksqualityair.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 0.0
+    },
+    {
+      "city": "Carmel",
+      "state": "IN",
+      "county": "Hamilton",
+      "population": 101651,
+      "zips": 3,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair Carmel IN",
+      "payout": 78.75,
+      "pricing": "geo",
+      "bundle_value": 78.75,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 78.75,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 7,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 2,
+        "forum": 0,
+        "other_local": 0,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 6748,
+        "pack_median_reviews": 720
+      },
+      "occupants": [
+        {
+          "host": "airtron.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "appelheat.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "yorksqualityair.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "hoppyair.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "firestonecompleteautocare.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "angi.com",
+          "kind": "directory"
+        },
+        {
+          "host": "bollscomfort.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "local.yahoo.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 0.0
+    },
+    {
+      "city": "Zionsville",
+      "state": "IN",
+      "county": "Boone",
+      "population": 32095,
+      "zips": 1,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair Zionsville IN",
+      "payout": 78.75,
+      "pricing": "geo",
+      "bundle_value": 78.75,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 78.75,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 8,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 2,
+        "forum": 0,
+        "other_local": 0,
+        "results": 10,
+        "pack_size": 0,
+        "pack_top_reviews": 0,
+        "pack_median_reviews": 0
+      },
+      "occupants": [
+        {
+          "host": "williamscomfortair.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "airtron.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "forddonhinds.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "russellheatingandcooling.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "cbac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "booneheatingandcooling.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "controltech.biz",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "aireserv.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 0.0
+    },
+    {
+      "city": "Brownsburg",
+      "state": "IN",
+      "county": "Hendricks",
+      "population": 31215,
+      "zips": 1,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair Brownsburg IN",
+      "payout": 78.75,
+      "pricing": "geo",
+      "bundle_value": 78.75,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 78.75,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 8,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 1,
+        "forum": 0,
+        "other_local": 0,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 2700,
+        "pack_median_reviews": 403
+      },
+      "occupants": [
+        {
+          "host": "williamscomfortair.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "airtron.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "summersphc.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "booneheatingandcooling.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "automotiveaction2.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "indycomfortpro.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "bluefoxhvac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "bollscomfort.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 0.0
+    },
+    {
+      "city": "Columbus",
+      "state": "IN",
+      "county": "Bartholomew",
+      "population": 51824,
+      "zips": 3,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair Columbus IN",
+      "payout": 74.03,
+      "pricing": "geo",
+      "bundle_value": 74.03,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 74.03,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 6,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 2,
+        "forum": 0,
+        "other_local": 1,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 1193,
+        "pack_median_reviews": 908
+      },
+      "occupants": [
+        {
+          "host": "hoppyair.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "summersphc.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "petermanhvac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "greenestruckautoservice.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "goduganair.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "efficientsystems.net",
+          "kind": "independent site"
+        },
+        {
+          "host": "summersphc.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 0.0
+    },
+    {
+      "city": "Greenfield",
+      "state": "IN",
+      "county": "Hancock",
+      "population": 24940,
+      "zips": 1,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair Greenfield IN",
+      "payout": 72.45,
+      "pricing": "geo",
+      "bundle_value": 72.45,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 72.45,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 6,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 2,
+        "forum": 0,
+        "other_local": 1,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 398,
+        "pack_median_reviews": 175
+      },
+      "occupants": [
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "autorepairnewpalestine.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "airtron.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "beardheatingandcooling.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "fellowshipheatingandcoolinginc.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "bryant.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "ssheatingcooling.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "rightawayoffers.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 0.0
+    },
+    {
+      "city": "Hamilton",
+      "state": "OH",
+      "county": "Butler",
+      "population": 63468,
+      "zips": 4,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair Hamilton OH",
+      "payout": 70.0,
+      "pricing": "geo",
+      "bundle_value": 70.0,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 70.0,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 7,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 2,
+        "forum": 0,
+        "other_local": 0,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 467,
+        "pack_median_reviews": 90
+      },
+      "occupants": [
+        {
+          "host": "rouseheatingandair.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "airtron.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "jimstireandauto.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "htrservices.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "geteco.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "aireserv.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "inloesheatingandcooling.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 0.0
+    },
+    {
+      "city": "Middletown",
+      "state": "OH",
+      "county": "Butler",
+      "population": 97529,
+      "zips": 2,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair Middletown OH",
+      "payout": 70.0,
+      "pricing": "geo",
+      "bundle_value": 70.0,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 70.0,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 8,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 1,
+        "forum": 0,
+        "other_local": 0,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 523,
+        "pack_median_reviews": 186
+      },
+      "occupants": [
+        {
+          "host": "thomasgalbraith.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "midas.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "blairhtg.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "geteco.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "airtron.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "hill-air.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "ricksheatingandcooling.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "trane.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 0.0
+    },
+    {
+      "city": "Springboro",
+      "state": "OH",
+      "county": "Warren",
+      "population": 19980,
+      "zips": 1,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair Springboro OH",
+      "payout": 70.0,
+      "pricing": "geo",
+      "bundle_value": 70.0,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 70.0,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 5,
+        "pseo": 0,
+        "national": 0,
+        "emd": 1,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 1,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 1194,
+        "pack_median_reviews": 140
+      },
+      "occupants": [
+        {
+          "host": "springboroheatingandcooling.com",
+          "kind": "city EMD + dedicated page"
+        },
+        {
+          "host": "thomasgalbraith.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "summersphc.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "airtron.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "mcair.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "raffoulheatingandair.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "angi.com",
+          "kind": "directory"
+        }
+      ],
+      "opportunity": 0.0
+    },
+    {
+      "city": "Westfield",
+      "state": "IN",
+      "county": "Hamilton",
+      "population": 54677,
+      "zips": 1,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair Westfield IN",
+      "payout": 68.75,
+      "pricing": "geo",
+      "bundle_value": 68.75,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 68.75,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 8,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 1,
+        "forum": 0,
+        "other_local": 0,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 2528,
+        "pack_median_reviews": 618
+      },
+      "occupants": [
+        {
+          "host": "williamscomfortair.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "bluefoxhvac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "airtron.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "goodguys.app",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "bollscomfort.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "calljakes.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "integrityhomehvac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "lcsheatingandcooling.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 0.0
+    },
+    {
+      "city": "Avon",
+      "state": "IN",
+      "county": "Hendricks",
+      "population": 23437,
+      "zips": 1,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair Avon IN",
+      "payout": 68.75,
+      "pricing": "geo",
+      "bundle_value": 68.75,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 68.75,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 7,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 2,
+        "forum": 0,
+        "other_local": 0,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 128,
+        "pack_median_reviews": 59
+      },
+      "occupants": [
+        {
+          "host": "williamscomfortair.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yorksqualityair.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "polleysperfectseasons.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "aireserv.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "airtron.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "summersphc.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "indycomfortpro.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 0.0
+    },
+    {
+      "city": "Greenwood",
+      "state": "IN",
+      "county": "Johnson",
+      "population": 66029,
+      "zips": 2,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair Greenwood IN",
+      "payout": 68.75,
+      "pricing": "geo",
+      "bundle_value": 68.75,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 68.75,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 6,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 2,
+        "forum": 0,
+        "other_local": 1,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 2323,
+        "pack_median_reviews": 312
+      },
+      "occupants": [
+        {
+          "host": "aireserv.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "williamscomfortair.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "airtron.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yorksqualityair.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "speedyairtoday.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "northerncomfortsystems.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "johnsoncomfort.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "angi.com",
+          "kind": "directory"
+        }
+      ],
+      "opportunity": 0.0
+    },
+    {
+      "city": "Lebanon",
+      "state": "IN",
+      "county": "Boone",
+      "population": 17812,
+      "zips": 1,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair Lebanon IN",
+      "payout": 66.41,
+      "pricing": "geo",
+      "bundle_value": 66.41,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 66.41,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 7,
+        "pseo": 0,
+        "national": 0,
+        "emd": 2,
+        "directory": 2,
+        "forum": 0,
+        "other_local": 0,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 1156,
+        "pack_median_reviews": 1089
+      },
+      "occupants": [
+        {
+          "host": "airy-time.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "williamscomfortair.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "booneheatingandcooling.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "warrenmechanicalhvac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "jtrrepairlebanon.com",
+          "kind": "city EMD + dedicated page"
+        },
+        {
+          "host": "kightsqualityair.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "scottsgaragelebanon.com",
+          "kind": "city EMD + dedicated page"
+        }
+      ],
+      "opportunity": 0.0
+    },
+    {
+      "city": "Muncie",
+      "state": "IN",
+      "county": "Delaware",
+      "population": 85519,
+      "zips": 4,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair Muncie IN",
+      "payout": 64.58,
+      "pricing": "geo",
+      "bundle_value": 64.58,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 64.58,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 7,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 2,
+        "forum": 0,
+        "other_local": 0,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 327,
+        "pack_median_reviews": 97
+      },
+      "occupants": [
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "williamscomfortair.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "reederhvac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "summersphc.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "mikekinghvac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "calljakes.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "petermanhvac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "onehourheatandair.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 0.0
+    },
+    {
+      "city": "Seymour",
+      "state": "IN",
+      "county": "Jackson",
+      "population": 22371,
+      "zips": 1,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair Seymour IN",
+      "payout": 61.25,
+      "pricing": "geo",
+      "bundle_value": 61.25,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 61.25,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 5,
+        "pseo": 0,
+        "national": 0,
+        "emd": 1,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 1,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 910,
+        "pack_median_reviews": 45
+      },
+      "occupants": [
+        {
+          "host": "craigsheatingandair.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "aplusderr.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "schneiderplumbingandhvac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "seymourtire.com",
+          "kind": "city EMD + dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "advantageheatingandair.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "reliablecomfort.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "angi.com",
+          "kind": "directory"
+        }
+      ],
+      "opportunity": 0.0
+    },
+    {
+      "city": "Plainfield",
+      "state": "IN",
+      "county": "Hendricks",
+      "population": 36369,
+      "zips": 1,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair Plainfield IN",
+      "payout": 60.38,
+      "pricing": "geo",
+      "bundle_value": 60.38,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 60.38,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 6,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 1,
+        "forum": 0,
+        "other_local": 2,
+        "results": 9,
+        "pack_size": 4,
+        "pack_top_reviews": 11000,
+        "pack_median_reviews": 1684
+      },
+      "occupants": [
+        {
+          "host": "polleysperfectseasons.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "newwavehomesolutions.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "williamscomfortair.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "xpresspro.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "midas.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "bryant.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "airtron.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "fellowshipheatingandcoolinginc.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 0.0
+    },
+    {
+      "city": "Delaware",
+      "state": "OH",
+      "county": "Delaware",
+      "population": 44589,
+      "zips": 1,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair Delaware OH",
+      "payout": 59.85,
+      "pricing": "geo",
+      "bundle_value": 59.85,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 59.85,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 5,
+        "pseo": 0,
+        "national": 0,
+        "emd": 1,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 1,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 498,
+        "pack_median_reviews": 76
+      },
+      "occupants": [
+        {
+          "host": "ttmmechanical.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "buckeyeheat.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "indoortemp.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "angi.com",
+          "kind": "directory"
+        },
+        {
+          "host": "emergencyplumbingservice.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "firestonecompleteautocare.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "delawareairandheat.com",
+          "kind": "city EMD + dedicated page"
+        }
+      ],
+      "opportunity": 0.0
+    },
+    {
+      "city": "Pataskala",
+      "state": "OH",
+      "county": "Licking",
+      "population": 18223,
+      "zips": 1,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair Pataskala OH",
+      "payout": 59.85,
+      "pricing": "geo",
+      "bundle_value": 59.85,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 59.85,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 7,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 2,
+        "forum": 0,
+        "other_local": 0,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 401,
+        "pack_median_reviews": 54
+      },
+      "occupants": [
+        {
+          "host": "buckeyeheat.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "bryant.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "careheatingcooling.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "rightwayhvac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "chandlerheatingcooling.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "accuratehvac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        },
+        {
+          "host": "xtremeairllc.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 0.0
+    },
+    {
+      "city": "Blue Springs",
+      "state": "MO",
+      "county": "Jackson",
+      "population": 59965,
+      "zips": 3,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair Blue Springs MO",
+      "payout": 59.5,
+      "pricing": "geo",
+      "bundle_value": 59.5,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 59.5,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 7,
+        "pseo": 0,
+        "national": 0,
+        "emd": 1,
+        "directory": 2,
+        "forum": 0,
+        "other_local": 0,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 1345,
+        "pack_median_reviews": 465
+      },
+      "occupants": [
+        {
+          "host": "dadscoolair.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "praycophc.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "autorepairbluesprings.com",
+          "kind": "city EMD + dedicated page"
+        },
+        {
+          "host": "aireserv.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "angi.com",
+          "kind": "directory"
+        },
+        {
+          "host": "abmay.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "callfirstmate.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "cmmoseandson.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 0.0
+    },
+    {
+      "city": "Grandview",
+      "state": "MO",
+      "county": "Jackson",
+      "population": 26527,
+      "zips": 1,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair Grandview MO",
+      "payout": 59.5,
+      "pricing": "geo",
+      "bundle_value": 59.5,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 59.5,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 6,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 0,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 1011,
+        "pack_median_reviews": 101
+      },
+      "occupants": [
+        {
+          "host": "abmay.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "summithckc.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "firestonecompleteautocare.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "kchvackc.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "homedepot.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "cmmoseandson.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "thumbtack.com",
+          "kind": "directory"
+        },
+        {
+          "host": "nextdoor.com",
+          "kind": "social profile"
+        }
+      ],
+      "opportunity": 0.0
+    },
+    {
+      "city": "Independence",
+      "state": "MO",
+      "county": "Jackson",
+      "population": 121740,
+      "zips": 9,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair Independence MO",
+      "payout": 59.5,
+      "pricing": "geo",
+      "bundle_value": 59.5,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 59.5,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 6,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 2,
+        "forum": 0,
+        "other_local": 1,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 158,
+        "pack_median_reviews": 103
+      },
+      "occupants": [
+        {
+          "host": "abmay.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "callfirstmate.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "mcintosh-hc.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "cbac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "mcdanielfurnace.biz",
+          "kind": "independent site"
+        },
+        {
+          "host": "angi.com",
+          "kind": "directory"
+        },
+        {
+          "host": "barrsautorepair.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "midas.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 0.0
+    },
+    {
+      "city": "Liberty",
+      "state": "MO",
+      "county": "Clay",
+      "population": 30689,
+      "zips": 2,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair Liberty MO",
+      "payout": 59.5,
+      "pricing": "geo",
+      "bundle_value": 59.5,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 59.5,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 5,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 1,
+        "results": 9,
+        "pack_size": 4,
+        "pack_top_reviews": 3900,
+        "pack_median_reviews": 2554
+      },
+      "occupants": [
+        {
+          "host": "airunlimitedkc.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "haleshnc.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "climatecontrolkc.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "bucknershc.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "firestonecompleteautocare.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "thumbtack.com",
+          "kind": "directory"
+        },
+        {
+          "host": "kchvackc.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 0.0
+    },
+    {
+      "city": "New Albany",
+      "state": "IN",
+      "county": "Floyd",
+      "population": 37581,
+      "zips": 2,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair New Albany IN",
+      "payout": 56.0,
+      "pricing": "geo",
+      "bundle_value": 56.0,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 56.0,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 6,
+        "pseo": 0,
+        "national": 0,
+        "emd": 1,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 0,
+        "results": 9,
+        "pack_size": 4,
+        "pack_top_reviews": 229,
+        "pack_median_reviews": 224
+      },
+      "occupants": [
+        {
+          "host": "newalbanyheating.com",
+          "kind": "city EMD + dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "mitchcraighvac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "frankhmonroe.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "lambshvac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "summersphc.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "oeffingercronehvacin.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "angi.com",
+          "kind": "directory"
+        }
+      ],
+      "opportunity": 0.0
+    },
+    {
+      "city": "Covington",
+      "state": "KY",
+      "county": "Kenton",
+      "population": 41110,
+      "zips": 5,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair Covington KY",
+      "payout": 56.0,
+      "pricing": "geo",
+      "bundle_value": 56.0,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 56.0,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 8,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 1,
+        "forum": 0,
+        "other_local": 0,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 3,
+        "pack_median_reviews": 3
+      },
+      "occupants": [
+        {
+          "host": "thomasgalbraith.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "independence-mechanical.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "logan-inc.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "firestonecompleteautocare.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "arlinghausair.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "airtron.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "schnellerair.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "schmidtheating.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 0.0
+    },
+    {
+      "city": "Erlanger",
+      "state": "KY",
+      "county": "Kenton",
+      "population": 19875,
+      "zips": 2,
+      "niche": "HVAC",
+      "sub_service": "ac repair",
+      "query": "ac repair Erlanger KY",
+      "payout": 56.0,
+      "pricing": "geo",
+      "bundle_value": 56.0,
+      "niches_here": [
+        {
+          "niche": "HVAC",
+          "payout": 56.0,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 7,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 2,
+        "forum": 0,
+        "other_local": 0,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 7101,
+        "pack_median_reviews": 423
+      },
+      "occupants": [
+        {
+          "host": "callnowhvac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "arlinghausair.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "schmidtheating.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "midas.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "thomasgalbraith.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "gchomeservice.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "schnellerair.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        }
+      ],
+      "opportunity": 0.0
+    }
+  ],
+  "top_candidates_unscanned": [
+    {
+      "city": "Fishers",
+      "state": "IN",
+      "county": "Hamilton",
+      "pop": 102337,
+      "zips": 3,
+      "top_niche": "HVAC",
+      "top_payout": 94.5,
+      "bundle_value": 94.5,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 94.5,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Noblesville",
+      "state": "IN",
+      "county": "Hamilton",
+      "pop": 73362,
+      "zips": 3,
+      "top_niche": "HVAC",
+      "top_payout": 94.5,
+      "bundle_value": 94.5,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 94.5,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Carmel",
+      "state": "IN",
+      "county": "Hamilton",
+      "pop": 101651,
+      "zips": 3,
+      "top_niche": "HVAC",
+      "top_payout": 78.75,
+      "bundle_value": 78.75,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 78.75,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Zionsville",
+      "state": "IN",
+      "county": "Boone",
+      "pop": 32095,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 78.75,
+      "bundle_value": 78.75,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 78.75,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Brownsburg",
+      "state": "IN",
+      "county": "Hendricks",
+      "pop": 31215,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 78.75,
+      "bundle_value": 78.75,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 78.75,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Columbus",
+      "state": "IN",
+      "county": "Bartholomew",
+      "pop": 51824,
+      "zips": 3,
+      "top_niche": "HVAC",
+      "top_payout": 74.03,
+      "bundle_value": 74.03,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 74.03,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Anderson",
+      "state": "IN",
+      "county": "Madison",
+      "pop": 80597,
+      "zips": 6,
+      "top_niche": "HVAC",
+      "top_payout": 72.45,
+      "bundle_value": 72.45,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 72.45,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Greenfield",
+      "state": "IN",
+      "county": "Hancock",
+      "pop": 24940,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 72.45,
+      "bundle_value": 72.45,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 72.45,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Hamilton",
+      "state": "OH",
+      "county": "Butler",
+      "pop": 63468,
+      "zips": 4,
+      "top_niche": "HVAC",
+      "top_payout": 70.0,
+      "bundle_value": 70.0,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 70.0,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Mason",
+      "state": "OH",
+      "county": "Warren",
+      "pop": 35509,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 70.0,
+      "bundle_value": 70.0,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 70.0,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Middletown",
+      "state": "OH",
+      "county": "Butler",
+      "pop": 97529,
+      "zips": 2,
+      "top_niche": "HVAC",
+      "top_payout": 70.0,
+      "bundle_value": 70.0,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 70.0,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Oxford",
+      "state": "OH",
+      "county": "Butler",
+      "pop": 21753,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 70.0,
+      "bundle_value": 70.0,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 70.0,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Springboro",
+      "state": "OH",
+      "county": "Warren",
+      "pop": 19980,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 70.0,
+      "bundle_value": 70.0,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 70.0,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Miamisburg",
+      "state": "OH",
+      "county": "Montgomery",
+      "pop": 19948,
+      "zips": 2,
+      "top_niche": "HVAC",
+      "top_payout": 70.0,
+      "bundle_value": 70.0,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 70.0,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Westfield",
+      "state": "IN",
+      "county": "Hamilton",
+      "pop": 54677,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 68.75,
+      "bundle_value": 68.75,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 68.75,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Avon",
+      "state": "IN",
+      "county": "Hendricks",
+      "pop": 23437,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 68.75,
+      "bundle_value": 68.75,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 68.75,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Greenwood",
+      "state": "IN",
+      "county": "Johnson",
+      "pop": 66029,
+      "zips": 2,
+      "top_niche": "HVAC",
+      "top_payout": 68.75,
+      "bundle_value": 68.75,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 68.75,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Lebanon",
+      "state": "IN",
+      "county": "Boone",
+      "pop": 17812,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 66.41,
+      "bundle_value": 66.41,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 66.41,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Shelbyville",
+      "state": "IN",
+      "county": "Shelby",
+      "pop": 20296,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 66.41,
+      "bundle_value": 66.41,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 66.41,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Richmond",
+      "state": "KY",
+      "county": "Madison",
+      "pop": 37111,
+      "zips": 2,
+      "top_niche": "HVAC",
+      "top_payout": 66.15,
+      "bundle_value": 66.15,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 66.15,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Muncie",
+      "state": "IN",
+      "county": "Delaware",
+      "pop": 85519,
+      "zips": 4,
+      "top_niche": "HVAC",
+      "top_payout": 64.58,
+      "bundle_value": 64.58,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 64.58,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "New Castle",
+      "state": "IN",
+      "county": "Henry",
+      "pop": 17367,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 64.58,
+      "bundle_value": 64.58,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 64.58,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Seymour",
+      "state": "IN",
+      "county": "Jackson",
+      "pop": 22371,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 61.25,
+      "bundle_value": 61.25,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 61.25,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Plainfield",
+      "state": "IN",
+      "county": "Hendricks",
+      "pop": 36369,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 60.38,
+      "bundle_value": 60.38,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 60.38,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Delaware",
+      "state": "OH",
+      "county": "Delaware",
+      "pop": 44589,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 59.85,
+      "bundle_value": 59.85,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 59.85,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Pataskala",
+      "state": "OH",
+      "county": "Licking",
+      "pop": 18223,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 59.85,
+      "bundle_value": 59.85,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 59.85,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Reynoldsburg",
+      "state": "OH",
+      "county": "Franklin",
+      "pop": 41224,
+      "zips": 2,
+      "top_niche": "HVAC",
+      "top_payout": 59.85,
+      "bundle_value": 59.85,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 59.85,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Lees Summit",
+      "state": "MO",
+      "county": "Jackson",
+      "pop": 103656,
+      "zips": 6,
+      "top_niche": "HVAC",
+      "top_payout": 59.5,
+      "bundle_value": 59.5,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 59.5,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Blue Springs",
+      "state": "MO",
+      "county": "Jackson",
+      "pop": 59965,
+      "zips": 3,
+      "top_niche": "HVAC",
+      "top_payout": 59.5,
+      "bundle_value": 59.5,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 59.5,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Grain Valley",
+      "state": "MO",
+      "county": "Jackson",
+      "pop": 16271,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 59.5,
+      "bundle_value": 59.5,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 59.5,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Grandview",
+      "state": "MO",
+      "county": "Jackson",
+      "pop": 26527,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 59.5,
+      "bundle_value": 59.5,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 59.5,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Independence",
+      "state": "MO",
+      "county": "Jackson",
+      "pop": 121740,
+      "zips": 9,
+      "top_niche": "HVAC",
+      "top_payout": 59.5,
+      "bundle_value": 59.5,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 59.5,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Liberty",
+      "state": "MO",
+      "county": "Clay",
+      "pop": 30689,
+      "zips": 2,
+      "top_niche": "HVAC",
+      "top_payout": 59.5,
+      "bundle_value": 59.5,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 59.5,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Winchester",
+      "state": "KY",
+      "county": "Clark",
+      "pop": 19213,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 58.59,
+      "bundle_value": 58.59,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 58.59,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "New Albany",
+      "state": "IN",
+      "county": "Floyd",
+      "pop": 37581,
+      "zips": 2,
+      "top_niche": "HVAC",
+      "top_payout": 56.0,
+      "bundle_value": 56.0,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 56.0,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Mount Washington",
+      "state": "KY",
+      "county": "Bullitt",
+      "pop": 18480,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 56.0,
+      "bundle_value": 56.0,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 56.0,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Nicholasville",
+      "state": "KY",
+      "county": "Jessamine",
+      "pop": 32197,
+      "zips": 2,
+      "top_niche": "HVAC",
+      "top_payout": 56.0,
+      "bundle_value": 56.0,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 56.0,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Covington",
+      "state": "KY",
+      "county": "Kenton",
+      "pop": 41110,
+      "zips": 5,
+      "top_niche": "HVAC",
+      "top_payout": 56.0,
+      "bundle_value": 56.0,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 56.0,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Erlanger",
+      "state": "KY",
+      "county": "Kenton",
+      "pop": 19875,
+      "zips": 2,
+      "top_niche": "HVAC",
+      "top_payout": 56.0,
+      "bundle_value": 56.0,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 56.0,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Florence",
+      "state": "KY",
+      "county": "Boone",
+      "pop": 32803,
+      "zips": 2,
+      "top_niche": "HVAC",
+      "top_payout": 56.0,
+      "bundle_value": 56.0,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 56.0,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Shelbyville",
+      "state": "KY",
+      "county": "Shelby",
+      "pop": 17668,
+      "zips": 2,
+      "top_niche": "HVAC",
+      "top_payout": 55.13,
+      "bundle_value": 55.13,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 55.13,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Franklin",
+      "state": "IN",
+      "county": "Johnson",
+      "pop": 26168,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 54.25,
+      "bundle_value": 54.25,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 54.25,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Newark",
+      "state": "OH",
+      "county": "Licking",
+      "pop": 82292,
+      "zips": 3,
+      "top_niche": "HVAC",
+      "top_payout": 53.63,
+      "bundle_value": 53.63,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 53.63,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Westerville",
+      "state": "OH",
+      "county": "Franklin",
+      "pop": 38645,
+      "zips": 3,
+      "top_niche": "HVAC",
+      "top_payout": 53.63,
+      "bundle_value": 53.63,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 53.63,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Wooster",
+      "state": "OH",
+      "county": "Wayne",
+      "pop": 26971,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 53.63,
+      "bundle_value": 53.63,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 53.63,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Ashland",
+      "state": "OH",
+      "county": "Ashland",
+      "pop": 18911,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 53.63,
+      "bundle_value": 53.63,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 53.63,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Mansfield",
+      "state": "OH",
+      "county": "Richland",
+      "pop": 75233,
+      "zips": 7,
+      "top_niche": "HVAC",
+      "top_payout": 53.63,
+      "bundle_value": 53.63,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 53.63,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Athens",
+      "state": "OH",
+      "county": "Athens",
+      "pop": 23396,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 53.63,
+      "bundle_value": 53.63,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 53.63,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Georgetown",
+      "state": "KY",
+      "county": "Scott",
+      "pop": 39117,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 53.55,
+      "bundle_value": 53.55,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 53.55,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Berea",
+      "state": "KY",
+      "county": "Madison",
+      "pop": 15786,
+      "zips": 2,
+      "top_niche": "HVAC",
+      "top_payout": 53.55,
+      "bundle_value": 53.55,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 53.55,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Fort Thomas",
+      "state": "KY",
+      "county": "Campbell",
+      "pop": 17169,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 52.67,
+      "bundle_value": 52.67,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 52.67,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Danville",
+      "state": "KY",
+      "county": "Boyle",
+      "pop": 17327,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 52.5,
+      "bundle_value": 52.5,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 52.5,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Burlington",
+      "state": "KY",
+      "county": "Boone",
+      "pop": 18008,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 52.5,
+      "bundle_value": 52.5,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 52.5,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Latonia",
+      "state": "KY",
+      "county": "Kenton",
+      "pop": 41110,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 52.5,
+      "bundle_value": 52.5,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 52.5,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Independence",
+      "state": "KY",
+      "county": "Kenton",
+      "pop": 29392,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 52.5,
+      "bundle_value": 52.5,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 52.5,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Fairfield",
+      "state": "OH",
+      "county": "Butler",
+      "pop": 44828,
+      "zips": 2,
+      "top_niche": "HVAC",
+      "top_payout": 52.5,
+      "bundle_value": 52.5,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 52.5,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Lebanon",
+      "state": "OH",
+      "county": "Warren",
+      "pop": 21501,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 52.5,
+      "bundle_value": 52.5,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 52.5,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Monroe",
+      "state": "OH",
+      "county": "Butler",
+      "pop": 15401,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 52.5,
+      "bundle_value": 52.5,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 52.5,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Lafayette",
+      "state": "IN",
+      "county": "Tippecanoe",
+      "pop": 165110,
+      "zips": 3,
+      "top_niche": "HVAC",
+      "top_payout": 50.4,
+      "bundle_value": 50.4,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 50.4,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Hilliard",
+      "state": "OH",
+      "county": "Franklin",
+      "pop": 38033,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 49.77,
+      "bundle_value": 49.77,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 49.77,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Mount Vernon",
+      "state": "OH",
+      "county": "Knox",
+      "pop": 17052,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 49.77,
+      "bundle_value": 49.77,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 49.77,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Lancaster",
+      "state": "OH",
+      "county": "Fairfield",
+      "pop": 41249,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 49.77,
+      "bundle_value": 49.77,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 49.77,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Zanesville",
+      "state": "OH",
+      "county": "Muskingum",
+      "pop": 24740,
+      "zips": 2,
+      "top_niche": "HVAC",
+      "top_payout": 49.77,
+      "bundle_value": 49.77,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 49.77,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Piqua",
+      "state": "OH",
+      "county": "Miami",
+      "pop": 20646,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 49.77,
+      "bundle_value": 49.77,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 49.77,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Kokomo",
+      "state": "IN",
+      "county": "Howard",
+      "pop": 59122,
+      "zips": 2,
+      "top_niche": "HVAC",
+      "top_payout": 49.45,
+      "bundle_value": 49.45,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 49.45,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Marion",
+      "state": "IN",
+      "county": "Grant",
+      "pop": 27531,
+      "zips": 2,
+      "top_niche": "HVAC",
+      "top_payout": 47.25,
+      "bundle_value": 47.25,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 47.25,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Clarksville",
+      "state": "IN",
+      "county": "Clark",
+      "pop": 22016,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 47.25,
+      "bundle_value": 47.25,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 47.25,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Jeffersonville",
+      "state": "IN",
+      "county": "Clark",
+      "pop": 51043,
+      "zips": 8,
+      "top_niche": "HVAC",
+      "top_payout": 47.25,
+      "bundle_value": 47.25,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 47.25,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Crawfordsville",
+      "state": "IN",
+      "county": "Montgomery",
+      "pop": 16491,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 47.25,
+      "bundle_value": 47.25,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 47.25,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Radcliff",
+      "state": "KY",
+      "county": "Hardin",
+      "pop": 22864,
+      "zips": 2,
+      "top_niche": "HVAC",
+      "top_payout": 47.25,
+      "bundle_value": 47.25,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 47.25,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Frankfort",
+      "state": "KY",
+      "county": "Franklin",
+      "pop": 28503,
+      "zips": 9,
+      "top_niche": "HVAC",
+      "top_payout": 47.25,
+      "bundle_value": 47.25,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 47.25,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Elizabethtown",
+      "state": "KY",
+      "county": "Hardin",
+      "pop": 81379,
+      "zips": 2,
+      "top_niche": "HVAC",
+      "top_payout": 47.25,
+      "bundle_value": 47.25,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 47.25,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Dublin",
+      "state": "OH",
+      "county": "Franklin",
+      "pop": 49294,
+      "zips": 2,
+      "top_niche": "HVAC",
+      "top_payout": 47.25,
+      "bundle_value": 47.25,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 47.25,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Marysville",
+      "state": "OH",
+      "county": "Union",
+      "pop": 27518,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 47.25,
+      "bundle_value": 47.25,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 47.25,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Summit Station",
+      "state": "OH",
+      "county": "Licking",
+      "pop": 18223,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 47.25,
+      "bundle_value": 47.25,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 47.25,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Grove City",
+      "state": "OH",
+      "county": "Franklin",
+      "pop": 42517,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 47.25,
+      "bundle_value": 47.25,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 47.25,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Pickerington",
+      "state": "OH",
+      "county": "Fairfield",
+      "pop": 24477,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 47.25,
+      "bundle_value": 47.25,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 47.25,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Saint Joseph",
+      "state": "MO",
+      "county": "Buchanan",
+      "pop": 73256,
+      "zips": 8,
+      "top_niche": "HVAC",
+      "top_payout": 45.5,
+      "bundle_value": 45.5,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 45.5,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Belton",
+      "state": "MO",
+      "county": "Cass",
+      "pop": 25008,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 45.38,
+      "bundle_value": 45.38,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 45.38,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Raymore",
+      "state": "MO",
+      "county": "Cass",
+      "pop": 24526,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 45.38,
+      "bundle_value": 45.38,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 45.38,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Mishawaka",
+      "state": "IN",
+      "county": "St. Joseph",
+      "pop": 51021,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 44.1,
+      "bundle_value": 44.1,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 44.1,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Warsaw",
+      "state": "IN",
+      "county": "Kosciusko",
+      "pop": 16768,
+      "zips": 3,
+      "top_niche": "HVAC",
+      "top_payout": 44.1,
+      "bundle_value": 44.1,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 44.1,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Huntington",
+      "state": "IN",
+      "county": "Huntington",
+      "pop": 17030,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 43.75,
+      "bundle_value": 43.75,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 43.75,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "New Haven",
+      "state": "IN",
+      "county": "Allen",
+      "pop": 15698,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 43.75,
+      "bundle_value": 43.75,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 43.75,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Alpha",
+      "state": "OH",
+      "county": "Greene",
+      "pop": 47126,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 43.45,
+      "bundle_value": 43.45,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 43.45,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Fairborn",
+      "state": "OH",
+      "county": "Greene",
+      "pop": 34534,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 43.45,
+      "bundle_value": 43.45,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 43.45,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Troy",
+      "state": "OH",
+      "county": "Miami",
+      "pop": 26842,
+      "zips": 2,
+      "top_niche": "HVAC",
+      "top_payout": 43.45,
+      "bundle_value": 43.45,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 43.45,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Vandalia",
+      "state": "OH",
+      "county": "Montgomery",
+      "pop": 15053,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 43.45,
+      "bundle_value": 43.45,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 43.45,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Xenia",
+      "state": "OH",
+      "county": "Greene",
+      "pop": 25689,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 43.45,
+      "bundle_value": 43.45,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 43.45,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Springfield",
+      "state": "OH",
+      "county": "Clark",
+      "pop": 80812,
+      "zips": 5,
+      "top_niche": "HVAC",
+      "top_payout": 43.45,
+      "bundle_value": 43.45,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 43.45,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Lima",
+      "state": "OH",
+      "county": "Allen",
+      "pop": 66412,
+      "zips": 4,
+      "top_niche": "HVAC",
+      "top_payout": 42.73,
+      "bundle_value": 42.73,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 42.73,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Findlay",
+      "state": "OH",
+      "county": "Hancock",
+      "pop": 40287,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 42.73,
+      "bundle_value": 42.73,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 42.73,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Valparaiso",
+      "state": "IN",
+      "county": "Porter",
+      "pop": 34733,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 42.7,
+      "bundle_value": 42.7,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 42.7,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Gary",
+      "state": "IN",
+      "county": "Lake",
+      "pop": 68113,
+      "zips": 4,
+      "top_niche": "HVAC",
+      "top_payout": 42.7,
+      "bundle_value": 42.7,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 42.7,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Bloomington",
+      "state": "IN",
+      "county": "Monroe",
+      "pop": 107655,
+      "zips": 8,
+      "top_niche": "HVAC",
+      "top_payout": 41.25,
+      "bundle_value": 41.25,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 41.25,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Saint Charles",
+      "state": "MO",
+      "county": "St. Charles",
+      "pop": 71508,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 37.8,
+      "bundle_value": 37.8,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 37.8,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "O Fallon",
+      "state": "MO",
+      "county": "St. Charles",
+      "pop": 93801,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 37.8,
+      "bundle_value": 37.8,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 37.8,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Saint Peters",
+      "state": "MO",
+      "county": "St. Charles",
+      "pop": 59092,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 37.8,
+      "bundle_value": 37.8,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 37.8,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Glasgow",
+      "state": "KY",
+      "county": "Barren",
+      "pop": 15197,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 37.58,
+      "bundle_value": 37.58,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 37.58,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Vincennes",
+      "state": "IN",
+      "county": "Knox",
+      "pop": 16586,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 36.75,
+      "bundle_value": 36.75,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 36.75,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Dyer",
+      "state": "IN",
+      "county": "Lake",
+      "pop": 16400,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 36.4,
+      "bundle_value": 36.4,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 36.4,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "East Chicago",
+      "state": "IN",
+      "county": "Lake",
+      "pop": 26022,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 36.4,
+      "bundle_value": 36.4,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 36.4,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Hammond",
+      "state": "IN",
+      "county": "Lake",
+      "pop": 76768,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 36.4,
+      "bundle_value": 36.4,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 36.4,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Highland",
+      "state": "IN",
+      "county": "Lake",
+      "pop": 23680,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 36.4,
+      "bundle_value": 36.4,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 36.4,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Hobart",
+      "state": "IN",
+      "county": "Lake",
+      "pop": 29558,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 36.4,
+      "bundle_value": 36.4,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 36.4,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "La Porte",
+      "state": "IN",
+      "county": "LaPorte",
+      "pop": 22449,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 36.4,
+      "bundle_value": 36.4,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 36.4,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Portage",
+      "state": "IN",
+      "county": "Porter",
+      "pop": 38082,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 36.4,
+      "bundle_value": 36.4,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 36.4,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Elkhart",
+      "state": "IN",
+      "county": "Elkhart",
+      "pop": 149701,
+      "zips": 2,
+      "top_niche": "HVAC",
+      "top_payout": 36.4,
+      "bundle_value": 36.4,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 36.4,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "Granger",
+      "state": "IN",
+      "county": "St. Joseph",
+      "pop": 30321,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 36.4,
+      "bundle_value": 36.4,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 36.4,
+          "pricing": "geo"
+        }
+      ]
+    },
+    {
+      "city": "West Lafayette",
+      "state": "IN",
+      "county": "Tippecanoe",
+      "pop": 45159,
+      "zips": 1,
+      "top_niche": "HVAC",
+      "top_payout": 36.4,
+      "bundle_value": 36.4,
+      "niche_list": [
+        {
+          "niche": "HVAC",
+          "payout": 36.4,
+          "pricing": "geo"
+        }
+      ]
+    }
+  ]
+}
