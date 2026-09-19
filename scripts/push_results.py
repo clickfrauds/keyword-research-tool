@@ -27,6 +27,7 @@ Optional:
 """
 
 import os
+import re
 import sys
 import json
 import base64
@@ -36,6 +37,10 @@ import urllib.error
 GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN", "")
 GITHUB_REPOSITORY = os.environ.get("GITHUB_REPOSITORY", "")
 REQUEST_ID = os.environ.get("REQUEST_ID", "").strip()
+# A hand-typed id ("electrical 2") put a space in the contents-API URL and
+# the push died with InvalidURL after the whole run had succeeded. Ids the
+# frontend generates are already safe, so this only ever touches typed ones.
+REQUEST_ID = re.sub(r"[^A-Za-z0-9._-]+", "-", REQUEST_ID).strip("-")
 RESULTS_BRANCH = os.environ.get("RESULTS_BRANCH", "results-data")
 
 # (local_filename, extension_to_publish_as)
