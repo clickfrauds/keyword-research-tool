@@ -378,7 +378,8 @@ _MISSING_SUBS = set()
 
 # ── SERP occupant classification ─────────────────────────────────────────
 # Derived from real result sets in this vertical, not a generic list.
-DIRECTORIES = ("downtobid.com", "yelp.com", "bbb.org", "angi.com", "angieslist.com",
+DIRECTORIES = ("downtobid.com", "localsloveus.com", "ecohome.net",
+               "standardplumbing.com", "ferguson.com", "hdsupply.com", "yelp.com", "bbb.org", "angi.com", "angieslist.com",
                "homeadvisor.com", "thumbtack.com", "yellowpages.com",
                "houzz.com", "porch.com", "nodig.com", "expertise.com",
                "networx.com", "buildzoom.com", "manta.com", "homeyou.com",
@@ -1056,12 +1057,19 @@ def score_serp(data, service, city):
         if (any(d in bare for d in DIRECTORIES)
                 or bare.endswith((".gov", ".edu")) or re.search(r"\.[a-z]{2}\.us$", bare)
                 or bare.startswith(("cityof", "townof", "ci.")) or ".k12." in bare
+                # plumb-remote-01 booked mohavelocal.com / palmcoastlocal.com
+                # (town listing sites), a chamber's business.tylertexas.com
+                # and a plumbing supply store as dedicated plumbers.
+                or bare.endswith("local.com") or bare.startswith("business.")
+                or "chamber" in bare or ("supply" in title and "/locations" in link)
                 or re.search(r"academy|school|college|training|institute|university", bare)):
             # ok-elec-01 booked cityofmustang.org as a dedicated electrician
             # page and meridiantech.edu (a trade school) as a local firm.
             # Councils, schools and state sites are listings, not rivals.
             tally["directory"] += 1; kinds.append("directory")
-        elif any(s_ in bare for s_ in SOCIAL):
+        # Whole-domain match: 'x.com' as a substring made brothersplumbingtx.com
+        # and knockoutplumbingtx.com (San Angelo plumbers) social profiles.
+        elif any(bare == s_ or bare.endswith("." + s_) for s_ in SOCIAL):
             tally["directory"] += 1; kinds.append("social profile")
         elif any(f in bare for f in FORUMS):
             tally["forum"] += 1; kinds.append("forum")
