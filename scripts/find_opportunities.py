@@ -376,7 +376,17 @@ DIRECTORIES = ("yelp.com", "bbb.org", "angi.com", "angieslist.com",
                "birdeye.com", "hotfrog.com", "merchantcircle.com",
                "todayshomeowner.com", "bobvila.com", "thisoldhouse.com",
                "consumeraffairs.com", "forbes.com", "threebestrated.com",
-               "bestprosintown.com", "nextdoor.com")
+               "bestprosintown.com", "nextdoor.com",
+               # electrical run: job boards, suppliers, chambers and city
+               # guides were booked as "dedicated" pages. Lawton OK read as
+               # 3 dedicated when two of them were indeed.com and an
+               # electrical supply store — a competitor count that decides
+               # STOP has to count competitors only.
+               "indeed.com", "glassdoor.com", "ziprecruiter.com", "simplyhired.com",
+               "craigslist.org", "namesandnumbers.com", "citylocal101.com",
+               "homeguide.com", "diamondcertified.org", "orangebook.com",
+               "rexelusa.com", "graybar.com", "chamber", "askparkcity.com",
+               "loc8nearme.com", "yellowbook.com")
 FORUMS      = ("reddit.com", "quora.com", "houzz.com/discussions",
                "city-data.com", "diychatroom.com", "terrylove.com")
 # A business's Facebook page ranking on page 1 is the same signal as a
@@ -671,9 +681,21 @@ def demand(cands):
         c["_q"] = [f"{term} {c['city']} {c['state']}".lower(), f"{term} {c['city']}".lower()]
         by_state.setdefault(c["state"], []).append(c)
     measured = 0
-    for st, group in by_state.items():
+    for n_st, (st, group) in enumerate(by_state.items()):
         qs = sorted({q for c in group for q in c["_q"]})
-        vol = volumes(qs, STATE_GEO_ID.get(st) or f"{STATE_NAMES.get(st, st)}, United States")
+        geo = STATE_GEO_ID.get(st) or f"{STATE_NAMES.get(st, st)}, United States"
+        # Paced, and one patient retry. The all-states electrical run asked
+        # for 20 states back to back and the Planner answered KS, MO and CO
+        # with 429 "Resource has been exhausted"; their cities went to the
+        # SERP stage unmeasured and spent credits on towns with no known
+        # demand. Planner calls are free -- waiting costs only seconds.
+        if n_st:
+            time.sleep(2)
+        vol = volumes(qs, geo)
+        if vol is None:
+            print(f"   ⏳ {st}: Planner refused — waiting 30s and asking once more")
+            time.sleep(30)
+            vol = volumes(qs, geo)
         if vol is None:
             print(f"   ⚠️ {st}: volume lookup failed — kept unmeasured")
             continue

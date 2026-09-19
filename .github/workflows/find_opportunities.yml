@@ -123,7 +123,8 @@ jobs:
           GOOGLE_ADS_CLIENT_ID:         ${{ secrets.GOOGLE_ADS_CLIENT_ID }}
           GOOGLE_ADS_CLIENT_SECRET:     ${{ secrets.GOOGLE_ADS_CLIENT_SECRET }}
           GOOGLE_ADS_REFRESH_TOKEN:     ${{ secrets.GOOGLE_ADS_REFRESH_TOKEN }}
-          GOOGLE_ADS_LOGIN_CUSTOMER_ID: ${{ secrets.GOOGLE_ADS_LOGIN_CUSTOMER_ID }}
+          # No LOGIN_CUSTOMER_ID: every run logged "does not manage this account",
+          # so each state cost two Planner calls and helped trip the 429 limit.
           GOOGLE_ADS_CUSTOMER_ID:       ${{ secrets.GOOGLE_ADS_CUSTOMER_ID }}
           GOOGLE_ADS_USE_PROTO_PLUS:    'True'
           SERP_GL:           us
