@@ -1,0 +1,198 @@
+{
+  "pricing_model_by_niche": {
+    "Gutters (Call)": {
+      "distinct": 1,
+      "mode": "flat"
+    },
+    "Bathroom Remodeling (Call)": {
+      "distinct": 22,
+      "mode": "geo"
+    },
+    "Roofing (Call)": {
+      "distinct": 29,
+      "mode": "geo"
+    },
+    "Electrical (Call)": {
+      "distinct": 16,
+      "mode": "geo"
+    },
+    "HVAC (Call)": {
+      "distinct": 32,
+      "mode": "geo"
+    },
+    "Water Damage (CPL)": {
+      "distinct": 10,
+      "mode": "geo"
+    },
+    "Pest Control (Call)": {
+      "distinct": 2,
+      "mode": "flat"
+    },
+    "Fire Damage Removal (CPL)": {
+      "distinct": 2,
+      "mode": "flat"
+    },
+    "Appliance (Call)": {
+      "distinct": 14,
+      "mode": "geo"
+    },
+    "Mold Removal (CPL)": {
+      "distinct": 2,
+      "mode": "flat"
+    },
+    "Plumbing (Call)": {
+      "distinct": 47,
+      "mode": "geo"
+    },
+    "Biohazard (CPL)": {
+      "distinct": 2,
+      "mode": "flat"
+    },
+    "Tree Services (Call)": {
+      "distinct": 1,
+      "mode": "flat"
+    }
+  },
+  "generated": "2026-09-19 00:53 UTC",
+  "dataset_date": "2026-09-18",
+  "filters": {
+    "payout_type": "CPL",
+    "min_payout": 100.0,
+    "population": [
+      8000,
+      150000
+    ],
+    "niches": [
+      "Water Damage",
+      "Fire Damage Removal"
+    ],
+    "states": [
+      "OK"
+    ],
+    "min_bundle_niches": 1
+  },
+  "candidate_cities": 1,
+  "serp_scanned": 1,
+  "serp_credits": {
+    "spent": 2,
+    "cached": 0,
+    "failed": 0
+  },
+  "verdict_counts": {
+    "GO": 0,
+    "WATCH": 0,
+    "STOP": 1
+  },
+  "cities": [
+    {
+      "city": "Lawton",
+      "state": "OK",
+      "county": "Comanche",
+      "population": 90595,
+      "niche": "Fire Damage Removal",
+      "payout": 193.0,
+      "volume": 0,
+      "bundle_value": 275.75,
+      "verdict": "STOP",
+      "why": [
+        "`fire damage restoration Lawton OK`: 4 dedicated fire damage removal pages"
+      ],
+      "queries": [
+        {
+          "query": "fire damage restoration Lawton OK",
+          "serp_score": 35,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 0
+    }
+  ],
+  "launch_plan": [],
+  "opportunities": [
+    {
+      "city": "Lawton",
+      "state": "OK",
+      "county": "Comanche",
+      "population": 90595,
+      "zips": 5,
+      "niche": "Fire Damage Removal",
+      "sub_service": "fire damage restoration",
+      "query": "fire damage restoration Lawton OK",
+      "payout": 193.0,
+      "pricing": "flat",
+      "bundle_value": 275.75,
+      "niches_here": [
+        {
+          "niche": "Fire Damage Removal",
+          "payout": 193.0,
+          "pricing": "flat"
+        },
+        {
+          "niche": "Water Damage",
+          "payout": 165.5,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 35,
+      "serp_breakdown": {
+        "dedicated": 4,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 4,
+        "forum": 0,
+        "other_local": 0,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 51,
+        "pack_median_reviews": 46
+      },
+      "occupants": [
+        {
+          "host": "servpro.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "servpro.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        },
+        {
+          "host": "driright.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "modernize.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "statewiderestoration.net",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "angi.com",
+          "kind": "directory"
+        }
+      ],
+      "opportunity": 96.51,
+      "volume": 0,
+      "value": 0.0,
+      "verdict": "STOP",
+      "why": [
+        "4 dedicated fire damage removal pages"
+      ]
+    }
+  ],
+  "top_candidates_unscanned": []
+}
