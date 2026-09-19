@@ -61,6 +61,10 @@ on:
         description: "Credits the scan must leave on the SerpApi account (for hand checks / a Difficulty run). The balance is read first, so the scan can never empty it."
         required: false
         default: '10'
+      cities:
+        description: "DEEP CHECK only: 'Lawton OK, Daytona Beach FL' — scan just these cities (use with sub-services 3). Blank = normal search."
+        required: false
+        default: ''
       request_id:
         description: "Run id for the published raw link. Blank = manual-<run_id>."
         required: false
@@ -117,6 +121,7 @@ jobs:
           NICHES_PER_CITY:   ${{ github.event.inputs.niches_per_city }}
           SUBS_PER_NICHE:    ${{ github.event.inputs.subs_per_niche }}
           MIN_VOLUME:        ${{ github.event.inputs.min_volume }}
+          CITIES:            ${{ github.event.inputs.cities }}
           SERP_RESERVE:      ${{ github.event.inputs.serp_reserve }}
           # Stage 3.5 (demand) — free Keyword Planner calls; unset = skipped
           GOOGLE_ADS_DEVELOPER_TOKEN:   ${{ secrets.GOOGLE_ADS_DEVELOPER_TOKEN }}

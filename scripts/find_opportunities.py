@@ -82,6 +82,12 @@ MIN_POP    = int(os.environ.get("MIN_POP", "8000") or 8000)
 MAX_POP    = int(os.environ.get("MAX_POP", "120000") or 120000)
 STATES     = [s.strip().upper() for s in os.environ.get("STATES", "").split(",") if s.strip()]
 MIN_BUNDLE = int(os.environ.get("MIN_BUNDLE_NICHES", "1") or 1)
+# Deep-check mode: "Lawton OK, Daytona Beach FL". Only these cities go past
+# stage 3, so subs_per_niche 3 spends its credits on the WATCH cities a broad
+# run found, not on the head of a list that is already known to be STOP.
+CITIES     = {tuple(x.strip().rsplit(" ", 1)) for x in os.environ.get("CITIES", "").split(",")
+              if len(x.strip().rsplit(" ", 1)) == 2}
+CITIES     = {(c.lower(), st.upper()) for c, st in CITIES}
 MAX_SERP   = int(os.environ.get("MAX_SERP_CHECKS", "120") or 120)
 SERP_KEY   = os.environ.get("SERPAPI_API_KEY", "").strip()
 SERP_GL    = os.environ.get("SERP_GL", "us").strip() or "us"
@@ -567,6 +573,8 @@ def shortlist(rows, pricing):
         # Niche filter before the economics gate, so the gate's report lists
         # only niches this run asked about, not every cheap niche in the feed.
         if NICHES and r["niche"] not in NICHES:
+            continue
+        if CITIES and (r["city"].lower(), r["state"]) not in CITIES:
             continue
         # Economics gate. MIN_PAYOUT only asks what the buyer pays; this asks
         # what a call is actually WORTH once the share that never pays is taken
