@@ -1,0 +1,907 @@
+{
+  "pricing_model_by_niche": {
+    "Electrical (Call)": {
+      "distinct": 30,
+      "mode": "geo"
+    },
+    "Appliance (Call)": {
+      "distinct": 39,
+      "mode": "geo"
+    },
+    "Gutters (Call)": {
+      "distinct": 1,
+      "mode": "flat"
+    },
+    "HVAC (Call)": {
+      "distinct": 43,
+      "mode": "geo"
+    },
+    "Water Damage (CPL)": {
+      "distinct": 13,
+      "mode": "geo"
+    },
+    "Bathroom Remodeling (Call)": {
+      "distinct": 32,
+      "mode": "geo"
+    },
+    "Pest Control (Call)": {
+      "distinct": 2,
+      "mode": "flat"
+    },
+    "Fire Damage Removal (CPL)": {
+      "distinct": 9,
+      "mode": "geo"
+    },
+    "Roofing (Call)": {
+      "distinct": 46,
+      "mode": "geo"
+    },
+    "Plumbing (Call)": {
+      "distinct": 141,
+      "mode": "geo"
+    },
+    "Garage Door (CPL)": {
+      "distinct": 7,
+      "mode": "geo"
+    },
+    "Mold Removal (CPL)": {
+      "distinct": 5,
+      "mode": "geo"
+    },
+    "Deck (CPL)": {
+      "distinct": 2,
+      "mode": "flat"
+    },
+    "Siding (CPL)": {
+      "distinct": 12,
+      "mode": "geo"
+    },
+    "Plumbing (CPL)": {
+      "distinct": 5,
+      "mode": "geo"
+    },
+    "Biohazard (CPL)": {
+      "distinct": 4,
+      "mode": "geo"
+    },
+    "Painting (CPL)": {
+      "distinct": 2,
+      "mode": "flat"
+    },
+    "Kitchen (CPL)": {
+      "distinct": 1,
+      "mode": "flat"
+    },
+    "Tree Services (Call)": {
+      "distinct": 2,
+      "mode": "flat"
+    }
+  },
+  "generated": "2026-09-19 08:08 UTC",
+  "dataset_date": "2026-09-18",
+  "filters": {
+    "payout_type": "Call",
+    "min_payout": 45.0,
+    "population": [
+      8000,
+      150000
+    ],
+    "niches": [
+      "Electrical"
+    ],
+    "states": [
+      "KS",
+      "CO"
+    ],
+    "min_bundle_niches": 1
+  },
+  "candidate_cities": 6,
+  "serp_scanned": 6,
+  "serp_credits": {
+    "spent": 3,
+    "cached": 3,
+    "failed": 0
+  },
+  "verdict_counts": {
+    "GO": 0,
+    "WATCH": 0,
+    "STOP": 6
+  },
+  "cities": [
+    {
+      "city": "Boulder",
+      "state": "CO",
+      "county": "Boulder",
+      "population": 120289,
+      "niche": "Electrical",
+      "payout": 50.4,
+      "volume": 320,
+      "bundle_value": 50.4,
+      "verdict": "STOP",
+      "why": [
+        "`electrician Boulder CO`: 4 dedicated electrical pages"
+      ],
+      "queries": [
+        {
+          "query": "electrician Boulder CO",
+          "serp_score": 35,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 5644.8,
+      "metro": "Denver, CO",
+      "metro_miles": 27,
+      "gates": [
+        {
+          "gate": "Payout",
+          "status": "pass",
+          "value": "$50.40"
+        },
+        {
+          "gate": "Economics",
+          "status": "pass",
+          "value": "~$41 per call (81% of calls pay)"
+        },
+        {
+          "gate": "Demand",
+          "status": "pass",
+          "value": "320/mo"
+        },
+        {
+          "gate": "SERP",
+          "status": "fail",
+          "value": "score 35\u201335 over 1 query"
+        },
+        {
+          "gate": "Coverage",
+          "status": "warn",
+          "value": "2 of 11 ZIPs bought"
+        }
+      ],
+      "gate_marks": "\u2705\u2705\u2705\u274c\ud83d\udfe1"
+    },
+    {
+      "city": "Olathe",
+      "state": "KS",
+      "county": "Johnson",
+      "population": 145057,
+      "niche": "Electrical",
+      "payout": 52.45,
+      "volume": 110,
+      "bundle_value": 52.45,
+      "verdict": "STOP",
+      "why": [
+        "`electrician Olathe KS`: 4 dedicated electrical pages"
+      ],
+      "queries": [
+        {
+          "query": "electrician Olathe KS",
+          "serp_score": 24,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 1384.7,
+      "metro": "Wichita, KS",
+      "metro_miles": 160,
+      "gates": [
+        {
+          "gate": "Payout",
+          "status": "pass",
+          "value": "$52.45"
+        },
+        {
+          "gate": "Economics",
+          "status": "pass",
+          "value": "~$42 per call (81% of calls pay)"
+        },
+        {
+          "gate": "Demand",
+          "status": "pass",
+          "value": "110/mo"
+        },
+        {
+          "gate": "SERP",
+          "status": "fail",
+          "value": "score 24\u201324 over 1 query"
+        },
+        {
+          "gate": "Coverage",
+          "status": "pass",
+          "value": "2 of 4 ZIPs bought"
+        }
+      ],
+      "gate_marks": "\u2705\u2705\u2705\u274c\u2705"
+    },
+    {
+      "city": "Littleton",
+      "state": "CO",
+      "county": "Arapahoe",
+      "population": 44710,
+      "niche": "Electrical",
+      "payout": 50.4,
+      "volume": 210,
+      "bundle_value": 50.4,
+      "verdict": "STOP",
+      "why": [
+        "`electrician Littleton CO`: 1 city EMD on page one; 5 dedicated electrical pages"
+      ],
+      "queries": [
+        {
+          "query": "electrician Littleton CO",
+          "serp_score": 10,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 1058.4,
+      "metro": "Denver, CO",
+      "metro_miles": 14,
+      "gates": [
+        {
+          "gate": "Payout",
+          "status": "pass",
+          "value": "$50.40"
+        },
+        {
+          "gate": "Economics",
+          "status": "pass",
+          "value": "~$41 per call (81% of calls pay)"
+        },
+        {
+          "gate": "Demand",
+          "status": "pass",
+          "value": "210/mo"
+        },
+        {
+          "gate": "SERP",
+          "status": "fail",
+          "value": "score 10\u201310 over 1 query"
+        },
+        {
+          "gate": "Coverage",
+          "status": "warn",
+          "value": "1 of 16 ZIPs bought"
+        }
+      ],
+      "gate_marks": "\u2705\u2705\u2705\u274c\ud83d\udfe1"
+    },
+    {
+      "city": "Broomfield",
+      "state": "CO",
+      "county": "Broomfield",
+      "population": 76304,
+      "niche": "Electrical",
+      "payout": 50.4,
+      "volume": 70,
+      "bundle_value": 50.4,
+      "verdict": "STOP",
+      "why": [
+        "`electrician Broomfield CO`: 5 dedicated electrical pages"
+      ],
+      "queries": [
+        {
+          "query": "electrician Broomfield CO",
+          "serp_score": 18,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 635.0,
+      "metro": "Denver, CO",
+      "metro_miles": 16,
+      "gates": [
+        {
+          "gate": "Payout",
+          "status": "pass",
+          "value": "$50.40"
+        },
+        {
+          "gate": "Economics",
+          "status": "pass",
+          "value": "~$41 per call (81% of calls pay)"
+        },
+        {
+          "gate": "Demand",
+          "status": "warn",
+          "value": "70/mo"
+        },
+        {
+          "gate": "SERP",
+          "status": "fail",
+          "value": "score 18\u201318 over 1 query"
+        },
+        {
+          "gate": "Coverage",
+          "status": "pass",
+          "value": "3 of 4 ZIPs bought"
+        }
+      ],
+      "gate_marks": "\u2705\u2705\ud83d\udfe1\u274c\u2705"
+    },
+    {
+      "city": "Westminster",
+      "state": "CO",
+      "county": "Adams",
+      "population": 115484,
+      "niche": "Electrical",
+      "payout": 50.4,
+      "volume": 70,
+      "bundle_value": 50.4,
+      "verdict": "STOP",
+      "why": [
+        "`electrician Westminster CO`: 1 city EMD on page one; 6 dedicated electrical pages"
+      ],
+      "queries": [
+        {
+          "query": "electrician Westminster CO",
+          "serp_score": 0,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 0,
+      "metro": "Denver, CO",
+      "metro_miles": 13,
+      "gates": [
+        {
+          "gate": "Payout",
+          "status": "pass",
+          "value": "$50.40"
+        },
+        {
+          "gate": "Economics",
+          "status": "pass",
+          "value": "~$41 per call (81% of calls pay)"
+        },
+        {
+          "gate": "Demand",
+          "status": "warn",
+          "value": "70/mo"
+        },
+        {
+          "gate": "SERP",
+          "status": "fail",
+          "value": "score 0\u20130 over 1 query"
+        },
+        {
+          "gate": "Coverage",
+          "status": "warn",
+          "value": "1 of 4 ZIPs bought"
+        }
+      ],
+      "gate_marks": "\u2705\u2705\ud83d\udfe1\u274c\ud83d\udfe1"
+    },
+    {
+      "city": "Hutchinson",
+      "state": "KS",
+      "county": "Reno",
+      "population": 39709,
+      "niche": "Electrical",
+      "payout": 45.79,
+      "volume": 90,
+      "bundle_value": 45.79,
+      "verdict": "STOP",
+      "why": [
+        "`electrician Hutchinson KS`: 1 city EMD on page one; 4 dedicated electrical pages"
+      ],
+      "queries": [
+        {
+          "query": "electrician Hutchinson KS",
+          "serp_score": 0,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 0,
+      "metro": "Wichita, KS",
+      "metro_miles": 40,
+      "gates": [
+        {
+          "gate": "Payout",
+          "status": "pass",
+          "value": "$45.79"
+        },
+        {
+          "gate": "Economics",
+          "status": "pass",
+          "value": "~$37 per call (81% of calls pay)"
+        },
+        {
+          "gate": "Demand",
+          "status": "warn",
+          "value": "90/mo"
+        },
+        {
+          "gate": "SERP",
+          "status": "fail",
+          "value": "score 0\u20130 over 1 query"
+        },
+        {
+          "gate": "Coverage",
+          "status": "warn",
+          "value": "1 of 3 ZIPs bought"
+        }
+      ],
+      "gate_marks": "\u2705\u2705\ud83d\udfe1\u274c\ud83d\udfe1"
+    }
+  ],
+  "launch_plan": [],
+  "opportunities": [
+    {
+      "city": "Boulder",
+      "state": "CO",
+      "county": "Boulder",
+      "population": 120289,
+      "zips": 2,
+      "niche": "Electrical",
+      "sub_service": "electrician",
+      "query": "electrician Boulder CO",
+      "payout": 50.4,
+      "pricing": "geo",
+      "bundle_value": 50.4,
+      "niches_here": [
+        {
+          "niche": "Electrical",
+          "payout": 50.4,
+          "zips": 2,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 35,
+      "serp_breakdown": {
+        "dedicated": 4,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 2,
+        "forum": 1,
+        "other_local": 1,
+        "results": 8,
+        "pack_size": 3,
+        "pack_top_reviews": 139,
+        "pack_median_reviews": 66
+      },
+      "occupants": [
+        {
+          "host": "reddit.com",
+          "kind": "forum"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "electricianlongmont.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "threecrownselectric.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "nextdoor.com",
+          "kind": "directory"
+        },
+        {
+          "host": "reedelectricalco.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "plumblineservices.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "mrelectric.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 17.64,
+      "volume": 320,
+      "value": 5644.8,
+      "verdict": "STOP",
+      "why": [
+        "4 dedicated electrical pages"
+      ]
+    },
+    {
+      "city": "Olathe",
+      "state": "KS",
+      "county": "Johnson",
+      "population": 145057,
+      "zips": 2,
+      "niche": "Electrical",
+      "sub_service": "electrician",
+      "query": "electrician Olathe KS",
+      "payout": 52.45,
+      "pricing": "geo",
+      "bundle_value": 52.45,
+      "niches_here": [
+        {
+          "niche": "Electrical",
+          "payout": 52.45,
+          "zips": 2,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 24,
+      "serp_breakdown": {
+        "dedicated": 4,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 4,
+        "forum": 0,
+        "other_local": 1,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 589,
+        "pack_median_reviews": 258
+      },
+      "occupants": [
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "mistersparky.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "jeremykc.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "jasonwrightelectric.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "landiselectrickc.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "thumbtack.com",
+          "kind": "directory"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "sparkdockc.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 12.59,
+      "volume": 110,
+      "value": 1384.7,
+      "verdict": "STOP",
+      "why": [
+        "4 dedicated electrical pages"
+      ]
+    },
+    {
+      "city": "Littleton",
+      "state": "CO",
+      "county": "Arapahoe",
+      "population": 44710,
+      "zips": 1,
+      "niche": "Electrical",
+      "sub_service": "electrician",
+      "query": "electrician Littleton CO",
+      "payout": 50.4,
+      "pricing": "geo",
+      "bundle_value": 50.4,
+      "niches_here": [
+        {
+          "niche": "Electrical",
+          "payout": 50.4,
+          "zips": 1,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 10,
+      "serp_breakdown": {
+        "dedicated": 5,
+        "pseo": 0,
+        "national": 0,
+        "emd": 1,
+        "directory": 3,
+        "forum": 1,
+        "other_local": 0,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 68,
+        "pack_median_reviews": 28
+      },
+      "occupants": [
+        {
+          "host": "reddit.com",
+          "kind": "forum"
+        },
+        {
+          "host": "mrelectriclittleton.com",
+          "kind": "city EMD + dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "mzelectric.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "brothersplumbing.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "thumbtack.com",
+          "kind": "directory"
+        },
+        {
+          "host": "sundogelectric.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "attaboyservices.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        }
+      ],
+      "opportunity": 5.04,
+      "volume": 210,
+      "value": 1058.4,
+      "verdict": "STOP",
+      "why": [
+        "1 city EMD on page one",
+        "5 dedicated electrical pages"
+      ]
+    },
+    {
+      "city": "Broomfield",
+      "state": "CO",
+      "county": "Broomfield",
+      "population": 76304,
+      "zips": 3,
+      "niche": "Electrical",
+      "sub_service": "electrician",
+      "query": "electrician Broomfield CO",
+      "payout": 50.4,
+      "pricing": "geo",
+      "bundle_value": 50.4,
+      "niches_here": [
+        {
+          "niche": "Electrical",
+          "payout": 50.4,
+          "zips": 3,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 18,
+      "serp_breakdown": {
+        "dedicated": 5,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 1,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 17,
+        "pack_median_reviews": 12
+      },
+      "occupants": [
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "brothersplumbing.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "bishop-electric.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "downtobid.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "mistersparky.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "tablemountainelectric.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "nextdoor.com",
+          "kind": "directory"
+        },
+        {
+          "host": "bornscheinelectric.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "thumbtack.com",
+          "kind": "directory"
+        }
+      ],
+      "opportunity": 9.07,
+      "volume": 70,
+      "value": 635.0,
+      "verdict": "STOP",
+      "why": [
+        "5 dedicated electrical pages"
+      ]
+    },
+    {
+      "city": "Hutchinson",
+      "state": "KS",
+      "county": "Reno",
+      "population": 39709,
+      "zips": 1,
+      "niche": "Electrical",
+      "sub_service": "electrician",
+      "query": "electrician Hutchinson KS",
+      "payout": 45.79,
+      "pricing": "geo",
+      "bundle_value": 45.79,
+      "niches_here": [
+        {
+          "niche": "Electrical",
+          "payout": 45.79,
+          "zips": 1,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 4,
+        "pseo": 0,
+        "national": 0,
+        "emd": 1,
+        "directory": 2,
+        "forum": 0,
+        "other_local": 3,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 335,
+        "pack_median_reviews": 314
+      },
+      "occupants": [
+        {
+          "host": "kraftelectric.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "hutchinsonelectricaltrainingacademy.org",
+          "kind": "city EMD + dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "servicepluselectrical.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "allamericanelectric.net",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "zenorelectric.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "angi.com",
+          "kind": "directory"
+        },
+        {
+          "host": "saltcityelectricllc.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "bomanelectric.com",
+          "kind": "independent site"
+        }
+      ],
+      "opportunity": 0.0,
+      "volume": 90,
+      "value": 0.0,
+      "verdict": "STOP",
+      "why": [
+        "1 city EMD on page one",
+        "4 dedicated electrical pages"
+      ]
+    },
+    {
+      "city": "Westminster",
+      "state": "CO",
+      "county": "Adams",
+      "population": 115484,
+      "zips": 1,
+      "niche": "Electrical",
+      "sub_service": "electrician",
+      "query": "electrician Westminster CO",
+      "payout": 50.4,
+      "pricing": "geo",
+      "bundle_value": 50.4,
+      "niches_here": [
+        {
+          "niche": "Electrical",
+          "payout": 50.4,
+          "zips": 1,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 6,
+        "pseo": 0,
+        "national": 0,
+        "emd": 1,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 0,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 304,
+        "pack_median_reviews": 59
+      },
+      "occupants": [
+        {
+          "host": "brothersplumbing.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        },
+        {
+          "host": "westminster-electricians.com",
+          "kind": "city EMD + dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "legacyelectric3g.org",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "blueskyplumbing.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "propowercolorado.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "jmelectricinc.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "thumbtack.com",
+          "kind": "directory"
+        }
+      ],
+      "opportunity": 0.0,
+      "volume": 70,
+      "value": 0.0,
+      "verdict": "STOP",
+      "why": [
+        "1 city EMD on page one",
+        "6 dedicated electrical pages"
+      ]
+    }
+  ],
+  "top_candidates_unscanned": []
+}
