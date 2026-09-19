@@ -17,6 +17,10 @@ financial sense:
     STAGE 4  SERP scan                COSTS     (SerpApi, hard-capped, cached)
     STAGE 5  verdict + launch plan    free      (GO / WATCH / STOP, builder forms)
 
+  Every city in the report carries a five-gate scorecard -- Payout, Economics,
+  Demand, SERP, Coverage -- the questions that picked Lawton OK, plus its miles
+  to the nearest metro (shown, not yet a gate).
+
 Stages 1-3 are free and cut 280,000 rows to a few hundred candidates.
 Only then does anything paid run, and MAX_SERP_CHECKS caps that. Running
 a SERP query against every row would cost thousands of dollars to learn
@@ -519,6 +523,8 @@ def pull_coverage():
                     "ptype":  ptype[r[3]]  if r[3] >= 0 and r[3] < len(ptype)  else None,
                     "payout": float(r[4] or 0),
                     "pop":    int(r[5] or 0),
+                    "lat":    r[7] if len(r) > 8 else None,
+                    "lng":    r[8] if len(r) > 8 else None,
                     "county": county[r[9]] if len(r) > 9 and r[9] >= 0 and r[9] < len(county) else None,
                 })
             except Exception:
@@ -559,7 +565,58 @@ def price_modes(rows):
     return out
 
 
+# Per-city facts for the five gates, keyed (state, city). Built from every
+# coverage row, not only the niche this run asks about: another niche's rows
+# are how we learn which ZIPs a town HAS (Lawton's PO-box ZIPs 73502/73506
+# only appear under Water Damage), and big cities anywhere in the loaded
+# states are the metros a town's distance is measured to.
+_CITY_INFO = {}
+METRO_POP = int(os.environ.get("METRO_POP", "350000") or 350000)
+
+
+def _miles(a, b):
+    import math
+    (la1, lo1), (la2, lo2) = a, b
+    r = 3958.8
+    p1, p2 = math.radians(la1), math.radians(la2)
+    dp, dl = math.radians(la2 - la1), math.radians(lo2 - lo1)
+    h = math.sin(dp / 2) ** 2 + math.cos(p1) * math.cos(p2) * math.sin(dl / 2) ** 2
+    return 2 * r * math.asin(math.sqrt(h))
+
+
+def build_city_info(rows):
+    zips, where, pops = {}, {}, {}
+    for r in rows:
+        if not r["city"]:
+            continue
+        k = (r["state"], r["city"])
+        zips.setdefault(k, set()).add(r["zip"])
+        pops[k] = max(pops.get(k, 0), r["pop"])
+        if k not in where and r.get("lat") not in (None, 0) and r.get("lng") not in (None, 0):
+            try:
+                where[k] = (float(r["lat"]), float(r["lng"]))
+            except (TypeError, ValueError):
+                pass
+    # The feed stamps a metro's population on its satellite towns too
+    # (Wheatland OK carries Oklahoma City's 1,017,828), so one town per
+    # population figure stands for the metro: the one with the most ZIPs.
+    by_pop = {}
+    for k, pop in pops.items():
+        if pop >= METRO_POP and k in where:
+            if pop not in by_pop or len(zips[k]) > len(zips[by_pop[pop]]):
+                by_pop[pop] = k
+    metros = [(k, where[k]) for k in by_pop.values()]
+    for k, z in zips.items():
+        info = {"all_zips": len(z), "metro": None, "metro_miles": None}
+        if k in where and metros:
+            best = min(((m, _miles(where[k], ll)) for m, ll in metros if m != k), key=lambda x: x[1], default=None)
+            if best:
+                info["metro"], info["metro_miles"] = f"{best[0][1]}, {best[0][0]}", round(best[1])
+        _CITY_INFO[k] = info
+
+
 def shortlist(rows, pricing):
+    build_city_info(rows)
     print("── STAGE 2: revenue filter ────────────────────────────")
     drop_econ = {}
     keep = []
@@ -612,9 +669,10 @@ def shortlist(rows, pricing):
             "pop": r["pop"], "niches": {}, "zips": set(),
         })
         c["zips"].add(r["zip"])
-        n = c["niches"].setdefault(r["niche"], {"best": 0.0, "zips": 0})
+        n = c["niches"].setdefault(r["niche"], {"best": 0.0, "zips": 0, "zipset": set()})
         n["best"] = max(n["best"], r["payout"])
-        n["zips"] += 1
+        n["zipset"].add(r["zip"])
+        n["zips"] = len(n["zipset"])
 
     out = []
     for c in cities.values():
@@ -629,10 +687,12 @@ def shortlist(rows, pricing):
         c["top_niche"]  = top[0][0]
         c["top_payout"] = round(top[0][1]["best"], 2)
         c["niche_list"] = [
-            {"niche": n, "payout": round(v["best"], 2),
+            {"niche": n, "payout": round(v["best"], 2), "zips": v["zips"],
              "pricing": (pricing.get((n, PAYOUT_T)) or {}).get("mode", "?")}
             for n, v in top
         ]
+        for v in c["niches"].values():
+            v.pop("zipset", None)
         c["top_pricing"] = c["niche_list"][0]["pricing"]
         c["bundle_value"] = round(bundle, 2)
         out.append(c)
@@ -1259,6 +1319,59 @@ def verdict(o):
 
 _RANK = {"STOP": 0, "WATCH": 1, "GO": 2}
 
+# ── The five gates ───────────────────────────────────────────────────────
+# The questions that picked Lawton, asked of every city in the same order and
+# shown in the report as a scorecard, so a verdict is never a black box:
+#   1 Payout      what the buyer pays for a call here
+#   2 Economics   what a call is worth once the unpaid share is taken out
+#   3 Demand      how many people search the trade + town each month
+#   4 SERP        whether page one has room (no EMD/pSEO, few, weak pages)
+#   5 Coverage    how much of the town the buyer actually takes calls from
+# Plus one fact that is shown but not yet a gate: miles to the nearest metro.
+# Lawton (92 mi from Oklahoma City) was open while every OKC suburb was
+# taken; that is one data point, so it informs and does not decide.
+MIN_ZIP_SHARE = float(os.environ.get("MIN_ZIP_SHARE", "0.5") or 0.5)
+
+
+def gates_for(c, rows):
+    g = []
+    g.append({"gate": "Payout", "status": "pass" if c["payout"] >= MIN_PAYOUT else "fail",
+              "value": f"${c['payout']:.2f}"})
+    # What a call from THIS town is worth: its payout times the share of
+    # calls that pay. (The national median is the stage-2 filter; here the
+    # question is this market.)
+    paid = _PAID_PCT.get(c["niche"])
+    rev = c["payout"] * paid / 100.0 if paid is not None else None
+    g.append({"gate": "Economics",
+              "status": "unknown" if rev is None else ("pass" if rev >= MIN_REV_PER_CALL else "fail"),
+              "value": f"~${rev:.0f} per call ({paid}% of calls pay)" if rev is not None else "no call data"})
+    vol = c.get("volume")
+    g.append({"gate": "Demand",
+              "status": "unknown" if vol is None else ("pass" if vol >= GO_VOLUME else "warn" if vol >= 30 else "fail"),
+              "value": f"{vol}/mo" if vol is not None else "not measured"})
+    serp = "pass"
+    for o in rows:
+        v, why = o["verdict"], o["why"]
+        if v == "STOP":
+            serp = "fail"
+            break
+        if v == "WATCH" and any(("dedicated" in w or "pack" in w or "SERP" in w or "local pages" in w) for w in why):
+            serp = "warn"
+    best = max((o["serp_score"] for o in rows), default=0)
+    worst = min((o["serp_score"] for o in rows), default=0)
+    g.append({"gate": "SERP", "status": serp, "value": f"score {worst}–{best} over {len(rows)} quer{'y' if len(rows) == 1 else 'ies'}"})
+    info = _CITY_INFO.get((c["state"], c["city"]), {})
+    covered = next((n.get("zips") for n in rows[0].get("niches_here") or [] if n.get("niche") == c["niche"]), None) if rows else None
+    total = info.get("all_zips")
+    if covered and total:
+        share = covered / total
+        g.append({"gate": "Coverage", "status": "pass" if share >= MIN_ZIP_SHARE or covered >= 3 else "warn",
+                  "value": f"{covered} of {total} ZIPs bought"})
+    else:
+        g.append({"gate": "Coverage", "status": "unknown", "value": "ZIP list unknown"})
+    c["metro"], c["metro_miles"] = info.get("metro"), info.get("metro_miles")
+    return g
+
 
 def city_verdicts(scored):
     """Roll the per-query verdicts up to one line per city (worst query wins)."""
@@ -1273,8 +1386,9 @@ def city_verdicts(scored):
                 "population": o["population"], "niche": o["niche"],
                 "payout": o["payout"], "volume": o.get("volume"),
                 "bundle_value": o["bundle_value"], "verdict": "GO", "why": [],
-                "queries": [], "best_value": 0,
+                "queries": [], "best_value": 0, "_rows": [],
             }
+        c["_rows"].append(o)
         c["queries"].append({"query": o["query"], "serp_score": o["serp_score"],
                              "verdict": o["verdict"]})
         c["best_value"] = max(c["best_value"], o.get("value") or 0)
@@ -1285,6 +1399,15 @@ def city_verdicts(scored):
         elif o["verdict"] == "GO" and not c["why"]:
             c["why"] = o["why"]
     out = list(cities.values())
+    for c in out:
+        c["gates"] = gates_for(c, c.pop("_rows"))
+        # A town whose buyer takes calls from only a sliver of it is not a GO,
+        # however open its page one: most callers would earn nothing.
+        cov = next(x for x in c["gates"] if x["gate"] == "Coverage")
+        if c["verdict"] == "GO" and cov["status"] == "warn":
+            c["verdict"], c["why"] = "WATCH", [f"only {cov['value']}"]
+        c["gate_marks"] = "".join({"pass": "✅", "warn": "🟡", "fail": "❌", "unknown": "❔"}[x["status"]]
+                                  for x in c["gates"])
     out.sort(key=lambda c: (-_RANK[c["verdict"]], -c["best_value"], -c["payout"]))
     return out
 
@@ -1458,15 +1581,18 @@ def write(meta, cands, scored, pricing=None):
         lines += ["## Verdict by city", "",
                   "Judged on the city's **worst** scored query — one open sub-service "
                   "under a taken head term is not an open market.", "",
-                  "| Verdict | City | Niche | Payout | Searches/mo | Why |",
-                  "|---|---|---|---|---|---|"]
+                  "Gates, in order: **Payout · Economics · Demand · SERP · Coverage** "
+                  "(✅ pass · 🟡 borderline · ❌ fail · ❔ unknown).", "",
+                  "| Verdict | Gates | City | Niche | Payout | Searches/mo | Nearest metro | Why |",
+                  "|---|---|---|---|---|---|---|---|"]
         _open = [c for c in city_rows if c["verdict"] != "STOP"]
         if not _open:
-            lines.append("| — | *every scanned city is STOP* | | | | |")
+            lines.append("| — | | *every scanned city is STOP* | | | | | |")
         for c in _open[:25]:
-            lines.append(f"| **{c['verdict']}** | {c['city']}, {c['state']} | {c['niche']} "
+            _m = f"{c['metro_miles']} mi · {c['metro']}" if c.get("metro_miles") is not None else "?"
+            lines.append(f"| **{c['verdict']}** | {c.get('gate_marks', '')} | {c['city']}, {c['state']} | {c['niche']} "
                          f"| ${c['payout']:.2f} | {c['volume'] if c['volume'] is not None else '?'} "
-                         f"| {'<br>'.join(c['why'][:3])} |")
+                         f"| {_m} | {'<br>'.join(c['why'][:3])} |")
         stops = [c for c in city_rows if c["verdict"] == "STOP"]
         if stops:
             lines += ["", f"<details><summary>{len(stops)} STOP cities</summary>", "",
@@ -1621,6 +1747,11 @@ a{color:var(--acc)}code{background:var(--bg);border:1px solid var(--line);border
 .legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px}
 .legend div{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-size:.9rem}
 ol.steps li{margin:6px 0}.muted{color:var(--mute)}
+ul.gates{list-style:none;margin:0;padding:0;font-size:.82rem;min-width:190px}
+ul.gates li{padding:1px 0 1px 20px;position:relative}
+ul.gates li:before{position:absolute;left:0;font-weight:700}
+ul.gates li.g-pass:before{content:"✓";color:var(--go)}ul.gates li.g-warn:before{content:"!";color:var(--watch)}
+ul.gates li.g-fail:before{content:"✗";color:var(--stop)}ul.gates li.g-unknown:before{content:"?";color:var(--mute)}
 """
 
 
@@ -1692,7 +1823,7 @@ def write_html(payload, scored, untested):
     h.append("<h2>Every city checked</h2>")
     if cities:
         h += ["<div class='card scroll'><table><thead><tr><th>Verdict</th><th>City</th>"
-              "<th>Payout</th><th>Searches/mo</th><th>Why</th><th>Who holds page one</th></tr></thead><tbody>"]
+              "<th>5 gates</th><th>Payout</th><th>Searches/mo</th><th>Why</th><th>Who holds page one</th></tr></thead><tbody>"]
         for c in cities:
             occ = []
             for o in by_city.get((c["city"], c["state"]), []):
@@ -1706,7 +1837,11 @@ def write_html(payload, scored, untested):
             link = "https://www.google.com/search?" + urllib.parse.urlencode({"q": q})
             h.append(
                 f"<tr><td><span class='chip {c['verdict']}'>{c['verdict']}</span></td>"
-                f"<td><b>{E(c['city'])}, {E(c['state'])}</b><br><a href='{E(link)}' target='_blank' rel='noopener'>see on Google</a></td>"
+                f"<td><b>{E(c['city'])}, {E(c['state'])}</b><br><a href='{E(link)}' target='_blank' rel='noopener'>see on Google</a>"
+                + (f"<br><span class='muted'>{c['metro_miles']} mi from {E(c['metro'])}</span>" if c.get("metro_miles") is not None else "")
+                + "</td>"
+                + "<td><ul class='gates'>" + "".join(
+                    f"<li class='g-{x['status']}'><b>{E(x['gate'])}</b> {E(x['value'])}</li>" for x in c.get("gates", [])) + "</ul></td>"
                 f"<td class='n'>${c['payout']:.2f}</td>"
                 f"<td class='n'>{c['volume'] if c['volume'] is not None else '?'}</td>"
                 f"<td>{why}</td>"
