@@ -368,7 +368,15 @@ DIRECTORIES = ("yelp.com", "bbb.org", "angi.com", "angieslist.com",
                "homeadvisor.com", "thumbtack.com", "yellowpages.com",
                "houzz.com", "porch.com", "nodig.com", "expertise.com",
                "networx.com", "buildzoom.com", "manta.com", "homeyou.com",
-               "contractorplus.app", "fixr.com", "mapquest.com")
+               "contractorplus.app", "fixr.com", "mapquest.com",
+               # plumb-pa-ga-03: local.yahoo.com and a todayshomeowner.com
+               # "best plumbers in Ephrata" list were booked as dedicated pages.
+               # Both are listings — an opening, not a competitor.
+               "yahoo.com", "superpages.com", "chamberofcommerce.com",
+               "birdeye.com", "hotfrog.com", "merchantcircle.com",
+               "todayshomeowner.com", "bobvila.com", "thisoldhouse.com",
+               "consumeraffairs.com", "forbes.com", "threebestrated.com",
+               "bestprosintown.com", "nextdoor.com")
 FORUMS      = ("reddit.com", "quora.com", "houzz.com/discussions",
                "city-data.com", "diychatroom.com", "terrylove.com")
 # A business's Facebook page ranking on page 1 is the same signal as a
@@ -388,6 +396,13 @@ NATIONALS   = ("rotorooter.com", "servpro.com", "terminix.com", "orkin.com",
                "servicemaster", "pauldavis.com", "trugreen.com", "aramark",
                "mosquitojoe.com", "roto-rooter.com")
 
+# Words that make a city domain a trade domain (see the EMD check).
+_TRADE_HOST = ("plumb", "drain", "rooter", "sewer", "leak", "pipe", "waterheater",
+               "hvac", "heat", "cool", "aircondition", "furnace", "electric", "roof",
+               "pest", "termite", "garage", "door", "tree", "mold", "water",
+               "restor", "remodel", "paint", "gutter", "appliance", "repair",
+               "service", "handyman", "contractor", "mechanical")
+
 _SUBDOMAIN_PSEO = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*-[a-z]{2}\.", re.I)
 
 # SerpApi's `location` wants a full place string, not a postal code.
@@ -406,6 +421,24 @@ STATE_NAMES = {
     "SD": "South Dakota", "TN": "Tennessee", "TX": "Texas", "UT": "Utah",
     "VT": "Vermont", "VA": "Virginia", "WA": "Washington",
     "WV": "West Virginia", "WI": "Wisconsin", "WY": "Wyoming",
+}
+
+
+# Google Ads geo target ids for the US states, from Google's own geotargets
+# file (geotargets-2026-08-12.csv, Target Type = State). Resolving the state by
+# NAME is what broke Georgia: the Planner's first suggestion for "Georgia" is
+# the country (id 2268), so plumb-pa-ga-03 measured "plumber buford ga" among
+# Georgians in Tbilisi, found almost nothing, and dropped every GA city before
+# a single SERP was read. An id cannot be misread.
+STATE_GEO_ID = {
+    "AK": "21132", "AL": "21133", "AR": "21135", "AZ": "21136", "CA": "21137", "CO": "21138", "CT": "21139",
+    "DC": "21140", "DE": "21141", "FL": "21142", "GA": "21143", "HI": "21144", "IA": "21145", "ID": "21146",
+    "IL": "21147", "IN": "21148", "KS": "21149", "KY": "21150", "LA": "21151", "MA": "21152", "MD": "21153",
+    "ME": "21154", "MI": "21155", "MN": "21156", "MO": "21157", "MS": "21158", "MT": "21159", "NC": "21160",
+    "ND": "21161", "NE": "21162", "NH": "21163", "NJ": "21164", "NM": "21165", "NV": "21166", "NY": "21167",
+    "OH": "21168", "OK": "21169", "OR": "21170", "PA": "21171", "RI": "21172", "SC": "21173", "SD": "21174",
+    "TN": "21175", "TX": "21176", "UT": "21177", "VA": "21178", "VT": "21179", "WA": "21180", "WI": "21182",
+    "WV": "21183", "WY": "21184",
 }
 
 
@@ -640,7 +673,7 @@ def demand(cands):
     measured = 0
     for st, group in by_state.items():
         qs = sorted({q for c in group for q in c["_q"]})
-        vol = volumes(qs, STATE_NAMES.get(st, st))
+        vol = volumes(qs, STATE_GEO_ID.get(st) or f"{STATE_NAMES.get(st, st)}, United States")
         if vol is None:
             print(f"   ⚠️ {st}: volume lookup failed — kept unmeasured")
             continue
@@ -868,7 +901,11 @@ def score_serp(data, service, city):
             # penalties and skip the expensive one.
             if _SUBDOMAIN_PSEO.match(bare) and city_slug in bare:
                 tally["pseo"] += 1; kinds.append("pSEO subdomain")
-            if city_flat in flat:
+            # A city name in the host is only an EMD when the host also names
+            # the trade. hanover.com is an insurance company; it was booked as
+            # a city EMD on "leak detection Hanover PA" and capped the score
+            # at 25 on its own. lebanonpaplumbingguys.com is the real thing.
+            if city_flat in flat and any(t in flat for t in _TRADE_HOST):
                 tally["emd"] += 1; kinds.append("city EMD")
             # Requiring a service word in the title or URL was too strict.
             # jmlapp.com/city/willow-street is titled just "Willow Street" and
@@ -1581,7 +1618,8 @@ def write_html(payload, scored, untested):
                         occ.append(f"{E(x['host'])} <span class='muted'>({E(x['kind'])})</span>")
             occ = list(dict.fromkeys(occ))[:6]
             why = "<br>".join(E(w.replace("`", "")) for w in c["why"][:3])
-            q = c["queries"][0]["query"] if c["queries"] else ""
+            # Link the query that decided the verdict (the worst one).
+            q = min(c["queries"], key=lambda x: x["serp_score"])["query"] if c["queries"] else ""
             link = "https://www.google.com/search?" + urllib.parse.urlencode({"q": q})
             h.append(
                 f"<tr><td><span class='chip {c['verdict']}'>{c['verdict']}</span></td>"

@@ -89,8 +89,19 @@ def fetch(params, timeout=40):
         return None, "no SERPAPI_API_KEY", False
     url = "https://serpapi.com/search?" + urllib.parse.urlencode(params)
     try:
-        with urllib.request.urlopen(url, timeout=timeout) as r:
-            data = json.loads(r.read().decode("utf-8", "replace"))
+        try:
+            with urllib.request.urlopen(url, timeout=timeout) as r:
+                data = json.loads(r.read().decode("utf-8", "replace"))
+        except (TimeoutError, OSError) as e:
+            # One retry on a network stall. plumb-pa-ga-03 lost a query to
+            # "The read operation timed out": SerpApi sometimes takes longer
+            # than usual to fetch a page. An HTTP error (an answer) is never
+            # retried -- only silence is.
+            if isinstance(e, urllib.error.HTTPError):
+                raise
+            time.sleep(3)
+            with urllib.request.urlopen(url, timeout=timeout + 30) as r:
+                data = json.loads(r.read().decode("utf-8", "replace"))
     except urllib.error.HTTPError as e:
         detail = ""
         try:
