@@ -1,0 +1,432 @@
+{
+  "pricing_model_by_niche": {
+    "Roofing (Call)": {
+      "distinct": 709,
+      "mode": "geo"
+    },
+    "Plumbing (Call)": {
+      "distinct": 1009,
+      "mode": "geo"
+    },
+    "Bathroom Remodeling (Call)": {
+      "distinct": 325,
+      "mode": "geo"
+    },
+    "HVAC (Call)": {
+      "distinct": 621,
+      "mode": "geo"
+    },
+    "Appliance (Call)": {
+      "distinct": 356,
+      "mode": "geo"
+    },
+    "Gutters (Call)": {
+      "distinct": 1,
+      "mode": "flat"
+    },
+    "Waterproofing (CPL)": {
+      "distinct": 23,
+      "mode": "geo"
+    },
+    "Water Damage (CPL)": {
+      "distinct": 115,
+      "mode": "geo"
+    },
+    "Garage Door (CPL)": {
+      "distinct": 25,
+      "mode": "geo"
+    },
+    "Mold Removal (CPL)": {
+      "distinct": 40,
+      "mode": "geo"
+    },
+    "Foundation Repair (CPL)": {
+      "distinct": 13,
+      "mode": "geo"
+    },
+    "Pest Control (Call)": {
+      "distinct": 2,
+      "mode": "flat"
+    },
+    "Fire Damage Removal (CPL)": {
+      "distinct": 46,
+      "mode": "geo"
+    },
+    "Electrical (Call)": {
+      "distinct": 383,
+      "mode": "geo"
+    },
+    "Tree Services (Call)": {
+      "distinct": 51,
+      "mode": "geo"
+    },
+    "Biohazard (CPL)": {
+      "distinct": 21,
+      "mode": "geo"
+    },
+    "Plumbing (CPL)": {
+      "distinct": 48,
+      "mode": "geo"
+    },
+    "Kitchen (CPL)": {
+      "distinct": 13,
+      "mode": "geo"
+    },
+    "Siding (CPL)": {
+      "distinct": 35,
+      "mode": "geo"
+    },
+    "Painting (CPL)": {
+      "distinct": 17,
+      "mode": "geo"
+    },
+    "Solar (CPL)": {
+      "distinct": 4,
+      "mode": "geo"
+    },
+    "Landscaping (CPL)": {
+      "distinct": 8,
+      "mode": "geo"
+    },
+    "Deck (CPL)": {
+      "distinct": 10,
+      "mode": "geo"
+    }
+  },
+  "generated": "2026-09-19 11:17 UTC",
+  "dataset_date": "2026-09-18",
+  "filters": {
+    "payout_type": "Call",
+    "min_payout": 40.0,
+    "population": [
+      8000,
+      150000
+    ],
+    "niches": [
+      "Roofing"
+    ],
+    "states": "all",
+    "min_bundle_niches": 1
+  },
+  "candidate_cities": 1,
+  "serp_scanned": 3,
+  "serp_credits": {
+    "spent": 2,
+    "cached": 1,
+    "failed": 0
+  },
+  "verdict_counts": {
+    "GO": 0,
+    "WATCH": 0,
+    "STOP": 1
+  },
+  "cities": [
+    {
+      "city": "Biloxi",
+      "state": "MS",
+      "county": "Harrison",
+      "population": 48861,
+      "niche": "Roofing",
+      "payout": 50.4,
+      "volume": 140,
+      "bundle_value": 50.4,
+      "verdict": "STOP",
+      "why": [
+        "`roof repair Biloxi MS`: 5 dedicated roofing pages",
+        "`roof leak repair Biloxi MS`: 6 dedicated roofing pages"
+      ],
+      "queries": [
+        {
+          "query": "roofer Biloxi MS",
+          "serp_score": 100,
+          "verdict": "GO"
+        },
+        {
+          "query": "roof repair Biloxi MS",
+          "serp_score": 18,
+          "verdict": "STOP"
+        },
+        {
+          "query": "roof leak repair Biloxi MS",
+          "serp_score": 4,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 7056.0,
+      "metro": "Mobile, AL",
+      "metro_miles": 57,
+      "gates": [
+        {
+          "gate": "Payout",
+          "status": "pass",
+          "value": "$50.40"
+        },
+        {
+          "gate": "Economics",
+          "status": "pass",
+          "value": "~$31 per call (61% of calls pay)"
+        },
+        {
+          "gate": "Demand",
+          "status": "pass",
+          "value": "140/mo"
+        },
+        {
+          "gate": "SERP",
+          "status": "fail",
+          "value": "score 4\u2013100 over 3 queries"
+        },
+        {
+          "gate": "Coverage",
+          "status": "pass",
+          "value": "3 of 6 ZIPs bought"
+        }
+      ],
+      "gate_marks": "\u2705\u2705\u2705\u274c\u2705"
+    }
+  ],
+  "launch_plan": [],
+  "opportunities": [
+    {
+      "city": "Biloxi",
+      "state": "MS",
+      "county": "Harrison",
+      "population": 48861,
+      "zips": 3,
+      "niche": "Roofing",
+      "sub_service": "roofer",
+      "query": "roofer Biloxi MS",
+      "payout": 50.4,
+      "pricing": "geo",
+      "bundle_value": 50.4,
+      "niches_here": [
+        {
+          "niche": "Roofing",
+          "payout": 50.4,
+          "zips": 3,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 100,
+      "serp_breakdown": {
+        "dedicated": 0,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 5,
+        "forum": 1,
+        "other_local": 3,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 260,
+        "pack_median_reviews": 73
+      },
+      "occupants": [
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "youtube.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "ag.ks.gov",
+          "kind": "directory"
+        },
+        {
+          "host": "wral.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "linkedin.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "rooftopsolutions.net",
+          "kind": "independent site"
+        },
+        {
+          "host": "reddit.com",
+          "kind": "forum"
+        },
+        {
+          "host": "theroofdocs.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "youtube.com",
+          "kind": "social profile"
+        }
+      ],
+      "opportunity": 50.4,
+      "volume": 140,
+      "value": 7056.0,
+      "verdict": "GO",
+      "why": [
+        "SERP 100, 0 dedicated, 140/mo"
+      ]
+    },
+    {
+      "city": "Biloxi",
+      "state": "MS",
+      "county": "Harrison",
+      "population": 48861,
+      "zips": 3,
+      "niche": "Roofing",
+      "sub_service": "roof repair",
+      "query": "roof repair Biloxi MS",
+      "payout": 50.4,
+      "pricing": "geo",
+      "bundle_value": 50.4,
+      "niches_here": [
+        {
+          "niche": "Roofing",
+          "payout": 50.4,
+          "zips": 3,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 18,
+      "serp_breakdown": {
+        "dedicated": 5,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 1,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 260,
+        "pack_median_reviews": 42
+      },
+      "occupants": [
+        {
+          "host": "durdenroofcare.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "gaf.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "gulfsouthroofing.net",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "garciadidmyroof.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "southeastroofing.llc",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "homeadvisor.com",
+          "kind": "directory"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "ensuredroof.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 9.07,
+      "volume": 140,
+      "value": 1270.1,
+      "verdict": "STOP",
+      "why": [
+        "5 dedicated roofing pages"
+      ]
+    },
+    {
+      "city": "Biloxi",
+      "state": "MS",
+      "county": "Harrison",
+      "population": 48861,
+      "zips": 3,
+      "niche": "Roofing",
+      "sub_service": "roof leak repair",
+      "query": "roof leak repair Biloxi MS",
+      "payout": 50.4,
+      "pricing": "geo",
+      "bundle_value": 50.4,
+      "niches_here": [
+        {
+          "niche": "Roofing",
+          "payout": 50.4,
+          "zips": 3,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 4,
+      "serp_breakdown": {
+        "dedicated": 6,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 0,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 260,
+        "pack_median_reviews": 73
+      },
+      "occupants": [
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "roofsquad.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "gulfsouthroofing.net",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "ensuredroof.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "modernize.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "garciadidmyroof.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "southeastroofing.llc",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "angi.com",
+          "kind": "directory"
+        }
+      ],
+      "opportunity": 2.02,
+      "volume": 140,
+      "value": 282.2,
+      "verdict": "STOP",
+      "why": [
+        "6 dedicated roofing pages"
+      ]
+    }
+  ],
+  "top_candidates_unscanned": []
+}
