@@ -1,0 +1,3844 @@
+{
+  "pricing_model_by_niche": {
+    "Roofing (Call)": {
+      "distinct": 709,
+      "mode": "geo"
+    },
+    "Plumbing (Call)": {
+      "distinct": 1009,
+      "mode": "geo"
+    },
+    "Bathroom Remodeling (Call)": {
+      "distinct": 325,
+      "mode": "geo"
+    },
+    "HVAC (Call)": {
+      "distinct": 621,
+      "mode": "geo"
+    },
+    "Appliance (Call)": {
+      "distinct": 356,
+      "mode": "geo"
+    },
+    "Gutters (Call)": {
+      "distinct": 1,
+      "mode": "flat"
+    },
+    "Waterproofing (CPL)": {
+      "distinct": 23,
+      "mode": "geo"
+    },
+    "Water Damage (CPL)": {
+      "distinct": 115,
+      "mode": "geo"
+    },
+    "Garage Door (CPL)": {
+      "distinct": 25,
+      "mode": "geo"
+    },
+    "Mold Removal (CPL)": {
+      "distinct": 40,
+      "mode": "geo"
+    },
+    "Foundation Repair (CPL)": {
+      "distinct": 13,
+      "mode": "geo"
+    },
+    "Pest Control (Call)": {
+      "distinct": 2,
+      "mode": "flat"
+    },
+    "Fire Damage Removal (CPL)": {
+      "distinct": 46,
+      "mode": "geo"
+    },
+    "Electrical (Call)": {
+      "distinct": 383,
+      "mode": "geo"
+    },
+    "Tree Services (Call)": {
+      "distinct": 51,
+      "mode": "geo"
+    },
+    "Biohazard (CPL)": {
+      "distinct": 21,
+      "mode": "geo"
+    },
+    "Plumbing (CPL)": {
+      "distinct": 48,
+      "mode": "geo"
+    },
+    "Kitchen (CPL)": {
+      "distinct": 13,
+      "mode": "geo"
+    },
+    "Siding (CPL)": {
+      "distinct": 35,
+      "mode": "geo"
+    },
+    "Painting (CPL)": {
+      "distinct": 17,
+      "mode": "geo"
+    },
+    "Solar (CPL)": {
+      "distinct": 4,
+      "mode": "geo"
+    },
+    "Landscaping (CPL)": {
+      "distinct": 8,
+      "mode": "geo"
+    },
+    "Deck (CPL)": {
+      "distinct": 10,
+      "mode": "geo"
+    }
+  },
+  "generated": "2026-09-19 09:17 UTC",
+  "dataset_date": "2026-09-18",
+  "filters": {
+    "payout_type": "Call",
+    "min_payout": 40.0,
+    "population": [
+      8000,
+      150000
+    ],
+    "niches": [
+      "Roofing"
+    ],
+    "states": "all",
+    "min_bundle_niches": 1
+  },
+  "candidate_cities": 51,
+  "serp_scanned": 24,
+  "serp_credits": {
+    "spent": 25,
+    "cached": 0,
+    "failed": 0
+  },
+  "verdict_counts": {
+    "GO": 1,
+    "WATCH": 1,
+    "STOP": 22
+  },
+  "cities": [
+    {
+      "city": "Biloxi",
+      "state": "MS",
+      "county": "Harrison",
+      "population": 48861,
+      "niche": "Roofing",
+      "payout": 50.4,
+      "volume": 140,
+      "bundle_value": 50.4,
+      "verdict": "GO",
+      "why": [
+        "SERP 100, 0 dedicated, 140/mo"
+      ],
+      "queries": [
+        {
+          "query": "roofer Biloxi MS",
+          "serp_score": 100,
+          "verdict": "GO"
+        }
+      ],
+      "best_value": 7056.0,
+      "metro": "New Orleans, LA",
+      "metro_miles": 75,
+      "gates": [
+        {
+          "gate": "Payout",
+          "status": "pass",
+          "value": "$50.40"
+        },
+        {
+          "gate": "Economics",
+          "status": "pass",
+          "value": "~$31 per call (61% of calls pay)"
+        },
+        {
+          "gate": "Demand",
+          "status": "pass",
+          "value": "140/mo"
+        },
+        {
+          "gate": "SERP",
+          "status": "pass",
+          "value": "score 100\u2013100 over 1 query"
+        },
+        {
+          "gate": "Coverage",
+          "status": "pass",
+          "value": "3 of 6 ZIPs bought"
+        }
+      ],
+      "gate_marks": "\u2705\u2705\u2705\u2705\u2705"
+    },
+    {
+      "city": "Bellingham",
+      "state": "WA",
+      "county": "Whatcom",
+      "population": 135591,
+      "niche": "Roofing",
+      "payout": 66.15,
+      "volume": 110,
+      "bundle_value": 66.15,
+      "verdict": "WATCH",
+      "why": [
+        "`roofer Bellingham WA`: 2 small local pages, weak map pack (<100 reviews); SERP 35 < 60"
+      ],
+      "queries": [
+        {
+          "query": "roofer Bellingham WA",
+          "serp_score": 35,
+          "verdict": "WATCH"
+        }
+      ],
+      "best_value": 2546.8,
+      "metro": "Seattle, WA",
+      "metro_miles": 79,
+      "gates": [
+        {
+          "gate": "Payout",
+          "status": "pass",
+          "value": "$66.15"
+        },
+        {
+          "gate": "Economics",
+          "status": "pass",
+          "value": "~$40 per call (61% of calls pay)"
+        },
+        {
+          "gate": "Demand",
+          "status": "pass",
+          "value": "110/mo"
+        },
+        {
+          "gate": "SERP",
+          "status": "warn",
+          "value": "score 35\u201335 over 1 query"
+        },
+        {
+          "gate": "Coverage",
+          "status": "pass",
+          "value": "5 of 5 ZIPs bought"
+        }
+      ],
+      "gate_marks": "\u2705\u2705\u2705\ud83d\udfe1\u2705"
+    },
+    {
+      "city": "Charlottesville",
+      "state": "VA",
+      "county": "Charlottesville",
+      "population": 103155,
+      "niche": "Roofing",
+      "payout": 43.75,
+      "volume": 260,
+      "bundle_value": 43.75,
+      "verdict": "STOP",
+      "why": [
+        "`roofer Charlottesville VA`: 4 dedicated roofing pages"
+      ],
+      "queries": [
+        {
+          "query": "roofer Charlottesville VA",
+          "serp_score": 35,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 3981.2,
+      "metro": "Richmond, VA",
+      "metro_miles": 67,
+      "gates": [
+        {
+          "gate": "Payout",
+          "status": "pass",
+          "value": "$43.75"
+        },
+        {
+          "gate": "Economics",
+          "status": "pass",
+          "value": "~$27 per call (61% of calls pay)"
+        },
+        {
+          "gate": "Demand",
+          "status": "pass",
+          "value": "260/mo"
+        },
+        {
+          "gate": "SERP",
+          "status": "fail",
+          "value": "score 35\u201335 over 1 query"
+        },
+        {
+          "gate": "Coverage",
+          "status": "pass",
+          "value": "5 of 11 ZIPs bought"
+        }
+      ],
+      "gate_marks": "\u2705\u2705\u2705\u274c\u2705"
+    },
+    {
+      "city": "Topeka",
+      "state": "KS",
+      "county": "Shawnee",
+      "population": 147144,
+      "niche": "Roofing",
+      "payout": 54.25,
+      "volume": 210,
+      "bundle_value": 54.25,
+      "verdict": "STOP",
+      "why": [
+        "`roofer Topeka KS`: 3 dedicated roofing pages"
+      ],
+      "queries": [
+        {
+          "query": "roofer Topeka KS",
+          "serp_score": 34,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 3873.5,
+      "metro": "Kansas City, MO",
+      "metro_miles": 60,
+      "gates": [
+        {
+          "gate": "Payout",
+          "status": "pass",
+          "value": "$54.25"
+        },
+        {
+          "gate": "Economics",
+          "status": "pass",
+          "value": "~$33 per call (61% of calls pay)"
+        },
+        {
+          "gate": "Demand",
+          "status": "pass",
+          "value": "210/mo"
+        },
+        {
+          "gate": "SERP",
+          "status": "fail",
+          "value": "score 34\u201334 over 1 query"
+        },
+        {
+          "gate": "Coverage",
+          "status": "pass",
+          "value": "8 of 31 ZIPs bought"
+        }
+      ],
+      "gate_marks": "\u2705\u2705\u2705\u274c\u2705"
+    },
+    {
+      "city": "Tyler",
+      "state": "TX",
+      "county": "Smith",
+      "population": 134739,
+      "niche": "Roofing",
+      "payout": 41.11,
+      "volume": 390,
+      "bundle_value": 41.11,
+      "verdict": "STOP",
+      "why": [
+        "`roofer Tyler TX`: 4 dedicated roofing pages; map pack at 517 reviews"
+      ],
+      "queries": [
+        {
+          "query": "roofer Tyler TX",
+          "serp_score": 22,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 3527.2,
+      "metro": "Dallas, TX",
+      "metro_miles": 93,
+      "gates": [
+        {
+          "gate": "Payout",
+          "status": "pass",
+          "value": "$41.11"
+        },
+        {
+          "gate": "Economics",
+          "status": "pass",
+          "value": "~$25 per call (61% of calls pay)"
+        },
+        {
+          "gate": "Demand",
+          "status": "pass",
+          "value": "390/mo"
+        },
+        {
+          "gate": "SERP",
+          "status": "fail",
+          "value": "score 22\u201322 over 1 query"
+        },
+        {
+          "gate": "Coverage",
+          "status": "warn",
+          "value": "2 of 15 ZIPs bought"
+        }
+      ],
+      "gate_marks": "\u2705\u2705\u2705\u274c\ud83d\udfe1"
+    },
+    {
+      "city": "Columbia",
+      "state": "MO",
+      "county": "Boone",
+      "population": 148781,
+      "niche": "Roofing",
+      "payout": 54.25,
+      "volume": 210,
+      "bundle_value": 54.25,
+      "verdict": "STOP",
+      "why": [
+        "`roofer Columbia MO`: 4 dedicated roofing pages"
+      ],
+      "queries": [
+        {
+          "query": "roofer Columbia MO",
+          "serp_score": 24,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 2734.2,
+      "metro": "Saint Louis, MO",
+      "metro_miles": 114,
+      "gates": [
+        {
+          "gate": "Payout",
+          "status": "pass",
+          "value": "$54.25"
+        },
+        {
+          "gate": "Economics",
+          "status": "pass",
+          "value": "~$33 per call (61% of calls pay)"
+        },
+        {
+          "gate": "Demand",
+          "status": "pass",
+          "value": "210/mo"
+        },
+        {
+          "gate": "SERP",
+          "status": "fail",
+          "value": "score 24\u201324 over 1 query"
+        },
+        {
+          "gate": "Coverage",
+          "status": "warn",
+          "value": "1 of 11 ZIPs bought"
+        }
+      ],
+      "gate_marks": "\u2705\u2705\u2705\u274c\ud83d\udfe1"
+    },
+    {
+      "city": "Middletown",
+      "state": "NY",
+      "county": "Orange",
+      "population": 30289,
+      "niche": "Roofing",
+      "payout": 78.38,
+      "volume": 90,
+      "bundle_value": 78.38,
+      "verdict": "STOP",
+      "why": [
+        "`roofer Middletown NY`: 3 dedicated roofing pages"
+      ],
+      "queries": [
+        {
+          "query": "roofer Middletown NY",
+          "serp_score": 35,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 2469.0,
+      "metro": "Bronx, NY",
+      "metro_miles": 50,
+      "gates": [
+        {
+          "gate": "Payout",
+          "status": "pass",
+          "value": "$78.38"
+        },
+        {
+          "gate": "Economics",
+          "status": "pass",
+          "value": "~$48 per call (61% of calls pay)"
+        },
+        {
+          "gate": "Demand",
+          "status": "warn",
+          "value": "90/mo"
+        },
+        {
+          "gate": "SERP",
+          "status": "fail",
+          "value": "score 35\u201335 over 1 query"
+        },
+        {
+          "gate": "Coverage",
+          "status": "pass",
+          "value": "2 of 2 ZIPs bought"
+        }
+      ],
+      "gate_marks": "\u2705\u2705\ud83d\udfe1\u274c\u2705"
+    },
+    {
+      "city": "Traverse City",
+      "state": "MI",
+      "county": "Grand Traverse",
+      "population": 15593,
+      "niche": "Roofing",
+      "payout": 58.8,
+      "volume": 110,
+      "bundle_value": 58.8,
+      "verdict": "STOP",
+      "why": [
+        "`roofer Traverse City MI`: 3 dedicated roofing pages"
+      ],
+      "queries": [
+        {
+          "query": "roofer Traverse City MI",
+          "serp_score": 35,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 2263.8,
+      "metro": "Grand Rapids, MI",
+      "metro_miles": 124,
+      "gates": [
+        {
+          "gate": "Payout",
+          "status": "pass",
+          "value": "$58.80"
+        },
+        {
+          "gate": "Economics",
+          "status": "pass",
+          "value": "~$36 per call (61% of calls pay)"
+        },
+        {
+          "gate": "Demand",
+          "status": "pass",
+          "value": "110/mo"
+        },
+        {
+          "gate": "SERP",
+          "status": "fail",
+          "value": "score 35\u201335 over 1 query"
+        },
+        {
+          "gate": "Coverage",
+          "status": "pass",
+          "value": "3 of 4 ZIPs bought"
+        }
+      ],
+      "gate_marks": "\u2705\u2705\u2705\u274c\u2705"
+    },
+    {
+      "city": "Bloomington",
+      "state": "IL",
+      "county": "McLean",
+      "population": 135296,
+      "niche": "Roofing",
+      "payout": 41.25,
+      "volume": 170,
+      "bundle_value": 41.25,
+      "verdict": "STOP",
+      "why": [
+        "`roofer Bloomington IL`: 4 dedicated roofing pages"
+      ],
+      "queries": [
+        {
+          "query": "roofer Bloomington IL",
+          "serp_score": 32,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 2244.0,
+      "metro": "Chicago, IL",
+      "metro_miles": 119,
+      "gates": [
+        {
+          "gate": "Payout",
+          "status": "pass",
+          "value": "$41.25"
+        },
+        {
+          "gate": "Economics",
+          "status": "pass",
+          "value": "~$25 per call (61% of calls pay)"
+        },
+        {
+          "gate": "Demand",
+          "status": "pass",
+          "value": "170/mo"
+        },
+        {
+          "gate": "SERP",
+          "status": "fail",
+          "value": "score 32\u201332 over 1 query"
+        },
+        {
+          "gate": "Coverage",
+          "status": "pass",
+          "value": "3 of 8 ZIPs bought"
+        }
+      ],
+      "gate_marks": "\u2705\u2705\u2705\u274c\u2705"
+    },
+    {
+      "city": "Johnson City",
+      "state": "TN",
+      "county": "Washington",
+      "population": 131898,
+      "niche": "Roofing",
+      "payout": 51.98,
+      "volume": 90,
+      "bundle_value": 51.98,
+      "verdict": "STOP",
+      "why": [
+        "`roofer Johnson City TN`: 3 dedicated roofing pages"
+      ],
+      "queries": [
+        {
+          "query": "roofer Johnson City TN",
+          "serp_score": 35,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 1637.4,
+      "metro": "Knoxville, TN",
+      "metro_miles": 91,
+      "gates": [
+        {
+          "gate": "Payout",
+          "status": "pass",
+          "value": "$51.98"
+        },
+        {
+          "gate": "Economics",
+          "status": "pass",
+          "value": "~$32 per call (61% of calls pay)"
+        },
+        {
+          "gate": "Demand",
+          "status": "warn",
+          "value": "90/mo"
+        },
+        {
+          "gate": "SERP",
+          "status": "fail",
+          "value": "score 35\u201335 over 1 query"
+        },
+        {
+          "gate": "Coverage",
+          "status": "pass",
+          "value": "3 of 7 ZIPs bought"
+        }
+      ],
+      "gate_marks": "\u2705\u2705\ud83d\udfe1\u274c\u2705"
+    },
+    {
+      "city": "Eau Claire",
+      "state": "WI",
+      "county": "Eau Claire",
+      "population": 109971,
+      "niche": "Roofing",
+      "payout": 63.0,
+      "volume": 70,
+      "bundle_value": 63.0,
+      "verdict": "STOP",
+      "why": [
+        "`roofer Eau Claire WI`: 4 dedicated roofing pages"
+      ],
+      "queries": [
+        {
+          "query": "roofer Eau Claire WI",
+          "serp_score": 35,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 1543.5,
+      "metro": "Minneapolis, MN",
+      "metro_miles": 88,
+      "gates": [
+        {
+          "gate": "Payout",
+          "status": "pass",
+          "value": "$63.00"
+        },
+        {
+          "gate": "Economics",
+          "status": "pass",
+          "value": "~$38 per call (61% of calls pay)"
+        },
+        {
+          "gate": "Demand",
+          "status": "warn",
+          "value": "70/mo"
+        },
+        {
+          "gate": "SERP",
+          "status": "fail",
+          "value": "score 35\u201335 over 1 query"
+        },
+        {
+          "gate": "Coverage",
+          "status": "pass",
+          "value": "2 of 3 ZIPs bought"
+        }
+      ],
+      "gate_marks": "\u2705\u2705\ud83d\udfe1\u274c\u2705"
+    },
+    {
+      "city": "Kingston",
+      "state": "NY",
+      "county": "Ulster",
+      "population": 23911,
+      "niche": "Roofing",
+      "payout": 86.78,
+      "volume": 50,
+      "bundle_value": 86.78,
+      "verdict": "STOP",
+      "why": [
+        "`roofer Kingston NY`: 3 dedicated roofing pages"
+      ],
+      "queries": [
+        {
+          "query": "roofer Kingston NY",
+          "serp_score": 35,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 1518.6,
+      "metro": "Albany, NY",
+      "metro_miles": 52,
+      "gates": [
+        {
+          "gate": "Payout",
+          "status": "pass",
+          "value": "$86.78"
+        },
+        {
+          "gate": "Economics",
+          "status": "pass",
+          "value": "~$53 per call (61% of calls pay)"
+        },
+        {
+          "gate": "Demand",
+          "status": "warn",
+          "value": "50/mo"
+        },
+        {
+          "gate": "SERP",
+          "status": "fail",
+          "value": "score 35\u201335 over 1 query"
+        },
+        {
+          "gate": "Coverage",
+          "status": "pass",
+          "value": "2 of 2 ZIPs bought"
+        }
+      ],
+      "gate_marks": "\u2705\u2705\ud83d\udfe1\u274c\u2705"
+    },
+    {
+      "city": "Greenville",
+      "state": "NC",
+      "county": "Pitt",
+      "population": 127632,
+      "niche": "Roofing",
+      "payout": 47.6,
+      "volume": 110,
+      "bundle_value": 47.6,
+      "verdict": "STOP",
+      "why": [
+        "`roofer Greenville NC`: 4 dedicated roofing pages"
+      ],
+      "queries": [
+        {
+          "query": "roofer Greenville NC",
+          "serp_score": 24,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 1256.6,
+      "metro": "Raleigh, NC",
+      "metro_miles": 72,
+      "gates": [
+        {
+          "gate": "Payout",
+          "status": "pass",
+          "value": "$47.60"
+        },
+        {
+          "gate": "Economics",
+          "status": "pass",
+          "value": "~$29 per call (61% of calls pay)"
+        },
+        {
+          "gate": "Demand",
+          "status": "pass",
+          "value": "110/mo"
+        },
+        {
+          "gate": "SERP",
+          "status": "fail",
+          "value": "score 24\u201324 over 1 query"
+        },
+        {
+          "gate": "Coverage",
+          "status": "pass",
+          "value": "5 of 5 ZIPs bought"
+        }
+      ],
+      "gate_marks": "\u2705\u2705\u2705\u274c\u2705"
+    },
+    {
+      "city": "Dothan",
+      "state": "AL",
+      "county": "Houston",
+      "population": 76419,
+      "niche": "Roofing",
+      "payout": 50.4,
+      "volume": 110,
+      "bundle_value": 50.4,
+      "verdict": "STOP",
+      "why": [
+        "`roofer Dothan AL`: 5 dedicated roofing pages"
+      ],
+      "queries": [
+        {
+          "query": "roofer Dothan AL",
+          "serp_score": 18,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 997.9,
+      "metro": "Pensacola, FL",
+      "metro_miles": 119,
+      "gates": [
+        {
+          "gate": "Payout",
+          "status": "pass",
+          "value": "$50.40"
+        },
+        {
+          "gate": "Economics",
+          "status": "pass",
+          "value": "~$31 per call (61% of calls pay)"
+        },
+        {
+          "gate": "Demand",
+          "status": "pass",
+          "value": "110/mo"
+        },
+        {
+          "gate": "SERP",
+          "status": "fail",
+          "value": "score 18\u201318 over 1 query"
+        },
+        {
+          "gate": "Coverage",
+          "status": "pass",
+          "value": "5 of 5 ZIPs bought"
+        }
+      ],
+      "gate_marks": "\u2705\u2705\u2705\u274c\u2705"
+    },
+    {
+      "city": "Temple",
+      "state": "TX",
+      "county": "Bell",
+      "population": 129969,
+      "niche": "Roofing",
+      "payout": 59.36,
+      "volume": 110,
+      "bundle_value": 59.36,
+      "verdict": "STOP",
+      "why": [
+        "`roofer Temple TX`: 5 dedicated roofing pages"
+      ],
+      "queries": [
+        {
+          "query": "roofer Temple TX",
+          "serp_score": 10,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 653.0,
+      "metro": "Austin, TX",
+      "metro_miles": 61,
+      "gates": [
+        {
+          "gate": "Payout",
+          "status": "pass",
+          "value": "$59.36"
+        },
+        {
+          "gate": "Economics",
+          "status": "pass",
+          "value": "~$36 per call (61% of calls pay)"
+        },
+        {
+          "gate": "Demand",
+          "status": "pass",
+          "value": "110/mo"
+        },
+        {
+          "gate": "SERP",
+          "status": "fail",
+          "value": "score 10\u201310 over 1 query"
+        },
+        {
+          "gate": "Coverage",
+          "status": "pass",
+          "value": "5 of 7 ZIPs bought"
+        }
+      ],
+      "gate_marks": "\u2705\u2705\u2705\u274c\u2705"
+    },
+    {
+      "city": "Abilene",
+      "state": "TX",
+      "county": "Taylor",
+      "population": 128053,
+      "niche": "Roofing",
+      "payout": 45.93,
+      "volume": 170,
+      "bundle_value": 45.93,
+      "verdict": "STOP",
+      "why": [
+        "`roofer Abilene TX`: 5 dedicated roofing pages"
+      ],
+      "queries": [
+        {
+          "query": "roofer Abilene TX",
+          "serp_score": 6,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 468.5,
+      "metro": "Fort Worth, TX",
+      "metro_miles": 142,
+      "gates": [
+        {
+          "gate": "Payout",
+          "status": "pass",
+          "value": "$45.93"
+        },
+        {
+          "gate": "Economics",
+          "status": "pass",
+          "value": "~$28 per call (61% of calls pay)"
+        },
+        {
+          "gate": "Demand",
+          "status": "pass",
+          "value": "170/mo"
+        },
+        {
+          "gate": "SERP",
+          "status": "fail",
+          "value": "score 6\u20136 over 1 query"
+        },
+        {
+          "gate": "Coverage",
+          "status": "warn",
+          "value": "2 of 10 ZIPs bought"
+        }
+      ],
+      "gate_marks": "\u2705\u2705\u2705\u274c\ud83d\udfe1"
+    },
+    {
+      "city": "Franklin",
+      "state": "VA",
+      "county": "Franklin",
+      "population": 8250,
+      "niche": "Roofing",
+      "payout": 42.63,
+      "volume": 110,
+      "bundle_value": 42.63,
+      "verdict": "STOP",
+      "why": [
+        "`roofer Franklin VA`: 6 dedicated roofing pages"
+      ],
+      "queries": [
+        {
+          "query": "roofer Franklin VA",
+          "serp_score": 4,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 187.6,
+      "metro": "Virginia Beach, VA",
+      "metro_miles": 54,
+      "gates": [
+        {
+          "gate": "Payout",
+          "status": "pass",
+          "value": "$42.63"
+        },
+        {
+          "gate": "Economics",
+          "status": "pass",
+          "value": "~$26 per call (61% of calls pay)"
+        },
+        {
+          "gate": "Demand",
+          "status": "pass",
+          "value": "110/mo"
+        },
+        {
+          "gate": "SERP",
+          "status": "fail",
+          "value": "score 4\u20134 over 1 query"
+        },
+        {
+          "gate": "Coverage",
+          "status": "pass",
+          "value": "1 of 1 ZIPs bought"
+        }
+      ],
+      "gate_marks": "\u2705\u2705\u2705\u274c\u2705"
+    },
+    {
+      "city": "Beaumont",
+      "state": "TX",
+      "county": "Jefferson",
+      "population": 146974,
+      "niche": "Roofing",
+      "payout": 148.75,
+      "volume": 110,
+      "bundle_value": 148.75,
+      "verdict": "STOP",
+      "why": [
+        "`roofer Beaumont TX`: 1 city EMD on page one; 5 dedicated roofing pages"
+      ],
+      "queries": [
+        {
+          "query": "roofer Beaumont TX",
+          "serp_score": 0,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 0,
+      "metro": "Houston, TX",
+      "metro_miles": 77,
+      "gates": [
+        {
+          "gate": "Payout",
+          "status": "pass",
+          "value": "$148.75"
+        },
+        {
+          "gate": "Economics",
+          "status": "pass",
+          "value": "~$91 per call (61% of calls pay)"
+        },
+        {
+          "gate": "Demand",
+          "status": "pass",
+          "value": "110/mo"
+        },
+        {
+          "gate": "SERP",
+          "status": "fail",
+          "value": "score 0\u20130 over 1 query"
+        },
+        {
+          "gate": "Coverage",
+          "status": "pass",
+          "value": "13 of 14 ZIPs bought"
+        }
+      ],
+      "gate_marks": "\u2705\u2705\u2705\u274c\u2705"
+    },
+    {
+      "city": "Palm Coast",
+      "state": "FL",
+      "county": "Flagler",
+      "population": 98258,
+      "niche": "Roofing",
+      "payout": 66.5,
+      "volume": 320,
+      "bundle_value": 66.5,
+      "verdict": "STOP",
+      "why": [
+        "`roofer Palm Coast FL`: 6 dedicated roofing pages"
+      ],
+      "queries": [
+        {
+          "query": "roofer Palm Coast FL",
+          "serp_score": 0,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 0,
+      "metro": "Jacksonville, FL",
+      "metro_miles": 60,
+      "gates": [
+        {
+          "gate": "Payout",
+          "status": "pass",
+          "value": "$66.50"
+        },
+        {
+          "gate": "Economics",
+          "status": "pass",
+          "value": "~$41 per call (61% of calls pay)"
+        },
+        {
+          "gate": "Demand",
+          "status": "pass",
+          "value": "320/mo"
+        },
+        {
+          "gate": "SERP",
+          "status": "fail",
+          "value": "score 0\u20130 over 1 query"
+        },
+        {
+          "gate": "Coverage",
+          "status": "pass",
+          "value": "5 of 5 ZIPs bought"
+        }
+      ],
+      "gate_marks": "\u2705\u2705\u2705\u274c\u2705"
+    },
+    {
+      "city": "Madison",
+      "state": "MS",
+      "county": "Madison",
+      "population": 27946,
+      "niche": "Roofing",
+      "payout": 50.4,
+      "volume": 140,
+      "bundle_value": 50.4,
+      "verdict": "STOP",
+      "why": [
+        "`roofer Madison MS`: 1 city EMD on page one; 5 dedicated roofing pages"
+      ],
+      "queries": [
+        {
+          "query": "roofer Madison MS",
+          "serp_score": 0,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 0,
+      "metro": "Baton Rouge, LA",
+      "metro_miles": 152,
+      "gates": [
+        {
+          "gate": "Payout",
+          "status": "pass",
+          "value": "$50.40"
+        },
+        {
+          "gate": "Economics",
+          "status": "pass",
+          "value": "~$31 per call (61% of calls pay)"
+        },
+        {
+          "gate": "Demand",
+          "status": "pass",
+          "value": "140/mo"
+        },
+        {
+          "gate": "SERP",
+          "status": "fail",
+          "value": "score 0\u20130 over 1 query"
+        },
+        {
+          "gate": "Coverage",
+          "status": "pass",
+          "value": "1 of 2 ZIPs bought"
+        }
+      ],
+      "gate_marks": "\u2705\u2705\u2705\u274c\u2705"
+    },
+    {
+      "city": "Winchester",
+      "state": "VA",
+      "county": "Winchester",
+      "population": 86067,
+      "niche": "Roofing",
+      "payout": 49.45,
+      "volume": 90,
+      "bundle_value": 49.45,
+      "verdict": "STOP",
+      "why": [
+        "`roofer Winchester VA`: 1 city EMD on page one; 6 dedicated roofing pages"
+      ],
+      "queries": [
+        {
+          "query": "roofer Winchester VA",
+          "serp_score": 0,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 0,
+      "metro": "Washington, DC",
+      "metro_miles": 64,
+      "gates": [
+        {
+          "gate": "Payout",
+          "status": "pass",
+          "value": "$49.45"
+        },
+        {
+          "gate": "Economics",
+          "status": "pass",
+          "value": "~$30 per call (61% of calls pay)"
+        },
+        {
+          "gate": "Demand",
+          "status": "warn",
+          "value": "90/mo"
+        },
+        {
+          "gate": "SERP",
+          "status": "fail",
+          "value": "score 0\u20130 over 1 query"
+        },
+        {
+          "gate": "Coverage",
+          "status": "pass",
+          "value": "3 of 4 ZIPs bought"
+        }
+      ],
+      "gate_marks": "\u2705\u2705\ud83d\udfe1\u274c\u2705"
+    },
+    {
+      "city": "Florence",
+      "state": "SC",
+      "county": "Florence",
+      "population": 90753,
+      "niche": "Roofing",
+      "payout": 45.67,
+      "volume": 590,
+      "bundle_value": 45.67,
+      "verdict": "STOP",
+      "why": [
+        "`roofer Florence SC`: 1 city EMD on page one; 6 dedicated roofing pages"
+      ],
+      "queries": [
+        {
+          "query": "roofer Florence SC",
+          "serp_score": 0,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 0,
+      "metro": "Columbia, SC",
+      "metro_miles": 64,
+      "gates": [
+        {
+          "gate": "Payout",
+          "status": "pass",
+          "value": "$45.67"
+        },
+        {
+          "gate": "Economics",
+          "status": "pass",
+          "value": "~$28 per call (61% of calls pay)"
+        },
+        {
+          "gate": "Demand",
+          "status": "pass",
+          "value": "590/mo"
+        },
+        {
+          "gate": "SERP",
+          "status": "fail",
+          "value": "score 0\u20130 over 1 query"
+        },
+        {
+          "gate": "Coverage",
+          "status": "pass",
+          "value": "6 of 6 ZIPs bought"
+        }
+      ],
+      "gate_marks": "\u2705\u2705\u2705\u274c\u2705"
+    },
+    {
+      "city": "Rochester",
+      "state": "MN",
+      "county": "Olmsted",
+      "population": 122867,
+      "niche": "Roofing",
+      "payout": 44.1,
+      "volume": 110,
+      "bundle_value": 44.1,
+      "verdict": "STOP",
+      "why": [
+        "`roofer Rochester MN`: 1 city EMD on page one; 6 dedicated roofing pages"
+      ],
+      "queries": [
+        {
+          "query": "roofer Rochester MN",
+          "serp_score": 0,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 0,
+      "metro": "Minneapolis, MN",
+      "metro_miles": 77,
+      "gates": [
+        {
+          "gate": "Payout",
+          "status": "pass",
+          "value": "$44.10"
+        },
+        {
+          "gate": "Economics",
+          "status": "pass",
+          "value": "~$27 per call (61% of calls pay)"
+        },
+        {
+          "gate": "Demand",
+          "status": "pass",
+          "value": "110/mo"
+        },
+        {
+          "gate": "SERP",
+          "status": "fail",
+          "value": "score 0\u20130 over 1 query"
+        },
+        {
+          "gate": "Coverage",
+          "status": "warn",
+          "value": "2 of 6 ZIPs bought"
+        }
+      ],
+      "gate_marks": "\u2705\u2705\u2705\u274c\ud83d\udfe1"
+    },
+    {
+      "city": "Harrisonburg",
+      "state": "VA",
+      "county": "Harrisonburg",
+      "population": 73815,
+      "niche": "Roofing",
+      "payout": 40.95,
+      "volume": 140,
+      "bundle_value": 40.95,
+      "verdict": "STOP",
+      "why": [
+        "`roofer Harrisonburg VA`: 6 dedicated roofing pages"
+      ],
+      "queries": [
+        {
+          "query": "roofer Harrisonburg VA",
+          "serp_score": 0,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 0,
+      "metro": "Richmond, VA",
+      "metro_miles": 100,
+      "gates": [
+        {
+          "gate": "Payout",
+          "status": "pass",
+          "value": "$40.95"
+        },
+        {
+          "gate": "Economics",
+          "status": "pass",
+          "value": "~$25 per call (61% of calls pay)"
+        },
+        {
+          "gate": "Demand",
+          "status": "pass",
+          "value": "140/mo"
+        },
+        {
+          "gate": "SERP",
+          "status": "fail",
+          "value": "score 0\u20130 over 1 query"
+        },
+        {
+          "gate": "Coverage",
+          "status": "pass",
+          "value": "3 of 4 ZIPs bought"
+        }
+      ],
+      "gate_marks": "\u2705\u2705\u2705\u274c\u2705"
+    }
+  ],
+  "launch_plan": [
+    {
+      "confidence": "GO",
+      "state": "MS",
+      "state_name": "Mississippi",
+      "niche": "Roofing",
+      "go_cities": [
+        "Biloxi"
+      ],
+      "watch_cities": [],
+      "monthly_searches": 140,
+      "best_payout": 50.4,
+      "shape": "add Biloxi as area page(s) on a Mississippi state site",
+      "manual_check": [
+        "https://www.google.com/search?q=roofer+Biloxi+MS"
+      ],
+      "forms": {
+        "1_keyword_tool_mode5_area_plan": {
+          "business_name": "Mississippi Roofer Pros",
+          "niche_description": "roofing referral service connecting homeowners with licensed local pros",
+          "target_location": "Mississippi, United States",
+          "primary_service": "roofer",
+          "min_area_volume": "20",
+          "max_areas": "",
+          "extra_areas": "Biloxi"
+        },
+        "2_builder_mode5": {
+          "mode": "5",
+          "business_name": "Mississippi Roofer Pros",
+          "industry": "roofer",
+          "main_service": "Roofer",
+          "sub_services": "Roof Leak Repair, Roof Repair, Roof Replacement, Roof Inspection, Shingle Repair, Missing Shingle Repair, Tile Roof Replacement",
+          "city": "Mississippi",
+          "country": "United States",
+          "phone": "<LeadSmart tracking number>",
+          "domain": "<new domain>",
+          "extras": {
+            "pseo_plan_url": "<raw .mode5.json link from step 3>",
+            "site_profile": "pay_per_call",
+            "footer_credit": "no",
+            "footer_sitemap_link": "no"
+          }
+        }
+      }
+    }
+  ],
+  "opportunities": [
+    {
+      "city": "Biloxi",
+      "state": "MS",
+      "county": "Harrison",
+      "population": 48861,
+      "zips": 3,
+      "niche": "Roofing",
+      "sub_service": "roofer",
+      "query": "roofer Biloxi MS",
+      "payout": 50.4,
+      "pricing": "geo",
+      "bundle_value": 50.4,
+      "niches_here": [
+        {
+          "niche": "Roofing",
+          "payout": 50.4,
+          "zips": 3,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 100,
+      "serp_breakdown": {
+        "dedicated": 0,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 5,
+        "forum": 1,
+        "other_local": 3,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 260,
+        "pack_median_reviews": 73
+      },
+      "occupants": [
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "youtube.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "ag.ks.gov",
+          "kind": "directory"
+        },
+        {
+          "host": "wral.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "linkedin.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "rooftopsolutions.net",
+          "kind": "independent site"
+        },
+        {
+          "host": "reddit.com",
+          "kind": "forum"
+        },
+        {
+          "host": "theroofdocs.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "youtube.com",
+          "kind": "social profile"
+        }
+      ],
+      "opportunity": 50.4,
+      "volume": 140,
+      "value": 7056.0,
+      "verdict": "GO",
+      "why": [
+        "SERP 100, 0 dedicated, 140/mo"
+      ]
+    },
+    {
+      "city": "Charlottesville",
+      "state": "VA",
+      "county": "Charlottesville",
+      "population": 103155,
+      "zips": 5,
+      "niche": "Roofing",
+      "sub_service": "roofer",
+      "query": "roofer Charlottesville VA",
+      "payout": 43.75,
+      "pricing": "geo",
+      "bundle_value": 43.75,
+      "niches_here": [
+        {
+          "niche": "Roofing",
+          "payout": 43.75,
+          "zips": 5,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 35,
+      "serp_breakdown": {
+        "dedicated": 4,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 2,
+        "forum": 1,
+        "other_local": 2,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 94,
+        "pack_median_reviews": 32
+      },
+      "occupants": [
+        {
+          "host": "rooftopservicesva.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "blueridgeroofing.net",
+          "kind": "independent site"
+        },
+        {
+          "host": "cenvarroofing.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "reddit.com",
+          "kind": "forum"
+        },
+        {
+          "host": "pjfitz.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "vanguardroofingva.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "melvintmorgan.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        }
+      ],
+      "opportunity": 15.31,
+      "volume": 260,
+      "value": 3981.2,
+      "verdict": "STOP",
+      "why": [
+        "4 dedicated roofing pages"
+      ]
+    },
+    {
+      "city": "Topeka",
+      "state": "KS",
+      "county": "Shawnee",
+      "population": 147144,
+      "zips": 8,
+      "niche": "Roofing",
+      "sub_service": "roofer",
+      "query": "roofer Topeka KS",
+      "payout": 54.25,
+      "pricing": "geo",
+      "bundle_value": 54.25,
+      "niches_here": [
+        {
+          "niche": "Roofing",
+          "payout": 54.25,
+          "zips": 8,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 34,
+      "serp_breakdown": {
+        "dedicated": 3,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 3,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 447,
+        "pack_median_reviews": 335
+      },
+      "occupants": [
+        {
+          "host": "gardnerroofing.net",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "dovetailroofing.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "dultmeierroofing.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "klausroofingsystems.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "appelhanzroofing.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "midwestcoating.us",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "homeadvisor.com",
+          "kind": "directory"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        }
+      ],
+      "opportunity": 18.45,
+      "volume": 210,
+      "value": 3873.5,
+      "verdict": "STOP",
+      "why": [
+        "3 dedicated roofing pages"
+      ]
+    },
+    {
+      "city": "Tyler",
+      "state": "TX",
+      "county": "Smith",
+      "population": 134739,
+      "zips": 2,
+      "niche": "Roofing",
+      "sub_service": "roofer",
+      "query": "roofer Tyler TX",
+      "payout": 41.11,
+      "pricing": "geo",
+      "bundle_value": 41.11,
+      "niches_here": [
+        {
+          "niche": "Roofing",
+          "payout": 41.11,
+          "zips": 2,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 22,
+      "serp_breakdown": {
+        "dedicated": 4,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 5,
+        "forum": 0,
+        "other_local": 0,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 761,
+        "pack_median_reviews": 517
+      },
+      "occupants": [
+        {
+          "host": "yosemiteroofing.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "hargroveroofing.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "local.yahoo.com",
+          "kind": "directory"
+        },
+        {
+          "host": "estesroofingtx.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "colemanroofs.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "projectoneroofing.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "angi.com",
+          "kind": "directory"
+        }
+      ],
+      "opportunity": 9.04,
+      "volume": 390,
+      "value": 3527.2,
+      "verdict": "STOP",
+      "why": [
+        "4 dedicated roofing pages",
+        "map pack at 517 reviews"
+      ]
+    },
+    {
+      "city": "Columbia",
+      "state": "MO",
+      "county": "Boone",
+      "population": 148781,
+      "zips": 1,
+      "niche": "Roofing",
+      "sub_service": "roofer",
+      "query": "roofer Columbia MO",
+      "payout": 54.25,
+      "pricing": "geo",
+      "bundle_value": 54.25,
+      "niches_here": [
+        {
+          "niche": "Roofing",
+          "payout": 54.25,
+          "zips": 1,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 24,
+      "serp_breakdown": {
+        "dedicated": 4,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 4,
+        "forum": 0,
+        "other_local": 1,
+        "results": 9,
+        "pack_size": 4,
+        "pack_top_reviews": 653,
+        "pack_median_reviews": 410
+      },
+      "occupants": [
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        },
+        {
+          "host": "precisionmo.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "resolveroofing.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "watkinsroofing.net",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "borntragerexterior.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "thechavezenterprises.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "homeadvisor.com",
+          "kind": "directory"
+        }
+      ],
+      "opportunity": 13.02,
+      "volume": 210,
+      "value": 2734.2,
+      "verdict": "STOP",
+      "why": [
+        "4 dedicated roofing pages"
+      ]
+    },
+    {
+      "city": "Bellingham",
+      "state": "WA",
+      "county": "Whatcom",
+      "population": 135591,
+      "zips": 5,
+      "niche": "Roofing",
+      "sub_service": "roofer",
+      "query": "roofer Bellingham WA",
+      "payout": 66.15,
+      "pricing": "geo",
+      "bundle_value": 66.15,
+      "niches_here": [
+        {
+          "niche": "Roofing",
+          "payout": 66.15,
+          "zips": 5,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 35,
+      "serp_breakdown": {
+        "dedicated": 2,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 3,
+        "forum": 1,
+        "other_local": 3,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 115,
+        "pack_median_reviews": 75
+      },
+      "occupants": [
+        {
+          "host": "joostensroofing.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "reddit.com",
+          "kind": "forum"
+        },
+        {
+          "host": "axiomrfg.net",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "bellinghamskyline.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "whatcomroofing.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "nolansroofing.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        }
+      ],
+      "opportunity": 23.15,
+      "volume": 110,
+      "value": 2546.8,
+      "verdict": "WATCH",
+      "why": [
+        "2 small local pages, weak map pack (<100 reviews)",
+        "SERP 35 < 60"
+      ]
+    },
+    {
+      "city": "Middletown",
+      "state": "NY",
+      "county": "Orange",
+      "population": 30289,
+      "zips": 2,
+      "niche": "Roofing",
+      "sub_service": "roofer",
+      "query": "roofer Middletown NY",
+      "payout": 78.38,
+      "pricing": "geo",
+      "bundle_value": 78.38,
+      "niches_here": [
+        {
+          "niche": "Roofing",
+          "payout": 78.38,
+          "zips": 2,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 35,
+      "serp_breakdown": {
+        "dedicated": 3,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 4,
+        "forum": 0,
+        "other_local": 2,
+        "results": 9,
+        "pack_size": 4,
+        "pack_top_reviews": 311,
+        "pack_median_reviews": 298
+      },
+      "occupants": [
+        {
+          "host": "gonzalesroofing.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "gaf.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "homeproexteriorsinc.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "exteriorprobuilders.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "guaillasroofing.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "angi.com",
+          "kind": "directory"
+        },
+        {
+          "host": "homeadvisor.com",
+          "kind": "directory"
+        }
+      ],
+      "opportunity": 27.43,
+      "volume": 90,
+      "value": 2469.0,
+      "verdict": "STOP",
+      "why": [
+        "3 dedicated roofing pages"
+      ]
+    },
+    {
+      "city": "Traverse City",
+      "state": "MI",
+      "county": "Grand Traverse",
+      "population": 15593,
+      "zips": 3,
+      "niche": "Roofing",
+      "sub_service": "roofer",
+      "query": "roofer Traverse City MI",
+      "payout": 58.8,
+      "pricing": "geo",
+      "bundle_value": 58.8,
+      "niches_here": [
+        {
+          "niche": "Roofing",
+          "payout": 58.8,
+          "zips": 3,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 35,
+      "serp_breakdown": {
+        "dedicated": 3,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 4,
+        "forum": 1,
+        "other_local": 1,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 362,
+        "pack_median_reviews": 99
+      },
+      "occupants": [
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "reddit.com",
+          "kind": "forum"
+        },
+        {
+          "host": "grandtraverseroofing.net",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "angi.com",
+          "kind": "directory"
+        },
+        {
+          "host": "northshoreexteriorsllc.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "mariageroofing.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "advancedroofingtc.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        }
+      ],
+      "opportunity": 20.58,
+      "volume": 110,
+      "value": 2263.8,
+      "verdict": "STOP",
+      "why": [
+        "3 dedicated roofing pages"
+      ]
+    },
+    {
+      "city": "Bloomington",
+      "state": "IL",
+      "county": "McLean",
+      "population": 135296,
+      "zips": 3,
+      "niche": "Roofing",
+      "sub_service": "roofer",
+      "query": "roofer Bloomington IL",
+      "payout": 41.25,
+      "pricing": "geo",
+      "bundle_value": 41.25,
+      "niches_here": [
+        {
+          "niche": "Roofing",
+          "payout": 41.25,
+          "zips": 3,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 32,
+      "serp_breakdown": {
+        "dedicated": 4,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 2,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 176,
+        "pack_median_reviews": 47
+      },
+      "occupants": [
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "allseasonsroofing-il.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "carlsonexteriors.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        },
+        {
+          "host": "sundownexteriors.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "aeroofingandconstruction.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "popejoyroofing.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "nussbaumroofco.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 13.2,
+      "volume": 170,
+      "value": 2244.0,
+      "verdict": "STOP",
+      "why": [
+        "4 dedicated roofing pages"
+      ]
+    },
+    {
+      "city": "Johnson City",
+      "state": "TN",
+      "county": "Washington",
+      "population": 131898,
+      "zips": 3,
+      "niche": "Roofing",
+      "sub_service": "roofer",
+      "query": "roofer Johnson City TN",
+      "payout": 51.98,
+      "pricing": "geo",
+      "bundle_value": 51.98,
+      "niches_here": [
+        {
+          "niche": "Roofing",
+          "payout": 51.98,
+          "zips": 3,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 35,
+      "serp_breakdown": {
+        "dedicated": 3,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 4,
+        "forum": 0,
+        "other_local": 2,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 311,
+        "pack_median_reviews": 76
+      },
+      "occupants": [
+        {
+          "host": "gaf.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "douglasroofingtn.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "mightydogroofing.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        },
+        {
+          "host": "yescontractingservices.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "redemptioncrs.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "angi.com",
+          "kind": "directory"
+        }
+      ],
+      "opportunity": 18.19,
+      "volume": 90,
+      "value": 1637.4,
+      "verdict": "STOP",
+      "why": [
+        "3 dedicated roofing pages"
+      ]
+    },
+    {
+      "city": "Eau Claire",
+      "state": "WI",
+      "county": "Eau Claire",
+      "population": 109971,
+      "zips": 2,
+      "niche": "Roofing",
+      "sub_service": "roofer",
+      "query": "roofer Eau Claire WI",
+      "payout": 63.0,
+      "pricing": "geo",
+      "bundle_value": 63.0,
+      "niches_here": [
+        {
+          "niche": "Roofing",
+          "payout": 63.0,
+          "zips": 2,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 35,
+      "serp_breakdown": {
+        "dedicated": 4,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 3,
+        "forum": 1,
+        "other_local": 1,
+        "results": 9,
+        "pack_size": 4,
+        "pack_top_reviews": 52,
+        "pack_median_reviews": 21
+      },
+      "occupants": [
+        {
+          "host": "ecroof.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "web.cvhomebuilders.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "reddit.com",
+          "kind": "forum"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        },
+        {
+          "host": "yakeshrfg.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "foreverext.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "superiorroofingandrestoration.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 22.05,
+      "volume": 70,
+      "value": 1543.5,
+      "verdict": "STOP",
+      "why": [
+        "4 dedicated roofing pages"
+      ]
+    },
+    {
+      "city": "Kingston",
+      "state": "NY",
+      "county": "Ulster",
+      "population": 23911,
+      "zips": 2,
+      "niche": "Roofing",
+      "sub_service": "roofer",
+      "query": "roofer Kingston NY",
+      "payout": 86.78,
+      "pricing": "geo",
+      "bundle_value": 86.78,
+      "niches_here": [
+        {
+          "niche": "Roofing",
+          "payout": 86.78,
+          "zips": 2,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 35,
+      "serp_breakdown": {
+        "dedicated": 3,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 4,
+        "forum": 0,
+        "other_local": 2,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 100,
+        "pack_median_reviews": 87
+      },
+      "occupants": [
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "gaf.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "jaroofing.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "hvroofers.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        },
+        {
+          "host": "probendcorp.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "cityroofingandsidingny.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "homeadvisor.com",
+          "kind": "directory"
+        }
+      ],
+      "opportunity": 30.37,
+      "volume": 50,
+      "value": 1518.6,
+      "verdict": "STOP",
+      "why": [
+        "3 dedicated roofing pages"
+      ]
+    },
+    {
+      "city": "Greenville",
+      "state": "NC",
+      "county": "Pitt",
+      "population": 127632,
+      "zips": 5,
+      "niche": "Roofing",
+      "sub_service": "roofer",
+      "query": "roofer Greenville NC",
+      "payout": 47.6,
+      "pricing": "geo",
+      "bundle_value": 47.6,
+      "niches_here": [
+        {
+          "niche": "Roofing",
+          "payout": 47.6,
+          "zips": 5,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 24,
+      "serp_breakdown": {
+        "dedicated": 4,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 4,
+        "forum": 0,
+        "other_local": 1,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 426,
+        "pack_median_reviews": 403
+      },
+      "occupants": [
+        {
+          "host": "gaf.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "clluptonroofing.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        },
+        {
+          "host": "bakerroofing.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "callgoliathroofing.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "roofingsolutionsnc.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "angi.com",
+          "kind": "directory"
+        }
+      ],
+      "opportunity": 11.42,
+      "volume": 110,
+      "value": 1256.6,
+      "verdict": "STOP",
+      "why": [
+        "4 dedicated roofing pages"
+      ]
+    },
+    {
+      "city": "Dothan",
+      "state": "AL",
+      "county": "Houston",
+      "population": 76419,
+      "zips": 5,
+      "niche": "Roofing",
+      "sub_service": "roofer",
+      "query": "roofer Dothan AL",
+      "payout": 50.4,
+      "pricing": "geo",
+      "bundle_value": 50.4,
+      "niches_here": [
+        {
+          "niche": "Roofing",
+          "payout": 50.4,
+          "zips": 5,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 18,
+      "serp_breakdown": {
+        "dedicated": 5,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 1,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 54,
+        "pack_median_reviews": 52
+      },
+      "occupants": [
+        {
+          "host": "gaf.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "kennethbedsoleroofingcompany.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        },
+        {
+          "host": "bestchoiceroofing.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "macconstructionofdothan.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "angi.com",
+          "kind": "directory"
+        },
+        {
+          "host": "mikegoodsonroofingllc.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "platinumroofpros.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        }
+      ],
+      "opportunity": 9.07,
+      "volume": 110,
+      "value": 997.9,
+      "verdict": "STOP",
+      "why": [
+        "5 dedicated roofing pages"
+      ]
+    },
+    {
+      "city": "Temple",
+      "state": "TX",
+      "county": "Bell",
+      "population": 129969,
+      "zips": 5,
+      "niche": "Roofing",
+      "sub_service": "roofer",
+      "query": "roofer Temple TX",
+      "payout": 59.36,
+      "pricing": "geo",
+      "bundle_value": 59.36,
+      "niches_here": [
+        {
+          "niche": "Roofing",
+          "payout": 59.36,
+          "zips": 5,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 10,
+      "serp_breakdown": {
+        "dedicated": 5,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 4,
+        "forum": 0,
+        "other_local": 0,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 228,
+        "pack_median_reviews": 209
+      },
+      "occupants": [
+        {
+          "host": "holdenroofing.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "whitishroofing.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "dgroofstx.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        },
+        {
+          "host": "schulteroofing.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "birdcreekroofing.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "atlasroofingprofessionals.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "thumbtack.com",
+          "kind": "directory"
+        }
+      ],
+      "opportunity": 5.94,
+      "volume": 110,
+      "value": 653.0,
+      "verdict": "STOP",
+      "why": [
+        "5 dedicated roofing pages"
+      ]
+    },
+    {
+      "city": "Abilene",
+      "state": "TX",
+      "county": "Taylor",
+      "population": 128053,
+      "zips": 2,
+      "niche": "Roofing",
+      "sub_service": "roofer",
+      "query": "roofer Abilene TX",
+      "payout": 45.93,
+      "pricing": "geo",
+      "bundle_value": 45.93,
+      "niches_here": [
+        {
+          "niche": "Roofing",
+          "payout": 45.93,
+          "zips": 2,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 6,
+      "serp_breakdown": {
+        "dedicated": 5,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 1,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 258,
+        "pack_median_reviews": 236
+      },
+      "occupants": [
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "business.growabilene.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "trustbarr.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "thorntonsroofingcompany.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        },
+        {
+          "host": "haleroofingconstruction.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "fatmattroofing.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "patriotsroofing.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 2.76,
+      "volume": 170,
+      "value": 468.5,
+      "verdict": "STOP",
+      "why": [
+        "5 dedicated roofing pages"
+      ]
+    },
+    {
+      "city": "Franklin",
+      "state": "VA",
+      "county": "Franklin",
+      "population": 8250,
+      "zips": 1,
+      "niche": "Roofing",
+      "sub_service": "roofer",
+      "query": "roofer Franklin VA",
+      "payout": 42.63,
+      "pricing": "geo",
+      "bundle_value": 42.63,
+      "niches_here": [
+        {
+          "niche": "Roofing",
+          "payout": 42.63,
+          "zips": 1,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 4,
+      "serp_breakdown": {
+        "dedicated": 6,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 0,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 8,
+        "pack_median_reviews": 5
+      },
+      "occupants": [
+        {
+          "host": "virginiaroofingandrenovations.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "southsideexteriors.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        },
+        {
+          "host": "widmeyerroofing.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "localprobook.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "gaf.ca",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "exteriorsourceva.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 1.71,
+      "volume": 110,
+      "value": 187.6,
+      "verdict": "STOP",
+      "why": [
+        "6 dedicated roofing pages"
+      ]
+    },
+    {
+      "city": "Florence",
+      "state": "SC",
+      "county": "Florence",
+      "population": 90753,
+      "zips": 6,
+      "niche": "Roofing",
+      "sub_service": "roofer",
+      "query": "roofer Florence SC",
+      "payout": 45.67,
+      "pricing": "geo",
+      "bundle_value": 45.67,
+      "niches_here": [
+        {
+          "niche": "Roofing",
+          "payout": 45.67,
+          "zips": 6,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 6,
+        "pseo": 0,
+        "national": 0,
+        "emd": 1,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 0,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 146,
+        "pack_median_reviews": 29
+      },
+      "occupants": [
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "roofingflorence.com",
+          "kind": "city EMD + dedicated page"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        },
+        {
+          "host": "clydenettles.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "gaf.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "scroofmasters.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "monragaroofing.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "angi.com",
+          "kind": "directory"
+        },
+        {
+          "host": "palmettoroofingandsolar.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 0.0,
+      "volume": 590,
+      "value": 0.0,
+      "verdict": "STOP",
+      "why": [
+        "1 city EMD on page one",
+        "6 dedicated roofing pages"
+      ]
+    },
+    {
+      "city": "Palm Coast",
+      "state": "FL",
+      "county": "Flagler",
+      "population": 98258,
+      "zips": 5,
+      "niche": "Roofing",
+      "sub_service": "roofer",
+      "query": "roofer Palm Coast FL",
+      "payout": 66.5,
+      "pricing": "geo",
+      "bundle_value": 66.5,
+      "niches_here": [
+        {
+          "niche": "Roofing",
+          "payout": 66.5,
+          "zips": 5,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 6,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 2,
+        "forum": 0,
+        "other_local": 1,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 447,
+        "pack_median_reviews": 90
+      },
+      "occupants": [
+        {
+          "host": "flaglercountyroofing.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "akccfl.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "ezroofingofflaglercounty.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "bestchoiceroofing.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        },
+        {
+          "host": "aatroofing.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "chardaniroofing.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "atsroof.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 0.0,
+      "volume": 320,
+      "value": 0.0,
+      "verdict": "STOP",
+      "why": [
+        "6 dedicated roofing pages"
+      ]
+    },
+    {
+      "city": "Beaumont",
+      "state": "TX",
+      "county": "Jefferson",
+      "population": 146974,
+      "zips": 13,
+      "niche": "Roofing",
+      "sub_service": "roofer",
+      "query": "roofer Beaumont TX",
+      "payout": 148.75,
+      "pricing": "geo",
+      "bundle_value": 148.75,
+      "niches_here": [
+        {
+          "niche": "Roofing",
+          "payout": 148.75,
+          "zips": 13,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 5,
+        "pseo": 0,
+        "national": 0,
+        "emd": 1,
+        "directory": 4,
+        "forum": 0,
+        "other_local": 0,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 276,
+        "pack_median_reviews": 159
+      },
+      "occupants": [
+        {
+          "host": "gaf.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "mmroofsiding.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "abcoroofingtx.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "ableroofingusa.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        },
+        {
+          "host": "beaumont-roofing.com",
+          "kind": "city EMD + dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "poperoofing.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "angi.com",
+          "kind": "directory"
+        }
+      ],
+      "opportunity": 0.0,
+      "volume": 110,
+      "value": 0.0,
+      "verdict": "STOP",
+      "why": [
+        "1 city EMD on page one",
+        "5 dedicated roofing pages"
+      ]
+    },
+    {
+      "city": "Madison",
+      "state": "MS",
+      "county": "Madison",
+      "population": 27946,
+      "zips": 1,
+      "niche": "Roofing",
+      "sub_service": "roofer",
+      "query": "roofer Madison MS",
+      "payout": 50.4,
+      "pricing": "geo",
+      "bundle_value": 50.4,
+      "niches_here": [
+        {
+          "niche": "Roofing",
+          "payout": 50.4,
+          "zips": 1,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 5,
+        "pseo": 0,
+        "national": 0,
+        "emd": 1,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 1,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 409,
+        "pack_median_reviews": 121
+      },
+      "occupants": [
+        {
+          "host": "gaf.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "cashconstruction.co",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "pro-shieldroofs.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        },
+        {
+          "host": "riveroaksconstructionms.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "renovaroofing.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "madisonroofingco.com",
+          "kind": "city EMD + dedicated page"
+        }
+      ],
+      "opportunity": 0.0,
+      "volume": 140,
+      "value": 0.0,
+      "verdict": "STOP",
+      "why": [
+        "1 city EMD on page one",
+        "5 dedicated roofing pages"
+      ]
+    },
+    {
+      "city": "Harrisonburg",
+      "state": "VA",
+      "county": "Harrisonburg",
+      "population": 73815,
+      "zips": 3,
+      "niche": "Roofing",
+      "sub_service": "roofer",
+      "query": "roofer Harrisonburg VA",
+      "payout": 40.95,
+      "pricing": "geo",
+      "bundle_value": 40.95,
+      "niches_here": [
+        {
+          "niche": "Roofing",
+          "payout": 40.95,
+          "zips": 3,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 6,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 0,
+        "results": 9,
+        "pack_size": 4,
+        "pack_top_reviews": 739,
+        "pack_median_reviews": 105
+      },
+      "occupants": [
+        {
+          "host": "highestroofing.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "hollowayroofingva.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "valroofing.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "bakerroofing.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "helmuthroofing.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "thumbtack.com",
+          "kind": "directory"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "cenvarroofing.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 0.0,
+      "volume": 140,
+      "value": 0.0,
+      "verdict": "STOP",
+      "why": [
+        "6 dedicated roofing pages"
+      ]
+    },
+    {
+      "city": "Rochester",
+      "state": "MN",
+      "county": "Olmsted",
+      "population": 122867,
+      "zips": 2,
+      "niche": "Roofing",
+      "sub_service": "roofer",
+      "query": "roofer Rochester MN",
+      "payout": 44.1,
+      "pricing": "geo",
+      "bundle_value": 44.1,
+      "niches_here": [
+        {
+          "niche": "Roofing",
+          "payout": 44.1,
+          "zips": 2,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 6,
+        "pseo": 0,
+        "national": 0,
+        "emd": 1,
+        "directory": 2,
+        "forum": 1,
+        "other_local": 0,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 197,
+        "pack_median_reviews": 120
+      },
+      "occupants": [
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "garyklineroofing.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "redemptiveroofing.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "ronningenroofing.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "gaf.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "reddit.com",
+          "kind": "forum"
+        },
+        {
+          "host": "brauerroofinginc.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "rochesterroofs.com",
+          "kind": "city EMD + dedicated page"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        }
+      ],
+      "opportunity": 0.0,
+      "volume": 110,
+      "value": 0.0,
+      "verdict": "STOP",
+      "why": [
+        "1 city EMD on page one",
+        "6 dedicated roofing pages"
+      ]
+    },
+    {
+      "city": "Winchester",
+      "state": "VA",
+      "county": "Winchester",
+      "population": 86067,
+      "zips": 3,
+      "niche": "Roofing",
+      "sub_service": "roofer",
+      "query": "roofer Winchester VA",
+      "payout": 49.45,
+      "pricing": "geo",
+      "bundle_value": 49.45,
+      "niches_here": [
+        {
+          "niche": "Roofing",
+          "payout": 49.45,
+          "zips": 3,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 6,
+        "pseo": 0,
+        "national": 0,
+        "emd": 1,
+        "directory": 2,
+        "forum": 0,
+        "other_local": 1,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 185,
+        "pack_median_reviews": 89
+      },
+      "occupants": [
+        {
+          "host": "roofingwinchester.com",
+          "kind": "city EMD + dedicated page"
+        },
+        {
+          "host": "nvbcontracting.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        },
+        {
+          "host": "jesus-roofing.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "gnsroofers.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "alamosroofing.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "gregoryexterior.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "gaf.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 0.0,
+      "volume": 90,
+      "value": 0.0,
+      "verdict": "STOP",
+      "why": [
+        "1 city EMD on page one",
+        "6 dedicated roofing pages"
+      ]
+    }
+  ],
+  "top_candidates_unscanned": [
+    {
+      "city": "Jacksonville",
+      "state": "NC",
+      "county": "Onslow",
+      "pop": 111529,
+      "zips": 2,
+      "top_niche": "Roofing",
+      "top_payout": 45.67,
+      "bundle_value": 45.67,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 45.67,
+          "zips": 2,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 90
+    },
+    {
+      "city": "Flagstaff",
+      "state": "AZ",
+      "county": "Coconino",
+      "pop": 81235,
+      "zips": 4,
+      "top_niche": "Roofing",
+      "top_payout": 43.75,
+      "bundle_value": 43.75,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 43.75,
+          "zips": 4,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 90
+    },
+    {
+      "city": "Albany",
+      "state": "GA",
+      "county": "Dougherty",
+      "pop": 80684,
+      "zips": 9,
+      "top_niche": "Roofing",
+      "top_payout": 52.5,
+      "bundle_value": 52.5,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 52.5,
+          "zips": 9,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 70
+    },
+    {
+      "city": "Twin Falls",
+      "state": "ID",
+      "county": "Twin Falls",
+      "pop": 54164,
+      "zips": 1,
+      "top_niche": "Roofing",
+      "top_payout": 50.51,
+      "bundle_value": 50.51,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 50.51,
+          "zips": 1,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 70
+    },
+    {
+      "city": "Johnstown",
+      "state": "PA",
+      "county": "Cambria",
+      "pop": 18087,
+      "zips": 2,
+      "top_niche": "Roofing",
+      "top_payout": 48.83,
+      "bundle_value": 48.83,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 48.83,
+          "zips": 2,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 70
+    },
+    {
+      "city": "New Bern",
+      "state": "NC",
+      "county": "Craven",
+      "pop": 32734,
+      "zips": 5,
+      "top_niche": "Roofing",
+      "top_payout": 47.6,
+      "bundle_value": 47.6,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 47.6,
+          "zips": 5,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 70
+    },
+    {
+      "city": "Lake City",
+      "state": "FL",
+      "county": "Columbia",
+      "pop": 12515,
+      "zips": 4,
+      "top_niche": "Roofing",
+      "top_payout": 66.5,
+      "bundle_value": 66.5,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 66.5,
+          "zips": 4,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 50
+    },
+    {
+      "city": "Ormond Beach",
+      "state": "FL",
+      "county": "Volusia",
+      "pop": 43976,
+      "zips": 4,
+      "top_niche": "Roofing",
+      "top_payout": 66.5,
+      "bundle_value": 66.5,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 66.5,
+          "zips": 4,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 50
+    },
+    {
+      "city": "Boone",
+      "state": "NC",
+      "county": "Watauga",
+      "pop": 20032,
+      "zips": 2,
+      "top_niche": "Roofing",
+      "top_payout": 44.0,
+      "bundle_value": 44.0,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 44.0,
+          "zips": 2,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 70
+    },
+    {
+      "city": "Boynton Beach",
+      "state": "FL",
+      "county": "Palm Beach",
+      "pop": 81435,
+      "zips": 4,
+      "top_niche": "Roofing",
+      "top_payout": 59.85,
+      "bundle_value": 59.85,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 59.85,
+          "zips": 4,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 50
+    },
+    {
+      "city": "Henderson",
+      "state": "KY",
+      "county": "Henderson",
+      "pop": 27852,
+      "zips": 2,
+      "top_niche": "Roofing",
+      "top_payout": 40.25,
+      "bundle_value": 40.25,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 40.25,
+          "zips": 2,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 70
+    },
+    {
+      "city": "Brunswick",
+      "state": "GA",
+      "county": "Glynn",
+      "pop": 68845,
+      "zips": 5,
+      "top_niche": "Roofing",
+      "top_payout": 52.5,
+      "bundle_value": 52.5,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 52.5,
+          "zips": 5,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 50
+    },
+    {
+      "city": "Cookeville",
+      "state": "TN",
+      "county": "Putnam",
+      "pop": 36088,
+      "zips": 4,
+      "top_niche": "Roofing",
+      "top_payout": 51.98,
+      "bundle_value": 51.98,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 51.98,
+          "zips": 4,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 50
+    },
+    {
+      "city": "Crossville",
+      "state": "TN",
+      "county": "Cumberland",
+      "pop": 12428,
+      "zips": 5,
+      "top_niche": "Roofing",
+      "top_payout": 51.98,
+      "bundle_value": 51.98,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 51.98,
+          "zips": 5,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 50
+    },
+    {
+      "city": "Gadsden",
+      "state": "AL",
+      "county": "Etowah",
+      "pop": 33374,
+      "zips": 2,
+      "top_niche": "Roofing",
+      "top_payout": 49.0,
+      "bundle_value": 49.0,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 49.0,
+          "zips": 2,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 50
+    },
+    {
+      "city": "Danville",
+      "state": "VA",
+      "county": "Danville",
+      "pop": 42214,
+      "zips": 1,
+      "top_niche": "Roofing",
+      "top_payout": 49.0,
+      "bundle_value": 49.0,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 49.0,
+          "zips": 1,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 50
+    },
+    {
+      "city": "Florence",
+      "state": "AL",
+      "county": "Lauderdale",
+      "pop": 80501,
+      "zips": 2,
+      "top_niche": "Roofing",
+      "top_payout": 48.83,
+      "bundle_value": 48.83,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 48.83,
+          "zips": 2,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 50
+    },
+    {
+      "city": "Rome",
+      "state": "GA",
+      "county": "Floyd",
+      "pop": 38189,
+      "zips": 2,
+      "top_niche": "Roofing",
+      "top_payout": 48.83,
+      "bundle_value": 48.83,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 48.83,
+          "zips": 2,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 50
+    },
+    {
+      "city": "Muncie",
+      "state": "IN",
+      "county": "Delaware",
+      "pop": 85519,
+      "zips": 4,
+      "top_niche": "Roofing",
+      "top_payout": 48.83,
+      "bundle_value": 48.83,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 48.83,
+          "zips": 4,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 50
+    },
+    {
+      "city": "Concord",
+      "state": "NH",
+      "county": "Merrimack",
+      "pop": 44375,
+      "zips": 4,
+      "top_niche": "Roofing",
+      "top_payout": 45.85,
+      "bundle_value": 45.85,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 45.85,
+          "zips": 4,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 50
+    },
+    {
+      "city": "Athens",
+      "state": "GA",
+      "county": "Clarke",
+      "pop": 143681,
+      "zips": 4,
+      "top_niche": "Roofing",
+      "top_payout": 44.1,
+      "bundle_value": 44.1,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 44.1,
+          "zips": 4,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 50
+    },
+    {
+      "city": "Martinsburg",
+      "state": "WV",
+      "county": "Berkeley",
+      "pop": 18904,
+      "zips": 4,
+      "top_niche": "Roofing",
+      "top_payout": 44.1,
+      "bundle_value": 44.1,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 44.1,
+          "zips": 4,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 50
+    },
+    {
+      "city": "Prescott",
+      "state": "AZ",
+      "county": "Yavapai",
+      "pop": 47400,
+      "zips": 6,
+      "top_niche": "Roofing",
+      "top_payout": 43.75,
+      "bundle_value": 43.75,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 43.75,
+          "zips": 6,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 50
+    },
+    {
+      "city": "Somerset",
+      "state": "KY",
+      "county": "Pulaski",
+      "pop": 12216,
+      "zips": 3,
+      "top_niche": "Roofing",
+      "top_payout": 43.75,
+      "bundle_value": 43.75,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 43.75,
+          "zips": 3,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 50
+    },
+    {
+      "city": "Statesboro",
+      "state": "GA",
+      "county": "Bulloch",
+      "pop": 34149,
+      "zips": 4,
+      "top_niche": "Roofing",
+      "top_payout": 42.0,
+      "bundle_value": 42.0,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 42.0,
+          "zips": 4,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 50
+    },
+    {
+      "city": "Richmond",
+      "state": "KY",
+      "county": "Madison",
+      "pop": 37111,
+      "zips": 2,
+      "top_niche": "Roofing",
+      "top_payout": 42.0,
+      "bundle_value": 42.0,
+      "niche_list": [
+        {
+          "niche": "Roofing",
+          "payout": 42.0,
+          "zips": 2,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 50
+    }
+  ]
+}
