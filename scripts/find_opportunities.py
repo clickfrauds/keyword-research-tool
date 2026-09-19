@@ -81,7 +81,9 @@ if hasattr(sys.stdout, "reconfigure"):
 BASE       = os.environ.get("COVERAGE_BASE", "https://leadsmart-coverage.netlify.app").rstrip("/")
 NICHES     = [n.strip() for n in os.environ.get("NICHES", "").split(",") if n.strip()]
 PAYOUT_T   = os.environ.get("PAYOUT_TYPE", "Call").strip() or "Call"
-MIN_PAYOUT = float(os.environ.get("MIN_PAYOUT", "35") or 35)
+# $25 a call: at the owner's cost base (PKR) that is a decent amount, and a
+# higher floor had left almost no town with a beatable page one.
+MIN_PAYOUT = float(os.environ.get("MIN_PAYOUT", "25") or 25)
 MIN_POP    = int(os.environ.get("MIN_POP", "8000") or 8000)
 MAX_POP    = int(os.environ.get("MAX_POP", "120000") or 120000)
 STATES     = [s.strip().upper() for s in os.environ.get("STATES", "").split(",") if s.strip()]
@@ -1352,7 +1354,10 @@ def verdict(o):
     # the pack's review depth is the strength proxy: under 100 reviews, two
     # pages is a market a better page can enter -> WATCH, not STOP.
     _weak = b.get("pack_median_reviews", 0) < 100 and not b.get("national")
-    if b.get("dedicated", 0) >= 3 or (b.get("dedicated", 0) == 2 and not _weak):
+    # Up to three small local pages under a weak pack is a market a better
+    # page on an exact-match domain can enter (Lawton OK: 1-3 small firms per
+    # query, pack ~35-90 reviews). Four or more, or any strong pack, is not.
+    if b.get("dedicated", 0) >= 4 or (b.get("dedicated", 0) >= 2 and not _weak):
         why.append(f"{b['dedicated']} dedicated {o['niche'].lower()} pages")
     if b.get("pack_median_reviews", 0) >= 500:
         why.append(f"map pack at {b['pack_median_reviews']} reviews")
@@ -1361,8 +1366,8 @@ def verdict(o):
     vol = o.get("volume")
     if b.get("dedicated", 0) == 1:
         why.append("1 dedicated page already")
-    elif b.get("dedicated", 0) == 2:
-        why.append("2 small local pages, weak map pack (<100 reviews)")
+    elif b.get("dedicated", 0) >= 2:
+        why.append(f"{b['dedicated']} small local pages, weak map pack (<100 reviews)")
     if b.get("pack_median_reviews", 0) >= 200:
         why.append(f"map pack at {b['pack_median_reviews']} reviews")
     if o["serp_score"] < GO_SCORE:
@@ -1443,6 +1448,64 @@ def gates_for(c, rows):
     return g
 
 
+# ── EMD gate ────────────────────────────────────────────────────────────
+# A city + trade .com still carries real weight in a local SERP (relevance
+# and click-through), and it is the one edge a new site can have that the
+# small local firms already there usually do not. Availability comes from
+# Verisign's RDAP server: free, no key, 404 = unregistered.
+EMD_WORDS = {
+    "Plumbing": ["plumbers", "plumber", "plumbing"],
+    "Electrical": ["electricians", "electrician", "electrical"],
+    "Roofing": ["roofers", "roofer", "roofing"],
+    "HVAC": ["hvac", "acrepair", "heatingandair"],
+    "Pest Control": ["pestcontrol", "exterminator"],
+    "Garage Door": ["garagedoor", "garagedoorrepair"],
+    "Water Damage": ["waterdamage", "waterdamagerestoration"],
+    "Tree Services": ["treeservice", "treeremoval"],
+    "Appliance": ["appliancerepair"],
+}
+_EMD_CACHE = {}
+
+
+def _rdap(domain):
+    if domain in _EMD_CACHE:
+        return _EMD_CACHE[domain]
+    st = None
+    try:
+        with urllib.request.urlopen(f"https://rdap.verisign.com/com/v1/domain/{domain}", timeout=10) as r:
+            st = "taken" if r.status == 200 else None
+    except urllib.error.HTTPError as e:
+        st = "free" if e.code == 404 else None
+    except Exception:
+        st = None
+    _EMD_CACHE[domain] = st
+    return st
+
+
+def emd_check(city, niche, want=2):
+    """{domain: 'free'|'taken'|None} for city+trade .com names, stopping once
+    `want` free ones are found."""
+    flat = "".join(ch for ch in city.lower() if ch.isalnum())
+    words = EMD_WORDS.get(niche) or ["".join(ch for ch in BROAD.get(niche, niche).lower() if ch.isalnum())]
+    names = [f"{flat}{w}.com" for w in words] + [f"{w}{flat}.com" for w in words]
+    out = {}
+    for d in names[:6]:
+        out[d] = _rdap(d)
+        if sum(1 for v in out.values() if v == "free") >= want:
+            break
+        time.sleep(0.3)
+    return out
+
+
+# WATCH reasons an exact-match domain and a better page can overcome. Anything
+# else (a big pack, no demand, a page one that is not local) stays WATCH.
+_BEATABLE = ("1 dedicated page already", "small local pages, weak map pack", "SERP ")
+
+
+def _beatable(why):
+    return all(any(b in w for b in _BEATABLE) and "SERP not local" not in w for w in why)
+
+
 def city_verdicts(scored):
     """Roll the per-query verdicts up to one line per city (worst query wins)."""
     cities = {}
@@ -1470,7 +1533,24 @@ def city_verdicts(scored):
             c["why"] = o["why"]
     out = list(cities.values())
     for c in out:
+        rows = c["_rows"]
         c["gates"] = gates_for(c, c.pop("_rows"))
+        if c["verdict"] in ("GO", "WATCH"):
+            doms = emd_check(c["city"], c["niche"])
+            free = [d for d, v in doms.items() if v == "free"]
+            c["emd_free"] = free
+            c["gates"].append({
+                "gate": "EMD",
+                "status": "pass" if free else ("warn" if any(v == "taken" for v in doms.values()) else "unknown"),
+                "value": (", ".join(free) + " free") if free else
+                         ("every city+trade .com taken" if doms and all(v == "taken" for v in doms.values())
+                          else "availability unknown"),
+            })
+            # Beatable competition + an exact-match .com of our own = GO.
+            if (c["verdict"] == "WATCH" and free and (c.get("volume") or 0) >= GO_VOLUME
+                    and all(o["verdict"] in ("GO", "WATCH") and _beatable(o["why"]) for o in rows)):
+                c["verdict"] = "GO"
+                c["why"] = [f"GO with EMD: {free[0]} is free"] + c["why"]
         # A town whose buyer takes calls from only a sliver of it is not a GO,
         # however open its page one: most callers would earn nothing.
         cov = next(x for x in c["gates"] if x["gate"] == "Coverage")
@@ -1513,6 +1593,8 @@ def _city_plan(r, st, state_name, niche, trade, term, also):
     services = ", ".join([trade] + subs)
     name = f"{city} {trade}s" if not trade.endswith("s") else f"{city} {trade}"
     slug = "".join(ch for ch in (city + trade + ("s" if not trade.endswith("s") else "")).lower() if ch.isalnum())
+    if r.get("emd_free"):
+        slug = r["emd_free"][0][:-4]
     return {
         "kind": "city",
         "confidence": "GO",
@@ -1527,6 +1609,7 @@ def _city_plan(r, st, state_name, niche, trade, term, also):
         "manual_check": ["https://www.google.com/search?" + urllib.parse.urlencode(
             {"q": f"{term} {city} {st}"})],
         "domain_hint": f"{slug}.com",
+        "emd_free": r.get("emd_free") or [],
         "steps": [
             {"title": "Keyword tool → Mode 3 Site Plan",
              "note": "the services list starts with the head term: the order here is the site's order",
@@ -1548,7 +1631,8 @@ def _city_plan(r, st, state_name, niche, trade, term, also):
                  "city": city,
                  "country": "United States",
                  "phone": "<LeadSmart tracking number>",
-                 "domain": f"<new domain, e.g. {slug}.com>",
+                 "domain": (f"{slug}.com (free when scanned -- buy it before building)"
+                            if r.get("emd_free") else f"<new domain, e.g. {slug}.com>"),
                  "extras": {
                      "seo_inputs_url": "<raw .seo.json link from the step above>",
                      "site_profile": "pay_per_call",
@@ -1720,7 +1804,7 @@ def write(meta, cands, scored, pricing=None):
         lines += ["## Verdict by city", "",
                   "Judged on the city's **worst** scored query — one open sub-service "
                   "under a taken head term is not an open market.", "",
-                  "Gates, in order: **Payout · Economics · Demand · SERP · Coverage** "
+                  "Gates, in order: **Payout · Economics · Demand · SERP · Coverage · EMD** "
                   "(✅ pass · 🟡 borderline · ❌ fail · ❔ unknown).", "",
                   "| Verdict | Gates | City | Niche | Payout | Searches/mo | Nearest metro | Why |",
                   "|---|---|---|---|---|---|---|---|"]
@@ -1955,7 +2039,7 @@ def write_html(payload, scored, untested):
     h.append("<h2>Every city checked</h2>")
     if cities:
         h += ["<div class='card scroll'><table><thead><tr><th>Verdict</th><th>City</th>"
-              "<th>5 gates</th><th>Payout</th><th>Searches/mo</th><th>Why</th><th>Who holds page one</th></tr></thead><tbody>"]
+              "<th>Gates</th><th>Payout</th><th>Searches/mo</th><th>Why</th><th>Who holds page one</th></tr></thead><tbody>"]
         for c in cities:
             occ = []
             for o in by_city.get((c["city"], c["state"]), []):

@@ -24,7 +24,7 @@ on:
       min_payout:
         description: "Ignore anything paying less than this per call/lead"
         required: false
-        default: '35'
+        default: '25'
       min_pop:
         description: "Smallest town worth a page. Below ~8k there is rarely enough search volume."
         required: false
