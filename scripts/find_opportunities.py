@@ -617,6 +617,17 @@ US_METROS = [
     ("Rochester, NY", 43.16, -77.61), ("Grand Rapids, MI", 42.96, -85.67), ("Tucson, AZ", 32.22, -110.97),
     ("Tulsa, OK", 36.15, -95.99), ("Fresno, CA", 36.74, -119.79), ("Omaha, NE", 41.26, -95.93),
     ("Albuquerque, NM", 35.08, -106.65), ("El Paso, TX", 31.76, -106.49), ("Wichita, KS", 37.69, -97.34),
+    # second tier (metros of ~350k-900k whose core city the feed may not stamp)
+    ("Jackson, MS", 32.30, -90.18), ("Little Rock, AR", 34.75, -92.29), ("Baton Rouge, LA", 30.45, -91.19),
+    ("Knoxville, TN", 35.96, -83.92), ("Chattanooga, TN", 35.05, -85.31), ("Columbia, SC", 34.00, -81.03),
+    ("Greenville, SC", 34.85, -82.40), ("Charleston, SC", 32.78, -79.93), ("Des Moines, IA", 41.59, -93.62),
+    ("Madison, WI", 43.07, -89.40), ("Boise, ID", 43.62, -116.20), ("Spokane, WA", 47.66, -117.43),
+    ("Albany, NY", 42.65, -73.76), ("Syracuse, NY", 43.05, -76.15), ("Allentown, PA", 40.60, -75.47),
+    ("Harrisburg, PA", 40.27, -76.88), ("Dayton, OH", 39.76, -84.19), ("Toledo, OH", 41.65, -83.54),
+    ("Akron, OH", 41.08, -81.52), ("Lexington, KY", 38.04, -84.50), ("Greensboro, NC", 36.07, -79.79),
+    ("Mobile, AL", 30.69, -88.04), ("Huntsville, AL", 34.73, -86.59), ("Montgomery, AL", 32.38, -86.30),
+    ("Shreveport, LA", 32.53, -93.75), ("Pensacola, FL", 30.42, -87.22), ("Fort Myers, FL", 26.64, -81.87),
+    ("Lakeland, FL", 28.04, -81.95), ("Colorado Springs, CO", 38.83, -104.82), ("Bakersfield, CA", 35.37, -119.02),
 ]
 
 
@@ -1478,6 +1489,66 @@ TRADE_WORD = {
 }
 
 
+def _city_plan(r, st, state_name, niche, trade, term, also):
+    """One open town on its own: a city site, the lawtonelectricians.com
+    pattern -- Mode 3 Site Plan, then a Mode 3 build. A state site for one
+    town would put the one page that earns under a state-level brand that
+    ranks for nothing, and the home page's H1 would name the state."""
+    city = r["city"]
+    subs = [x.title() for x in SUB_SERVICES.get(niche, [])]
+    # money first: the head "[trade] [city]" page, then services in earning order
+    services = ", ".join([trade] + subs)
+    name = f"{city} {trade}s" if not trade.endswith("s") else f"{city} {trade}"
+    slug = "".join(ch for ch in (city + trade + ("s" if not trade.endswith("s") else "")).lower() if ch.isalnum())
+    return {
+        "kind": "city",
+        "confidence": "GO",
+        "state": st, "state_name": state_name, "niche": niche, "city": city,
+        "title": f"{city}, {st} · {niche}",
+        "go_cities": [city],
+        "watch_cities": also,
+        "monthly_searches": r["volume"] or 0,
+        "best_payout": r["payout"],
+        "shape": (f"city site for {city} (the lawtonelectricians.com pattern)"
+                  + (f"; {', '.join(also)} can be added later as area pages" if also else "")),
+        "manual_check": ["https://www.google.com/search?" + urllib.parse.urlencode(
+            {"q": f"{term} {city} {st}"})],
+        "domain_hint": f"{slug}.com",
+        "steps": [
+            {"title": "Keyword tool → Mode 3 Site Plan",
+             "note": "the services list starts with the head term: the order here is the site's order",
+             "fields": {
+                 "business_name": name,
+                 "niche_description": f"{niche.lower()} referral service connecting homeowners with licensed local pros",
+                 "target_location": f"{city}, {state_name}, United States",
+                 "services_mode3": services,
+                 "serp_dedupe": "auto",
+             }},
+            {"title": "Website builder → Mode 3",
+             "note": "paste the plan's .seo.json link from the step above into extras",
+             "fields": {
+                 "mode": "3",
+                 "business_name": name,
+                 "industry": trade.lower() if trade != "HVAC" else "hvac",
+                 "main_service": trade,
+                 "sub_services": services,
+                 "city": city,
+                 "country": "United States",
+                 "phone": "<LeadSmart tracking number>",
+                 "domain": f"<new domain, e.g. {slug}.com>",
+                 "extras": {
+                     "seo_inputs_url": "<raw .seo.json link from the step above>",
+                     "site_profile": "pay_per_call",
+                     "footer_credit": "no",
+                     "footer_sitemap_link": "no",
+                 },
+             }},
+        ],
+        "later": "After 1–2 months in Search Console: Mode 6 local articles on the "
+                 "queries that show impressions.",
+    }
+
+
 def launch_plan(city_rows):
     plans = []
     by_state = {}
@@ -1499,13 +1570,51 @@ def launch_plan(city_rows):
         term = BROAD.get(niche, niche.lower())
         trade = TRADE_WORD.get(niche, niche)
         names = [r["city"] for r in go] + [r["city"] for r in rows if r["verdict"] == "WATCH"]
-        # One city on its own is an area page on a state site, not a site: a
-        # single-town domain has nowhere to grow when the next open town turns
-        # up one county over. Three or more open towns is the Arizona shape.
-        shape = ("state site — Mode 5 area pages (the arizonahomeservicepros.com pattern)"
-                 if len(names) >= 3 else
-                 f"add {', '.join(names)} as area page(s) on a {state_name} state site")
+        # Fewer than three GO towns in a state: each GO town is its own city
+        # site, the Lawton pattern that is live and earning. A state site
+        # only pays when there are enough open towns to fill it -- one GO
+        # town plus a WATCH one (roof-remote-01: Biloxi) is still a city site.
+        if not watch_only and len(go) < 3:
+            also = [r["city"] for r in watch]
+            for r in go:
+                plans.append(_city_plan(r, st, state_name, niche, trade, term, also))
+            continue
+        shape = "state site — Mode 5 area pages (the arizonahomeservicepros.com pattern)"
+        f1 = {
+            "business_name": f"{state_name} {trade} Pros",
+            "niche_description": f"{niche.lower()} referral service connecting homeowners with licensed local pros",
+            "target_location": f"{state_name}, United States",
+            "primary_service": term,
+            "min_area_volume": "20",
+            "extra_areas": ", ".join(names),
+        }
+        f2 = {
+            "mode": "5",
+            "business_name": f"{state_name} {trade} Pros",
+            "industry": trade.lower() if trade != "HVAC" else "hvac",
+            "main_service": trade,
+            # The call-earning services, in earning order (SUB_SERVICES)
+            "sub_services": ", ".join(x.title() for x in SUB_SERVICES.get(niche, [])[:8]),
+            "city": state_name,
+            "country": "United States",
+            "phone": "<LeadSmart tracking number>",
+            "domain": "<new domain>",
+            "extras": {
+                "pseo_plan_url": "<raw .mode5.json link from the step above>",
+                "site_profile": "pay_per_call",
+                "footer_credit": "no",
+                "footer_sitemap_link": "no",
+            },
+        }
         plans.append({
+            "kind": "state",
+            "title": f"{state_name} · {niche}",
+            "steps": [
+                {"title": "Keyword tool → Mode 5 Area Plan", "note": "", "fields": f1},
+                {"title": "Website builder → Mode 5", "note": "paste the .mode5.json link from the step above into extras", "fields": f2},
+            ],
+            "later": "After 3–4 weeks in Search Console: Mode 2 service pages under the "
+                     "area pages that show impressions (the Mesa/Phoenix pattern, m2_merge.py).",
             "confidence": "WATCH-level: no open town, several weak ones" if watch_only else "GO",
             "state": st, "state_name": state_name, "niche": niche,
             "go_cities": [r["city"] for r in go],
@@ -1516,35 +1625,6 @@ def launch_plan(city_rows):
             "manual_check": [
                 "https://www.google.com/search?" + urllib.parse.urlencode(
                     {"q": f"{term} {r['city']} {st}"}) for r in go[:5]],
-            "forms": {
-                "1_keyword_tool_mode5_area_plan": {
-                    "business_name": f"{state_name} {trade} Pros",
-                    "niche_description": f"{niche.lower()} referral service connecting homeowners with licensed local pros",
-                    "target_location": f"{state_name}, United States",
-                    "primary_service": term,
-                    "min_area_volume": "20",
-                    "max_areas": "",
-                    "extra_areas": ", ".join(names),
-                },
-                "2_builder_mode5": {
-                    "mode": "5",
-                    "business_name": f"{state_name} {trade} Pros",
-                    "industry": trade.lower() if trade != "HVAC" else "hvac",
-                    "main_service": trade,
-                    # The call-earning services, in earning order (SUB_SERVICES)
-                    "sub_services": ", ".join(x.title() for x in SUB_SERVICES.get(niche, [])[:8]),
-                    "city": state_name,
-                    "country": "United States",
-                    "phone": "<LeadSmart tracking number>",
-                    "domain": "<new domain>",
-                    "extras": {
-                        "pseo_plan_url": "<raw .mode5.json link from step 3>",
-                        "site_profile": "pay_per_call",
-                        "footer_credit": "no",
-                        "footer_sitemap_link": "no",
-                    },
-                },
-            },
         })
     plans.sort(key=lambda p: (-len(p["go_cities"]), -p["monthly_searches"]))
     return plans
@@ -1652,9 +1732,13 @@ def write(meta, cands, scored, pricing=None):
                   "Every value below is already filled in and is also in "
                   "`launch_plan.json`. Do the steps in order; each one is a gate.", ""]
         for pl in plans[:5]:
-            f1 = pl["forms"]["1_keyword_tool_mode5_area_plan"]
-            f2 = pl["forms"]["2_builder_mode5"]
-            lines += [f"### {pl['state_name']} · {pl['niche']}",
+            _steps = []
+            for n, stp in enumerate(pl["steps"], 3):
+                _steps += [f"{n}. **{stp['title']}**" + (f" — {stp['note']}" if stp["note"] else ""),
+                           "", "   | Field | Value |", "   |---|---|",
+                           *[f"   | {k} | `{json.dumps(v) if isinstance(v, dict) else v}` |"
+                             for k, v in stp["fields"].items() if v != ""], ""]
+            lines += [f"### {pl['title']}",
                       "",
                       f"- **{'GO' if pl.get('confidence') == 'GO' else 'WATCH (no GO town)'}:** {', '.join(pl['go_cities'])}"
                       + (f" · WATCH: {', '.join(pl['watch_cities'])}" if pl["watch_cities"] else ""),
@@ -1666,19 +1750,8 @@ def write(meta, cands, scored, pricing=None):
                       *[f"   - {u}" for u in pl["manual_check"]],
                       "2. **Confirm with LeadSmart** — the ZIPs are bought for this niche "
                       "at call (not CPL), the billable duration, and the hours the buyer answers.",
-                      "3. **Keyword tool → Mode 5 Area Plan**",
-                      "",
-                      "   | Field | Value |", "   |---|---|",
-                      *[f"   | {k} | `{v}` |" for k, v in f1.items() if v != ""],
-                      "",
-                      "4. **Website builder → Mode 5** with the `.mode5.json` link from step 3",
-                      "",
-                      "   | Field | Value |", "   |---|---|",
-                      *[f"   | {k} | `{v}` |" for k, v in f2.items() if k != "extras"],
-                      f"   | extras | `{json.dumps(f2['extras'])}` |",
-                      "",
-                      "5. **After 3-4 weeks in GSC** — Mode 2 service pages under the area "
-                      "hubs that show impressions (the Mesa/Phoenix pattern, `m2_merge.py`).",
+                      *_steps,
+                      f"{len(pl['steps']) + 3}. **Later** — {pl['later']}",
                       ""]
     elif scored:
         lines += ["## Launch plan", "",
@@ -1900,12 +1973,13 @@ def write_html(payload, scored, untested):
     if plans:
         h.append("<h2>Launch plan</h2>")
         for pl in plans[:5]:
-            f1 = pl["forms"]["1_keyword_tool_mode5_area_plan"]
-            f2 = pl["forms"]["2_builder_mode5"]
-            rows1 = "".join(f"<tr><td>{E(k)}</td><td><code>{E(str(v))}</code></td></tr>" for k, v in f1.items() if v != "")
-            rows2 = "".join(f"<tr><td>{E(k)}</td><td><code>{E(json.dumps(v) if isinstance(v, dict) else str(v))}</code></td></tr>"
-                            for k, v in f2.items())
-            h += [f"<div class='card' style='margin-bottom:14px'><h3>{E(pl['state_name'])} · {E(pl['niche'])}</h3>",
+            _steps = "".join(
+                f"<li><b>{E(stp['title'])}</b>" + (f" <span class='muted'>— {E(stp['note'])}</span>" if stp["note"] else "")
+                + "<div class='scroll'><table>" + "".join(
+                    f"<tr><td>{E(k)}</td><td><code>{E(json.dumps(v) if isinstance(v, dict) else str(v))}</code></td></tr>"
+                    for k, v in stp["fields"].items() if v != "") + "</table></div></li>"
+                for stp in pl["steps"])
+            h += [f"<div class='card' style='margin-bottom:14px'><h3>{E(pl['title'])}</h3>",
                   f"<p><span class='chip {'GO' if pl.get('confidence') == 'GO' else 'WATCH'}'>{'GO' if pl.get('confidence') == 'GO' else 'WATCH — slower bet'}</span> {E(', '.join(pl['go_cities']))}"
                   + (f" &nbsp;<span class='chip WATCH'>WATCH</span> {E(', '.join(pl['watch_cities']))}" if pl["watch_cities"] else "")
                   + f"<br><span class='muted'>{pl['monthly_searches']:,} searches/mo · best payout ${pl['best_payout']:.2f} · {E(pl['shape'])}</span></p>",
@@ -1913,9 +1987,8 @@ def write_html(payload, scored, untested):
                   "<li><b>Look yourself</b> (free): page one should be directories and out-of-town sites, not pages built for the town. "
                   + " · ".join(f"<a href='{E(u)}' target='_blank' rel='noopener'>{E(urllib.parse.parse_qs(urllib.parse.urlparse(u).query)['q'][0])}</a>" for u in pl["manual_check"]) + "</li>",
                   "<li><b>Ask LeadSmart</b>: are these ZIPs bought for this niche on calls, what call length pays, and what hours the buyer answers.</li>",
-                  f"<li><b>Keyword tool → Mode 5 Area Plan</b><div class='scroll'><table>{rows1}</table></div></li>",
-                  f"<li><b>Website builder → Mode 5</b> with the <code>.mode5.json</code> link from step 3<div class='scroll'><table>{rows2}</table></div></li>",
-                  "<li><b>After 3–4 weeks</b>: Mode 2 service pages under the area pages that show impressions in Search Console.</li>",
+                  _steps,
+                  f"<li><b>Later</b>: {E(pl['later'])}</li>",
                   "</ol></div>"]
 
     # ── untested ────────────────────────────────────────────────────────
