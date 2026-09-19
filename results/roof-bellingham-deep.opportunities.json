@@ -1,0 +1,436 @@
+{
+  "pricing_model_by_niche": {
+    "Roofing (Call)": {
+      "distinct": 709,
+      "mode": "geo"
+    },
+    "Plumbing (Call)": {
+      "distinct": 1009,
+      "mode": "geo"
+    },
+    "Bathroom Remodeling (Call)": {
+      "distinct": 325,
+      "mode": "geo"
+    },
+    "HVAC (Call)": {
+      "distinct": 621,
+      "mode": "geo"
+    },
+    "Appliance (Call)": {
+      "distinct": 356,
+      "mode": "geo"
+    },
+    "Gutters (Call)": {
+      "distinct": 1,
+      "mode": "flat"
+    },
+    "Waterproofing (CPL)": {
+      "distinct": 23,
+      "mode": "geo"
+    },
+    "Water Damage (CPL)": {
+      "distinct": 115,
+      "mode": "geo"
+    },
+    "Garage Door (CPL)": {
+      "distinct": 25,
+      "mode": "geo"
+    },
+    "Mold Removal (CPL)": {
+      "distinct": 40,
+      "mode": "geo"
+    },
+    "Foundation Repair (CPL)": {
+      "distinct": 13,
+      "mode": "geo"
+    },
+    "Pest Control (Call)": {
+      "distinct": 2,
+      "mode": "flat"
+    },
+    "Fire Damage Removal (CPL)": {
+      "distinct": 46,
+      "mode": "geo"
+    },
+    "Electrical (Call)": {
+      "distinct": 383,
+      "mode": "geo"
+    },
+    "Tree Services (Call)": {
+      "distinct": 51,
+      "mode": "geo"
+    },
+    "Biohazard (CPL)": {
+      "distinct": 21,
+      "mode": "geo"
+    },
+    "Plumbing (CPL)": {
+      "distinct": 48,
+      "mode": "geo"
+    },
+    "Kitchen (CPL)": {
+      "distinct": 13,
+      "mode": "geo"
+    },
+    "Siding (CPL)": {
+      "distinct": 35,
+      "mode": "geo"
+    },
+    "Painting (CPL)": {
+      "distinct": 17,
+      "mode": "geo"
+    },
+    "Solar (CPL)": {
+      "distinct": 4,
+      "mode": "geo"
+    },
+    "Landscaping (CPL)": {
+      "distinct": 8,
+      "mode": "geo"
+    },
+    "Deck (CPL)": {
+      "distinct": 10,
+      "mode": "geo"
+    }
+  },
+  "generated": "2026-09-19 12:36 UTC",
+  "dataset_date": "2026-09-18",
+  "filters": {
+    "payout_type": "Call",
+    "min_payout": 25.0,
+    "population": [
+      8000,
+      150000
+    ],
+    "niches": [
+      "Roofing"
+    ],
+    "states": "all",
+    "min_bundle_niches": 1
+  },
+  "candidate_cities": 1,
+  "serp_scanned": 3,
+  "serp_credits": {
+    "spent": 2,
+    "cached": 1,
+    "failed": 0
+  },
+  "verdict_counts": {
+    "GO": 0,
+    "WATCH": 0,
+    "STOP": 1
+  },
+  "cities": [
+    {
+      "city": "Bellingham",
+      "state": "WA",
+      "county": "Whatcom",
+      "population": 135591,
+      "niche": "Roofing",
+      "payout": 66.15,
+      "volume": 110,
+      "bundle_value": 66.15,
+      "verdict": "STOP",
+      "why": [
+        "`roof leak repair Bellingham WA`: 4 dedicated roofing pages",
+        "`roof repair Bellingham WA`: 4 dedicated roofing pages"
+      ],
+      "queries": [
+        {
+          "query": "roofer Bellingham WA",
+          "serp_score": 35,
+          "verdict": "WATCH"
+        },
+        {
+          "query": "roof leak repair Bellingham WA",
+          "serp_score": 35,
+          "verdict": "STOP"
+        },
+        {
+          "query": "roof repair Bellingham WA",
+          "serp_score": 35,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 2546.8,
+      "metro": "Seattle, WA",
+      "metro_miles": 79,
+      "gates": [
+        {
+          "gate": "Payout",
+          "status": "pass",
+          "value": "$66.15"
+        },
+        {
+          "gate": "Economics",
+          "status": "pass",
+          "value": "~$40 per call (61% of calls pay)"
+        },
+        {
+          "gate": "Demand",
+          "status": "pass",
+          "value": "110/mo"
+        },
+        {
+          "gate": "SERP",
+          "status": "fail",
+          "value": "score 35\u201335 over 3 queries"
+        },
+        {
+          "gate": "Coverage",
+          "status": "pass",
+          "value": "5 of 5 ZIPs bought"
+        }
+      ],
+      "gate_marks": "\u2705\u2705\u2705\u274c\u2705"
+    }
+  ],
+  "launch_plan": [],
+  "opportunities": [
+    {
+      "city": "Bellingham",
+      "state": "WA",
+      "county": "Whatcom",
+      "population": 135591,
+      "zips": 5,
+      "niche": "Roofing",
+      "sub_service": "roofer",
+      "query": "roofer Bellingham WA",
+      "payout": 66.15,
+      "pricing": "geo",
+      "bundle_value": 66.15,
+      "niches_here": [
+        {
+          "niche": "Roofing",
+          "payout": 66.15,
+          "zips": 5,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 35,
+      "serp_breakdown": {
+        "dedicated": 2,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 3,
+        "forum": 1,
+        "other_local": 3,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 115,
+        "pack_median_reviews": 75,
+        "city_mentions": 7
+      },
+      "occupants": [
+        {
+          "host": "joostensroofing.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "reddit.com",
+          "kind": "forum"
+        },
+        {
+          "host": "axiomrfg.net",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "bellinghamskyline.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "whatcomroofing.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "nolansroofing.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        }
+      ],
+      "opportunity": 23.15,
+      "volume": 110,
+      "value": 2546.8,
+      "verdict": "WATCH",
+      "why": [
+        "2 small local pages, weak map pack (<100 reviews)",
+        "SERP 35 < 60"
+      ]
+    },
+    {
+      "city": "Bellingham",
+      "state": "WA",
+      "county": "Whatcom",
+      "population": 135591,
+      "zips": 5,
+      "niche": "Roofing",
+      "sub_service": "roof leak repair",
+      "query": "roof leak repair Bellingham WA",
+      "payout": 66.15,
+      "pricing": "geo",
+      "bundle_value": 66.15,
+      "niches_here": [
+        {
+          "niche": "Roofing",
+          "payout": 66.15,
+          "zips": 5,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 35,
+      "serp_breakdown": {
+        "dedicated": 4,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 2,
+        "forum": 1,
+        "other_local": 2,
+        "results": 9,
+        "pack_size": 0,
+        "pack_top_reviews": 0,
+        "pack_median_reviews": 0,
+        "city_mentions": 6
+      },
+      "occupants": [
+        {
+          "host": "whatcomroofing.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "bellinghamskyline.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "reddit.com",
+          "kind": "forum"
+        },
+        {
+          "host": "downtobid.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "topsideroofing.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "mtroofingservicesllc.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "srsroofing.com",
+          "kind": "independent site"
+        }
+      ],
+      "opportunity": 23.15,
+      "volume": 110,
+      "value": 2546.8,
+      "verdict": "STOP",
+      "why": [
+        "4 dedicated roofing pages"
+      ]
+    },
+    {
+      "city": "Bellingham",
+      "state": "WA",
+      "county": "Whatcom",
+      "population": 135591,
+      "zips": 5,
+      "niche": "Roofing",
+      "sub_service": "roof repair",
+      "query": "roof repair Bellingham WA",
+      "payout": 66.15,
+      "pricing": "geo",
+      "bundle_value": 66.15,
+      "niches_here": [
+        {
+          "niche": "Roofing",
+          "payout": 66.15,
+          "zips": 5,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 35,
+      "serp_breakdown": {
+        "dedicated": 4,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 2,
+        "forum": 1,
+        "other_local": 2,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 115,
+        "pack_median_reviews": 75,
+        "city_mentions": 7
+      },
+      "occupants": [
+        {
+          "host": "reddit.com",
+          "kind": "forum"
+        },
+        {
+          "host": "joostensroofing.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "axiomrfg.net",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "whatcomroofing.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "bellinghamskyline.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        },
+        {
+          "host": "nolansroofing.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "mtbakerroofing.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 23.15,
+      "volume": 110,
+      "value": 2546.8,
+      "verdict": "STOP",
+      "why": [
+        "4 dedicated roofing pages"
+      ]
+    }
+  ],
+  "top_candidates_unscanned": []
+}
