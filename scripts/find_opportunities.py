@@ -92,6 +92,8 @@ MIN_BUNDLE = int(os.environ.get("MIN_BUNDLE_NICHES", "1") or 1)
 CITIES     = {tuple(x.strip().rsplit(" ", 1)) for x in os.environ.get("CITIES", "").split(",")
               if len(x.strip().rsplit(" ", 1)) == 2}
 CITIES     = {(c.lower(), st.upper()) for c, st in CITIES}
+if os.environ.get("CITIES", "").strip() and not CITIES:
+    print(f"⚠️ cities='{os.environ['CITIES'].strip()}' is not 'City ST, City ST' -- ignored, scanning every city")
 MAX_SERP   = int(os.environ.get("MAX_SERP_CHECKS", "120") or 120)
 SERP_KEY   = os.environ.get("SERPAPI_API_KEY", "").strip()
 SERP_GL    = os.environ.get("SERP_GL", "us").strip() or "us"
@@ -584,6 +586,34 @@ def _miles(a, b):
     return 2 * r * math.asin(math.sqrt(h))
 
 
+# The 60 largest US metros (core city coordinates). A run that loads only
+# KS,CO has no Kansas City row -- KC is in Missouri -- and put Olathe KS, a
+# KC suburb, "160 mi from Wichita". Metros come from this list first; big
+# cities in the loaded feed only add to it.
+US_METROS = [
+    ("New York, NY", 40.71, -74.01), ("Los Angeles, CA", 34.05, -118.24), ("Chicago, IL", 41.88, -87.63),
+    ("Dallas, TX", 32.78, -96.80), ("Fort Worth, TX", 32.76, -97.33), ("Houston, TX", 29.76, -95.37),
+    ("Washington, DC", 38.91, -77.04), ("Philadelphia, PA", 39.95, -75.17), ("Miami, FL", 25.76, -80.19),
+    ("Atlanta, GA", 33.75, -84.39), ("Boston, MA", 42.36, -71.06), ("Phoenix, AZ", 33.45, -112.07),
+    ("San Francisco, CA", 37.77, -122.42), ("San Jose, CA", 37.34, -121.89), ("Riverside, CA", 33.95, -117.40),
+    ("Detroit, MI", 42.33, -83.05), ("Seattle, WA", 47.61, -122.33), ("Minneapolis, MN", 44.98, -93.27),
+    ("San Diego, CA", 32.72, -117.16), ("Tampa, FL", 27.95, -82.46), ("Denver, CO", 39.74, -104.99),
+    ("Baltimore, MD", 39.29, -76.61), ("St. Louis, MO", 38.63, -90.20), ("Orlando, FL", 28.54, -81.38),
+    ("Charlotte, NC", 35.23, -80.84), ("San Antonio, TX", 29.42, -98.49), ("Portland, OR", 45.52, -122.68),
+    ("Sacramento, CA", 38.58, -121.49), ("Pittsburgh, PA", 40.44, -80.00), ("Austin, TX", 30.27, -97.74),
+    ("Las Vegas, NV", 36.17, -115.14), ("Cincinnati, OH", 39.10, -84.51), ("Kansas City, MO", 39.10, -94.58),
+    ("Columbus, OH", 39.96, -83.00), ("Indianapolis, IN", 39.77, -86.16), ("Cleveland, OH", 41.50, -81.69),
+    ("Nashville, TN", 36.16, -86.78), ("Virginia Beach, VA", 36.85, -75.98), ("Providence, RI", 41.82, -71.41),
+    ("Jacksonville, FL", 30.33, -81.66), ("Milwaukee, WI", 43.04, -87.91), ("Raleigh, NC", 35.78, -78.64),
+    ("Oklahoma City, OK", 35.47, -97.52), ("Memphis, TN", 35.15, -90.05), ("Richmond, VA", 37.54, -77.44),
+    ("Louisville, KY", 38.25, -85.76), ("New Orleans, LA", 29.95, -90.07), ("Salt Lake City, UT", 40.76, -111.89),
+    ("Hartford, CT", 41.77, -72.67), ("Buffalo, NY", 42.89, -78.88), ("Birmingham, AL", 33.52, -86.80),
+    ("Rochester, NY", 43.16, -77.61), ("Grand Rapids, MI", 42.96, -85.67), ("Tucson, AZ", 32.22, -110.97),
+    ("Tulsa, OK", 36.15, -95.99), ("Fresno, CA", 36.74, -119.79), ("Omaha, NE", 41.26, -95.93),
+    ("Albuquerque, NM", 35.08, -106.65), ("El Paso, TX", 31.76, -106.49), ("Wichita, KS", 37.69, -97.34),
+]
+
+
 def build_city_info(rows):
     zips, where, pops = {}, {}, {}
     for r in rows:
@@ -605,11 +635,14 @@ def build_city_info(rows):
         if pop >= METRO_POP and k in where:
             if pop not in by_pop or len(zips[k]) > len(zips[by_pop[pop]]):
                 by_pop[pop] = k
-    metros = [(k, where[k]) for k in by_pop.values()]
+    metros = [((name.split(", ")[1], name.split(", ")[0]), (lat, lng)) for name, lat, lng in US_METROS]
+    _have = {m[0] for m in metros}
+    metros += [(k, where[k]) for k in by_pop.values() if k not in _have]
     for k, z in zips.items():
         info = {"all_zips": len(z), "metro": None, "metro_miles": None}
         if k in where and metros:
-            best = min(((m, _miles(where[k], ll)) for m, ll in metros if m != k), key=lambda x: x[1], default=None)
+            best = min(((m, _miles(where[k], ll)) for m, ll in metros
+                        if m != k and m[1].lower() != k[1].lower()), key=lambda x: x[1], default=None)
             if best:
                 info["metro"], info["metro_miles"] = f"{best[0][1]}, {best[0][0]}", round(best[1])
         _CITY_INFO[k] = info
@@ -989,7 +1022,8 @@ def score_serp(data, service, city):
 
         if (any(d in bare for d in DIRECTORIES)
                 or bare.endswith((".gov", ".edu")) or re.search(r"\.[a-z]{2}\.us$", bare)
-                or bare.startswith(("cityof", "townof", "ci.")) or ".k12." in bare):
+                or bare.startswith(("cityof", "townof", "ci.")) or ".k12." in bare
+                or re.search(r"academy|school|college|training|institute|university", bare)):
             # ok-elec-01 booked cityofmustang.org as a dedicated electrician
             # page and meridiantech.edu (a trade school) as a local firm.
             # Councils, schools and state sites are listings, not rivals.
