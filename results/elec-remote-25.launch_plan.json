@@ -1,0 +1,63 @@
+[
+  {
+    "kind": "city",
+    "confidence": "GO",
+    "state": "OK",
+    "state_name": "Oklahoma",
+    "niche": "Electrical",
+    "city": "Lawton",
+    "title": "Lawton, OK \u00b7 Electrical",
+    "go_cities": [
+      "Lawton"
+    ],
+    "watch_cities": [
+      "Stillwater"
+    ],
+    "monthly_searches": 210,
+    "best_payout": 60.5,
+    "shape": "city site for Lawton (the lawtonelectricians.com pattern); Stillwater can be added later as area pages",
+    "manual_check": [
+      "https://www.google.com/search?q=electrician+Lawton+OK"
+    ],
+    "domain_hint": "lawtonelectrical.com",
+    "emd_free": [
+      "lawtonelectrical.com",
+      "electricianslawton.com"
+    ],
+    "steps": [
+      {
+        "title": "Keyword tool \u2192 Mode 3 Site Plan",
+        "note": "the services list starts with the head term: the order here is the site's order",
+        "fields": {
+          "business_name": "Lawton Electricians",
+          "niche_description": "electrical referral service connecting homeowners with licensed local pros",
+          "target_location": "Lawton, Oklahoma, United States",
+          "services_mode3": "Electrician, Outlet Repair, House Rewiring, Light Fixture Installation, Electrical Panel Repair, Ev Charger Installation, Partial Power Outage, Range Wiring",
+          "serp_dedupe": "auto"
+        }
+      },
+      {
+        "title": "Website builder \u2192 Mode 3",
+        "note": "paste the plan's .seo.json link from the step above into extras",
+        "fields": {
+          "mode": "3",
+          "business_name": "Lawton Electricians",
+          "industry": "electrician",
+          "main_service": "Electrician",
+          "sub_services": "Electrician, Outlet Repair, House Rewiring, Light Fixture Installation, Electrical Panel Repair, Ev Charger Installation, Partial Power Outage, Range Wiring",
+          "city": "Lawton",
+          "country": "United States",
+          "phone": "<LeadSmart tracking number>",
+          "domain": "lawtonelectrical.com (free when scanned -- buy it before building)",
+          "extras": {
+            "seo_inputs_url": "<raw .seo.json link from the step above>",
+            "site_profile": "pay_per_call",
+            "footer_credit": "no",
+            "footer_sitemap_link": "no"
+          }
+        }
+      }
+    ],
+    "later": "After 1\u20132 months in Search Console: Mode 6 local articles on the queries that show impressions."
+  }
+]
