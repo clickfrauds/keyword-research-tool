@@ -418,7 +418,12 @@ NATIONALS   = ("rotorooter.com", "servpro.com", "terminix.com", "orkin.com",
                "rentokil.com", "benjaminfranklinplumbing.com",
                "arsrescuerooter.com", "rescuerooter.com", "911restoration.com",
                "servicemaster", "pauldavis.com", "trugreen.com", "aramark",
-               "mosquitojoe.com", "roto-rooter.com")
+               "mosquitojoe.com", "roto-rooter.com",
+               # elec-remote-25 booked mistersparky.com's home page as one of
+               # Jacksonville NC's "5 local firms". With a city path it is
+               # still a dedicated page (see the elif below).
+               "mistersparky.com", "mrelectric.com", "onehourheatandair.com",
+               "aireserv.com", "mrhandyman.com", "mightydogroofing.com")
 
 # Words that make a city domain a trade domain (see the EMD check).
 _TRADE_HOST = ("plumb", "drain", "rooter", "sewer", "leak", "pipe", "waterheater",
@@ -1480,6 +1485,22 @@ EMD_WORDS = {
 }
 _EMD_CACHE = {}
 
+# Towns we already have a live site for. elec-remote-25 put Lawton OK at the
+# top and planned a NEW site on lawtonelectrical.com next to the
+# lawtonelectricians.com that is already live -- two domains competing for
+# the same page one. Extra entries: OWN_SITES="City ST Niche=domain; ...".
+OWN_SITES = {
+    ("Lawton", "OK", "Electrical"): "lawtonelectricians.com",
+}
+for _e in filter(None, (x.strip() for x in os.environ.get("OWN_SITES", "").split(";"))):
+    try:
+        _k, _d = _e.split("=", 1)
+        _w = _k.split()
+        _OWN_ST = next(i for i, w in enumerate(_w) if len(w) == 2 and w.isupper())
+        OWN_SITES[(" ".join(_w[:_OWN_ST]), _w[_OWN_ST], " ".join(_w[_OWN_ST + 1:]))] = _d.strip()
+    except (ValueError, StopIteration):
+        print(f"⚠️ OWN_SITES entry '{_e}' is not 'City ST Niche=domain' -- ignored")
+
 
 def _rdap(domain):
     if domain in _EMD_CACHE:
@@ -1549,7 +1570,11 @@ def city_verdicts(scored):
     for c in out:
         rows = c["_rows"]
         c["gates"] = gates_for(c, c.pop("_rows"))
-        if c["verdict"] in ("GO", "WATCH"):
+        own = OWN_SITES.get((c["city"], c["state"], c["niche"]))
+        if own:
+            c["own_site"] = own
+            c["why"] = [f"already live: {own} -- no second domain"] + c["why"]
+        if c["verdict"] in ("GO", "WATCH") and not own:
             doms = emd_check(c["city"], c["niche"])
             free = [d for d, v in doms.items() if v == "free"]
             c["emd_free"] = free
@@ -1664,7 +1689,7 @@ def launch_plan(city_rows):
     plans = []
     by_state = {}
     for c in city_rows:
-        if c["verdict"] in ("GO", "WATCH"):
+        if c["verdict"] in ("GO", "WATCH") and not c.get("own_site"):
             by_state.setdefault((c["state"], c["niche"]), []).append(c)
     for (st, niche), rows in by_state.items():
         go = [r for r in rows if r["verdict"] == "GO"]
@@ -1897,8 +1922,12 @@ def write(meta, cands, scored, pricing=None):
                   "- **STOP** on any `EMD > 0` or `pSEO > 0` — a city exact-match "
                   "domain or a programmatic network already holds that slot with "
                   "authority a new domain does not have.",
-                  "- **STOP** on `dedicated >= 2` — the local trades already built "
-                  "that page.",
+                  "- **STOP** on 4+ dedicated pages, 2+ under a map pack of 100+ reviews, "
+                  "or 5+ local firms on page one whatever their titles say.",
+                  "- **WATCH** when page one does not name the town (Google read the "
+                  "query as research) -- judge it on the service queries.",
+                  "- **GO with EMD**: only small local pages under a weak pack, 100+ "
+                  "searches, and a city+trade .com still free.",
                   "- `pricing: flat` means the payout is identical nationwide, so "
                   "choosing this market over another buys nothing on the revenue "
                   "side; judge it on volume and competition alone.",
@@ -2113,12 +2142,13 @@ def write_html(payload, scored, untested):
         h.append("</tbody></table></div>")
 
     h += ["<h2>What the verdicts mean</h2><div class='legend'>",
-          "<div><span class='chip GO'>GO</span> Every query checked is open: no city domain, no page network, "
-          f"no local company with a page for this town, SERP score ≥ {GO_SCORE}, at least {GO_VOLUME} searches a month.</div>",
-          "<div><span class='chip WATCH'>WATCH</span> Close but not clean — one competitor page, a strong map pack, "
-          "a low score or low/unknown searches. Fine as an extra area page, not a new domain.</div>",
-          "<div><span class='chip STOP'>STOP</span> A city domain, a programmatic network, two or more local pages "
-          "built for this town, or a map pack at 500+ reviews. A new site will not get past them.</div>",
+          "<div><span class='chip GO'>GO</span> No city domain or page network, at most a few small local pages "
+          f"under a weak map pack, at least {GO_VOLUME} searches a month -- and either an open page one "
+          f"(score ≥ {GO_SCORE}) or a city+trade .com still free.</div>",
+          "<div><span class='chip WATCH'>WATCH</span> Close but not clean — low searches, a page one that is not "
+          "local, a big map pack, or the buyer takes only part of the town. Fine as an extra page, not a new domain.</div>",
+          "<div><span class='chip STOP'>STOP</span> A city domain, a page network, 4+ pages built for this town, "
+          "5+ local firms on page one, or a strong map pack behind 2+ pages. A new site will not get past them.</div>",
           "</div>",
           "<p class='muted' style='margin-top:18px'>A city is judged on its worst query. Population figures come from the "
           "coverage feed and are often the nearest large city's, so searches/mo is the demand number to trust. "
