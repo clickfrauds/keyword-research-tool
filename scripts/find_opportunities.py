@@ -378,7 +378,7 @@ _MISSING_SUBS = set()
 
 # ── SERP occupant classification ─────────────────────────────────────────
 # Derived from real result sets in this vertical, not a generic list.
-DIRECTORIES = ("yelp.com", "bbb.org", "angi.com", "angieslist.com",
+DIRECTORIES = ("downtobid.com", "yelp.com", "bbb.org", "angi.com", "angieslist.com",
                "homeadvisor.com", "thumbtack.com", "yellowpages.com",
                "houzz.com", "porch.com", "nodig.com", "expertise.com",
                "networx.com", "buildzoom.com", "manta.com", "homeyou.com",
@@ -1028,13 +1028,14 @@ def score_serp(data, service, city):
     tally = {"dedicated": 0, "pseo": 0, "national": 0, "emd": 0,
              "directory": 0, "forum": 0, "other_local": 0, "results": len(results),
              "pack_size": pack_n, "pack_top_reviews": pack_max,
-             "pack_median_reviews": pack_med, "city_mentions": 0}
+             "pack_median_reviews": pack_med, "city_mentions": 0, "local_firms": 0}
     occupants = []
     # One competitor is one competitor however many of its pages rank.
     # elec-deep-01 counted soonersvcs.com twice on "outlet repair Lawton OK"
     # (its service page and its Lawton area page) and turned one local firm
     # into the "2 dedicated" that means STOP.
     _dedicated_hosts = set()
+    _firm_hosts = set()
 
     for res in results:
         link  = (res.get("link") or "").lower()
@@ -1111,6 +1112,15 @@ def score_serp(data, service, city):
                 # invisible — a SERP of ten real businesses scored a clean
                 # 100 because not one of them fell into a bucket.
                 tally["other_local"] += 1; kinds.append("independent site")
+            # A local firm is a local firm whether or not its title names
+            # the town. roof-bellingham-deep counted 2-4 "dedicated" pages
+            # while page one was nine Bellingham roofers' home pages
+            # (Joostens, Axiom, Skyline, Whatcom, Nolans, Topside...).
+            if ("dedicated page" in kinds
+                    or (any(t in flat for t in _TRADE_HOST) or any(t in title for t in _TRADE_HOST))
+                    and "/blog" not in link):
+                _firm_hosts.add(bare)
+                tally["local_firms"] = len(_firm_hosts)
         if kinds:
             occupants.append({"host": bare, "kind": " + ".join(kinds)})
 
@@ -1361,6 +1371,10 @@ def verdict(o):
         why.append(f"{b['dedicated']} dedicated {o['niche'].lower()} pages")
     if b.get("pack_median_reviews", 0) >= 500:
         why.append(f"map pack at {b['pack_median_reviews']} reviews")
+    # Five or more local firms on page one is a settled market, whatever
+    # their titles say (Lawton OK: 2; Bellingham WA roofing: 5-6).
+    if b.get("local_firms", 0) >= 5 and not why:
+        why.append(f"{b['local_firms']} local {o['niche'].lower()} firms on page one")
     if why:
         return "STOP", why
     vol = o.get("volume")
