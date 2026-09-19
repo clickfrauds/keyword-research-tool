@@ -1,0 +1,46 @@
+[
+  {
+    "confidence": "GO",
+    "state": "MS",
+    "state_name": "Mississippi",
+    "niche": "Roofing",
+    "go_cities": [
+      "Biloxi"
+    ],
+    "watch_cities": [],
+    "monthly_searches": 140,
+    "best_payout": 50.4,
+    "shape": "add Biloxi as area page(s) on a Mississippi state site",
+    "manual_check": [
+      "https://www.google.com/search?q=roofer+Biloxi+MS"
+    ],
+    "forms": {
+      "1_keyword_tool_mode5_area_plan": {
+        "business_name": "Mississippi Roofer Pros",
+        "niche_description": "roofing referral service connecting homeowners with licensed local pros",
+        "target_location": "Mississippi, United States",
+        "primary_service": "roofer",
+        "min_area_volume": "20",
+        "max_areas": "",
+        "extra_areas": "Biloxi"
+      },
+      "2_builder_mode5": {
+        "mode": "5",
+        "business_name": "Mississippi Roofer Pros",
+        "industry": "roofer",
+        "main_service": "Roofer",
+        "sub_services": "Roof Leak Repair, Roof Repair, Roof Replacement, Roof Inspection, Shingle Repair, Missing Shingle Repair, Tile Roof Replacement",
+        "city": "Mississippi",
+        "country": "United States",
+        "phone": "<LeadSmart tracking number>",
+        "domain": "<new domain>",
+        "extras": {
+          "pseo_plan_url": "<raw .mode5.json link from step 3>",
+          "site_profile": "pay_per_call",
+          "footer_credit": "no",
+          "footer_sitemap_link": "no"
+        }
+      }
+    }
+  }
+]
