@@ -1,0 +1,1452 @@
+{
+  "pricing_model_by_niche": {
+    "Roofing (Call)": {
+      "distinct": 709,
+      "mode": "geo"
+    },
+    "Plumbing (Call)": {
+      "distinct": 1009,
+      "mode": "geo"
+    },
+    "Bathroom Remodeling (Call)": {
+      "distinct": 325,
+      "mode": "geo"
+    },
+    "HVAC (Call)": {
+      "distinct": 621,
+      "mode": "geo"
+    },
+    "Appliance (Call)": {
+      "distinct": 356,
+      "mode": "geo"
+    },
+    "Gutters (Call)": {
+      "distinct": 1,
+      "mode": "flat"
+    },
+    "Waterproofing (CPL)": {
+      "distinct": 23,
+      "mode": "geo"
+    },
+    "Water Damage (CPL)": {
+      "distinct": 115,
+      "mode": "geo"
+    },
+    "Garage Door (CPL)": {
+      "distinct": 25,
+      "mode": "geo"
+    },
+    "Mold Removal (CPL)": {
+      "distinct": 40,
+      "mode": "geo"
+    },
+    "Foundation Repair (CPL)": {
+      "distinct": 13,
+      "mode": "geo"
+    },
+    "Pest Control (Call)": {
+      "distinct": 2,
+      "mode": "flat"
+    },
+    "Fire Damage Removal (CPL)": {
+      "distinct": 46,
+      "mode": "geo"
+    },
+    "Electrical (Call)": {
+      "distinct": 383,
+      "mode": "geo"
+    },
+    "Tree Services (Call)": {
+      "distinct": 51,
+      "mode": "geo"
+    },
+    "Biohazard (CPL)": {
+      "distinct": 21,
+      "mode": "geo"
+    },
+    "Plumbing (CPL)": {
+      "distinct": 48,
+      "mode": "geo"
+    },
+    "Kitchen (CPL)": {
+      "distinct": 13,
+      "mode": "geo"
+    },
+    "Siding (CPL)": {
+      "distinct": 35,
+      "mode": "geo"
+    },
+    "Painting (CPL)": {
+      "distinct": 17,
+      "mode": "geo"
+    },
+    "Solar (CPL)": {
+      "distinct": 4,
+      "mode": "geo"
+    },
+    "Landscaping (CPL)": {
+      "distinct": 8,
+      "mode": "geo"
+    },
+    "Deck (CPL)": {
+      "distinct": 10,
+      "mode": "geo"
+    }
+  },
+  "generated": "2026-09-19 08:19 UTC",
+  "dataset_date": "2026-09-18",
+  "filters": {
+    "payout_type": "Call",
+    "min_payout": 45.0,
+    "population": [
+      8000,
+      150000
+    ],
+    "niches": [
+      "Electrical"
+    ],
+    "states": "all",
+    "min_bundle_niches": 1
+  },
+  "candidate_cities": 11,
+  "serp_scanned": 10,
+  "serp_credits": {
+    "spent": 5,
+    "cached": 6,
+    "failed": 0
+  },
+  "verdict_counts": {
+    "GO": 0,
+    "WATCH": 2,
+    "STOP": 8
+  },
+  "cities": [
+    {
+      "city": "Lawton",
+      "state": "OK",
+      "county": "Comanche",
+      "population": 90595,
+      "niche": "Electrical",
+      "payout": 60.5,
+      "volume": 210,
+      "bundle_value": 60.5,
+      "verdict": "WATCH",
+      "why": [
+        "`electrician Lawton OK`: 1 dedicated page already"
+      ],
+      "queries": [
+        {
+          "query": "electrician Lawton OK",
+          "serp_score": 90,
+          "verdict": "WATCH"
+        }
+      ],
+      "best_value": 11434.5,
+      "metro": "Oklahoma City, OK",
+      "metro_miles": 78,
+      "gates": [
+        {
+          "gate": "Payout",
+          "status": "pass",
+          "value": "$60.50"
+        },
+        {
+          "gate": "Economics",
+          "status": "pass",
+          "value": "~$49 per call (81% of calls pay)"
+        },
+        {
+          "gate": "Demand",
+          "status": "pass",
+          "value": "210/mo"
+        },
+        {
+          "gate": "SERP",
+          "status": "warn",
+          "value": "score 90\u201390 over 1 query"
+        },
+        {
+          "gate": "Coverage",
+          "status": "pass",
+          "value": "3 of 5 ZIPs bought"
+        }
+      ],
+      "gate_marks": "\u2705\u2705\u2705\ud83d\udfe1\u2705"
+    },
+    {
+      "city": "Stillwater",
+      "state": "OK",
+      "county": "Payne",
+      "population": 49269,
+      "niche": "Electrical",
+      "payout": 60.5,
+      "volume": 90,
+      "bundle_value": 60.5,
+      "verdict": "WATCH",
+      "why": [
+        "`electrician Stillwater OK`: 2 small local pages, weak map pack (<100 reviews); SERP 35 < 60; only 90 searches/mo"
+      ],
+      "queries": [
+        {
+          "query": "electrician Stillwater OK",
+          "serp_score": 35,
+          "verdict": "WATCH"
+        }
+      ],
+      "best_value": 1905.7,
+      "metro": "Oklahoma City, OK",
+      "metro_miles": 52,
+      "gates": [
+        {
+          "gate": "Payout",
+          "status": "pass",
+          "value": "$60.50"
+        },
+        {
+          "gate": "Economics",
+          "status": "pass",
+          "value": "~$49 per call (81% of calls pay)"
+        },
+        {
+          "gate": "Demand",
+          "status": "warn",
+          "value": "90/mo"
+        },
+        {
+          "gate": "SERP",
+          "status": "warn",
+          "value": "score 35\u201335 over 1 query"
+        },
+        {
+          "gate": "Coverage",
+          "status": "warn",
+          "value": "1 of 5 ZIPs bought"
+        }
+      ],
+      "gate_marks": "\u2705\u2705\ud83d\udfe1\ud83d\udfe1\ud83d\udfe1"
+    },
+    {
+      "city": "Yakima",
+      "state": "WA",
+      "county": "Yakima",
+      "population": 136518,
+      "niche": "Electrical",
+      "payout": 55.0,
+      "volume": 320,
+      "bundle_value": 55.0,
+      "verdict": "STOP",
+      "why": [
+        "`electrician Yakima WA`: 2 dedicated electrical pages"
+      ],
+      "queries": [
+        {
+          "query": "electrician Yakima WA",
+          "serp_score": 35,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 6160.0,
+      "metro": "Seattle, WA",
+      "metro_miles": 109,
+      "gates": [
+        {
+          "gate": "Payout",
+          "status": "pass",
+          "value": "$55.00"
+        },
+        {
+          "gate": "Economics",
+          "status": "pass",
+          "value": "~$45 per call (81% of calls pay)"
+        },
+        {
+          "gate": "Demand",
+          "status": "pass",
+          "value": "320/mo"
+        },
+        {
+          "gate": "SERP",
+          "status": "fail",
+          "value": "score 35\u201335 over 1 query"
+        },
+        {
+          "gate": "Coverage",
+          "status": "pass",
+          "value": "7 of 7 ZIPs bought"
+        }
+      ],
+      "gate_marks": "\u2705\u2705\u2705\u274c\u2705"
+    },
+    {
+      "city": "Longview",
+      "state": "TX",
+      "county": "Gregg",
+      "population": 106896,
+      "niche": "Electrical",
+      "payout": 45.33,
+      "volume": 260,
+      "bundle_value": 45.33,
+      "verdict": "STOP",
+      "why": [
+        "`electrician Longview TX`: 1 city EMD on page one; 3 dedicated electrical pages"
+      ],
+      "queries": [
+        {
+          "query": "electrician Longview TX",
+          "serp_score": 25,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 2946.4,
+      "metro": "Dallas, TX",
+      "metro_miles": 120,
+      "gates": [
+        {
+          "gate": "Payout",
+          "status": "pass",
+          "value": "$45.33"
+        },
+        {
+          "gate": "Economics",
+          "status": "pass",
+          "value": "~$37 per call (81% of calls pay)"
+        },
+        {
+          "gate": "Demand",
+          "status": "pass",
+          "value": "260/mo"
+        },
+        {
+          "gate": "SERP",
+          "status": "fail",
+          "value": "score 25\u201325 over 1 query"
+        },
+        {
+          "gate": "Coverage",
+          "status": "pass",
+          "value": "3 of 10 ZIPs bought"
+        }
+      ],
+      "gate_marks": "\u2705\u2705\u2705\u274c\u2705"
+    },
+    {
+      "city": "Ormond Beach",
+      "state": "FL",
+      "county": "Volusia",
+      "population": 43976,
+      "niche": "Electrical",
+      "payout": 56.7,
+      "volume": 140,
+      "bundle_value": 56.7,
+      "verdict": "STOP",
+      "why": [
+        "`electrician Ormond Beach FL`: 3 dedicated electrical pages"
+      ],
+      "queries": [
+        {
+          "query": "electrician Ormond Beach FL",
+          "serp_score": 35,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 2778.3,
+      "metro": "Orlando, FL",
+      "metro_miles": 55,
+      "gates": [
+        {
+          "gate": "Payout",
+          "status": "pass",
+          "value": "$56.70"
+        },
+        {
+          "gate": "Economics",
+          "status": "pass",
+          "value": "~$46 per call (81% of calls pay)"
+        },
+        {
+          "gate": "Demand",
+          "status": "pass",
+          "value": "140/mo"
+        },
+        {
+          "gate": "SERP",
+          "status": "fail",
+          "value": "score 35\u201335 over 1 query"
+        },
+        {
+          "gate": "Coverage",
+          "status": "warn",
+          "value": "1 of 4 ZIPs bought"
+        }
+      ],
+      "gate_marks": "\u2705\u2705\u2705\u274c\ud83d\udfe1"
+    },
+    {
+      "city": "Boynton Beach",
+      "state": "FL",
+      "county": "Palm Beach",
+      "population": 81435,
+      "niche": "Electrical",
+      "payout": 50.75,
+      "volume": 170,
+      "bundle_value": 50.75,
+      "verdict": "STOP",
+      "why": [
+        "`electrician Boynton Beach FL`: 4 dedicated electrical pages"
+      ],
+      "queries": [
+        {
+          "query": "electrician Boynton Beach FL",
+          "serp_score": 24,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 2070.6,
+      "metro": "Miami, FL",
+      "metro_miles": 53,
+      "gates": [
+        {
+          "gate": "Payout",
+          "status": "pass",
+          "value": "$50.75"
+        },
+        {
+          "gate": "Economics",
+          "status": "pass",
+          "value": "~$41 per call (81% of calls pay)"
+        },
+        {
+          "gate": "Demand",
+          "status": "pass",
+          "value": "170/mo"
+        },
+        {
+          "gate": "SERP",
+          "status": "fail",
+          "value": "score 24\u201324 over 1 query"
+        },
+        {
+          "gate": "Coverage",
+          "status": "pass",
+          "value": "9 of 9 ZIPs bought"
+        }
+      ],
+      "gate_marks": "\u2705\u2705\u2705\u274c\u2705"
+    },
+    {
+      "city": "Sebring",
+      "state": "FL",
+      "county": "Highlands",
+      "population": 67549,
+      "niche": "Electrical",
+      "payout": 46.2,
+      "volume": 90,
+      "bundle_value": 46.2,
+      "verdict": "STOP",
+      "why": [
+        "`electrician Sebring FL`: 3 dedicated electrical pages"
+      ],
+      "queries": [
+        {
+          "query": "electrician Sebring FL",
+          "serp_score": 35,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 1455.3,
+      "metro": "Kissimmee, FL",
+      "metro_miles": 57,
+      "gates": [
+        {
+          "gate": "Payout",
+          "status": "pass",
+          "value": "$46.20"
+        },
+        {
+          "gate": "Economics",
+          "status": "pass",
+          "value": "~$37 per call (81% of calls pay)"
+        },
+        {
+          "gate": "Demand",
+          "status": "warn",
+          "value": "90/mo"
+        },
+        {
+          "gate": "SERP",
+          "status": "fail",
+          "value": "score 35\u201335 over 1 query"
+        },
+        {
+          "gate": "Coverage",
+          "status": "pass",
+          "value": "4 of 5 ZIPs bought"
+        }
+      ],
+      "gate_marks": "\u2705\u2705\ud83d\udfe1\u274c\u2705"
+    },
+    {
+      "city": "Monterey",
+      "state": "CA",
+      "county": "Monterey",
+      "population": 29613,
+      "niche": "Electrical",
+      "payout": 52.5,
+      "volume": 140,
+      "bundle_value": 52.5,
+      "verdict": "STOP",
+      "why": [
+        "`electrician Monterey CA`: 5 dedicated electrical pages"
+      ],
+      "queries": [
+        {
+          "query": "electrician Monterey CA",
+          "serp_score": 18,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 1323.0,
+      "metro": "San Jose, CA",
+      "metro_miles": 52,
+      "gates": [
+        {
+          "gate": "Payout",
+          "status": "pass",
+          "value": "$52.50"
+        },
+        {
+          "gate": "Economics",
+          "status": "pass",
+          "value": "~$43 per call (81% of calls pay)"
+        },
+        {
+          "gate": "Demand",
+          "status": "pass",
+          "value": "140/mo"
+        },
+        {
+          "gate": "SERP",
+          "status": "fail",
+          "value": "score 18\u201318 over 1 query"
+        },
+        {
+          "gate": "Coverage",
+          "status": "pass",
+          "value": "4 of 4 ZIPs bought"
+        }
+      ],
+      "gate_marks": "\u2705\u2705\u2705\u274c\u2705"
+    },
+    {
+      "city": "Richland",
+      "state": "WA",
+      "county": "Benton",
+      "population": 62753,
+      "niche": "Electrical",
+      "payout": 63.0,
+      "volume": 50,
+      "bundle_value": 63.0,
+      "verdict": "STOP",
+      "why": [
+        "`electrician Richland WA`: 3 dedicated electrical pages"
+      ],
+      "queries": [
+        {
+          "query": "electrician Richland WA",
+          "serp_score": 35,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 1102.5,
+      "metro": "Spokane, WA",
+      "metro_miles": 130,
+      "gates": [
+        {
+          "gate": "Payout",
+          "status": "pass",
+          "value": "$63.00"
+        },
+        {
+          "gate": "Economics",
+          "status": "pass",
+          "value": "~$51 per call (81% of calls pay)"
+        },
+        {
+          "gate": "Demand",
+          "status": "warn",
+          "value": "50/mo"
+        },
+        {
+          "gate": "SERP",
+          "status": "fail",
+          "value": "score 35\u201335 over 1 query"
+        },
+        {
+          "gate": "Coverage",
+          "status": "pass",
+          "value": "2 of 2 ZIPs bought"
+        }
+      ],
+      "gate_marks": "\u2705\u2705\ud83d\udfe1\u274c\u2705"
+    },
+    {
+      "city": "Walla Walla",
+      "state": "WA",
+      "county": "Walla Walla",
+      "population": 33925,
+      "niche": "Electrical",
+      "payout": 63.0,
+      "volume": 50,
+      "bundle_value": 63.0,
+      "verdict": "STOP",
+      "why": [
+        "`electrician Walla Walla WA`: 4 dedicated electrical pages"
+      ],
+      "queries": [
+        {
+          "query": "electrician Walla Walla WA",
+          "serp_score": 35,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 1102.5,
+      "metro": "Spokane, WA",
+      "metro_miles": 119,
+      "gates": [
+        {
+          "gate": "Payout",
+          "status": "pass",
+          "value": "$63.00"
+        },
+        {
+          "gate": "Economics",
+          "status": "pass",
+          "value": "~$51 per call (81% of calls pay)"
+        },
+        {
+          "gate": "Demand",
+          "status": "warn",
+          "value": "50/mo"
+        },
+        {
+          "gate": "SERP",
+          "status": "fail",
+          "value": "score 35\u201335 over 1 query"
+        },
+        {
+          "gate": "Coverage",
+          "status": "pass",
+          "value": "1 of 1 ZIPs bought"
+        }
+      ],
+      "gate_marks": "\u2705\u2705\ud83d\udfe1\u274c\u2705"
+    }
+  ],
+  "launch_plan": [],
+  "opportunities": [
+    {
+      "city": "Lawton",
+      "state": "OK",
+      "county": "Comanche",
+      "population": 90595,
+      "zips": 3,
+      "niche": "Electrical",
+      "sub_service": "electrician",
+      "query": "electrician Lawton OK",
+      "payout": 60.5,
+      "pricing": "geo",
+      "bundle_value": 60.5,
+      "niches_here": [
+        {
+          "niche": "Electrical",
+          "payout": 60.5,
+          "zips": 3,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 90,
+      "serp_breakdown": {
+        "dedicated": 1,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 7,
+        "forum": 0,
+        "other_local": 1,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 90,
+        "pack_median_reviews": 35
+      },
+      "occupants": [
+        {
+          "host": "thumbtack.com",
+          "kind": "directory"
+        },
+        {
+          "host": "johnsonselectrical.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "citylocal101.com",
+          "kind": "directory"
+        },
+        {
+          "host": "indeed.com",
+          "kind": "directory"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        },
+        {
+          "host": "codeelectric-ok.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "rexelusa.com",
+          "kind": "directory"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        }
+      ],
+      "opportunity": 54.45,
+      "volume": 210,
+      "value": 11434.5,
+      "verdict": "WATCH",
+      "why": [
+        "1 dedicated page already"
+      ]
+    },
+    {
+      "city": "Yakima",
+      "state": "WA",
+      "county": "Yakima",
+      "population": 136518,
+      "zips": 7,
+      "niche": "Electrical",
+      "sub_service": "electrician",
+      "query": "electrician Yakima WA",
+      "payout": 55.0,
+      "pricing": "geo",
+      "bundle_value": 55.0,
+      "niches_here": [
+        {
+          "niche": "Electrical",
+          "payout": 55.0,
+          "zips": 7,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 35,
+      "serp_breakdown": {
+        "dedicated": 2,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 4,
+        "forum": 0,
+        "other_local": 3,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 225,
+        "pack_median_reviews": 135
+      },
+      "occupants": [
+        {
+          "host": "thunderelectric.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "509electric.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "bigfootelectric.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "namesandnumbers.com",
+          "kind": "directory"
+        },
+        {
+          "host": "primaryelectricanddesign.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "wattsmartelectric.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "todayshomeowner.com",
+          "kind": "directory"
+        }
+      ],
+      "opportunity": 19.25,
+      "volume": 320,
+      "value": 6160.0,
+      "verdict": "STOP",
+      "why": [
+        "2 dedicated electrical pages"
+      ]
+    },
+    {
+      "city": "Longview",
+      "state": "TX",
+      "county": "Gregg",
+      "population": 106896,
+      "zips": 3,
+      "niche": "Electrical",
+      "sub_service": "electrician",
+      "query": "electrician Longview TX",
+      "payout": 45.33,
+      "pricing": "geo",
+      "bundle_value": 45.33,
+      "niches_here": [
+        {
+          "niche": "Electrical",
+          "payout": 45.33,
+          "zips": 3,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 25,
+      "serp_breakdown": {
+        "dedicated": 3,
+        "pseo": 0,
+        "national": 0,
+        "emd": 1,
+        "directory": 4,
+        "forum": 0,
+        "other_local": 2,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 101,
+        "pack_median_reviews": 59
+      },
+      "occupants": [
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "longviewlicensedelectrician.com",
+          "kind": "city EMD + dedicated page"
+        },
+        {
+          "host": "tdpelectric.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        },
+        {
+          "host": "cobb-electric.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "indeed.com",
+          "kind": "directory"
+        },
+        {
+          "host": "eteclongview.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "dynamic-electricians.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 11.33,
+      "volume": 260,
+      "value": 2946.4,
+      "verdict": "STOP",
+      "why": [
+        "1 city EMD on page one",
+        "3 dedicated electrical pages"
+      ]
+    },
+    {
+      "city": "Ormond Beach",
+      "state": "FL",
+      "county": "Volusia",
+      "population": 43976,
+      "zips": 1,
+      "niche": "Electrical",
+      "sub_service": "electrician",
+      "query": "electrician Ormond Beach FL",
+      "payout": 56.7,
+      "pricing": "geo",
+      "bundle_value": 56.7,
+      "niches_here": [
+        {
+          "niche": "Electrical",
+          "payout": 56.7,
+          "zips": 1,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 35,
+      "serp_breakdown": {
+        "dedicated": 3,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 4,
+        "forum": 0,
+        "other_local": 2,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 40,
+        "pack_median_reviews": 28
+      },
+      "occupants": [
+        {
+          "host": "nextdoor.com",
+          "kind": "directory"
+        },
+        {
+          "host": "courteauxelectric.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "electricianfl.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "beachsideelectricfl.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        },
+        {
+          "host": "paulselectric.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "angi.com",
+          "kind": "directory"
+        },
+        {
+          "host": "cainselectric.com",
+          "kind": "independent site"
+        }
+      ],
+      "opportunity": 19.84,
+      "volume": 140,
+      "value": 2778.3,
+      "verdict": "STOP",
+      "why": [
+        "3 dedicated electrical pages"
+      ]
+    },
+    {
+      "city": "Boynton Beach",
+      "state": "FL",
+      "county": "Palm Beach",
+      "population": 81435,
+      "zips": 9,
+      "niche": "Electrical",
+      "sub_service": "electrician",
+      "query": "electrician Boynton Beach FL",
+      "payout": 50.75,
+      "pricing": "geo",
+      "bundle_value": 50.75,
+      "niches_here": [
+        {
+          "niche": "Electrical",
+          "payout": 50.75,
+          "zips": 9,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 24,
+      "serp_breakdown": {
+        "dedicated": 4,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 4,
+        "forum": 0,
+        "other_local": 1,
+        "results": 9,
+        "pack_size": 4,
+        "pack_top_reviews": 430,
+        "pack_median_reviews": 429
+      },
+      "occupants": [
+        {
+          "host": "simonelectricllc.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "nextdoor.com",
+          "kind": "directory"
+        },
+        {
+          "host": "alphatecelectric.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "mistersparky.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "thumbtack.com",
+          "kind": "directory"
+        },
+        {
+          "host": "kasperelectricinc.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "agelectric.us",
+          "kind": "independent site"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        }
+      ],
+      "opportunity": 12.18,
+      "volume": 170,
+      "value": 2070.6,
+      "verdict": "STOP",
+      "why": [
+        "4 dedicated electrical pages"
+      ]
+    },
+    {
+      "city": "Stillwater",
+      "state": "OK",
+      "county": "Payne",
+      "population": 49269,
+      "zips": 1,
+      "niche": "Electrical",
+      "sub_service": "electrician",
+      "query": "electrician Stillwater OK",
+      "payout": 60.5,
+      "pricing": "geo",
+      "bundle_value": 60.5,
+      "niches_here": [
+        {
+          "niche": "Electrical",
+          "payout": 60.5,
+          "zips": 1,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 35,
+      "serp_breakdown": {
+        "dedicated": 2,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 5,
+        "forum": 0,
+        "other_local": 2,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 212,
+        "pack_median_reviews": 79
+      },
+      "occupants": [
+        {
+          "host": "fieldelectricinc.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "knightselectricllc.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "aceelectricstw.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "indeed.com",
+          "kind": "directory"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        },
+        {
+          "host": "meridiantech.edu",
+          "kind": "directory"
+        },
+        {
+          "host": "martinelectricok.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 21.17,
+      "volume": 90,
+      "value": 1905.7,
+      "verdict": "WATCH",
+      "why": [
+        "2 small local pages, weak map pack (<100 reviews)",
+        "SERP 35 < 60",
+        "only 90 searches/mo"
+      ]
+    },
+    {
+      "city": "Sebring",
+      "state": "FL",
+      "county": "Highlands",
+      "population": 67549,
+      "zips": 4,
+      "niche": "Electrical",
+      "sub_service": "electrician",
+      "query": "electrician Sebring FL",
+      "payout": 46.2,
+      "pricing": "geo",
+      "bundle_value": 46.2,
+      "niches_here": [
+        {
+          "niche": "Electrical",
+          "payout": 46.2,
+          "zips": 4,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 35,
+      "serp_breakdown": {
+        "dedicated": 3,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 6,
+        "forum": 0,
+        "other_local": 0,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 198,
+        "pack_median_reviews": 77
+      },
+      "occupants": [
+        {
+          "host": "angi.com",
+          "kind": "directory"
+        },
+        {
+          "host": "doneriteelectricalservices.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "nextdoor.com",
+          "kind": "directory"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "climateguardelectrical.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "markpalmerelectricandair.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "indeed.com",
+          "kind": "directory"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        }
+      ],
+      "opportunity": 16.17,
+      "volume": 90,
+      "value": 1455.3,
+      "verdict": "STOP",
+      "why": [
+        "3 dedicated electrical pages"
+      ]
+    },
+    {
+      "city": "Monterey",
+      "state": "CA",
+      "county": "Monterey",
+      "population": 29613,
+      "zips": 4,
+      "niche": "Electrical",
+      "sub_service": "electrician",
+      "query": "electrician Monterey CA",
+      "payout": 52.5,
+      "pricing": "geo",
+      "bundle_value": 52.5,
+      "niches_here": [
+        {
+          "niche": "Electrical",
+          "payout": 52.5,
+          "zips": 4,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 18,
+      "serp_breakdown": {
+        "dedicated": 5,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 1,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 75,
+        "pack_median_reviews": 16
+      },
+      "occupants": [
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "wattelectricinc.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "russgallowayelectric.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "dsaelectric.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "alphaomegaelectric.org",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "jpelectric.co",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "thumbtack.com",
+          "kind": "directory"
+        },
+        {
+          "host": "indeed.com",
+          "kind": "directory"
+        },
+        {
+          "host": "fehnelectric.net",
+          "kind": "independent site"
+        }
+      ],
+      "opportunity": 9.45,
+      "volume": 140,
+      "value": 1323.0,
+      "verdict": "STOP",
+      "why": [
+        "5 dedicated electrical pages"
+      ]
+    },
+    {
+      "city": "Richland",
+      "state": "WA",
+      "county": "Benton",
+      "population": 62753,
+      "zips": 2,
+      "niche": "Electrical",
+      "sub_service": "electrician",
+      "query": "electrician Richland WA",
+      "payout": 63.0,
+      "pricing": "geo",
+      "bundle_value": 63.0,
+      "niches_here": [
+        {
+          "niche": "Electrical",
+          "payout": 63.0,
+          "zips": 2,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 35,
+      "serp_breakdown": {
+        "dedicated": 3,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 5,
+        "forum": 0,
+        "other_local": 1,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 77,
+        "pack_median_reviews": 66
+      },
+      "occupants": [
+        {
+          "host": "letsgowithessco.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        },
+        {
+          "host": "indeed.com",
+          "kind": "directory"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "prairielectric.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "thornelectric.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "angi.com",
+          "kind": "directory"
+        },
+        {
+          "host": "richlandwa.gov",
+          "kind": "directory"
+        },
+        {
+          "host": "mrelectric.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 22.05,
+      "volume": 50,
+      "value": 1102.5,
+      "verdict": "STOP",
+      "why": [
+        "3 dedicated electrical pages"
+      ]
+    },
+    {
+      "city": "Walla Walla",
+      "state": "WA",
+      "county": "Walla Walla",
+      "population": 33925,
+      "zips": 1,
+      "niche": "Electrical",
+      "sub_service": "electrician",
+      "query": "electrician Walla Walla WA",
+      "payout": 63.0,
+      "pricing": "geo",
+      "bundle_value": 63.0,
+      "niches_here": [
+        {
+          "niche": "Electrical",
+          "payout": 63.0,
+          "zips": 1,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 35,
+      "serp_breakdown": {
+        "dedicated": 4,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 4,
+        "forum": 0,
+        "other_local": 1,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 149,
+        "pack_median_reviews": 57
+      },
+      "occupants": [
+        {
+          "host": "doyleelectric.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "wwelectric.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "nicoelectrical.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "angi.com",
+          "kind": "directory"
+        },
+        {
+          "host": "myswitchelectric.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        },
+        {
+          "host": "7electricllc.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 22.05,
+      "volume": 50,
+      "value": 1102.5,
+      "verdict": "STOP",
+      "why": [
+        "4 dedicated electrical pages"
+      ]
+    }
+  ],
+  "top_candidates_unscanned": []
+}
