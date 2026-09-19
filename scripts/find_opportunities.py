@@ -1060,8 +1060,13 @@ def scan(cands):
                 continue
             _subs = SUB_SERVICES.get(nrec["niche"], [])
             _b = BROAD.get(nrec["niche"])
-            if _b and _b not in _subs:
-                _subs = [_b] + _subs
+            # Broad term FIRST, even when the list already holds it further
+            # down. Water Damage lists "water damage restoration" second, so
+            # the old "not in" test left "ceiling water damage repair Lawton
+            # OK" as the one query run -- Google answered it with Nike videos
+            # and Wikipedia, and the credit bought nothing.
+            if _b:
+                _subs = [_b] + [x for x in _subs if x != _b]
             for si, sub in enumerate(_subs[:SUBS_PER_NICHE]):
                 passes.append((ni * 100 + si, c, nrec["niche"], nrec["payout"],
                                nrec.get("pricing", "?"), sub))
