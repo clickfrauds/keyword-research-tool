@@ -1,0 +1,1110 @@
+{
+  "pricing_model_by_niche": {
+    "Gutters (Call)": {
+      "distinct": 1,
+      "mode": "flat"
+    },
+    "Bathroom Remodeling (Call)": {
+      "distinct": 22,
+      "mode": "geo"
+    },
+    "Roofing (Call)": {
+      "distinct": 29,
+      "mode": "geo"
+    },
+    "Electrical (Call)": {
+      "distinct": 16,
+      "mode": "geo"
+    },
+    "HVAC (Call)": {
+      "distinct": 32,
+      "mode": "geo"
+    },
+    "Water Damage (CPL)": {
+      "distinct": 10,
+      "mode": "geo"
+    },
+    "Pest Control (Call)": {
+      "distinct": 2,
+      "mode": "flat"
+    },
+    "Fire Damage Removal (CPL)": {
+      "distinct": 2,
+      "mode": "flat"
+    },
+    "Appliance (Call)": {
+      "distinct": 14,
+      "mode": "geo"
+    },
+    "Mold Removal (CPL)": {
+      "distinct": 2,
+      "mode": "flat"
+    },
+    "Plumbing (Call)": {
+      "distinct": 47,
+      "mode": "geo"
+    },
+    "Biohazard (CPL)": {
+      "distinct": 2,
+      "mode": "flat"
+    },
+    "Tree Services (Call)": {
+      "distinct": 1,
+      "mode": "flat"
+    }
+  },
+  "generated": "2026-09-19 01:15 UTC",
+  "dataset_date": "2026-09-18",
+  "filters": {
+    "payout_type": "Call",
+    "min_payout": 50.0,
+    "population": [
+      8000,
+      150000
+    ],
+    "niches": [
+      "Electrical"
+    ],
+    "states": [
+      "OK"
+    ],
+    "min_bundle_niches": 1
+  },
+  "candidate_cities": 11,
+  "serp_scanned": 10,
+  "serp_credits": {
+    "spent": 7,
+    "cached": 4,
+    "failed": 0
+  },
+  "verdict_counts": {
+    "GO": 0,
+    "WATCH": 3,
+    "STOP": 7
+  },
+  "cities": [
+    {
+      "city": "Lawton",
+      "state": "OK",
+      "county": "Comanche",
+      "population": 90595,
+      "niche": "Electrical",
+      "payout": 60.5,
+      "volume": 210,
+      "bundle_value": 60.5,
+      "verdict": "WATCH",
+      "why": [
+        "`electrician Lawton OK`: 1 dedicated page already"
+      ],
+      "queries": [
+        {
+          "query": "electrician Lawton OK",
+          "serp_score": 90,
+          "verdict": "WATCH"
+        }
+      ],
+      "best_value": 11434.5
+    },
+    {
+      "city": "Stillwater",
+      "state": "OK",
+      "county": "Payne",
+      "population": 49269,
+      "niche": "Electrical",
+      "payout": 60.5,
+      "volume": 90,
+      "bundle_value": 60.5,
+      "verdict": "WATCH",
+      "why": [
+        "`electrician Stillwater OK`: 2 small local pages, weak map pack (<100 reviews); SERP 35 < 60; only 90 searches/mo"
+      ],
+      "queries": [
+        {
+          "query": "electrician Stillwater OK",
+          "serp_score": 35,
+          "verdict": "WATCH"
+        }
+      ],
+      "best_value": 1905.7
+    },
+    {
+      "city": "Duncan",
+      "state": "OK",
+      "county": "Stephens",
+      "population": 22958,
+      "niche": "Electrical",
+      "payout": 60.5,
+      "volume": 30,
+      "bundle_value": 60.5,
+      "verdict": "WATCH",
+      "why": [
+        "`electrician Duncan OK`: only 30 searches/mo"
+      ],
+      "queries": [
+        {
+          "query": "electrician Duncan OK",
+          "serp_score": 100,
+          "verdict": "WATCH"
+        }
+      ],
+      "best_value": 1815.0
+    },
+    {
+      "city": "Norman",
+      "state": "OK",
+      "county": "Cleveland",
+      "population": 129672,
+      "niche": "Electrical",
+      "payout": 60.5,
+      "volume": 260,
+      "bundle_value": 60.5,
+      "verdict": "STOP",
+      "why": [
+        "`electrician Norman OK`: 4 dedicated electrical pages"
+      ],
+      "queries": [
+        {
+          "query": "electrician Norman OK",
+          "serp_score": 35,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 5505.5
+    },
+    {
+      "city": "Broken Arrow",
+      "state": "OK",
+      "county": "Tulsa",
+      "population": 118180,
+      "niche": "Electrical",
+      "payout": 52.45,
+      "volume": 170,
+      "bundle_value": 52.45,
+      "verdict": "STOP",
+      "why": [
+        "`electrician Broken Arrow OK`: 3 dedicated electrical pages"
+      ],
+      "queries": [
+        {
+          "query": "electrician Broken Arrow OK",
+          "serp_score": 35,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 3120.8
+    },
+    {
+      "city": "Edmond",
+      "state": "OK",
+      "county": "Oklahoma",
+      "population": 96825,
+      "niche": "Electrical",
+      "payout": 60.5,
+      "volume": 320,
+      "bundle_value": 60.5,
+      "verdict": "STOP",
+      "why": [
+        "`electrician Edmond OK`: 4 dedicated electrical pages; map pack at 816 reviews"
+      ],
+      "queries": [
+        {
+          "query": "electrician Edmond OK",
+          "serp_score": 14,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 2710.4
+    },
+    {
+      "city": "Muskogee",
+      "state": "OK",
+      "county": "Muskogee",
+      "population": 36758,
+      "niche": "Electrical",
+      "payout": 52.45,
+      "volume": 90,
+      "bundle_value": 52.45,
+      "verdict": "STOP",
+      "why": [
+        "`electrician Muskogee OK`: 3 dedicated electrical pages"
+      ],
+      "queries": [
+        {
+          "query": "electrician Muskogee OK",
+          "serp_score": 35,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 1652.2
+    },
+    {
+      "city": "Ada",
+      "state": "OK",
+      "county": "Pontotoc",
+      "population": 16575,
+      "niche": "Electrical",
+      "payout": 60.5,
+      "volume": 40,
+      "bundle_value": 60.5,
+      "verdict": "STOP",
+      "why": [
+        "`electrician Ada OK`: 1 city EMD on page one; 1 programmatic subdomain(s)"
+      ],
+      "queries": [
+        {
+          "query": "electrician Ada OK",
+          "serp_score": 25,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 605.0
+    },
+    {
+      "city": "Mustang",
+      "state": "OK",
+      "county": "Canadian",
+      "population": 22192,
+      "niche": "Electrical",
+      "payout": 60.5,
+      "volume": 40,
+      "bundle_value": 60.5,
+      "verdict": "STOP",
+      "why": [
+        "`electrician Mustang OK`: 5 dedicated electrical pages"
+      ],
+      "queries": [
+        {
+          "query": "electrician Mustang OK",
+          "serp_score": 22,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 532.4
+    },
+    {
+      "city": "Yukon",
+      "state": "OK",
+      "county": "Canadian",
+      "population": 25529,
+      "niche": "Electrical",
+      "payout": 60.5,
+      "volume": 50,
+      "bundle_value": 60.5,
+      "verdict": "STOP",
+      "why": [
+        "`electrician Yukon OK`: 1 city EMD on page one; 5 dedicated electrical pages"
+      ],
+      "queries": [
+        {
+          "query": "electrician Yukon OK",
+          "serp_score": 2,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 60.5
+    }
+  ],
+  "launch_plan": [],
+  "opportunities": [
+    {
+      "city": "Lawton",
+      "state": "OK",
+      "county": "Comanche",
+      "population": 90595,
+      "zips": 3,
+      "niche": "Electrical",
+      "sub_service": "electrician",
+      "query": "electrician Lawton OK",
+      "payout": 60.5,
+      "pricing": "geo",
+      "bundle_value": 60.5,
+      "niches_here": [
+        {
+          "niche": "Electrical",
+          "payout": 60.5,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 90,
+      "serp_breakdown": {
+        "dedicated": 1,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 7,
+        "forum": 0,
+        "other_local": 1,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 90,
+        "pack_median_reviews": 35
+      },
+      "occupants": [
+        {
+          "host": "thumbtack.com",
+          "kind": "directory"
+        },
+        {
+          "host": "johnsonselectrical.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "citylocal101.com",
+          "kind": "directory"
+        },
+        {
+          "host": "indeed.com",
+          "kind": "directory"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        },
+        {
+          "host": "codeelectric-ok.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "rexelusa.com",
+          "kind": "directory"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        }
+      ],
+      "opportunity": 54.45,
+      "volume": 210,
+      "value": 11434.5,
+      "verdict": "WATCH",
+      "why": [
+        "1 dedicated page already"
+      ]
+    },
+    {
+      "city": "Norman",
+      "state": "OK",
+      "county": "Cleveland",
+      "population": 129672,
+      "zips": 6,
+      "niche": "Electrical",
+      "sub_service": "electrician",
+      "query": "electrician Norman OK",
+      "payout": 60.5,
+      "pricing": "geo",
+      "bundle_value": 60.5,
+      "niches_here": [
+        {
+          "niche": "Electrical",
+          "payout": 60.5,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 35,
+      "serp_breakdown": {
+        "dedicated": 4,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 4,
+        "forum": 1,
+        "other_local": 0,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 374,
+        "pack_median_reviews": 187
+      },
+      "occupants": [
+        {
+          "host": "schaffnervalouch.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "reddit.com",
+          "kind": "forum"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "mistersparky.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "waterselectricinc.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        },
+        {
+          "host": "wadelectric.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "indeed.com",
+          "kind": "directory"
+        },
+        {
+          "host": "business.normanchamber.com",
+          "kind": "directory"
+        }
+      ],
+      "opportunity": 21.17,
+      "volume": 260,
+      "value": 5505.5,
+      "verdict": "STOP",
+      "why": [
+        "4 dedicated electrical pages"
+      ]
+    },
+    {
+      "city": "Broken Arrow",
+      "state": "OK",
+      "county": "Tulsa",
+      "population": 118180,
+      "zips": 2,
+      "niche": "Electrical",
+      "sub_service": "electrician",
+      "query": "electrician Broken Arrow OK",
+      "payout": 52.45,
+      "pricing": "geo",
+      "bundle_value": 52.45,
+      "niches_here": [
+        {
+          "niche": "Electrical",
+          "payout": 52.45,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 35,
+      "serp_breakdown": {
+        "dedicated": 3,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 4,
+        "forum": 0,
+        "other_local": 2,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 1186,
+        "pack_median_reviews": 230
+      },
+      "occupants": [
+        {
+          "host": "shankselectric.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        },
+        {
+          "host": "callwaybright.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "nextdoor.com",
+          "kind": "directory"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "mistersparky.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "jacoelec.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "nova-electric.net",
+          "kind": "independent site"
+        },
+        {
+          "host": "thumbtack.com",
+          "kind": "directory"
+        }
+      ],
+      "opportunity": 18.36,
+      "volume": 170,
+      "value": 3120.8,
+      "verdict": "STOP",
+      "why": [
+        "3 dedicated electrical pages"
+      ]
+    },
+    {
+      "city": "Edmond",
+      "state": "OK",
+      "county": "Oklahoma",
+      "population": 96825,
+      "zips": 5,
+      "niche": "Electrical",
+      "sub_service": "electrician",
+      "query": "electrician Edmond OK",
+      "payout": 60.5,
+      "pricing": "geo",
+      "bundle_value": 60.5,
+      "niches_here": [
+        {
+          "niche": "Electrical",
+          "payout": 60.5,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 14,
+      "serp_breakdown": {
+        "dedicated": 4,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 2,
+        "results": 9,
+        "pack_size": 4,
+        "pack_top_reviews": 1200,
+        "pack_median_reviews": 816
+      },
+      "occupants": [
+        {
+          "host": "shepherdelectricalconstruction.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "baxterelectricok.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "thumbtack.com",
+          "kind": "directory"
+        },
+        {
+          "host": "integratedok.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "americanstandardelectricok.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "mistersparky.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        },
+        {
+          "host": "hiselectric.org",
+          "kind": "independent site"
+        }
+      ],
+      "opportunity": 8.47,
+      "volume": 320,
+      "value": 2710.4,
+      "verdict": "STOP",
+      "why": [
+        "4 dedicated electrical pages",
+        "map pack at 816 reviews"
+      ]
+    },
+    {
+      "city": "Stillwater",
+      "state": "OK",
+      "county": "Payne",
+      "population": 49269,
+      "zips": 1,
+      "niche": "Electrical",
+      "sub_service": "electrician",
+      "query": "electrician Stillwater OK",
+      "payout": 60.5,
+      "pricing": "geo",
+      "bundle_value": 60.5,
+      "niches_here": [
+        {
+          "niche": "Electrical",
+          "payout": 60.5,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 35,
+      "serp_breakdown": {
+        "dedicated": 2,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 4,
+        "forum": 0,
+        "other_local": 3,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 212,
+        "pack_median_reviews": 79
+      },
+      "occupants": [
+        {
+          "host": "fieldelectricinc.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "knightselectricllc.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "aceelectricstw.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "indeed.com",
+          "kind": "directory"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        },
+        {
+          "host": "meridiantech.edu",
+          "kind": "independent site"
+        },
+        {
+          "host": "martinelectricok.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 21.17,
+      "volume": 90,
+      "value": 1905.7,
+      "verdict": "WATCH",
+      "why": [
+        "2 small local pages, weak map pack (<100 reviews)",
+        "SERP 35 < 60",
+        "only 90 searches/mo"
+      ]
+    },
+    {
+      "city": "Duncan",
+      "state": "OK",
+      "county": "Stephens",
+      "population": 22958,
+      "zips": 2,
+      "niche": "Electrical",
+      "sub_service": "electrician",
+      "query": "electrician Duncan OK",
+      "payout": 60.5,
+      "pricing": "geo",
+      "bundle_value": 60.5,
+      "niches_here": [
+        {
+          "niche": "Electrical",
+          "payout": 60.5,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 100,
+      "serp_breakdown": {
+        "dedicated": 0,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 6,
+        "forum": 0,
+        "other_local": 3,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 192,
+        "pack_median_reviews": 25
+      },
+      "occupants": [
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "bishopelectricok.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "todayshomeowner.com",
+          "kind": "directory"
+        },
+        {
+          "host": "smithdressler.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        },
+        {
+          "host": "angi.com",
+          "kind": "directory"
+        },
+        {
+          "host": "stephenselectric.org",
+          "kind": "independent site"
+        },
+        {
+          "host": "mapquest.com",
+          "kind": "directory"
+        }
+      ],
+      "opportunity": 60.5,
+      "volume": 30,
+      "value": 1815.0,
+      "verdict": "WATCH",
+      "why": [
+        "only 30 searches/mo"
+      ]
+    },
+    {
+      "city": "Muskogee",
+      "state": "OK",
+      "county": "Muskogee",
+      "population": 36758,
+      "zips": 1,
+      "niche": "Electrical",
+      "sub_service": "electrician",
+      "query": "electrician Muskogee OK",
+      "payout": 52.45,
+      "pricing": "geo",
+      "bundle_value": 52.45,
+      "niches_here": [
+        {
+          "niche": "Electrical",
+          "payout": 52.45,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 35,
+      "serp_breakdown": {
+        "dedicated": 3,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 5,
+        "forum": 0,
+        "other_local": 1,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 35,
+        "pack_median_reviews": 15
+      },
+      "occupants": [
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "goodnightelectricllc.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        },
+        {
+          "host": "renfroelectric.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "thumbtack.com",
+          "kind": "directory"
+        },
+        {
+          "host": "mooreelectricandlogistics.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "callwattsright.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "homeadvisor.com",
+          "kind": "directory"
+        }
+      ],
+      "opportunity": 18.36,
+      "volume": 90,
+      "value": 1652.2,
+      "verdict": "STOP",
+      "why": [
+        "3 dedicated electrical pages"
+      ]
+    },
+    {
+      "city": "Ada",
+      "state": "OK",
+      "county": "Pontotoc",
+      "population": 16575,
+      "zips": 1,
+      "niche": "Electrical",
+      "sub_service": "electrician",
+      "query": "electrician Ada OK",
+      "payout": 60.5,
+      "pricing": "geo",
+      "bundle_value": 60.5,
+      "niches_here": [
+        {
+          "niche": "Electrical",
+          "payout": 60.5,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 25,
+      "serp_breakdown": {
+        "dedicated": 2,
+        "pseo": 1,
+        "national": 0,
+        "emd": 1,
+        "directory": 6,
+        "forum": 0,
+        "other_local": 2,
+        "results": 10,
+        "pack_size": 3,
+        "pack_top_reviews": 64,
+        "pack_median_reviews": 40
+      },
+      "occupants": [
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "mcgeheeelectricllc.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "acshockeyelectric.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "angi.com",
+          "kind": "directory"
+        },
+        {
+          "host": "mapquest.com",
+          "kind": "directory"
+        },
+        {
+          "host": "ada-ok.moorepowerelectrical.com",
+          "kind": "pSEO subdomain + city EMD + dedicated page"
+        },
+        {
+          "host": "huntersupertechs.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "todayshomeowner.com",
+          "kind": "directory"
+        }
+      ],
+      "opportunity": 15.12,
+      "volume": 40,
+      "value": 605.0,
+      "verdict": "STOP",
+      "why": [
+        "1 city EMD on page one",
+        "1 programmatic subdomain(s)"
+      ]
+    },
+    {
+      "city": "Mustang",
+      "state": "OK",
+      "county": "Canadian",
+      "population": 22192,
+      "zips": 1,
+      "niche": "Electrical",
+      "sub_service": "electrician",
+      "query": "electrician Mustang OK",
+      "payout": 60.5,
+      "pricing": "geo",
+      "bundle_value": 60.5,
+      "niches_here": [
+        {
+          "niche": "Electrical",
+          "payout": 60.5,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 22,
+      "serp_breakdown": {
+        "dedicated": 5,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 4,
+        "forum": 0,
+        "other_local": 0,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 41,
+        "pack_median_reviews": 9
+      },
+      "occupants": [
+        {
+          "host": "mistersparky.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "gopaschal.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "angi.com",
+          "kind": "directory"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "cityofmustang.org",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "kelvinelectricok.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "mapquest.com",
+          "kind": "directory"
+        },
+        {
+          "host": "247electricalservices.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 13.31,
+      "volume": 40,
+      "value": 532.4,
+      "verdict": "STOP",
+      "why": [
+        "5 dedicated electrical pages"
+      ]
+    },
+    {
+      "city": "Yukon",
+      "state": "OK",
+      "county": "Canadian",
+      "population": 25529,
+      "zips": 1,
+      "niche": "Electrical",
+      "sub_service": "electrician",
+      "query": "electrician Yukon OK",
+      "payout": 60.5,
+      "pricing": "geo",
+      "bundle_value": 60.5,
+      "niches_here": [
+        {
+          "niche": "Electrical",
+          "payout": 60.5,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 2,
+      "serp_breakdown": {
+        "dedicated": 5,
+        "pseo": 0,
+        "national": 0,
+        "emd": 1,
+        "directory": 4,
+        "forum": 0,
+        "other_local": 0,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 48,
+        "pack_median_reviews": 12
+      },
+      "occupants": [
+        {
+          "host": "mistersparky.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "thumbtack.com",
+          "kind": "directory"
+        },
+        {
+          "host": "gopaschal.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "electrician-yukonoklahoma.com",
+          "kind": "city EMD + dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "pinkvantechs.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "247electricalservices.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "angi.com",
+          "kind": "directory"
+        }
+      ],
+      "opportunity": 1.21,
+      "volume": 50,
+      "value": 60.5,
+      "verdict": "STOP",
+      "why": [
+        "1 city EMD on page one",
+        "5 dedicated electrical pages"
+      ]
+    }
+  ],
+  "top_candidates_unscanned": []
+}
