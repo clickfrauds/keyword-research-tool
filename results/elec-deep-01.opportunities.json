@@ -1,0 +1,667 @@
+{
+  "pricing_model_by_niche": {
+    "Gutters (Call)": {
+      "distinct": 1,
+      "mode": "flat"
+    },
+    "Bathroom Remodeling (Call)": {
+      "distinct": 61,
+      "mode": "geo"
+    },
+    "Roofing (Call)": {
+      "distinct": 117,
+      "mode": "geo"
+    },
+    "Electrical (Call)": {
+      "distinct": 98,
+      "mode": "geo"
+    },
+    "HVAC (Call)": {
+      "distinct": 130,
+      "mode": "geo"
+    },
+    "Water Damage (CPL)": {
+      "distinct": 24,
+      "mode": "geo"
+    },
+    "Pest Control (Call)": {
+      "distinct": 2,
+      "mode": "flat"
+    },
+    "Fire Damage Removal (CPL)": {
+      "distinct": 11,
+      "mode": "geo"
+    },
+    "Appliance (Call)": {
+      "distinct": 107,
+      "mode": "geo"
+    },
+    "Mold Removal (CPL)": {
+      "distinct": 15,
+      "mode": "geo"
+    },
+    "Plumbing (Call)": {
+      "distinct": 193,
+      "mode": "geo"
+    },
+    "Biohazard (CPL)": {
+      "distinct": 7,
+      "mode": "geo"
+    },
+    "Tree Services (Call)": {
+      "distinct": 13,
+      "mode": "geo"
+    },
+    "Plumbing (CPL)": {
+      "distinct": 17,
+      "mode": "geo"
+    },
+    "Landscaping (CPL)": {
+      "distinct": 1,
+      "mode": "flat"
+    },
+    "Painting (CPL)": {
+      "distinct": 6,
+      "mode": "geo"
+    },
+    "Siding (CPL)": {
+      "distinct": 6,
+      "mode": "geo"
+    },
+    "Kitchen (CPL)": {
+      "distinct": 4,
+      "mode": "geo"
+    },
+    "Foundation Repair (CPL)": {
+      "distinct": 1,
+      "mode": "flat"
+    },
+    "Garage Door (CPL)": {
+      "distinct": 2,
+      "mode": "flat"
+    }
+  },
+  "generated": "2026-09-19 00:43 UTC",
+  "dataset_date": "2026-09-18",
+  "filters": {
+    "payout_type": "Call",
+    "min_payout": 50.0,
+    "population": [
+      8000,
+      150000
+    ],
+    "niches": [
+      "Electrical"
+    ],
+    "states": [
+      "OK",
+      "FL"
+    ],
+    "min_bundle_niches": 1
+  },
+  "candidate_cities": 2,
+  "serp_scanned": 6,
+  "serp_credits": {
+    "spent": 4,
+    "cached": 2,
+    "failed": 0
+  },
+  "verdict_counts": {
+    "GO": 0,
+    "WATCH": 0,
+    "STOP": 2
+  },
+  "cities": [
+    {
+      "city": "Lawton",
+      "state": "OK",
+      "county": "Comanche",
+      "population": 90595,
+      "niche": "Electrical",
+      "payout": 60.5,
+      "volume": 210,
+      "bundle_value": 60.5,
+      "verdict": "STOP",
+      "why": [
+        "`outlet repair Lawton OK`: 2 dedicated electrical pages",
+        "`house rewiring Lawton OK`: 3 dedicated electrical pages"
+      ],
+      "queries": [
+        {
+          "query": "electrician Lawton OK",
+          "serp_score": 90,
+          "verdict": "WATCH"
+        },
+        {
+          "query": "outlet repair Lawton OK",
+          "serp_score": 35,
+          "verdict": "STOP"
+        },
+        {
+          "query": "house rewiring Lawton OK",
+          "serp_score": 35,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 11434.5
+    },
+    {
+      "city": "Daytona Beach",
+      "state": "FL",
+      "county": "Volusia",
+      "population": 78992,
+      "niche": "Electrical",
+      "payout": 56.7,
+      "volume": 140,
+      "bundle_value": 56.7,
+      "verdict": "STOP",
+      "why": [
+        "`outlet repair Daytona Beach FL`: 1 city EMD on page one; 4 dedicated electrical pages",
+        "`house rewiring Daytona Beach FL`: 1 city EMD on page one; 1 programmatic subdomain(s); 4 dedicated electrical pages"
+      ],
+      "queries": [
+        {
+          "query": "electrician Daytona Beach FL",
+          "serp_score": 76,
+          "verdict": "WATCH"
+        },
+        {
+          "query": "outlet repair Daytona Beach FL",
+          "serp_score": 22,
+          "verdict": "STOP"
+        },
+        {
+          "query": "house rewiring Daytona Beach FL",
+          "serp_score": 18,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 6032.9
+    }
+  ],
+  "launch_plan": [],
+  "opportunities": [
+    {
+      "city": "Lawton",
+      "state": "OK",
+      "county": "Comanche",
+      "population": 90595,
+      "zips": 3,
+      "niche": "Electrical",
+      "sub_service": "electrician",
+      "query": "electrician Lawton OK",
+      "payout": 60.5,
+      "pricing": "geo",
+      "bundle_value": 60.5,
+      "niches_here": [
+        {
+          "niche": "Electrical",
+          "payout": 60.5,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 90,
+      "serp_breakdown": {
+        "dedicated": 1,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 7,
+        "forum": 0,
+        "other_local": 1,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 90,
+        "pack_median_reviews": 35
+      },
+      "occupants": [
+        {
+          "host": "thumbtack.com",
+          "kind": "directory"
+        },
+        {
+          "host": "johnsonselectrical.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "citylocal101.com",
+          "kind": "directory"
+        },
+        {
+          "host": "indeed.com",
+          "kind": "directory"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        },
+        {
+          "host": "codeelectric-ok.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "rexelusa.com",
+          "kind": "directory"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        }
+      ],
+      "opportunity": 54.45,
+      "volume": 210,
+      "value": 11434.5,
+      "verdict": "WATCH",
+      "why": [
+        "1 dedicated page already"
+      ]
+    },
+    {
+      "city": "Daytona Beach",
+      "state": "FL",
+      "county": "Volusia",
+      "population": 78992,
+      "zips": 1,
+      "niche": "Electrical",
+      "sub_service": "electrician",
+      "query": "electrician Daytona Beach FL",
+      "payout": 56.7,
+      "pricing": "geo",
+      "bundle_value": 56.7,
+      "niches_here": [
+        {
+          "niche": "Electrical",
+          "payout": 56.7,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 76,
+      "serp_breakdown": {
+        "dedicated": 1,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 5,
+        "forum": 0,
+        "other_local": 3,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 244,
+        "pack_median_reviews": 185
+      },
+      "occupants": [
+        {
+          "host": "electricianfl.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "mistersparky.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "whiteselectric.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "todayshomeowner.com",
+          "kind": "directory"
+        },
+        {
+          "host": "paulselectric.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "indeed.com",
+          "kind": "directory"
+        },
+        {
+          "host": "mecojax.com",
+          "kind": "social profile"
+        }
+      ],
+      "opportunity": 43.09,
+      "volume": 140,
+      "value": 6032.9,
+      "verdict": "WATCH",
+      "why": [
+        "1 dedicated page already"
+      ]
+    },
+    {
+      "city": "Lawton",
+      "state": "OK",
+      "county": "Comanche",
+      "population": 90595,
+      "zips": 3,
+      "niche": "Electrical",
+      "sub_service": "outlet repair",
+      "query": "outlet repair Lawton OK",
+      "payout": 60.5,
+      "pricing": "geo",
+      "bundle_value": 60.5,
+      "niches_here": [
+        {
+          "niche": "Electrical",
+          "payout": 60.5,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 35,
+      "serp_breakdown": {
+        "dedicated": 2,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 4,
+        "forum": 0,
+        "other_local": 3,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 331,
+        "pack_median_reviews": 84
+      },
+      "occupants": [
+        {
+          "host": "soonersvcs.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "thumbtack.com",
+          "kind": "directory"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "soonersvcs.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "blueskysparky.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "schaffnervalouch.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "homeadvisor.com",
+          "kind": "directory"
+        },
+        {
+          "host": "johnsonselectrical.com",
+          "kind": "independent site"
+        }
+      ],
+      "opportunity": 21.17,
+      "volume": 210,
+      "value": 4446.7,
+      "verdict": "STOP",
+      "why": [
+        "2 dedicated electrical pages"
+      ]
+    },
+    {
+      "city": "Lawton",
+      "state": "OK",
+      "county": "Comanche",
+      "population": 90595,
+      "zips": 3,
+      "niche": "Electrical",
+      "sub_service": "house rewiring",
+      "query": "house rewiring Lawton OK",
+      "payout": 60.5,
+      "pricing": "geo",
+      "bundle_value": 60.5,
+      "niches_here": [
+        {
+          "niche": "Electrical",
+          "payout": 60.5,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 35,
+      "serp_breakdown": {
+        "dedicated": 3,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 5,
+        "forum": 0,
+        "other_local": 1,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 293,
+        "pack_median_reviews": 90
+      },
+      "occupants": [
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "homedepot.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "codeelectric-ok.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "homeadvisor.com",
+          "kind": "directory"
+        },
+        {
+          "host": "soonersvcs.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "johnsonselectrical.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "thumbtack.com",
+          "kind": "directory"
+        },
+        {
+          "host": "angi.com",
+          "kind": "directory"
+        }
+      ],
+      "opportunity": 21.17,
+      "volume": 210,
+      "value": 4446.7,
+      "verdict": "STOP",
+      "why": [
+        "3 dedicated electrical pages"
+      ]
+    },
+    {
+      "city": "Daytona Beach",
+      "state": "FL",
+      "county": "Volusia",
+      "population": 78992,
+      "zips": 1,
+      "niche": "Electrical",
+      "sub_service": "outlet repair",
+      "query": "outlet repair Daytona Beach FL",
+      "payout": 56.7,
+      "pricing": "geo",
+      "bundle_value": 56.7,
+      "niches_here": [
+        {
+          "niche": "Electrical",
+          "payout": 56.7,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 22,
+      "serp_breakdown": {
+        "dedicated": 4,
+        "pseo": 0,
+        "national": 0,
+        "emd": 1,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 2,
+        "results": 9,
+        "pack_size": 0,
+        "pack_top_reviews": 0,
+        "pack_median_reviews": 0
+      },
+      "occupants": [
+        {
+          "host": "instaservice.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "delair.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "daytonabeachelectricianpro.com",
+          "kind": "city EMD + dedicated page"
+        },
+        {
+          "host": "thumbtack.com",
+          "kind": "directory"
+        },
+        {
+          "host": "daytonamistersparky.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "powerprosvs.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "mistersparky.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        }
+      ],
+      "opportunity": 12.47,
+      "volume": 140,
+      "value": 1746.4,
+      "verdict": "STOP",
+      "why": [
+        "1 city EMD on page one",
+        "4 dedicated electrical pages"
+      ]
+    },
+    {
+      "city": "Daytona Beach",
+      "state": "FL",
+      "county": "Volusia",
+      "population": 78992,
+      "zips": 1,
+      "niche": "Electrical",
+      "sub_service": "house rewiring",
+      "query": "house rewiring Daytona Beach FL",
+      "payout": 56.7,
+      "pricing": "geo",
+      "bundle_value": 56.7,
+      "niches_here": [
+        {
+          "niche": "Electrical",
+          "payout": 56.7,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 18,
+      "serp_breakdown": {
+        "dedicated": 4,
+        "pseo": 1,
+        "national": 0,
+        "emd": 1,
+        "directory": 6,
+        "forum": 0,
+        "other_local": 0,
+        "results": 10,
+        "pack_size": 0,
+        "pack_top_reviews": 0,
+        "pack_median_reviews": 0
+      },
+      "occupants": [
+        {
+          "host": "mistersparky.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "floridaes.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "homeyou.com",
+          "kind": "directory"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "thumbtack.com",
+          "kind": "directory"
+        },
+        {
+          "host": "kaamcam.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "daytona-beach-fl.moorepowerelectrical.com",
+          "kind": "pSEO subdomain + city EMD + dedicated page"
+        },
+        {
+          "host": "homeadvisor.com",
+          "kind": "directory"
+        },
+        {
+          "host": "indeed.com",
+          "kind": "directory"
+        }
+      ],
+      "opportunity": 10.21,
+      "volume": 140,
+      "value": 1428.8,
+      "verdict": "STOP",
+      "why": [
+        "1 city EMD on page one",
+        "1 programmatic subdomain(s)",
+        "4 dedicated electrical pages"
+      ]
+    }
+  ],
+  "top_candidates_unscanned": []
+}
