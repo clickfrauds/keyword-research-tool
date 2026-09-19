@@ -847,7 +847,8 @@ def score_serp(data, service, city):
     # gottman.com's "repair attempts" and tune.com as happily as an AC page.
     _generic = {"repair", "repairs", "service", "services", "installation", "install",
                 "replacement", "replace", "tune", "cost", "near", "company", "emergency",
-                "maintenance", "inspection", "cleaning", "upgrade", "removal", "local"}
+                "maintenance", "inspection", "cleaning", "upgrade", "removal", "local",
+                "house", "home", "residential", "partial"}
     _topic = {w for w in re.split(r"\W+", service.lower()) if len(w) > 3 and w not in _generic}
     if re.search(r"\b(ac|hvac|a/c)\b", service.lower()):
         _topic |= {"hvac", "air conditioning", "cooling", "heating", "air condition"}
@@ -860,6 +861,18 @@ def score_serp(data, service, city):
                      ("installer", {"install"}), ("builder", {"build"})):
         if _w in _topic:
             _topic |= _alt
+    # A job-level query is answered by pages that name the trade, not the job:
+    # "house rewiring Lawton OK" came back as Code Electric's "Home Wiring
+    # Services" and Sooner Services' "Electrical Repair" -- zero pages said
+    # "rewiring", so the guard refused a perfectly local, on-topic SERP.
+    _svc = service.lower()
+    for _jobs, _trade in ((("outlet", "wiring", "panel", "breaker", "charger", "fixture",
+                            "power outage", "range"), {"electric"}),
+                          (("leak", "drain", "sewer", "faucet", "toilet", "water heater",
+                            "water line", "softener", "pipe"), {"plumb"}),
+                          (("roof", "shingle"), {"roof"})):
+        if any(j in _svc for j in _jobs):
+            _topic |= _trade
     _hits = sum(1 for r in results
                 if any(t in f"{r.get('title', '')} {r.get('link', '')} {r.get('snippet', '')}".lower()
                        for t in _topic))
@@ -899,6 +912,11 @@ def score_serp(data, service, city):
              "pack_size": pack_n, "pack_top_reviews": pack_max,
              "pack_median_reviews": pack_med}
     occupants = []
+    # One competitor is one competitor however many of its pages rank.
+    # elec-deep-01 counted soonersvcs.com twice on "outlet repair Lawton OK"
+    # (its service page and its Lawton area page) and turned one local firm
+    # into the "2 dedicated" that means STOP.
+    _dedicated_hosts = set()
 
     for res in results:
         link  = (res.get("link") or "").lower()
@@ -915,8 +933,12 @@ def score_serp(data, service, city):
             tally["directory"] += 1; kinds.append("social profile")
         elif any(f in bare for f in FORUMS):
             tally["forum"] += 1; kinds.append("forum")
-        elif ((any(n in bare for n in NATIONALS) or any(b in bare for b in BIGBOX))
-              and not (city_slug in link or city_flat in link.replace("-", ""))):
+        elif (any(b in bare for b in BIGBOX)
+              or (any(n in bare for n in NATIONALS)
+                  and not (city_slug in link or city_flat in link.replace("-", "")))):
+            # Big-box retail is national even WITH the city in the URL:
+            # homedepot.com/l/Lawton/OK/... is a store-locator page, and it
+            # was booked as a dedicated competitor on "house rewiring Lawton".
             # A national brand with no city page is weak here — it ranks on
             # domain strength alone. But rotorooter.com/doverpa and
             # americanleakdetection.com/harrisburg ARE city pages, and this
@@ -952,7 +974,10 @@ def score_serp(data, service, city):
                              "/plumber-", "/plumbers-"))
             if _city_hit and (any(w in blob for w in svc_words) or _path_hit
                               or city_l in title):
-                tally["dedicated"] += 1; kinds.append("dedicated page")
+                if bare not in _dedicated_hosts:
+                    tally["dedicated"] += 1
+                _dedicated_hosts.add(bare)
+                kinds.append("dedicated page")
             if not kinds:
                 # A local contractor ranking here without the city in its
                 # title is still a competitor. Left unclassified these were
