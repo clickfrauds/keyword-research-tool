@@ -1220,7 +1220,14 @@ def verdict(o):
         why.append(f"{b['emd']} city EMD on page one")
     if b.get("pseo"):
         why.append(f"{b['pseo']} programmatic subdomain(s)")
-    if b.get("dedicated", 0) >= 2:
+    # Two local pages is STOP only where the market behind them is strong.
+    # The count alone treated Lawton OK (two small firms, map pack at ~35-90
+    # reviews, page one otherwise directories) exactly like Mechanicsburg PA
+    # (four pages, 822-review pack). No authority data is free to fetch, so
+    # the pack's review depth is the strength proxy: under 100 reviews, two
+    # pages is a market a better page can enter -> WATCH, not STOP.
+    _weak = b.get("pack_median_reviews", 0) < 100 and not b.get("national")
+    if b.get("dedicated", 0) >= 3 or (b.get("dedicated", 0) == 2 and not _weak):
         why.append(f"{b['dedicated']} dedicated {o['niche'].lower()} pages")
     if b.get("pack_median_reviews", 0) >= 500:
         why.append(f"map pack at {b['pack_median_reviews']} reviews")
@@ -1229,6 +1236,8 @@ def verdict(o):
     vol = o.get("volume")
     if b.get("dedicated", 0) == 1:
         why.append("1 dedicated page already")
+    elif b.get("dedicated", 0) == 2:
+        why.append("2 small local pages, weak map pack (<100 reviews)")
     if b.get("pack_median_reviews", 0) >= 200:
         why.append(f"map pack at {b['pack_median_reviews']} reviews")
     if o["serp_score"] < GO_SCORE:
