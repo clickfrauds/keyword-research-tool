@@ -1026,7 +1026,7 @@ def score_serp(data, service, city):
     tally = {"dedicated": 0, "pseo": 0, "national": 0, "emd": 0,
              "directory": 0, "forum": 0, "other_local": 0, "results": len(results),
              "pack_size": pack_n, "pack_top_reviews": pack_max,
-             "pack_median_reviews": pack_med}
+             "pack_median_reviews": pack_med, "city_mentions": 0}
     occupants = []
     # One competitor is one competitor however many of its pages rank.
     # elec-deep-01 counted soonersvcs.com twice on "outlet repair Lawton OK"
@@ -1042,6 +1042,8 @@ def score_serp(data, service, city):
         flat  = bare.replace("-", "").replace(".", "")
         blob  = f"{title} {link}"
         kinds = []
+        if city_l in title or city_slug in link or city_flat in flat:
+            tally["city_mentions"] += 1
 
         if (any(d in bare for d in DIRECTORIES)
                 or bare.endswith((".gov", ".edu")) or re.search(r"\.[a-z]{2}\.us$", bare)
@@ -1365,6 +1367,17 @@ def verdict(o):
         why.append(f"map pack at {b['pack_median_reviews']} reviews")
     if o["serp_score"] < GO_SCORE:
         why.append(f"SERP {o['serp_score']} < {GO_SCORE}")
+    # An empty page one is only an opening if it is a LOCAL page one.
+    # roof-remote-01 scored "roofer Biloxi MS" 100 and called it GO: Google
+    # read it as research (Facebook/YouTube scam videos, the Kansas AG, a
+    # Raleigh news story, Reddit) and not one result named Biloxi. The
+    # service queries a caller actually types ("roof repair Biloxi MS")
+    # held 5 and 6 local roofing pages. Too few results naming the town
+    # means this query says nothing about the market.
+    _cm = b.get("city_mentions")
+    if _cm is not None and b.get("results", 0) >= 5 and _cm < 3:
+        why.append(f"SERP not local: only {_cm} of {b['results']} results name {o['city']} "
+                   f"-- judge it on the service queries (subs_per_niche 3)")
     if vol is None:
         why.append("search volume not measured")
     elif vol < GO_VOLUME:
