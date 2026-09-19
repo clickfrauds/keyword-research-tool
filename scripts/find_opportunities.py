@@ -574,6 +574,12 @@ def price_modes(rows):
 # states are the metros a town's distance is measured to.
 _CITY_INFO = {}
 METRO_POP = int(os.environ.get("METRO_POP", "350000") or 350000)
+# Free pre-SERP filter: drop towns closer than this to a big metro. Every town
+# within 30 miles of one has been taken in every run so far (Edmond 15, Norman
+# 19, Littleton 10, Westminster 13, Broomfield 16, Olathe 20, Boulder 24), and
+# the only open or borderline ones sat 50+ out (Stillwater 52, Duncan 68,
+# Lawton 78). 0 = off.
+MIN_METRO_MILES = int(os.environ.get("MIN_METRO_MILES", "0") or 0)
 
 
 def _miles(a, b):
@@ -730,6 +736,12 @@ def shortlist(rows, pricing):
         c["bundle_value"] = round(bundle, 2)
         out.append(c)
 
+    if MIN_METRO_MILES:
+        before = len(out)
+        out = [c for c in out
+               if (_CITY_INFO.get((c["state"], c["city"])) or {}).get("metro_miles") is None
+               or _CITY_INFO[(c["state"], c["city"])]["metro_miles"] >= MIN_METRO_MILES]
+        print(f"   🧭 {before - len(out)} town(s) within {MIN_METRO_MILES} mi of a metro dropped (free)")
     out.sort(key=lambda c: -c["bundle_value"])
     multi = sum(1 for c in out if len(c["niche_list"]) > 1)
     print(f"   ✅ {len(out):,} candidate cities · {multi:,} with 2+ niches\n")
