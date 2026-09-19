@@ -927,7 +927,12 @@ def score_serp(data, service, city):
         blob  = f"{title} {link}"
         kinds = []
 
-        if any(d in bare for d in DIRECTORIES):
+        if (any(d in bare for d in DIRECTORIES)
+                or bare.endswith((".gov", ".edu")) or re.search(r"\.[a-z]{2}\.us$", bare)
+                or bare.startswith(("cityof", "townof", "ci.")) or ".k12." in bare):
+            # ok-elec-01 booked cityofmustang.org as a dedicated electrician
+            # page and meridiantech.edu (a trade school) as a local firm.
+            # Councils, schools and state sites are listings, not rivals.
             tally["directory"] += 1; kinds.append("directory")
         elif any(s_ in bare for s_ in SOCIAL):
             tally["directory"] += 1; kinds.append("social profile")
@@ -971,6 +976,7 @@ def score_serp(data, service, city):
             _path_hit = any(seg in link for seg in
                             ("/city/", "/cities/", "/service-area", "/service_area",
                              "/locations/", "/location/", "/areas/", "/areas-served",
+                             "/areas-we-serv", "/service-areas/", "/city-pages/",
                              "/plumber-", "/plumbers-"))
             if _city_hit and (any(w in blob for w in svc_words) or _path_hit
                               or city_l in title):
@@ -1311,8 +1317,15 @@ def launch_plan(city_rows):
             by_state.setdefault((c["state"], c["niche"]), []).append(c)
     for (st, niche), rows in by_state.items():
         go = [r for r in rows if r["verdict"] == "GO"]
-        if not go:
+        watch = [r for r in rows if r["verdict"] == "WATCH"]
+        # A state site is built on many towns, each worth a little. No GO
+        # but three WATCH towns in one state (ok-elec-01: Lawton, Stillwater,
+        # Duncan) is exactly that shape -- plan it, flagged as the slower bet.
+        watch_only = not go and len(watch) >= 3
+        if not go and not watch_only:
             continue
+        if watch_only:
+            go = watch
         state_name = STATE_NAMES.get(st, st)
         term = BROAD.get(niche, niche.lower())
         trade = TRADE_WORD.get(niche, niche)
@@ -1324,9 +1337,10 @@ def launch_plan(city_rows):
                  if len(names) >= 3 else
                  f"add {', '.join(names)} as area page(s) on a {state_name} state site")
         plans.append({
+            "confidence": "WATCH-level: no open town, several weak ones" if watch_only else "GO",
             "state": st, "state_name": state_name, "niche": niche,
             "go_cities": [r["city"] for r in go],
-            "watch_cities": [r["city"] for r in rows if r["verdict"] == "WATCH"],
+            "watch_cities": [] if watch_only else [r["city"] for r in rows if r["verdict"] == "WATCH"],
             "monthly_searches": sum((r["volume"] or 0) for r in rows),
             "best_payout": max(r["payout"] for r in rows),
             "shape": shape,
@@ -1470,7 +1484,7 @@ def write(meta, cands, scored, pricing=None):
             f2 = pl["forms"]["2_builder_mode5"]
             lines += [f"### {pl['state_name']} · {pl['niche']}",
                       "",
-                      f"- **GO:** {', '.join(pl['go_cities'])}"
+                      f"- **{'GO' if pl.get('confidence') == 'GO' else 'WATCH (no GO town)'}:** {', '.join(pl['go_cities'])}"
                       + (f" · WATCH: {', '.join(pl['watch_cities'])}" if pl["watch_cities"] else ""),
                       f"- {pl['monthly_searches']:,} searches/mo across these towns · best payout ${pl['best_payout']:.2f}",
                       f"- Shape: {pl['shape']}",
@@ -1711,7 +1725,7 @@ def write_html(payload, scored, untested):
             rows2 = "".join(f"<tr><td>{E(k)}</td><td><code>{E(json.dumps(v) if isinstance(v, dict) else str(v))}</code></td></tr>"
                             for k, v in f2.items())
             h += [f"<div class='card' style='margin-bottom:14px'><h3>{E(pl['state_name'])} · {E(pl['niche'])}</h3>",
-                  f"<p><span class='chip GO'>GO</span> {E(', '.join(pl['go_cities']))}"
+                  f"<p><span class='chip {'GO' if pl.get('confidence') == 'GO' else 'WATCH'}'>{'GO' if pl.get('confidence') == 'GO' else 'WATCH — slower bet'}</span> {E(', '.join(pl['go_cities']))}"
                   + (f" &nbsp;<span class='chip WATCH'>WATCH</span> {E(', '.join(pl['watch_cities']))}" if pl["watch_cities"] else "")
                   + f"<br><span class='muted'>{pl['monthly_searches']:,} searches/mo · best payout ${pl['best_payout']:.2f} · {E(pl['shape'])}</span></p>",
                   "<ol class='steps'>",
