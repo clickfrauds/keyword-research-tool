@@ -628,6 +628,41 @@ def fetch_category_keywords(ads_client, category, location_id, language_id, glob
             print(f"   ℹ️ Autocomplete expansion skipped for "
                   f"'{category['name']}' ({str(e)[:70]}) — Planner data stands")
 
+    # ── City-qualified head terms ─────────────────────────────────────────
+    # Bare seeds ("Plumber") pulled for a city geo return "plumbers near me"
+    # and never the query the site is named after. Bullhead City's plan and
+    # Lawton's both came back without "plumber bullhead city" (320/mo) /
+    # "electrician lawton" (210/mo) -- the biggest keyword the domain had.
+    # Measured exactly (GenerateKeywordHistoricalMetrics, free) and appended
+    # outside the cap, like the autocomplete rows.
+    if _AC_CITY_TERM:
+        city = _AC_CITY_TERM.lower().strip()
+        variants = []
+        for seed in seeds:
+            b = seed.lower().strip()
+            forms = [f"{b} {city}", f"{city} {b}"]
+            if not b.endswith("s"):
+                forms += [f"{b}s {city}", f"{city} {b}s"]
+            variants += [v for v in forms if _norm(v) not in local_seen and _norm(v) not in global_seen]
+        try:
+            metrics = fetch_historical_metrics(list(dict.fromkeys(variants)), verbose=False) if variants else {}
+        except Exception as e:
+            metrics = {}
+            print(f"   ℹ️ city-term check skipped ({str(e)[:60]})")
+        added = 0
+        for v in dict.fromkeys(variants):
+            row = metrics.get(v)
+            if row and row.get("avg_monthly_searches", 0) > 0 and _norm(v) not in local_seen:
+                row["source"] = "city_term"
+                row["intent"], row["flags"] = classify_intent(row["keyword"])
+                if "local" not in row["flags"]:
+                    row["flags"] = list(row["flags"]) + ["local"]
+                local_seen.add(_norm(v))
+                out.append(row)
+                added += 1
+        if added:
+            print(f"   🏙️ +{added} '<service> {city}' keywords with volume for '{category['name']}'")
+
     global_seen.update(local_seen)
     # Collapse spelling/word-order variants LAST, so the cap above still
     # measured real coverage but the assignment prompt sees distinct queries.
@@ -646,6 +681,37 @@ def fetch_category_keywords(ads_client, category, location_id, language_id, glob
 ASSIGN_SYSTEM = """You are a senior SEO strategist. You assign real
 Google Keyword Planner keywords to the service pages of one website
 category. Output must be valid JSON only."""
+
+
+def _promote_city_primary(services, keywords):
+    """Make "<service> <city>" the page's primary keyword when it was measured
+    with volume. The assignment model preferred "plumbers near me" (110) over
+    "plumber bullhead city" (320) because the city form was never offered;
+    even when it is, the page a city site is built around must lead with the
+    query that names the city. Moves the keyword onto its own page if the
+    model filed it elsewhere."""
+    if not _AC_CITY_TERM:
+        return
+    city = _AC_CITY_TERM.lower().strip()
+    rows = {r["keyword"].lower(): r for r in keywords if r.get("source") == "city_term"}
+    if not rows:
+        return
+    for svc in services:
+        b = svc["name"].lower().strip()
+        forms = [f"{b} {city}", f"{b}s {city}", f"{city} {b}", f"{city} {b}s"]
+        best = max((rows[f] for f in forms if f in rows),
+                   key=lambda r: r["avg_monthly_searches"], default=None)
+        if not best:
+            continue
+        kw = expand_kw(enrich(dict(best)))
+        for other in services:
+            if other is not svc:
+                other["keywords"] = [k for k in other["keywords"] if k["keyword"].lower() != kw["keyword"]]
+        if all(k["keyword"].lower() != kw["keyword"] for k in svc["keywords"]):
+            svc["keywords"].insert(0, kw)
+            svc["total_volume"] = svc.get("total_volume", 0) + kw["volume"]
+        svc["primary_keyword"] = kw
+        print(f"   🏙️ '{svc['name']}' primary -> '{kw['keyword']}' ({kw['volume']}/mo)")
 
 
 def assign_keywords(client, category, keywords):
@@ -1403,6 +1469,7 @@ def main():
                          "total_volume": 0, "questions": [], "entities_to_mention": []}
                         for s in cat["services"]]
 
+        _promote_city_primary(services, keywords)
         services.sort(key=lambda s: -s["total_volume"])
         plan_categories.append({
             "name": cat["name"],
