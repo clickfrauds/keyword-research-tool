@@ -371,7 +371,10 @@ def fetch_historical_metrics(keywords, chunk=500, verbose=True):
     try:
         client = GoogleAdsClient.load_from_env()
         service = client.get_service("KeywordPlanIdeaService")
-        location_id = LOCATION_ID or resolve_location_id(client)
+        # resolve_location_id honours LOCATION_ID itself and turns a ZIP
+        # into its city+state; using the env value raw sent "88101" to
+        # the Planner as a geo target id and every call failed.
+        location_id = resolve_location_id(client)
         if LANGUAGE_ID:
             language_id = LANGUAGE_ID
         elif LANGUAGE:

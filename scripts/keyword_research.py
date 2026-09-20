@@ -259,9 +259,23 @@ def resolve_location_id(client):
                                     names Google returns (not just the first)
 
     Returns None → worldwide (no geo filter)."""
-    if LOCATION_ID:
-        print(f"🌍 Location: explicit LOCATION_ID={LOCATION_ID} (env override)")
-        return LOCATION_ID
+    # LOCATION_ID may itself be a ZIP: the form offers "ZIP or geo id" in
+    # one box, and returning 88101 as a geo id made every Planner call
+    # fail with "The input has an invalid value". US ZIPs are 5 digits;
+    # Google's city ids are 7 and its US state ids start at 21000.
+    _explicit = (LOCATION_ID or "").strip()
+    if _explicit and re.fullmatch(r"\d{5}", _explicit) and not _explicit.startswith("21"):
+        place = _zip_to_place(_explicit)
+        if place:
+            _explicit = ""
+            globals()["TARGET_LOCATION"] = place
+        else:
+            print(f"⚠️ {_explicit} is not a geo target id and its ZIP lookup failed — "
+                  f"falling back to the target location text")
+            _explicit = ""
+    if _explicit:
+        print(f"🌍 Location: explicit LOCATION_ID={_explicit}")
+        return _explicit
     loc = (TARGET_LOCATION or "").strip()
     if not loc or loc.lower() in ("n/a", "na", "none", "worldwide", "global", "-"):
         print("🌍 Location: none given — pulling WORLDWIDE data.")
