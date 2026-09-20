@@ -1,0 +1,61 @@
+[
+  {
+    "kind": "city",
+    "confidence": "GO",
+    "state": "AZ",
+    "state_name": "Arizona",
+    "niche": "Plumbing",
+    "city": "Bullhead City",
+    "title": "Bullhead City, AZ \u00b7 Plumbing",
+    "go_cities": [
+      "Bullhead City"
+    ],
+    "watch_cities": [],
+    "monthly_searches": 880,
+    "best_payout": 56.98,
+    "shape": "city site for Bullhead City (the lawtonelectricians.com pattern)",
+    "manual_check": [
+      "https://www.google.com/search?q=plumber+Bullhead+City+AZ"
+    ],
+    "domain_hint": "plumbersbullheadcity.com",
+    "emd_free": [
+      "plumbersbullheadcity.com",
+      "plumberbullheadcity.com"
+    ],
+    "steps": [
+      {
+        "title": "Keyword tool \u2192 Mode 3 Site Plan",
+        "note": "the services list starts with the head term: the order here is the site's order",
+        "fields": {
+          "business_name": "Bullhead City Plumbers",
+          "niche_description": "plumbing referral service connecting homeowners with licensed local pros",
+          "target_location": "Bullhead City, Arizona, United States",
+          "services_mode3": "Plumber, Leak Detection, Drain Cleaning, Sewer Line Repair, Clogged Drain Repair, Water Heater Leak Repair, Faucet Repair, Slab Leak Repair, Water Line Repair, Toilet Repair, Sewer Backup Cleanup, Drain Snaking, Ceiling Leak Repair, Tankless Water Heater Repair, Water Softener Installation",
+          "serp_dedupe": "auto"
+        }
+      },
+      {
+        "title": "Website builder \u2192 Mode 3",
+        "note": "paste the plan's .seo.json link from the step above into extras",
+        "fields": {
+          "mode": "3",
+          "business_name": "Bullhead City Plumbers",
+          "industry": "plumber",
+          "main_service": "Plumber",
+          "sub_services": "Plumber, Leak Detection, Drain Cleaning, Sewer Line Repair, Clogged Drain Repair, Water Heater Leak Repair, Faucet Repair, Slab Leak Repair, Water Line Repair, Toilet Repair, Sewer Backup Cleanup, Drain Snaking, Ceiling Leak Repair, Tankless Water Heater Repair, Water Softener Installation",
+          "city": "Bullhead City",
+          "country": "United States",
+          "phone": "<LeadSmart tracking number>",
+          "domain": "plumbersbullheadcity.com (free when scanned -- buy it before building)",
+          "extras": {
+            "seo_inputs_url": "<raw .seo.json link from the step above>",
+            "site_profile": "pay_per_call",
+            "footer_credit": "no",
+            "footer_sitemap_link": "no"
+          }
+        }
+      }
+    ],
+    "later": "After 1\u20132 months in Search Console: Mode 6 local articles on the queries that show impressions."
+  }
+]
