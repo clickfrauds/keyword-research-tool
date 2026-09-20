@@ -1,0 +1,413 @@
+{
+  "pricing_model_by_niche": {
+    "Roofing (Call)": {
+      "distinct": 709,
+      "mode": "geo"
+    },
+    "Plumbing (Call)": {
+      "distinct": 1033,
+      "mode": "geo"
+    },
+    "Bathroom Remodeling (Call)": {
+      "distinct": 352,
+      "mode": "geo"
+    },
+    "HVAC (Call)": {
+      "distinct": 621,
+      "mode": "geo"
+    },
+    "Appliance (Call)": {
+      "distinct": 345,
+      "mode": "geo"
+    },
+    "Gutters (Call)": {
+      "distinct": 1,
+      "mode": "flat"
+    },
+    "Waterproofing (CPL)": {
+      "distinct": 21,
+      "mode": "geo"
+    },
+    "Water Damage (CPL)": {
+      "distinct": 110,
+      "mode": "geo"
+    },
+    "Garage Door (CPL)": {
+      "distinct": 20,
+      "mode": "geo"
+    },
+    "Foundation Repair (CPL)": {
+      "distinct": 12,
+      "mode": "geo"
+    },
+    "Pest Control (Call)": {
+      "distinct": 2,
+      "mode": "flat"
+    },
+    "Electrical (Call)": {
+      "distinct": 365,
+      "mode": "geo"
+    },
+    "Fire Damage Removal (CPL)": {
+      "distinct": 46,
+      "mode": "geo"
+    },
+    "Mold Removal (CPL)": {
+      "distinct": 40,
+      "mode": "geo"
+    },
+    "Tree Services (Call)": {
+      "distinct": 47,
+      "mode": "geo"
+    },
+    "Biohazard (CPL)": {
+      "distinct": 22,
+      "mode": "geo"
+    },
+    "Plumbing (CPL)": {
+      "distinct": 43,
+      "mode": "geo"
+    },
+    "Kitchen (CPL)": {
+      "distinct": 13,
+      "mode": "geo"
+    },
+    "Painting (CPL)": {
+      "distinct": 17,
+      "mode": "geo"
+    },
+    "Siding (CPL)": {
+      "distinct": 27,
+      "mode": "geo"
+    },
+    "Solar (CPL)": {
+      "distinct": 2,
+      "mode": "flat"
+    },
+    "Landscaping (CPL)": {
+      "distinct": 7,
+      "mode": "geo"
+    },
+    "Deck (CPL)": {
+      "distinct": 8,
+      "mode": "geo"
+    }
+  },
+  "generated": "2026-09-20 07:15 UTC",
+  "dataset_date": "2026-09-19",
+  "filters": {
+    "payout_type": "Call",
+    "min_payout": 25.0,
+    "population": [
+      8000,
+      80000
+    ],
+    "niches": [
+      "Electrical"
+    ],
+    "states": "all",
+    "min_bundle_niches": 1
+  },
+  "candidate_cities": 15,
+  "serp_scanned": 0,
+  "serp_credits": {
+    "spent": 0,
+    "cached": 0,
+    "failed": 0
+  },
+  "verdict_counts": {
+    "GO": 0,
+    "WATCH": 0,
+    "STOP": 0
+  },
+  "cities": [],
+  "launch_plan": [],
+  "opportunities": [],
+  "top_candidates_unscanned": [
+    {
+      "city": "Ormond Beach",
+      "state": "FL",
+      "county": "Volusia",
+      "pop": 43976,
+      "zips": 4,
+      "top_niche": "Electrical",
+      "top_payout": 56.7,
+      "bundle_value": 56.7,
+      "niche_list": [
+        {
+          "niche": "Electrical",
+          "payout": 56.7,
+          "zips": 4,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 140
+    },
+    {
+      "city": "Owensboro",
+      "state": "KY",
+      "county": "Daviess",
+      "pop": 73882,
+      "zips": 2,
+      "top_niche": "Electrical",
+      "top_payout": 28.35,
+      "bundle_value": 28.35,
+      "niche_list": [
+        {
+          "niche": "Electrical",
+          "payout": 28.35,
+          "zips": 2,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 260
+    },
+    {
+      "city": "Monterey",
+      "state": "CA",
+      "county": "Monterey",
+      "pop": 29613,
+      "zips": 4,
+      "top_niche": "Electrical",
+      "top_payout": 52.5,
+      "bundle_value": 52.5,
+      "niche_list": [
+        {
+          "niche": "Electrical",
+          "payout": 52.5,
+          "zips": 4,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 140
+    },
+    {
+      "city": "Corvallis",
+      "state": "OR",
+      "county": "Benton",
+      "pop": 69209,
+      "zips": 2,
+      "top_niche": "Electrical",
+      "top_payout": 42.52,
+      "bundle_value": 42.52,
+      "niche_list": [
+        {
+          "niche": "Electrical",
+          "payout": 42.52,
+          "zips": 2,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 170
+    },
+    {
+      "city": "Mansfield",
+      "state": "OH",
+      "county": "Richland",
+      "pop": 75233,
+      "zips": 6,
+      "top_niche": "Electrical",
+      "top_payout": 28.35,
+      "bundle_value": 28.35,
+      "niche_list": [
+        {
+          "niche": "Electrical",
+          "payout": 28.35,
+          "zips": 6,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 210
+    },
+    {
+      "city": "Stillwater",
+      "state": "OK",
+      "county": "Payne",
+      "pop": 49269,
+      "zips": 1,
+      "top_niche": "Electrical",
+      "top_payout": 36.75,
+      "bundle_value": 36.75,
+      "niche_list": [
+        {
+          "niche": "Electrical",
+          "payout": 36.75,
+          "zips": 1,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 90
+    },
+    {
+      "city": "Rome",
+      "state": "GA",
+      "county": "Floyd",
+      "pop": 38189,
+      "zips": 1,
+      "top_niche": "Electrical",
+      "top_payout": 29.93,
+      "bundle_value": 29.93,
+      "niche_list": [
+        {
+          "niche": "Electrical",
+          "payout": 29.93,
+          "zips": 1,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 110
+    },
+    {
+      "city": "Redmond",
+      "state": "OR",
+      "county": "Deschutes",
+      "pop": 36092,
+      "zips": 1,
+      "top_niche": "Electrical",
+      "top_payout": 35.0,
+      "bundle_value": 35.0,
+      "niche_list": [
+        {
+          "niche": "Electrical",
+          "payout": 35.0,
+          "zips": 1,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 90
+    },
+    {
+      "city": "Lincoln City",
+      "state": "OR",
+      "county": "Lincoln",
+      "pop": 9968,
+      "zips": 1,
+      "top_niche": "Electrical",
+      "top_payout": 42.52,
+      "bundle_value": 42.52,
+      "niche_list": [
+        {
+          "niche": "Electrical",
+          "payout": 42.52,
+          "zips": 1,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 70
+    },
+    {
+      "city": "Salisbury",
+      "state": "MD",
+      "county": "Wicomico",
+      "pop": 76593,
+      "zips": 1,
+      "top_niche": "Electrical",
+      "top_payout": 40.95,
+      "bundle_value": 40.95,
+      "niche_list": [
+        {
+          "niche": "Electrical",
+          "payout": 40.95,
+          "zips": 1,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 70
+    },
+    {
+      "city": "Cedar City",
+      "state": "UT",
+      "county": "Iron",
+      "pop": 38524,
+      "zips": 2,
+      "top_niche": "Electrical",
+      "top_payout": 28.35,
+      "bundle_value": 28.35,
+      "niche_list": [
+        {
+          "niche": "Electrical",
+          "payout": 28.35,
+          "zips": 2,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 90
+    },
+    {
+      "city": "Nacogdoches",
+      "state": "TX",
+      "county": "Nacogdoches",
+      "pop": 32197,
+      "zips": 3,
+      "top_niche": "Electrical",
+      "top_payout": 34.65,
+      "bundle_value": 34.65,
+      "niche_list": [
+        {
+          "niche": "Electrical",
+          "payout": 34.65,
+          "zips": 3,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 70
+    },
+    {
+      "city": "Concord",
+      "state": "NH",
+      "county": "Merrimack",
+      "pop": 44375,
+      "zips": 4,
+      "top_niche": "Electrical",
+      "top_payout": 28.66,
+      "bundle_value": 28.66,
+      "niche_list": [
+        {
+          "niche": "Electrical",
+          "payout": 28.66,
+          "zips": 4,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 70
+    },
+    {
+      "city": "Dover",
+      "state": "NH",
+      "county": "Strafford",
+      "pop": 74236,
+      "zips": 3,
+      "top_niche": "Electrical",
+      "top_payout": 26.25,
+      "bundle_value": 26.25,
+      "niche_list": [
+        {
+          "niche": "Electrical",
+          "payout": 26.25,
+          "zips": 3,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 70
+    },
+    {
+      "city": "Conway",
+      "state": "SC",
+      "county": "Horry",
+      "pop": 27263,
+      "zips": 1,
+      "top_niche": "Electrical",
+      "top_payout": 25.52,
+      "bundle_value": 25.52,
+      "niche_list": [
+        {
+          "niche": "Electrical",
+          "payout": 25.52,
+          "zips": 1,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 70
+    }
+  ]
+}
