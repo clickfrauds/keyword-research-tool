@@ -90,6 +90,35 @@ EFFORT = os.environ.get("CLAUDE_EFFORT", "medium")
 BUSINESS_NAME = os.environ.get("BUSINESS_NAME", "").strip()
 NICHE_DESCRIPTION = os.environ.get("NICHE_DESCRIPTION", "").strip()
 TARGET_LOCATION = os.environ.get("TARGET_LOCATION", "").strip()
+
+# US state names -> the two letters people actually type. Clovis NM taught
+# this: "plumber clovis" is 20/mo there and "plumber clovis nm" is 480,
+# because the locals disambiguate their own town from Clovis, California.
+_US_STATES = {
+    "alabama": "al", "alaska": "ak", "arizona": "az", "arkansas": "ar", "california": "ca",
+    "colorado": "co", "connecticut": "ct", "delaware": "de", "florida": "fl", "georgia": "ga",
+    "hawaii": "hi", "idaho": "id", "illinois": "il", "indiana": "in", "iowa": "ia",
+    "kansas": "ks", "kentucky": "ky", "louisiana": "la", "maine": "me", "maryland": "md",
+    "massachusetts": "ma", "michigan": "mi", "minnesota": "mn", "mississippi": "ms",
+    "missouri": "mo", "montana": "mt", "nebraska": "ne", "nevada": "nv",
+    "new hampshire": "nh", "new jersey": "nj", "new mexico": "nm", "new york": "ny",
+    "north carolina": "nc", "north dakota": "nd", "ohio": "oh", "oklahoma": "ok",
+    "oregon": "or", "pennsylvania": "pa", "rhode island": "ri", "south carolina": "sc",
+    "south dakota": "sd", "tennessee": "tn", "texas": "tx", "utah": "ut", "vermont": "vt",
+    "virginia": "va", "washington": "wa", "west virginia": "wv", "wisconsin": "wi",
+    "wyoming": "wy", "district of columbia": "dc",
+}
+
+
+def _state_suffix():
+    """'nm' for 'Clovis, New Mexico, United States', '' outside the US."""
+    parts = [p.strip().lower() for p in TARGET_LOCATION.split(",")]
+    for p in parts:
+        if p in _US_STATES:
+            return _US_STATES[p]
+        if len(p) == 2 and p in set(_US_STATES.values()):
+            return p
+    return ""
 MAX_KW_PER_CAT = int(os.environ.get("MAX_KEYWORDS_PER_CATEGORY", "120"))
 
 # Arabic keyboards produce ، (U+060C), not the ASCII comma, and Arabic text
@@ -637,12 +666,17 @@ def fetch_category_keywords(ads_client, category, location_id, language_id, glob
     # outside the cap, like the autocomplete rows.
     if _AC_CITY_TERM:
         city = _AC_CITY_TERM.lower().strip()
+        _st = _state_suffix()
         variants = []
         for seed in seeds:
             b = seed.lower().strip()
             forms = [f"{b} {city}", f"{city} {b}"]
             if not b.endswith("s"):
                 forms += [f"{b}s {city}", f"{city} {b}s"]
+            # "<service> <city> <state>" too: in a town whose name is shared
+            # with a bigger city elsewhere, that IS the query people type.
+            if _st:
+                forms += [f"{f} {_st}" for f in list(forms)]
             variants += [v for v in forms if _norm(v) not in local_seen and _norm(v) not in global_seen]
         try:
             metrics = fetch_historical_metrics(list(dict.fromkeys(variants)), verbose=False) if variants else {}
@@ -693,12 +727,15 @@ def _promote_city_primary(services, keywords):
     if not _AC_CITY_TERM:
         return
     city = _AC_CITY_TERM.lower().strip()
+    st = _state_suffix()
     rows = {r["keyword"].lower(): r for r in keywords if r.get("source") == "city_term"}
     if not rows:
         return
     for svc in services:
         b = svc["name"].lower().strip()
         forms = [f"{b} {city}", f"{b}s {city}", f"{city} {b}", f"{city} {b}s"]
+        if st:
+            forms += [f"{f} {st}" for f in list(forms)]
         best = max((rows[f] for f in forms if f in rows),
                    key=lambda r: r["avg_monthly_searches"], default=None)
         if not best:
