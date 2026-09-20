@@ -1,0 +1,375 @@
+{
+  "pricing_model_by_niche": {
+    "Roofing (Call)": {
+      "distinct": 709,
+      "mode": "geo"
+    },
+    "Plumbing (Call)": {
+      "distinct": 1033,
+      "mode": "geo"
+    },
+    "Bathroom Remodeling (Call)": {
+      "distinct": 352,
+      "mode": "geo"
+    },
+    "HVAC (Call)": {
+      "distinct": 621,
+      "mode": "geo"
+    },
+    "Appliance (Call)": {
+      "distinct": 345,
+      "mode": "geo"
+    },
+    "Gutters (Call)": {
+      "distinct": 1,
+      "mode": "flat"
+    },
+    "Waterproofing (CPL)": {
+      "distinct": 21,
+      "mode": "geo"
+    },
+    "Water Damage (CPL)": {
+      "distinct": 110,
+      "mode": "geo"
+    },
+    "Garage Door (CPL)": {
+      "distinct": 20,
+      "mode": "geo"
+    },
+    "Foundation Repair (CPL)": {
+      "distinct": 12,
+      "mode": "geo"
+    },
+    "Pest Control (Call)": {
+      "distinct": 2,
+      "mode": "flat"
+    },
+    "Electrical (Call)": {
+      "distinct": 365,
+      "mode": "geo"
+    },
+    "Fire Damage Removal (CPL)": {
+      "distinct": 46,
+      "mode": "geo"
+    },
+    "Mold Removal (CPL)": {
+      "distinct": 40,
+      "mode": "geo"
+    },
+    "Tree Services (Call)": {
+      "distinct": 47,
+      "mode": "geo"
+    },
+    "Biohazard (CPL)": {
+      "distinct": 22,
+      "mode": "geo"
+    },
+    "Plumbing (CPL)": {
+      "distinct": 43,
+      "mode": "geo"
+    },
+    "Kitchen (CPL)": {
+      "distinct": 13,
+      "mode": "geo"
+    },
+    "Painting (CPL)": {
+      "distinct": 17,
+      "mode": "geo"
+    },
+    "Siding (CPL)": {
+      "distinct": 27,
+      "mode": "geo"
+    },
+    "Solar (CPL)": {
+      "distinct": 2,
+      "mode": "flat"
+    },
+    "Landscaping (CPL)": {
+      "distinct": 7,
+      "mode": "geo"
+    },
+    "Deck (CPL)": {
+      "distinct": 8,
+      "mode": "geo"
+    }
+  },
+  "generated": "2026-09-20 06:47 UTC",
+  "dataset_date": "2026-09-19",
+  "filters": {
+    "payout_type": "Call",
+    "min_payout": 25.0,
+    "population": [
+      8000,
+      150000
+    ],
+    "niches": [
+      "Electrical"
+    ],
+    "states": "all",
+    "min_bundle_niches": 1
+  },
+  "candidate_cities": 13,
+  "serp_scanned": 0,
+  "serp_credits": {
+    "spent": 0,
+    "cached": 0,
+    "failed": 0
+  },
+  "verdict_counts": {
+    "GO": 0,
+    "WATCH": 0,
+    "STOP": 0
+  },
+  "cities": [],
+  "launch_plan": [],
+  "opportunities": [],
+  "top_candidates_unscanned": [
+    {
+      "city": "Yakima",
+      "state": "WA",
+      "county": "Yakima",
+      "pop": 136518,
+      "zips": 7,
+      "top_niche": "Electrical",
+      "top_payout": 55.0,
+      "bundle_value": 55.0,
+      "niche_list": [
+        {
+          "niche": "Electrical",
+          "payout": 55.0,
+          "zips": 7,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 320
+    },
+    {
+      "city": "Tyler",
+      "state": "TX",
+      "county": "Smith",
+      "pop": 134739,
+      "zips": 12,
+      "top_niche": "Electrical",
+      "top_payout": 49.86,
+      "bundle_value": 49.86,
+      "niche_list": [
+        {
+          "niche": "Electrical",
+          "payout": 49.86,
+          "zips": 12,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 320
+    },
+    {
+      "city": "Longview",
+      "state": "TX",
+      "county": "Gregg",
+      "pop": 106896,
+      "zips": 5,
+      "top_niche": "Electrical",
+      "top_payout": 45.33,
+      "bundle_value": 45.33,
+      "niche_list": [
+        {
+          "niche": "Electrical",
+          "payout": 45.33,
+          "zips": 5,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 260
+    },
+    {
+      "city": "Boynton Beach",
+      "state": "FL",
+      "county": "Palm Beach",
+      "pop": 81435,
+      "zips": 9,
+      "top_niche": "Electrical",
+      "top_payout": 50.75,
+      "bundle_value": 50.75,
+      "niche_list": [
+        {
+          "niche": "Electrical",
+          "payout": 50.75,
+          "zips": 9,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 170
+    },
+    {
+      "city": "Owensboro",
+      "state": "KY",
+      "county": "Daviess",
+      "pop": 73882,
+      "zips": 2,
+      "top_niche": "Electrical",
+      "top_payout": 28.35,
+      "bundle_value": 28.35,
+      "niche_list": [
+        {
+          "niche": "Electrical",
+          "payout": 28.35,
+          "zips": 2,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 260
+    },
+    {
+      "city": "Jacksonville",
+      "state": "NC",
+      "county": "Onslow",
+      "pop": 111529,
+      "zips": 1,
+      "top_niche": "Electrical",
+      "top_payout": 28.35,
+      "bundle_value": 28.35,
+      "niche_list": [
+        {
+          "niche": "Electrical",
+          "payout": 28.35,
+          "zips": 1,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 260
+    },
+    {
+      "city": "Palm Coast",
+      "state": "FL",
+      "county": "Flagler",
+      "pop": 98258,
+      "zips": 3,
+      "top_niche": "Electrical",
+      "top_payout": 34.58,
+      "bundle_value": 34.58,
+      "niche_list": [
+        {
+          "niche": "Electrical",
+          "payout": 34.58,
+          "zips": 3,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 210
+    },
+    {
+      "city": "Corvallis",
+      "state": "OR",
+      "county": "Benton",
+      "pop": 69209,
+      "zips": 2,
+      "top_niche": "Electrical",
+      "top_payout": 42.52,
+      "bundle_value": 42.52,
+      "niche_list": [
+        {
+          "niche": "Electrical",
+          "payout": 42.52,
+          "zips": 2,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 170
+    },
+    {
+      "city": "Bend",
+      "state": "OR",
+      "county": "Deschutes",
+      "pop": 113075,
+      "zips": 5,
+      "top_niche": "Electrical",
+      "top_payout": 37.8,
+      "bundle_value": 37.8,
+      "niche_list": [
+        {
+          "niche": "Electrical",
+          "payout": 37.8,
+          "zips": 5,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 170
+    },
+    {
+      "city": "Lawton",
+      "state": "OK",
+      "county": "Comanche",
+      "pop": 90595,
+      "zips": 3,
+      "top_niche": "Electrical",
+      "top_payout": 28.88,
+      "bundle_value": 28.88,
+      "niche_list": [
+        {
+          "niche": "Electrical",
+          "payout": 28.88,
+          "zips": 3,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 210
+    },
+    {
+      "city": "Athens",
+      "state": "GA",
+      "county": "Clarke",
+      "pop": 143681,
+      "zips": 1,
+      "top_niche": "Electrical",
+      "top_payout": 28.35,
+      "bundle_value": 28.35,
+      "niche_list": [
+        {
+          "niche": "Electrical",
+          "payout": 28.35,
+          "zips": 1,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 210
+    },
+    {
+      "city": "Mansfield",
+      "state": "OH",
+      "county": "Richland",
+      "pop": 75233,
+      "zips": 6,
+      "top_niche": "Electrical",
+      "top_payout": 28.35,
+      "bundle_value": 28.35,
+      "niche_list": [
+        {
+          "niche": "Electrical",
+          "payout": 28.35,
+          "zips": 6,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 210
+    },
+    {
+      "city": "Santa Fe",
+      "state": "NM",
+      "county": "Santa Fe",
+      "pop": 100264,
+      "zips": 2,
+      "top_niche": "Electrical",
+      "top_payout": 25.2,
+      "bundle_value": 25.2,
+      "niche_list": [
+        {
+          "niche": "Electrical",
+          "payout": 25.2,
+          "zips": 2,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 210
+    }
+  ]
+}
