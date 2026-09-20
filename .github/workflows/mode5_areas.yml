@@ -28,6 +28,10 @@ on:
       extra_areas:
         description: "Extra area names to measure, comma-separated. Google cannot target Deira, Bur Dubai, Al Karama or JLT, but people search them — list any the plan is missing."
         default: ''
+      location_id:
+        description: "OPTIONAL: exact Google geo target id (or US ZIP) — blank = resolve the target location by name"
+        required: false
+        default: ''
       language:
         default: ''
 
@@ -79,6 +83,7 @@ jobs:
           BUSINESS_NAME: ${{ github.event.inputs.business_name }}
           NICHE_DESCRIPTION: ${{ github.event.inputs.niche_description }}
           TARGET_LOCATION: ${{ github.event.inputs.target_location }}
+          LOCATION_ID: ${{ github.event.inputs.location_id }}
           PRIMARY_SERVICE: ${{ github.event.inputs.primary_service }}
           MIN_AREA_VOLUME: ${{ github.event.inputs.min_area_volume }}
           MAX_AREAS: ${{ github.event.inputs.max_areas }}

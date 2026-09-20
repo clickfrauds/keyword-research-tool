@@ -213,6 +213,21 @@
     <input id="target_location" name="target_location" required placeholder="e.g. Phoenix, United States — or pick above">
     <div class="hint">Pick country + city above (auto-fills this field), or type free text. For Google Ads runs the Locations CSV targets the best areas of the country — narrowed to the city when one is chosen. Use <b>Worldwide (N/A)</b> for global SEO runs.</div>
 
+    <label for="location_id">Exact location <span style="opacity:.6">(optional — ZIP or Google geo id)</span></label>
+    <input id="location_id" name="location_id" placeholder="e.g. 88101 (US ZIP) or 1022519 (geo id)">
+    <div class="hint">Only needed when the city name exists twice: <b>Clovis, New Mexico</b> (1022519) and <b>Clovis, California</b> (1013686) both answer to "Clovis", and the Planner returned California's volumes. A US ZIP is resolved to its own city + state; ids are on <a href="https://developers.google.com/google-ads/api/data/geotargets" target="_blank" rel="noopener">Google's geo target list</a>.</div>
+
+    <div id="dedupe-block" style="display:none;">
+      <label for="serp_dedupe">Duplicate-page check <span style="opacity:.6">(Mode 3 only — costs 1 SerpApi credit per page)</span></label>
+      <select id="serp_dedupe" name="serp_dedupe">
+        <option value="off">Off — no SerpApi credits (default)</option>
+        <option value="auto">Auto — merge lists of 25 pages or fewer, flag longer ones</option>
+        <option value="merge">Merge — always remove duplicate pages first</option>
+        <option value="flag">Flag — report duplicates, change nothing</option>
+      </select>
+      <div class="hint">A 20-service plan spends 20 credits on <b>auto</b> or <b>merge</b>. Leave it off unless two services really are the same page.</div>
+    </div>
+
     <label for="website_url">Website URL <span style="opacity:.6">(optional — RSA Final URLs are built from this plus each landing-page slug)</span></label>
     <input id="website_url" name="website_url" placeholder="https://yourdomain.com">
 
@@ -333,6 +348,7 @@
         var m5 = this.value === "mode5";
         setLocationsOnly(this.value === "locations");
         document.getElementById("extra-areas-block").style.display = m5 ? "" : "none";
+        document.getElementById("dedupe-block").style.display = m3 ? "" : "none";
         // Mode 5 researches and tags the language but does not translate the
         // plan's own summary text — say so rather than let it surprise anyone.
         document.getElementById("lang-mode5-note").style.display =

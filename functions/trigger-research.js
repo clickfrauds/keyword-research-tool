@@ -94,6 +94,12 @@ export async function onRequestPost(context) {
   const language = LANG_CODES.includes(String(body.language || "").toLowerCase())
     ? String(body.language).toLowerCase() : "no";
 
+  // A ZIP or a geo target id pins the market when the city name is not
+  // unique (Clovis NM vs Clovis CA). Digits only; the backend resolves it.
+  const location_id = String(body.location_id || "").replace(/[^0-9]/g, "").slice(0, 9);
+  const DEDUPE = ["off", "auto", "merge", "flag"];
+  const serp_dedupe = DEDUPE.includes(String(body.serp_dedupe || "")) ? String(body.serp_dedupe) : "off";
+
   const inputs = isMode5
     ? {
         business_name: String(business_name).slice(0, 200),
@@ -108,6 +114,7 @@ export async function onRequestPost(context) {
         max_areas: String(body.max_areas || "").slice(0, 4),
         // districts that are not Google geo targets but are searched by name
         extra_areas: String(body.extra_areas || "").slice(0, 900),
+        location_id,
         language,
         request_id,
       }
@@ -117,6 +124,8 @@ export async function onRequestPost(context) {
         niche_description: String(niche_description).slice(0, 500),
         target_location: String(target_location).slice(0, 200),
         services_mode3: String(seed_keywords).slice(0, 4000),
+        location_id,
+        serp_dedupe,
         language,
         request_id,
       }
@@ -125,6 +134,8 @@ export async function onRequestPost(context) {
         niche_description: String(niche_description).slice(0, 500),
         target_location: String(target_location).slice(0, 200),
         seed_keywords: String(seed_keywords || "").slice(0, 1000),
+        // the pipeline reads location_id out of its `advanced` blob
+        advanced: location_id ? JSON.stringify({ location_id }) : "",
         // Live pages the campaign must be built around. Present = Stage
         // 0-CRAWL runs and its seeds replace seed_keywords downstream.
         landing_urls: landing_urls.slice(0, 4000),

@@ -36,6 +36,7 @@ OUTPUT:
     Sorted by search volume (highest first).
 """
 
+import json
 import os
 import re
 import time
@@ -205,31 +206,94 @@ def resolve_language_from_code(client, code):
     return None
 
 
+def _zip_to_place(text):
+    """'88101' or 'Clovis 88101' -> 'Clovis, New Mexico, United States'.
+
+    A US ZIP names exactly one place, which is the point: 'Clovis' alone is
+    two cities 900 miles apart (New Mexico 1022519, California 1013686) and
+    the Planner answered with California's numbers. Free, no key; on any
+    failure the original text is used unchanged."""
+    m = re.search(r"\b(\d{5})\b", text or "")
+    if not m:
+        return None
+    try:
+        import urllib.request as _ur
+        with _ur.urlopen(f"https://api.zippopotam.us/us/{m.group(1)}", timeout=10) as r:
+            p = (json.loads(r.read().decode("utf-8")).get("places") or [{}])[0]
+        city, state = p.get("place name", "").strip(), p.get("state", "").strip()
+        if city and state:
+            print(f"🌍 ZIP {m.group(1)} → {city}, {state}")
+            return f"{city}, {state}, United States"
+    except Exception as e:
+        print(f"   ℹ️ ZIP lookup failed ({str(e)[:50]}) — using the text as given")
+    return None
+
+
+def _score_geo(geo, wanted_parts):
+    """How well one suggestion matches what was asked for.
+
+    Google returns suggestions ranked by ITS idea of relevance, so taking
+    [0] handed back Clovis, California for 'Clovis, New Mexico, United
+    States'. Matching the canonical name against every part the caller
+    wrote is what makes the answer theirs and not Google's guess."""
+    canon = (geo.canonical_name or geo.name or "").lower()
+    canon_parts = [c.strip() for c in canon.split(",")]
+    canon_flat = ",".join(canon_parts)   # Google writes "Clovis,New Mexico,United States"
+    score = 0
+    if canon_flat == ",".join(wanted_parts):
+        score += 100                       # exact canonical name
+    hit = sum(1 for w in wanted_parts if w in canon_parts)
+    score += hit * 20
+    score += sum(5 for w in wanted_parts if w not in canon_parts and w in canon)
+    if wanted_parts and canon_parts and canon_parts[0] == wanted_parts[0]:
+        score += 10                        # same place name, not just a parent
+    return score
+
+
 def resolve_location_id(client):
-    """Resolve free-text TARGET_LOCATION ('Dubai, UAE', 'Lahore', 'United
-    Kingdom' — any market) to a geo target constant id via the official
-    GeoTargetConstantService. Returns None → worldwide (no geo filter)."""
+    """TARGET_LOCATION -> geo target constant id. Accepts, in this order:
+
+        1234567                     a Google geo target id (or 'id:1234567')
+        88101 / 'Clovis 88101'      a US ZIP — resolved to its city + state
+        'Clovis, New Mexico, US'    free text, matched against the canonical
+                                    names Google returns (not just the first)
+
+    Returns None → worldwide (no geo filter)."""
     if LOCATION_ID:
         print(f"🌍 Location: explicit LOCATION_ID={LOCATION_ID} (env override)")
         return LOCATION_ID
-    loc = TARGET_LOCATION
+    loc = (TARGET_LOCATION or "").strip()
     if not loc or loc.lower() in ("n/a", "na", "none", "worldwide", "global", "-"):
         print("🌍 Location: none given — pulling WORLDWIDE data.")
         return None
+    _id = re.fullmatch(r"(?:id:)?\s*(\d{4,9})", loc, re.I)
+    if _id:
+        print(f"🌍 Location: geo target id {_id.group(1)} (given directly)")
+        return _id.group(1)
+    loc = _zip_to_place(loc) or loc
+    wanted = [p.strip().lower() for p in loc.split(",") if p.strip()]
     try:
         svc = client.get_service("GeoTargetConstantService")
-        parts = [p.strip() for p in loc.split(",") if p.strip()]
-        for query in [loc] + parts:
+        for query in [loc] + [p.strip() for p in loc.split(",") if p.strip()]:
             request = client.get_type("SuggestGeoTargetConstantsRequest")
             request.locale = "en"
             request.location_names.names.append(query)
             resp = svc.suggest_geo_target_constants(request=request)
-            suggestions = list(resp.geo_target_constant_suggestions)
-            if suggestions:
-                geo = suggestions[0].geo_target_constant
-                print(f"🌍 Location resolved: '{query}' → {geo.name}, "
-                      f"{geo.country_code} (geo id {geo.id})")
-                return str(geo.id)
+            cands = [s.geo_target_constant for s in resp.geo_target_constant_suggestions]
+            if not cands:
+                continue
+            ranked = sorted(cands, key=lambda g: -_score_geo(g, wanted))
+            best = ranked[0]
+            if len(ranked) > 1 and _score_geo(ranked[1], wanted) == _score_geo(best, wanted):
+                print("⚠️ Two geo targets match equally well — using the first. "
+                      "Pass the id or a ZIP to be sure:")
+                for g in ranked[:3]:
+                    print(f"      {g.id}  {g.canonical_name}")
+            print(f"🌍 Location resolved: '{query}' → {best.canonical_name} "
+                  f"(geo id {best.id})")
+            for g in ranked[1:3]:
+                print(f"      other match: {g.id}  {g.canonical_name}")
+            return str(best.id)
     except Exception as e:
         print(f"⚠️ Geo lookup failed ({e}) — continuing WORLDWIDE (no geo filter).")
         return None
