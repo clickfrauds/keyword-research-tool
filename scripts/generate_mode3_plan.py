@@ -134,6 +134,15 @@ def split_list(raw):
 
 SERVICES = split_list(os.environ.get("SERVICES_MODE3", ""))
 
+# Retailers, fixture brands and trade-career queries: real search volume,
+# no buyer behind it for a service site.
+_JUNK_KW = re.compile(
+    r"home ?depot|lowe'?s|menards|costco|walmart|amazon|wayfair|ace hardware|harbor freight|"
+    r"\bmoen\b|\bdelta\b|kohler|american standard|insinkerator|rheem|ao smith|a\.?o\.? smith|"
+    r"bradford white|navien|rinnai|noritz|\bbosch\b|culligan|kinetico|pfister|\bglacier bay\b|"
+    r"salary|wage|apprentice|\bjobs?\b|hiring|school|training|certification|\bexam\b|"
+    r"\blicen[sc]e (?:test|exam|renewal|lookup)\b|\bdiy\b|home ?made", re.I)
+
 ADS_SEED_LIMIT = 20          # GenerateKeywordIdeas hard limit: 20 seed keywords/request
 ADS_CALL_DELAY = 1.5         # polite pacing between Ads API calls (seconds)
 
@@ -601,6 +610,15 @@ def fetch_category_keywords(ads_client, category, location_id, language_id, glob
     for r in rows:
         r.setdefault("source", "planner")
         r["intent"], r["flags"] = classify_intent(r["keyword"])
+    # The Planner answers a service seed with the retail aisle next to it:
+    # "home depot water heater installation cost", "moen cartridge",
+    # "plumber salary". Someone pricing a Lowe's install or reading a wage
+    # table is not going to call a referral line, and every one of these was
+    # reaching a page (27 of them in the Clovis plan).
+    _before = len(rows)
+    rows = [r for r in rows if not _JUNK_KW.search(r["keyword"])]
+    if len(rows) != _before:
+        print(f"   🧽 {_before - len(rows)} retailer/brand/career keyword(s) dropped")
     out, local_seen = [], set()
     for r in sorted(rows, key=lambda r: -r["avg_monthly_searches"]):
         key = _norm(r["keyword"])
@@ -795,6 +813,10 @@ RULES:
    cannibalization). Irrelevant/junk/competitor-brand ids → excluded_ids.
 2. primary_keyword_id = that page's single #1 target (highest-value
    relevant keyword) and must appear in its keyword_ids.
+2a. NEVER write a promise the site cannot keep — no arrival times ("same-day",
+   "within 60 minutes", "we dispatch"), no fixed prices ("$49 drain cleaning"),
+   no ratings or review counts, in questions, answer_angles, h2s or attributes.
+   The site refers the caller to an independent local pro who sets both.
 3. questions: 3-6 per service — REAL phrasing customers type into
    Google/AI assistants about THAT service{' in ' + TARGET_LOCATION if TARGET_LOCATION else ''}
    (cost, timeframe, troubleshooting). Each gets an answer_angle: one
@@ -1264,6 +1286,14 @@ category's expertise obvious. Rules:
    page NAME exactly as written.
 4. Titles read like an article a person would open, not a category label.
 5. slug: lowercase, hyphenated, English, no city unless the query has one.
+6. NEVER a step-by-step DIY repair guide ("How to Repair a Leaky Faucet").
+   A reader who fixes it himself never calls. Write the article that ends
+   with him calling: symptoms and what they mean, what a repair involves and
+   what drives its cost, repair-or-replace, what to ask before booking, and
+   what the local climate and water do to the system.
+7. Where a CITY is given, at least half the titles name it — a local reader
+   should see his own town, and these articles are what the core pages link
+   out to.
 
 JSON:
 {{"articles": [{{"title": "...", "slug": "...", "focus_keyword": "...",
@@ -1307,6 +1337,23 @@ def _short_label(text, limit):
     if len(t) <= limit:
         return t
     return t[:limit].rsplit(" ", 1)[0].rstrip(",;:-") or t[:limit]
+
+
+def _industry_label(services, central_entity):
+    """What the site is, in one or two words, for the page writer.
+
+    _short_label(NICHE_DESCRIPTION, 60) cut "plumbing referral service
+    connecting homeowners with licensed local plumbers" into "plumbing
+    referral service connecting homeowners with" and shipped that as the
+    site's label. The head service IS the label ("Plumber"); the central
+    entity is the fallback, and the trimmed description the last resort."""
+    head = str((services or [""])[0]).strip()
+    if 2 <= len(head) <= 40:
+        return head.lower()
+    ce = str(central_entity or "").strip()
+    if 2 <= len(ce) <= 40:
+        return ce.lower()
+    return _short_label(NICHE_DESCRIPTION, 60)
 
 
 def normalize_entities(plan_categories):
@@ -1559,7 +1606,8 @@ def main():
             # home page's demand block, so a fragment ending in "w" was framing
             # the whole site. Cut on a word boundary, and only when it is
             # genuinely too long to be a label.
-            "industry_label": _short_label(NICHE_DESCRIPTION, 60),
+            "industry_label": _industry_label(all_services_ordered,
+                                              site_context.get("central_entity", "")),
             # Site-wide framing. The builder puts these in front of the writer
             # on EVERY page, which is what stops 100 pages reading as 100
             # unrelated pages — each one is visibly about the same entity,
