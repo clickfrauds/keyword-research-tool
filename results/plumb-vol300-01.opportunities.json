@@ -1,0 +1,4479 @@
+{
+  "pricing_model_by_niche": {
+    "Roofing (Call)": {
+      "distinct": 709,
+      "mode": "geo"
+    },
+    "Plumbing (Call)": {
+      "distinct": 1033,
+      "mode": "geo"
+    },
+    "Bathroom Remodeling (Call)": {
+      "distinct": 352,
+      "mode": "geo"
+    },
+    "HVAC (Call)": {
+      "distinct": 621,
+      "mode": "geo"
+    },
+    "Appliance (Call)": {
+      "distinct": 345,
+      "mode": "geo"
+    },
+    "Gutters (Call)": {
+      "distinct": 1,
+      "mode": "flat"
+    },
+    "Waterproofing (CPL)": {
+      "distinct": 21,
+      "mode": "geo"
+    },
+    "Water Damage (CPL)": {
+      "distinct": 110,
+      "mode": "geo"
+    },
+    "Garage Door (CPL)": {
+      "distinct": 20,
+      "mode": "geo"
+    },
+    "Foundation Repair (CPL)": {
+      "distinct": 12,
+      "mode": "geo"
+    },
+    "Pest Control (Call)": {
+      "distinct": 2,
+      "mode": "flat"
+    },
+    "Electrical (Call)": {
+      "distinct": 365,
+      "mode": "geo"
+    },
+    "Fire Damage Removal (CPL)": {
+      "distinct": 46,
+      "mode": "geo"
+    },
+    "Mold Removal (CPL)": {
+      "distinct": 40,
+      "mode": "geo"
+    },
+    "Tree Services (Call)": {
+      "distinct": 47,
+      "mode": "geo"
+    },
+    "Biohazard (CPL)": {
+      "distinct": 22,
+      "mode": "geo"
+    },
+    "Plumbing (CPL)": {
+      "distinct": 43,
+      "mode": "geo"
+    },
+    "Kitchen (CPL)": {
+      "distinct": 13,
+      "mode": "geo"
+    },
+    "Painting (CPL)": {
+      "distinct": 17,
+      "mode": "geo"
+    },
+    "Siding (CPL)": {
+      "distinct": 27,
+      "mode": "geo"
+    },
+    "Solar (CPL)": {
+      "distinct": 2,
+      "mode": "flat"
+    },
+    "Landscaping (CPL)": {
+      "distinct": 7,
+      "mode": "geo"
+    },
+    "Deck (CPL)": {
+      "distinct": 8,
+      "mode": "geo"
+    }
+  },
+  "generated": "2026-09-20 03:09 UTC",
+  "dataset_date": "2026-09-19",
+  "filters": {
+    "payout_type": "Call",
+    "min_payout": 30.0,
+    "population": [
+      8000,
+      150000
+    ],
+    "niches": [
+      "Plumbing"
+    ],
+    "states": "all",
+    "min_bundle_niches": 1
+  },
+  "candidate_cities": 59,
+  "serp_scanned": 28,
+  "serp_credits": {
+    "spent": 9,
+    "cached": 22,
+    "failed": 0
+  },
+  "verdict_counts": {
+    "GO": 1,
+    "WATCH": 0,
+    "STOP": 27
+  },
+  "cities": [
+    {
+      "city": "Bullhead City",
+      "state": "AZ",
+      "county": "Mohave",
+      "population": 42496,
+      "niche": "Plumbing",
+      "payout": 56.98,
+      "volume": 880,
+      "bundle_value": 56.98,
+      "verdict": "GO",
+      "why": [
+        "GO with EMD: plumbersbullheadcity.com is free",
+        "`plumber Bullhead City AZ`: 3 small local pages, weak map pack (<100 reviews); SERP 35 < 60"
+      ],
+      "queries": [
+        {
+          "query": "plumber Bullhead City AZ",
+          "serp_score": 35,
+          "verdict": "WATCH"
+        }
+      ],
+      "best_value": 17549.8,
+      "metro": "Las Vegas, NV",
+      "metro_miles": 80,
+      "gates": [
+        {
+          "gate": "Payout",
+          "status": "pass",
+          "value": "$56.98"
+        },
+        {
+          "gate": "Economics",
+          "status": "pass",
+          "value": "~$45 per call (79% of calls pay)"
+        },
+        {
+          "gate": "Demand",
+          "status": "pass",
+          "value": "880/mo"
+        },
+        {
+          "gate": "SERP",
+          "status": "warn",
+          "value": "score 35\u201335 over 1 query"
+        },
+        {
+          "gate": "Coverage",
+          "status": "pass",
+          "value": "3 of 4 ZIPs bought"
+        },
+        {
+          "gate": "EMD",
+          "status": "pass",
+          "value": "plumbersbullheadcity.com, plumberbullheadcity.com free"
+        }
+      ],
+      "emd_free": [
+        "plumbersbullheadcity.com",
+        "plumberbullheadcity.com"
+      ],
+      "gate_marks": "\u2705\u2705\u2705\ud83d\udfe1\u2705\u2705"
+    },
+    {
+      "city": "Pocatello",
+      "state": "ID",
+      "county": "Bannock",
+      "population": 72963,
+      "niche": "Plumbing",
+      "payout": 34.65,
+      "volume": 1900,
+      "bundle_value": 34.65,
+      "verdict": "STOP",
+      "why": [
+        "`plumber Pocatello ID`: 3 dedicated plumbing pages"
+      ],
+      "queries": [
+        {
+          "query": "plumber Pocatello ID",
+          "serp_score": 35,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 23042.2,
+      "metro": "Ogden, UT",
+      "metro_miles": 116,
+      "gates": [
+        {
+          "gate": "Payout",
+          "status": "pass",
+          "value": "$34.65"
+        },
+        {
+          "gate": "Economics",
+          "status": "pass",
+          "value": "~$27 per call (79% of calls pay)"
+        },
+        {
+          "gate": "Demand",
+          "status": "pass",
+          "value": "1900/mo"
+        },
+        {
+          "gate": "SERP",
+          "status": "fail",
+          "value": "score 35\u201335 over 1 query"
+        },
+        {
+          "gate": "Coverage",
+          "status": "pass",
+          "value": "3 of 6 ZIPs bought"
+        }
+      ],
+      "gate_marks": "\u2705\u2705\u2705\u274c\u2705"
+    },
+    {
+      "city": "Lake Havasu City",
+      "state": "AZ",
+      "county": "Mohave",
+      "population": 58359,
+      "niche": "Plumbing",
+      "payout": 54.39,
+      "volume": 880,
+      "bundle_value": 54.39,
+      "verdict": "STOP",
+      "why": [
+        "`plumber Lake Havasu City AZ`: 3 dedicated plumbing pages"
+      ],
+      "queries": [
+        {
+          "query": "plumber Lake Havasu City AZ",
+          "serp_score": 35,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 16752.1,
+      "metro": "Indio, CA",
+      "metro_miles": 122,
+      "gates": [
+        {
+          "gate": "Payout",
+          "status": "pass",
+          "value": "$54.39"
+        },
+        {
+          "gate": "Economics",
+          "status": "pass",
+          "value": "~$43 per call (79% of calls pay)"
+        },
+        {
+          "gate": "Demand",
+          "status": "pass",
+          "value": "880/mo"
+        },
+        {
+          "gate": "SERP",
+          "status": "fail",
+          "value": "score 35\u201335 over 1 query"
+        },
+        {
+          "gate": "Coverage",
+          "status": "pass",
+          "value": "3 of 4 ZIPs bought"
+        }
+      ],
+      "gate_marks": "\u2705\u2705\u2705\u274c\u2705"
+    },
+    {
+      "city": "Palm Coast",
+      "state": "FL",
+      "county": "Flagler",
+      "population": 98258,
+      "niche": "Plumbing",
+      "payout": 47.25,
+      "volume": 590,
+      "bundle_value": 47.25,
+      "verdict": "STOP",
+      "why": [
+        "`plumber Palm Coast FL`: 4 dedicated plumbing pages"
+      ],
+      "queries": [
+        {
+          "query": "plumber Palm Coast FL",
+          "serp_score": 35,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 9757.1,
+      "metro": "Jacksonville, FL",
+      "metro_miles": 60,
+      "gates": [
+        {
+          "gate": "Payout",
+          "status": "pass",
+          "value": "$47.25"
+        },
+        {
+          "gate": "Economics",
+          "status": "pass",
+          "value": "~$37 per call (79% of calls pay)"
+        },
+        {
+          "gate": "Demand",
+          "status": "pass",
+          "value": "590/mo"
+        },
+        {
+          "gate": "SERP",
+          "status": "fail",
+          "value": "score 35\u201335 over 1 query"
+        },
+        {
+          "gate": "Coverage",
+          "status": "pass",
+          "value": "3 of 5 ZIPs bought"
+        }
+      ],
+      "gate_marks": "\u2705\u2705\u2705\u274c\u2705"
+    },
+    {
+      "city": "Tyler",
+      "state": "TX",
+      "county": "Smith",
+      "population": 134739,
+      "niche": "Plumbing",
+      "payout": 38.5,
+      "volume": 1000,
+      "bundle_value": 38.5,
+      "verdict": "STOP",
+      "why": [
+        "`plumber Tyler TX`: 2 city EMD on page one; map pack at 936 reviews"
+      ],
+      "queries": [
+        {
+          "query": "plumber Tyler TX",
+          "serp_score": 25,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 9625.0,
+      "metro": "Shreveport, LA",
+      "metro_miles": 92,
+      "gates": [
+        {
+          "gate": "Payout",
+          "status": "pass",
+          "value": "$38.50"
+        },
+        {
+          "gate": "Economics",
+          "status": "pass",
+          "value": "~$30 per call (79% of calls pay)"
+        },
+        {
+          "gate": "Demand",
+          "status": "pass",
+          "value": "1000/mo"
+        },
+        {
+          "gate": "SERP",
+          "status": "fail",
+          "value": "score 25\u201325 over 1 query"
+        },
+        {
+          "gate": "Coverage",
+          "status": "pass",
+          "value": "11 of 15 ZIPs bought"
+        }
+      ],
+      "gate_marks": "\u2705\u2705\u2705\u274c\u2705"
+    },
+    {
+      "city": "Florence",
+      "state": "SC",
+      "county": "Florence",
+      "population": 90753,
+      "niche": "Plumbing",
+      "payout": 35.0,
+      "volume": 720,
+      "bundle_value": 35.0,
+      "verdict": "STOP",
+      "why": [
+        "`plumber Florence SC`: 5 local plumbing firms on page one"
+      ],
+      "queries": [
+        {
+          "query": "plumber Florence SC",
+          "serp_score": 35,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 8820.0,
+      "metro": "Columbia, SC",
+      "metro_miles": 72,
+      "gates": [
+        {
+          "gate": "Payout",
+          "status": "pass",
+          "value": "$35.00"
+        },
+        {
+          "gate": "Economics",
+          "status": "pass",
+          "value": "~$28 per call (79% of calls pay)"
+        },
+        {
+          "gate": "Demand",
+          "status": "pass",
+          "value": "720/mo"
+        },
+        {
+          "gate": "SERP",
+          "status": "fail",
+          "value": "score 35\u201335 over 1 query"
+        },
+        {
+          "gate": "Coverage",
+          "status": "pass",
+          "value": "6 of 6 ZIPs bought"
+        }
+      ],
+      "gate_marks": "\u2705\u2705\u2705\u274c\u2705"
+    },
+    {
+      "city": "Longview",
+      "state": "TX",
+      "county": "Gregg",
+      "population": 106896,
+      "niche": "Plumbing",
+      "payout": 55.13,
+      "volume": 880,
+      "bundle_value": 55.13,
+      "verdict": "STOP",
+      "why": [
+        "`plumber Longview TX`: 1 city EMD on page one; 3 dedicated plumbing pages"
+      ],
+      "queries": [
+        {
+          "query": "plumber Longview TX",
+          "serp_score": 18,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 8732.6,
+      "metro": "Shreveport, LA",
+      "metro_miles": 59,
+      "gates": [
+        {
+          "gate": "Payout",
+          "status": "pass",
+          "value": "$55.13"
+        },
+        {
+          "gate": "Economics",
+          "status": "pass",
+          "value": "~$44 per call (79% of calls pay)"
+        },
+        {
+          "gate": "Demand",
+          "status": "pass",
+          "value": "880/mo"
+        },
+        {
+          "gate": "SERP",
+          "status": "fail",
+          "value": "score 18\u201318 over 1 query"
+        },
+        {
+          "gate": "Coverage",
+          "status": "pass",
+          "value": "9 of 10 ZIPs bought"
+        }
+      ],
+      "gate_marks": "\u2705\u2705\u2705\u274c\u2705"
+    },
+    {
+      "city": "Bend",
+      "state": "OR",
+      "county": "Deschutes",
+      "population": 113075,
+      "niche": "Plumbing",
+      "payout": 39.38,
+      "volume": 880,
+      "bundle_value": 39.38,
+      "verdict": "STOP",
+      "why": [
+        "`plumber Bend OR`: 1 city EMD on page one; 2 dedicated plumbing pages"
+      ],
+      "queries": [
+        {
+          "query": "plumber Bend OR",
+          "serp_score": 25,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 8663.6,
+      "metro": "Portland, OR",
+      "metro_miles": 121,
+      "gates": [
+        {
+          "gate": "Payout",
+          "status": "pass",
+          "value": "$39.38"
+        },
+        {
+          "gate": "Economics",
+          "status": "pass",
+          "value": "~$31 per call (79% of calls pay)"
+        },
+        {
+          "gate": "Demand",
+          "status": "pass",
+          "value": "880/mo"
+        },
+        {
+          "gate": "SERP",
+          "status": "fail",
+          "value": "score 25\u201325 over 1 query"
+        },
+        {
+          "gate": "Coverage",
+          "status": "pass",
+          "value": "5 of 6 ZIPs bought"
+        }
+      ],
+      "gate_marks": "\u2705\u2705\u2705\u274c\u2705"
+    },
+    {
+      "city": "Lompoc",
+      "state": "CA",
+      "county": "Santa Barbara",
+      "population": 43646,
+      "niche": "Plumbing",
+      "payout": 61.25,
+      "volume": 390,
+      "bundle_value": 61.25,
+      "verdict": "STOP",
+      "why": [
+        "`plumber Lompoc CA`: 5 local plumbing firms on page one"
+      ],
+      "queries": [
+        {
+          "query": "plumber Lompoc CA",
+          "serp_score": 35,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 8360.6,
+      "metro": "Oxnard, CA",
+      "metro_miles": 80,
+      "gates": [
+        {
+          "gate": "Payout",
+          "status": "pass",
+          "value": "$61.25"
+        },
+        {
+          "gate": "Economics",
+          "status": "pass",
+          "value": "~$48 per call (79% of calls pay)"
+        },
+        {
+          "gate": "Demand",
+          "status": "pass",
+          "value": "390/mo"
+        },
+        {
+          "gate": "SERP",
+          "status": "fail",
+          "value": "score 35\u201335 over 1 query"
+        },
+        {
+          "gate": "Coverage",
+          "status": "pass",
+          "value": "2 of 3 ZIPs bought"
+        }
+      ],
+      "gate_marks": "\u2705\u2705\u2705\u274c\u2705"
+    },
+    {
+      "city": "Lawton",
+      "state": "OK",
+      "county": "Comanche",
+      "population": 90595,
+      "niche": "Plumbing",
+      "payout": 43.12,
+      "volume": 590,
+      "bundle_value": 43.12,
+      "verdict": "STOP",
+      "why": [
+        "`plumber Lawton OK`: 4 dedicated plumbing pages; map pack at 2200 reviews"
+      ],
+      "queries": [
+        {
+          "query": "plumber Lawton OK",
+          "serp_score": 22,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 5597.0,
+      "metro": "Oklahoma City, OK",
+      "metro_miles": 78,
+      "gates": [
+        {
+          "gate": "Payout",
+          "status": "pass",
+          "value": "$43.12"
+        },
+        {
+          "gate": "Economics",
+          "status": "pass",
+          "value": "~$34 per call (79% of calls pay)"
+        },
+        {
+          "gate": "Demand",
+          "status": "pass",
+          "value": "590/mo"
+        },
+        {
+          "gate": "SERP",
+          "status": "fail",
+          "value": "score 22\u201322 over 1 query"
+        },
+        {
+          "gate": "Coverage",
+          "status": "warn",
+          "value": "1 of 5 ZIPs bought"
+        }
+      ],
+      "gate_marks": "\u2705\u2705\u2705\u274c\ud83d\udfe1"
+    },
+    {
+      "city": "Yakima",
+      "state": "WA",
+      "county": "Yakima",
+      "population": 136518,
+      "niche": "Plumbing",
+      "payout": 34.65,
+      "volume": 880,
+      "bundle_value": 34.65,
+      "verdict": "STOP",
+      "why": [
+        "`plumber Yakima WA`: 4 dedicated plumbing pages; map pack at 636 reviews"
+      ],
+      "queries": [
+        {
+          "query": "plumber Yakima WA",
+          "serp_score": 18,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 5488.6,
+      "metro": "Seattle, WA",
+      "metro_miles": 109,
+      "gates": [
+        {
+          "gate": "Payout",
+          "status": "pass",
+          "value": "$34.65"
+        },
+        {
+          "gate": "Economics",
+          "status": "pass",
+          "value": "~$27 per call (79% of calls pay)"
+        },
+        {
+          "gate": "Demand",
+          "status": "pass",
+          "value": "880/mo"
+        },
+        {
+          "gate": "SERP",
+          "status": "fail",
+          "value": "score 18\u201318 over 1 query"
+        },
+        {
+          "gate": "Coverage",
+          "status": "pass",
+          "value": "7 of 7 ZIPs bought"
+        }
+      ],
+      "gate_marks": "\u2705\u2705\u2705\u274c\u2705"
+    },
+    {
+      "city": "Greenville",
+      "state": "NC",
+      "county": "Pitt",
+      "population": 127632,
+      "niche": "Plumbing",
+      "payout": 44.66,
+      "volume": 590,
+      "bundle_value": 44.66,
+      "verdict": "STOP",
+      "why": [
+        "`plumber Greenville NC`: 4 dedicated plumbing pages"
+      ],
+      "queries": [
+        {
+          "query": "plumber Greenville NC",
+          "serp_score": 20,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 5269.9,
+      "metro": "Raleigh, NC",
+      "metro_miles": 72,
+      "gates": [
+        {
+          "gate": "Payout",
+          "status": "pass",
+          "value": "$44.66"
+        },
+        {
+          "gate": "Economics",
+          "status": "pass",
+          "value": "~$35 per call (79% of calls pay)"
+        },
+        {
+          "gate": "Demand",
+          "status": "pass",
+          "value": "590/mo"
+        },
+        {
+          "gate": "SERP",
+          "status": "fail",
+          "value": "score 20\u201320 over 1 query"
+        },
+        {
+          "gate": "Coverage",
+          "status": "warn",
+          "value": "1 of 5 ZIPs bought"
+        }
+      ],
+      "gate_marks": "\u2705\u2705\u2705\u274c\ud83d\udfe1"
+    },
+    {
+      "city": "Lynchburg",
+      "state": "VA",
+      "county": "Lynchburg",
+      "population": 126860,
+      "niche": "Plumbing",
+      "payout": 30.1,
+      "volume": 720,
+      "bundle_value": 30.1,
+      "verdict": "STOP",
+      "why": [
+        "`plumber Lynchburg VA`: 4 dedicated plumbing pages"
+      ],
+      "queries": [
+        {
+          "query": "plumber Lynchburg VA",
+          "serp_score": 24,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 5201.3,
+      "metro": "Richmond, VA",
+      "metro_miles": 96,
+      "gates": [
+        {
+          "gate": "Payout",
+          "status": "pass",
+          "value": "$30.10"
+        },
+        {
+          "gate": "Economics",
+          "status": "pass",
+          "value": "~$24 per call (79% of calls pay)"
+        },
+        {
+          "gate": "Demand",
+          "status": "pass",
+          "value": "720/mo"
+        },
+        {
+          "gate": "SERP",
+          "status": "fail",
+          "value": "score 24\u201324 over 1 query"
+        },
+        {
+          "gate": "Coverage",
+          "status": "warn",
+          "value": "1 of 9 ZIPs bought"
+        }
+      ],
+      "gate_marks": "\u2705\u2705\u2705\u274c\ud83d\udfe1"
+    },
+    {
+      "city": "Ormond Beach",
+      "state": "FL",
+      "county": "Volusia",
+      "population": 43976,
+      "niche": "Plumbing",
+      "payout": 44.66,
+      "volume": 480,
+      "bundle_value": 44.66,
+      "verdict": "STOP",
+      "why": [
+        "`plumber Ormond Beach FL`: 4 dedicated plumbing pages; map pack at 647 reviews"
+      ],
+      "queries": [
+        {
+          "query": "plumber Ormond Beach FL",
+          "serp_score": 18,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 3858.6,
+      "metro": "Orlando, FL",
+      "metro_miles": 55,
+      "gates": [
+        {
+          "gate": "Payout",
+          "status": "pass",
+          "value": "$44.66"
+        },
+        {
+          "gate": "Economics",
+          "status": "pass",
+          "value": "~$35 per call (79% of calls pay)"
+        },
+        {
+          "gate": "Demand",
+          "status": "pass",
+          "value": "480/mo"
+        },
+        {
+          "gate": "SERP",
+          "status": "fail",
+          "value": "score 18\u201318 over 1 query"
+        },
+        {
+          "gate": "Coverage",
+          "status": "pass",
+          "value": "4 of 4 ZIPs bought"
+        }
+      ],
+      "gate_marks": "\u2705\u2705\u2705\u274c\u2705"
+    },
+    {
+      "city": "Monterey",
+      "state": "CA",
+      "county": "Monterey",
+      "population": 29613,
+      "niche": "Plumbing",
+      "payout": 58.27,
+      "volume": 1300,
+      "bundle_value": 58.27,
+      "verdict": "STOP",
+      "why": [
+        "`plumber Monterey CA`: 6 dedicated plumbing pages"
+      ],
+      "queries": [
+        {
+          "query": "plumber Monterey CA",
+          "serp_score": 4,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 3030.0,
+      "metro": "San Jose, CA",
+      "metro_miles": 52,
+      "gates": [
+        {
+          "gate": "Payout",
+          "status": "pass",
+          "value": "$58.27"
+        },
+        {
+          "gate": "Economics",
+          "status": "pass",
+          "value": "~$46 per call (79% of calls pay)"
+        },
+        {
+          "gate": "Demand",
+          "status": "pass",
+          "value": "1300/mo"
+        },
+        {
+          "gate": "SERP",
+          "status": "fail",
+          "value": "score 4\u20134 over 1 query"
+        },
+        {
+          "gate": "Coverage",
+          "status": "pass",
+          "value": "4 of 4 ZIPs bought"
+        }
+      ],
+      "gate_marks": "\u2705\u2705\u2705\u274c\u2705"
+    },
+    {
+      "city": "Flagstaff",
+      "state": "AZ",
+      "county": "Coconino",
+      "population": 81235,
+      "niche": "Plumbing",
+      "payout": 31.5,
+      "volume": 720,
+      "bundle_value": 31.5,
+      "verdict": "STOP",
+      "why": [
+        "`plumber Flagstaff AZ`: 5 dedicated plumbing pages"
+      ],
+      "queries": [
+        {
+          "query": "plumber Flagstaff AZ",
+          "serp_score": 12,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 2721.6,
+      "metro": "Phoenix, AZ",
+      "metro_miles": 123,
+      "gates": [
+        {
+          "gate": "Payout",
+          "status": "pass",
+          "value": "$31.50"
+        },
+        {
+          "gate": "Economics",
+          "status": "pass",
+          "value": "~$25 per call (79% of calls pay)"
+        },
+        {
+          "gate": "Demand",
+          "status": "pass",
+          "value": "720/mo"
+        },
+        {
+          "gate": "SERP",
+          "status": "fail",
+          "value": "score 12\u201312 over 1 query"
+        },
+        {
+          "gate": "Coverage",
+          "status": "warn",
+          "value": "2 of 6 ZIPs bought"
+        }
+      ],
+      "gate_marks": "\u2705\u2705\u2705\u274c\ud83d\udfe1"
+    },
+    {
+      "city": "Rochester",
+      "state": "MN",
+      "county": "Olmsted",
+      "population": 122867,
+      "niche": "Plumbing",
+      "payout": 30.8,
+      "volume": 720,
+      "bundle_value": 30.8,
+      "verdict": "STOP",
+      "why": [
+        "`plumber Rochester MN`: 5 dedicated plumbing pages"
+      ],
+      "queries": [
+        {
+          "query": "plumber Rochester MN",
+          "serp_score": 10,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 2217.6,
+      "metro": "Minneapolis, MN",
+      "metro_miles": 77,
+      "gates": [
+        {
+          "gate": "Payout",
+          "status": "pass",
+          "value": "$30.80"
+        },
+        {
+          "gate": "Economics",
+          "status": "pass",
+          "value": "~$24 per call (79% of calls pay)"
+        },
+        {
+          "gate": "Demand",
+          "status": "pass",
+          "value": "720/mo"
+        },
+        {
+          "gate": "SERP",
+          "status": "fail",
+          "value": "score 10\u201310 over 1 query"
+        },
+        {
+          "gate": "Coverage",
+          "status": "warn",
+          "value": "2 of 6 ZIPs bought"
+        }
+      ],
+      "gate_marks": "\u2705\u2705\u2705\u274c\ud83d\udfe1"
+    },
+    {
+      "city": "Sierra Vista",
+      "state": "AZ",
+      "county": "Cochise",
+      "population": 45155,
+      "niche": "Plumbing",
+      "payout": 60.2,
+      "volume": 590,
+      "bundle_value": 60.2,
+      "verdict": "STOP",
+      "why": [
+        "`plumber Sierra Vista AZ`: 1 city EMD on page one; 4 dedicated plumbing pages"
+      ],
+      "queries": [
+        {
+          "query": "plumber Sierra Vista AZ",
+          "serp_score": 6,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 2131.1,
+      "metro": "Tucson, AZ",
+      "metro_miles": 59,
+      "gates": [
+        {
+          "gate": "Payout",
+          "status": "pass",
+          "value": "$60.20"
+        },
+        {
+          "gate": "Economics",
+          "status": "pass",
+          "value": "~$48 per call (79% of calls pay)"
+        },
+        {
+          "gate": "Demand",
+          "status": "pass",
+          "value": "590/mo"
+        },
+        {
+          "gate": "SERP",
+          "status": "fail",
+          "value": "score 6\u20136 over 1 query"
+        },
+        {
+          "gate": "Coverage",
+          "status": "warn",
+          "value": "1 of 3 ZIPs bought"
+        }
+      ],
+      "gate_marks": "\u2705\u2705\u2705\u274c\ud83d\udfe1"
+    },
+    {
+      "city": "Muncie",
+      "state": "IN",
+      "county": "Delaware",
+      "population": 85519,
+      "niche": "Plumbing",
+      "payout": 47.25,
+      "volume": 480,
+      "bundle_value": 47.25,
+      "verdict": "STOP",
+      "why": [
+        "`plumber Muncie IN`: 5 dedicated plumbing pages"
+      ],
+      "queries": [
+        {
+          "query": "plumber Muncie IN",
+          "serp_score": 6,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 1360.8,
+      "metro": "Indianapolis, IN",
+      "metro_miles": 50,
+      "gates": [
+        {
+          "gate": "Payout",
+          "status": "pass",
+          "value": "$47.25"
+        },
+        {
+          "gate": "Economics",
+          "status": "pass",
+          "value": "~$37 per call (79% of calls pay)"
+        },
+        {
+          "gate": "Demand",
+          "status": "pass",
+          "value": "480/mo"
+        },
+        {
+          "gate": "SERP",
+          "status": "fail",
+          "value": "score 6\u20136 over 1 query"
+        },
+        {
+          "gate": "Coverage",
+          "status": "pass",
+          "value": "4 of 7 ZIPs bought"
+        }
+      ],
+      "gate_marks": "\u2705\u2705\u2705\u274c\u2705"
+    },
+    {
+      "city": "Rome",
+      "state": "GA",
+      "county": "Floyd",
+      "population": 38189,
+      "niche": "Plumbing",
+      "payout": 69.3,
+      "volume": 480,
+      "bundle_value": 69.3,
+      "verdict": "STOP",
+      "why": [
+        "`plumber Rome GA`: 1 city EMD on page one; 5 dedicated plumbing pages"
+      ],
+      "queries": [
+        {
+          "query": "plumber Rome GA",
+          "serp_score": 0,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 0,
+      "metro": "Chattanooga, TN",
+      "metro_miles": 55,
+      "gates": [
+        {
+          "gate": "Payout",
+          "status": "pass",
+          "value": "$69.30"
+        },
+        {
+          "gate": "Economics",
+          "status": "pass",
+          "value": "~$55 per call (79% of calls pay)"
+        },
+        {
+          "gate": "Demand",
+          "status": "pass",
+          "value": "480/mo"
+        },
+        {
+          "gate": "SERP",
+          "status": "fail",
+          "value": "score 0\u20130 over 1 query"
+        },
+        {
+          "gate": "Coverage",
+          "status": "warn",
+          "value": "2 of 5 ZIPs bought"
+        }
+      ],
+      "gate_marks": "\u2705\u2705\u2705\u274c\ud83d\udfe1"
+    },
+    {
+      "city": "Boynton Beach",
+      "state": "FL",
+      "county": "Palm Beach",
+      "population": 81435,
+      "niche": "Plumbing",
+      "payout": 64.75,
+      "volume": 480,
+      "bundle_value": 64.75,
+      "verdict": "STOP",
+      "why": [
+        "`plumber Boynton Beach FL`: 6 dedicated plumbing pages"
+      ],
+      "queries": [
+        {
+          "query": "plumber Boynton Beach FL",
+          "serp_score": 0,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 0,
+      "metro": "Miami, FL",
+      "metro_miles": 53,
+      "gates": [
+        {
+          "gate": "Payout",
+          "status": "pass",
+          "value": "$64.75"
+        },
+        {
+          "gate": "Economics",
+          "status": "pass",
+          "value": "~$51 per call (79% of calls pay)"
+        },
+        {
+          "gate": "Demand",
+          "status": "pass",
+          "value": "480/mo"
+        },
+        {
+          "gate": "SERP",
+          "status": "fail",
+          "value": "score 0\u20130 over 1 query"
+        },
+        {
+          "gate": "Coverage",
+          "status": "pass",
+          "value": "9 of 9 ZIPs bought"
+        }
+      ],
+      "gate_marks": "\u2705\u2705\u2705\u274c\u2705"
+    },
+    {
+      "city": "Santa Maria",
+      "state": "CA",
+      "county": "Santa Barbara",
+      "population": 144941,
+      "niche": "Plumbing",
+      "payout": 61.25,
+      "volume": 720,
+      "bundle_value": 61.25,
+      "verdict": "STOP",
+      "why": [
+        "`plumber Santa Maria CA`: 7 dedicated plumbing pages"
+      ],
+      "queries": [
+        {
+          "query": "plumber Santa Maria CA",
+          "serp_score": 0,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 0,
+      "metro": "Bakersfield, CA",
+      "metro_miles": 86,
+      "gates": [
+        {
+          "gate": "Payout",
+          "status": "pass",
+          "value": "$61.25"
+        },
+        {
+          "gate": "Economics",
+          "status": "pass",
+          "value": "~$48 per call (79% of calls pay)"
+        },
+        {
+          "gate": "Demand",
+          "status": "pass",
+          "value": "720/mo"
+        },
+        {
+          "gate": "SERP",
+          "status": "fail",
+          "value": "score 0\u20130 over 1 query"
+        },
+        {
+          "gate": "Coverage",
+          "status": "pass",
+          "value": "3 of 5 ZIPs bought"
+        }
+      ],
+      "gate_marks": "\u2705\u2705\u2705\u274c\u2705"
+    },
+    {
+      "city": "Kingman",
+      "state": "AZ",
+      "county": "Mohave",
+      "population": 34375,
+      "niche": "Plumbing",
+      "payout": 56.98,
+      "volume": 880,
+      "bundle_value": 56.98,
+      "verdict": "STOP",
+      "why": [
+        "`plumber Kingman AZ`: 6 dedicated plumbing pages; map pack at 950 reviews"
+      ],
+      "queries": [
+        {
+          "query": "plumber Kingman AZ",
+          "serp_score": 0,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 0,
+      "metro": "Las Vegas, NV",
+      "metro_miles": 91,
+      "gates": [
+        {
+          "gate": "Payout",
+          "status": "pass",
+          "value": "$56.98"
+        },
+        {
+          "gate": "Economics",
+          "status": "pass",
+          "value": "~$45 per call (79% of calls pay)"
+        },
+        {
+          "gate": "Demand",
+          "status": "pass",
+          "value": "880/mo"
+        },
+        {
+          "gate": "SERP",
+          "status": "fail",
+          "value": "score 0\u20130 over 1 query"
+        },
+        {
+          "gate": "Coverage",
+          "status": "pass",
+          "value": "2 of 3 ZIPs bought"
+        }
+      ],
+      "gate_marks": "\u2705\u2705\u2705\u274c\u2705"
+    },
+    {
+      "city": "Corvallis",
+      "state": "OR",
+      "county": "Benton",
+      "population": 69209,
+      "niche": "Plumbing",
+      "payout": 53.55,
+      "volume": 480,
+      "bundle_value": 53.55,
+      "verdict": "STOP",
+      "why": [
+        "`plumber Corvallis OR`: 1 city EMD on page one; 6 dedicated plumbing pages"
+      ],
+      "queries": [
+        {
+          "query": "plumber Corvallis OR",
+          "serp_score": 0,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 0,
+      "metro": "Portland, OR",
+      "metro_miles": 72,
+      "gates": [
+        {
+          "gate": "Payout",
+          "status": "pass",
+          "value": "$53.55"
+        },
+        {
+          "gate": "Economics",
+          "status": "pass",
+          "value": "~$42 per call (79% of calls pay)"
+        },
+        {
+          "gate": "Demand",
+          "status": "pass",
+          "value": "480/mo"
+        },
+        {
+          "gate": "SERP",
+          "status": "fail",
+          "value": "score 0\u20130 over 1 query"
+        },
+        {
+          "gate": "Coverage",
+          "status": "pass",
+          "value": "4 of 4 ZIPs bought"
+        }
+      ],
+      "gate_marks": "\u2705\u2705\u2705\u274c\u2705"
+    },
+    {
+      "city": "Prescott",
+      "state": "AZ",
+      "county": "Yavapai",
+      "population": 47400,
+      "niche": "Plumbing",
+      "payout": 48.16,
+      "volume": 720,
+      "bundle_value": 48.16,
+      "verdict": "STOP",
+      "why": [
+        "`plumber Prescott AZ`: 1 city EMD on page one; 6 dedicated plumbing pages"
+      ],
+      "queries": [
+        {
+          "query": "plumber Prescott AZ",
+          "serp_score": 0,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 0,
+      "metro": "Phoenix, AZ",
+      "metro_miles": 81,
+      "gates": [
+        {
+          "gate": "Payout",
+          "status": "pass",
+          "value": "$48.16"
+        },
+        {
+          "gate": "Economics",
+          "status": "pass",
+          "value": "~$38 per call (79% of calls pay)"
+        },
+        {
+          "gate": "Demand",
+          "status": "pass",
+          "value": "720/mo"
+        },
+        {
+          "gate": "SERP",
+          "status": "fail",
+          "value": "score 0\u20130 over 1 query"
+        },
+        {
+          "gate": "Coverage",
+          "status": "pass",
+          "value": "6 of 6 ZIPs bought"
+        }
+      ],
+      "gate_marks": "\u2705\u2705\u2705\u274c\u2705"
+    },
+    {
+      "city": "Wenatchee",
+      "state": "WA",
+      "county": "Chelan",
+      "population": 85048,
+      "niche": "Plumbing",
+      "payout": 36.42,
+      "volume": 590,
+      "bundle_value": 36.42,
+      "verdict": "STOP",
+      "why": [
+        "`plumber Wenatchee WA`: 3 city EMD on page one; 6 dedicated plumbing pages"
+      ],
+      "queries": [
+        {
+          "query": "plumber Wenatchee WA",
+          "serp_score": 0,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 0,
+      "metro": "Seattle, WA",
+      "metro_miles": 94,
+      "gates": [
+        {
+          "gate": "Payout",
+          "status": "pass",
+          "value": "$36.42"
+        },
+        {
+          "gate": "Economics",
+          "status": "pass",
+          "value": "~$29 per call (79% of calls pay)"
+        },
+        {
+          "gate": "Demand",
+          "status": "pass",
+          "value": "590/mo"
+        },
+        {
+          "gate": "SERP",
+          "status": "fail",
+          "value": "score 0\u20130 over 1 query"
+        },
+        {
+          "gate": "Coverage",
+          "status": "pass",
+          "value": "2 of 2 ZIPs bought"
+        }
+      ],
+      "gate_marks": "\u2705\u2705\u2705\u274c\u2705"
+    },
+    {
+      "city": "Idaho Falls",
+      "state": "ID",
+      "county": "Bonneville",
+      "population": 111137,
+      "niche": "Plumbing",
+      "payout": 34.65,
+      "volume": 590,
+      "bundle_value": 34.65,
+      "verdict": "STOP",
+      "why": [
+        "`plumber Idaho Falls ID`: 1 city EMD on page one; 5 dedicated plumbing pages"
+      ],
+      "queries": [
+        {
+          "query": "plumber Idaho Falls ID",
+          "serp_score": 0,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 0,
+      "metro": "Ogden, UT",
+      "metro_miles": 156,
+      "gates": [
+        {
+          "gate": "Payout",
+          "status": "pass",
+          "value": "$34.65"
+        },
+        {
+          "gate": "Economics",
+          "status": "pass",
+          "value": "~$27 per call (79% of calls pay)"
+        },
+        {
+          "gate": "Demand",
+          "status": "pass",
+          "value": "590/mo"
+        },
+        {
+          "gate": "SERP",
+          "status": "fail",
+          "value": "score 0\u20130 over 1 query"
+        },
+        {
+          "gate": "Coverage",
+          "status": "pass",
+          "value": "4 of 7 ZIPs bought"
+        }
+      ],
+      "gate_marks": "\u2705\u2705\u2705\u274c\u2705"
+    },
+    {
+      "city": "Grants Pass",
+      "state": "OR",
+      "county": "Josephine",
+      "population": 39311,
+      "niche": "Plumbing",
+      "payout": 30.8,
+      "volume": 720,
+      "bundle_value": 30.8,
+      "verdict": "STOP",
+      "why": [
+        "`plumber Grants Pass OR`: 1 city EMD on page one; 6 dedicated plumbing pages"
+      ],
+      "queries": [
+        {
+          "query": "plumber Grants Pass OR",
+          "serp_score": 0,
+          "verdict": "STOP"
+        }
+      ],
+      "best_value": 0,
+      "metro": "Portland, OR",
+      "metro_miles": 216,
+      "gates": [
+        {
+          "gate": "Payout",
+          "status": "pass",
+          "value": "$30.80"
+        },
+        {
+          "gate": "Economics",
+          "status": "pass",
+          "value": "~$24 per call (79% of calls pay)"
+        },
+        {
+          "gate": "Demand",
+          "status": "pass",
+          "value": "720/mo"
+        },
+        {
+          "gate": "SERP",
+          "status": "fail",
+          "value": "score 0\u20130 over 1 query"
+        },
+        {
+          "gate": "Coverage",
+          "status": "pass",
+          "value": "2 of 3 ZIPs bought"
+        }
+      ],
+      "gate_marks": "\u2705\u2705\u2705\u274c\u2705"
+    }
+  ],
+  "launch_plan": [
+    {
+      "kind": "city",
+      "confidence": "GO",
+      "state": "AZ",
+      "state_name": "Arizona",
+      "niche": "Plumbing",
+      "city": "Bullhead City",
+      "title": "Bullhead City, AZ \u00b7 Plumbing",
+      "go_cities": [
+        "Bullhead City"
+      ],
+      "watch_cities": [],
+      "monthly_searches": 880,
+      "best_payout": 56.98,
+      "shape": "city site for Bullhead City (the lawtonelectricians.com pattern)",
+      "manual_check": [
+        "https://www.google.com/search?q=plumber+Bullhead+City+AZ"
+      ],
+      "domain_hint": "plumbersbullheadcity.com",
+      "emd_free": [
+        "plumbersbullheadcity.com",
+        "plumberbullheadcity.com"
+      ],
+      "steps": [
+        {
+          "title": "Keyword tool \u2192 Mode 3 Site Plan",
+          "note": "the services list starts with the head term: the order here is the site's order",
+          "fields": {
+            "business_name": "Bullhead City Plumbers",
+            "niche_description": "plumbing referral service connecting homeowners with licensed local pros",
+            "target_location": "Bullhead City, Arizona, United States",
+            "services_mode3": "Plumber, Leak Detection, Drain Cleaning, Sewer Line Repair, Clogged Drain Repair, Water Heater Leak Repair, Faucet Repair, Slab Leak Repair, Water Line Repair, Toilet Repair, Sewer Backup Cleanup, Drain Snaking, Ceiling Leak Repair, Tankless Water Heater Repair, Water Softener Installation",
+            "serp_dedupe": "auto"
+          }
+        },
+        {
+          "title": "Website builder \u2192 Mode 3",
+          "note": "paste the plan's .seo.json link from the step above into extras",
+          "fields": {
+            "mode": "3",
+            "business_name": "Bullhead City Plumbers",
+            "industry": "plumber",
+            "main_service": "Plumber",
+            "sub_services": "Plumber, Leak Detection, Drain Cleaning, Sewer Line Repair, Clogged Drain Repair, Water Heater Leak Repair, Faucet Repair, Slab Leak Repair, Water Line Repair, Toilet Repair, Sewer Backup Cleanup, Drain Snaking, Ceiling Leak Repair, Tankless Water Heater Repair, Water Softener Installation",
+            "city": "Bullhead City",
+            "country": "United States",
+            "phone": "<LeadSmart tracking number>",
+            "domain": "plumbersbullheadcity.com (free when scanned -- buy it before building)",
+            "extras": {
+              "seo_inputs_url": "<raw .seo.json link from the step above>",
+              "site_profile": "pay_per_call",
+              "footer_credit": "no",
+              "footer_sitemap_link": "no"
+            }
+          }
+        }
+      ],
+      "later": "After 1\u20132 months in Search Console: Mode 6 local articles on the queries that show impressions."
+    }
+  ],
+  "opportunities": [
+    {
+      "city": "Pocatello",
+      "state": "ID",
+      "county": "Bannock",
+      "population": 72963,
+      "zips": 3,
+      "niche": "Plumbing",
+      "sub_service": "plumber",
+      "query": "plumber Pocatello ID",
+      "payout": 34.65,
+      "pricing": "geo",
+      "bundle_value": 34.65,
+      "niches_here": [
+        {
+          "niche": "Plumbing",
+          "payout": 34.65,
+          "zips": 3,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 35,
+      "serp_breakdown": {
+        "dedicated": 3,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 5,
+        "forum": 0,
+        "other_local": 1,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 235,
+        "pack_median_reviews": 161,
+        "city_mentions": 7,
+        "local_firms": 4
+      },
+      "occupants": [
+        {
+          "host": "b-gplumbing.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "rotorooter.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "elkhornplumbingid.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "standardplumbing.com",
+          "kind": "directory"
+        },
+        {
+          "host": "houzz.com",
+          "kind": "directory"
+        },
+        {
+          "host": "homeadvisor.com",
+          "kind": "directory"
+        },
+        {
+          "host": "platinumboring.com",
+          "kind": "independent site"
+        }
+      ],
+      "opportunity": 12.13,
+      "volume": 1900,
+      "value": 23042.2,
+      "verdict": "STOP",
+      "why": [
+        "3 dedicated plumbing pages"
+      ]
+    },
+    {
+      "city": "Bullhead City",
+      "state": "AZ",
+      "county": "Mohave",
+      "population": 42496,
+      "zips": 3,
+      "niche": "Plumbing",
+      "sub_service": "plumber",
+      "query": "plumber Bullhead City AZ",
+      "payout": 56.98,
+      "pricing": "geo",
+      "bundle_value": 56.98,
+      "niches_here": [
+        {
+          "niche": "Plumbing",
+          "payout": 56.98,
+          "zips": 3,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 35,
+      "serp_breakdown": {
+        "dedicated": 3,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 6,
+        "forum": 0,
+        "other_local": 0,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 37,
+        "pack_median_reviews": 30,
+        "city_mentions": 9,
+        "local_firms": 3
+      },
+      "occupants": [
+        {
+          "host": "ancplumbing.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "gonzosplumbing.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "thompsonfamilyplumbing.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "mapquest.com",
+          "kind": "directory"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        },
+        {
+          "host": "mohavelocal.com",
+          "kind": "directory"
+        }
+      ],
+      "opportunity": 19.94,
+      "volume": 880,
+      "value": 17549.8,
+      "verdict": "WATCH",
+      "why": [
+        "3 small local pages, weak map pack (<100 reviews)",
+        "SERP 35 < 60"
+      ]
+    },
+    {
+      "city": "Lake Havasu City",
+      "state": "AZ",
+      "county": "Mohave",
+      "population": 58359,
+      "zips": 3,
+      "niche": "Plumbing",
+      "sub_service": "plumber",
+      "query": "plumber Lake Havasu City AZ",
+      "payout": 54.39,
+      "pricing": "geo",
+      "bundle_value": 54.39,
+      "niches_here": [
+        {
+          "niche": "Plumbing",
+          "payout": 54.39,
+          "zips": 3,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 35,
+      "serp_breakdown": {
+        "dedicated": 3,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 4,
+        "forum": 0,
+        "other_local": 2,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 973,
+        "pack_median_reviews": 297,
+        "city_mentions": 6,
+        "local_firms": 5
+      },
+      "occupants": [
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "craigplumbing.net",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "vanrooyplumbing.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "alpineplumbingandair.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "mohavelocal.com",
+          "kind": "directory"
+        },
+        {
+          "host": "thompsonfamilyplumbing.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "ecohome.net",
+          "kind": "directory"
+        },
+        {
+          "host": "havasuaffordableplumbing.com",
+          "kind": "independent site"
+        }
+      ],
+      "opportunity": 19.04,
+      "volume": 880,
+      "value": 16752.1,
+      "verdict": "STOP",
+      "why": [
+        "3 dedicated plumbing pages"
+      ]
+    },
+    {
+      "city": "Palm Coast",
+      "state": "FL",
+      "county": "Flagler",
+      "population": 98258,
+      "zips": 3,
+      "niche": "Plumbing",
+      "sub_service": "plumber",
+      "query": "plumber Palm Coast FL",
+      "payout": 47.25,
+      "pricing": "geo",
+      "bundle_value": 47.25,
+      "niches_here": [
+        {
+          "niche": "Plumbing",
+          "payout": 47.25,
+          "zips": 3,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 35,
+      "serp_breakdown": {
+        "dedicated": 4,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 4,
+        "forum": 0,
+        "other_local": 1,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 153,
+        "pack_median_reviews": 29,
+        "city_mentions": 8,
+        "local_firms": 5
+      },
+      "occupants": [
+        {
+          "host": "charliesprofessionalplumbing.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "rotorooter.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "mrrooter.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "terrysplumbingfl.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "nextdoor.com",
+          "kind": "directory"
+        },
+        {
+          "host": "palmcoastlocal.com",
+          "kind": "directory"
+        },
+        {
+          "host": "frankgayservices.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 16.54,
+      "volume": 590,
+      "value": 9757.1,
+      "verdict": "STOP",
+      "why": [
+        "4 dedicated plumbing pages"
+      ]
+    },
+    {
+      "city": "Tyler",
+      "state": "TX",
+      "county": "Smith",
+      "population": 134739,
+      "zips": 11,
+      "niche": "Plumbing",
+      "sub_service": "plumber",
+      "query": "plumber Tyler TX",
+      "payout": 38.5,
+      "pricing": "geo",
+      "bundle_value": 38.5,
+      "niches_here": [
+        {
+          "niche": "Plumbing",
+          "payout": 38.5,
+          "zips": 11,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 25,
+      "serp_breakdown": {
+        "dedicated": 1,
+        "pseo": 0,
+        "national": 0,
+        "emd": 2,
+        "directory": 5,
+        "forum": 1,
+        "other_local": 1,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 1588,
+        "pack_median_reviews": 936,
+        "city_mentions": 8,
+        "local_firms": 3
+      },
+      "occupants": [
+        {
+          "host": "reddit.com",
+          "kind": "forum"
+        },
+        {
+          "host": "eschbergerplumbing.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "localsloveus.com",
+          "kind": "directory"
+        },
+        {
+          "host": "business.tylertexas.com",
+          "kind": "directory"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "benjaminfranklinplumbingtyler.com",
+          "kind": "city EMD + dedicated page"
+        },
+        {
+          "host": "leesplumbingtyler.com",
+          "kind": "city EMD"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        }
+      ],
+      "opportunity": 9.62,
+      "volume": 1000,
+      "value": 9625.0,
+      "verdict": "STOP",
+      "why": [
+        "2 city EMD on page one",
+        "map pack at 936 reviews"
+      ]
+    },
+    {
+      "city": "Florence",
+      "state": "SC",
+      "county": "Florence",
+      "population": 90753,
+      "zips": 6,
+      "niche": "Plumbing",
+      "sub_service": "plumber",
+      "query": "plumber Florence SC",
+      "payout": 35.0,
+      "pricing": "geo",
+      "bundle_value": 35.0,
+      "niches_here": [
+        {
+          "niche": "Plumbing",
+          "payout": 35.0,
+          "zips": 6,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 35,
+      "serp_breakdown": {
+        "dedicated": 2,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 4,
+        "forum": 0,
+        "other_local": 3,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 1047,
+        "pack_median_reviews": 49,
+        "city_mentions": 6,
+        "local_firms": 5
+      },
+      "occupants": [
+        {
+          "host": "urquhartplumbing.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "rotorooter.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        },
+        {
+          "host": "andersonplumbing.biz",
+          "kind": "independent site"
+        },
+        {
+          "host": "qualityservicecompany.net",
+          "kind": "independent site"
+        },
+        {
+          "host": "angi.com",
+          "kind": "directory"
+        },
+        {
+          "host": "benjaminfranklinplumbing.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 12.25,
+      "volume": 720,
+      "value": 8820.0,
+      "verdict": "STOP",
+      "why": [
+        "5 local plumbing firms on page one"
+      ]
+    },
+    {
+      "city": "Longview",
+      "state": "TX",
+      "county": "Gregg",
+      "population": 106896,
+      "zips": 9,
+      "niche": "Plumbing",
+      "sub_service": "plumber",
+      "query": "plumber Longview TX",
+      "payout": 55.13,
+      "pricing": "geo",
+      "bundle_value": 55.13,
+      "niches_here": [
+        {
+          "niche": "Plumbing",
+          "payout": 55.13,
+          "zips": 9,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 18,
+      "serp_breakdown": {
+        "dedicated": 3,
+        "pseo": 0,
+        "national": 0,
+        "emd": 1,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 2,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 780,
+        "pack_median_reviews": 234,
+        "city_mentions": 7,
+        "local_firms": 6
+      },
+      "occupants": [
+        {
+          "host": "richardholtplumbing.net",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "bakerbrosplumbing.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "ledbetterplumbing.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "angi.com",
+          "kind": "directory"
+        },
+        {
+          "host": "arrowplumbinglongview.com",
+          "kind": "city EMD"
+        },
+        {
+          "host": "affordableplumbingeasttx.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "rotorooter.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 9.92,
+      "volume": 880,
+      "value": 8732.6,
+      "verdict": "STOP",
+      "why": [
+        "1 city EMD on page one",
+        "3 dedicated plumbing pages"
+      ]
+    },
+    {
+      "city": "Bend",
+      "state": "OR",
+      "county": "Deschutes",
+      "population": 113075,
+      "zips": 5,
+      "niche": "Plumbing",
+      "sub_service": "plumber",
+      "query": "plumber Bend OR",
+      "payout": 39.38,
+      "pricing": "geo",
+      "bundle_value": 39.38,
+      "niches_here": [
+        {
+          "niche": "Plumbing",
+          "payout": 39.38,
+          "zips": 5,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 25,
+      "serp_breakdown": {
+        "dedicated": 2,
+        "pseo": 0,
+        "national": 1,
+        "emd": 1,
+        "directory": 2,
+        "forum": 1,
+        "other_local": 2,
+        "results": 8,
+        "pack_size": 3,
+        "pack_top_reviews": 432,
+        "pack_median_reviews": 284,
+        "city_mentions": 6,
+        "local_firms": 4
+      },
+      "occupants": [
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "seversonplumbers.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "reddit.com",
+          "kind": "forum"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "mrrooter.com",
+          "kind": "national brand"
+        },
+        {
+          "host": "firkusplumbing.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "renewplumbing.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "sunsetplumbingofbend.com",
+          "kind": "city EMD + dedicated page"
+        }
+      ],
+      "opportunity": 9.85,
+      "volume": 880,
+      "value": 8663.6,
+      "verdict": "STOP",
+      "why": [
+        "1 city EMD on page one",
+        "2 dedicated plumbing pages"
+      ]
+    },
+    {
+      "city": "Lompoc",
+      "state": "CA",
+      "county": "Santa Barbara",
+      "population": 43646,
+      "zips": 2,
+      "niche": "Plumbing",
+      "sub_service": "plumber",
+      "query": "plumber Lompoc CA",
+      "payout": 61.25,
+      "pricing": "geo",
+      "bundle_value": 61.25,
+      "niches_here": [
+        {
+          "niche": "Plumbing",
+          "payout": 61.25,
+          "zips": 2,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 35,
+      "serp_breakdown": {
+        "dedicated": 3,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 4,
+        "forum": 0,
+        "other_local": 2,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 75,
+        "pack_median_reviews": 41,
+        "city_mentions": 7,
+        "local_firms": 5
+      },
+      "occupants": [
+        {
+          "host": "rotorooter.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "wmrieckplumbingco.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "griffin-plumbing.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "heritagehomeandplumbing.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "angi.com",
+          "kind": "directory"
+        },
+        {
+          "host": "lewisplumbingsantabarbara.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "mapquest.com",
+          "kind": "directory"
+        }
+      ],
+      "opportunity": 21.44,
+      "volume": 390,
+      "value": 8360.6,
+      "verdict": "STOP",
+      "why": [
+        "5 local plumbing firms on page one"
+      ]
+    },
+    {
+      "city": "Lawton",
+      "state": "OK",
+      "county": "Comanche",
+      "population": 90595,
+      "zips": 1,
+      "niche": "Plumbing",
+      "sub_service": "plumber",
+      "query": "plumber Lawton OK",
+      "payout": 43.12,
+      "pricing": "geo",
+      "bundle_value": 43.12,
+      "niches_here": [
+        {
+          "niche": "Plumbing",
+          "payout": 43.12,
+          "zips": 1,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 22,
+      "serp_breakdown": {
+        "dedicated": 4,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 5,
+        "forum": 0,
+        "other_local": 0,
+        "results": 9,
+        "pack_size": 4,
+        "pack_top_reviews": 2252,
+        "pack_median_reviews": 2200,
+        "city_mentions": 9,
+        "local_firms": 4
+      },
+      "occupants": [
+        {
+          "host": "andysplumbinghvac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "affordablepha.co",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "todayshomeowner.com",
+          "kind": "directory"
+        },
+        {
+          "host": "shieldsplumbingok.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "solidplumbing.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "mapquest.com",
+          "kind": "directory"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        }
+      ],
+      "opportunity": 9.49,
+      "volume": 590,
+      "value": 5597.0,
+      "verdict": "STOP",
+      "why": [
+        "4 dedicated plumbing pages",
+        "map pack at 2200 reviews"
+      ]
+    },
+    {
+      "city": "Yakima",
+      "state": "WA",
+      "county": "Yakima",
+      "population": 136518,
+      "zips": 7,
+      "niche": "Plumbing",
+      "sub_service": "plumber",
+      "query": "plumber Yakima WA",
+      "payout": 34.65,
+      "pricing": "geo",
+      "bundle_value": 34.65,
+      "niches_here": [
+        {
+          "niche": "Plumbing",
+          "payout": 34.65,
+          "zips": 7,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 18,
+      "serp_breakdown": {
+        "dedicated": 4,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 4,
+        "forum": 0,
+        "other_local": 1,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 1064,
+        "pack_median_reviews": 636,
+        "city_mentions": 8,
+        "local_firms": 5
+      },
+      "occupants": [
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "rotorooter.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "burkeplumbingsvc.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        },
+        {
+          "host": "apexplumb.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "shephardplumbingwa.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "namesandnumbers.com",
+          "kind": "directory"
+        },
+        {
+          "host": "absolutedrainandseptic.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "angi.com",
+          "kind": "directory"
+        }
+      ],
+      "opportunity": 6.24,
+      "volume": 880,
+      "value": 5488.6,
+      "verdict": "STOP",
+      "why": [
+        "4 dedicated plumbing pages",
+        "map pack at 636 reviews"
+      ]
+    },
+    {
+      "city": "Greenville",
+      "state": "NC",
+      "county": "Pitt",
+      "population": 127632,
+      "zips": 1,
+      "niche": "Plumbing",
+      "sub_service": "plumber",
+      "query": "plumber Greenville NC",
+      "payout": 44.66,
+      "pricing": "geo",
+      "bundle_value": 44.66,
+      "niches_here": [
+        {
+          "niche": "Plumbing",
+          "payout": 44.66,
+          "zips": 1,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 20,
+      "serp_breakdown": {
+        "dedicated": 4,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 2,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 468,
+        "pack_median_reviews": 303,
+        "city_mentions": 7,
+        "local_firms": 6
+      },
+      "occupants": [
+        {
+          "host": "easternplumbingonline.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "plumbsupnc.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "angi.com",
+          "kind": "directory"
+        },
+        {
+          "host": "jacksonandsons.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "rotorooter.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "hardeesplumbing.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "plumbsupplumbing.org",
+          "kind": "independent site"
+        }
+      ],
+      "opportunity": 8.93,
+      "volume": 590,
+      "value": 5269.9,
+      "verdict": "STOP",
+      "why": [
+        "4 dedicated plumbing pages"
+      ]
+    },
+    {
+      "city": "Lynchburg",
+      "state": "VA",
+      "county": "Lynchburg",
+      "population": 126860,
+      "zips": 1,
+      "niche": "Plumbing",
+      "sub_service": "plumber",
+      "query": "plumber Lynchburg VA",
+      "payout": 30.1,
+      "pricing": "geo",
+      "bundle_value": 30.1,
+      "niches_here": [
+        {
+          "niche": "Plumbing",
+          "payout": 30.1,
+          "zips": 1,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 24,
+      "serp_breakdown": {
+        "dedicated": 4,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 1,
+        "results": 8,
+        "pack_size": 3,
+        "pack_top_reviews": 300,
+        "pack_median_reviews": 283,
+        "city_mentions": 7,
+        "local_firms": 5
+      },
+      "occupants": [
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "plumbcareplumbing.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "tyreeplumbing.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "rotorooter.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "faithplumbingva.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "lightsplumbing.net",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        }
+      ],
+      "opportunity": 7.22,
+      "volume": 720,
+      "value": 5201.3,
+      "verdict": "STOP",
+      "why": [
+        "4 dedicated plumbing pages"
+      ]
+    },
+    {
+      "city": "Ormond Beach",
+      "state": "FL",
+      "county": "Volusia",
+      "population": 43976,
+      "zips": 4,
+      "niche": "Plumbing",
+      "sub_service": "plumber",
+      "query": "plumber Ormond Beach FL",
+      "payout": 44.66,
+      "pricing": "geo",
+      "bundle_value": 44.66,
+      "niches_here": [
+        {
+          "niche": "Plumbing",
+          "payout": 44.66,
+          "zips": 4,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 18,
+      "serp_breakdown": {
+        "dedicated": 4,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 4,
+        "forum": 0,
+        "other_local": 1,
+        "results": 9,
+        "pack_size": 4,
+        "pack_top_reviews": 728,
+        "pack_median_reviews": 647,
+        "city_mentions": 8,
+        "local_firms": 5
+      },
+      "occupants": [
+        {
+          "host": "krakenplumbingcompany.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "angi.com",
+          "kind": "directory"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "patriotplumbingco.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "frankgayservices.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "justanswer.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "rotorooter.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "thumbtack.com",
+          "kind": "directory"
+        }
+      ],
+      "opportunity": 8.04,
+      "volume": 480,
+      "value": 3858.6,
+      "verdict": "STOP",
+      "why": [
+        "4 dedicated plumbing pages",
+        "map pack at 647 reviews"
+      ]
+    },
+    {
+      "city": "Monterey",
+      "state": "CA",
+      "county": "Monterey",
+      "population": 29613,
+      "zips": 4,
+      "niche": "Plumbing",
+      "sub_service": "plumber",
+      "query": "plumber Monterey CA",
+      "payout": 58.27,
+      "pricing": "geo",
+      "bundle_value": 58.27,
+      "niches_here": [
+        {
+          "niche": "Plumbing",
+          "payout": 58.27,
+          "zips": 4,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 4,
+      "serp_breakdown": {
+        "dedicated": 6,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 0,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 174,
+        "pack_median_reviews": 90,
+        "city_mentions": 9,
+        "local_firms": 6
+      },
+      "occupants": [
+        {
+          "host": "gppiping.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "1800plumber.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "aandrplumbinginc.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "duncanplumbing.us",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        },
+        {
+          "host": "chriswilsonplumbing.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "thumbtack.com",
+          "kind": "directory"
+        },
+        {
+          "host": "rotorooter.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 2.33,
+      "volume": 1300,
+      "value": 3030.0,
+      "verdict": "STOP",
+      "why": [
+        "6 dedicated plumbing pages"
+      ]
+    },
+    {
+      "city": "Flagstaff",
+      "state": "AZ",
+      "county": "Coconino",
+      "population": 81235,
+      "zips": 2,
+      "niche": "Plumbing",
+      "sub_service": "plumber",
+      "query": "plumber Flagstaff AZ",
+      "payout": 31.5,
+      "pricing": "geo",
+      "bundle_value": 31.5,
+      "niches_here": [
+        {
+          "niche": "Plumbing",
+          "payout": 31.5,
+          "zips": 2,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 12,
+      "serp_breakdown": {
+        "dedicated": 5,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 1,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 1010,
+        "pack_median_reviews": 196,
+        "city_mentions": 8,
+        "local_firms": 6
+      },
+      "occupants": [
+        {
+          "host": "tcrrooter.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "elementnaz.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "yourplumberaz.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "assuranceph.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "intermountainaz.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "mountainhighplumbing.net",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        }
+      ],
+      "opportunity": 3.78,
+      "volume": 720,
+      "value": 2721.6,
+      "verdict": "STOP",
+      "why": [
+        "5 dedicated plumbing pages"
+      ]
+    },
+    {
+      "city": "Rochester",
+      "state": "MN",
+      "county": "Olmsted",
+      "population": 122867,
+      "zips": 2,
+      "niche": "Plumbing",
+      "sub_service": "plumber",
+      "query": "plumber Rochester MN",
+      "payout": 30.8,
+      "pricing": "geo",
+      "bundle_value": 30.8,
+      "niches_here": [
+        {
+          "niche": "Plumbing",
+          "payout": 30.8,
+          "zips": 2,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 10,
+      "serp_breakdown": {
+        "dedicated": 5,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 0,
+        "results": 8,
+        "pack_size": 3,
+        "pack_top_reviews": 3748,
+        "pack_median_reviews": 475,
+        "city_mentions": 8,
+        "local_firms": 5
+      },
+      "occupants": [
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "elsmoreplumbing.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "1stclassplumbingandheating.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "rotorooter.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "calltonna.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "cozikplumbing.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        }
+      ],
+      "opportunity": 3.08,
+      "volume": 720,
+      "value": 2217.6,
+      "verdict": "STOP",
+      "why": [
+        "5 dedicated plumbing pages"
+      ]
+    },
+    {
+      "city": "Sierra Vista",
+      "state": "AZ",
+      "county": "Cochise",
+      "population": 45155,
+      "zips": 1,
+      "niche": "Plumbing",
+      "sub_service": "plumber",
+      "query": "plumber Sierra Vista AZ",
+      "payout": 60.2,
+      "pricing": "geo",
+      "bundle_value": 60.2,
+      "niches_here": [
+        {
+          "niche": "Plumbing",
+          "payout": 60.2,
+          "zips": 1,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 6,
+      "serp_breakdown": {
+        "dedicated": 4,
+        "pseo": 0,
+        "national": 0,
+        "emd": 1,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 2,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 230,
+        "pack_median_reviews": 122,
+        "city_mentions": 7,
+        "local_firms": 6
+      },
+      "occupants": [
+        {
+          "host": "sierravistaplumbing.com",
+          "kind": "city EMD + dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "rotorooter.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "eagleplumbingaz.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "huachucaplumbing.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "ritewayac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "struseplumbing.net",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "angi.com",
+          "kind": "directory"
+        }
+      ],
+      "opportunity": 3.61,
+      "volume": 590,
+      "value": 2131.1,
+      "verdict": "STOP",
+      "why": [
+        "1 city EMD on page one",
+        "4 dedicated plumbing pages"
+      ]
+    },
+    {
+      "city": "Muncie",
+      "state": "IN",
+      "county": "Delaware",
+      "population": 85519,
+      "zips": 4,
+      "niche": "Plumbing",
+      "sub_service": "plumber",
+      "query": "plumber Muncie IN",
+      "payout": 47.25,
+      "pricing": "geo",
+      "bundle_value": 47.25,
+      "niches_here": [
+        {
+          "niche": "Plumbing",
+          "payout": 47.25,
+          "zips": 4,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 6,
+      "serp_breakdown": {
+        "dedicated": 5,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 1,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 1053,
+        "pack_median_reviews": 241,
+        "city_mentions": 8,
+        "local_firms": 6
+      },
+      "occupants": [
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "petermanhvac.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "jacksonplumbingllc.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "mrrooter.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "enterpriseplumbinginc.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "summersphc.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        },
+        {
+          "host": "indianarooterman.com",
+          "kind": "independent site"
+        }
+      ],
+      "opportunity": 2.83,
+      "volume": 480,
+      "value": 1360.8,
+      "verdict": "STOP",
+      "why": [
+        "5 dedicated plumbing pages"
+      ]
+    },
+    {
+      "city": "Kingman",
+      "state": "AZ",
+      "county": "Mohave",
+      "population": 34375,
+      "zips": 2,
+      "niche": "Plumbing",
+      "sub_service": "plumber",
+      "query": "plumber Kingman AZ",
+      "payout": 56.98,
+      "pricing": "geo",
+      "bundle_value": 56.98,
+      "niches_here": [
+        {
+          "niche": "Plumbing",
+          "payout": 56.98,
+          "zips": 2,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 6,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 0,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 1095,
+        "pack_median_reviews": 950,
+        "city_mentions": 9,
+        "local_firms": 6
+      },
+      "occupants": [
+        {
+          "host": "thompsonfamilyplumbing.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "mohavelocal.com",
+          "kind": "directory"
+        },
+        {
+          "host": "ambientedge.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "benjaminfranklinplumbing.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "randnplumbing.org",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "aircontrolaz.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        },
+        {
+          "host": "retroplumbinginc.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 0.0,
+      "volume": 880,
+      "value": 0.0,
+      "verdict": "STOP",
+      "why": [
+        "6 dedicated plumbing pages",
+        "map pack at 950 reviews"
+      ]
+    },
+    {
+      "city": "Santa Maria",
+      "state": "CA",
+      "county": "Santa Barbara",
+      "population": 144941,
+      "zips": 3,
+      "niche": "Plumbing",
+      "sub_service": "plumber",
+      "query": "plumber Santa Maria CA",
+      "payout": 61.25,
+      "pricing": "geo",
+      "bundle_value": 61.25,
+      "niches_here": [
+        {
+          "niche": "Plumbing",
+          "payout": 61.25,
+          "zips": 3,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 7,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 2,
+        "forum": 0,
+        "other_local": 0,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 1198,
+        "pack_median_reviews": 297,
+        "city_mentions": 9,
+        "local_firms": 7
+      },
+      "occupants": [
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "jacksplumbing.net",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "griffin-plumbing.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "ziermanplumbing.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "rotorooter.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "curtlaniniplumbingandheating.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "popsplumbingrepair.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "titos-plumbing.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 0.0,
+      "volume": 720,
+      "value": 0.0,
+      "verdict": "STOP",
+      "why": [
+        "7 dedicated plumbing pages"
+      ]
+    },
+    {
+      "city": "Prescott",
+      "state": "AZ",
+      "county": "Yavapai",
+      "population": 47400,
+      "zips": 6,
+      "niche": "Plumbing",
+      "sub_service": "plumber",
+      "query": "plumber Prescott AZ",
+      "payout": 48.16,
+      "pricing": "geo",
+      "bundle_value": 48.16,
+      "niches_here": [
+        {
+          "niche": "Plumbing",
+          "payout": 48.16,
+          "zips": 6,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 6,
+        "pseo": 0,
+        "national": 0,
+        "emd": 1,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 0,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 1176,
+        "pack_median_reviews": 342,
+        "city_mentions": 9,
+        "local_firms": 6
+      },
+      "occupants": [
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "franklinplumbingaz.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "redplumbinginc.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "plumberprescottaz.com",
+          "kind": "city EMD + dedicated page"
+        },
+        {
+          "host": "benjaminfranklinplumbing.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        },
+        {
+          "host": "elseaplumbing.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "nicholsaz.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 0.0,
+      "volume": 720,
+      "value": 0.0,
+      "verdict": "STOP",
+      "why": [
+        "1 city EMD on page one",
+        "6 dedicated plumbing pages"
+      ]
+    },
+    {
+      "city": "Rome",
+      "state": "GA",
+      "county": "Floyd",
+      "population": 38189,
+      "zips": 2,
+      "niche": "Plumbing",
+      "sub_service": "plumber",
+      "query": "plumber Rome GA",
+      "payout": 69.3,
+      "pricing": "geo",
+      "bundle_value": 69.3,
+      "niches_here": [
+        {
+          "niche": "Plumbing",
+          "payout": 69.3,
+          "zips": 2,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 5,
+        "pseo": 0,
+        "national": 0,
+        "emd": 1,
+        "directory": 2,
+        "forum": 0,
+        "other_local": 1,
+        "results": 8,
+        "pack_size": 3,
+        "pack_top_reviews": 225,
+        "pack_median_reviews": 24,
+        "city_mentions": 7,
+        "local_firms": 6
+      },
+      "occupants": [
+        {
+          "host": "rotorooter.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "carverandcarver2.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "cravensplumbingspecialist.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        },
+        {
+          "host": "romegaplumber.com",
+          "kind": "city EMD + dedicated page"
+        },
+        {
+          "host": "criderplumbing.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "clayhendersonplumbing.net",
+          "kind": "independent site"
+        }
+      ],
+      "opportunity": 0.0,
+      "volume": 480,
+      "value": 0.0,
+      "verdict": "STOP",
+      "why": [
+        "1 city EMD on page one",
+        "5 dedicated plumbing pages"
+      ]
+    },
+    {
+      "city": "Boynton Beach",
+      "state": "FL",
+      "county": "Palm Beach",
+      "population": 81435,
+      "zips": 9,
+      "niche": "Plumbing",
+      "sub_service": "plumber",
+      "query": "plumber Boynton Beach FL",
+      "payout": 64.75,
+      "pricing": "geo",
+      "bundle_value": 64.75,
+      "niches_here": [
+        {
+          "niche": "Plumbing",
+          "payout": 64.75,
+          "zips": 9,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 6,
+        "pseo": 0,
+        "national": 0,
+        "emd": 0,
+        "directory": 2,
+        "forum": 0,
+        "other_local": 0,
+        "results": 8,
+        "pack_size": 3,
+        "pack_top_reviews": 412,
+        "pack_median_reviews": 363,
+        "city_mentions": 8,
+        "local_firms": 6
+      },
+      "occupants": [
+        {
+          "host": "lindstromair.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "rotorooter.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "buckeyeplmg.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "ironmanplumbingfl.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "teamplumbinganddrains.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        },
+        {
+          "host": "clearyplumbing.com",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 0.0,
+      "volume": 480,
+      "value": 0.0,
+      "verdict": "STOP",
+      "why": [
+        "6 dedicated plumbing pages"
+      ]
+    },
+    {
+      "city": "Corvallis",
+      "state": "OR",
+      "county": "Benton",
+      "population": 69209,
+      "zips": 4,
+      "niche": "Plumbing",
+      "sub_service": "plumber",
+      "query": "plumber Corvallis OR",
+      "payout": 53.55,
+      "pricing": "geo",
+      "bundle_value": 53.55,
+      "niches_here": [
+        {
+          "niche": "Plumbing",
+          "payout": 53.55,
+          "zips": 4,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 6,
+        "pseo": 0,
+        "national": 0,
+        "emd": 1,
+        "directory": 2,
+        "forum": 1,
+        "other_local": 0,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 243,
+        "pack_median_reviews": 25,
+        "city_mentions": 9,
+        "local_firms": 6
+      },
+      "occupants": [
+        {
+          "host": "evenfloplumbing.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "reddit.com",
+          "kind": "forum"
+        },
+        {
+          "host": "rotorooter.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "judsons.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "albinsplumbing.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "rgsmithelectricandplumbing.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "nextdoor.com",
+          "kind": "directory"
+        },
+        {
+          "host": "corvallisplumbinginc.com",
+          "kind": "city EMD + dedicated page"
+        }
+      ],
+      "opportunity": 0.0,
+      "volume": 480,
+      "value": 0.0,
+      "verdict": "STOP",
+      "why": [
+        "1 city EMD on page one",
+        "6 dedicated plumbing pages"
+      ]
+    },
+    {
+      "city": "Grants Pass",
+      "state": "OR",
+      "county": "Josephine",
+      "population": 39311,
+      "zips": 2,
+      "niche": "Plumbing",
+      "sub_service": "plumber",
+      "query": "plumber Grants Pass OR",
+      "payout": 30.8,
+      "pricing": "geo",
+      "bundle_value": 30.8,
+      "niches_here": [
+        {
+          "niche": "Plumbing",
+          "payout": 30.8,
+          "zips": 2,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 6,
+        "pseo": 0,
+        "national": 0,
+        "emd": 1,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 0,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 859,
+        "pack_median_reviews": 398,
+        "city_mentions": 9,
+        "local_firms": 6
+      },
+      "occupants": [
+        {
+          "host": "grantspassplumbing.com",
+          "kind": "city EMD + dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "murphyswedoplumbing.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "rotorooter.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "stedfastplumbing.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "aristocratplumbinginc.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "localprobook.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "angi.com",
+          "kind": "directory"
+        },
+        {
+          "host": "groverelectric.com",
+          "kind": "directory"
+        }
+      ],
+      "opportunity": 0.0,
+      "volume": 720,
+      "value": 0.0,
+      "verdict": "STOP",
+      "why": [
+        "1 city EMD on page one",
+        "6 dedicated plumbing pages"
+      ]
+    },
+    {
+      "city": "Wenatchee",
+      "state": "WA",
+      "county": "Chelan",
+      "population": 85048,
+      "zips": 2,
+      "niche": "Plumbing",
+      "sub_service": "plumber",
+      "query": "plumber Wenatchee WA",
+      "payout": 36.42,
+      "pricing": "geo",
+      "bundle_value": 36.42,
+      "niches_here": [
+        {
+          "niche": "Plumbing",
+          "payout": 36.42,
+          "zips": 2,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 6,
+        "pseo": 0,
+        "national": 0,
+        "emd": 3,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 0,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 1337,
+        "pack_median_reviews": 233,
+        "city_mentions": 9,
+        "local_firms": 6
+      },
+      "occupants": [
+        {
+          "host": "afterhoursplumbing.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "wenatcheeplumber.com",
+          "kind": "city EMD + dedicated page"
+        },
+        {
+          "host": "plumbperfectwenatchee.com",
+          "kind": "city EMD + dedicated page"
+        },
+        {
+          "host": "ferguson.com",
+          "kind": "directory"
+        },
+        {
+          "host": "wenatchee-plumbing.com",
+          "kind": "city EMD + dedicated page"
+        },
+        {
+          "host": "callpatriot.net",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "plumberboysllc.org",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        }
+      ],
+      "opportunity": 0.0,
+      "volume": 590,
+      "value": 0.0,
+      "verdict": "STOP",
+      "why": [
+        "3 city EMD on page one",
+        "6 dedicated plumbing pages"
+      ]
+    },
+    {
+      "city": "Idaho Falls",
+      "state": "ID",
+      "county": "Bonneville",
+      "population": 111137,
+      "zips": 4,
+      "niche": "Plumbing",
+      "sub_service": "plumber",
+      "query": "plumber Idaho Falls ID",
+      "payout": 34.65,
+      "pricing": "geo",
+      "bundle_value": 34.65,
+      "niches_here": [
+        {
+          "niche": "Plumbing",
+          "payout": 34.65,
+          "zips": 4,
+          "pricing": "geo"
+        }
+      ],
+      "serp_score": 0,
+      "serp_breakdown": {
+        "dedicated": 5,
+        "pseo": 0,
+        "national": 0,
+        "emd": 1,
+        "directory": 3,
+        "forum": 0,
+        "other_local": 1,
+        "results": 9,
+        "pack_size": 3,
+        "pack_top_reviews": 710,
+        "pack_median_reviews": 132,
+        "city_mentions": 8,
+        "local_firms": 6
+      },
+      "occupants": [
+        {
+          "host": "facebook.com",
+          "kind": "social profile"
+        },
+        {
+          "host": "holeshotplumbingid.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "yelp.com",
+          "kind": "directory"
+        },
+        {
+          "host": "evansplumbingidahofalls.com",
+          "kind": "city EMD + dedicated page"
+        },
+        {
+          "host": "rotorooter.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "fallsplumbingsupply.com",
+          "kind": "dedicated page"
+        },
+        {
+          "host": "bbb.org",
+          "kind": "directory"
+        },
+        {
+          "host": "idahofurnaceplumbingsource.com",
+          "kind": "independent site"
+        },
+        {
+          "host": "wolverineplumbing.net",
+          "kind": "dedicated page"
+        }
+      ],
+      "opportunity": 0.0,
+      "volume": 590,
+      "value": 0.0,
+      "verdict": "STOP",
+      "why": [
+        "1 city EMD on page one",
+        "5 dedicated plumbing pages"
+      ]
+    }
+  ],
+  "top_candidates_unscanned": [
+    {
+      "city": "Clovis",
+      "state": "NM",
+      "county": "Curry",
+      "pop": 37942,
+      "zips": 1,
+      "top_niche": "Plumbing",
+      "top_payout": 31.5,
+      "bundle_value": 31.5,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 31.5,
+          "zips": 1,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 590
+    },
+    {
+      "city": "Kingsport",
+      "state": "TN",
+      "county": "Sullivan",
+      "pop": 103542,
+      "zips": 4,
+      "top_niche": "Plumbing",
+      "top_payout": 31.5,
+      "bundle_value": 31.5,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 31.5,
+          "zips": 4,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 590
+    },
+    {
+      "city": "Bloomington",
+      "state": "IL",
+      "county": "McLean",
+      "pop": 135296,
+      "zips": 3,
+      "top_niche": "Plumbing",
+      "top_payout": 30.8,
+      "bundle_value": 30.8,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 30.8,
+          "zips": 3,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 590
+    },
+    {
+      "city": "Bowling Green",
+      "state": "KY",
+      "county": "Warren",
+      "pop": 106928,
+      "zips": 4,
+      "top_niche": "Plumbing",
+      "top_payout": 30.8,
+      "bundle_value": 30.8,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 30.8,
+          "zips": 4,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 590
+    },
+    {
+      "city": "Salisbury",
+      "state": "MD",
+      "county": "Wicomico",
+      "pop": 76593,
+      "zips": 4,
+      "top_niche": "Plumbing",
+      "top_payout": 54.25,
+      "bundle_value": 54.25,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 54.25,
+          "zips": 4,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 320
+    },
+    {
+      "city": "Winchester",
+      "state": "VA",
+      "county": "Winchester",
+      "pop": 86067,
+      "zips": 4,
+      "top_niche": "Plumbing",
+      "top_payout": 44.1,
+      "bundle_value": 44.1,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 44.1,
+          "zips": 4,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 390
+    },
+    {
+      "city": "Kerrville",
+      "state": "TX",
+      "county": "Kerr",
+      "pop": 24755,
+      "zips": 1,
+      "top_niche": "Plumbing",
+      "top_payout": 43.65,
+      "bundle_value": 43.65,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 43.65,
+          "zips": 1,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 390
+    },
+    {
+      "city": "Martinsburg",
+      "state": "WV",
+      "county": "Berkeley",
+      "pop": 18904,
+      "zips": 4,
+      "top_niche": "Plumbing",
+      "top_payout": 42.52,
+      "bundle_value": 42.52,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 42.52,
+          "zips": 4,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 390
+    },
+    {
+      "city": "Prescott Valley",
+      "state": "AZ",
+      "county": "Yavapai",
+      "pop": 98921,
+      "zips": 3,
+      "top_niche": "Plumbing",
+      "top_payout": 50.4,
+      "bundle_value": 50.4,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 50.4,
+          "zips": 3,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 320
+    },
+    {
+      "city": "Johnson City",
+      "state": "TN",
+      "county": "Washington",
+      "pop": 131898,
+      "zips": 4,
+      "top_niche": "Plumbing",
+      "top_payout": 31.5,
+      "bundle_value": 31.5,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 31.5,
+          "zips": 4,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 480
+    },
+    {
+      "city": "Farmington",
+      "state": "NM",
+      "county": "San Juan",
+      "pop": 46314,
+      "zips": 2,
+      "top_niche": "Plumbing",
+      "top_payout": 30.8,
+      "bundle_value": 30.8,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 30.8,
+          "zips": 2,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 480
+    },
+    {
+      "city": "Morgantown",
+      "state": "WV",
+      "county": "Monongalia",
+      "pop": 77875,
+      "zips": 2,
+      "top_niche": "Plumbing",
+      "top_payout": 30.8,
+      "bundle_value": 30.8,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 30.8,
+          "zips": 2,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 480
+    },
+    {
+      "city": "Mishawaka",
+      "state": "IN",
+      "county": "St. Joseph",
+      "pop": 51021,
+      "zips": 1,
+      "top_niche": "Plumbing",
+      "top_payout": 44.1,
+      "bundle_value": 44.1,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 44.1,
+          "zips": 1,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 320
+    },
+    {
+      "city": "Lake City",
+      "state": "FL",
+      "county": "Columbia",
+      "pop": 12515,
+      "zips": 3,
+      "top_niche": "Plumbing",
+      "top_payout": 41.58,
+      "bundle_value": 41.58,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 41.58,
+          "zips": 3,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 320
+    },
+    {
+      "city": "Somerset",
+      "state": "KY",
+      "county": "Pulaski",
+      "pop": 12216,
+      "zips": 2,
+      "top_niche": "Plumbing",
+      "top_payout": 39.43,
+      "bundle_value": 39.43,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 39.43,
+          "zips": 2,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 320
+    },
+    {
+      "city": "Johnstown",
+      "state": "PA",
+      "county": "Cambria",
+      "pop": 18087,
+      "zips": 8,
+      "top_niche": "Plumbing",
+      "top_payout": 30.8,
+      "bundle_value": 30.8,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 30.8,
+          "zips": 8,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 390
+    },
+    {
+      "city": "Altoona",
+      "state": "PA",
+      "county": "Blair",
+      "pop": 72876,
+      "zips": 3,
+      "top_niche": "Plumbing",
+      "top_payout": 30.8,
+      "bundle_value": 30.8,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 30.8,
+          "zips": 3,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 390
+    },
+    {
+      "city": "Morganton",
+      "state": "NC",
+      "county": "Burke",
+      "pop": 17646,
+      "zips": 1,
+      "top_niche": "Plumbing",
+      "top_payout": 30.1,
+      "bundle_value": 30.1,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 30.1,
+          "zips": 1,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 390
+    },
+    {
+      "city": "Cedar City",
+      "state": "UT",
+      "county": "Iron",
+      "pop": 38524,
+      "zips": 2,
+      "top_niche": "Plumbing",
+      "top_payout": 36.42,
+      "bundle_value": 36.42,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 36.42,
+          "zips": 2,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 320
+    },
+    {
+      "city": "Hilton Head Island",
+      "state": "SC",
+      "county": "Beaufort",
+      "pop": 37911,
+      "zips": 2,
+      "top_niche": "Plumbing",
+      "top_payout": 36.23,
+      "bundle_value": 36.23,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 36.23,
+          "zips": 2,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 320
+    },
+    {
+      "city": "Sandpoint",
+      "state": "ID",
+      "county": "Bonner",
+      "pop": 9637,
+      "zips": 1,
+      "top_niche": "Plumbing",
+      "top_payout": 36.12,
+      "bundle_value": 36.12,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 36.12,
+          "zips": 1,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 320
+    },
+    {
+      "city": "Lufkin",
+      "state": "TX",
+      "county": "Angelina",
+      "pop": 34251,
+      "zips": 1,
+      "top_niche": "Plumbing",
+      "top_payout": 34.65,
+      "bundle_value": 34.65,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 34.65,
+          "zips": 1,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 320
+    },
+    {
+      "city": "Paso Robles",
+      "state": "CA",
+      "county": "San Luis Obispo",
+      "pop": 67346,
+      "zips": 1,
+      "top_niche": "Plumbing",
+      "top_payout": 33.67,
+      "bundle_value": 33.67,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 33.67,
+          "zips": 1,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 320
+    },
+    {
+      "city": "Show Low",
+      "state": "AZ",
+      "county": "Navajo",
+      "pop": 12102,
+      "zips": 1,
+      "top_niche": "Plumbing",
+      "top_payout": 31.5,
+      "bundle_value": 31.5,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 31.5,
+          "zips": 1,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 320
+    },
+    {
+      "city": "Kapolei",
+      "state": "HI",
+      "county": "Honolulu",
+      "pop": 22232,
+      "zips": 1,
+      "top_niche": "Plumbing",
+      "top_payout": 31.5,
+      "bundle_value": 31.5,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 31.5,
+          "zips": 1,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 320
+    },
+    {
+      "city": "Beaufort",
+      "state": "SC",
+      "county": "Beaufort",
+      "pop": 65303,
+      "zips": 3,
+      "top_niche": "Plumbing",
+      "top_payout": 31.5,
+      "bundle_value": 31.5,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 31.5,
+          "zips": 3,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 320
+    },
+    {
+      "city": "Bryan",
+      "state": "TX",
+      "county": "Brazos",
+      "pop": 87939,
+      "zips": 7,
+      "top_niche": "Plumbing",
+      "top_payout": 31.5,
+      "bundle_value": 31.5,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 31.5,
+          "zips": 7,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 320
+    },
+    {
+      "city": "San Luis Obispo",
+      "state": "CA",
+      "county": "San Luis Obispo",
+      "pop": 48491,
+      "zips": 1,
+      "top_niche": "Plumbing",
+      "top_payout": 30.24,
+      "bundle_value": 30.24,
+      "niche_list": [
+        {
+          "niche": "Plumbing",
+          "payout": 30.24,
+          "zips": 1,
+          "pricing": "geo"
+        }
+      ],
+      "volume": 320
+    }
+  ]
+}
