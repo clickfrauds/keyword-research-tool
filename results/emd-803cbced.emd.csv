@@ -1,0 +1,13 @@
+city,state,service,volume,local_volume,domain,emd,payout,bids,pop,zips,verdict,serp_score,why,geo_name
+Torrance,CA,plumbers,480,260,torranceplumbers.com,taken,115.21,True,142130,10,,,,"Torrance,California,United States"
+Torrance,CA,water heater repair,70,50,torrancewaterheaterrepair.com,,115.21,True,142130,10,,,,"Torrance,California,United States"
+Torrance,CA,drain cleaning,70,40,torrancedraincleaning.com,,115.21,True,142130,10,,,,"Torrance,California,United States"
+Torrance,CA,water heater replacement,10,30,torrancewaterheaterreplacement.com,,115.21,True,142130,10,,,,"Torrance,California,United States"
+Torrance,CA,emergency plumbing,10,20,torranceemergencyplumbing.com,,115.21,True,142130,10,,,,"Torrance,California,United States"
+Torrance,CA,water heater installation,0,10,torrancewaterheaterinstallation.com,,115.21,True,142130,10,,,,"Torrance,California,United States"
+Torrance,CA,tankless water heater installation,0,20,torrancetanklesswaterheaterinstallation.com,,115.21,True,142130,10,,,,"Torrance,California,United States"
+Torrance,CA,tankless water heater repair,0,10,torrancetanklesswaterheaterrepair.com,,115.21,True,142130,10,,,,"Torrance,California,United States"
+Torrance,CA,water heater leaking,0,10,torrancewaterheaterleaking.com,,115.21,True,142130,10,,,,"Torrance,California,United States"
+Torrance,CA,no hot water,0,10,torrancenohotwater.com,,115.21,True,142130,10,,,,"Torrance,California,United States"
+Torrance,CA,water heater flush,0,10,torrancewaterheaterflush.com,,115.21,True,142130,10,,,,"Torrance,California,United States"
+Torrance,CA,water heater earthquake strapping,0,10,torrancewaterheaterearthquakestrapping.com,,115.21,True,142130,10,,,,"Torrance,California,United States"
