@@ -118,7 +118,7 @@
     <a class="back" href="/">← Keyword tool</a>
     <div class="eyebrow" style="margin-top:14px">EMD finder · pay-per-call</div>
     <h1>Exact-match domains, measured town by town</h1>
-    <p class="lede">Pick a state and a LeadSmart niche, choose the towns and services, and the run
+    <p class="lede">Pick a state and one of your LeadSmart campaigns, choose the towns and services, and the run
       measures every <em>town + service</em> search <strong>inside that town</strong>, keeps the ones
       searched 100+ times a month, checks whether <code>{town}{service}.com</code> is still
       unregistered, and reads page one for the free ones.</p>
@@ -126,14 +126,15 @@
 
   <section class="card">
     <h2><span class="n">01</span> Market</h2>
-    <p class="sub">Only niches LeadSmart buys are listed — a call nobody buys earns nothing.</p>
+    <p class="sub">These are the campaigns on your own LeadSmart account — the Manage Campaigns
+      list, not a guess. Two are Live; the rest need an Apply first.</p>
     <div class="row">
       <div>
         <label for="state">State</label>
         <select id="state"><option value="">Choose a state…</option></select>
       </div>
       <div>
-        <label for="niche">LeadSmart niche</label>
+        <label for="niche">LeadSmart campaign</label>
         <select id="niche"><option value="">Loading…</option></select>
       </div>
     </div>
@@ -142,8 +143,10 @@
 
   <section class="card">
     <h2><span class="n">02</span> Towns</h2>
-    <p class="sub">Every town here is one where LeadSmart pays for this niche. Our three live sites
-      are all 39k–90k towns away from a metro; the big cities are where the agencies are.</p>
+    <p class="sub">Every town in the state the coverage feed knows. A payout means a bid is live
+      there today; “no live bid” is still fair game, because the campaigns themselves are
+      nationwide. Our live sites are all 39k–90k towns away from a metro; the big cities are
+      where the agencies are.</p>
     <div class="bar">
       <input type="search" id="town-q" placeholder="Filter towns…" aria-label="Filter towns">
       <select id="town-max" aria-label="Largest town to show">
@@ -157,7 +160,7 @@
       <button class="btn" data-top="none">None</button>
       <span class="count" id="town-count">0 selected</span>
     </div>
-    <div class="list" id="towns"><div class="empty">Choose a state and a niche first.</div></div>
+    <div class="list" id="towns"><div class="empty">Choose a state and a campaign first.</div></div>
   </section>
 
   <section class="card">
@@ -170,7 +173,7 @@
       <button class="btn" id="svc-none">None</button>
       <span class="count" id="svc-count">0 selected</span>
     </div>
-    <div class="chips" id="services"><span class="hint">Choose a niche first.</span></div>
+    <div class="chips" id="services"><span class="hint">Choose a campaign first.</span></div>
   </section>
 
   <section class="card">
@@ -229,37 +232,49 @@
     $("state").appendChild(o);
   });
 
-  fetch("/data/services_by_niche.json").then(function (r) { return r.json(); }).then(function (d) {
-    catalogue = d.niches || {};
-    var sel = $("niche"); sel.innerHTML = '<option value="">Choose a niche…</option>';
+  fetch("/data/leadsmart_campaigns.json").then(function (r) { return r.json(); }).then(function (d) {
+    catalogue = d.campaigns || {};
+    var sel = $("niche"); sel.innerHTML = '<option value="">Choose a campaign…</option>';
+    var live = document.createElement("optgroup"); live.label = "Live on your account";
+    var apply = document.createElement("optgroup"); apply.label = "Available to apply for";
+    var other = document.createElement("optgroup"); other.label = "Not a local SEO fit";
     Object.keys(catalogue).forEach(function (k) {
-      var e = catalogue[k].economics || {}, bits = [];
+      var c = catalogue[k], e = c.economics || {}, bits = [];
       if (e.call_median) bits.push("call $" + e.call_median);
       if (e.cpl_median) bits.push("lead $" + e.cpl_median);
       var o = document.createElement("option"); o.value = k;
       o.textContent = k + (bits.length ? " — " + bits.join(" · ") : "");
-      sel.appendChild(o);
+      (!c.local_seo ? other : c.status === "live" ? live : apply).appendChild(o);
     });
-  }).catch(function () { $("niche").innerHTML = '<option value="">Could not load niches</option>'; });
+    [live, apply, other].forEach(function (g) { if (g.children.length) sel.appendChild(g); });
+  }).catch(function () { $("niche").innerHTML = '<option value="">Could not load campaigns</option>'; });
 
   function showEcon() {
     var k = $("niche").value, box = $("econ");
     if (!k || !catalogue[k]) { box.innerHTML = ""; return; }
-    var e = catalogue[k].economics || {}, parts = [];
+    var c = catalogue[k], e = c.economics || {}, parts = [];
     if (e.call_median) parts.push("Call median $" + e.call_median + " · " + fmt(e.call_zips) + " ZIPs");
     if (e.cpl_median) parts.push("Lead (CPL) median $" + e.cpl_median + " · " + fmt(e.cpl_zips) + " ZIPs");
-    if (e.paid_pct != null) parts.push(e.paid_pct + "% of calls paid");
-    var cplOnly = e.cpl_median && !e.call_median;
+    if (e.paid_pct != null) parts.push(e.paid_pct + "% of " + fmt(e.calls_seen) + " calls paid");
+    var notes = [];
+    notes.push(c.status === "live"
+      ? "Live on your account."
+      : 'Shows as <strong>Apply</strong> on your LeadSmart dashboard — apply before the site goes up.');
+    notes.push("Offer: <em>" + esc(c.offer_title) + "</em>");
+    if (c.payout_type === "cpl") notes.push("Lead (CPL) only: the site needs the LeadSmart form as well as the number.");
+    if (!c.feed_niche) notes.push("The coverage feed carries no ZIP rates for this one, so towns are listed without a payout.");
+    if (!c.local_seo) notes.push("Not a local town-and-service site — listed only because it is on your account.");
     box.innerHTML = '<span class="econ">' + esc(parts.join("  ·  ")) + '</span>' +
-      (cplOnly ? '<p class="hint">Lead (CPL) only: the site needs the LeadSmart form as well as the number.</p>' : "");
+      '<p class="hint">' + notes.join(" ") + '</p>';
   }
 
   function loadTowns() {
     var st = $("state").value, k = $("niche").value;
     pickedTowns = {}; towns = [];
-    if (!st || !k) { $("towns").innerHTML = '<div class="empty">Choose a state and a niche first.</div>'; update(); return; }
+    if (!st || !k) { $("towns").innerHTML = '<div class="empty">Choose a state and a campaign first.</div>'; update(); return; }
     $("towns").innerHTML = '<div class="empty">Loading towns…</div>';
-    fetch("/coverage-cities?state=" + encodeURIComponent(st) + "&niche=" + encodeURIComponent(k))
+    var fn = (catalogue[k] || {}).feed_niche || "";
+    fetch("/coverage-cities?state=" + encodeURIComponent(st) + "&feed_niche=" + encodeURIComponent(fn))
       .then(function (r) { return r.json(); }).then(function (d) {
         if (d.error) throw new Error(d.error);
         towns = d.cities || []; renderTowns();
@@ -277,14 +292,16 @@
 
   function renderTowns() {
     var v = visibleTowns();
-    if (!towns.length) { $("towns").innerHTML = '<div class="empty">LeadSmart buys no ' + esc($("niche").value) + ' calls in this state.</div>'; update(); return; }
+    if (!towns.length) { $("towns").innerHTML = '<div class="empty">The coverage feed lists no towns for ' + esc($("state").value) + '.</div>'; update(); return; }
     if (!v.length) { $("towns").innerHTML = '<div class="empty">No town matches that filter.</div>'; update(); return; }
     $("towns").innerHTML = v.map(function (t) {
       var id = "t-" + t.city.replace(/[^a-z0-9]/gi, "_");
       return '<label class="town" for="' + id + '"><input type="checkbox" id="' + id + '" data-town="' + esc(t.city) + '"' +
         (pickedTowns[t.city] ? " checked" : "") + '><span>' + esc(t.city) + '</span>' +
-        '<span class="m">' + fmt(t.pop) + '</span><span class="m pay">$' + t.payout.toFixed(2) + '</span>' +
-        '<span class="m z">' + t.zips + ' ZIP' + (t.zips === 1 ? "" : "s") + '</span></label>';
+        '<span class="m">' + fmt(t.pop) + '</span>' +
+        (t.bids ? '<span class="m pay">$' + t.payout.toFixed(2) + '</span>' +
+                  '<span class="m z">' + t.zips + ' ZIP' + (t.zips === 1 ? "" : "s") + '</span>'
+                : '<span class="m">—</span><span class="m z">no live bid</span>') + '</label>';
     }).join("");
     update();
   }
@@ -306,7 +323,7 @@
 
   function renderServices() {
     var k = $("niche").value;
-    if (!k || !catalogue[k]) { $("services").innerHTML = '<span class="hint">Choose a niche first.</span>'; update(); return; }
+    if (!k || !catalogue[k]) { $("services").innerHTML = '<span class="hint">Choose a campaign first.</span>'; update(); return; }
     $("services").innerHTML = catalogue[k].services.map(function (s, i) {
       return '<label class="chip"><input type="checkbox" value="' + esc(s) + '"' + (i < 12 ? " checked" : "") + '>' + esc(s) + '</label>';
     }).join("");

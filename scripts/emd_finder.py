@@ -73,7 +73,7 @@ MAX_SERVICES = int(os.environ.get("MAX_SERVICES", "40") or 40)
 REQUEST_ID = (os.environ.get("REQUEST_ID") or "").strip() or "emd-local"
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-SERVICES_FILE = os.path.join(HERE, "..", "data", "services_by_niche.json")
+SERVICES_FILE = os.path.join(HERE, "..", "data", "leadsmart_campaigns.json")
 
 
 def split_list(text):
@@ -92,8 +92,15 @@ def slug(s):
 
 
 # ── STAGE 1: coverage ────────────────────────────────────────────────────
-def coverage(state, niche):
-    """{norm(city): {...}} for the towns in `state` where `niche` is bought."""
+def coverage(state, feed_niche):
+    """{norm(city): {...}} for every town in `state` the coverage feed knows.
+
+    The union, not the towns carrying `feed_niche`. The feed says where bids
+    are live at this moment; the campaigns on the account are sold Nationwide,
+    and New Mexico lists 16 towns under Electrical against 359 in total. So a
+    town without a live bid is reported, not dropped — `bids` carries that
+    distinction and the payout columns stay empty for it.
+    """
     shard = FO.j(f"{FO.BASE}/api/state/{state}.json")
     if not shard or not shard.get("rows"):
         return {}
@@ -101,16 +108,21 @@ def coverage(state, niche):
     out = {}
     for r in shard["rows"]:
         try:
-            if nich[r[2]] != niche:
-                continue
             name = city[r[0]]
+            this_niche = nich[r[2]]
         except (IndexError, TypeError):
             continue
         k = norm(name)
         e = out.setdefault(k, {"city": name, "pop": 0, "zips": 0, "payout": 0.0,
-                               "ptypes": set()})
-        e["zips"] += 1
+                               "bids": False, "ptypes": set()})
         e["pop"] = max(e["pop"], int(r[5] or 0))
+        # With no feed niche, the town is listed but nothing is attributed to
+        # it: summing every niche would hand a dentist campaign the pest
+        # control rate.
+        if not feed_niche or this_niche != feed_niche:
+            continue
+        e["bids"] = True
+        e["zips"] += 1
         e["payout"] = max(e["payout"], float(r[4] or 0))
         e["ptypes"].add(ptype[r[3]] if 0 <= r[3] < len(ptype) else "")
     for e in out.values():
@@ -224,7 +236,7 @@ def write(meta, rows, unresolved, not_bought):
     json.dump({"meta": meta, "rows": rows, "unresolved_towns": unresolved,
                "towns_without_buyer": not_bought},
               open("emd_matrix.json", "w", encoding="utf-8"), indent=1, ensure_ascii=False)
-    cols = ["city", "state", "service", "volume", "domain", "emd", "payout", "pop",
+    cols = ["city", "state", "service", "volume", "domain", "emd", "payout", "bids", "pop",
             "zips", "verdict", "serp_score", "why", "geo_name"]
     with open("emd_matrix.csv", "w", encoding="utf-8", newline="") as fh:
         w = csv.writer(fh)
@@ -278,26 +290,33 @@ def main():
     if not STATE or not NICHE:
         print("❌ STATE and NICHE are required")
         return 1
-    catalogue = json.load(open(SERVICES_FILE, encoding="utf-8"))["niches"]
+    catalogue = json.load(open(SERVICES_FILE, encoding="utf-8"))["campaigns"]
     if NICHE not in catalogue:
-        print(f"❌ unknown niche {NICHE!r}. Known: {', '.join(catalogue)}")
+        print(f"❌ unknown campaign {NICHE!r}. Known: {', '.join(catalogue)}")
         return 1
-    services = split_list(SERVICES_IN) or catalogue[NICHE]["services"]
+    campaign = catalogue[NICHE]
+    feed_niche = campaign.get("feed_niche")
+    services = split_list(SERVICES_IN) or campaign["services"]
     services = list(dict.fromkeys(s.lower() for s in services))[:MAX_SERVICES]
+    print(f"   offer: {campaign.get('offer_title', '')} "
+          f"({campaign.get('payout_type', '?')}, {campaign.get('status', '?')})")
 
     print("── STAGE 1: LeadSmart coverage ─────────────────────────")
     meta_feed = FO.j(f"{FO.BASE}/api/meta.json") or {}
-    cov = coverage(STATE, NICHE)
-    print(f"   {len(cov)} town(s) in {STATE} where LeadSmart buys {NICHE}")
+    cov = coverage(STATE, feed_niche)
+    live = sum(1 for e in cov.values() if e["bids"])
+    print(f"   {len(cov)} town(s) in {STATE}; {live} with a live "
+          f"{feed_niche or NICHE} bid today")
     towns = split_list(CITIES_IN)
     if not towns:
-        towns = [e["city"] for e in sorted(cov.values(), key=lambda e: -e["pop"])]
-    towns = list(dict.fromkeys(towns))
-    not_bought = [t for t in towns if norm(t) not in cov]
-    towns = [t for t in towns if norm(t) in cov][:MAX_CITIES]
-    if not_bought:
-        print(f"   {len(not_bought)} town(s) dropped — no {NICHE} buyer there: "
-              + ", ".join(not_bought[:10]))
+        # Auto-pick prefers towns with a live bid, then the rest by population.
+        towns = [e["city"] for e in sorted(cov.values(),
+                                           key=lambda e: (not e["bids"], -e["pop"]))]
+    towns = list(dict.fromkeys(towns))[:MAX_CITIES]
+    no_bid = [t for t in towns if not (cov.get(norm(t)) or {}).get("bids")]
+    if no_bid:
+        print(f"   {len(no_bid)} town(s) measured without a live bid "
+              f"(the campaign is nationwide): " + ", ".join(no_bid[:10]))
 
     print("── STAGE 2+3: per-town geo and volume ──────────────────")
     client = ads_client()
@@ -319,12 +338,16 @@ def main():
             unresolved.append((town, "Keyword Planner refused twice"))
             continue
         measured += 1
-        c = cov[norm(town)]
+        # A town typed by hand need not be in the feed at all, so this reads
+        # through a default rather than indexing.
+        c = cov.get(norm(town)) or {"payout": 0.0, "pop": 0, "zips": 0,
+                                    "bids": False, "ptypes": ""}
         for s in services:
             rows.append({"city": town, "state": STATE, "service": s, "volume": vols.get(s, 0),
                          "domain": f"{slug(town)}{slug(s)}.com", "emd": None,
                          "payout": c["payout"], "pop": c["pop"], "zips": c["zips"],
-                         "ptype": c["ptypes"], "geo_id": geo_id, "geo_name": geo_name,
+                         "bids": c["bids"], "ptype": c["ptypes"],
+                         "geo_id": geo_id, "geo_name": geo_name,
                          "verdict": None, "why": None})
         top = sorted(vols.items(), key=lambda kv: -kv[1])[:3]
         print(f"   {town} [{geo_name}] · " + ", ".join(f"{s} {v}" for s, v in top))
