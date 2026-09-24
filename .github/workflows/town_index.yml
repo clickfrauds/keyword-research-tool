@@ -1,0 +1,102 @@
+name: Town index (rebuild + measure volumes)
+
+# Rebuilds data/town_index.json from the LeadSmart coverage feed, then
+# optionally measures the EMD keyword's own search volume in each candidate
+# town's own Google geo and writes it into the same file.
+#
+# Stage 1 costs nothing at all — the feed is static JSON.
+# Stage 2 spends Google Ads calls, which are free; the limit that bites is the
+# 429 from asking too fast, so towns are paced and refusals retried once.
+# No SerpApi anywhere.
+
+on:
+  workflow_dispatch:
+    inputs:
+      measure_volumes:
+        description: "Measure search volume too? 'no' rebuilds the feed data only (instant, zero API)"
+        type: choice
+        options: ["yes", "no"]
+        default: "yes"
+      niches:
+        description: "Comma-separated niches to measure. Blank = Plumbing, Electrical, Roofing, HVAC"
+        default: ""
+      min_payout:
+        description: "Only measure towns paying at least this much"
+        default: "25"
+      min_pop:
+        description: "Smallest town to measure"
+        default: "10000"
+      max_pop:
+        description: "Largest town to measure"
+        default: "120000"
+      min_metro_miles:
+        description: "Only measure towns at least this far from one of the 90 metros"
+        default: "50"
+      max_towns:
+        description: "Cap on towns measured this run. 0 = all that qualify (about 700 at the defaults, ~50 min)"
+        default: "0"
+
+permissions:
+  contents: write
+
+jobs:
+  index:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - run: pip install -r requirements.txt
+
+      - name: Rebuild the index from the coverage feed
+        run: python -u scripts/build_town_index.py
+
+      # Resumable: a run that dies at town 400 starts at 400 next time, so the
+      # 1,400 calls are never repeated for a timeout.
+      - name: Restore volume progress
+        uses: actions/cache/restore@v4
+        with:
+          path: data/.volume_progress.json
+          key: town-volumes-${{ github.run_id }}
+          restore-keys: town-volumes-
+
+      - name: Measure search volume per town
+        if: ${{ github.event.inputs.measure_volumes != 'no' }}
+        env:
+          NICHES:           ${{ github.event.inputs.niches }}
+          MIN_PAYOUT:       ${{ github.event.inputs.min_payout }}
+          MIN_POP:          ${{ github.event.inputs.min_pop }}
+          MAX_POP:          ${{ github.event.inputs.max_pop }}
+          MIN_METRO_MILES:  ${{ github.event.inputs.min_metro_miles }}
+          MAX_TOWNS:        ${{ github.event.inputs.max_towns }}
+          GOOGLE_ADS_DEVELOPER_TOKEN:   ${{ secrets.GOOGLE_ADS_DEVELOPER_TOKEN }}
+          GOOGLE_ADS_CLIENT_ID:         ${{ secrets.GOOGLE_ADS_CLIENT_ID }}
+          GOOGLE_ADS_CLIENT_SECRET:     ${{ secrets.GOOGLE_ADS_CLIENT_SECRET }}
+          GOOGLE_ADS_REFRESH_TOKEN:     ${{ secrets.GOOGLE_ADS_REFRESH_TOKEN }}
+          GOOGLE_ADS_CUSTOMER_ID:       ${{ secrets.GOOGLE_ADS_CUSTOMER_ID }}
+          GOOGLE_ADS_USE_PROTO_PLUS:    'True'
+        run: python -u scripts/enrich_town_volumes.py
+
+      - name: Save volume progress
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: data/.volume_progress.json
+          key: town-volumes-${{ github.run_id }}
+
+      - name: Commit the refreshed index
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/town_index.json
+          if git diff --cached --quiet; then
+            echo "index unchanged"
+          else
+            git commit -m "Town index: refreshed from the coverage feed$(
+              [ "${{ github.event.inputs.measure_volumes }}" = "no" ] || echo ' + volumes')"
+            git push
+          fi

@@ -11,3 +11,4 @@ opportunity_score.md
 
 # SerpApi response cache (carried between runs by actions/cache)
 .serp_cache/
+.volume_progress.json

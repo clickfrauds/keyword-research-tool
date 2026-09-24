@@ -66,6 +66,7 @@
   .dom.free { color: var(--go); font-weight: 600; }
   .dom.taken { color: var(--muted); text-decoration: line-through; }
   .muted { color: var(--muted); }
+  .vol { font-weight: 600; }
 </style>
 </head>
 <body>
@@ -147,7 +148,10 @@
     <h2><span class="n">02</span> Towns</h2>
     <p class="sub">Click a column to sort. The top 300 are shown; narrow the filters to see
       further down. <strong>Payout is the harshest filter</strong> — for Electrical, $50+
-      leaves 27 towns in the country and $25+ leaves 109, and our Clovis site earns at $33.</p>
+      leaves 27 towns in the country and $25+ leaves 109, and our Clovis site earns at $33.
+      <strong>Searches/mo</strong> is the EMD's own term — "{town} {trade}" — measured inside
+      that town's own Google geo, not the state's. A dash means the town has not been
+      measured yet, which is not the same as zero.</p>
     <div class="scroll">
       <table>
         <thead><tr>
@@ -156,11 +160,12 @@
           <th data-k="0">State</th>
           <th data-k="3">Population</th>
           <th data-k="5">ZIPs</th>
+          <th data-k="8">Searches/mo</th>
           <th data-k="6">Miles to metro</th>
           <th data-k="7">Nearest metro</th>
           <th>Exact-match .com</th>
         </tr></thead>
-        <tbody id="rows"><tr><td colspan="8" class="empty">Loading the index…</td></tr></tbody>
+        <tbody id="rows"><tr><td colspan="9" class="empty">Loading the index…</td></tr></tbody>
       </table>
     </div>
     <div class="bar" style="margin-top:14px">
@@ -242,7 +247,7 @@
       fmt(DATA.length) + " town-and-niche rows from " + (d.source || "the coverage feed") + ".";
     render();
   }).catch(function (e) {
-    $("rows").innerHTML = '<tr><td colspan="8" class="empty">Could not load the index: ' + esc(e.message) + "</td></tr>";
+    $("rows").innerHTML = '<tr><td colspan="9" class="empty">Could not load the index: ' + esc(e.message) + "</td></tr>";
   });
 
   function visible() {
@@ -272,7 +277,7 @@
     $("count").textContent = fmt(v.length) + " town" + (v.length === 1 ? "" : "s") +
       (v.length > LIMIT ? " · showing the first " + LIMIT : "");
     if (!v.length) {
-      $("rows").innerHTML = '<tr><td colspan="8" class="empty">No town matches those filters. Loosen the payout first — it is the one that cuts deepest.</td></tr>';
+      $("rows").innerHTML = '<tr><td colspan="9" class="empty">No town matches those filters. Loosen the payout first — it is the one that cuts deepest.</td></tr>';
       return;
     }
     $("rows").innerHTML = v.slice(0, LIMIT).map(function (r) {
@@ -284,6 +289,7 @@
         '<td class="st">' + esc(r[0]) + "</td>" +
         '<td class="num">' + fmt(r[3]) + "</td>" +
         '<td class="num">' + r[5] + "</td>" +
+        '<td class="num vol">' + (r[8] == null ? '<span class="muted">-</span>' : fmt(r[8])) + "</td>" +
         '<td class="num far">' + fmt(r[6]) + "</td>" +
         "<td>" + esc(r[7]) + "</td>" +
         "<td>" + domainCell(r) + "</td>" +
