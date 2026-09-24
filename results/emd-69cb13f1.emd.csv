@@ -1,0 +1,10 @@
+city,state,service,volume,domain,emd,payout,pop,zips,verdict,serp_score,why,geo_name
+Farmington,NM,plumbers,260,farmingtonplumbers.com,taken,30.8,46314,2,,,,"Farmington,New Mexico,United States"
+Clovis,NM,plumbers,50,clovisplumbers.com,,31.5,37942,1,,,,"Clovis,New Mexico,United States"
+Carlsbad,NM,plumbers,10,carlsbadplumbers.com,,10.22,31746,1,,,,"Carlsbad,New Mexico,United States"
+Carlsbad,NM,drain cleaning,10,carlsbaddraincleaning.com,,10.22,31746,1,,,,"Carlsbad,New Mexico,United States"
+Carlsbad,NM,water heater repair,10,carlsbadwaterheaterrepair.com,,10.22,31746,1,,,,"Carlsbad,New Mexico,United States"
+Clovis,NM,drain cleaning,10,clovisdraincleaning.com,,31.5,37942,1,,,,"Clovis,New Mexico,United States"
+Clovis,NM,water heater repair,10,cloviswaterheaterrepair.com,,31.5,37942,1,,,,"Clovis,New Mexico,United States"
+Farmington,NM,drain cleaning,10,farmingtondraincleaning.com,,30.8,46314,2,,,,"Farmington,New Mexico,United States"
+Farmington,NM,water heater repair,0,farmingtonwaterheaterrepair.com,,30.8,46314,2,,,,"Farmington,New Mexico,United States"
