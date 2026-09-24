@@ -188,6 +188,7 @@
       <button class="btn" data-top="25">Top 25</button>
       <button class="btn" data-top="none">None</button>
       <span class="count" id="town-count">0 selected</span>
+      <span class="count" id="town-shown"></span>
     </div>
     <div class="list" id="towns"><div class="empty">Choose a state and a campaign first.</div></div>
   </section>
@@ -395,6 +396,19 @@
   function update() {
     var nt = Object.keys(pickedTowns).length, ns = pickedServices().length, serp = +$("serp").value || 0;
     $("town-count").textContent = nt + " selected" + (nt > MAX_TOWNS ? " — only " + MAX_TOWNS + " are measured" : "");
+    if (towns.length) {
+      var shown = visibleTowns().length, noGeo = 0;
+      if ($("town-metro").value !== "any") {
+        noGeo = towns.filter(function (t) { return t.metro_miles == null; }).length;
+      }
+      // The feed leaves lat/lng, population and county null on some small
+      // ZIPs, so a distance filter cannot place those towns. Saying so beats
+      // dropping them silently.
+      $("town-shown").textContent = shown + " of " + towns.length + " shown" +
+        (noGeo ? " · " + noGeo + " have no coordinates in the feed" : "");
+    } else {
+      $("town-shown").textContent = "";
+    }
     $("svc-count").textContent = ns + " selected" + (ns > MAX_SERVICES ? " — only " + MAX_SERVICES + " are sent" : "");
     var ok = nt > 0 && ns > 0 && $("state").value && $("niche").value;
     $("run").disabled = !ok;
