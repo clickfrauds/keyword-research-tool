@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Town Finder</title>
+<style>
+  :root {
+    --ink: #14181c; --muted: #6b6560; --line: #dcdad3; --paper: #fdfcfa; --bg: #f6f5f2;
+    --accent: #0b5d5a; --accent-soft: #e3f0ef; --accent-deep: #084543;
+    --gold: #b4791f; --gold-soft: #fdf3e0; --go: #1d6b3a; --go-soft: #e4f2e8;
+    --shadow-sm: 0 1px 2px rgba(20, 24, 28, .05);
+    --mono: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Menlo, Consolas, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--sans);
+         line-height: 1.5; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 16px 80px; }
+  header { padding: 40px 0 20px; }
+  .eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: .12em;
+             text-transform: uppercase; color: var(--accent); }
+  h1 { font-size: clamp(1.6rem, 4vw, 2.2rem); line-height: 1.15; margin: 8px 0 10px;
+       text-wrap: balance; letter-spacing: -.01em; }
+  .lede { color: var(--muted); max-width: 66ch; margin: 0; }
+  .back { font-size: 13px; color: var(--accent); text-decoration: none; }
+  .card { background: var(--paper); border: 1px solid var(--line); border-radius: 10px;
+          padding: 20px; margin-top: 14px; box-shadow: var(--shadow-sm); }
+  .card h2 { font-size: 1.02rem; margin: 0 0 4px; display: flex; gap: 10px; align-items: baseline; }
+  .card h2 .n { font-family: var(--mono); font-size: 12px; color: var(--gold); }
+  .card .sub { color: var(--muted); font-size: 13.5px; margin: 0 0 14px; max-width: 74ch; }
+  label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 5px; }
+  select, input[type=search] {
+    width: 100%; padding: 9px 10px; font: inherit; font-size: 14px; color: var(--ink);
+    background: #fff; border: 1px solid var(--line); border-radius: 7px; }
+  select:focus, input:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+  .bar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 12px 0 0; }
+  .bar select, .bar input[type=search] { width: auto; }
+  .bar input[type=search] { flex: 1 1 180px; }
+  .count { font-family: var(--mono); font-size: 12px; color: var(--muted); margin-left: auto; }
+  .btn { font: inherit; font-size: 13px; padding: 7px 11px; border-radius: 7px;
+         border: 1px solid var(--line); background: #fff; color: var(--ink); cursor: pointer;
+         text-decoration: none; display: inline-block; }
+  .btn:hover { border-color: var(--accent); color: var(--accent); }
+  table { width: 100%; border-collapse: collapse; margin-top: 14px; font-size: 13.5px; }
+  th { text-align: left; font-size: 11.5px; text-transform: uppercase; letter-spacing: .06em;
+       color: var(--muted); font-weight: 600; padding: 8px 10px; border-bottom: 1px solid var(--line);
+       white-space: nowrap; cursor: pointer; user-select: none; }
+  th:hover { color: var(--accent); }
+  th.on { color: var(--accent); }
+  td { padding: 9px 10px; border-bottom: 1px solid var(--line); vertical-align: baseline; }
+  tbody tr:hover { background: var(--accent-soft); }
+  .num { font-family: var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .pay { color: var(--go); font-weight: 600; }
+  .far { color: var(--accent-deep); }
+  .st { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+  .town { font-weight: 600; }
+  .scroll { overflow-x: auto; }
+  .note { font-size: 12.5px; color: var(--muted); margin-top: 12px; }
+  .empty { padding: 26px; text-align: center; color: var(--muted); font-size: 14px; }
+  .pill { font-family: var(--mono); font-size: 11px; padding: 2px 7px; border-radius: 20px;
+          background: var(--gold-soft); color: var(--gold); }
+  .yours { background: var(--go-soft); color: var(--go); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a class="back" href="/">← Keyword tool</a>
+    <div class="eyebrow" style="margin-top:14px">Town finder · pay-per-call</div>
+    <h1>Every town LeadSmart buys, ranked</h1>
+    <p class="lede">The whole country in one table — payout, population, ZIP count and the
+      distance to the nearest of 90 US metros. Nothing here costs an API call: it is the
+      coverage feed, rebuilt into one file. Pick a shortlist here, then measure it in the
+      <a href="/emd">EMD finder</a>.</p>
+  </header>
+
+  <section class="card">
+    <h2><span class="n">01</span> Filters</h2>
+    <p class="sub">Distance is the column that decides. Measured on our own four sites:
+      Clovis is 201 miles from Albuquerque, Bullhead City 80 from Las Vegas, Lawton 78 from
+      Oklahoma City — all three earn. Torrance is 16 from Los Angeles, and its page one
+      already carries seven established firms and someone else's EMD.</p>
+    <div class="grid">
+      <div>
+        <label for="niche">Niche</label>
+        <select id="niche"><option value="">Loading…</option></select>
+      </div>
+      <div>
+        <label for="minpop">Population from</label>
+        <select id="minpop">
+          <option value="0">No floor</option>
+          <option value="5000">5k+</option>
+          <option value="10000" selected>10k+</option>
+          <option value="20000">20k+</option>
+          <option value="40000">40k+</option>
+        </select>
+      </div>
+      <div>
+        <label for="maxpop">Population to</label>
+        <select id="maxpop">
+          <option value="0">No ceiling</option>
+          <option value="250000">Under 250k</option>
+          <option value="120000">Under 120k</option>
+          <option value="60000" selected>Under 60k</option>
+          <option value="30000">Under 30k</option>
+        </select>
+      </div>
+      <div>
+        <label for="pay">Minimum payout</label>
+        <select id="pay">
+          <option value="0">Any</option>
+          <option value="25" selected>$25+</option>
+          <option value="35">$35+</option>
+          <option value="50">$50+</option>
+          <option value="75">$75+</option>
+          <option value="100">$100+</option>
+        </select>
+      </div>
+      <div>
+        <label for="metro">Distance to a metro</label>
+        <select id="metro">
+          <option value="0">Any</option>
+          <option value="30">30+ mi</option>
+          <option value="50" selected>50+ mi</option>
+          <option value="80">80+ mi</option>
+          <option value="120">120+ mi</option>
+        </select>
+      </div>
+      <div>
+        <label for="state">State</label>
+        <select id="state"><option value="">Every state</option></select>
+      </div>
+    </div>
+    <div class="bar">
+      <input type="search" id="q" placeholder="Filter by town name…" aria-label="Filter by town name">
+      <span class="count" id="count"></span>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2><span class="n">02</span> Towns</h2>
+    <p class="sub">Click a column to sort. The top 300 are shown; narrow the filters to see
+      further down. <strong>Payout is the harshest filter</strong> — for Electrical, $50+
+      leaves 27 towns in the country and $25+ leaves 109, and our Clovis site earns at $33.</p>
+    <div class="scroll">
+      <table>
+        <thead><tr>
+          <th data-k="4" class="on">Payout</th>
+          <th data-k="1">Town</th>
+          <th data-k="0">State</th>
+          <th data-k="3">Population</th>
+          <th data-k="5">ZIPs</th>
+          <th data-k="6">Miles to metro</th>
+          <th data-k="7">Nearest metro</th>
+        </tr></thead>
+        <tbody id="rows"><tr><td colspan="7" class="empty">Loading the index…</td></tr></tbody>
+      </table>
+    </div>
+    <p class="note" id="foot"></p>
+  </section>
+</div>
+
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var DATA = [], NICHES = [], STATES = [], sortKey = 4, sortDir = -1, LIMIT = 300;
+  // Towns we already run a site in, so the table never suggests one twice.
+  var OURS = { "Clovis|NM": 1, "Bullhead City|AZ": 1, "Lawton|OK": 1, "Torrance|CA": 1 };
+
+  function esc(s) {
+    return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
+  function fmt(n) { return (+n || 0).toLocaleString("en-US"); }
+
+  fetch("/data/town_index.json").then(function (r) { return r.json(); }).then(function (d) {
+    DATA = d.rows || [];
+    NICHES = Object.keys(DATA.reduce(function (a, r) { a[r[2]] = 1; return a; }, {})).sort();
+    STATES = Object.keys(DATA.reduce(function (a, r) { a[r[0]] = 1; return a; }, {})).sort();
+    var ns = $("niche");
+    ns.innerHTML = NICHES.map(function (n) {
+      return '<option value="' + esc(n) + '"' + (n === "Electrical" ? " selected" : "") + '>' + esc(n) + "</option>";
+    }).join("");
+    STATES.forEach(function (s) {
+      var o = document.createElement("option"); o.value = s; o.textContent = s;
+      $("state").appendChild(o);
+    });
+    $("foot").textContent = "Index built " + (d.generated || "") + " · " +
+      fmt(DATA.length) + " town-and-niche rows from " + (d.source || "the coverage feed") + ".";
+    render();
+  }).catch(function (e) {
+    $("rows").innerHTML = '<tr><td colspan="7" class="empty">Could not load the index: ' + esc(e.message) + "</td></tr>";
+  });
+
+  function visible() {
+    var niche = $("niche").value, st = $("state").value,
+        lo = +$("minpop").value, hi = +$("maxpop").value,
+        pay = +$("pay").value, md = +$("metro").value,
+        q = $("q").value.trim().toLowerCase();
+    return DATA.filter(function (r) {
+      if (niche && r[2] !== niche) return false;
+      if (st && r[0] !== st) return false;
+      if (lo && r[3] < lo) return false;
+      if (hi && r[3] >= hi) return false;
+      if (pay && r[4] < pay) return false;
+      if (md && r[6] < md) return false;
+      if (q && r[1].toLowerCase().indexOf(q) < 0) return false;
+      return true;
+    });
+  }
+
+  function render() {
+    var v = visible();
+    v.sort(function (a, b) {
+      var x = a[sortKey], y = b[sortKey];
+      if (typeof x === "string") return sortDir * x.localeCompare(y);
+      return sortDir * (x - y);
+    });
+    $("count").textContent = fmt(v.length) + " town" + (v.length === 1 ? "" : "s") +
+      (v.length > LIMIT ? " · showing the first " + LIMIT : "");
+    if (!v.length) {
+      $("rows").innerHTML = '<tr><td colspan="7" class="empty">No town matches those filters. Loosen the payout first — it is the one that cuts deepest.</td></tr>';
+      return;
+    }
+    $("rows").innerHTML = v.slice(0, LIMIT).map(function (r) {
+      var mine = OURS[r[1] + "|" + r[0]];
+      return "<tr>" +
+        '<td class="num pay">$' + (+r[4]).toFixed(2) + "</td>" +
+        '<td class="town">' + esc(r[1]) +
+          (mine ? ' <span class="pill yours">ours</span>' : "") + "</td>" +
+        '<td class="st">' + esc(r[0]) + "</td>" +
+        '<td class="num">' + fmt(r[3]) + "</td>" +
+        '<td class="num">' + r[5] + "</td>" +
+        '<td class="num far">' + fmt(r[6]) + "</td>" +
+        "<td>" + esc(r[7]) + "</td>" +
+      "</tr>";
+    }).join("");
+  }
+
+  document.querySelectorAll("th[data-k]").forEach(function (th) {
+    th.addEventListener("click", function () {
+      var k = +th.getAttribute("data-k");
+      if (k === sortKey) { sortDir = -sortDir; }
+      else { sortKey = k; sortDir = (k === 1 || k === 0 || k === 7) ? 1 : -1; }
+      document.querySelectorAll("th[data-k]").forEach(function (o) { o.classList.remove("on"); });
+      th.classList.add("on");
+      render();
+    });
+  });
+  ["niche", "state", "minpop", "maxpop", "pay", "metro"].forEach(function (id) {
+    $(id).addEventListener("change", render);
+  });
+  $("q").addEventListener("input", render);
+})();
+</script>
+</body>
+</html>
