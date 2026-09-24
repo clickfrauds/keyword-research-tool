@@ -432,7 +432,9 @@
     if (un.length) h += '<p class="hint">Not measured: ' + un.map(function (u) { return esc(u[0]) + " (" + esc(u[1]) + ")"; }).join("; ") + "</p>";
     if (nb.length) h += '<p class="hint">No LeadSmart buyer, skipped: ' + esc(nb.join(", ")) + "</p>";
     h += '<p class="hint">FREE is Verisign\'s own answer: an unregistered .com sells at the standard price (Namecheap $11.28). A name Namecheap lists at a premium price is already owned and shows as TAKEN.</p>';
-    h += '<p class="links"><a href="' + esc(d.links.csv) + '">Download CSV</a><a href="' + esc(d.links.md) + '">Report</a><a href="' + esc(d.links.json) + '">Raw JSON</a></p>';
+    h += '<p class="links"><a href="' + esc(d.links.csv) + '">Download CSV</a>' +
+         (d.links.grid ? '<a href="' + esc(d.links.grid) + '">Grid (town x service)</a>' : "") +
+         '<a href="' + esc(d.links.md) + '">Report</a><a href="' + esc(d.links.json) + '">Raw JSON</a></p>';
     $("result").innerHTML = h;
   }
 })();

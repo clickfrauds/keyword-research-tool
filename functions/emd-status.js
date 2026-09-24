@@ -33,5 +33,6 @@ export async function onRequestGet({ request, env }) {
 
   const raw = `https://raw.githubusercontent.com/${GITHUB_OWNER}/${GITHUB_REPO}/${BRANCH}/results/${rid}`;
   return json({ status: "ready", result: await r.json(),
-                links: { csv: raw + ".emd.csv", md: raw + ".emd.md", json: raw + ".emd.json" } });
+                links: { csv: raw + ".emd.csv", grid: raw + ".emd.grid.csv",
+                         md: raw + ".emd.md", json: raw + ".emd.json" } });
 }

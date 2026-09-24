@@ -54,6 +54,7 @@ FILES_TO_PUSH = [
     # report and a spreadsheet-ready copy.
     ("emd_matrix.json", "emd.json"),
     ("emd_matrix.csv", "emd.csv"),
+    ("emd_grid.csv", "emd.grid.csv"),
     ("emd_report.md", "emd.md"),
     ("keyword_strategy_targets.csv", "csv"),
     ("keyword_strategy.json", "json"),

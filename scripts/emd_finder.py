@@ -244,6 +244,31 @@ def write(meta, rows, unresolved, not_bought):
         for r in sorted(rows, key=lambda r: (-r["volume"], r["city"])):
             w.writerow([("; ".join(r.get(c) or []) if c == "why" else r.get(c, "")) for c in cols])
 
+    # The same numbers as a grid: one row per town, one column per service,
+    # which is how the cross matrix is read by eye. The cell is the volume,
+    # with a * when the exact .com is still free and >= MIN_VOLUME.
+    services_out = list(dict.fromkeys(r["service"] for r in rows))
+    cell = {(r["city"], r["service"]): r for r in rows}
+    towns_out = sorted({r["city"] for r in rows},
+                       key=lambda c: -max((cell[(c, s)]["volume"]
+                                           for s in services_out if (c, s) in cell),
+                                          default=0))
+    with open("emd_grid.csv", "w", encoding="utf-8", newline="") as fh:
+        w = csv.writer(fh)
+        w.writerow(["town", "population", "payout", "live bid"] + services_out)
+        for c in towns_out:
+            any_row = next((cell[(c, s)] for s in services_out if (c, s) in cell), {})
+            line = [c, any_row.get("pop", ""), any_row.get("payout", ""),
+                    "yes" if any_row.get("bids") else "no"]
+            for s in services_out:
+                r = cell.get((c, s))
+                if not r:
+                    line.append("")
+                    continue
+                mark = "*" if (r["emd"] == "free" and r["volume"] >= MIN_VOLUME) else ""
+                line.append(f"{r['volume']}{mark}")
+            w.writerow(line)
+
     L = [f"# EMD finder — {NICHE}, {FO.STATE_NAMES.get(STATE, STATE)}", "",
          f"- Request `{REQUEST_ID}` · coverage dataset {meta.get('dataset')}",
          f"- {meta['towns_in']} town(s) in · {meta['towns_measured']} measured in their own geo "

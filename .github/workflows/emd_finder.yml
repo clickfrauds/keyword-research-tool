@@ -125,6 +125,7 @@ jobs:
           path: |
             emd_matrix.json
             emd_matrix.csv
+            emd_grid.csv
             emd_report.md
           retention-days: 30
           if-no-files-found: warn
