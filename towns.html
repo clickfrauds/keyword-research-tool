@@ -171,7 +171,9 @@
     <div class="bar" style="margin-top:14px">
       <button class="btn" id="check">Check .com availability</button>
       <button class="btn" id="copy">Copy names for Namecheap</button>
+      <button class="btn" id="vol">Get search volume</button>
       <span class="count" id="checked"></span>
+      <span class="count" id="volmsg" style="margin-left:0"></span>
     </div>
     <p class="note" id="foot"></p>
   </section>
@@ -270,7 +272,10 @@
   function render() {
     var v = visible();
     v.sort(function (a, b) {
-      var x = a[sortKey], y = b[sortKey];
+      var x = sortKey === 8 ? volOf(a) : a[sortKey];
+      var y = sortKey === 8 ? volOf(b) : b[sortKey];
+      if (x == null) x = -1;
+      if (y == null) y = -1;
       if (typeof x === "string") return sortDir * x.localeCompare(y);
       return sortDir * (x - y);
     });
@@ -289,7 +294,7 @@
         '<td class="st">' + esc(r[0]) + "</td>" +
         '<td class="num">' + fmt(r[3]) + "</td>" +
         '<td class="num">' + r[5] + "</td>" +
-        '<td class="num vol">' + (r[8] == null ? '<span class="muted">-</span>' : fmt(r[8])) + "</td>" +
+        '<td class="num vol">' + volCell(r) + "</td>" +
         '<td class="num far">' + fmt(r[6]) + "</td>" +
         "<td>" + esc(r[7]) + "</td>" +
         "<td>" + domainCell(r) + "</td>" +
@@ -362,6 +367,64 @@
     } else { done(false); }
   }
 
+
+  // Volume comes from Google Ads, which needs credentials, so it cannot be
+  // baked into the static index the way payout and distance are. VOL holds
+  // what this session has measured; the index's own value (r[8]) is used
+  // when the workflow has already filled it in.
+  var VOL = {};
+  function volKey(r) { return r[0] + "|" + r[1] + "|" + (TERMS[r[2]] || [""])[0]; }
+  function volOf(r) {
+    var k = volKey(r);
+    return VOL[k] != null ? VOL[k] : (r[8] == null ? null : r[8]);
+  }
+  function volCell(r) {
+    var v = volOf(r);
+    if (v == null) return '<span class="muted">-</span>';
+    return fmt(v);
+  }
+
+  // One click measures every town on screen, in batches the Pages function
+  // can fit inside Cloudflare's subrequest budget.
+  function runVolume() {
+    var rows = visible().slice(0, LIMIT).filter(function (r) {
+      return volOf(r) == null && (TERMS[r[2]] || []).length;
+    });
+    if (!rows.length) { $("volmsg").textContent = "every town on screen is already measured"; return; }
+    var btn = $("vol"), BATCH = 20, done = 0, failed = [];
+    btn.disabled = true;
+
+    function step(i) {
+      if (i >= rows.length) {
+        btn.disabled = false;
+        $("volmsg").textContent = done + " town" + (done === 1 ? "" : "s") + " measured" +
+          (failed.length ? " · " + failed.length + " could not be resolved" : "");
+        render();
+        return;
+      }
+      var slice = rows.slice(i, i + BATCH);
+      $("volmsg").textContent = "measuring " + (i + 1) + "–" +
+        Math.min(i + BATCH, rows.length) + " of " + rows.length + "…";
+      fetch("/ads-volume", {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ towns: slice.map(function (r) {
+          return { state: r[0], town: r[1], terms: [(TERMS[r[2]] || [""])[0]] };
+        }) })
+      }).then(function (x) { return x.json(); }).then(function (d) {
+        if (d.error) throw new Error(d.error);
+        Object.keys(d.results || {}).forEach(function (k) { VOL[k] = d.results[k]; });
+        done += d.measured || 0;
+        (d.unresolved || []).forEach(function (u) { failed.push(u); });
+        render();
+        step(i + BATCH);
+      }).catch(function (e) {
+        btn.disabled = false;
+        $("volmsg").textContent = "volume lookup failed: " + e.message;
+      });
+    }
+    step(0);
+  }
+
   document.querySelectorAll("th[data-k]").forEach(function (th) {
     th.addEventListener("click", function () {
       var k = +th.getAttribute("data-k");
@@ -378,6 +441,7 @@
   $("q").addEventListener("input", render);
   $("check").addEventListener("click", runCheck);
   $("copy").addEventListener("click", copyNames);
+  $("vol").addEventListener("click", runVolume);
 })();
 </script>
 </body>
