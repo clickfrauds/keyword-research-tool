@@ -52,8 +52,26 @@ MIN_METRO_MILES = int(os.environ.get("MIN_METRO_MILES", "50") or 50)
 MAX_TOWNS = int(os.environ.get("MAX_TOWNS", "0") or 0)
 PACE = float(os.environ.get("PACE_SECONDS", "2") or 2)
 
-# The head term each trade's EMD is built from — the same map the /towns page
-# uses to name the domains, so the volume belongs to the name on screen.
+# Read the same probe terms the /towns button uses, so a town measured here
+# and a town measured there report the same number. leadsmart_campaigns.json
+# is keyed by campaign; the index is keyed by the feed's niche label, and
+# feed_niche is the bridge the catalogue already carries.
+def load_probe():
+    try:
+        cat = json.load(open(os.path.join(HERE, "..", "data",
+                                          "leadsmart_campaigns.json"), encoding="utf-8"))
+    except Exception as e:
+        print(f"catalogue unreadable ({str(e)[:60]}) — falling back to head terms")
+        return {}
+    out = {}
+    for _name, c in (cat.get("campaigns") or {}).items():
+        fn, terms = c.get("feed_niche"), c.get("probe_terms") or []
+        if fn and terms:
+            out[fn] = terms
+    return out
+
+
+# Fallback only, for a niche the catalogue has no probe list for.
 TERMS = {
     "Plumbing": "plumbers", "Electrical": "electricians", "Roofing": "roofers",
     "HVAC": "hvac", "Pest Control": "pest control", "Appliance": "appliance repair",
@@ -117,6 +135,11 @@ def load_progress():
 def main():
     idx = json.load(open(INDEX, encoding="utf-8"))
     rows = idx["rows"]
+    probe = load_probe()
+    print(f"probe terms for {len(probe)} niche(s) from the campaign catalogue")
+
+    def terms_for(niche):
+        return probe.get(niche) or ([TERMS[niche]] if niche in TERMS else [])
 
     # Which towns are worth an API call, and which trades each one needs.
     want = {}
@@ -153,8 +176,8 @@ def main():
 
         queries = []
         for niche in niches:
-            t = TERMS[niche]
-            queries += [f"{town} {t}".lower(), f"{t} {town}".lower()]
+            for t in terms_for(niche):
+                queries += [f"{town} {t}".lower(), f"{t} {town}".lower()]
         vol = CSV.volumes(queries, geo_id)
         if vol is None:
             print(f"   [{n}/{len(todo)}] {town}, {st}: Planner refused — waiting 30s")
@@ -165,11 +188,15 @@ def main():
             time.sleep(PACE)
             continue
 
+        # The town's whole demand for the trade, not one keyword: measuring
+        # only the head term reported El Campo roofing as an empty market
+        # because nobody types "el campo roofers", which is not the same as
+        # nobody needing a roof.
         got = {}
         for niche in niches:
-            t = TERMS[niche]
-            got[niche] = max(vol.get(f"{town} {t}".lower(), 0),
-                             vol.get(f"{t} {town}".lower(), 0))
+            got[niche] = sum(
+                max(vol.get(f"{town} {t}".lower(), 0), vol.get(f"{t} {town}".lower(), 0))
+                for t in terms_for(niche))
         done[f"{st}|{town}"] = {"geo": geo_id, "vol": got}
         json.dump(done, open(STATE_FILE, "w", encoding="utf-8"))
         best = max(got.items(), key=lambda kv: kv[1]) if got else ("", 0)

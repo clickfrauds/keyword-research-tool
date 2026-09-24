@@ -210,6 +210,77 @@ RULES = [
      r"ice (maker|machine)|icemaker|cooktop|wine cooler"),
 ]
 
+
+# The terms the /towns volume probe measures for a campaign. Not the whole
+# service list -- that is alphabetical after the head terms, so "water heater
+# repair" sits near the end while "faucet installation" comes near the front,
+# and a ten-term probe would miss the money. These are the ten a homeowner
+# actually types, head term first, chosen for demand rather than for spelling.
+PROBE = {
+    "Plumbing": ["plumbers", "emergency plumber", "drain cleaning",
+                 "water heater repair", "water heater replacement",
+                 "clogged drain", "sewer line repair", "leak detection",
+                 "toilet repair", "burst pipe repair"],
+    "Electrical": ["electricians", "emergency electrician", "electrical repair",
+                   "electrical panel upgrade", "ceiling fan installation",
+                   "outlet repair", "generator installation",
+                   "ev charger installation", "house rewiring",
+                   "lighting installation"],
+    "Roofing": ["roofers", "roof repair", "roof replacement", "roof leak repair",
+                "metal roof installation", "storm damage roof repair",
+                "roof inspection", "shingle replacement", "flat roof repair",
+                "emergency roof repair"],
+    "HVAC": ["hvac", "ac repair", "air conditioning repair", "furnace repair",
+             "ac installation", "heating repair", "ac replacement",
+             "furnace installation", "emergency ac repair", "hvac maintenance"],
+    "Pest Control": ["pest control", "exterminator", "termite treatment",
+                     "bed bug treatment", "rodent control", "ant exterminator",
+                     "cockroach exterminator", "mosquito control",
+                     "wildlife removal", "termite inspection"],
+    "Appliance Repair": ["appliance repair", "refrigerator repair",
+                         "washer repair", "dryer repair", "dishwasher repair",
+                         "oven repair", "stove repair", "freezer repair",
+                         "ice maker repair", "washing machine repair"],
+    "Gutters": ["gutters", "gutter cleaning", "gutter installation",
+                "gutter repair", "gutter guards", "seamless gutters",
+                "downspout repair", "gutter replacement"],
+    "Tree Services": ["tree service", "tree removal", "tree trimming",
+                      "stump removal", "stump grinding", "emergency tree removal",
+                      "tree cutting", "arborist"],
+    "Lawncare & Landscaping": ["landscaping", "lawn care", "lawn mowing",
+                               "sod installation", "sprinkler repair",
+                               "landscape design", "yard cleanup",
+                               "irrigation repair", "tree and shrub care"],
+    "Garage Door": ["garage door repair", "garage door installation",
+                    "garage door spring repair", "garage door opener repair",
+                    "garage door replacement", "emergency garage door repair"],
+    "Painting": ["painters", "house painting", "interior painting",
+                 "exterior painting", "cabinet painting", "drywall repair",
+                 "pressure washing", "commercial painting"],
+    "Siding": ["siding", "siding installation", "siding repair",
+               "siding replacement", "vinyl siding", "stucco repair"],
+    "Decking": ["deck builders", "deck repair", "deck building",
+                "deck staining", "patio cover", "pergola builders"],
+    "Foundation Repair": ["foundation repair", "foundation crack repair",
+                          "house leveling", "slab leak repair",
+                          "foundation inspection", "pier and beam repair"],
+    "Waterproofing": ["waterproofing", "basement waterproofing",
+                      "crawl space waterproofing", "sump pump installation",
+                      "sump pump repair", "french drain installation"],
+    "Bathroom & Kitchen Remodeling": ["bathroom remodeling", "kitchen remodeling",
+                                      "bathroom renovation", "kitchen renovation",
+                                      "shower installation", "bathtub replacement",
+                                      "cabinet installation", "countertop installation"],
+    "Water, Fire & Mold Restoration": ["water damage restoration", "mold removal",
+                                       "water damage repair", "fire damage restoration",
+                                       "mold remediation", "flood cleanup",
+                                       "smoke damage restoration", "water extraction"],
+    "Bio Hazard Cleanup": ["biohazard cleanup", "crime scene cleanup",
+                           "hoarding cleanup", "sewage cleanup"],
+    "Solar": ["solar installers", "solar panel installation", "solar panel repair",
+              "solar companies", "solar panel cleaning"],
+}
+
 COMPILED_EXCLUDE = [(re.compile(p), re.compile(u) if u else None, why)
                     for p, u, why in EXCLUDE]
 COMPILED_RULES = [(c, re.compile(p)) for c, p in RULES]
@@ -374,6 +445,7 @@ def main():
                 "offer_title": title, "payout_type": payout, "status": status,
                 "local_seo": fit, "feed_niche": feed, "economics": econ,
                 "head_terms": HEAD_TERM.get(key, []),
+                "probe_terms": PROBE.get(key, HEAD_TERM.get(key, [])[:1]),
                 "services": heads + subs,
             }
         out["dropped"] = {why: sorted(n) for why, n in dropped.items()}

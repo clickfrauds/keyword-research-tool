@@ -27,7 +27,10 @@
 //   GOOGLE_ADS_REFRESH_TOKEN, GOOGLE_ADS_CUSTOMER_ID
 
 const API = "https://googleads.googleapis.com/v23";
-const MAX_TOWNS = 20;
+// Each town costs two subrequests (geo, then volume) on top of the one token
+// call. Cloudflare caps subrequests per request, so twelve towns is 25 and
+// leaves room; the page sends the rest in the next batch.
+const MAX_TOWNS = 12;
 
 const STATE_NAMES = {
   AL: "Alabama", AK: "Alaska", AZ: "Arizona", AR: "Arkansas", CA: "California",

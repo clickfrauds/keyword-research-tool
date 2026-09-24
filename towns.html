@@ -67,6 +67,7 @@
   .dom.taken { color: var(--muted); text-decoration: line-through; }
   .muted { color: var(--muted); }
   .vol { font-weight: 600; }
+  .best { font-weight: 400; font-size: 11px; color: var(--muted); }
 </style>
 </head>
 <body>
@@ -149,9 +150,12 @@
     <p class="sub">Click a column to sort. The top 300 are shown; narrow the filters to see
       further down. <strong>Payout is the harshest filter</strong> — for Electrical, $50+
       leaves 27 towns in the country and $25+ leaves 109, and our Clovis site earns at $33.
-      <strong>Searches/mo</strong> is the EMD's own term — "{town} {trade}" — measured inside
-      that town's own Google geo, not the state's. A dash means the town has not been
-      measured yet, which is not the same as zero.</p>
+      <strong>Searches/mo</strong> is the town's whole demand for that trade: ten money
+      terms — "{town} plumbers", "{town} water heater repair", "{town} emergency plumber"
+      and so on — each measured inside that town's own Google geo, not the state's. The
+      total is shown with the strongest single term under it. Ten terms cost the same one
+      request as one, so there is no reason to ask a narrower question. A dash means the
+      town has not been measured yet, which is not the same as zero.</p>
     <div class="scroll">
       <table>
         <thead><tr>
@@ -232,6 +236,17 @@
     });
   }
   function fmt(n) { return (+n || 0).toLocaleString("en-US"); }
+
+  var PROBE = {};      // feed niche -> the ten money terms to measure
+  fetch("/data/leadsmart_campaigns.json").then(function (r) { return r.json(); })
+    .then(function (c) {
+      Object.keys(c.campaigns || {}).forEach(function (k) {
+        var v = c.campaigns[k];
+        // The index is keyed by the feed's niche label, the catalogue by the
+        // campaign name; feed_niche is the bridge the catalogue already carries.
+        if (v.feed_niche && (v.probe_terms || []).length) PROBE[v.feed_niche] = v.probe_terms;
+      });
+    }).catch(function () { /* head term only, which is what it did before */ });
 
   fetch("/data/town_index.json").then(function (r) { return r.json(); }).then(function (d) {
     DATA = d.rows || [];
@@ -373,15 +388,38 @@
   // what this session has measured; the index's own value (r[8]) is used
   // when the workflow has already filled it in.
   var VOL = {};
-  function volKey(r) { return r[0] + "|" + r[1] + "|" + (TERMS[r[2]] || [""])[0]; }
+  // A town's demand is not one keyword. "el campo roofers" reads 0 while the
+  // town may still search "roof repair"; measuring only the head term said a
+  // market was empty when nobody had asked it the right question. The probe
+  // is the ten money terms for the trade, and they all ride in the same
+  // request, so ten terms cost exactly what one did.
+  function termsFor(r) {
+    return PROBE[r[2]] || (TERMS[r[2]] || []).slice(0, 1);
+  }
+  function volParts(r) {
+    var out = [];
+    termsFor(r).forEach(function (t) {
+      var v = VOL[r[0] + "|" + r[1] + "|" + t];
+      if (v != null) out.push([t, v]);
+    });
+    return out;
+  }
   function volOf(r) {
-    var k = volKey(r);
-    return VOL[k] != null ? VOL[k] : (r[8] == null ? null : r[8]);
+    var parts = volParts(r);
+    if (parts.length) return parts.reduce(function (a, x) { return a + x[1]; }, 0);
+    return r[8] == null ? null : r[8];
   }
   function volCell(r) {
-    var v = volOf(r);
-    if (v == null) return '<span class="muted">-</span>';
-    return fmt(v);
+    var parts = volParts(r);
+    if (!parts.length) return r[8] == null ? '<span class="muted">-</span>' : fmt(r[8]);
+    var total = parts.reduce(function (a, x) { return a + x[1]; }, 0);
+    var best = parts.slice().sort(function (a, b) { return b[1] - a[1]; })[0];
+    var tip = parts.filter(function (x) { return x[1] > 0; })
+      .sort(function (a, b) { return b[1] - a[1]; })
+      .map(function (x) { return x[0] + " " + x[1]; }).join(", ") || "nothing measurable";
+    return '<span title="' + esc(tip) + '">' + fmt(total) +
+      (best && best[1] > 0 ? '<br><span class="best">' + esc(best[0]) + " " + fmt(best[1]) + "</span>" : "") +
+      "</span>";
   }
 
   // One click measures every town on screen, in batches the Pages function
@@ -391,7 +429,7 @@
       return volOf(r) == null && (TERMS[r[2]] || []).length;
     });
     if (!rows.length) { $("volmsg").textContent = "every town on screen is already measured"; return; }
-    var btn = $("vol"), BATCH = 20, done = 0, failed = [];
+    var btn = $("vol"), BATCH = 12, done = 0, failed = [];
     btn.disabled = true;
 
     function step(i) {
@@ -408,7 +446,7 @@
       fetch("/ads-volume", {
         method: "POST", headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ towns: slice.map(function (r) {
-          return { state: r[0], town: r[1], terms: [(TERMS[r[2]] || [""])[0]] };
+          return { state: r[0], town: r[1], terms: termsFor(r) };
         }) })
       }).then(function (x) { return x.json(); }).then(function (d) {
         if (d.error) throw new Error(d.error);

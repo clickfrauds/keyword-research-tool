@@ -20,6 +20,18 @@
     "plumbers",
     "plumbing"
    ],
+   "probe_terms": [
+    "plumbers",
+    "emergency plumber",
+    "drain cleaning",
+    "water heater repair",
+    "water heater replacement",
+    "clogged drain",
+    "sewer line repair",
+    "leak detection",
+    "toilet repair",
+    "burst pipe repair"
+   ],
    "services": [
     "plumbers",
     "plumbing",
@@ -80,6 +92,18 @@
     "electricians",
     "electrical"
    ],
+   "probe_terms": [
+    "electricians",
+    "emergency electrician",
+    "electrical repair",
+    "electrical panel upgrade",
+    "ceiling fan installation",
+    "outlet repair",
+    "generator installation",
+    "ev charger installation",
+    "house rewiring",
+    "lighting installation"
+   ],
    "services": [
     "electricians",
     "electrical",
@@ -119,6 +143,18 @@
    "head_terms": [
     "hvac",
     "air conditioning"
+   ],
+   "probe_terms": [
+    "hvac",
+    "ac repair",
+    "air conditioning repair",
+    "furnace repair",
+    "ac installation",
+    "heating repair",
+    "ac replacement",
+    "furnace installation",
+    "emergency ac repair",
+    "hvac maintenance"
    ],
    "services": [
     "hvac",
@@ -172,6 +208,18 @@
     "roofers",
     "roofing"
    ],
+   "probe_terms": [
+    "roofers",
+    "roof repair",
+    "roof replacement",
+    "roof leak repair",
+    "metal roof installation",
+    "storm damage roof repair",
+    "roof inspection",
+    "shingle replacement",
+    "flat roof repair",
+    "emergency roof repair"
+   ],
    "services": [
     "roofers",
     "roofing",
@@ -218,6 +266,18 @@
     "pest control",
     "exterminators"
    ],
+   "probe_terms": [
+    "pest control",
+    "exterminator",
+    "termite treatment",
+    "bed bug treatment",
+    "rodent control",
+    "ant exterminator",
+    "cockroach exterminator",
+    "mosquito control",
+    "wildlife removal",
+    "termite inspection"
+   ],
    "services": [
     "pest control",
     "exterminators",
@@ -257,6 +317,18 @@
    },
    "head_terms": [
     "appliance repair"
+   ],
+   "probe_terms": [
+    "appliance repair",
+    "refrigerator repair",
+    "washer repair",
+    "dryer repair",
+    "dishwasher repair",
+    "oven repair",
+    "stove repair",
+    "freezer repair",
+    "ice maker repair",
+    "washing machine repair"
    ],
    "services": [
     "appliance repair",
@@ -307,6 +379,16 @@
    "head_terms": [
     "gutters"
    ],
+   "probe_terms": [
+    "gutters",
+    "gutter cleaning",
+    "gutter installation",
+    "gutter repair",
+    "gutter guards",
+    "seamless gutters",
+    "downspout repair",
+    "gutter replacement"
+   ],
    "services": [
     "gutters",
     "gutter cleaning",
@@ -336,6 +418,16 @@
    "head_terms": [
     "tree service",
     "tree removal"
+   ],
+   "probe_terms": [
+    "tree service",
+    "tree removal",
+    "tree trimming",
+    "stump removal",
+    "stump grinding",
+    "emergency tree removal",
+    "tree cutting",
+    "arborist"
    ],
    "services": [
     "tree service",
@@ -371,6 +463,17 @@
    "head_terms": [
     "landscaping",
     "lawn care"
+   ],
+   "probe_terms": [
+    "landscaping",
+    "lawn care",
+    "lawn mowing",
+    "sod installation",
+    "sprinkler repair",
+    "landscape design",
+    "yard cleanup",
+    "irrigation repair",
+    "tree and shrub care"
    ],
    "services": [
     "landscaping",
@@ -427,6 +530,14 @@
    "head_terms": [
     "garage door repair"
    ],
+   "probe_terms": [
+    "garage door repair",
+    "garage door installation",
+    "garage door spring repair",
+    "garage door opener repair",
+    "garage door replacement",
+    "emergency garage door repair"
+   ],
    "services": [
     "garage door repair",
     "garage door cable repair",
@@ -455,6 +566,16 @@
    "head_terms": [
     "painters",
     "painting"
+   ],
+   "probe_terms": [
+    "painters",
+    "house painting",
+    "interior painting",
+    "exterior painting",
+    "cabinet painting",
+    "drywall repair",
+    "pressure washing",
+    "commercial painting"
    ],
    "services": [
     "painters",
@@ -498,6 +619,9 @@
     "window replacement",
     "windows"
    ],
+   "probe_terms": [
+    "window replacement"
+   ],
    "services": [
     "window replacement",
     "windows",
@@ -536,6 +660,9 @@
     "fence company",
     "fencing"
    ],
+   "probe_terms": [
+    "fence company"
+   ],
    "services": [
     "fence company",
     "fencing",
@@ -564,6 +691,9 @@
    "head_terms": [
     "flooring",
     "carpet installation"
+   ],
+   "probe_terms": [
+    "flooring"
    ],
    "services": [
     "flooring",
@@ -611,6 +741,14 @@
     "deck builders",
     "decks"
    ],
+   "probe_terms": [
+    "deck builders",
+    "deck repair",
+    "deck building",
+    "deck staining",
+    "patio cover",
+    "pergola builders"
+   ],
    "services": [
     "deck builders",
     "decks",
@@ -644,6 +782,14 @@
    "head_terms": [
     "siding"
    ],
+   "probe_terms": [
+    "siding",
+    "siding installation",
+    "siding repair",
+    "siding replacement",
+    "vinyl siding",
+    "stucco repair"
+   ],
    "services": [
     "siding",
     "aluminum siding",
@@ -673,6 +819,14 @@
    },
    "head_terms": [
     "foundation repair"
+   ],
+   "probe_terms": [
+    "foundation repair",
+    "foundation crack repair",
+    "house leveling",
+    "slab leak repair",
+    "foundation inspection",
+    "pier and beam repair"
    ],
    "services": [
     "foundation repair",
@@ -706,6 +860,14 @@
    "head_terms": [
     "waterproofing"
    ],
+   "probe_terms": [
+    "waterproofing",
+    "basement waterproofing",
+    "crawl space waterproofing",
+    "sump pump installation",
+    "sump pump repair",
+    "french drain installation"
+   ],
    "services": [
     "waterproofing",
     "basement waterproofing",
@@ -738,6 +900,16 @@
    "head_terms": [
     "bathroom remodeling",
     "kitchen remodeling"
+   ],
+   "probe_terms": [
+    "bathroom remodeling",
+    "kitchen remodeling",
+    "bathroom renovation",
+    "kitchen renovation",
+    "shower installation",
+    "bathtub replacement",
+    "cabinet installation",
+    "countertop installation"
    ],
    "services": [
     "bathroom remodeling",
@@ -807,6 +979,16 @@
     "water damage restoration",
     "mold removal"
    ],
+   "probe_terms": [
+    "water damage restoration",
+    "mold removal",
+    "water damage repair",
+    "fire damage restoration",
+    "mold remediation",
+    "flood cleanup",
+    "smoke damage restoration",
+    "water extraction"
+   ],
    "services": [
     "water damage restoration",
     "mold removal",
@@ -842,6 +1024,12 @@
    "head_terms": [
     "biohazard cleanup"
    ],
+   "probe_terms": [
+    "biohazard cleanup",
+    "crime scene cleanup",
+    "hoarding cleanup",
+    "sewage cleanup"
+   ],
    "services": [
     "biohazard cleanup",
     "biohazard remediation",
@@ -864,6 +1052,13 @@
    },
    "head_terms": [
     "solar installers"
+   ],
+   "probe_terms": [
+    "solar installers",
+    "solar panel installation",
+    "solar panel repair",
+    "solar companies",
+    "solar panel cleaning"
    ],
    "services": [
     "solar installers",
@@ -888,6 +1083,9 @@
    "head_terms": [
     "movers",
     "moving company"
+   ],
+   "probe_terms": [
+    "movers"
    ],
    "services": [
     "movers",
@@ -917,6 +1115,9 @@
     "dumpster rental",
     "porta potty rental"
    ],
+   "probe_terms": [
+    "dumpster rental"
+   ],
    "services": [
     "dumpster rental",
     "porta potty rental",
@@ -937,6 +1138,9 @@
    "feed_niche": null,
    "economics": {},
    "head_terms": [
+    "self storage"
+   ],
+   "probe_terms": [
     "self storage"
    ],
    "services": [
@@ -961,6 +1165,9 @@
    "head_terms": [
     "walk in tubs"
    ],
+   "probe_terms": [
+    "walk in tubs"
+   ],
    "services": [
     "walk in tubs",
     "barrier free shower",
@@ -981,6 +1188,9 @@
    "feed_niche": null,
    "economics": {},
    "head_terms": [
+    "dentist"
+   ],
+   "probe_terms": [
     "dentist"
    ],
    "services": [
@@ -1007,6 +1217,9 @@
    "head_terms": [
     "garage door repair"
    ],
+   "probe_terms": [
+    "garage door repair"
+   ],
    "services": [
     "garage door repair",
     "garage door installation",
@@ -1022,6 +1235,9 @@
    "feed_niche": null,
    "economics": {},
    "head_terms": [
+    "airline tickets"
+   ],
+   "probe_terms": [
     "airline tickets"
    ],
    "services": [
