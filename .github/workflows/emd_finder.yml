@@ -1,0 +1,130 @@
+name: EMD Finder (town x service exact-match domains)
+
+# Which "{city}{service}.com" names are still unregistered, searched 100+ times
+# a month by people IN that town, and on a page one a new site can enter?
+# Stages 1-4 are free (LeadSmart feed, Keyword Planner, Verisign RDAP).
+# Stage 5 reads Google through SerpApi and is capped by max_serp_checks and
+# by the account balance. See scripts/emd_finder.py for the why of each stage.
+
+on:
+  workflow_dispatch:
+    inputs:
+      state:
+        description: "Two-letter state, e.g. NM"
+        required: true
+        default: ''
+      niche:
+        description: "LeadSmart niche exactly as the feed spells it, e.g. Plumbing, HVAC, Roofing, Pest Control"
+        required: true
+        default: 'Plumbing'
+      cities:
+        description: "Towns, comma-separated. Blank = every town in the state where LeadSmart buys the niche (largest first, capped by max_cities)"
+        required: false
+        default: ''
+      services:
+        description: "Services, comma-separated. Blank = every service data/services_by_niche.json lists for the niche"
+        required: false
+        default: ''
+      min_volume:
+        description: "Keep a town x service pair only at or above this many searches a month, measured in the town"
+        required: false
+        default: '100'
+      max_serp_checks:
+        description: "THE MONEY KNOB — SerpApi credits this run may spend. 0 = free run, no page-one verdicts"
+        required: false
+        default: '0'
+      max_cities:
+        description: "Cap on towns measured (one Keyword Planner request each)"
+        required: false
+        default: '60'
+      request_id:
+        description: "Name for the results files. Blank = emd-<run id>"
+        required: false
+        default: ''
+
+permissions:
+  contents: write
+
+jobs:
+  find:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+
+      # Shared with every SerpApi workflow: a page one read by any of them in
+      # the last 30 days is free here.
+      - name: Restore SERP cache
+        uses: actions/cache/restore@v4
+        with:
+          path: .serp_cache
+          key: serp-cache-${{ github.run_id }}
+          restore-keys: serp-cache-
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - run: pip install -r requirements.txt
+
+      - name: Resolve request id
+        id: reqid
+        run: |
+          RID="${{ github.event.inputs.request_id }}"
+          if [ -z "$RID" ]; then RID="emd-${{ github.run_id }}"; fi
+          echo "value=$RID" >> $GITHUB_OUTPUT
+
+      - name: Find exact-match domains
+        env:
+          STATE:            ${{ github.event.inputs.state }}
+          NICHE:            ${{ github.event.inputs.niche }}
+          CITIES:           ${{ github.event.inputs.cities }}
+          SERVICES:         ${{ github.event.inputs.services }}
+          MIN_VOLUME:       ${{ github.event.inputs.min_volume }}
+          MAX_SERP_CHECKS:  ${{ github.event.inputs.max_serp_checks }}
+          MAX_CITIES:       ${{ github.event.inputs.max_cities }}
+          REQUEST_ID:       ${{ steps.reqid.outputs.value }}
+          SERPAPI_API_KEY:  ${{ secrets.SERPAPI_API_KEY }}
+          SERP_RESERVE:     '10'
+          SERP_GL:          us
+          GOOGLE_ADS_DEVELOPER_TOKEN:   ${{ secrets.GOOGLE_ADS_DEVELOPER_TOKEN }}
+          GOOGLE_ADS_CLIENT_ID:         ${{ secrets.GOOGLE_ADS_CLIENT_ID }}
+          GOOGLE_ADS_CLIENT_SECRET:     ${{ secrets.GOOGLE_ADS_CLIENT_SECRET }}
+          GOOGLE_ADS_REFRESH_TOKEN:     ${{ secrets.GOOGLE_ADS_REFRESH_TOKEN }}
+          # No LOGIN_CUSTOMER_ID, same as find_opportunities: every run logged
+          # "does not manage this account", doubling the Planner calls.
+          GOOGLE_ADS_CUSTOMER_ID:       ${{ secrets.GOOGLE_ADS_CUSTOMER_ID }}
+          GOOGLE_ADS_USE_PROTO_PLUS:    'True'
+        run: python -u scripts/emd_finder.py
+
+      - name: Save SERP cache
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: .serp_cache
+          key: serp-cache-${{ github.run_id }}
+
+      - name: Show the report in the run log
+        if: always()
+        run: |
+          if [ -f emd_report.md ]; then cat emd_report.md >> $GITHUB_STEP_SUMMARY; fi
+
+      - name: Publish raw links
+        if: always()
+        env:
+          GITHUB_TOKEN:      ${{ secrets.GITHUB_TOKEN }}
+          REQUEST_ID:        ${{ steps.reqid.outputs.value }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: python scripts/push_results.py
+
+      - name: Upload artifact (backup copy)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: emd-${{ steps.reqid.outputs.value }}
+          path: |
+            emd_matrix.json
+            emd_matrix.csv
+            emd_report.md
+          retention-days: 30
+          if-no-files-found: warn

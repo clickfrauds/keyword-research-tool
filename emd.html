@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EMD Finder</title>
+<style>
+  :root {
+    --ink: #14181c;
+    --muted: #6b6560;
+    --line: #dcdad3;
+    --paper: #fdfcfa;
+    --bg: #f6f5f2;
+    --accent: #0b5d5a;
+    --accent-soft: #e3f0ef;
+    --accent-deep: #084543;
+    --gold: #b4791f;
+    --gold-soft: #fdf3e0;
+    --go: #1d6b3a;
+    --go-soft: #e4f2e8;
+    --stop: #a3322b;
+    --stop-soft: #f8e6e4;
+    --shadow-sm: 0 1px 2px rgba(20, 24, 28, .05);
+    --mono: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Menlo, Consolas, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--sans);
+         line-height: 1.5; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 16px 80px; }
+  header { padding: 40px 0 20px; }
+  .eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: .12em;
+             text-transform: uppercase; color: var(--accent); }
+  h1 { font-size: clamp(1.6rem, 4vw, 2.2rem); line-height: 1.15; margin: 8px 0 10px;
+       text-wrap: balance; letter-spacing: -.01em; }
+  .lede { color: var(--muted); max-width: 64ch; margin: 0; }
+  .back { font-size: 13px; color: var(--accent); text-decoration: none; }
+  .card { background: var(--paper); border: 1px solid var(--line); border-radius: 10px;
+          padding: 20px; margin-top: 14px; box-shadow: var(--shadow-sm); }
+  .card h2 { font-size: 1.02rem; margin: 0 0 4px; display: flex; gap: 10px; align-items: baseline; }
+  .card h2 .n { font-family: var(--mono); font-size: 12px; color: var(--gold); }
+  .card .sub { color: var(--muted); font-size: 13.5px; margin: 0 0 14px; max-width: 70ch; }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 600px) { .row { grid-template-columns: 1fr; } }
+  label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 5px; }
+  select, input[type=number], input[type=text], input[type=search], input[type=password] {
+    width: 100%; padding: 9px 10px; font: inherit; font-size: 14px; color: var(--ink);
+    background: #fff; border: 1px solid var(--line); border-radius: 7px; }
+  select:focus, input:focus, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .hint { font-size: 12.5px; color: var(--muted); margin: 6px 0 0; }
+  .econ { font-family: var(--mono); font-size: 12px; color: var(--accent-deep);
+          background: var(--accent-soft); border-radius: 6px; padding: 6px 9px; margin-top: 10px;
+          display: inline-block; }
+  .bar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 10px; }
+  .bar input[type=search] { flex: 1 1 200px; width: auto; }
+  .bar select { width: auto; }
+  .btn { font: inherit; font-size: 13px; padding: 7px 11px; border-radius: 7px;
+         border: 1px solid var(--line); background: #fff; color: var(--ink); cursor: pointer; }
+  .btn:hover { border-color: var(--accent); color: var(--accent); }
+  .count { font-family: var(--mono); font-size: 12px; color: var(--muted); margin-left: auto; }
+  .list { max-height: 340px; overflow-y: auto; border: 1px solid var(--line); border-radius: 8px;
+          background: #fff; }
+  .town { display: grid; grid-template-columns: 22px 1fr auto auto auto; gap: 10px;
+          align-items: center; padding: 7px 11px; border-bottom: 1px solid #efede8;
+          font-size: 14px; cursor: pointer; }
+  .town:last-child { border-bottom: 0; }
+  .town:hover { background: var(--accent-soft); }
+  .town .m { font-family: var(--mono); font-size: 12px; color: var(--muted);
+             font-variant-numeric: tabular-nums; text-align: right; }
+  .town .pay { color: var(--accent-deep); font-weight: 600; }
+  @media (max-width: 600px) { .town { grid-template-columns: 22px 1fr auto; }
+                              .town .z, .town .pt { display: none; } }
+  .chips { display: flex; flex-wrap: wrap; gap: 7px; }
+  .chip { display: inline-flex; gap: 6px; align-items: center; font-size: 13px;
+          border: 1px solid var(--line); border-radius: 999px; padding: 5px 11px 5px 8px;
+          background: #fff; cursor: pointer; user-select: none; }
+  .chip:has(input:checked) { border-color: var(--accent); background: var(--accent-soft);
+                             color: var(--accent-deep); }
+  .chip input { margin: 0; }
+  .estimate { font-family: var(--mono); font-size: 12.5px; background: var(--gold-soft);
+              border: 1px solid #efd9ad; border-radius: 8px; padding: 10px 12px; margin: 14px 0;
+              line-height: 1.7; }
+  .estimate b { color: var(--ink); }
+  .run { font: inherit; font-weight: 600; font-size: 15px; padding: 12px 20px; border-radius: 8px;
+         border: 0; background: var(--accent); color: #fff; cursor: pointer; }
+  .run:hover { background: var(--accent-deep); }
+  .run:disabled { opacity: .5; cursor: default; }
+  .empty { padding: 18px; color: var(--muted); font-size: 13.5px; text-align: center; }
+  .err { color: var(--stop); font-size: 13.5px; margin-top: 10px; }
+  .status-line { font-family: var(--mono); font-size: 13px; color: var(--accent-deep); }
+  .funnel { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+  .funnel div { background: var(--bg); border: 1px solid var(--line); border-radius: 8px;
+                padding: 8px 12px; font-size: 12.5px; color: var(--muted); }
+  .funnel b { display: block; font-size: 18px; color: var(--ink);
+              font-variant-numeric: tabular-nums; }
+  .tbl { overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; font-size: 13.5px; }
+  th { text-align: left; font-size: 11.5px; text-transform: uppercase; letter-spacing: .06em;
+       color: var(--muted); font-weight: 600; padding: 8px 9px; border-bottom: 1px solid var(--line); }
+  td { padding: 8px 9px; border-bottom: 1px solid #efede8; vertical-align: top; }
+  td.num { font-variant-numeric: tabular-nums; text-align: right; font-family: var(--mono); font-size: 12.5px; }
+  td.dom { font-family: var(--mono); font-size: 12.5px; word-break: break-all; }
+  .pill { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .04em;
+          padding: 2px 8px; border-radius: 999px; }
+  .p-go { background: var(--go-soft); color: var(--go); }
+  .p-watch { background: var(--gold-soft); color: var(--gold); }
+  .p-stop { background: var(--stop-soft); color: var(--stop); }
+  .p-free { background: var(--accent-soft); color: var(--accent-deep); }
+  .p-taken { background: #eeece7; color: var(--muted); }
+  .why { color: var(--muted); font-size: 12.5px; }
+  .links a { font-size: 13px; color: var(--accent); margin-right: 14px; }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a class="back" href="/">← Keyword tool</a>
+    <div class="eyebrow" style="margin-top:14px">EMD finder · pay-per-call</div>
+    <h1>Exact-match domains, measured town by town</h1>
+    <p class="lede">Pick a state and a LeadSmart niche, choose the towns and services, and the run
+      measures every <em>town + service</em> search <strong>inside that town</strong>, keeps the ones
+      searched 100+ times a month, checks whether <code>{town}{service}.com</code> is still
+      unregistered, and reads page one for the free ones.</p>
+  </header>
+
+  <section class="card">
+    <h2><span class="n">01</span> Market</h2>
+    <p class="sub">Only niches LeadSmart buys are listed — a call nobody buys earns nothing.</p>
+    <div class="row">
+      <div>
+        <label for="state">State</label>
+        <select id="state"><option value="">Choose a state…</option></select>
+      </div>
+      <div>
+        <label for="niche">LeadSmart niche</label>
+        <select id="niche"><option value="">Loading…</option></select>
+      </div>
+    </div>
+    <div id="econ"></div>
+  </section>
+
+  <section class="card">
+    <h2><span class="n">02</span> Towns</h2>
+    <p class="sub">Every town here is one where LeadSmart pays for this niche. Our three live sites
+      are all 39k–90k towns away from a metro; the big cities are where the agencies are.</p>
+    <div class="bar">
+      <input type="search" id="town-q" placeholder="Filter towns…" aria-label="Filter towns">
+      <select id="town-max" aria-label="Largest town to show">
+        <option value="0">Any size</option>
+        <option value="150000">Under 150k</option>
+        <option value="100000" selected>Under 100k</option>
+        <option value="60000">Under 60k</option>
+      </select>
+      <button class="btn" data-top="10">Top 10</button>
+      <button class="btn" data-top="25">Top 25</button>
+      <button class="btn" data-top="none">None</button>
+      <span class="count" id="town-count">0 selected</span>
+    </div>
+    <div class="list" id="towns"><div class="empty">Choose a state and a niche first.</div></div>
+  </section>
+
+  <section class="card">
+    <h2><span class="n">03</span> Services</h2>
+    <p class="sub">The domain is the town, then the service exactly as written here:
+      <code>clovis</code> + <code>drain cleaning</code> → <code>clovisdraincleaning.com</code>.
+      In small towns only the trade name itself usually clears 100 searches.</p>
+    <div class="bar">
+      <button class="btn" id="svc-all">All</button>
+      <button class="btn" id="svc-none">None</button>
+      <span class="count" id="svc-count">0 selected</span>
+    </div>
+    <div class="chips" id="services"><span class="hint">Choose a niche first.</span></div>
+  </section>
+
+  <section class="card">
+    <h2><span class="n">04</span> Limits</h2>
+    <div class="row">
+      <div>
+        <label for="minvol">Minimum searches a month, in the town</label>
+        <input type="number" id="minvol" value="100" min="10" max="5000" step="10">
+      </div>
+      <div>
+        <label for="serp">Page-one checks (SerpApi credits)</label>
+        <input type="number" id="serp" value="0" min="0" max="100">
+        <p class="hint">0 = free run: volumes and domains only, no GO/STOP. The balance is read
+          first and 10 credits are always kept back.</p>
+      </div>
+    </div>
+    <div style="margin-top:12px">
+      <label for="code">Access code <span style="font-weight:400;color:var(--muted)">(only if this site asks for one)</span></label>
+      <input type="password" id="code" autocomplete="off">
+    </div>
+    <div class="estimate" id="estimate">Pick towns and services to see what the run will cost.</div>
+    <button class="run" id="run" disabled>Run the matrix</button>
+    <div class="err" id="err" hidden></div>
+  </section>
+
+  <section class="card" id="out" hidden>
+    <h2><span class="n">05</span> Results</h2>
+    <div class="status-line" id="status"></div>
+    <div id="result"></div>
+  </section>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  var STATES = [["AL","Alabama"],["AK","Alaska"],["AZ","Arizona"],["AR","Arkansas"],["CA","California"],
+    ["CO","Colorado"],["CT","Connecticut"],["DE","Delaware"],["DC","District of Columbia"],["FL","Florida"],
+    ["GA","Georgia"],["HI","Hawaii"],["ID","Idaho"],["IL","Illinois"],["IN","Indiana"],["IA","Iowa"],
+    ["KS","Kansas"],["KY","Kentucky"],["LA","Louisiana"],["ME","Maine"],["MD","Maryland"],
+    ["MA","Massachusetts"],["MI","Michigan"],["MN","Minnesota"],["MS","Mississippi"],["MO","Missouri"],
+    ["MT","Montana"],["NE","Nebraska"],["NV","Nevada"],["NH","New Hampshire"],["NJ","New Jersey"],
+    ["NM","New Mexico"],["NY","New York"],["NC","North Carolina"],["ND","North Dakota"],["OH","Ohio"],
+    ["OK","Oklahoma"],["OR","Oregon"],["PA","Pennsylvania"],["RI","Rhode Island"],["SC","South Carolina"],
+    ["SD","South Dakota"],["TN","Tennessee"],["TX","Texas"],["UT","Utah"],["VT","Vermont"],
+    ["VA","Virginia"],["WA","Washington"],["WV","West Virginia"],["WI","Wisconsin"],["WY","Wyoming"]];
+  var MAX_SERVICES = 40, MAX_TOWNS = 60;
+  var $ = function (id) { return document.getElementById(id); };
+  var esc = function (s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
+    return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]; }); };
+  var fmt = function (n) { return Number(n || 0).toLocaleString("en-US"); };
+
+  var catalogue = {}, towns = [], pickedTowns = {}, pollTimer = null;
+
+  STATES.forEach(function (s) {
+    var o = document.createElement("option"); o.value = s[0]; o.textContent = s[1] + " (" + s[0] + ")";
+    $("state").appendChild(o);
+  });
+
+  fetch("/data/services_by_niche.json").then(function (r) { return r.json(); }).then(function (d) {
+    catalogue = d.niches || {};
+    var sel = $("niche"); sel.innerHTML = '<option value="">Choose a niche…</option>';
+    Object.keys(catalogue).forEach(function (k) {
+      var e = catalogue[k].economics || {}, bits = [];
+      if (e.call_median) bits.push("call $" + e.call_median);
+      if (e.cpl_median) bits.push("lead $" + e.cpl_median);
+      var o = document.createElement("option"); o.value = k;
+      o.textContent = k + (bits.length ? " — " + bits.join(" · ") : "");
+      sel.appendChild(o);
+    });
+  }).catch(function () { $("niche").innerHTML = '<option value="">Could not load niches</option>'; });
+
+  function showEcon() {
+    var k = $("niche").value, box = $("econ");
+    if (!k || !catalogue[k]) { box.innerHTML = ""; return; }
+    var e = catalogue[k].economics || {}, parts = [];
+    if (e.call_median) parts.push("Call median $" + e.call_median + " · " + fmt(e.call_zips) + " ZIPs");
+    if (e.cpl_median) parts.push("Lead (CPL) median $" + e.cpl_median + " · " + fmt(e.cpl_zips) + " ZIPs");
+    if (e.paid_pct != null) parts.push(e.paid_pct + "% of calls paid");
+    var cplOnly = e.cpl_median && !e.call_median;
+    box.innerHTML = '<span class="econ">' + esc(parts.join("  ·  ")) + '</span>' +
+      (cplOnly ? '<p class="hint">Lead (CPL) only: the site needs the LeadSmart form as well as the number.</p>' : "");
+  }
+
+  function loadTowns() {
+    var st = $("state").value, k = $("niche").value;
+    pickedTowns = {}; towns = [];
+    if (!st || !k) { $("towns").innerHTML = '<div class="empty">Choose a state and a niche first.</div>'; update(); return; }
+    $("towns").innerHTML = '<div class="empty">Loading towns…</div>';
+    fetch("/coverage-cities?state=" + encodeURIComponent(st) + "&niche=" + encodeURIComponent(k))
+      .then(function (r) { return r.json(); }).then(function (d) {
+        if (d.error) throw new Error(d.error);
+        towns = d.cities || []; renderTowns();
+      }).catch(function (e) {
+        $("towns").innerHTML = '<div class="empty">Could not load towns: ' + esc(e.message) + '</div>';
+      });
+  }
+
+  function visibleTowns() {
+    var q = $("town-q").value.trim().toLowerCase(), max = +$("town-max").value;
+    return towns.filter(function (t) {
+      return (!q || t.city.toLowerCase().indexOf(q) >= 0) && (!max || t.pop < max);
+    });
+  }
+
+  function renderTowns() {
+    var v = visibleTowns();
+    if (!towns.length) { $("towns").innerHTML = '<div class="empty">LeadSmart buys no ' + esc($("niche").value) + ' calls in this state.</div>'; update(); return; }
+    if (!v.length) { $("towns").innerHTML = '<div class="empty">No town matches that filter.</div>'; update(); return; }
+    $("towns").innerHTML = v.map(function (t) {
+      var id = "t-" + t.city.replace(/[^a-z0-9]/gi, "_");
+      return '<label class="town" for="' + id + '"><input type="checkbox" id="' + id + '" data-town="' + esc(t.city) + '"' +
+        (pickedTowns[t.city] ? " checked" : "") + '><span>' + esc(t.city) + '</span>' +
+        '<span class="m">' + fmt(t.pop) + '</span><span class="m pay">$' + t.payout.toFixed(2) + '</span>' +
+        '<span class="m z">' + t.zips + ' ZIP' + (t.zips === 1 ? "" : "s") + '</span></label>';
+    }).join("");
+    update();
+  }
+
+  $("towns").addEventListener("change", function (ev) {
+    var t = ev.target.getAttribute("data-town");
+    if (t) { if (ev.target.checked) pickedTowns[t] = true; else delete pickedTowns[t]; update(); }
+  });
+  document.querySelectorAll("[data-top]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var n = b.getAttribute("data-top");
+      if (n === "none") pickedTowns = {};
+      else visibleTowns().slice(0, +n).forEach(function (t) { pickedTowns[t.city] = true; });
+      renderTowns();
+    });
+  });
+  $("town-q").addEventListener("input", renderTowns);
+  $("town-max").addEventListener("change", renderTowns);
+
+  function renderServices() {
+    var k = $("niche").value;
+    if (!k || !catalogue[k]) { $("services").innerHTML = '<span class="hint">Choose a niche first.</span>'; update(); return; }
+    $("services").innerHTML = catalogue[k].services.map(function (s, i) {
+      return '<label class="chip"><input type="checkbox" value="' + esc(s) + '"' + (i < 12 ? " checked" : "") + '>' + esc(s) + '</label>';
+    }).join("");
+    update();
+  }
+  $("services").addEventListener("change", update);
+  $("svc-all").addEventListener("click", function () {
+    $("services").querySelectorAll("input").forEach(function (x, i) { x.checked = i < MAX_SERVICES; }); update(); });
+  $("svc-none").addEventListener("click", function () {
+    $("services").querySelectorAll("input").forEach(function (x) { x.checked = false; }); update(); });
+
+  $("state").addEventListener("change", loadTowns);
+  $("niche").addEventListener("change", function () { showEcon(); renderServices(); loadTowns(); });
+  ["minvol", "serp"].forEach(function (id) { $(id).addEventListener("input", update); });
+
+  function pickedServices() {
+    return Array.prototype.map.call($("services").querySelectorAll("input:checked"), function (x) { return x.value; });
+  }
+
+  function update() {
+    var nt = Object.keys(pickedTowns).length, ns = pickedServices().length, serp = +$("serp").value || 0;
+    $("town-count").textContent = nt + " selected" + (nt > MAX_TOWNS ? " — only " + MAX_TOWNS + " are measured" : "");
+    $("svc-count").textContent = ns + " selected" + (ns > MAX_SERVICES ? " — only " + MAX_SERVICES + " are sent" : "");
+    var ok = nt > 0 && ns > 0 && $("state").value && $("niche").value;
+    $("run").disabled = !ok;
+    if (!ok) { $("estimate").textContent = "Pick towns and services to see what the run will cost."; return; }
+    var t = Math.min(nt, MAX_TOWNS), s = Math.min(ns, MAX_SERVICES), mins = Math.max(2, Math.ceil(t * 5 / 60) + 2);
+    $("estimate").innerHTML =
+      "<b>" + t + "</b> towns × <b>" + s + "</b> services = <b>" + fmt(t * s) + "</b> pairs<br>" +
+      "Keyword Planner: <b>" + t + "</b> requests (free, one per town, paced)<br>" +
+      "Domain checks: only pairs at ≥ " + (+$("minvol").value || 100) + "/mo (free, Verisign)<br>" +
+      "SerpApi: " + (serp ? "up to <b>" + serp + "</b> credits, free names only" : "<b>0</b> — free run") +
+      "<br>Roughly " + mins + "–" + (mins + 5) + " minutes on GitHub Actions";
+  }
+
+  $("run").addEventListener("click", function () {
+    $("err").hidden = true;
+    var body = { state: $("state").value, niche: $("niche").value,
+                 cities: Object.keys(pickedTowns).slice(0, MAX_TOWNS),
+                 services: pickedServices().slice(0, MAX_SERVICES),
+                 min_volume: +$("minvol").value || 100, max_serp_checks: +$("serp").value || 0,
+                 access_code: $("code").value };
+    $("run").disabled = true; $("run").textContent = "Starting…";
+    fetch("/trigger-emd", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) })
+      .then(function (r) { return r.json().then(function (d) { if (!r.ok) throw new Error(d.error || ("HTTP " + r.status)); return d; }); })
+      .then(function (d) {
+        $("out").hidden = false; $("result").innerHTML = "";
+        $("status").textContent = "Run " + d.request_id + " started — measuring town by town. This page checks every 15 seconds.";
+        $("out").scrollIntoView({ behavior: "smooth", block: "start" });
+        poll(d.request_id, Date.now());
+      })
+      .catch(function (e) { $("err").textContent = "Could not start the run: " + e.message; $("err").hidden = false; })
+      .then(function () { $("run").textContent = "Run the matrix"; update(); });
+  });
+
+  function poll(rid, started) {
+    clearTimeout(pollTimer);
+    fetch("/emd-status?request_id=" + encodeURIComponent(rid)).then(function (r) { return r.json(); }).then(function (d) {
+      if (d.status === "ready") { render(d); return; }
+      var m = Math.round((Date.now() - started) / 60000);
+      $("status").textContent = "Run " + rid + " · still running (" + m + " min). Results appear here when it publishes.";
+      if (Date.now() - started < 70 * 60000) pollTimer = setTimeout(function () { poll(rid, started); }, 15000);
+      else $("status").textContent = "Run " + rid + " has not published after 70 minutes — check it in GitHub Actions.";
+    }).catch(function () { pollTimer = setTimeout(function () { poll(rid, started); }, 20000); });
+  }
+
+  function pill(v) {
+    if (!v) return "";
+    var c = v === "GO" ? "p-go" : v === "STOP" ? "p-stop" : "p-watch";
+    return '<span class="pill ' + c + '">' + esc(v) + '</span>';
+  }
+
+  function render(d) {
+    var res = d.result || {}, meta = res.meta || {}, rows = res.rows || [], min = meta.min_volume || 100;
+    var passed = rows.filter(function (r) { return r.volume >= min; });
+    var free = passed.filter(function (r) { return r.emd === "free"; });
+    var go = free.filter(function (r) { return r.verdict === "GO"; });
+    var rank = { GO: 0, WATCH: 1, UNREAD: 2, STOP: 3 };
+    passed.sort(function (a, b) {
+      var fa = a.emd === "free" ? 0 : 1, fb = b.emd === "free" ? 0 : 1;
+      if (fa !== fb) return fa - fb;
+      var va = rank[a.verdict] != null ? rank[a.verdict] : 2, vb = rank[b.verdict] != null ? rank[b.verdict] : 2;
+      return va - vb || b.volume - a.volume;
+    });
+    $("status").textContent = "Run " + meta.request_id + " · finished " + (meta.generated || "");
+    var h = '<div class="funnel">' +
+      '<div><b>' + fmt(meta.towns_measured) + '</b>towns measured</div>' +
+      '<div><b>' + fmt(meta.pairs) + '</b>pairs</div>' +
+      '<div><b>' + fmt(passed.length) + '</b>at ≥ ' + min + '/mo</div>' +
+      '<div><b>' + fmt(free.length) + '</b>.com free</div>' +
+      '<div><b>' + fmt(go.length) + '</b>GO</div></div>';
+    if (!passed.length) {
+      h += '<p class="hint">No town + service pair reached ' + min + ' searches a month in its own town. Try the trade name alone, larger towns, or a lower minimum.</p>';
+    } else {
+      h += '<div class="tbl"><table><thead><tr><th>Domain</th><th>Town</th><th>Service</th><th style="text-align:right">Searches/mo</th>' +
+        '<th style="text-align:right">Payout</th><th>.com</th><th>Page one</th></tr></thead><tbody>' +
+        passed.map(function (r) {
+          return "<tr><td class=\"dom\">" + esc(r.domain) + "</td><td>" + esc(r.city) + "</td><td>" + esc(r.service) + "</td>" +
+            '<td class="num">' + fmt(r.volume) + '</td><td class="num">$' + Number(r.payout || 0).toFixed(2) + "</td>" +
+            "<td>" + (r.emd === "free" ? '<span class="pill p-free">FREE</span>' : r.emd === "taken" ? '<span class="pill p-taken">TAKEN</span>' : '<span class="pill p-taken">?</span>') + "</td>" +
+            "<td>" + (r.verdict ? pill(r.verdict) + '<div class="why">' + esc((r.why || []).join("; ")) + "</div>"
+                                  : (r.emd === "free" ? '<span class="why">not read — raise page-one checks</span>' : "")) + "</td></tr>";
+        }).join("") + "</tbody></table></div>";
+    }
+    var nb = res.towns_without_buyer || [], un = res.unresolved_towns || [];
+    if (un.length) h += '<p class="hint">Not measured: ' + un.map(function (u) { return esc(u[0]) + " (" + esc(u[1]) + ")"; }).join("; ") + "</p>";
+    if (nb.length) h += '<p class="hint">No LeadSmart buyer, skipped: ' + esc(nb.join(", ")) + "</p>";
+    h += '<p class="hint">FREE is Verisign\'s own answer: an unregistered .com sells at the standard price (Namecheap $11.28). A name Namecheap lists at a premium price is already owned and shows as TAKEN.</p>';
+    h += '<p class="links"><a href="' + esc(d.links.csv) + '">Download CSV</a><a href="' + esc(d.links.md) + '">Report</a><a href="' + esc(d.links.json) + '">Raw JSON</a></p>';
+    $("result").innerHTML = h;
+  }
+})();
+</script>
+</body>
+</html>

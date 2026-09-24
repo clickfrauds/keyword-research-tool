@@ -50,6 +50,11 @@ RESULTS_BRANCH = os.environ.get("RESULTS_BRANCH", "results-data")
 # where the frontend showed the report but the seo.json/csv/js links were
 # still seconds away from existing, so they stayed hidden forever.
 FILES_TO_PUSH = [
+    # EMD finder (emd_finder.yml): the town x service matrix, the ranked
+    # report and a spreadsheet-ready copy.
+    ("emd_matrix.json", "emd.json"),
+    ("emd_matrix.csv", "emd.csv"),
+    ("emd_report.md", "emd.md"),
     ("keyword_strategy_targets.csv", "csv"),
     ("keyword_strategy.json", "json"),
     # Mode 4 feed: publishing this here means the raw link auto-generates —
