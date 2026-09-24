@@ -113,7 +113,7 @@ def coverage(state, feed_niche):
         except (IndexError, TypeError):
             continue
         k = norm(name)
-        e = out.setdefault(k, {"city": name, "pop": 0, "zips": 0, "payout": 0.0,
+        e = out.setdefault(k, {"city": name, "pop": 0, "zip_set": set(), "payout": 0.0,
                                "bids": False, "ptypes": set()})
         e["pop"] = max(e["pop"], int(r[5] or 0))
         # With no feed niche, the town is listed but nothing is attributed to
@@ -122,11 +122,14 @@ def coverage(state, feed_niche):
         if not feed_niche or this_niche != feed_niche:
             continue
         e["bids"] = True
-        e["zips"] += 1
+        # ZIPs, not rows: a town sold on both Call and CPL carries two rows per
+        # ZIP, and Torrance reported 20 against its real 10.
+        e["zip_set"].add(r[1])
         e["payout"] = max(e["payout"], float(r[4] or 0))
         e["ptypes"].add(ptype[r[3]] if 0 <= r[3] < len(ptype) else "")
     for e in out.values():
         e["ptypes"] = "/".join(sorted(p for p in e["ptypes"] if p))
+        e["zips"] = len(e.pop("zip_set"))
     return out
 
 
@@ -230,11 +233,11 @@ def postmortem(rows):
 
 
 # ── output ───────────────────────────────────────────────────────────────
-def write(meta, rows, unresolved, not_bought):
+def write(meta, rows, unresolved, no_bid):
     passed = [r for r in rows if r["volume"] >= MIN_VOLUME]
     free = [r for r in passed if r["emd"] == "free"]
     json.dump({"meta": meta, "rows": rows, "unresolved_towns": unresolved,
-               "towns_without_buyer": not_bought},
+               "towns_without_live_bid": no_bid},
               open("emd_matrix.json", "w", encoding="utf-8"), indent=1, ensure_ascii=False)
     cols = ["city", "state", "service", "volume", "domain", "emd", "payout", "bids", "pop",
             "zips", "verdict", "serp_score", "why", "geo_name"]
@@ -303,9 +306,10 @@ def write(meta, rows, unresolved, not_bought):
                         sorted(taken, key=lambda r: -r["volume"])), ""]
     if unresolved:
         L += ["## Towns not measured", ""] + [f"- {t}: {why}" for t, why in unresolved] + [""]
-    if not_bought:
-        L += ["## Towns where LeadSmart does not buy " + NICHE, "",
-              ", ".join(not_bought), ""]
+    if no_bid:
+        L += ["## Towns measured without a live bid", "",
+              "The campaign is nationwide; the coverage feed simply has no live "
+              "bid in these towns today.", "", ", ".join(no_bid), ""]
     open("emd_report.md", "w", encoding="utf-8").write("\n".join(L))
     print("\n".join(L[:12]))
 
@@ -390,11 +394,11 @@ def main():
     checked = postmortem(rows)
 
     meta = {"request_id": REQUEST_ID, "state": STATE, "niche": NICHE,
-            "services": services, "towns_in": len(towns) + len(not_bought),
+            "services": services, "towns_in": len(towns),
             "towns_measured": measured, "pairs": len(rows), "min_volume": MIN_VOLUME,
             "serp_checked": checked, "dataset": meta_feed.get("data_date"),
             "generated": time.strftime("%Y-%m-%d %H:%M UTC", time.gmtime())}
-    write(meta, rows, unresolved, not_bought)
+    write(meta, rows, unresolved, no_bid)
     return 0
 
 

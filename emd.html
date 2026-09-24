@@ -60,7 +60,7 @@
   .count { font-family: var(--mono); font-size: 12px; color: var(--muted); margin-left: auto; }
   .list { max-height: 340px; overflow-y: auto; border: 1px solid var(--line); border-radius: 8px;
           background: #fff; }
-  .town { display: grid; grid-template-columns: 22px 1fr auto auto auto; gap: 10px;
+  .town { display: grid; grid-template-columns: 22px 1fr auto auto auto auto; gap: 10px;
           align-items: center; padding: 7px 11px; border-bottom: 1px solid #efede8;
           font-size: 14px; cursor: pointer; }
   .town:last-child { border-bottom: 0; }
@@ -68,7 +68,9 @@
   .town .m { font-family: var(--mono); font-size: 12px; color: var(--muted);
              font-variant-numeric: tabular-nums; text-align: right; }
   .town .pay { color: var(--accent-deep); font-weight: 600; }
+  .town .mi { color: var(--muted); font-size: 12px; white-space: nowrap; }
   @media (max-width: 600px) { .town { grid-template-columns: 22px 1fr auto; }
+    .town .mi { display: none; }
                               .town .z, .town .pt { display: none; } }
   .chips { display: flex; flex-wrap: wrap; gap: 7px; }
   .chip { display: inline-flex; gap: 6px; align-items: center; font-size: 13px;
@@ -145,15 +147,42 @@
     <h2><span class="n">02</span> Towns</h2>
     <p class="sub">Every town in the state the coverage feed knows. A payout means a bid is live
       there today; “no live bid” is still fair game, because the campaigns themselves are
-      nationwide. Our live sites are all 39k–90k towns away from a metro; the big cities are
-      where the agencies are.</p>
+      nationwide. Distance is to the nearest of 90 US metros — every scan so far found the
+      suburbs inside 50 miles already taken, and our live sites are 39k–90k towns well
+      outside that ring.</p>
     <div class="bar">
       <input type="search" id="town-q" placeholder="Filter towns…" aria-label="Filter towns">
+      <select id="town-min" aria-label="Smallest town to show">
+        <option value="0">No floor</option>
+        <option value="10000">10k+</option>
+        <option value="30000" selected>30k+</option>
+        <option value="60000">60k+</option>
+        <option value="100000">100k+</option>
+        <option value="250000">250k+</option>
+      </select>
       <select id="town-max" aria-label="Largest town to show">
-        <option value="0">Any size</option>
+        <option value="0">No ceiling</option>
+        <option value="1000000">Under 1M</option>
+        <option value="500000">Under 500k</option>
+        <option value="250000">Under 250k</option>
         <option value="150000">Under 150k</option>
         <option value="100000" selected>Under 100k</option>
         <option value="60000">Under 60k</option>
+      </select>
+      <select id="town-pay" aria-label="Minimum payout">
+        <option value="0" selected>Any payout</option>
+        <option value="25">$25+</option>
+        <option value="50">$50+</option>
+        <option value="75">$75+</option>
+        <option value="100">$100+</option>
+        <option value="150">$150+</option>
+      </select>
+      <select id="town-metro" aria-label="Distance to a metro">
+        <option value="any" selected>Any distance</option>
+        <option value="in">In a metro (under 30 mi)</option>
+        <option value="near">30-50 mi out</option>
+        <option value="far">50+ mi from a metro</option>
+        <option value="veryfar">100+ mi from a metro</option>
       </select>
       <button class="btn" data-top="10">Top 10</button>
       <button class="btn" data-top="25">Top 25</button>
@@ -284,9 +313,25 @@
   }
 
   function visibleTowns() {
-    var q = $("town-q").value.trim().toLowerCase(), max = +$("town-max").value;
+    var q = $("town-q").value.trim().toLowerCase(),
+        min = +$("town-min").value, max = +$("town-max").value,
+        pay = +$("town-pay").value, metro = $("town-metro").value;
     return towns.filter(function (t) {
-      return (!q || t.city.toLowerCase().indexOf(q) >= 0) && (!max || t.pop < max);
+      if (q && t.city.toLowerCase().indexOf(q) < 0) return false;
+      if (min && t.pop < min) return false;
+      if (max && t.pop >= max) return false;
+      // A payout floor only makes sense where a bid is live; a town with none
+      // has no rate to compare, so the floor excludes it rather than passing it.
+      if (pay && !(t.bids && t.payout >= pay)) return false;
+      var m = t.metro_miles;
+      if (metro !== "any") {
+        if (m == null) return false;
+        if (metro === "in" && m >= 30) return false;
+        if (metro === "near" && (m < 30 || m > 50)) return false;
+        if (metro === "far" && m < 50) return false;
+        if (metro === "veryfar" && m < 100) return false;
+      }
+      return true;
     });
   }
 
@@ -301,7 +346,9 @@
         '<span class="m">' + fmt(t.pop) + '</span>' +
         (t.bids ? '<span class="m pay">$' + t.payout.toFixed(2) + '</span>' +
                   '<span class="m z">' + t.zips + ' ZIP' + (t.zips === 1 ? "" : "s") + '</span>'
-                : '<span class="m">—</span><span class="m z">no live bid</span>') + '</label>';
+                : '<span class="m">—</span><span class="m z">no live bid</span>') +
+        '<span class="m mi">' + (t.metro_miles == null ? "" :
+           t.metro_miles + ' mi to ' + esc(String(t.metro).split(",")[0])) + '</span></label>';
     }).join("");
     update();
   }
@@ -319,7 +366,9 @@
     });
   });
   $("town-q").addEventListener("input", renderTowns);
-  $("town-max").addEventListener("change", renderTowns);
+  ["town-min", "town-max", "town-pay", "town-metro"].forEach(function (id) {
+    $(id).addEventListener("change", renderTowns);
+  });
 
   function renderServices() {
     var k = $("niche").value;
