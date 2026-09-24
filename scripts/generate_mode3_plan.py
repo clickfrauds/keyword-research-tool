@@ -140,6 +140,13 @@ _JUNK_KW = re.compile(
     r"home ?depot|lowe'?s|menards|costco|walmart|amazon|wayfair|ace hardware|harbor freight|"
     r"\bmoen\b|\bdelta\b|kohler|american standard|insinkerator|rheem|ao smith|a\.?o\.? smith|"
     r"bradford white|navien|rinnai|noritz|\bbosch\b|culligan|kinetico|pfister|\bglacier bay\b|"
+    # A Torrance run put "honeywell thermocouple replacement" on the
+    # thermocouple page, and Honeywell on the thermostat and gas-valve
+    # pages too — the part brands, which this list only carried for whole
+    # units. A page optimised for a component maker's name sells that
+    # maker, not the callout.
+    r"honeywell|\bwhite[- ]rodgers\b|robertshaw|\bcamco\b|\bwatts\b|"
+    r"\bstate industries\b|\breliance\b|\bruud\b|takagi|\beemax\b|\bstiebel\b|"
     r"salary|wage|apprentice|\bjobs?\b|hiring|school|training|certification|\bexam\b|"
     r"\blicen[sc]e (?:test|exam|renewal|lookup)\b|\bdiy\b|home ?made", re.I)
 
