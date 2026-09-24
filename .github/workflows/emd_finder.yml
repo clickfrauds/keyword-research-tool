@@ -14,15 +14,15 @@ on:
         required: true
         default: ''
       niche:
-        description: "LeadSmart niche exactly as the feed spells it, e.g. Plumbing, HVAC, Roofing, Pest Control"
+        description: "Campaign key from data/leadsmart_campaigns.json, e.g. Plumbing, Electrical, HVAC, Windows, Fencing, Dentist"
         required: true
         default: 'Plumbing'
       cities:
-        description: "Towns, comma-separated. Blank = every town in the state where LeadSmart buys the niche (largest first, capped by max_cities)"
+        description: "Towns, comma-separated. Blank = every town the feed knows in that state, live-bid ones first, then by population (capped by max_cities)"
         required: false
         default: ''
       services:
-        description: "Services, comma-separated. Blank = every service data/services_by_niche.json lists for the niche"
+        description: "Services, comma-separated. Blank = every service data/leadsmart_campaigns.json lists for the campaign"
         required: false
         default: ''
       min_volume:
@@ -30,7 +30,7 @@ on:
         required: false
         default: '100'
       max_serp_checks:
-        description: "THE MONEY KNOB — SerpApi credits this run may spend. 0 = free run, no page-one verdicts"
+        description: "THE MONEY KNOB — SerpApi credits this run may spend, 1 per free domain judged. 0 = free run, no page-one verdicts"
         required: false
         default: '0'
       max_cities:
