@@ -907,7 +907,9 @@ def _enrich_areas(results, vocab=None):
             'before booking, each with an "answer_angle" naming exactly what the '
             'answer must say to win the AI Overview. Ground them in the area '
             "itself where it matters (building type, access, travel time) — not "
-            "generic questions that would suit any area.\n"
+            "generic questions that would suit any area. At least HALF must be "
+            "questions whose answer would be different in the next area over "
+            "(its climate, housing, water, permit office or utility).\n"
             '  "entities": 8-14 concrete things the page must mention for topical '
             "authority — brands, parts, fault codes, standards, appliance types. "
             "Prefer the related demand above; do not invent products. A different "
@@ -1010,6 +1012,106 @@ def _enrich_areas(results, vocab=None):
               f"added for {added}/{len(results)} areas")
     else:
         print("   ⚠️ No area got questions or entities — the builder will write its own.")
+
+
+# ── Go/no-go gate: SERP distinctness ──────────────────────────────────────
+# Demand is the first check a location has to pass, and the loop above makes
+# it. The second is whether Google treats the area as its own place at all: if
+# "plumber al qusais" returns the same pages as "plumber dubai", one page
+# already serves both, and a second one is a doorway to the first. Opt-in —
+# it costs one SerpApi credit per area plus one for the parent, cached 30 days
+# in .serp_cache like every other SerpApi stage in this repo.
+AREA_SERP_GATE = os.environ.get("AREA_SERP_GATE", "no").strip().lower() in (
+    "yes", "y", "true", "1", "on")
+AREA_SERP_OVERLAP = int(os.environ.get("AREA_SERP_OVERLAP", "5") or 5)
+AREA_SERP_MAX = int(os.environ.get("AREA_SERP_MAX", "60") or 60)
+
+
+def _serp_top(query, gl, hl):
+    """Top-10 organic URLs for one query, via the shared cached SerpApi door."""
+    key = os.environ.get("SERPAPI_API_KEY", "").strip()
+    if not key:
+        return None
+    try:
+        import serp_client
+        data, _err, _cached = serp_client.fetch({"engine": "google", "q": query, "num": 10,
+                                                 "gl": gl or "us", "hl": hl or "en",
+                                                 "api_key": key}, timeout=30)
+    except Exception:
+        return None
+    if not data:
+        return None
+    out = set()
+    for res in (data.get("organic_results") or [])[:10]:
+        u = str(res.get("link") or "")
+        if u.startswith("http") and "google." not in u:
+            out.add(u.split("?")[0].rstrip("/").lower())
+    return out
+
+
+def _serp_gate(results, gl, hl):
+    """Mark each area page / merge by how many of Google's top ten it shares
+    with the parent query. Nothing is dropped here: the builder reports the
+    verdict, and only leaves an area out when told to (m5_gate=strict)."""
+    if not AREA_SERP_GATE:
+        return
+    if not os.environ.get("SERPAPI_API_KEY", "").strip():
+        print("   ℹ️ AREA_SERP_GATE on but no SERPAPI_API_KEY — SERP gate skipped")
+        return
+    parent_q = f"{PRIMARY_SERVICE} {TARGET_LOCATION.split(',')[0].strip()}".strip()
+    parent = _serp_top(parent_q, gl, hl)
+    if not parent:
+        print(f"   ⚠️ no SERP for the parent query '{parent_q}' — SERP gate skipped")
+        return
+    probe = results[:AREA_SERP_MAX]
+    print(f"\n🔍 SERP gate — {len(probe)} areas vs '{parent_q}' "
+          f"(≤{len(probe) + 1} SerpApi credits, cached)")
+    merged = 0
+    for a in probe:
+        q = (a.get("primary_keyword") or {}).get("keyword") or f"{PRIMARY_SERVICE} {a['area']}"
+        mine = _serp_top(q, gl, hl)
+        time.sleep(1.0)
+        if not mine:
+            continue
+        shared = len(mine & parent)
+        verdict = "merge" if shared >= AREA_SERP_OVERLAP else "page"
+        merged += verdict == "merge"
+        a["gate"] = {"serp_checked": True, "parent_query": parent_q,
+                     "shared_with_parent": shared, "verdict": verdict}
+        if verdict == "merge":
+            print(f"   ⚠️ {a['area']}: '{q}' shares {shared}/10 results with the parent "
+                  f"— Google treats it as the same place")
+    print(f"   ✅ {len(probe) - merged} distinct, {merged} merge candidate(s)")
+
+
+# ── Template bleed across the set ─────────────────────────────────────────
+def _mark_shared_headings(results):
+    """Flag every planned H2 that another area also got once the place names
+    are masked. _enrich_areas already shows each batch the headings earlier
+    batches used, but only the last 24 of them and only as a request; this is
+    the check, measured, and it is free. The builder is told to keep the
+    search each flagged heading answers and reword it around a local fact."""
+    names = sorted({str(a["area"]) for a in results}
+                   | {TARGET_LOCATION.split(",")[0].strip()}, key=len, reverse=True)
+    pat = re.compile(r"\b(" + "|".join(re.escape(n.lower()) for n in names if n) + r")\b")
+
+    def sig(h):
+        s = pat.sub("·", str(h).lower())
+        return re.sub(r"\s+", " ", re.sub(r"[^\w· ]", " ", s)).strip()
+
+    where = {}
+    for a in results:
+        for h in a.get("headings") or []:
+            where.setdefault(sig(h), set()).add(a["area"])
+    total = shared = 0
+    for a in results:
+        hs = a.get("headings") or []
+        a["shared_headings"] = [h for h in hs if len(where.get(sig(h), ())) > 1]
+        total += len(hs)
+        shared += len(a["shared_headings"])
+    if total:
+        print(f"   🧬 Heading bleed: {shared}/{total} planned H2s repeat on another area "
+              f"once the place is masked — flagged for the builder to reword")
 
 
 def classify_trend(vols):
@@ -1348,6 +1450,8 @@ def main():
     vocab = _service_vocabulary(ideas_for, area_names_norm)
     _add_proximity(results)
     _enrich_areas(results, vocab)
+    _mark_shared_headings(results)
+    _serp_gate(results, (_cc_for_fx or "").lower() or None, lang_code or "en")
 
     out = {
         "business": {"name": BUSINESS_NAME, "niche": NICHE_DESCRIPTION,

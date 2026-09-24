@@ -820,7 +820,7 @@ RULES:
 3. questions: 3-6 per service — REAL phrasing customers type into
    Google/AI assistants about THAT service{' in ' + TARGET_LOCATION if TARGET_LOCATION else ''}
    (cost, timeframe, troubleshooting). Each gets an answer_angle: one
-   sentence on HOW the content should answer to win the snippet.
+   sentence on HOW the content should answer to win the snippet.{(chr(10) + "   Where the place genuinely changes the answer (its climate, water, housing" + chr(10) + "   age, permit office or utility), make at least one question about THAT —" + chr(10) + "   a page that could sit unchanged in the next city over is a template.") if TARGET_LOCATION else ''}
 4. entities_to_mention: 3-6 specific terms/parts/standards per service
    for topical authority.
 4a. h2_outline: the page's BODY SKELETON — 5-8 H2 sections, in reading order.

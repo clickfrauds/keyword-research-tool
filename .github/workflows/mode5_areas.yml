@@ -34,6 +34,9 @@ on:
         default: ''
       language:
         default: ''
+      serp_gate:
+        description: "yes = check each area's SERP against the parent query (go/no-go gate): an area sharing 5+ of Google's top 10 with it is marked 'merge'. Costs 1 SerpApi credit per area + 1 (cached 30 days). The builder only reports it unless m5_gate=strict."
+        default: 'no'
 
 permissions:
   contents: write
@@ -64,8 +67,20 @@ jobs:
           if [ -z "$RID" ]; then RID="manual-${{ github.run_id }}"; fi
           echo "value=$RID" >> $GITHUB_OUTPUT
 
+      # Shared SerpApi cache (scripts/serp_client.py) — same cache every SerpApi
+      # workflow restores and saves, so the SERP gate re-buys nothing it read
+      # in the last 30 days. A no-op when serp_gate is off.
+      - name: Restore SERP cache
+        uses: actions/cache/restore@v4
+        with:
+          path: .serp_cache
+          key: serp-cache-${{ github.run_id }}
+          restore-keys: serp-cache-
+
       - name: Research every area of the city (Google Ads Planner)
         env:
+          AREA_SERP_GATE: ${{ github.event.inputs.serp_gate }}
+          SERPAPI_API_KEY: ${{ secrets.SERPAPI_API_KEY }}
           GOOGLE_ADS_DEVELOPER_TOKEN: ${{ secrets.GOOGLE_ADS_DEVELOPER_TOKEN }}
           GOOGLE_ADS_CLIENT_ID: ${{ secrets.GOOGLE_ADS_CLIENT_ID }}
           GOOGLE_ADS_CLIENT_SECRET: ${{ secrets.GOOGLE_ADS_CLIENT_SECRET }}
@@ -98,6 +113,14 @@ jobs:
         # run is in fact progressing normally. Every other workflow here
         # already runs unbuffered.
         run: python -u scripts/generate_area_plan.py
+
+      # Saved even when the run fails: any credits were spent either way.
+      - name: Save SERP cache
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: .serp_cache
+          key: serp-cache-${{ github.run_id }}
 
       - name: Publish result JSON (raw link for the builder)
         env:
