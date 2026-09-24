@@ -12,9 +12,12 @@ enter?
     STAGE 2  geo        free   each town -> its own Google geo target (City,
                                in the right state). Never falls back to the
                                state or the US.
-    STAGE 3  matrix     free   town x service -> "{city} {service}" and
-                               "{service} {city}", one Keyword Planner request
-                               per town, measured in THAT town
+    STAGE 3  matrix     free   town x service -> "{city} {service}",
+                               "{service} {city}" AND the bare "{service}",
+                               one Keyword Planner request per town, all
+                               measured in THAT town. The named forms decide
+                               the domain; the bare one says whether the town
+                               has demand at all (see WHY TWO NUMBERS)
     STAGE 4  domain     free   {city}{service}.com, city first, exact, checked
                                against Verisign RDAP for every pair >= MIN_VOLUME
     STAGE 5  SERP       paid   page one for the free names, best first, scored
@@ -30,6 +33,15 @@ WHY PER-TOWN GEO
   question. Measured in the town itself, Bullhead City read 320, not the
   state-geo 880; Clovis NM read 480 for its "nm" form. The number that pays is
   the local one, so every town gets its own geo target and its own request.
+
+WHY TWO NUMBERS
+  "{town} {service}" is what the exact-match domain is worth, and only it
+  decides an EMD. It is not what the market is worth. In an isolated town the
+  name is how a search is disambiguated and the two run together; inside a
+  metro almost nobody types the suburb. Torrance reads 70 for "torrance water
+  heater repair" — its residents use the bare phrase and Google localises it
+  for them. Reporting only the named form there says "no demand" about a
+  market that has plenty, so both are measured, in the same request.
 
 WHY RDAP AND NOT A NAMECHEAP SCRAPE
   Verisign runs .com and has no premium tier for it: an unregistered .com is
@@ -177,10 +189,28 @@ def town_geo(client, town, state):
 
 # ── STAGE 3: the matrix, measured per town ───────────────────────────────
 def measure(town, services, geo_id):
-    """{service: volume} for one town, or None if the Planner refused twice."""
+    """{service: (named, local)} for one town, or None if the Planner refused.
+
+    Two numbers per service, from the same request:
+
+      named  "{town} {service}" / "{service} {town}" — the exact-match demand.
+             This is what the domain is worth, and only this decides an EMD.
+      local  "{service}" on its own, measured inside the town's geo — how many
+             people THERE search it at all, named or not.
+
+    They diverge hard by market. In Clovis or Lawton the town name IS how a
+    search is disambiguated, so the two are close. Inside a metro almost
+    nobody types the suburb: Torrance reads 70 for "torrance water heater
+    repair" while the bare phrase is the one its residents actually use, and
+    Google localises it for them. Reporting only `named` there says "no
+    demand" about a market that has plenty.
+
+    The bare terms ride in the same batched call, so this costs no extra
+    request.
+    """
     queries = []
     for s in services:
-        queries += [f"{town} {s}".lower(), f"{s} {town}".lower()]
+        queries += [f"{town} {s}".lower(), f"{s} {town}".lower(), s.lower()]
     vol = CSV.volumes(queries, geo_id)
     if vol is None:
         print(f"   ⏳ {town}: Planner refused — waiting 30s and asking once more")
@@ -188,7 +218,8 @@ def measure(town, services, geo_id):
         vol = CSV.volumes(queries, geo_id)
     if vol is None:
         return None
-    return {s: max(vol.get(f"{town} {s}".lower(), 0), vol.get(f"{s} {town}".lower(), 0))
+    return {s: (max(vol.get(f"{town} {s}".lower(), 0), vol.get(f"{s} {town}".lower(), 0)),
+                vol.get(s.lower(), 0))
             for s in services}
 
 
@@ -239,7 +270,8 @@ def write(meta, rows, unresolved, no_bid):
     json.dump({"meta": meta, "rows": rows, "unresolved_towns": unresolved,
                "towns_without_live_bid": no_bid},
               open("emd_matrix.json", "w", encoding="utf-8"), indent=1, ensure_ascii=False)
-    cols = ["city", "state", "service", "volume", "domain", "emd", "payout", "bids", "pop",
+    cols = ["city", "state", "service", "volume", "local_volume", "domain", "emd",
+            "payout", "bids", "pop",
             "zips", "verdict", "serp_score", "why", "geo_name"]
     with open("emd_matrix.csv", "w", encoding="utf-8", newline="") as fh:
         w = csv.writer(fh)
@@ -259,6 +291,8 @@ def write(meta, rows, unresolved, no_bid):
     with open("emd_grid.csv", "w", encoding="utf-8", newline="") as fh:
         w = csv.writer(fh)
         w.writerow(["town", "population", "payout", "live bid"] + services_out)
+        w.writerow(["", "", "", "cells are: named searches / searches in the town"]
+                   + [""] * len(services_out))
         for c in towns_out:
             any_row = next((cell[(c, s)] for s in services_out if (c, s) in cell), {})
             line = [c, any_row.get("pop", ""), any_row.get("payout", ""),
@@ -269,7 +303,7 @@ def write(meta, rows, unresolved, no_bid):
                     line.append("")
                     continue
                 mark = "*" if (r["emd"] == "free" and r["volume"] >= MIN_VOLUME) else ""
-                line.append(f"{r['volume']}{mark}")
+                line.append(f"{r['volume']}{mark} / {r.get('local_volume', 0)}")
             w.writerow(line)
 
     L = [f"# EMD finder — {NICHE}, {FO.STATE_NAMES.get(STATE, STATE)}", "",
@@ -279,6 +313,10 @@ def write(meta, rows, unresolved, no_bid):
          f"- **{len(passed)}** pair(s) at ≥ {MIN_VOLUME} searches/mo · **{len(free)}** with the "
          f"exact .com still unregistered · {meta['serp_checked']} page one(s) read",
          "",
+         "Two numbers per pair: **named** is \"{town} {service}\", what the exact-match "
+         "domain is worth; **local** is the bare \"{service}\" measured inside the town, "
+         "what its residents search at all. In a metro the second is far larger, because "
+         "nobody types the suburb. "
          "Volume is measured in each town's own Google geo target, not the state or the US. "
          "\"Free\" is Verisign's own registry answer: an unregistered .com sells at the "
          "registrar's standard price (Namecheap $11.28), and a name Namecheap shows at a "
@@ -372,14 +410,17 @@ def main():
         c = cov.get(norm(town)) or {"payout": 0.0, "pop": 0, "zips": 0,
                                     "bids": False, "ptypes": ""}
         for s in services:
-            rows.append({"city": town, "state": STATE, "service": s, "volume": vols.get(s, 0),
+            named, local = vols.get(s, (0, 0))
+            rows.append({"city": town, "state": STATE, "service": s, "volume": named,
+                         "local_volume": local,
                          "domain": f"{slug(town)}{slug(s)}.com", "emd": None,
                          "payout": c["payout"], "pop": c["pop"], "zips": c["zips"],
                          "bids": c["bids"], "ptype": c["ptypes"],
                          "geo_id": geo_id, "geo_name": geo_name,
                          "verdict": None, "why": None})
-        top = sorted(vols.items(), key=lambda kv: -kv[1])[:3]
-        print(f"   {town} [{geo_name}] · " + ", ".join(f"{s} {v}" for s, v in top))
+        top = sorted(vols.items(), key=lambda kv: -max(kv[1]))[:3]
+        print(f"   {town} [{geo_name}] · "
+              + ", ".join(f"{s} {v[0]} named / {v[1]} local" for s, v in top))
 
     print("── STAGE 4: exact-match .com, RDAP ─────────────────────")
     for r in rows:
