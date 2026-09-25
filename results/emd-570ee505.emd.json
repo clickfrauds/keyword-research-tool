@@ -1,0 +1,267 @@
+{
+ "meta": {
+  "request_id": "emd-570ee505",
+  "state": "WA",
+  "niche": "Electrical",
+  "services": [
+   "electricians",
+   "electrical",
+   "emergency electrician",
+   "electrical repair",
+   "electrical panel upgrade"
+  ],
+  "towns_in": 2,
+  "towns_measured": 2,
+  "pairs": 10,
+  "min_volume": 40,
+  "serp_checked": 2,
+  "dataset": "2026-09-24",
+  "generated": "2026-09-25 02:16 UTC"
+ },
+ "rows": [
+  {
+   "city": "Yakima",
+   "state": "WA",
+   "service": "electricians",
+   "volume": 170,
+   "local_volume": 110,
+   "domain": "yakimaelectricians.com",
+   "emd": "free",
+   "payout": 63.0,
+   "pop": 136518,
+   "zips": 7,
+   "bids": true,
+   "ptype": "Call",
+   "geo_id": "1027811",
+   "geo_name": "Yakima,Washington,United States",
+   "verdict": "STOP",
+   "why": [
+    "2 dedicated electrical pages"
+   ],
+   "serp_query": "electricians Yakima WA",
+   "serp_score": 35,
+   "occupants": [
+    {
+     "host": "thunderelectric.com",
+     "kind": "dedicated page"
+    },
+    {
+     "host": "yelp.com",
+     "kind": "directory"
+    },
+    {
+     "host": "509electric.com",
+     "kind": "dedicated page"
+    },
+    {
+     "host": "bigfootelectric.com",
+     "kind": "independent site"
+    },
+    {
+     "host": "primaryelectricanddesign.com",
+     "kind": "independent site"
+    },
+    {
+     "host": "facebook.com",
+     "kind": "social profile"
+    }
+   ]
+  },
+  {
+   "city": "Yakima",
+   "state": "WA",
+   "service": "electrical",
+   "volume": 0,
+   "local_volume": 90,
+   "domain": "yakimaelectrical.com",
+   "emd": null,
+   "payout": 63.0,
+   "pop": 136518,
+   "zips": 7,
+   "bids": true,
+   "ptype": "Call",
+   "geo_id": "1027811",
+   "geo_name": "Yakima,Washington,United States",
+   "verdict": null,
+   "why": null
+  },
+  {
+   "city": "Yakima",
+   "state": "WA",
+   "service": "emergency electrician",
+   "volume": 0,
+   "local_volume": 10,
+   "domain": "yakimaemergencyelectrician.com",
+   "emd": null,
+   "payout": 63.0,
+   "pop": 136518,
+   "zips": 7,
+   "bids": true,
+   "ptype": "Call",
+   "geo_id": "1027811",
+   "geo_name": "Yakima,Washington,United States",
+   "verdict": null,
+   "why": null
+  },
+  {
+   "city": "Yakima",
+   "state": "WA",
+   "service": "electrical repair",
+   "volume": 10,
+   "local_volume": 10,
+   "domain": "yakimaelectricalrepair.com",
+   "emd": null,
+   "payout": 63.0,
+   "pop": 136518,
+   "zips": 7,
+   "bids": true,
+   "ptype": "Call",
+   "geo_id": "1027811",
+   "geo_name": "Yakima,Washington,United States",
+   "verdict": null,
+   "why": null
+  },
+  {
+   "city": "Yakima",
+   "state": "WA",
+   "service": "electrical panel upgrade",
+   "volume": 0,
+   "local_volume": 10,
+   "domain": "yakimaelectricalpanelupgrade.com",
+   "emd": null,
+   "payout": 63.0,
+   "pop": 136518,
+   "zips": 7,
+   "bids": true,
+   "ptype": "Call",
+   "geo_id": "1027811",
+   "geo_name": "Yakima,Washington,United States",
+   "verdict": null,
+   "why": null
+  },
+  {
+   "city": "Richland",
+   "state": "WA",
+   "service": "electricians",
+   "volume": 40,
+   "local_volume": 110,
+   "domain": "richlandelectricians.com",
+   "emd": "free",
+   "payout": 63.0,
+   "pop": 62753,
+   "zips": 2,
+   "bids": true,
+   "ptype": "Call",
+   "geo_id": "1027729",
+   "geo_name": "Richland,Washington,United States",
+   "verdict": "WATCH",
+   "why": [
+    "2 small local pages, weak map pack (<100 reviews)",
+    "SERP 35 < 60",
+    "only 40 searches/mo"
+   ],
+   "serp_query": "electricians Richland WA",
+   "serp_score": 35,
+   "occupants": [
+    {
+     "host": "yelp.com",
+     "kind": "directory"
+    },
+    {
+     "host": "letsgowithessco.com",
+     "kind": "independent site"
+    },
+    {
+     "host": "bbb.org",
+     "kind": "directory"
+    },
+    {
+     "host": "prairielectric.com",
+     "kind": "dedicated page"
+    },
+    {
+     "host": "facebook.com",
+     "kind": "social profile"
+    },
+    {
+     "host": "thornelectric.com",
+     "kind": "dedicated page"
+    }
+   ]
+  },
+  {
+   "city": "Richland",
+   "state": "WA",
+   "service": "electrical",
+   "volume": 0,
+   "local_volume": 70,
+   "domain": "richlandelectrical.com",
+   "emd": null,
+   "payout": 63.0,
+   "pop": 62753,
+   "zips": 2,
+   "bids": true,
+   "ptype": "Call",
+   "geo_id": "1027729",
+   "geo_name": "Richland,Washington,United States",
+   "verdict": null,
+   "why": null
+  },
+  {
+   "city": "Richland",
+   "state": "WA",
+   "service": "emergency electrician",
+   "volume": 0,
+   "local_volume": 10,
+   "domain": "richlandemergencyelectrician.com",
+   "emd": null,
+   "payout": 63.0,
+   "pop": 62753,
+   "zips": 2,
+   "bids": true,
+   "ptype": "Call",
+   "geo_id": "1027729",
+   "geo_name": "Richland,Washington,United States",
+   "verdict": null,
+   "why": null
+  },
+  {
+   "city": "Richland",
+   "state": "WA",
+   "service": "electrical repair",
+   "volume": 0,
+   "local_volume": 10,
+   "domain": "richlandelectricalrepair.com",
+   "emd": null,
+   "payout": 63.0,
+   "pop": 62753,
+   "zips": 2,
+   "bids": true,
+   "ptype": "Call",
+   "geo_id": "1027729",
+   "geo_name": "Richland,Washington,United States",
+   "verdict": null,
+   "why": null
+  },
+  {
+   "city": "Richland",
+   "state": "WA",
+   "service": "electrical panel upgrade",
+   "volume": 0,
+   "local_volume": 10,
+   "domain": "richlandelectricalpanelupgrade.com",
+   "emd": null,
+   "payout": 63.0,
+   "pop": 62753,
+   "zips": 2,
+   "bids": true,
+   "ptype": "Call",
+   "geo_id": "1027729",
+   "geo_name": "Richland,Washington,United States",
+   "verdict": null,
+   "why": null
+  }
+ ],
+ "unresolved_towns": [],
+ "towns_without_live_bid": []
+}
