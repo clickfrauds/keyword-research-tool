@@ -1,0 +1,9 @@
+city,state,service,volume,local_volume,domain,emd,payout,bids,pop,zips,verdict,serp_score,dedicated,local_firms,pack_reviews,pack_also_organic,emd_on_page,why,geo_name
+Diamond Bar,CA,plumbers,210,140,diamondbarplumbers.com,taken,114.97,True,53355,1,,,,,,,,,"Diamond Bar,California,United States"
+Diamond Bar,CA,water heater repair,10,20,diamondbarwaterheaterrepair.com,free,114.97,True,53355,1,,,,,,,,,"Diamond Bar,California,United States"
+Diamond Bar,CA,sewer line repair,10,10,diamondbarsewerlinerepair.com,free,114.97,True,53355,1,,,,,,,,,"Diamond Bar,California,United States"
+Diamond Bar,CA,drain cleaning,10,30,diamondbardraincleaning.com,free,114.97,True,53355,1,,,,,,,,,"Diamond Bar,California,United States"
+Diamond Bar,CA,water heater leak repair,0,10,diamondbarwaterheaterleakrepair.com,,114.97,True,53355,1,,,,,,,,,"Diamond Bar,California,United States"
+Diamond Bar,CA,slab leak repair,0,10,diamondbarslableakrepair.com,,114.97,True,53355,1,,,,,,,,,"Diamond Bar,California,United States"
+Diamond Bar,CA,toilet repair,0,10,diamondbartoiletrepair.com,,114.97,True,53355,1,,,,,,,,,"Diamond Bar,California,United States"
+Diamond Bar,CA,faucet repair,0,10,diamondbarfaucetrepair.com,,114.97,True,53355,1,,,,,,,,,"Diamond Bar,California,United States"
