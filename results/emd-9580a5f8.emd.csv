@@ -1,0 +1,13 @@
+city,state,service,volume,local_volume,domain,emd,payout,bids,pop,zips,verdict,serp_score,dedicated,local_firms,pack_reviews,pack_also_organic,emd_on_page,why,geo_name
+Draper,UT,mold remediation,10,10,drapermoldremediation.com,taken,422.0,True,50278,1,,,,,,,,,"Draper,Utah,United States"
+Draper,UT,mold removal,10,10,drapermoldremoval.com,free,422.0,True,50278,1,STOP,20,4,6,338,1,0,"4 dedicated water, fire & mold restoration pages","Draper,Utah,United States"
+Draper,UT,water damage restoration,10,10,draperwaterdamagerestoration.com,free,422.0,True,50278,1,UNREAD,,,,,,,page one could not be read,"Draper,Utah,United States"
+Saratoga Springs,UT,mold remediation,10,30,saratogaspringsmoldremediation.com,free,434.0,True,48425,1,STOP,0,3,4,61,3,2,2 city EMD on page one; 3 map-pack firms also rank organically,"Saratoga Springs,Utah,United States"
+Saratoga Springs,UT,mold removal,10,20,saratogaspringsmoldremoval.com,free,434.0,True,48425,1,STOP,0,4,5,61,0,4,"4 city EMD on page one; 4 dedicated water, fire & mold restoration pages","Saratoga Springs,Utah,United States"
+Draper,UT,mold testing,0,10,drapermoldtesting.com,,422.0,True,50278,1,,,,,,,,,"Draper,Utah,United States"
+Saratoga Springs,UT,mold testing,0,10,saratogaspringsmoldtesting.com,,434.0,True,48425,1,,,,,,,,,"Saratoga Springs,Utah,United States"
+Saratoga Springs,UT,water damage restoration,0,10,saratogaspringswaterdamagerestoration.com,,434.0,True,48425,1,,,,,,,,,"Saratoga Springs,Utah,United States"
+Taylorsville,UT,mold remediation,0,10,taylorsvillemoldremediation.com,,422.0,True,58678,1,,,,,,,,,"Taylorsville,Utah,United States"
+Taylorsville,UT,mold testing,0,10,taylorsvillemoldtesting.com,,422.0,True,58678,1,,,,,,,,,"Taylorsville,Utah,United States"
+Taylorsville,UT,mold removal,0,10,taylorsvillemoldremoval.com,,422.0,True,58678,1,,,,,,,,,"Taylorsville,Utah,United States"
+Taylorsville,UT,water damage restoration,0,10,taylorsvillewaterdamagerestoration.com,,422.0,True,58678,1,,,,,,,,,"Taylorsville,Utah,United States"
