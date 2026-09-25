@@ -1,0 +1,137 @@
+{
+ "meta": {
+  "request_id": "emd-c20fc2aa",
+  "state": "NV",
+  "niche": "Plumbing",
+  "services": [
+   "water heater repair",
+   "drain cleaning",
+   "emergency plumbing"
+  ],
+  "towns_in": 1,
+  "towns_measured": 1,
+  "pairs": 3,
+  "min_volume": 10,
+  "serp_checked": 2,
+  "dataset": "2026-09-24",
+  "generated": "2026-09-25 01:59 UTC"
+ },
+ "rows": [
+  {
+   "city": "Carson City",
+   "state": "NV",
+   "service": "water heater repair",
+   "volume": 10,
+   "local_volume": 20,
+   "domain": "carsoncitywaterheaterrepair.com",
+   "emd": "free",
+   "payout": 64.97,
+   "pop": 58384,
+   "zips": 10,
+   "bids": true,
+   "ptype": "Call",
+   "geo_id": "1022620",
+   "geo_name": "Carson City,Nevada,United States",
+   "verdict": "STOP",
+   "why": [
+    "6 local plumbing firms on page one"
+   ],
+   "serp_query": "water heater repair Carson City NV",
+   "serp_score": 92,
+   "occupants": [
+    {
+     "host": "en.wikipedia.org",
+     "kind": "independent site"
+    },
+    {
+     "host": "mdpi.com",
+     "kind": "independent site"
+    },
+    {
+     "host": "water.org",
+     "kind": "independent site"
+    },
+    {
+     "host": "unwater.org",
+     "kind": "independent site"
+    },
+    {
+     "host": "sciencedirect.com",
+     "kind": "independent site"
+    },
+    {
+     "host": "youtube.com",
+     "kind": "social profile"
+    }
+   ]
+  },
+  {
+   "city": "Carson City",
+   "state": "NV",
+   "service": "drain cleaning",
+   "volume": 0,
+   "local_volume": 20,
+   "domain": "carsoncitydraincleaning.com",
+   "emd": null,
+   "payout": 64.97,
+   "pop": 58384,
+   "zips": 10,
+   "bids": true,
+   "ptype": "Call",
+   "geo_id": "1022620",
+   "geo_name": "Carson City,Nevada,United States",
+   "verdict": null,
+   "why": null
+  },
+  {
+   "city": "Carson City",
+   "state": "NV",
+   "service": "emergency plumbing",
+   "volume": 10,
+   "local_volume": 20,
+   "domain": "carsoncityemergencyplumbing.com",
+   "emd": "free",
+   "payout": 64.97,
+   "pop": 58384,
+   "zips": 10,
+   "bids": true,
+   "ptype": "Call",
+   "geo_id": "1022620",
+   "geo_name": "Carson City,Nevada,United States",
+   "verdict": "STOP",
+   "why": [
+    "6 dedicated plumbing pages"
+   ],
+   "serp_query": "emergency plumbing Carson City NV",
+   "serp_score": 0,
+   "occupants": [
+    {
+     "host": "rotorooter.com",
+     "kind": "dedicated page"
+    },
+    {
+     "host": "joesplumbingnv.com",
+     "kind": "dedicated page"
+    },
+    {
+     "host": "callbighorn.com",
+     "kind": "dedicated page"
+    },
+    {
+     "host": "yelp.com",
+     "kind": "directory"
+    },
+    {
+     "host": "facebook.com",
+     "kind": "social profile"
+    },
+    {
+     "host": "johnsonplumbingnv.com",
+     "kind": "dedicated page"
+    }
+   ]
+  }
+ ],
+ "unresolved_towns": [],
+ "towns_without_live_bid": []
+}
