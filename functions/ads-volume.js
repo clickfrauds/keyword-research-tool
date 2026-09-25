@@ -98,16 +98,23 @@ async function geoFor(env, token, town, state) {
   });
   if (!r.ok) return { id: null, why: "geo lookup " + r.status };
   const d = await r.json();
+  const seen = [];
   for (const s of (d.geoTargetConstantSuggestions || [])) {
     const g = s.geoTargetConstant || {};
     const parts = String(g.canonicalName || "").split(",").map((x) => x.trim());
-    if (parts.length >= 2 && g.targetType === "CITY"
+    seen.push(g.canonicalName + " (" + g.targetType + ")");
+    // targetType is a plain string in the REST API and comes back "City",
+    // not the enum spelling "CITY" the proto client uses. Comparing against
+    // "CITY" matched nothing at all, and every town read as unresolved.
+    if (parts.length >= 2 && String(g.targetType || "").toUpperCase() === "CITY"
         && norm(parts[0]) === norm(town) && norm(parts[1]) === norm(stateName)) {
       // resourceName is "geoTargetConstants/1014339"
       return { id: String(g.resourceName || "").split("/").pop(), name: g.canonicalName };
     }
   }
-  return { id: null, why: "no City match in " + stateName };
+  // Say what Google did offer, so a miss is diagnosable instead of silent.
+  return { id: null, why: "no City match in " + stateName
+                        + "; Google offered: " + (seen.slice(0, 3).join("; ") || "nothing") };
 }
 
 async function volumesFor(env, token, geoId, keywords) {
