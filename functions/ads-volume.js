@@ -186,15 +186,22 @@ export async function onRequestPost({ request, env }) {
   try { token = await accessToken(env); }
   catch (e) { return json({ error: String(e.message || e) }, 502); }
 
-  const results = {}, geo = {}, unresolved = [];
+  const results = {}, local = {}, geo = {}, unresolved = [];
   for (const t of towns) {
     const g = await geoFor(env, token, t.town, t.state);
     if (!g.id) { unresolved.push({ town: t.town, state: t.state, why: g.why }); continue; }
     geo[t.state + "|" + t.town] = g.name;
 
+    // Three forms per term, all in the one request: the two named word
+    // orders, and the bare service measured inside the town's own geo.
+    // "{town} slab leak repair" is what the exact-match domain is worth;
+    // the bare "slab leak repair" is what the town's residents actually
+    // search, because Google localises it for them. On a sub-service the
+    // second is the larger of the two and the one the decision needs.
     const kws = [];
     for (const term of t.terms) {
-      kws.push(`${t.town} ${term}`.toLowerCase(), `${term} ${t.town}`.toLowerCase());
+      kws.push(`${t.town} ${term}`.toLowerCase(), `${term} ${t.town}`.toLowerCase(),
+               String(term).toLowerCase());
     }
     let vol;
     try { vol = await volumesFor(env, token, g.id, kws); }
@@ -203,10 +210,12 @@ export async function onRequestPost({ request, env }) {
     for (const term of t.terms) {
       const a = vol[`${t.town} ${term}`.toLowerCase()] || 0;
       const b = vol[`${term} ${t.town}`.toLowerCase()] || 0;
-      results[`${t.state}|${t.town}|${term}`] = Math.max(a, b);
+      const key = `${t.state}|${t.town}|${term}`;
+      results[key] = Math.max(a, b);
+      local[key] = vol[String(term).toLowerCase()] || 0;
     }
   }
 
-  return json({ measured: Object.keys(geo).length, results, geo, unresolved,
+  return json({ measured: Object.keys(geo).length, results, local, geo, unresolved,
                 remaining: Math.max(0, (body.towns || []).length - towns.length) });
 }
