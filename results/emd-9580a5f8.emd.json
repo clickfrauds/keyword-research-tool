@@ -1,0 +1,385 @@
+{
+ "meta": {
+  "request_id": "emd-9580a5f8",
+  "state": "UT",
+  "niche": "Water, Fire & Mold Restoration",
+  "services": [
+   "mold remediation",
+   "mold testing",
+   "mold removal",
+   "water damage restoration"
+  ],
+  "towns_in": 3,
+  "towns_measured": 3,
+  "pairs": 12,
+  "min_volume": 10,
+  "serp_checked": 4,
+  "dataset": "2026-09-24",
+  "generated": "2026-09-25 08:49 UTC"
+ },
+ "rows": [
+  {
+   "city": "Saratoga Springs",
+   "state": "UT",
+   "service": "mold remediation",
+   "volume": 10,
+   "local_volume": 30,
+   "domain": "saratogaspringsmoldremediation.com",
+   "emd": "free",
+   "payout": 434.0,
+   "pop": 48425,
+   "zips": 1,
+   "bids": true,
+   "ptype": "CPL",
+   "geo_id": "9052809",
+   "geo_name": "Saratoga Springs,Utah,United States",
+   "verdict": "STOP",
+   "why": [
+    "2 city EMD on page one",
+    "3 map-pack firms also rank organically"
+   ],
+   "serp_query": "mold remediation Saratoga Springs UT",
+   "serp_score": 0,
+   "serp_breakdown": {
+    "dedicated": 3,
+    "pseo": 0,
+    "national": 0,
+    "emd": 2,
+    "directory": 0,
+    "forum": 0,
+    "other_local": 3,
+    "results": 7,
+    "pack_size": 3,
+    "pack_top_reviews": 88,
+    "pack_median_reviews": 61,
+    "pack_with_site": 3,
+    "pack_also_organic": 3,
+    "city_mentions": 4,
+    "local_firms": 4
+   },
+   "occupants": [
+    {
+     "host": "homepriderestorationandcleaning.com",
+     "kind": "independent site + in map pack"
+    },
+    {
+     "host": "homepriderestorationandcleaning.com",
+     "kind": "independent site + in map pack"
+    },
+    {
+     "host": "moldremediationalpine.netlify.app",
+     "kind": "dedicated page"
+    },
+    {
+     "host": "homepriderestorationandcleaning.com",
+     "kind": "independent site + in map pack"
+    },
+    {
+     "host": "water-damage-in-saratogespringsut.netlify.app",
+     "kind": "dedicated page"
+    },
+    {
+     "host": "moldremediationsaratogasprings.netlify.app",
+     "kind": "city EMD + dedicated page"
+    }
+   ]
+  },
+  {
+   "city": "Saratoga Springs",
+   "state": "UT",
+   "service": "mold testing",
+   "volume": 0,
+   "local_volume": 10,
+   "domain": "saratogaspringsmoldtesting.com",
+   "emd": null,
+   "payout": 434.0,
+   "pop": 48425,
+   "zips": 1,
+   "bids": true,
+   "ptype": "CPL",
+   "geo_id": "9052809",
+   "geo_name": "Saratoga Springs,Utah,United States",
+   "verdict": null,
+   "why": null
+  },
+  {
+   "city": "Saratoga Springs",
+   "state": "UT",
+   "service": "mold removal",
+   "volume": 10,
+   "local_volume": 20,
+   "domain": "saratogaspringsmoldremoval.com",
+   "emd": "free",
+   "payout": 434.0,
+   "pop": 48425,
+   "zips": 1,
+   "bids": true,
+   "ptype": "CPL",
+   "geo_id": "9052809",
+   "geo_name": "Saratoga Springs,Utah,United States",
+   "verdict": "STOP",
+   "why": [
+    "4 city EMD on page one",
+    "4 dedicated water, fire & mold restoration pages"
+   ],
+   "serp_query": "mold removal Saratoga Springs UT",
+   "serp_score": 0,
+   "serp_breakdown": {
+    "dedicated": 4,
+    "pseo": 0,
+    "national": 0,
+    "emd": 4,
+    "directory": 0,
+    "forum": 0,
+    "other_local": 1,
+    "results": 8,
+    "pack_size": 3,
+    "pack_top_reviews": 485,
+    "pack_median_reviews": 61,
+    "pack_with_site": 3,
+    "pack_also_organic": 0,
+    "city_mentions": 7,
+    "local_firms": 5
+   },
+   "occupants": [
+    {
+     "host": "moldremediationalpine.netlify.app",
+     "kind": "dedicated page"
+    },
+    {
+     "host": "moldremediationlindon.netlify.app",
+     "kind": "dedicated page"
+    },
+    {
+     "host": "moldremediationoremut.netlify.app",
+     "kind": "dedicated page"
+    },
+    {
+     "host": "moldremediationsaratogasprings.netlify.app",
+     "kind": "city EMD + dedicated page"
+    },
+    {
+     "host": "moldremediationsaratogasprings.netlify.app",
+     "kind": "city EMD + dedicated page"
+    },
+    {
+     "host": "moldremediationsaratogasprings.netlify.app",
+     "kind": "city EMD + dedicated page"
+    }
+   ]
+  },
+  {
+   "city": "Saratoga Springs",
+   "state": "UT",
+   "service": "water damage restoration",
+   "volume": 0,
+   "local_volume": 10,
+   "domain": "saratogaspringswaterdamagerestoration.com",
+   "emd": null,
+   "payout": 434.0,
+   "pop": 48425,
+   "zips": 1,
+   "bids": true,
+   "ptype": "CPL",
+   "geo_id": "9052809",
+   "geo_name": "Saratoga Springs,Utah,United States",
+   "verdict": null,
+   "why": null
+  },
+  {
+   "city": "Taylorsville",
+   "state": "UT",
+   "service": "mold remediation",
+   "volume": 0,
+   "local_volume": 10,
+   "domain": "taylorsvillemoldremediation.com",
+   "emd": null,
+   "payout": 422.0,
+   "pop": 58678,
+   "zips": 1,
+   "bids": true,
+   "ptype": "CPL",
+   "geo_id": "9052962",
+   "geo_name": "Taylorsville,Utah,United States",
+   "verdict": null,
+   "why": null
+  },
+  {
+   "city": "Taylorsville",
+   "state": "UT",
+   "service": "mold testing",
+   "volume": 0,
+   "local_volume": 10,
+   "domain": "taylorsvillemoldtesting.com",
+   "emd": null,
+   "payout": 422.0,
+   "pop": 58678,
+   "zips": 1,
+   "bids": true,
+   "ptype": "CPL",
+   "geo_id": "9052962",
+   "geo_name": "Taylorsville,Utah,United States",
+   "verdict": null,
+   "why": null
+  },
+  {
+   "city": "Taylorsville",
+   "state": "UT",
+   "service": "mold removal",
+   "volume": 0,
+   "local_volume": 10,
+   "domain": "taylorsvillemoldremoval.com",
+   "emd": null,
+   "payout": 422.0,
+   "pop": 58678,
+   "zips": 1,
+   "bids": true,
+   "ptype": "CPL",
+   "geo_id": "9052962",
+   "geo_name": "Taylorsville,Utah,United States",
+   "verdict": null,
+   "why": null
+  },
+  {
+   "city": "Taylorsville",
+   "state": "UT",
+   "service": "water damage restoration",
+   "volume": 0,
+   "local_volume": 10,
+   "domain": "taylorsvillewaterdamagerestoration.com",
+   "emd": null,
+   "payout": 422.0,
+   "pop": 58678,
+   "zips": 1,
+   "bids": true,
+   "ptype": "CPL",
+   "geo_id": "9052962",
+   "geo_name": "Taylorsville,Utah,United States",
+   "verdict": null,
+   "why": null
+  },
+  {
+   "city": "Draper",
+   "state": "UT",
+   "service": "mold remediation",
+   "volume": 10,
+   "local_volume": 10,
+   "domain": "drapermoldremediation.com",
+   "emd": "taken",
+   "payout": 422.0,
+   "pop": 50278,
+   "zips": 1,
+   "bids": true,
+   "ptype": "CPL",
+   "geo_id": "1026920",
+   "geo_name": "Draper,Utah,United States",
+   "verdict": null,
+   "why": null
+  },
+  {
+   "city": "Draper",
+   "state": "UT",
+   "service": "mold testing",
+   "volume": 0,
+   "local_volume": 10,
+   "domain": "drapermoldtesting.com",
+   "emd": null,
+   "payout": 422.0,
+   "pop": 50278,
+   "zips": 1,
+   "bids": true,
+   "ptype": "CPL",
+   "geo_id": "1026920",
+   "geo_name": "Draper,Utah,United States",
+   "verdict": null,
+   "why": null
+  },
+  {
+   "city": "Draper",
+   "state": "UT",
+   "service": "mold removal",
+   "volume": 10,
+   "local_volume": 10,
+   "domain": "drapermoldremoval.com",
+   "emd": "free",
+   "payout": 422.0,
+   "pop": 50278,
+   "zips": 1,
+   "bids": true,
+   "ptype": "CPL",
+   "geo_id": "1026920",
+   "geo_name": "Draper,Utah,United States",
+   "verdict": "STOP",
+   "why": [
+    "4 dedicated water, fire & mold restoration pages"
+   ],
+   "serp_query": "mold removal Draper UT",
+   "serp_score": 20,
+   "serp_breakdown": {
+    "dedicated": 4,
+    "pseo": 0,
+    "national": 0,
+    "emd": 0,
+    "directory": 3,
+    "forum": 0,
+    "other_local": 2,
+    "results": 9,
+    "pack_size": 3,
+    "pack_top_reviews": 661,
+    "pack_median_reviews": 338,
+    "pack_with_site": 3,
+    "pack_also_organic": 1,
+    "city_mentions": 7,
+    "local_firms": 6
+   },
+   "occupants": [
+    {
+     "host": "servpro.com",
+     "kind": "dedicated page"
+    },
+    {
+     "host": "thefloodco.com",
+     "kind": "dedicated page"
+    },
+    {
+     "host": "verifiedremediation.com",
+     "kind": "independent site"
+    },
+    {
+     "host": "vitalutah.com",
+     "kind": "dedicated page"
+    },
+    {
+     "host": "allstarrepairutah.com",
+     "kind": "dedicated page"
+    },
+    {
+     "host": "bbb.org",
+     "kind": "directory"
+    }
+   ]
+  },
+  {
+   "city": "Draper",
+   "state": "UT",
+   "service": "water damage restoration",
+   "volume": 10,
+   "local_volume": 10,
+   "domain": "draperwaterdamagerestoration.com",
+   "emd": "free",
+   "payout": 422.0,
+   "pop": 50278,
+   "zips": 1,
+   "bids": true,
+   "ptype": "CPL",
+   "geo_id": "1026920",
+   "geo_name": "Draper,Utah,United States",
+   "verdict": "UNREAD",
+   "why": [
+    "page one could not be read"
+   ]
+  }
+ ],
+ "unresolved_towns": [],
+ "towns_without_live_bid": []
+}
