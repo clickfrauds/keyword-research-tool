@@ -1,0 +1,9 @@
+city,state,service,volume,local_volume,domain,emd,payout,bids,pop,zips,verdict,serp_score,why,geo_name
+Carson City,NV,plumbers,40,70,carsoncityplumbers.com,taken,64.97,True,58384,10,,,,"Carson City,Nevada,United States"
+Carson City,NV,water heater repair,10,20,carsoncitywaterheaterrepair.com,,64.97,True,58384,10,,,,"Carson City,Nevada,United States"
+Carson City,NV,emergency plumbing,10,20,carsoncityemergencyplumbing.com,,64.97,True,58384,10,,,,"Carson City,Nevada,United States"
+Carson City,NV,leak detection,10,10,carsoncityleakdetection.com,,64.97,True,58384,10,,,,"Carson City,Nevada,United States"
+Carson City,NV,water heater replacement,10,10,carsoncitywaterheaterreplacement.com,,64.97,True,58384,10,,,,"Carson City,Nevada,United States"
+Carson City,NV,drain cleaning,0,20,carsoncitydraincleaning.com,,64.97,True,58384,10,,,,"Carson City,Nevada,United States"
+Carson City,NV,sewer line repair,0,10,carsoncitysewerlinerepair.com,,64.97,True,58384,10,,,,"Carson City,Nevada,United States"
+Carson City,NV,toilet repair,0,10,carsoncitytoiletrepair.com,,64.97,True,58384,10,,,,"Carson City,Nevada,United States"
