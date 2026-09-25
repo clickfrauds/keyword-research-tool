@@ -1,0 +1,4 @@
+city,state,service,volume,local_volume,domain,emd,payout,bids,pop,zips,verdict,serp_score,why,geo_name
+Carson City,NV,water heater repair,10,20,carsoncitywaterheaterrepair.com,free,64.97,True,58384,10,STOP,92,6 local plumbing firms on page one,"Carson City,Nevada,United States"
+Carson City,NV,emergency plumbing,10,20,carsoncityemergencyplumbing.com,free,64.97,True,58384,10,STOP,0,6 dedicated plumbing pages,"Carson City,Nevada,United States"
+Carson City,NV,drain cleaning,0,20,carsoncitydraincleaning.com,,64.97,True,58384,10,,,,"Carson City,Nevada,United States"
