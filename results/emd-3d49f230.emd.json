@@ -1,0 +1,86 @@
+{
+ "meta": {
+  "request_id": "emd-3d49f230",
+  "state": "WA",
+  "niche": "Electrical",
+  "services": [
+   "electricians"
+  ],
+  "towns_in": 1,
+  "towns_measured": 1,
+  "pairs": 1,
+  "min_volume": 40,
+  "serp_checked": 1,
+  "dataset": "2026-09-24",
+  "generated": "2026-09-25 02:25 UTC"
+ },
+ "rows": [
+  {
+   "city": "Yakima",
+   "state": "WA",
+   "service": "electricians",
+   "volume": 170,
+   "local_volume": 110,
+   "domain": "yakimaelectricians.com",
+   "emd": "free",
+   "payout": 63.0,
+   "pop": 136518,
+   "zips": 7,
+   "bids": true,
+   "ptype": "Call",
+   "geo_id": "1027811",
+   "geo_name": "Yakima,Washington,United States",
+   "verdict": "STOP",
+   "why": [
+    "2 dedicated electrical pages"
+   ],
+   "serp_query": "electricians Yakima WA",
+   "serp_score": 35,
+   "serp_breakdown": {
+    "dedicated": 2,
+    "pseo": 0,
+    "national": 0,
+    "emd": 0,
+    "directory": 4,
+    "forum": 0,
+    "other_local": 3,
+    "results": 9,
+    "pack_size": 3,
+    "pack_top_reviews": 226,
+    "pack_median_reviews": 135,
+    "pack_with_site": 3,
+    "pack_also_organic": 1,
+    "city_mentions": 6,
+    "local_firms": 5
+   },
+   "occupants": [
+    {
+     "host": "thunderelectric.com",
+     "kind": "dedicated page + in map pack"
+    },
+    {
+     "host": "yelp.com",
+     "kind": "directory"
+    },
+    {
+     "host": "509electric.com",
+     "kind": "dedicated page"
+    },
+    {
+     "host": "bigfootelectric.com",
+     "kind": "independent site"
+    },
+    {
+     "host": "primaryelectricanddesign.com",
+     "kind": "independent site"
+    },
+    {
+     "host": "facebook.com",
+     "kind": "social profile"
+    }
+   ]
+  }
+ ],
+ "unresolved_towns": [],
+ "towns_without_live_bid": []
+}
