@@ -1,0 +1,11 @@
+city,state,service,volume,local_volume,domain,emd,payout,bids,pop,zips,verdict,serp_score,why,geo_name
+Lompoc,CA,plumbers,210,50,lompocplumbers.com,free,61.25,True,43646,3,STOP,35,5 local plumbing firms on page one,"Lompoc,California,United States"
+Carpinteria,CA,plumbers,30,40,carpinteriaplumbers.com,,61.25,True,13036,2,,,,"Carpinteria,California,United States"
+Carpinteria,CA,drain cleaning,10,10,carpinteriadraincleaning.com,,61.25,True,13036,2,,,,"Carpinteria,California,United States"
+Lompoc,CA,drain cleaning,10,10,lompocdraincleaning.com,,61.25,True,43646,3,,,,"Lompoc,California,United States"
+Lompoc,CA,water heater repair,10,10,lompocwaterheaterrepair.com,,61.25,True,43646,3,,,,"Lompoc,California,United States"
+Carpinteria,CA,plumbing,0,0,carpinteriaplumbing.com,,61.25,True,13036,2,,,,"Carpinteria,California,United States"
+Carpinteria,CA,emergency plumbing,0,10,carpinteriaemergencyplumbing.com,,61.25,True,13036,2,,,,"Carpinteria,California,United States"
+Carpinteria,CA,water heater repair,0,10,carpinteriawaterheaterrepair.com,,61.25,True,13036,2,,,,"Carpinteria,California,United States"
+Lompoc,CA,plumbing,0,0,lompocplumbing.com,,61.25,True,43646,3,,,,"Lompoc,California,United States"
+Lompoc,CA,emergency plumbing,0,10,lompocemergencyplumbing.com,,61.25,True,43646,3,,,,"Lompoc,California,United States"
