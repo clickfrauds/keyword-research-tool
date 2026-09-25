@@ -276,14 +276,33 @@ def write(meta, rows, unresolved, no_bid):
     json.dump({"meta": meta, "rows": rows, "unresolved_towns": unresolved,
                "towns_without_live_bid": no_bid},
               open("emd_matrix.json", "w", encoding="utf-8"), indent=1, ensure_ascii=False)
+    # The pack columns ride in the CSV because they are the evidence behind a
+    # verdict, and a verdict nobody can check is a verdict nobody should act
+    # on. pack_also_organic is the one that matters most: a strong pack ABOVE
+    # directory results leaves the organic half winnable, and the organic half
+    # is the only ground a site with no address can fight on.
     cols = ["city", "state", "service", "volume", "local_volume", "domain", "emd",
-            "payout", "bids", "pop",
-            "zips", "verdict", "serp_score", "why", "geo_name"]
+            "payout", "bids", "pop", "zips", "verdict", "serp_score",
+            "dedicated", "local_firms", "pack_reviews", "pack_also_organic",
+            "emd_on_page", "why", "geo_name"]
     with open("emd_matrix.csv", "w", encoding="utf-8", newline="") as fh:
         w = csv.writer(fh)
         w.writerow(cols)
+        _FROM_BREAKDOWN = {"dedicated": "dedicated", "local_firms": "local_firms",
+                           "pack_reviews": "pack_median_reviews",
+                           "pack_also_organic": "pack_also_organic",
+                           "emd_on_page": "emd"}
         for r in sorted(rows, key=lambda r: (-r["volume"], r["city"])):
-            w.writerow([("; ".join(r.get(c) or []) if c == "why" else r.get(c, "")) for c in cols])
+            b = r.get("serp_breakdown") or {}
+            line = []
+            for c in cols:
+                if c == "why":
+                    line.append("; ".join(r.get(c) or []))
+                elif c in _FROM_BREAKDOWN:
+                    line.append(b.get(_FROM_BREAKDOWN[c], "") if b else "")
+                else:
+                    line.append(r.get(c, ""))
+            w.writerow(line)
 
     # The same numbers as a grid: one row per town, one column per service,
     # which is how the cross matrix is read by eye. The cell is the volume,
@@ -336,11 +355,21 @@ def write(meta, rows, unresolved, no_bid):
         L.append("")
     if free:
         L += ["## Free exact-match names at ≥ %d/mo" % MIN_VOLUME, "",
-              "| Domain | Town | Service | Searches/mo | Payout | Verdict | Why |",
-              "|---|---|---|---|---|---|---|"]
+              "Pack columns are the evidence behind the verdict. **Pack/organic** is how "
+              "many map-pack firms ALSO hold an organic slot: a strong pack above "
+              "directory results leaves the organic half winnable, and the organic half "
+              "is the only ground a site with no address fights on. **Rival EMD** is the "
+              "one to fear — it means somebody already runs this play here.", "",
+              "| Domain | Town | Service | Searches/mo | Payout | Verdict | "
+              "Dedicated | Local firms | Pack reviews | Pack/organic | Rival EMD | Why |",
+              "|---|---|---|---|---|---|---|---|---|---|---|---|"]
         for r in sorted(free, key=lambda r: -r["volume"]):
+            b = r.get("serp_breakdown") or {}
+            g = lambda k: (b.get(k, "") if b else "")
             L.append(f"| {r['domain']} | {r['city']} | {r['service']} | {r['volume']} | "
                      f"${r['payout']:.2f} | {r.get('verdict') or 'not read'} | "
+                     f"{g('dedicated')} | {g('local_firms')} | {g('pack_median_reviews')} | "
+                     f"{g('pack_also_organic')} | {g('emd')} | "
                      f"{'; '.join(r.get('why') or [])} |")
         L.append("")
     taken = [r for r in passed if r["emd"] != "free"]
