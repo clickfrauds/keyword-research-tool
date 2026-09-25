@@ -1,0 +1,465 @@
+{
+ "meta": {
+  "request_id": "emd-e65bd42d",
+  "state": "FL",
+  "niche": "Water, Fire & Mold Restoration",
+  "services": [
+   "mold remediation",
+   "mold testing",
+   "mold removal",
+   "water damage restoration"
+  ],
+  "towns_in": 4,
+  "towns_measured": 4,
+  "pairs": 16,
+  "min_volume": 10,
+  "serp_checked": 6,
+  "dataset": "2026-09-24",
+  "generated": "2026-09-25 08:49 UTC"
+ },
+ "rows": [
+  {
+   "city": "Oakland Park",
+   "state": "FL",
+   "service": "mold remediation",
+   "volume": 10,
+   "local_volume": 40,
+   "domain": "oaklandparkmoldremediation.com",
+   "emd": "free",
+   "payout": 398.0,
+   "pop": 44682,
+   "zips": 2,
+   "bids": true,
+   "ptype": "CPL",
+   "geo_id": "9052586",
+   "geo_name": "Oakland Park,Florida,United States",
+   "verdict": "STOP",
+   "why": [
+    "3 city EMD on page one",
+    "1 programmatic subdomain(s)",
+    "7 dedicated water, fire & mold restoration pages"
+   ],
+   "serp_query": "mold remediation Oakland Park FL",
+   "serp_score": 0,
+   "serp_breakdown": {
+    "dedicated": 7,
+    "pseo": 1,
+    "national": 0,
+    "emd": 3,
+    "directory": 1,
+    "forum": 0,
+    "other_local": 0,
+    "results": 8,
+    "pack_size": 3,
+    "pack_top_reviews": 226,
+    "pack_median_reviews": 214,
+    "pack_with_site": 3,
+    "pack_also_organic": 0,
+    "city_mentions": 7,
+    "local_firms": 7
+   },
+   "occupants": [
+    {
+     "host": "floridamoldfix.com",
+     "kind": "dedicated page"
+    },
+    {
+     "host": "moldremediationoaklandparkfl.netlify.app",
+     "kind": "city EMD + dedicated page"
+    },
+    {
+     "host": "waterdamagerestorationoaklandpark.vercel.app",
+     "kind": "city EMD + dedicated page"
+    },
+    {
+     "host": "yelp.com",
+     "kind": "directory"
+    },
+    {
+     "host": "waterdamagerestorationfl.shop",
+     "kind": "dedicated page"
+    },
+    {
+     "host": "mold-removal-remediation-oakland-park-fl.netlify.app",
+     "kind": "pSEO subdomain + city EMD + dedicated page"
+    }
+   ]
+  },
+  {
+   "city": "Oakland Park",
+   "state": "FL",
+   "service": "mold testing",
+   "volume": 0,
+   "local_volume": 20,
+   "domain": "oaklandparkmoldtesting.com",
+   "emd": null,
+   "payout": 398.0,
+   "pop": 44682,
+   "zips": 2,
+   "bids": true,
+   "ptype": "CPL",
+   "geo_id": "9052586",
+   "geo_name": "Oakland Park,Florida,United States",
+   "verdict": null,
+   "why": null
+  },
+  {
+   "city": "Oakland Park",
+   "state": "FL",
+   "service": "mold removal",
+   "volume": 10,
+   "local_volume": 20,
+   "domain": "oaklandparkmoldremoval.com",
+   "emd": "free",
+   "payout": 398.0,
+   "pop": 44682,
+   "zips": 2,
+   "bids": true,
+   "ptype": "CPL",
+   "geo_id": "9052586",
+   "geo_name": "Oakland Park,Florida,United States",
+   "verdict": "STOP",
+   "why": [
+    "3 city EMD on page one",
+    "1 programmatic subdomain(s)",
+    "6 dedicated water, fire & mold restoration pages"
+   ],
+   "serp_query": "mold removal Oakland Park FL",
+   "serp_score": 0,
+   "serp_breakdown": {
+    "dedicated": 6,
+    "pseo": 1,
+    "national": 0,
+    "emd": 3,
+    "directory": 2,
+    "forum": 0,
+    "other_local": 0,
+    "results": 8,
+    "pack_size": 3,
+    "pack_top_reviews": 179,
+    "pack_median_reviews": 26,
+    "pack_with_site": 0,
+    "pack_also_organic": 0,
+    "city_mentions": 7,
+    "local_firms": 6
+   },
+   "occupants": [
+    {
+     "host": "mapquest.com",
+     "kind": "directory"
+    },
+    {
+     "host": "floridamoldfix.com",
+     "kind": "dedicated page"
+    },
+    {
+     "host": "moldremediationdeerfieldbeach-fl.netlify.app",
+     "kind": "dedicated page"
+    },
+    {
+     "host": "waterdamagerestorationoaklandpark.vercel.app",
+     "kind": "city EMD + dedicated page"
+    },
+    {
+     "host": "yelp.com",
+     "kind": "directory"
+    },
+    {
+     "host": "mold-removal-remediation-oakland-park-fl.netlify.app",
+     "kind": "pSEO subdomain + city EMD + dedicated page"
+    }
+   ]
+  },
+  {
+   "city": "Oakland Park",
+   "state": "FL",
+   "service": "water damage restoration",
+   "volume": 10,
+   "local_volume": 30,
+   "domain": "oaklandparkwaterdamagerestoration.com",
+   "emd": "free",
+   "payout": 398.0,
+   "pop": 44682,
+   "zips": 2,
+   "bids": true,
+   "ptype": "CPL",
+   "geo_id": "9052586",
+   "geo_name": "Oakland Park,Florida,United States",
+   "verdict": "STOP",
+   "why": [
+    "4 city EMD on page one",
+    "1 programmatic subdomain(s)",
+    "5 dedicated water, fire & mold restoration pages"
+   ],
+   "serp_query": "water damage restoration Oakland Park FL",
+   "serp_score": 0,
+   "serp_breakdown": {
+    "dedicated": 5,
+    "pseo": 1,
+    "national": 0,
+    "emd": 4,
+    "directory": 0,
+    "forum": 0,
+    "other_local": 2,
+    "results": 9,
+    "pack_size": 3,
+    "pack_top_reviews": 226,
+    "pack_median_reviews": 214,
+    "pack_with_site": 3,
+    "pack_also_organic": 0,
+    "city_mentions": 7,
+    "local_firms": 6
+   },
+   "occupants": [
+    {
+     "host": "waterdamagerestorationoaklandpark.vercel.app",
+     "kind": "city EMD + dedicated page"
+    },
+    {
+     "host": "allstarwaterdamage.netlify.app",
+     "kind": "dedicated page"
+    },
+    {
+     "host": "waterdamagerestorationoaklandpark.vercel.app",
+     "kind": "city EMD + dedicated page"
+    },
+    {
+     "host": "floridamoldfix.com",
+     "kind": "dedicated page"
+    },
+    {
+     "host": "storm-damage-restoration-plant.pages.dev",
+     "kind": "independent site"
+    },
+    {
+     "host": "waterdamagerestorationoaklandpark.vercel.app",
+     "kind": "city EMD + dedicated page"
+    }
+   ]
+  },
+  {
+   "city": "Country Club",
+   "state": "FL",
+   "service": "mold remediation",
+   "volume": 0,
+   "local_volume": 10,
+   "domain": "countryclubmoldremediation.com",
+   "emd": null,
+   "payout": 398.0,
+   "pop": 51296,
+   "zips": 1,
+   "bids": true,
+   "ptype": "CPL",
+   "geo_id": "9051779",
+   "geo_name": "Country Club,Florida,United States",
+   "verdict": null,
+   "why": null
+  },
+  {
+   "city": "Country Club",
+   "state": "FL",
+   "service": "mold testing",
+   "volume": 0,
+   "local_volume": 10,
+   "domain": "countryclubmoldtesting.com",
+   "emd": null,
+   "payout": 398.0,
+   "pop": 51296,
+   "zips": 1,
+   "bids": true,
+   "ptype": "CPL",
+   "geo_id": "9051779",
+   "geo_name": "Country Club,Florida,United States",
+   "verdict": null,
+   "why": null
+  },
+  {
+   "city": "Country Club",
+   "state": "FL",
+   "service": "mold removal",
+   "volume": 0,
+   "local_volume": 10,
+   "domain": "countryclubmoldremoval.com",
+   "emd": null,
+   "payout": 398.0,
+   "pop": 51296,
+   "zips": 1,
+   "bids": true,
+   "ptype": "CPL",
+   "geo_id": "9051779",
+   "geo_name": "Country Club,Florida,United States",
+   "verdict": null,
+   "why": null
+  },
+  {
+   "city": "Country Club",
+   "state": "FL",
+   "service": "water damage restoration",
+   "volume": 0,
+   "local_volume": 10,
+   "domain": "countryclubwaterdamagerestoration.com",
+   "emd": null,
+   "payout": 398.0,
+   "pop": 51296,
+   "zips": 1,
+   "bids": true,
+   "ptype": "CPL",
+   "geo_id": "9051779",
+   "geo_name": "Country Club,Florida,United States",
+   "verdict": null,
+   "why": null
+  },
+  {
+   "city": "Coral Gables",
+   "state": "FL",
+   "service": "mold remediation",
+   "volume": 10,
+   "local_volume": 50,
+   "domain": "coralgablesmoldremediation.com",
+   "emd": "free",
+   "payout": 398.0,
+   "pop": 49802,
+   "zips": 3,
+   "bids": true,
+   "ptype": "CPL",
+   "geo_id": "9051768",
+   "geo_name": "Coral Gables,Florida,United States",
+   "verdict": "UNREAD",
+   "why": [
+    "page one could not be read"
+   ]
+  },
+  {
+   "city": "Coral Gables",
+   "state": "FL",
+   "service": "mold testing",
+   "volume": 10,
+   "local_volume": 10,
+   "domain": "coralgablesmoldtesting.com",
+   "emd": "free",
+   "payout": 398.0,
+   "pop": 49802,
+   "zips": 3,
+   "bids": true,
+   "ptype": "CPL",
+   "geo_id": "9051768",
+   "geo_name": "Coral Gables,Florida,United States",
+   "verdict": "UNREAD",
+   "why": [
+    "page one could not be read"
+   ]
+  },
+  {
+   "city": "Coral Gables",
+   "state": "FL",
+   "service": "mold removal",
+   "volume": 10,
+   "local_volume": 30,
+   "domain": "coralgablesmoldremoval.com",
+   "emd": "free",
+   "payout": 398.0,
+   "pop": 49802,
+   "zips": 3,
+   "bids": true,
+   "ptype": "CPL",
+   "geo_id": "9051768",
+   "geo_name": "Coral Gables,Florida,United States",
+   "verdict": "UNREAD",
+   "why": [
+    "page one could not be read"
+   ]
+  },
+  {
+   "city": "Coral Gables",
+   "state": "FL",
+   "service": "water damage restoration",
+   "volume": 10,
+   "local_volume": 20,
+   "domain": "coralgableswaterdamagerestoration.com",
+   "emd": "free",
+   "payout": 398.0,
+   "pop": 49802,
+   "zips": 3,
+   "bids": true,
+   "ptype": "CPL",
+   "geo_id": "9051768",
+   "geo_name": "Coral Gables,Florida,United States",
+   "verdict": null,
+   "why": null
+  },
+  {
+   "city": "North Miami Beach",
+   "state": "FL",
+   "service": "mold remediation",
+   "volume": 10,
+   "local_volume": 20,
+   "domain": "northmiamibeachmoldremediation.com",
+   "emd": "free",
+   "payout": 398.0,
+   "pop": 43898,
+   "zips": 2,
+   "bids": true,
+   "ptype": "CPL",
+   "geo_id": "1015138",
+   "geo_name": "North Miami Beach,Florida,United States",
+   "verdict": null,
+   "why": null
+  },
+  {
+   "city": "North Miami Beach",
+   "state": "FL",
+   "service": "mold testing",
+   "volume": 0,
+   "local_volume": 10,
+   "domain": "northmiamibeachmoldtesting.com",
+   "emd": null,
+   "payout": 398.0,
+   "pop": 43898,
+   "zips": 2,
+   "bids": true,
+   "ptype": "CPL",
+   "geo_id": "1015138",
+   "geo_name": "North Miami Beach,Florida,United States",
+   "verdict": null,
+   "why": null
+  },
+  {
+   "city": "North Miami Beach",
+   "state": "FL",
+   "service": "mold removal",
+   "volume": 10,
+   "local_volume": 20,
+   "domain": "northmiamibeachmoldremoval.com",
+   "emd": "free",
+   "payout": 398.0,
+   "pop": 43898,
+   "zips": 2,
+   "bids": true,
+   "ptype": "CPL",
+   "geo_id": "1015138",
+   "geo_name": "North Miami Beach,Florida,United States",
+   "verdict": null,
+   "why": null
+  },
+  {
+   "city": "North Miami Beach",
+   "state": "FL",
+   "service": "water damage restoration",
+   "volume": 10,
+   "local_volume": 10,
+   "domain": "northmiamibeachwaterdamagerestoration.com",
+   "emd": "free",
+   "payout": 398.0,
+   "pop": 43898,
+   "zips": 2,
+   "bids": true,
+   "ptype": "CPL",
+   "geo_id": "1015138",
+   "geo_name": "North Miami Beach,Florida,United States",
+   "verdict": null,
+   "why": null
+  }
+ ],
+ "unresolved_towns": [],
+ "towns_without_live_bid": []
+}
