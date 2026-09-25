@@ -1,0 +1,391 @@
+{
+ "meta": {
+  "request_id": "emd-8d0d419f",
+  "state": "AZ",
+  "niche": "HVAC",
+  "services": [
+   "ac repair",
+   "hvac",
+   "air conditioning repair",
+   "ac installation",
+   "furnace repair"
+  ],
+  "towns_in": 3,
+  "towns_measured": 3,
+  "pairs": 15,
+  "min_volume": 60,
+  "serp_checked": 3,
+  "dataset": "2026-09-24",
+  "generated": "2026-09-25 09:34 UTC"
+ },
+ "rows": [
+  {
+   "city": "Lake Havasu City",
+   "state": "AZ",
+   "service": "ac repair",
+   "volume": 170,
+   "local_volume": 110,
+   "domain": "lakehavasucityacrepair.com",
+   "emd": "free",
+   "payout": 51.8,
+   "pop": 58359,
+   "zips": 4,
+   "bids": true,
+   "ptype": "Call",
+   "geo_id": "1013433",
+   "geo_name": "Lake Havasu City,Arizona,United States",
+   "verdict": "STOP",
+   "why": [
+    "2 dedicated hvac pages"
+   ],
+   "serp_query": "ac repair Lake Havasu City AZ",
+   "serp_score": 35,
+   "serp_breakdown": {
+    "dedicated": 2,
+    "pseo": 0,
+    "national": 2,
+    "emd": 0,
+    "directory": 4,
+    "forum": 0,
+    "other_local": 0,
+    "results": 8,
+    "pack_size": 3,
+    "pack_top_reviews": 319,
+    "pack_median_reviews": 238,
+    "pack_with_site": 3,
+    "pack_also_organic": 0,
+    "city_mentions": 8,
+    "local_firms": 2
+   },
+   "occupants": [
+    {
+     "host": "yelp.com",
+     "kind": "directory"
+    },
+    {
+     "host": "homedepot.com",
+     "kind": "national brand"
+    },
+    {
+     "host": "preview.orangeskywebsites.com",
+     "kind": "dedicated page"
+    },
+    {
+     "host": "walmart.com",
+     "kind": "national brand"
+    },
+    {
+     "host": "angi.com",
+     "kind": "directory"
+    },
+    {
+     "host": "facebook.com",
+     "kind": "social profile"
+    }
+   ]
+  },
+  {
+   "city": "Lake Havasu City",
+   "state": "AZ",
+   "service": "hvac",
+   "volume": 70,
+   "local_volume": 70,
+   "domain": "lakehavasucityhvac.com",
+   "emd": "free",
+   "payout": 51.8,
+   "pop": 58359,
+   "zips": 4,
+   "bids": true,
+   "ptype": "Call",
+   "geo_id": "1013433",
+   "geo_name": "Lake Havasu City,Arizona,United States",
+   "verdict": "UNREAD",
+   "why": [
+    "page one could not be read"
+   ]
+  },
+  {
+   "city": "Lake Havasu City",
+   "state": "AZ",
+   "service": "air conditioning repair",
+   "volume": 170,
+   "local_volume": 110,
+   "domain": "lakehavasucityairconditioningrepair.com",
+   "emd": "free",
+   "payout": 51.8,
+   "pop": 58359,
+   "zips": 4,
+   "bids": true,
+   "ptype": "Call",
+   "geo_id": "1013433",
+   "geo_name": "Lake Havasu City,Arizona,United States",
+   "verdict": "STOP",
+   "why": [
+    "1 city EMD on page one"
+   ],
+   "serp_query": "air conditioning repair Lake Havasu City AZ",
+   "serp_score": 25,
+   "serp_breakdown": {
+    "dedicated": 1,
+    "pseo": 0,
+    "national": 1,
+    "emd": 1,
+    "directory": 6,
+    "forum": 0,
+    "other_local": 0,
+    "results": 8,
+    "pack_size": 3,
+    "pack_top_reviews": 319,
+    "pack_median_reviews": 238,
+    "pack_with_site": 3,
+    "pack_also_organic": 0,
+    "city_mentions": 7,
+    "local_firms": 1
+   },
+   "occupants": [
+    {
+     "host": "homedepot.com",
+     "kind": "national brand"
+    },
+    {
+     "host": "yelp.com",
+     "kind": "directory"
+    },
+    {
+     "host": "mapquest.com",
+     "kind": "directory"
+    },
+    {
+     "host": "facebook.com",
+     "kind": "social profile"
+    },
+    {
+     "host": "thumbtack.com",
+     "kind": "directory"
+    },
+    {
+     "host": "mohavelocal.com",
+     "kind": "directory"
+    }
+   ]
+  },
+  {
+   "city": "Lake Havasu City",
+   "state": "AZ",
+   "service": "ac installation",
+   "volume": 0,
+   "local_volume": 20,
+   "domain": "lakehavasucityacinstallation.com",
+   "emd": null,
+   "payout": 51.8,
+   "pop": 58359,
+   "zips": 4,
+   "bids": true,
+   "ptype": "Call",
+   "geo_id": "1013433",
+   "geo_name": "Lake Havasu City,Arizona,United States",
+   "verdict": null,
+   "why": null
+  },
+  {
+   "city": "Lake Havasu City",
+   "state": "AZ",
+   "service": "furnace repair",
+   "volume": 0,
+   "local_volume": 10,
+   "domain": "lakehavasucityfurnacerepair.com",
+   "emd": null,
+   "payout": 51.8,
+   "pop": 58359,
+   "zips": 4,
+   "bids": true,
+   "ptype": "Call",
+   "geo_id": "1013433",
+   "geo_name": "Lake Havasu City,Arizona,United States",
+   "verdict": null,
+   "why": null
+  },
+  {
+   "city": "Kingman",
+   "state": "AZ",
+   "service": "ac repair",
+   "volume": 50,
+   "local_volume": 70,
+   "domain": "kingmanacrepair.com",
+   "emd": null,
+   "payout": 26.25,
+   "pop": 34375,
+   "zips": 2,
+   "bids": true,
+   "ptype": "Call",
+   "geo_id": "1013431",
+   "geo_name": "Kingman,Arizona,United States",
+   "verdict": null,
+   "why": null
+  },
+  {
+   "city": "Kingman",
+   "state": "AZ",
+   "service": "hvac",
+   "volume": 70,
+   "local_volume": 50,
+   "domain": "kingmanhvac.com",
+   "emd": "taken",
+   "payout": 26.25,
+   "pop": 34375,
+   "zips": 2,
+   "bids": true,
+   "ptype": "Call",
+   "geo_id": "1013431",
+   "geo_name": "Kingman,Arizona,United States",
+   "verdict": null,
+   "why": null
+  },
+  {
+   "city": "Kingman",
+   "state": "AZ",
+   "service": "air conditioning repair",
+   "volume": 0,
+   "local_volume": 70,
+   "domain": "kingmanairconditioningrepair.com",
+   "emd": null,
+   "payout": 26.25,
+   "pop": 34375,
+   "zips": 2,
+   "bids": true,
+   "ptype": "Call",
+   "geo_id": "1013431",
+   "geo_name": "Kingman,Arizona,United States",
+   "verdict": null,
+   "why": null
+  },
+  {
+   "city": "Kingman",
+   "state": "AZ",
+   "service": "ac installation",
+   "volume": 10,
+   "local_volume": 30,
+   "domain": "kingmanacinstallation.com",
+   "emd": null,
+   "payout": 26.25,
+   "pop": 34375,
+   "zips": 2,
+   "bids": true,
+   "ptype": "Call",
+   "geo_id": "1013431",
+   "geo_name": "Kingman,Arizona,United States",
+   "verdict": null,
+   "why": null
+  },
+  {
+   "city": "Kingman",
+   "state": "AZ",
+   "service": "furnace repair",
+   "volume": 10,
+   "local_volume": 20,
+   "domain": "kingmanfurnacerepair.com",
+   "emd": null,
+   "payout": 26.25,
+   "pop": 34375,
+   "zips": 2,
+   "bids": true,
+   "ptype": "Call",
+   "geo_id": "1013431",
+   "geo_name": "Kingman,Arizona,United States",
+   "verdict": null,
+   "why": null
+  },
+  {
+   "city": "Sierra Vista",
+   "state": "AZ",
+   "service": "ac repair",
+   "volume": 30,
+   "local_volume": 40,
+   "domain": "sierravistaacrepair.com",
+   "emd": null,
+   "payout": 21.42,
+   "pop": 45155,
+   "zips": 2,
+   "bids": true,
+   "ptype": "Call",
+   "geo_id": "1013487",
+   "geo_name": "Sierra Vista,Arizona,United States",
+   "verdict": null,
+   "why": null
+  },
+  {
+   "city": "Sierra Vista",
+   "state": "AZ",
+   "service": "hvac",
+   "volume": 70,
+   "local_volume": 40,
+   "domain": "sierravistahvac.com",
+   "emd": "taken",
+   "payout": 21.42,
+   "pop": 45155,
+   "zips": 2,
+   "bids": true,
+   "ptype": "Call",
+   "geo_id": "1013487",
+   "geo_name": "Sierra Vista,Arizona,United States",
+   "verdict": null,
+   "why": null
+  },
+  {
+   "city": "Sierra Vista",
+   "state": "AZ",
+   "service": "air conditioning repair",
+   "volume": 30,
+   "local_volume": 40,
+   "domain": "sierravistaairconditioningrepair.com",
+   "emd": null,
+   "payout": 21.42,
+   "pop": 45155,
+   "zips": 2,
+   "bids": true,
+   "ptype": "Call",
+   "geo_id": "1013487",
+   "geo_name": "Sierra Vista,Arizona,United States",
+   "verdict": null,
+   "why": null
+  },
+  {
+   "city": "Sierra Vista",
+   "state": "AZ",
+   "service": "ac installation",
+   "volume": 0,
+   "local_volume": 10,
+   "domain": "sierravistaacinstallation.com",
+   "emd": null,
+   "payout": 21.42,
+   "pop": 45155,
+   "zips": 2,
+   "bids": true,
+   "ptype": "Call",
+   "geo_id": "1013487",
+   "geo_name": "Sierra Vista,Arizona,United States",
+   "verdict": null,
+   "why": null
+  },
+  {
+   "city": "Sierra Vista",
+   "state": "AZ",
+   "service": "furnace repair",
+   "volume": 10,
+   "local_volume": 10,
+   "domain": "sierravistafurnacerepair.com",
+   "emd": null,
+   "payout": 21.42,
+   "pop": 45155,
+   "zips": 2,
+   "bids": true,
+   "ptype": "Call",
+   "geo_id": "1013487",
+   "geo_name": "Sierra Vista,Arizona,United States",
+   "verdict": null,
+   "why": null
+  }
+ ],
+ "unresolved_towns": [],
+ "towns_without_live_bid": []
+}
