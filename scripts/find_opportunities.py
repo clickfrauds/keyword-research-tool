@@ -1027,6 +1027,24 @@ def score_serp(data, service, city):
     pack_max = pack_reviews[0] if pack_reviews else 0
     pack_med = pack_reviews[len(pack_reviews) // 2] if pack_reviews else 0
 
+    # Whose sites are IN the pack. A pack full of reviews is one thing; the
+    # same firms holding organic slots underneath it is another, and much
+    # worse: Google has settled on those businesses as the answer, and the
+    # page is occupied twice over by the same entities. A pack of strong
+    # firms above organic results that are all Yelp and Angi leaves the
+    # organic slots winnable, which is the only ground a site with no
+    # physical address can fight on.
+    def _host(u):
+        m = re.search(r"https?://([^/]+)", str(u or ""), re.I)
+        return re.sub(r"^www\.", "", m.group(1).lower()) if m else ""
+
+    pack_hosts = set()
+    for pl in pack:
+        site = pl.get("website") or (pl.get("links") or {}).get("website")
+        h = _host(site)
+        if h:
+            pack_hosts.add(h)
+
     svc_words = [w for w in re.split(r"\W+", service.lower()) if len(w) > 3]
     city_l = city.lower()
     city_slug = city_l.replace(" ", "-")
@@ -1034,7 +1052,8 @@ def score_serp(data, service, city):
     tally = {"dedicated": 0, "pseo": 0, "national": 0, "emd": 0,
              "directory": 0, "forum": 0, "other_local": 0, "results": len(results),
              "pack_size": pack_n, "pack_top_reviews": pack_max,
-             "pack_median_reviews": pack_med, "city_mentions": 0, "local_firms": 0}
+             "pack_median_reviews": pack_med, "pack_with_site": len(pack_hosts),
+             "pack_also_organic": 0, "city_mentions": 0, "local_firms": 0}
     occupants = []
     # One competitor is one competitor however many of its pages rank.
     # elec-deep-01 counted soonersvcs.com twice on "outlet repair Lawton OK"
@@ -1134,6 +1153,11 @@ def score_serp(data, service, city):
                     and "/blog" not in link):
                 _firm_hosts.add(bare)
                 tally["local_firms"] = len(_firm_hosts)
+        if bare in pack_hosts:
+            # Same firm in the pack AND in organic: the page is occupied
+            # twice by one business.
+            tally["pack_also_organic"] += 1
+            kinds.append("in map pack")
         if kinds:
             occupants.append({"host": bare, "kind": " + ".join(kinds)})
 
@@ -1384,6 +1408,13 @@ def verdict(o):
         why.append(f"{b['dedicated']} dedicated {o['niche'].lower()} pages")
     if b.get("pack_median_reviews", 0) >= 500:
         why.append(f"map pack at {b['pack_median_reviews']} reviews")
+    # Two or more map-pack firms also holding organic slots is double
+    # occupancy: Google has settled on those businesses for this query, and
+    # the organic half -- the only half a site with no address can win -- is
+    # theirs too. A strong pack ABOVE directory results is a different and
+    # much more enterable page.
+    if b.get("pack_also_organic", 0) >= 2:
+        why.append(f"{b['pack_also_organic']} map-pack firms also rank organically")
     # Five or more local firms on page one is a settled market, whatever
     # their titles say (Lawton OK: 2; Bellingham WA roofing: 5-6).
     if b.get("local_firms", 0) >= 5 and not why:
