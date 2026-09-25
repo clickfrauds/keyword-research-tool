@@ -277,6 +277,11 @@
       (!c.local_seo ? other : c.status === "live" ? live : apply).appendChild(o);
     });
     [live, apply, other].forEach(function (g) { if (g.children.length) sel.appendChild(g); });
+    if (HANDOFF) {
+      $("state").value = HANDOFF.state;
+      if (HANDOFF.niche && catalogue[HANDOFF.niche]) sel.value = HANDOFF.niche;
+      showEcon(); renderServices(); loadTowns();
+    }
   }).catch(function () { $("niche").innerHTML = '<option value="">Could not load campaigns</option>'; });
 
   function showEcon() {
@@ -298,6 +303,36 @@
       '<p class="hint">' + notes.join(" ") + '</p>';
   }
 
+  // The town finder hands a shortlist over as ?state=&niche=&towns=A|B|C so
+  // the list never has to be retyped. Applied once, after the towns for that
+  // state have loaded; a town the feed does not know is reported, not
+  // silently dropped.
+  var HANDOFF = (function () {
+    var q = new URLSearchParams(location.search);
+    var t = (q.get("towns") || "").split("|").map(function (x) { return x.trim(); })
+              .filter(Boolean);
+    if (!q.get("state") || !t.length) return null;
+    return { state: q.get("state"), niche: q.get("niche") || "", towns: t, done: false };
+  })();
+
+  function applyHandoff() {
+    if (!HANDOFF || HANDOFF.done) return;
+    HANDOFF.done = true;
+    var known = {};
+    towns.forEach(function (t) { known[t.city.toLowerCase()] = t.city; });
+    var hit = [], miss = [];
+    HANDOFF.towns.forEach(function (name) {
+      var c = known[name.toLowerCase()];
+      if (c) { pickedTowns[c] = true; hit.push(c); } else { miss.push(name); }
+    });
+    // Nothing is hidden by a filter the handoff did not choose.
+    $("town-min").value = "0"; $("town-max").value = "0";
+    $("town-pay").value = "0"; $("town-metro").value = "any";
+    renderTowns();
+    $("town-shown").textContent = hit.length + " town(s) from the town finder"
+      + (miss.length ? " · not in this state's feed: " + miss.join(", ") : "");
+  }
+
   function loadTowns() {
     var st = $("state").value, k = $("niche").value;
     pickedTowns = {}; towns = [];
@@ -307,7 +342,7 @@
     fetch("/coverage-cities?state=" + encodeURIComponent(st) + "&feed_niche=" + encodeURIComponent(fn))
       .then(function (r) { return r.json(); }).then(function (d) {
         if (d.error) throw new Error(d.error);
-        towns = d.cities || []; renderTowns();
+        towns = d.cities || []; renderTowns(); applyHandoff();
       }).catch(function (e) {
         $("towns").innerHTML = '<div class="empty">Could not load towns: ' + esc(e.message) + '</div>';
       });

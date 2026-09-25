@@ -176,6 +176,7 @@
       <button class="btn" id="check">Check .com availability</button>
       <button class="btn" id="copy">Copy names for Namecheap</button>
       <button class="btn" id="vol">Get search volume</button>
+      <button class="btn" id="toemd">Open in EMD finder</button>
       <span class="count" id="checked"></span>
       <span class="count" id="volmsg" style="margin-left:0"></span>
     </div>
@@ -238,6 +239,7 @@
   function fmt(n) { return (+n || 0).toLocaleString("en-US"); }
 
   var PROBE = {};      // feed niche -> the ten money terms to measure
+  var CAMPAIGN = {};   // feed niche -> the campaign the EMD form uses
   fetch("/data/leadsmart_campaigns.json").then(function (r) { return r.json(); })
     .then(function (c) {
       Object.keys(c.campaigns || {}).forEach(function (k) {
@@ -245,6 +247,9 @@
         // The index is keyed by the feed's niche label, the catalogue by the
         // campaign name; feed_niche is the bridge the catalogue already carries.
         if (v.feed_niche && (v.probe_terms || []).length) PROBE[v.feed_niche] = v.probe_terms;
+        // The EMD form is keyed by campaign name, this table by the feed's
+        // niche label. Keep the way back so the handoff can name the campaign.
+        if (v.feed_niche) CAMPAIGN[v.feed_niche] = k;
       });
     }).catch(function () { /* head term only, which is what it did before */ });
 
@@ -463,6 +468,29 @@
     step(0);
   }
 
+
+  // Hand the shortlist to the EMD finder instead of retyping it. The EMD run
+  // is per-state, so this only goes when every visible row is in one state.
+  function openInEmd() {
+    var rows = visible().slice(0, LIMIT);
+    if (!rows.length) { $("volmsg").textContent = "no towns on screen"; return; }
+    var states = {};
+    rows.forEach(function (r) { states[r[0]] = 1; });
+    var list = Object.keys(states);
+    if (list.length !== 1) {
+      $("volmsg").textContent = "the EMD run is one state at a time — pick a state first ("
+        + list.length + " on screen)";
+      return;
+    }
+    var towns = rows.map(function (r) { return r[1]; }).slice(0, 25);
+    var niche = $("niche").value;
+    var q = "state=" + encodeURIComponent(list[0])
+          + "&niche=" + encodeURIComponent(CAMPAIGN[niche] || niche)
+          + "&towns=" + encodeURIComponent(towns.join("|"));
+    window.open("/emd?" + q, "_blank");
+    $("volmsg").textContent = towns.length + " town(s) sent to the EMD finder";
+  }
+
   document.querySelectorAll("th[data-k]").forEach(function (th) {
     th.addEventListener("click", function () {
       var k = +th.getAttribute("data-k");
@@ -480,6 +508,7 @@
   $("check").addEventListener("click", runCheck);
   $("copy").addEventListener("click", copyNames);
   $("vol").addEventListener("click", runVolume);
+  $("toemd").addEventListener("click", openInEmd);
 })();
 </script>
 </body>
