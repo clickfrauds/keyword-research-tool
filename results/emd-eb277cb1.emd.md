@@ -1,0 +1,13 @@
+# EMD finder — Electrical, Washington
+
+- Request `emd-eb277cb1` · coverage dataset 2026-09-24
+- 1 town(s) in · 1 measured in their own geo · 1 service(s) · 1 town x service pair(s)
+- **1** pair(s) at ≥ 40 searches/mo · **1** with the exact .com still unregistered · 1 page one(s) read
+
+Two numbers per pair: **named** is "{town} {service}", what the exact-match domain is worth; **local** is the bare "{service}" measured inside the town, what its residents search at all. In a metro the second is far larger, because nobody types the suburb. Volume is measured in each town's own Google geo target, not the state or the US. "Free" is Verisign's own registry answer: an unregistered .com sells at the registrar's standard price (Namecheap $11.28), and a name Namecheap shows at a premium price is already owned, so it reads as taken here.
+
+## Free exact-match names at ≥ 40/mo
+
+| Domain | Town | Service | Searches/mo | Payout | Verdict | Why |
+|---|---|---|---|---|---|---|
+| yakimaelectricians.com | Yakima | electricians | 170 | $63.00 | STOP | 2 dedicated electrical pages |
