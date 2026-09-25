@@ -258,7 +258,13 @@ def postmortem(rows):
         o = {"serp_breakdown": tally, "niche": NICHE, "serp_score": sc,
              "volume": r["volume"], "city": r["city"]}
         label, why = FO.verdict(o)
+        # Keep the tally the verdict was made from. Without it the report says
+        # "2 dedicated electrical pages" and stops, and the number that
+        # actually decided -- the map pack's review depth, which separates a
+        # Lawton (35-90, WATCH, built and earning) from a Yakima (STOP) --
+        # is not in the output at all. The verdict has to be auditable.
         r.update({"serp_query": query, "serp_score": sc, "verdict": label, "why": why,
+                  "serp_breakdown": tally,
                   "occupants": occ[:6] if isinstance(occ, list) else occ})
     return checked
 
