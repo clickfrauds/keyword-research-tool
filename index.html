@@ -946,10 +946,28 @@
   const downloadBtn = document.getElementById("download-btn");
 
   const POLL_INTERVAL_MS = 10000;
-  const MAX_ATTEMPTS = 120; // ~20 minutes total — pipeline now runs keyword pull,
-  // clustering, ad groups, negative guard, audiences, per-ad-group RSA (with
-  // retries on malformed JSON), locations, master CSV, live Ads push and
-  // reports; a 12-15 seed run with 7 ad groups regularly takes 7-9 minutes.
+
+  // How long to keep polling, PER RESEARCH TYPE.
+  //
+  // This was one flat MAX_ATTEMPTS = 120 — twenty minutes for every run. The
+  // Ads pipeline fits in that; Mode 3 does not. A 49-service Mode 3 plan
+  // measured 32 minutes end to end (Yakima, 2026-09-25), so the page gave up
+  // at 20 with "this is taking longer than expected" while the run was still
+  // working, finished fine, and published its JSON link that nobody saw. The
+  // run cost real Planner and SerpApi calls either way.
+  //
+  // Minutes, not attempts: attempts only mean something next to the interval,
+  // and every past edit to one of them had to remember the other.
+  const BUDGET_MIN = { mode3: 90, mode5: 45, seo: 30, ads: 45 };
+  const DEFAULT_BUDGET_MIN = 30;
+  // A run a Mode 3 plan's size is not "1-3 minutes", and saying so turns a
+  // normal wait into a reason to reload the page mid-run.
+  const ETA_TEXT = {
+    mode3: "a full-website plan takes 25-40 minutes for 40-50 services",
+    mode5: "an area plan takes 5-15 minutes",
+    seo: "this usually takes 3-8 minutes",
+    ads: "this usually takes 7-15 minutes",
+  };
 
   let lastHtml = null;
   let lastBusinessName = "report";
@@ -1059,16 +1077,39 @@
       return;
     }
 
-    setStatus("Generating your report — this usually takes 1-3 minutes...", false);
+    const kind = data.research_type || "seo";
+    const eta = ETA_TEXT[kind] || ETA_TEXT.seo;
+    const startedAt = Date.now();
+    let budgetMs = (BUDGET_MIN[kind] || DEFAULT_BUDGET_MIN) * 60000;
 
-    let attempts = 0;
+    // Elapsed minutes in the status line. Without it a long run and a hung run
+    // look identical, which is the reason to reload the page — and reloading
+    // loses the request id, the one thing that can still fetch the result.
+    function waitingStatus() {
+      const mins = Math.floor((Date.now() - startedAt) / 60000);
+      setStatus("Generating your report — " + eta + ". "
+                + (mins ? mins + " min elapsed" : "just started")
+                + ". Keep this tab open; the run continues on GitHub Actions "
+                + "either way (request id " + request_id + ").", false);
+    }
+    waitingStatus();
+
     const poll = async () => {
-      attempts++;
       let json;
       try {
         const res = await fetch(`/check-status?request_id=${request_id}`);
         json = await res.json();
       } catch (err) {
+        // One failed poll is not a failed run. Over a 30-minute Mode 3 plan
+        // that is ~180 requests, and a single dropped one used to end the wait
+        // for good — the run kept going and published its link unseen. Retry
+        // until the budget runs out; only then say so.
+        if (Date.now() - startedAt < budgetMs) {
+          setStatus("Lost contact while checking (" + err.message
+                    + ") — retrying. The run itself is unaffected.", false);
+          setTimeout(poll, POLL_INTERVAL_MS);
+          return;
+        }
         setStatus("Error while checking status: " + err.message, true);
         submitBtn.disabled = false;
         return;
@@ -1145,12 +1186,31 @@
         return;
       }
 
-      if (attempts >= MAX_ATTEMPTS) {
-        setStatus("This is taking longer than expected. Check GitHub Actions, or try again in a few minutes.", true);
+      if (Date.now() - startedAt >= budgetMs) {
+        // Never "try again in a few minutes" — a re-run spends the Planner and
+        // SerpApi calls a second time. The run is still going; offer to keep
+        // watching it instead.
+        const mins = Math.round((Date.now() - startedAt) / 60000);
+        setStatus("Still running after " + mins + " minutes. The run has not failed — "
+                  + "this page just stopped waiting. Press “Keep checking” to carry on "
+                  + "(request id " + request_id + "), or open the GitHub Actions run.", true);
+        const again = document.createElement("button");
+        again.type = "button";
+        again.textContent = "Keep checking";
+        again.style.marginTop = "10px";
+        again.addEventListener("click", function () {
+          budgetMs += 30 * 60000;
+          statusEl.classList.remove("error");
+          waitingStatus();
+          setTimeout(poll, POLL_INTERVAL_MS);
+        });
+        statusEl.appendChild(document.createElement("br"));
+        statusEl.appendChild(again);
         submitBtn.disabled = false;
         return;
       }
 
+      waitingStatus();
       setTimeout(poll, POLL_INTERVAL_MS);
     };
 

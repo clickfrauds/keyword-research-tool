@@ -50,6 +50,13 @@ permissions:
 jobs:
   mode3-plan:
     runs-on: ubuntu-latest
+    # Python buffers stdout when it is a pipe, and a GitHub Actions log IS a
+    # pipe. Without this the whole run printed nothing for half an hour and then
+    # dumped every line at once with a single timestamp, so there was no way to
+    # tell a slow stage from a hung one. Set on the job, not one step, so
+    # push_results.py streams too.
+    env:
+      PYTHONUNBUFFERED: "1"
     steps:
       - uses: actions/checkout@v4
 

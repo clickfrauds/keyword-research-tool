@@ -137,6 +137,10 @@ permissions:
 jobs:
   research:
     runs-on: ubuntu-latest
+    # Stream every step's output as it happens instead of flushing it all when
+    # the step ends -- see the note in mode3_plan.yml.
+    env:
+      PYTHONUNBUFFERED: "1"
     steps:
       - uses: actions/checkout@v4
 
