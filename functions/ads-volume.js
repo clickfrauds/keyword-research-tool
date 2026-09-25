@@ -108,8 +108,14 @@ async function geoFor(env, token, town, state) {
     // "CITY" matched nothing at all, and every town read as unresolved.
     if (parts.length >= 2 && String(g.targetType || "").toUpperCase() === "CITY"
         && norm(parts[0]) === norm(town) && norm(parts[1]) === norm(stateName)) {
-      // resourceName is "geoTargetConstants/1014339"
-      return { id: String(g.resourceName || "").split("/").pop(), name: g.canonicalName };
+      // The suggest response carries `id` and `resourceName`, and which of
+      // the two is populated varies. Taking the tail of an absent
+      // resourceName produced "geoTargetConstants/undefined" and the Planner
+      // answered INVALID_ARGUMENT for a geo that had resolved perfectly.
+      const gid = g.id != null ? String(g.id)
+                : String(g.resourceName || "").split("/").pop();
+      if (!/^\d+$/.test(gid)) continue;
+      return { id: gid, name: g.canonicalName };
     }
   }
   // Say what Google did offer, so a miss is diagnosable instead of silent.
@@ -129,7 +135,15 @@ async function volumesFor(env, token, geoId, keywords) {
   });
   if (!r.ok) {
     const t = await r.text().catch(() => "");
-    throw new Error("planner " + r.status + " " + t.slice(0, 160));
+    // Keep enough of the body to name the bad field; a 160-character slice
+    // cut off before the details array every time.
+    let why = t.slice(0, 700);
+    try {
+      const e = JSON.parse(t).error || {};
+      const det = (e.details || []).map((d) => JSON.stringify(d)).join(" ");
+      why = (e.message || "") + " " + det;
+    } catch (_) { /* not JSON, the raw slice stands */ }
+    throw new Error("planner " + r.status + ": " + why.slice(0, 700));
   }
   const d = await r.json();
   const out = {};
