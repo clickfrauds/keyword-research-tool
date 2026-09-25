@@ -162,6 +162,17 @@ export async function onRequestPost({ request, env }) {
     return json({ error: "Google Ads is not configured on this site. Add these as "
                        + "environment variables on the Pages project: " + missing.join(", ") }, 503);
   }
+  // A customer id that is not ten digits produces INVALID_CUSTOMER_ID from
+  // the Planner, one town at a time, with nothing to say which variable is
+  // wrong. Check the shape first and report the DIGIT COUNT only -- enough to
+  // fix it, and the value itself never leaves the worker.
+  const cidDigits = String(env.GOOGLE_ADS_CUSTOMER_ID || "").replace(/\D/g, "");
+  if (cidDigits.length !== 10) {
+    return json({ error: "GOOGLE_ADS_CUSTOMER_ID holds " + cidDigits.length
+                       + " digit(s); a Google Ads customer id is exactly 10 "
+                       + "(e.g. 123-456-7890). Use the account the Keyword Planner "
+                       + "runs in, not the manager/MCC id." }, 503);
+  }
 
   let body;
   try { body = await request.json(); } catch (e) {
