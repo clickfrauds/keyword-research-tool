@@ -273,6 +273,12 @@ HARD RULES:
    entity — the site's angle. Two sites covering the same entity differ by
    this, and it is what stops a 30-page cluster reading as 30 unrelated
    pages. Both are prose the page writer sees on EVERY page.
+   Use only supplied business facts. The target market is not proof of a
+   physical office there. Do not invent credentials, client results or
+   first-hand experience. Preserve remote-service or referral framing.
+   Prioritize relevant measured demand without dropping useful low-volume
+   questions. Group synonymous queries; no exact-match repetition quota.
+   Entities are real concepts/objects, not a label for every low-volume query.
 3c. attributes (per cluster): the ANGLES that page must cover to be
    complete. A page that answers "what it is" but never "what it costs" or
    "how long it takes" is thin at any word count, and the searcher goes
@@ -573,17 +579,28 @@ def validate(raw, by_id, geo_areas=None, keywords=()):
         # questions are: the builder puts them in a prompt, and it has no
         # access to the id table.
         h2_outline = []
+        heading_seen = set()
+        owned_ids = set(ids + tail_ids)
         for h in (c.get("h2_outline") or [])[:3]:
             if not isinstance(h, dict):
                 continue
             _h2 = str(h.get("h2", "")).strip()[:120]
             if not _h2:
                 continue
-            _hk = [by_id[i]["keyword"] for i in (h.get("keyword_ids") or [])
-                   if i in by_id]
+            # Keep the complete section allocation, but only this cluster's
+            # terms. A model-supplied ID must not bypass page ownership.
+            _hk = []
+            for raw_id in (h.get("keyword_ids") or []):
+                try:
+                    kid = int(raw_id)
+                except (TypeError, ValueError):
+                    continue
+                if kid in owned_ids and kid not in heading_seen:
+                    _hk.append(by_id[kid]["keyword"])
+                    heading_seen.add(kid)
             h2_outline.append({
                 "h2": _h2,
-                "keywords": _hk[:8],
+                "keywords": _hk,
                 "entities": [str(e).strip() for e in (h.get("entities") or [])
                              if str(e).strip()][:4],
             })
@@ -644,8 +661,8 @@ def validate(raw, by_id, geo_areas=None, keywords=()):
         # page of the cluster — the same entity, the same publisher voice. An
         # empty string means "not provided" and the builder writes the pages
         # exactly the way it did before this field existed.
-        "central_entity": str(m4.get("central_entity", "")).strip()[:120],
-        "source_context": str(m4.get("source_context", "")).strip()[:300],
+        "central_entity": str(m4.get("central_entity") or "").strip(),
+        "source_context": str(m4.get("source_context") or "").strip(),
         "pillar_keyword": pillar,
         "clusters": clusters,
     }
