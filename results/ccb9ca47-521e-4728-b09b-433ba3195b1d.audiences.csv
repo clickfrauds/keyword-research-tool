@@ -1,0 +1,15 @@
+﻿Campaign,Ad Group,Audience,Bid Modifier,Flexible Reach,Comment
+Washing Machine & Dryer Repair,,Home Appliances,25%,,IN_MARKET | observation | Direct match to appliance repair intent
+Washing Machine & Dryer Repair,,Washers & Dryers,30%,,IN_MARKET | observation | Exact product intent match
+Washing Machine & Dryer Repair,,Refrigerators,30%,,IN_MARKET | observation | Direct fridge repair intent match
+Washing Machine & Dryer Repair,,Dishwashers,30%,,IN_MARKET | observation | Direct dishwasher repair intent match
+Washing Machine & Dryer Repair,,Home Improvement,15%,,IN_MARKET | observation | Homeowners investing in home upkeep
+Washing Machine & Dryer Repair,,Home Insurance,10%,,IN_MARKET | observation | Homeowners likely to need repairs
+Washing Machine & Dryer Repair,,Residential Properties (For Rent),15%,,IN_MARKET | observation | Renters need appliance repair services
+Washing Machine & Dryer Repair,,Residential Properties (For Sale),10%,,IN_MARKET | observation | Homeowners are prime repair customers
+Washing Machine & Dryer Repair,,Home Cleaning Services,10%,,IN_MARKET | observation | Home services buyers overlap segment
+Washing Machine & Dryer Repair,,Plumbing Services,10%,,IN_MARKET | observation | Adjacent home repair service buyers
+Washing Machine & Dryer Repair,,Home Decor Enthusiasts,10%,,AFFINITY | observation | Homeowners engaged with home upkeep
+Washing Machine & Dryer Repair,,Home Automation Enthusiasts,10%,,AFFINITY | observation | Tech-savvy homeowners with appliances
+Washing Machine & Dryer Repair,,Do-It-Yourselfers,10%,,AFFINITY | observation | Homeowners troubleshoot before calling pros
+Washing Machine & Dryer Repair,,Family-Focused,10%,,AFFINITY | observation | Families heavily use these appliances
