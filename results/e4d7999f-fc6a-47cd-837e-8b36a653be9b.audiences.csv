@@ -1,0 +1,15 @@
+﻿Campaign,Ad Group,Audience,Bid Modifier,Flexible Reach,Comment
+Washing Machine & Dryer Repair,,Home Appliances,25%,,IN_MARKET | observation | Direct appliance category match
+Washing Machine & Dryer Repair,,Washers & Dryers,30%,,IN_MARKET | observation | Exact product intent match
+Washing Machine & Dryer Repair,,Refrigerators,20%,,IN_MARKET | observation | Fridge purchase intent overlap
+Washing Machine & Dryer Repair,,Dishwashers,20%,,IN_MARKET | observation | Dishwasher owners likely need repair
+Washing Machine & Dryer Repair,,Small Appliances,15%,,IN_MARKET | observation | Broader appliance ownership signal
+Washing Machine & Dryer Repair,,Plumbing Services,15%,,IN_MARKET | observation | Home service intent overlap
+Washing Machine & Dryer Repair,,Electrician Services,15%,,IN_MARKET | observation | Home repair services buyer behavior
+Washing Machine & Dryer Repair,,General Contracting & Remodeling Services,10%,,IN_MARKET | observation | Home maintenance service seekers
+Washing Machine & Dryer Repair,,Home Cleaning Services,10%,,IN_MARKET | observation | Homeowners hiring home services
+Washing Machine & Dryer Repair,,Home Insurance,10%,,IN_MARKET | observation | Homeowner audience with appliance assets
+Washing Machine & Dryer Repair,,Do-It-Yourselfers,10%,,AFFINITY | observation | May escalate to pro repair
+Washing Machine & Dryer Repair,,Home Decor Enthusiasts,10%,,"AFFINITY | observation | Home-focused audience, owns appliances"
+Washing Machine & Dryer Repair,,Family-Focused,15%,,AFFINITY | observation | Households with heavy appliance use
+Washing Machine & Dryer Repair,,Value Shoppers,10%,,AFFINITY | observation | Repair vs replace cost-conscious mindset
