@@ -1,0 +1,1164 @@
+[
+  {
+    "page_name": "Washing Machine Repair",
+    "url_slug": "washing-machine-repair-dubai",
+    "language": "en",
+    "service_name": "Washing Machine Repair",
+    "industry": "Home Appliance Repair",
+    "sub_services": [
+      "General Repair",
+      "Branded Repair",
+      "Emergency Repair",
+      "Door Seal Repair",
+      "Motor Replacement",
+      "Drum & Bearing Repair"
+    ],
+    "ad_groups_covered": [
+      "Washing Machine Repair - General & Near Me",
+      "Branded Washing Machine Repair",
+      "Washing Machine Parts & Problem Symptoms",
+      "Emergency Washer/Dryer Repair"
+    ],
+    "keywords_covered": 99,
+    "monthly_volume_covered": 56130,
+    "target_keywords": [
+      {
+        "keyword": "washing machine repair",
+        "volume": 6600,
+        "intent": "transactional",
+        "cpc_range": "1040.03-4345.97",
+        "score": 122.3
+      },
+      {
+        "keyword": "fix washing machine",
+        "volume": 6600,
+        "intent": "transactional",
+        "cpc_range": "1040.03-4345.97",
+        "score": 122.3
+      },
+      {
+        "keyword": "laundry machine repair",
+        "volume": 6600,
+        "intent": "transactional",
+        "cpc_range": "1040.03-4345.97",
+        "score": 122.3
+      },
+      {
+        "keyword": "clothes washer repair",
+        "volume": 6600,
+        "intent": "transactional",
+        "cpc_range": "1040.03-4345.97",
+        "score": 122.3
+      },
+      {
+        "keyword": "laundry washer repair",
+        "volume": 6600,
+        "intent": "transactional",
+        "cpc_range": "1040.03-4345.97",
+        "score": 122.3
+      },
+      {
+        "keyword": "fix laundry machine",
+        "volume": 6600,
+        "intent": "transactional",
+        "cpc_range": "1040.03-4345.97",
+        "score": 122.3
+      },
+      {
+        "keyword": "bosch washer repair near me",
+        "volume": 20,
+        "intent": "transactional",
+        "cpc_range": "603.68-6558.83",
+        "score": 111.5
+      },
+      {
+        "keyword": "lg washer repair near me",
+        "volume": 50,
+        "intent": "transactional",
+        "cpc_range": "459.28-3020.32",
+        "score": 109.8
+      },
+      {
+        "keyword": "lg washing machine repair near me",
+        "volume": 50,
+        "intent": "transactional",
+        "cpc_range": "459.28-3020.32",
+        "score": 109.8
+      },
+      {
+        "keyword": "washing machine repair near me",
+        "volume": 2900,
+        "intent": "transactional",
+        "cpc_range": "970.69-3368.72",
+        "score": 108.2
+      },
+      {
+        "keyword": "washer fixer",
+        "volume": 6600,
+        "intent": "commercial",
+        "cpc_range": "1040.03-4345.97",
+        "score": 107.6
+      },
+      {
+        "keyword": "washer repair near me",
+        "volume": 260,
+        "intent": "transactional",
+        "cpc_range": "970.69-3941.68",
+        "score": 103.1
+      },
+      {
+        "keyword": "washer repair service near me",
+        "volume": 260,
+        "intent": "transactional",
+        "cpc_range": "970.69-3941.68",
+        "score": 103.1
+      },
+      {
+        "keyword": "fix washing machine near me",
+        "volume": 260,
+        "intent": "transactional",
+        "cpc_range": "970.69-3941.68",
+        "score": 103.1
+      },
+      {
+        "keyword": "clothes washer repair near me",
+        "volume": 260,
+        "intent": "transactional",
+        "cpc_range": "970.69-3941.68",
+        "score": 103.1
+      },
+      {
+        "keyword": "laundry machine repair near me",
+        "volume": 260,
+        "intent": "transactional",
+        "cpc_range": "970.69-3941.68",
+        "score": 103.1
+      },
+      {
+        "keyword": "repair wash machine near me",
+        "volume": 260,
+        "intent": "transactional",
+        "cpc_range": "970.69-3941.68",
+        "score": 103.1
+      },
+      {
+        "keyword": "samsung washing machine repair",
+        "volume": 320,
+        "intent": "transactional",
+        "cpc_range": "354.89-3911.73",
+        "score": 101.8
+      },
+      {
+        "keyword": "samsung washer repair",
+        "volume": 320,
+        "intent": "transactional",
+        "cpc_range": "354.89-3911.73",
+        "score": 101.8
+      },
+      {
+        "keyword": "fix samsung washing machine",
+        "volume": 320,
+        "intent": "transactional",
+        "cpc_range": "354.89-3911.73",
+        "score": 101.8
+      },
+      {
+        "keyword": "samsung washer fix",
+        "volume": 320,
+        "intent": "transactional",
+        "cpc_range": "354.89-3911.73",
+        "score": 101.8
+      },
+      {
+        "keyword": "siemens washing machine repair",
+        "volume": 320,
+        "intent": "transactional",
+        "cpc_range": "650.22-3052.78",
+        "score": 100.6
+      },
+      {
+        "keyword": "lg washing machine repair",
+        "volume": 320,
+        "intent": "transactional",
+        "cpc_range": "225.02-3152.5",
+        "score": 98.6
+      },
+      {
+        "keyword": "bosch washing machine repairs near me",
+        "volume": 20,
+        "intent": "commercial",
+        "cpc_range": "603.68-6558.83",
+        "score": 98.1
+      },
+      {
+        "keyword": "lg washer repairs near me",
+        "volume": 50,
+        "intent": "commercial",
+        "cpc_range": "459.28-3020.32",
+        "score": 96.7
+      }
+    ],
+    "negative_keywords": [
+      "lg",
+      "samsung",
+      "bosch",
+      "siemens",
+      "dryer",
+      "fridge",
+      "refrigerator",
+      "freezer",
+      "dishwasher",
+      "led tv",
+      "dishwasher repair",
+      "absorber",
+      "ariston",
+      "bearing",
+      "bearings",
+      "beko",
+      "belt",
+      "chest",
+      "chiller",
+      "close"
+    ],
+    "ad_group_themes": [
+      "Users searching for non-branded washing machine/laundry machine repair, often with local near-me intent.",
+      "Users searching for washing machine repair for a specific brand (LG, Samsung, Bosch, Siemens, Panasonic, etc.).",
+      "Users describing a specific washing machine fault or part failure (door seal, bearing, PCB, drum, motor).",
+      "Urgent, same-day breakdown queries for washers, dryers and related laundry appliances."
+    ],
+    "match_types": [
+      "phrase"
+    ],
+    "mode1_config": {
+      "main_service": "Washing Machine Repair",
+      "sub_services": "General Repair, Branded Repair, Emergency Repair, Door Seal Repair, Motor Replacement, Drum & Bearing Repair",
+      "industry": "Home Appliance Repair"
+    },
+    "google_ads_tracking_tip": "Final URL suffix: kw={keyword} — enables the landing page's Dynamic Keyword Insertion (DKI).",
+    "ad_copy": {
+      "headlines": [
+        "Washing Machine Repair Dubai",
+        "Fix Washing Machine Today",
+        "Laundry Machine Repair Experts",
+        "Clothes Washer Repair Dubai",
+        "Laundry Washer Repair Fast",
+        "Fix Laundry Machine Same Day",
+        "Repair Near Me In Dubai",
+        "Washer Fixer At Your Door",
+        "Washer Repair Service Today",
+        "Fix Washer Leaking Water Fast",
+        "Not Spinning Washer Fix",
+        "Book Repair Online Today"
+      ],
+      "descriptions": [
+        "Washing machine repair across Dubai with same day engineer visits and free diagnosis.",
+        "Our engineers carry spare parts on site, most washer fixer jobs done in one visit.",
+        "Free diagnosis before repair, transparent pricing so you know the cost upfront.",
+        "Rated by Dubai homes for fast laundry machine repair, book your slot today."
+      ],
+      "sitelinks": [
+        {
+          "text": "Washing Machine Services",
+          "desc1": "What the service covers",
+          "desc2": "All brands, same-day slots",
+          "anchor": "services"
+        },
+        {
+          "text": "Washing Machine Pricing",
+          "desc1": "Transparent price ranges",
+          "desc2": "No hidden charges, ever",
+          "anchor": "pricing"
+        },
+        {
+          "text": "Customer Reviews",
+          "desc1": "Real customer stories",
+          "desc2": "Rated by local clients",
+          "anchor": "reviews"
+        },
+        {
+          "text": "Washing Machine FAQs",
+          "desc1": "Costs, timing & questions",
+          "desc2": "Repair vs replace advice",
+          "anchor": "faq"
+        },
+        {
+          "text": "Get a Free Quote",
+          "desc1": "Free quote before any work",
+          "desc2": "Call or WhatsApp today",
+          "anchor": "contact"
+        },
+        {
+          "text": "Branded Washing Services",
+          "desc1": "What the service covers",
+          "desc2": "All brands, same-day slots",
+          "anchor": "services"
+        }
+      ]
+    }
+  },
+  {
+    "page_name": "Dryer Repair",
+    "url_slug": "dryer-repair-dubai",
+    "language": "en",
+    "service_name": "Dryer Repair",
+    "industry": "Home Appliance Repair",
+    "sub_services": [
+      "Tumble Dryer Repair",
+      "Belt Replacement",
+      "Heating Element Repair",
+      "Branded Dryer Service",
+      "Vent & Duct Repair",
+      "Same Day Dryer Repair"
+    ],
+    "ad_groups_covered": [
+      "Dryer Repair"
+    ],
+    "keywords_covered": 40,
+    "monthly_volume_covered": 650,
+    "target_keywords": [
+      {
+        "keyword": "lg dryer repair near me",
+        "volume": 20,
+        "intent": "transactional",
+        "cpc_range": "757.39-5324.94",
+        "score": 93.2
+      },
+      {
+        "keyword": "lg washer dryer repair near me",
+        "volume": 20,
+        "intent": "transactional",
+        "cpc_range": "757.39-5324.94",
+        "score": 93.2
+      },
+      {
+        "keyword": "dryer repair",
+        "volume": 70,
+        "intent": "transactional",
+        "cpc_range": "561.79-2936.97",
+        "score": 88.3
+      },
+      {
+        "keyword": "bosch dryer repair",
+        "volume": 20,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 84.9
+      },
+      {
+        "keyword": "bosch tumble dryer repair",
+        "volume": 20,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 84.9
+      },
+      {
+        "keyword": "lg dryer repair",
+        "volume": 30,
+        "intent": "transactional",
+        "cpc_range": "437.15-1172.52",
+        "score": 79.0
+      },
+      {
+        "keyword": "lg dryer fix",
+        "volume": 30,
+        "intent": "transactional",
+        "cpc_range": "437.15-1172.52",
+        "score": 79.0
+      },
+      {
+        "keyword": "lg clothes dryer repair",
+        "volume": 30,
+        "intent": "transactional",
+        "cpc_range": "437.15-1172.52",
+        "score": 79.0
+      },
+      {
+        "keyword": "lg dryer repair company",
+        "volume": 30,
+        "intent": "transactional",
+        "cpc_range": "437.15-1172.52",
+        "score": 79.0
+      },
+      {
+        "keyword": "lg washing machine dryer repair",
+        "volume": 30,
+        "intent": "transactional",
+        "cpc_range": "437.15-1172.52",
+        "score": 79.0
+      },
+      {
+        "keyword": "samsung dryer repair",
+        "volume": 20,
+        "intent": "transactional",
+        "cpc_range": "391.92-2013.41",
+        "score": 75.9
+      },
+      {
+        "keyword": "samsung dryer fix",
+        "volume": 20,
+        "intent": "transactional",
+        "cpc_range": "391.92-2013.41",
+        "score": 75.9
+      },
+      {
+        "keyword": "samsung clothes dryer repair",
+        "volume": 20,
+        "intent": "transactional",
+        "cpc_range": "391.92-2013.41",
+        "score": 75.9
+      },
+      {
+        "keyword": "appliance repair samsung dryer",
+        "volume": 20,
+        "intent": "transactional",
+        "cpc_range": "391.92-2013.41",
+        "score": 75.9
+      },
+      {
+        "keyword": "siemens dryer repair",
+        "volume": 20,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 73.1
+      },
+      {
+        "keyword": "dryer roller replacement",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 69.8
+      },
+      {
+        "keyword": "bosch dryer repair near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "824.34-4060.26",
+        "score": 66.0
+      },
+      {
+        "keyword": "dyson hair dryer repair",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 65.8
+      },
+      {
+        "keyword": "washer and dryer repair service",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 62.8
+      },
+      {
+        "keyword": "miele dryer repair",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "559.86-2654.15",
+        "score": 59.1
+      },
+      {
+        "keyword": "dryer machine repair",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 57.7
+      },
+      {
+        "keyword": "fix dryer machine",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 57.7
+      },
+      {
+        "keyword": "samsung dryer roller replacement",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 57.7
+      },
+      {
+        "keyword": "dyson supersonic repair",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 57.7
+      },
+      {
+        "keyword": "stackable washer and dryer repair",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 54.7
+      }
+    ],
+    "negative_keywords": [
+      "fridge",
+      "refrigerator",
+      "dishwasher",
+      "freezer",
+      "led tv",
+      "absorber",
+      "ariston",
+      "bearing",
+      "bearings",
+      "beko",
+      "body",
+      "chest",
+      "chiller",
+      "close",
+      "code",
+      "compressor",
+      "daewoo",
+      "deep",
+      "display",
+      "error"
+    ],
+    "ad_group_themes": [
+      "Users searching for tumble/clothes dryer repair, generic and branded, including near-me and cost queries."
+    ],
+    "match_types": [
+      "phrase"
+    ],
+    "mode1_config": {
+      "main_service": "Dryer Repair",
+      "sub_services": "Tumble Dryer Repair, Belt Replacement, Heating Element Repair, Branded Dryer Service, Vent & Duct Repair, Same Day Dryer Repair",
+      "industry": "Home Appliance Repair"
+    },
+    "google_ads_tracking_tip": "Final URL suffix: kw={keyword} — enables the landing page's Dynamic Keyword Insertion (DKI).",
+    "ad_copy": {
+      "headlines": [
+        "LG Dryer Repair Near Me",
+        "Dryer Repair In Dubai Today",
+        "Bosch Tumble Dryer Repair",
+        "Samsung Dryer Repair Service",
+        "Siemens Dryer Repair Dubai",
+        "Fixed Same Day, Guaranteed",
+        "Dryer Not Heating? We Fix It",
+        "Quiet Again In One Visit",
+        "Book Dryer Repair Online Now",
+        "Get A Free Repair Quote",
+        "Same Day Dryer Repair Dubai",
+        "Technicians Rated By Locals"
+      ],
+      "descriptions": [
+        "LG, Samsung and Bosch dryer repair across Dubai with same day technician visits.",
+        "Free diagnosis before repair, so you know the cost before we start any work.",
+        "No fix, no fee on all dryer repairs, parts backed by a written warranty.",
+        "Trusted by hundreds of Dubai homes for fast, honest dryer repair service."
+      ],
+      "sitelinks": [
+        {
+          "text": "Dryer Repair Services",
+          "desc1": "What the service covers",
+          "desc2": "All brands, same-day slots",
+          "anchor": "services"
+        },
+        {
+          "text": "Dryer Repair Pricing",
+          "desc1": "Transparent price ranges",
+          "desc2": "No hidden charges, ever",
+          "anchor": "pricing"
+        },
+        {
+          "text": "Customer Reviews",
+          "desc1": "Real customer stories",
+          "desc2": "Rated by local clients",
+          "anchor": "reviews"
+        },
+        {
+          "text": "Dryer Repair FAQs",
+          "desc1": "Costs, timing & questions",
+          "desc2": "Repair vs replace advice",
+          "anchor": "faq"
+        },
+        {
+          "text": "Get a Free Quote",
+          "desc1": "Free quote before any work",
+          "desc2": "Call or WhatsApp today",
+          "anchor": "contact"
+        }
+      ]
+    }
+  },
+  {
+    "page_name": "Refrigerator & Freezer Repair",
+    "url_slug": "refrigerator-freezer-repair-dubai",
+    "language": "en",
+    "service_name": "Refrigerator Repair",
+    "industry": "Home Appliance Repair",
+    "sub_services": [
+      "General Fridge Repair",
+      "Branded Fridge Service",
+      "Freezer Repair",
+      "Wine Cooler Repair",
+      "Compressor Repair",
+      "Cooling Issue Diagnostics"
+    ],
+    "ad_groups_covered": [
+      "Refrigerator Repair - General & Near Me",
+      "Branded Fridge Repair",
+      "Freezer & Wine Cooler Repair"
+    ],
+    "keywords_covered": 95,
+    "monthly_volume_covered": 19300,
+    "target_keywords": [
+      {
+        "keyword": "refrigerator repair",
+        "volume": 2400,
+        "intent": "transactional",
+        "cpc_range": "970.69-4152.93",
+        "score": 130.5
+      },
+      {
+        "keyword": "refrig repair",
+        "volume": 2400,
+        "intent": "transactional",
+        "cpc_range": "970.69-4152.93",
+        "score": 130.5
+      },
+      {
+        "keyword": "refrigerator fridge repair",
+        "volume": 2400,
+        "intent": "transactional",
+        "cpc_range": "970.69-4152.93",
+        "score": 130.5
+      },
+      {
+        "keyword": "refrigerator repair near me",
+        "volume": 1900,
+        "intent": "transactional",
+        "cpc_range": "1040.03-3523.06",
+        "score": 111.0
+      },
+      {
+        "keyword": "fridge repair near me",
+        "volume": 1900,
+        "intent": "transactional",
+        "cpc_range": "1040.03-3523.06",
+        "score": 111.0
+      },
+      {
+        "keyword": "home refrigerator repair near me",
+        "volume": 1900,
+        "intent": "transactional",
+        "cpc_range": "1040.03-3523.06",
+        "score": 111.0
+      },
+      {
+        "keyword": "fridge service repair near me",
+        "volume": 320,
+        "intent": "transactional",
+        "cpc_range": "789.08-2517.97",
+        "score": 105.0
+      },
+      {
+        "keyword": "refrigerator repair close to me",
+        "volume": 1900,
+        "intent": "transactional",
+        "cpc_range": "1040.03-3523.06",
+        "score": 100.9
+      },
+      {
+        "keyword": "wine cooler repair near me",
+        "volume": 90,
+        "intent": "transactional",
+        "cpc_range": "838.89-1859.23",
+        "score": 97.4
+      },
+      {
+        "keyword": "lg refrigerator repair",
+        "volume": 90,
+        "intent": "transactional",
+        "cpc_range": "269.21-2713.02",
+        "score": 90.2
+      },
+      {
+        "keyword": "lg fridge repair",
+        "volume": 90,
+        "intent": "transactional",
+        "cpc_range": "269.21-2713.02",
+        "score": 90.2
+      },
+      {
+        "keyword": "lg freezer repair",
+        "volume": 90,
+        "intent": "transactional",
+        "cpc_range": "269.21-2713.02",
+        "score": 90.2
+      },
+      {
+        "keyword": "samsung fridge repair",
+        "volume": 50,
+        "intent": "transactional",
+        "cpc_range": "502.19-2868.05",
+        "score": 85.4
+      },
+      {
+        "keyword": "samsung freezer repair",
+        "volume": 50,
+        "intent": "transactional",
+        "cpc_range": "502.19-2868.05",
+        "score": 85.4
+      },
+      {
+        "keyword": "lg refrigerator repair near me",
+        "volume": 20,
+        "intent": "transactional",
+        "cpc_range": "725.41-3507.37",
+        "score": 82.6
+      },
+      {
+        "keyword": "lg fridge repair near me",
+        "volume": 20,
+        "intent": "transactional",
+        "cpc_range": "725.41-3507.37",
+        "score": 82.6
+      },
+      {
+        "keyword": "refrigerator repair service near me",
+        "volume": 110,
+        "intent": "transactional",
+        "cpc_range": "2723.1-5087.45",
+        "score": 82.5
+      },
+      {
+        "keyword": "repair freezer near me",
+        "volume": 70,
+        "intent": "transactional",
+        "cpc_range": "1028.62-4147.77",
+        "score": 80.3
+      },
+      {
+        "keyword": "bosch refrigerator repair near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 79.5
+      },
+      {
+        "keyword": "bosch fridge repair near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 79.5
+      },
+      {
+        "keyword": "freezer repair",
+        "volume": 70,
+        "intent": "transactional",
+        "cpc_range": "873.62-2369.9",
+        "score": 76.2
+      },
+      {
+        "keyword": "bosch fridge repair",
+        "volume": 40,
+        "intent": "transactional",
+        "cpc_range": "851.42-4427.9",
+        "score": 75.7
+      },
+      {
+        "keyword": "samsung fridge service",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 74.3
+      },
+      {
+        "keyword": "samsung fridge maintenance",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 74.3
+      },
+      {
+        "keyword": "samsung refrigerator service",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 74.3
+      }
+    ],
+    "negative_keywords": [
+      "lg",
+      "samsung",
+      "bosch",
+      "siemens",
+      "wine cooler",
+      "dishwasher",
+      "washing machine",
+      "dryer",
+      "led tv",
+      "absorber",
+      "ariston",
+      "bearing",
+      "bearings",
+      "beko",
+      "belt",
+      "body",
+      "chest",
+      "chiller",
+      "code",
+      "daewoo"
+    ],
+    "ad_group_themes": [
+      "Users searching for non-branded refrigerator/fridge repair, often local near-me intent.",
+      "Users searching for refrigerator repair for a specific brand (LG, Samsung, Bosch, Siemens, Sharp, Hitachi, etc.).",
+      "Users searching for freezer, deep freezer or wine cooler/chiller repair."
+    ],
+    "match_types": [
+      "phrase"
+    ],
+    "mode1_config": {
+      "main_service": "Refrigerator Repair",
+      "sub_services": "General Fridge Repair, Branded Fridge Service, Freezer Repair, Wine Cooler Repair, Compressor Repair, Cooling Issue Diagnostics",
+      "industry": "Home Appliance Repair"
+    },
+    "google_ads_tracking_tip": "Final URL suffix: kw={keyword} — enables the landing page's Dynamic Keyword Insertion (DKI).",
+    "ad_copy": {
+      "headlines": [
+        "Refrigerator Repair Near You",
+        "Fridge Repair Near Me Today",
+        "Refrigerator Fridge Repair",
+        "Home Fridge Repair Near Me",
+        "Fridge Repair Shop In Dubai",
+        "Fridge Not Cooling Fixed Fast",
+        "Same Day Refrigerator Repair",
+        "Affordable Fridge Repair Dubai",
+        "Fixed In One Visit Guarantee",
+        "Compressor Repair Cost Dubai",
+        "Book Fridge Repair Online Now",
+        "Get A Free Repair Quote Today"
+      ],
+      "descriptions": [
+        "Refrigerator repair near you, fixed fast with upfront pricing. Book online today.",
+        "Free diagnosis before any repair, genuine parts, and technicians for all brands.",
+        "No fix, no fee. Transparent cost in Dubai dirhams before we start work.",
+        "Same day fridge repair across Dubai, rated by hundreds of happy customers."
+      ],
+      "sitelinks": [
+        {
+          "text": "Refrigerator Services",
+          "desc1": "What the service covers",
+          "desc2": "All brands, same-day slots",
+          "anchor": "services"
+        },
+        {
+          "text": "Refrigerator Pricing",
+          "desc1": "Transparent price ranges",
+          "desc2": "No hidden charges, ever",
+          "anchor": "pricing"
+        },
+        {
+          "text": "Customer Reviews",
+          "desc1": "Real customer stories",
+          "desc2": "Rated by local clients",
+          "anchor": "reviews"
+        },
+        {
+          "text": "Refrigerator Repair FAQs",
+          "desc1": "Costs, timing & questions",
+          "desc2": "Repair vs replace advice",
+          "anchor": "faq"
+        },
+        {
+          "text": "Get a Free Quote",
+          "desc1": "Free quote before any work",
+          "desc2": "Call or WhatsApp today",
+          "anchor": "contact"
+        },
+        {
+          "text": "Branded Fridge Services",
+          "desc1": "What the service covers",
+          "desc2": "All brands, same-day slots",
+          "anchor": "services"
+        }
+      ]
+    }
+  },
+  {
+    "page_name": "Dishwasher Repair",
+    "url_slug": "dishwasher-repair-dubai",
+    "language": "en",
+    "service_name": "Dishwasher Repair",
+    "industry": "Home Appliance Repair",
+    "sub_services": [
+      "General Dishwasher Repair",
+      "Branded Dishwasher Service",
+      "Drainage Repair",
+      "Spare Parts Replacement",
+      "Commercial Dishwasher Repair",
+      "Maintenance Service"
+    ],
+    "ad_groups_covered": [
+      "Dishwasher Repair - General & Branded"
+    ],
+    "keywords_covered": 32,
+    "monthly_volume_covered": 1780,
+    "target_keywords": [
+      {
+        "keyword": "bosch dishwasher repair",
+        "volume": 90,
+        "intent": "transactional",
+        "cpc_range": "636.53-3916.63",
+        "score": 101.3
+      },
+      {
+        "keyword": "appliance repair bosch dishwasher",
+        "volume": 90,
+        "intent": "transactional",
+        "cpc_range": "636.53-3916.63",
+        "score": 101.3
+      },
+      {
+        "keyword": "bosch dishwasher service and repair",
+        "volume": 90,
+        "intent": "transactional",
+        "cpc_range": "636.53-3916.63",
+        "score": 101.3
+      },
+      {
+        "keyword": "dishwasher repair near me",
+        "volume": 260,
+        "intent": "transactional",
+        "cpc_range": "873.62-4449.17",
+        "score": 96.6
+      },
+      {
+        "keyword": "dishwasher repair service near me",
+        "volume": 260,
+        "intent": "transactional",
+        "cpc_range": "873.62-4449.17",
+        "score": 96.6
+      },
+      {
+        "keyword": "siemens dishwasher repair",
+        "volume": 140,
+        "intent": "transactional",
+        "cpc_range": "706.75-4457.23",
+        "score": 93.0
+      },
+      {
+        "keyword": "bosch dishwasher repair near me",
+        "volume": 20,
+        "intent": "transactional",
+        "cpc_range": "720.01-4457.23",
+        "score": 92.7
+      },
+      {
+        "keyword": "samsung dishwasher repair",
+        "volume": 30,
+        "intent": "transactional",
+        "cpc_range": "628.54-3332.76",
+        "score": 92.3
+      },
+      {
+        "keyword": "dishwasher repair",
+        "volume": 260,
+        "intent": "transactional",
+        "cpc_range": "970.69-4725.87",
+        "score": 90.8
+      },
+      {
+        "keyword": "lg dishwasher repair",
+        "volume": 50,
+        "intent": "transactional",
+        "cpc_range": "689.33-4457.23",
+        "score": 88.7
+      },
+      {
+        "keyword": "dishwasher fixer near me",
+        "volume": 260,
+        "intent": "commercial",
+        "cpc_range": "873.62-4449.17",
+        "score": 85.0
+      },
+      {
+        "keyword": "dishwasher service",
+        "volume": 20,
+        "intent": "transactional",
+        "cpc_range": "873.62-4714.05",
+        "score": 64.3
+      },
+      {
+        "keyword": "lg dishwasher repair near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "939.5-5324.94",
+        "score": 62.8
+      },
+      {
+        "keyword": "dishwasher maintenance",
+        "volume": 20,
+        "intent": "transactional",
+        "cpc_range": "3001.13-8010.64",
+        "score": 59.8
+      },
+      {
+        "keyword": "daewoo dishwasher repair",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 57.7
+      },
+      {
+        "keyword": "samsung dishwasher repairs near me",
+        "volume": 10,
+        "intent": "commercial",
+        "cpc_range": "0.0-0.0",
+        "score": 57.6
+      },
+      {
+        "keyword": "fix dishwasher near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 54.0
+      },
+      {
+        "keyword": "best dishwasher repair services near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 54.0
+      },
+      {
+        "keyword": "electrolux dishwasher repair near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 54.0
+      },
+      {
+        "keyword": "dishwasher specialist near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 54.0
+      },
+      {
+        "keyword": "dishwasher technician",
+        "volume": 10,
+        "intent": "commercial",
+        "cpc_range": "0.0-0.0",
+        "score": 53.4
+      },
+      {
+        "keyword": "dishwasher mechanic",
+        "volume": 10,
+        "intent": "commercial",
+        "cpc_range": "0.0-0.0",
+        "score": 53.4
+      },
+      {
+        "keyword": "dishwasher tech",
+        "volume": 10,
+        "intent": "commercial",
+        "cpc_range": "0.0-0.0",
+        "score": 53.4
+      },
+      {
+        "keyword": "lg dishwasher repair cost",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 52.2
+      },
+      {
+        "keyword": "lg dishwasher repair service near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 51.8
+      }
+    ],
+    "negative_keywords": [
+      "washing machine",
+      "dryer",
+      "fridge",
+      "refrigerator",
+      "freezer",
+      "led tv",
+      "absorber",
+      "ariston",
+      "bearing",
+      "bearings",
+      "beko",
+      "belt",
+      "body",
+      "chest",
+      "chiller",
+      "close",
+      "code",
+      "compressor",
+      "deep",
+      "display"
+    ],
+    "ad_group_themes": [
+      "Users searching for dishwasher repair, generic or branded (Bosch, Siemens, Samsung, LG, Electrolux)."
+    ],
+    "match_types": [
+      "phrase"
+    ],
+    "mode1_config": {
+      "main_service": "Dishwasher Repair",
+      "sub_services": "General Dishwasher Repair, Branded Dishwasher Service, Drainage Repair, Spare Parts Replacement, Commercial Dishwasher Repair, Maintenance Service",
+      "industry": "Home Appliance Repair"
+    },
+    "google_ads_tracking_tip": "Final URL suffix: kw={keyword} — enables the landing page's Dynamic Keyword Insertion (DKI).",
+    "ad_copy": {
+      "headlines": [
+        "Bosch Dishwasher Repair",
+        "Siemens Dishwasher Repair",
+        "Samsung Dishwasher Repair",
+        "LG Dishwasher Repair Dubai",
+        "Dishwasher Repair Near You",
+        "Same Day Dishwasher Repair",
+        "Book Dishwasher Repair Online",
+        "Get Your Free Repair Quote",
+        "Fixed In One Visit",
+        "Dishwasher Not Draining Fix",
+        "Commercial Dishwasher Repair",
+        "Trusted Repair Technicians"
+      ],
+      "descriptions": [
+        "Dishwasher repair near you in Dubai, same day service with upfront pricing.",
+        "Genuine Bosch, Siemens, Samsung and LG parts fitted by certified technicians.",
+        "Free diagnosis before any repair, no fix no pay on parts and labour costs.",
+        "Trusted by Dubai homes for quick dishwasher fixes, book your slot today."
+      ],
+      "sitelinks": [
+        {
+          "text": "Dishwasher Services",
+          "desc1": "What the service covers",
+          "desc2": "All brands, same-day slots",
+          "anchor": "services"
+        },
+        {
+          "text": "Dishwasher Repair Pricing",
+          "desc1": "Transparent price ranges",
+          "desc2": "No hidden charges, ever",
+          "anchor": "pricing"
+        },
+        {
+          "text": "Customer Reviews",
+          "desc1": "Real customer stories",
+          "desc2": "Rated by local clients",
+          "anchor": "reviews"
+        },
+        {
+          "text": "Dishwasher Repair - FAQs",
+          "desc1": "Costs, timing & questions",
+          "desc2": "Repair vs replace advice",
+          "anchor": "faq"
+        },
+        {
+          "text": "Get a Free Quote",
+          "desc1": "Free quote before any work",
+          "desc2": "Call or WhatsApp today",
+          "anchor": "contact"
+        }
+      ]
+    }
+  }
+]
