@@ -1,0 +1,9 @@
+﻿Campaign,Ad Group,Negative Audience,Comment
+Washing Machine & Dryer Repair,,Construction Jobs,IN_MARKET | Job seekers not repair customers
+Washing Machine & Dryer Repair,,Manufacturing Jobs,"IN_MARKET | Job seekers, wrong intent"
+Washing Machine & Dryer Repair,,Business Education,IN_MARKET | Education intent irrelevant
+Washing Machine & Dryer Repair,,Technology Education,"IN_MARKET | Students, not appliance owners"
+Washing Machine & Dryer Repair,,Luxury Shoppers,AFFINITY | Not focused on repair pricing
+Washing Machine & Dryer Repair,,Bargain Hunters,AFFINITY | Attracts non-serious price shoppers only
+Washing Machine & Dryer Repair,,Business Professionals,AFFINITY | B2B focus irrelevant to household repair
+Washing Machine & Dryer Repair,,Staffing & Recruitment Services,"IN_MARKET | HR/hiring intent, not repair customers"
