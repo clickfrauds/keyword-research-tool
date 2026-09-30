@@ -1201,6 +1201,9 @@ def write_landing_pages_json(pages, groups):
                 "main_service": p["service_name"],
                 "sub_services": ", ".join(p["sub_services"]),
                 "industry": p["industry"],
+                # the name the ads run under — the builder puts the same one
+                # on the page (a click on one brand must not land on another)
+                **({"business_name": BUSINESS_NAME} if BUSINESS_NAME else {}),
             },
             "google_ads_tracking_tip": "Final URL suffix: kw={keyword} — enables the "
                                        "landing page's Dynamic Keyword Insertion (DKI).",
