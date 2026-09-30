@@ -65,6 +65,7 @@ Output: google_ads_push_report.md, push_manifest.json (+ log lines)
 import os
 import re
 import sys
+import time
 import csv
 import json
 from datetime import datetime, timezone
@@ -79,6 +80,10 @@ PUSH_MODE = os.environ.get("PUSH_MODE", "validate").strip().lower()
 # structure : structure only, never the ads (use while the site is being built)
 # creative  : the ads/sitelinks for a campaign structure that already exists
 PUSH_PHASE = os.environ.get("PUSH_PHASE", "auto").strip().lower()
+try:
+    WAIT_FOR_PAGES_MIN = max(0, int(os.environ.get("WAIT_FOR_PAGES_MIN", "0") or 0))
+except ValueError:
+    WAIT_FOR_PAGES_MIN = 0
 # Preflight is the whole point; leave it on unless a page is genuinely
 # unreachable from here but fine for Google (a firewalled staging host).
 PREFLIGHT = os.environ.get("PREFLIGHT", "on").strip().lower() not in ("off", "0", "no", "false")
@@ -384,10 +389,12 @@ def run_creative_phase(client, svc, camp_name, validate):
         return
 
     ag_res_by_name = {}
+    _ag_lower = {}
     for row in svc.search(customer_id=PUSH_CUSTOMER_ID, query=(
             "SELECT ad_group.resource_name, ad_group.name FROM ad_group "
             f"WHERE campaign.id = {camp_id} AND ad_group.status != 'REMOVED'")):
         ag_res_by_name[row.ad_group.name] = row.ad_group.resource_name
+        _ag_lower[row.ad_group.name.strip().lower()] = row.ad_group.resource_name
 
     if not ag_res_by_name:
         log(f"❌ Campaign '{camp_name}' has no ad groups — structure phase incomplete.")
@@ -397,14 +404,39 @@ def run_creative_phase(client, svc, camp_name, validate):
     # Re-pushing the same RSAs would stack a second identical ad in every ad
     # group, and Google will happily let you: duplicate ads split impressions
     # and make the ad-strength reading meaningless.
-    existing_ads = 0
+    # PER AD GROUP, not per campaign (Sep 2026): the old campaign-wide count
+    # meant one ad anywhere blocked every other group forever — after a
+    # half-failed creative push only that one group ever got copy.
+    groups_with_ads = set()
     for row in svc.search(customer_id=PUSH_CUSTOMER_ID, query=(
-            "SELECT ad_group_ad.ad.id FROM ad_group_ad "
+            "SELECT ad_group.resource_name FROM ad_group_ad "
             f"WHERE campaign.id = {camp_id} AND ad_group_ad.status != 'REMOVED'")):
-        existing_ads += 1
-    if existing_ads:
-        log(f"⚠️ {existing_ads} ad(s) already live in this campaign — creative "
-            "phase already ran. Nothing pushed (delete them first to re-push).")
+        groups_with_ads.add(row.ad_group.resource_name)
+
+    # Map every RSA row to a real ad group (exact, then case/space-insensitive)
+    # and refuse to go on half-matched: a name mismatch here means this run's
+    # strategy is NOT the one the structure was built from.
+    rsa_groups = [r.get("Ad Group", "") for r in load_rows("rsa_editor.csv")]
+    resolved, missing = {}, []
+    for gname in rsa_groups:
+        res = ag_res_by_name.get(gname) or _ag_lower.get(gname.strip().lower())
+        if res:
+            resolved[gname] = res
+        else:
+            missing.append(gname)
+    if missing:
+        log(f"❌ {len(missing)} of {len(rsa_groups)} RSA ad group(s) do not exist in the "
+            f"campaign: {missing[:6]}")
+        log("   This creative run did not use the SAME strategy as the structure run. "
+            "Re-run with reuse_request_id=<structure run id> so the frozen "
+            "keyword_strategy.json / rsa_editor.csv are used. Nothing pushed.")
+        return
+    skip = {g for g, res in resolved.items() if res in groups_with_ads}
+    if skip:
+        log(f"ℹ️ {len(skip)} ad group(s) already have ads — skipped: {sorted(skip)[:6]}")
+    ag_res_by_name = {g: res for g, res in resolved.items() if g not in skip}
+    if not ag_res_by_name:
+        log("✅ Every ad group already has its ad — nothing to push.")
         return
 
     def op():
@@ -513,6 +545,15 @@ def main():
     pages_live, dead = (True, [])
     if PREFLIGHT and creative_urls and PUSH_PHASE != "structure":
         pages_live, dead = preflight(creative_urls)
+        # The site build (Cloudflare Pages) usually finishes minutes after
+        # this job starts. Poll instead of failing on a page that is seconds
+        # from going live.
+        _deadline = time.time() + 60 * WAIT_FOR_PAGES_MIN
+        while dead and time.time() < _deadline:
+            log(f"⏳ {len(dead)} page(s) not live yet — re-checking in 60s "
+                f"(waiting up to {WAIT_FOR_PAGES_MIN} min)")
+            time.sleep(60)
+            pages_live, dead = preflight([u for u, _ in dead])
     elif not PREFLIGHT:
         log("⚠️ PREFLIGHT=off — landing pages not checked. A URL that 404s "
             "here will be disapproved by Google.")
@@ -536,13 +577,20 @@ def main():
         _write_report()
         return
     else:
-        push_creative = pages_live
+        # AUTO (Sep 2026, user rule): push the COMPLETE campaign in one go.
+        # Preflight still runs and reports, but no longer blocks — the
+        # campaign is created Paused, so nothing spends before you look.
+        push_creative = True
         log("")
         if pages_live:
             log("▶ Phase: AUTO — every page answers, pushing structure + ads together")
         else:
-            log(f"▶ Phase: AUTO — {len(dead)} of {len(creative_urls)} page(s) "
-                "not live yet, so structure only")
+            log(f"▶ Phase: AUTO — pushing structure + ads. ⚠️ {len(dead)} of "
+                f"{len(creative_urls)} page(s) did not answer yet: Google may mark those "
+                "ads 'Destination not working' until the page is live. Campaign stays "
+                "Paused; publish the site, then edit/appeal any disapproved ad.")
+            for u, why in dead:
+                log(f"   {u} — {why}")
 
     # NAME COLLISION: the mutate is atomic and partial_failure is off, so a
     # campaign whose name already exists in the account fails the ENTIRE push
@@ -617,7 +665,13 @@ def main():
     # Landing-page DKI: kw={keyword} suffix campaign-wide so every RSA click
     # carries its bid keyword — the Mode 1 pages' ?kw= H1 message-match swap
     # runs on this. Was a manual step in the report; now set automatically.
-    c.final_url_suffix = "kw={keyword}"
+    # Plus the click's own facts, so the middleware / Supabase can tie every
+    # lead AND every fraud signal to campaign, ad group, match type, device
+    # and the PHYSICAL location of the clicker (loc_physical_ms — what the
+    # fraud agent needs to catch out-of-area clicks). Auto-tagging (gclid)
+    # still carries the Google Ads attribution on its own.
+    c.final_url_suffix = ("kw={keyword}&cid={campaignid}&agid={adgroupid}"
+                          "&mt={matchtype}&dev={device}&loc={loc_physical_ms}&net={network}")
     # Required since the EU political-ads regulation (API rejects campaign
     # creation without it — hit on first live push, Jul 2026). Our campaigns
     # are local-service ads, never EU political advertising.
@@ -835,6 +889,31 @@ def main():
         n_rsa, n_sl = build_creative_ops(client, op, temp, ag_res_by_name, ops)
     else:
         log("⏸️  Structure phase — RSAs and sitelinks held back.")
+
+    # ── campaign-level junk negatives (Stage 3.6: jobs, cv, manual, pdf,
+    # second hand, supplier, spare parts, retail chains, wrong cities...).
+    # They were only ever written to an Editor CSV, so an API-pushed campaign
+    # went live without a single campaign negative. Phrase match.
+    n_camp_neg = 0
+    _seen_cn = set()
+    for r in load_rows("google_ads_campaign_negatives.csv"):
+        t = " ".join(str(r.get("Keyword") or "").split())
+        if (not t or (r.get("Ad Group") or "").strip() or len(t) > 80
+                or len(t.split()) > 10 or t.lower() in _seen_cn):
+            continue
+        _seen_cn.add(t.lower())
+        o = op()
+        cc = o.campaign_criterion_operation.create
+        cc.campaign = temp("campaigns/-2")
+        cc.negative = True
+        cc.keyword.text = t
+        cc.keyword.match_type = client.enums.KeywordMatchTypeEnum.PHRASE
+        ops.append(o)
+        n_camp_neg += 1
+    if n_camp_neg:
+        log(f"Campaign negatives: {n_camp_neg} (phrase)")
+    else:
+        log("⚠️ No google_ads_campaign_negatives.csv rows — campaign has no junk negatives.")
 
     # ── locations: targets with bid modifiers + exclusions ─────────────
     n_loc = n_loc_neg = 0

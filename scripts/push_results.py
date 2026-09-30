@@ -90,6 +90,7 @@ FILES_TO_PUSH = [
     # "Keywords, Negative" section with a blank Ad Group.
     ("google_ads_campaign_negatives.csv", "campaign_negatives.csv"),
     ("negative_guard_script.js", "guard.js"),
+    ("silo_router_script.js", "silo_router.js"),
     # Stage 3.7: niche-matched audience plan (positive + negative segments,
     # Editor paste-ready) — downloadable straight from the result page.
     ("audiences_editor.csv", "audiences.csv"),
@@ -99,6 +100,12 @@ FILES_TO_PUSH = [
     # Stage 3.8: RSA ad copy — 15 headlines + 4 descriptions per ad group,
     # policy-validated, Google Ads Editor import format.
     ("rsa_editor.csv", "rsa.csv"),
+    # FROZEN-STRATEGY SET (Sep 2026): everything the push step reads, so a
+    # later creative-phase run (advanced.reuse_request_id) can restore the
+    # exact same structure instead of re-researching it.
+    ("sitelinks.json", "sitelinks.json"),
+    ("audience_plan.json", "audience_plan.json"),
+    ("ad_group_plan.json", "plan.json"),
     # Stage 3.9: location targeting rows (real geo target ids) per campaign.
     ("locations_editor.csv", "locations.csv"),
     # Claude-suggested excluded locations (sibling regions + bot-source

@@ -88,6 +88,8 @@ UNIVERSAL_ACTIONS = [
     "contact", "number", "whatsapp", "call",
     "check", "inspect", "inspection", "diagnose", "solution", "help",
     "near me", "nearby", "local", "in my area",
+    "تصليح", "اصلاح", "صيانة", "فني", "فنيين", "تركيب", "تنظيف", "تعبئة", "تبديل",
+    "شركة", "خدمة", "مركز", "قريب", "طوارئ",
 ]
 
 # STRONG service verbs only — used by the context-word rule. "near me" /
@@ -104,6 +106,7 @@ UNIVERSAL_STRONG_ACTIONS = [
     "renovation", "renovate", "remodel", "remodeling", "refurbish",
     "restore", "restoration", "unblock", "unclog", "inspect", "inspection",
     "detect", "detection", "mount", "mounting", "fitted", "fabrication",
+    "تصليح", "اصلاح", "صيانة", "تركيب", "تنظيف", "تعبئة", "تبديل",
 ]
 
 # ══════════════════════════════════════════════════════════════════════════
@@ -379,6 +382,61 @@ function main() {
 
   // Problem-state phrases = service intent ("toilet not flushing")
   var PROBLEMS = %%PROBLEMS%%;
+  // Symptom-only rule (Sep 2026): "fridge not cooling", "washing machine not
+  // spinning" with NO hire word are people fixing it themselves. Blocked,
+  // unless a hard fault says they need a technician ("drum broken").
+  var HIRE_WORDS = %%HIRE_WORDS%%;
+  var HARD_FAULTS = %%HARD_FAULTS%%;
+  var SYMPTOM_RE = /(^|\s)(not|wont|won't|doesnt|doesn't|stopped|error|code|[a-z]{1,2}\d{1,3}|لا|ما|عطل)(\s|$)/;
+  var PRICE_RE = /(^|\s)(price|prices|cost|costs|rate|rates|cheap|cheapest|سعر|اسعار|أسعار|كم)(\s|$)/;
+  function isHireOrFault(t) { return !!(matchFuzzy(t, HIRE_WORDS) || matchStrict(t, HARD_FAULTS)); }
+  // "washingmachine repair" -> "washing machine repair": glued spellings of
+  // our own multi-word products and bid keywords are leads, not junk.
+  var GLUE = {};
+  PRODUCTS.concat(SAFE_ROOTS).forEach(function (p) {
+    p.split(/\s+/).forEach(function (w, i, a) {
+      if (i < a.length - 1) GLUE[w + a[i + 1]] = w + " " + a[i + 1];
+    });
+  });
+  // Arabic normaliser (same rules as the keyword tool): one form per word,
+  // so "ثلاجة", "الثلاجة", "ثلاجات" all read as the same product.
+  function arNorm(w) {
+    w = w.replace(/[\u064B-\u0652\u0640]/g, "").replace(/[أإآ]/g, "ا").replace(/ى/g, "ي");
+    if (w.length <= 3) return w;
+    var pres = ["وال", "بال", "فال", "كال", "لل", "ال"];
+    for (var i = 0; i < pres.length; i++) {
+      if (w.indexOf(pres[i]) === 0 && w.length - pres[i].length >= 3) { w = w.slice(pres[i].length); break; }
+    }
+    var sufs = ["ات", "ة", "ه"];
+    for (var j = 0; j < sufs.length; j++) {
+      var s = sufs[j];
+      if (w.slice(-s.length) === s && w.length - s.length >= 3) { w = w.slice(0, -s.length); break; }
+    }
+    return w;
+  }
+  function arText(t) {
+    return String(t).split(/\s+/).map(function (w) {
+      return /[\u0600-\u06FF]/.test(w) ? arNorm(w) : w;
+    }).join(" ");
+  }
+  function arList(l) { return l.map(arText); }
+  SAFE_ROOTS = arList(SAFE_ROOTS); PRODUCTS = arList(PRODUCTS); ACTIONS = arList(ACTIONS);
+  STRONG_ACTIONS = arList(STRONG_ACTIONS); PROBLEMS = arList(PROBLEMS);
+  HIRE_WORDS = arList(HIRE_WORDS); HARD_FAULTS = arList(HARD_FAULTS);
+  FORBIDDEN_WORDS = arList(FORBIDDEN_WORDS); EDU_CAREER = arList(EDU_CAREER);
+  INFO_DIY = arList(INFO_DIY); CONTEXT_WORDS = arList(CONTEXT_WORDS);
+  FORBIDDEN_LOCATIONS = arList(FORBIDDEN_LOCATIONS);
+
+  function stripPhrases(t, list) {
+    var out = " " + t + " ";
+    list.slice().sort(function (a, b) { return b.length - a.length; }).forEach(function (p) {
+      if (p.indexOf(" ") !== -1 || p.length >= 4) out = out.split(" " + p + " ").join(" ");
+    });
+    return out.replace(/\s+/g, " ").trim();
+  }
+  function normalizeGlued(t) {
+    return t.split(/\s+/).map(function (w) { return GLUE[w] || w; }).join(" ");
+  }
 
   // Head service tokens — 1-edit misspellings of these are KEPT as leads
   var FUZZY_ROOTS = %%FUZZY_ROOTS%%;
@@ -538,7 +596,7 @@ function main() {
     rowCount++;
     var row = rows.next();
     var rawTerm = row.searchTermView.searchTerm;
-    var term = rawTerm.toLowerCase().trim();
+    var term = normalizeGlued(arText(rawTerm.toLowerCase().trim()));
     var adGroupId = row.adGroup.id;
     var conversions = Number(row.metrics.conversions || 0);
 
@@ -552,9 +610,13 @@ function main() {
     // service signals computed once — reused by the context-word rule
     var fuzzyRootHit = hasFuzzyRoot(term);
     var safeHit = matchFuzzy(term, SAFE_ROOTS);
-    var actionHit = matchFuzzy(term, ACTIONS);
+    // Action words are read from the term WITHOUT our product names: in
+    // "washing machine not spinning" the "washing" is the product, not a
+    // wash service, and it was passing symptom queries as service intent.
+    var termNoProd = stripPhrases(term, PRODUCTS);
+    var actionHit = matchFuzzy(termNoProd, ACTIONS);
     var problemHit = matchFuzzy(term, PROBLEMS);
-    var strongHit = matchFuzzy(term, STRONG_ACTIONS);
+    var strongHit = matchFuzzy(termNoProd, STRONG_ACTIONS);
     var serviceSignal = !!(fuzzyRootHit || safeHit || problemHit || strongHit);
 
     // 0️⃣ converted terms are sacred
@@ -581,6 +643,15 @@ function main() {
             if (bad) {
               reason = "Forbidden Word: [" + bad + "]";
               forbiddenRootHits[bad] = (forbiddenRootHits[bad] || 0) + 1;
+            } else if (!actionHit && !strongHit && !isHireOrFault(term)
+                       && PRICE_RE.test(term)) {
+              // 4️⃣a product price, no service word ("fridge price")
+              reason = "Product price, no service word";
+            } else if ((problemHit || SYMPTOM_RE.test(term)) && !actionHit && !strongHit
+                       && !matchFuzzy(term, HIRE_WORDS) && !matchStrict(term, HARD_FAULTS)
+                       && !safeHit) {
+              // 4️⃣b symptom only — research, not a hire
+              reason = "Symptom only, no hire word (DIY/info): [" + problemHit + "]";
             } else {
               // 5️⃣ ambiguous context word without any service signal
               var ctx = matchFuzzy(term, CONTEXT_WORDS);
@@ -690,6 +761,16 @@ def js_list(items, per_line=6, lower=True):
     return "[\n    " + ",\n    ".join(lines) + "\n  ]"
 
 
+HIRE_WORDS_JS = ["near me", "nearby", "emergency", "urgent", "company", "technician",
+                 "service", "services", "call", "book",
+                 "shop", "center", "centre", "today", "now", "open", "hire", "expert",
+                 "specialist", "mechanic", "engineer", "at home", "same day",
+                 "تصليح", "اصلاح", "صيانة", "فني", "فنيين", "شركة", "مركز", "قريب",
+                 "طوارئ", "عاجل", "رقم", "في المنزل"]
+HARD_FAULTS_JS = ["broken", "broke", "burst", "damaged", "dead", "cracked", "sparking",
+                  "smoke", "burnt", "burned", "shock", "flooding", "failed", "tripping",
+                  "مكسور", "مكسورة", "خربان", "خربانة", "محروق", "محروقة", "معطل", "معطلة"]
+
 CAMPAIGN_NEGATIVES_CSV = "google_ads_campaign_negatives.csv"
 
 
@@ -746,6 +827,24 @@ def negatives_from_excluded(strategy, bid_keywords):
     return sorted(set(out))
 
 
+def pack_negatives(strategy, bid_keywords):
+    """Deterministic niche packs (negative_packs.py): jobs/cv/salary, manual/
+    pdf, second hand/used, supplier/wholesale/spare parts, retail chains —
+    chosen by niche, with the niche's buyer words protected, then run through
+    the same bid-keyword collision filter as everything else. Present even
+    when the Claude call fails."""
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    import negative_packs
+    seeds = [s.strip() for s in os.environ.get("SEED_KEYWORDS", "").split(",") if s.strip()]
+    svc = [g.get("name", "") for g in strategy.get("ad_groups", [])]
+    block, _allow, packs = negative_packs.build(NICHE_DESCRIPTION, seeds + svc)
+    kept = filter_forbidden(block, bid_keywords, "niche-pack")
+    print(f"   📦 Negative packs: universal + {packs or ['(no niche pack matched)']} "
+          f"-> {len(kept)} campaign negatives after collision filter "
+          f"(BUSINESS_MODEL={os.environ.get('BUSINESS_MODEL', 'service') or 'service'})")
+    return kept
+
+
 def write_campaign_negatives(campaigns, block_lists):
     """The same block lists, added to the account BEFORE the first click.
 
@@ -770,7 +869,8 @@ def write_campaign_negatives(campaigns, block_lists):
     handle". They stay with the script, which can tell the two apart.
     """
     rows, seen = [], set()
-    for label, terms in (("locations", block_lists.get("locations") or []),
+    for label, terms in (("packs", block_lists.get("packs") or []),
+                         ("locations", block_lists.get("locations") or []),
                          ("forbidden", block_lists.get("forbidden") or []),
                          ("edu", block_lists.get("edu") or []),
                          ("info_diy", block_lists.get("info_diy") or []),
@@ -832,6 +932,8 @@ def render_script(campaigns, bid_keywords, products, fuzzy_roots, niche):
           .replace("%%ACTIONS%%", js_list(actions))
           .replace("%%STRONG_ACTIONS%%", js_list(strong_actions))
           .replace("%%PROBLEMS%%", js_list(problems, 4))
+          .replace("%%HIRE_WORDS%%", js_list(HIRE_WORDS_JS))
+          .replace("%%HARD_FAULTS%%", js_list(HARD_FAULTS_JS))
           .replace("%%FUZZY_ROOTS%%", js_list(fuzzy_roots)))
 
     stats = {
@@ -885,6 +987,7 @@ def main():
 
     _bl = dict(stats.get("block_lists") or {})
     _bl["excluded"] = negatives_from_excluded(strategy, bid_keywords)
+    _bl["packs"] = pack_negatives(strategy, bid_keywords)
     write_campaign_negatives(campaigns, _bl)
 
 
