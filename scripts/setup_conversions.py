@@ -441,6 +441,51 @@ def write_back(results, row):
     return False
 
 
+OFFLINE_ACTION_NAME = os.environ.get("OFFLINE_ACTION_NAME", "").strip() or "Job (offline)"
+
+
+def ensure_offline_action(client, svc, ca_svc, validate, GoogleAdsException):
+    """The offline "job" action (UPLOAD_CLICKS), created with every new
+    campaign instead of on the first upload weeks later — so the account
+    already has somewhere to send qualified leads from day one.
+
+    Same definition as upload_offline_conversions.py (one builder, shared),
+    created NOT primary: it never changes what the account spends. Its own
+    mutate, so a problem here can never take the three website actions down.
+    Never raises; returns a short status for the log/summary."""
+    try:
+        existing = fetch_actions(svc, [OFFLINE_ACTION_NAME]).get(OFFLINE_ACTION_NAME)
+    except Exception as e:
+        log(f"   ⚠️ offline action: could not look it up — {str(e)[:100]}")
+        return "lookup failed"
+    if existing:
+        if existing["status"] == "REMOVED":
+            log(f"   ⛔ offline action {existing['real_name']!r} is REMOVED — restore or "
+                "rename it in the UI, or set OFFLINE_ACTION_NAME")
+            return "removed"
+        log(f"   offline action already exists: {existing['real_name']}")
+        return "exists"
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    from upload_offline_conversions import build_offline_action_op
+    try:
+        req = client.get_type("MutateConversionActionsRequest")
+        req.customer_id = PUSH_CUSTOMER_ID
+        req.operations.append(build_offline_action_op(client, OFFLINE_ACTION_NAME))
+        req.validate_only = validate
+        ca_svc.mutate_conversion_actions(request=req)
+    except GoogleAdsException as e:
+        for err in e.failure.errors[:3]:
+            log(f"   ❌ offline action: {err.message}")
+        return "rejected"
+    except Exception as e:
+        log(f"   ❌ offline action: {str(e)[:120]}")
+        return "failed"
+    log(f"   ✅ {'VALIDATE ok — would create' if validate else 'Created'} offline action "
+        f"'{OFFLINE_ACTION_NAME}' (UPLOAD_CLICKS, not primary — qualified jobs are "
+        "uploaded to it by the Offline conversions workflow)")
+    return "would create" if validate else "created"
+
+
 def run_one(client, svc, ca_svc, row, validate, GoogleAdsException):
     """One client: create what is missing, read the labels, write them back.
 
@@ -463,6 +508,10 @@ def run_one(client, svc, ca_svc, row, validate, GoogleAdsException):
     except Exception as e:
         log(f"❌ {name}: could not read conversion actions — {str(e)[:100]}")
         return "read failed"
+
+    # Before the website actions, and on its own mutate: whatever happens to
+    # those three below, the offline job action is in place.
+    ensure_offline_action(client, svc, ca_svc, validate, GoogleAdsException)
 
     # A REMOVED action still owns its name in Google's eyes, so recreating it
     # can never succeed. Say so and leave it out of the mutate, rather than

@@ -269,9 +269,24 @@ def ensure_action(client, ca_svc, ga_svc, customer_id):
         log(f"   ↳ would create '{OFFLINE_ACTION_NAME}' (validate mode)")
         return None
 
+    op = build_offline_action_op(client, OFFLINE_ACTION_NAME)
+    try:
+        res = ca_svc.mutate_conversion_actions(customer_id=customer_id, operations=[op])
+        rn = res.results[0].resource_name
+        log(f"   ✅ created '{OFFLINE_ACTION_NAME}' (not primary — promote it yourself)")
+        return rn
+    except Exception as e:
+        log(f"   ❌ Could not create the action: {str(e)[:200]}")
+        return None
+
+
+def build_offline_action_op(client, name):
+    """The create operation for the offline job action. ONE definition, used
+    here and by setup_conversions.py (Stage 0-CONV), which creates it with
+    every new campaign — two definitions would drift and split the history."""
     op = client.get_type("ConversionActionOperation")
     ca = op.create
-    ca.name = OFFLINE_ACTION_NAME
+    ca.name = name
     ca.type_ = client.enums.ConversionActionTypeEnum.UPLOAD_CLICKS
     # "Became a customer" is exactly what a marked job is, and the category is
     # what Google's own lead-funnel reporting groups on.
@@ -291,15 +306,7 @@ def ensure_action(client, ca_svc, ga_svc, customer_id):
         ca.primary_for_goal = False
     except AttributeError:
         pass
-
-    try:
-        res = ca_svc.mutate_conversion_actions(customer_id=customer_id, operations=[op])
-        rn = res.results[0].resource_name
-        log(f"   ✅ created '{OFFLINE_ACTION_NAME}' (not primary — promote it yourself)")
-        return rn
-    except Exception as e:
-        log(f"   ❌ Could not create the action: {str(e)[:200]}")
-        return None
+    return op
 
 
 def upload_for_client(client, row, leads, GoogleAdsException):
@@ -418,6 +425,103 @@ def upload_for_client(client, row, leads, GoogleAdsException):
     }
 
 
+# ── BIDDING GRADUATION (read-only) ───────────────────────────────────────
+# When is an account ready to let Google bid on qualified jobs? Gates from
+# the Sep 2026 review: under 30 uploaded jobs in 30 days stay on manual CPC
+# with phone/WhatsApp primary; 30+ -> promote the offline action to primary
+# and move to Maximize Conversions; 50+ -> Target CPA at 1.10 x the real CPA.
+# This REPORTS. It never promotes an action or touches a bid strategy — both
+# change what the account spends, and that stays a person's decision.
+GATE_MAX_CONV = 30
+GATE_TCPA = 50
+TCPA_HEADROOM = 1.10
+
+
+def graduation_advice(jobs, cost, offline_primary, strategies):
+    """Pure: 30-day jobs + cost (account currency) + whether the offline
+    action is primary + the enabled campaigns' bid strategies -> advice."""
+    jobs = float(jobs or 0)
+    cpa = round(cost / jobs, 2) if jobs else None
+    smart = sorted({s for s in strategies if s not in ("MANUAL_CPC", "MAXIMIZE_CLICKS",
+                                                      "TARGET_SPEND", "UNKNOWN", "")})
+    out = {"jobs_30d": jobs, "cost_30d": round(cost, 2), "cpa": cpa,
+           "offline_primary": bool(offline_primary), "bid_strategies": sorted(set(strategies))}
+    if jobs < GATE_MAX_CONV:
+        out["stage"] = "manual"
+        out["advice"] = (f"{jobs:g}/{GATE_MAX_CONV} jobs in 30 days — stay on manual CPC; phone "
+                         "and WhatsApp clicks stay the primary conversions.")
+        if smart:
+            out["advice"] += (f" WARNING: {', '.join(smart)} is already bidding on too little "
+                              "qualified data.")
+    elif jobs < GATE_TCPA:
+        out["stage"] = "maximize_conversions"
+        out["advice"] = (f"{jobs:g} jobs in 30 days — ready: "
+                         + ("" if offline_primary else f"make '{OFFLINE_ACTION_NAME}' PRIMARY, then ")
+                         + "switch to Maximize Conversions.")
+    else:
+        out["stage"] = "target_cpa"
+        out["target_cpa"] = round(cpa * TCPA_HEADROOM, 2) if cpa else None
+        out["advice"] = (f"{jobs:g} jobs in 30 days, CPA {cpa:g} — ready for Target CPA at "
+                         f"{out['target_cpa']:g} (1.10 x CPA)"
+                         + ("" if offline_primary else f"; make '{OFFLINE_ACTION_NAME}' primary first")
+                         + ".")
+    return out
+
+
+def readiness_for_account(ga_svc, customer_id):
+    """Reads the numbers graduation_advice needs. Raises on API errors; the
+    caller treats a failure as 'no report', never as a failed run."""
+    safe = OFFLINE_ACTION_NAME.replace("'", "\\'")
+    jobs = 0.0
+    for r in ga_svc.search(customer_id=customer_id, query=(
+            "SELECT segments.conversion_action_name, metrics.all_conversions "
+            "FROM customer WHERE segments.date DURING LAST_30_DAYS")):
+        if r.segments.conversion_action_name == OFFLINE_ACTION_NAME:
+            jobs += float(r.metrics.all_conversions or 0)
+    cost = 0.0
+    for r in ga_svc.search(customer_id=customer_id, query=(
+            "SELECT metrics.cost_micros FROM customer WHERE segments.date DURING LAST_30_DAYS")):
+        cost += (r.metrics.cost_micros or 0) / 1e6
+    primary = False
+    for r in ga_svc.search(customer_id=customer_id, query=(
+            "SELECT conversion_action.primary_for_goal FROM conversion_action "
+            f"WHERE conversion_action.name = '{safe}'")):
+        primary = bool(r.conversion_action.primary_for_goal)
+    strategies = [r.campaign.bidding_strategy_type.name for r in ga_svc.search(
+        customer_id=customer_id, query=(
+            "SELECT campaign.bidding_strategy_type FROM campaign "
+            "WHERE campaign.status = 'ENABLED'"))]
+    return graduation_advice(jobs, cost, primary, strategies)
+
+
+def readiness_report(client, rows):
+    """One read-only line per selected client with an Ads account."""
+    out = []
+    try:
+        ga_svc = client.get_service("GoogleAdsService")
+    except Exception as e:
+        log(f"⚠️ Bidding readiness skipped: {str(e)[:120]}")
+        return out
+    log("")
+    log("── BIDDING READINESS (read-only — nothing is changed) " + "─" * 8)
+    for token, row in rows.items():
+        if not ALL_CLIENTS and token not in CLIENT_TOKENS:
+            continue
+        cid = "".join(c for c in str((row or {}).get("customer_id") or "") if c.isdigit())
+        if not cid:
+            continue
+        name = (row or {}).get("website_name") or token
+        try:
+            adv = readiness_for_account(ga_svc, cid)
+        except Exception as e:
+            log(f"   {name}: could not read ({str(e)[:100]})")
+            continue
+        adv.update({"client": token, "website_name": name, "customer_id": cid})
+        out.append(adv)
+        log(f"   {name}: {adv['advice']}")
+    return out
+
+
 def main():
     if not (ADMIN_API_URL and LEADS_API_URL and ADMIN_PASSWORD):
         log("❌ ADMIN_API_URL, LEADS_API_URL and ADMIN_PASSWORD are all required.")
@@ -432,7 +536,14 @@ def main():
     pending = fetch_pending()
     if not pending:
         log("No jobs waiting. Mark some on /leads first.")
-        json.dump({"mode": UPLOAD_MODE, "clients": [], "log": _LOG},
+        readiness = []
+        try:
+            from google.ads.googleads.client import GoogleAdsClient
+            readiness = readiness_report(GoogleAdsClient.load_from_env(),
+                                         {c.get("client_token"): c for c in fetch_clients()})
+        except Exception as e:
+            log(f"⚠️ Bidding readiness skipped: {str(e)[:120]}")
+        json.dump({"mode": UPLOAD_MODE, "clients": [], "readiness": readiness, "log": _LOG},
                   open(OUTPUT_FILE, "w", encoding="utf-8"), indent=2)
         return
 
@@ -498,7 +609,9 @@ def main():
         log(f"{total} conversion(s) would upload. Re-run with UPLOAD_MODE=live.")
     log("=" * 62)
 
-    json.dump({"mode": UPLOAD_MODE, "clients": results, "log": _LOG},
+    readiness = [] if halted else readiness_report(client, rows)
+
+    json.dump({"mode": UPLOAD_MODE, "clients": results, "readiness": readiness, "log": _LOG},
               open(OUTPUT_FILE, "w", encoding="utf-8"), indent=2)
     log(f"Wrote {OUTPUT_FILE}")
 
