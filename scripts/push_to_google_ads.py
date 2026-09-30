@@ -665,6 +665,16 @@ def main():
             log(f"⚠️ Language lookup failed for '{code}' ({str(_le)[:60]}) — not targeted.")
         return None
 
+    # RETIRED (Sep 2026): Google removed language targeting from Search
+    # campaigns. A CampaignCriterion.language now comes back
+    # OPERATION_NOT_PERMITTED_FOR_CONTEXT, and because this mutate is atomic
+    # that one criterion failed the ENTIRE campaign push. Nothing is sent
+    # unless SEARCH_LANGUAGE_CRITERIA=on brings the old behaviour back (for
+    # a campaign type that still accepts it). The ad groups keep their own
+    # language — that is what the keywords and ads are written in.
+    SEARCH_LANGUAGE_CRITERIA = os.environ.get(
+        "SEARCH_LANGUAGE_CRITERIA", "").strip().lower() in ("on", "1", "yes", "true")
+
     _langs = set()
     for g in groups:
         code = str(g.get("language") or "").strip().lower()
@@ -675,7 +685,7 @@ def main():
         if code:
             _langs.add(code)
     _targeted = []
-    for code in sorted(_langs or {"en"}):
+    for code in (sorted(_langs or {"en"}) if SEARCH_LANGUAGE_CRITERIA else []):
         lid = _lang_id(code)
         if lid is None:
             continue
@@ -685,15 +695,19 @@ def main():
         cc.language.language_constant = f"languageConstants/{lid}"
         ops.append(o)
         _targeted.append(code)
-    # Never ship a campaign with no language criterion at all.
-    if not _targeted:
-        o = op()
-        cc = o.campaign_criterion_operation.create
-        cc.campaign = temp("campaigns/-2")
-        cc.language.language_constant = "languageConstants/1000"
-        ops.append(o)
-        _targeted = ["en (fallback)"]
-    log(f"Campaign languages targeted: {', '.join(_targeted)}")
+    if not SEARCH_LANGUAGE_CRITERIA:
+        log("Campaign languages: not sent (Google retired Search language "
+            f"targeting, Sep 2026) — ad groups written in: {', '.join(sorted(_langs or {'en'}))}")
+    else:
+        # Never ship a campaign with no language criterion at all.
+        if not _targeted:
+            o = op()
+            cc = o.campaign_criterion_operation.create
+            cc.campaign = temp("campaigns/-2")
+            cc.language.language_constant = "languageConstants/1000"
+            ops.append(o)
+            _targeted = ["en (fallback)"]
+        log(f"Campaign languages targeted: {', '.join(_targeted)}")
 
     # ── ad groups + keywords + negatives ────────────────────────────────
     n_kw = n_neg = 0
