@@ -593,12 +593,23 @@ def main():
                 headlines.append(cand)
             i += 1
         while len(descriptions) < N_DESCRIPTIONS:
-            fillers = [
-                f"Professional {NICHE_DESCRIPTION[:40].lower().rstrip('.')} you can rely on. Get a free quote today.",
-                f"Trusted by businesses across {TARGET_LOCATION[:30]}. Fast setup and clear pricing.",
-                "No long-term contract. Cancel anytime. See results from the first week.",
-                "Talk to a specialist today and get a plan built around your goals.",
-            ]
+            # Fillers only run when the model under-delivers. They must be in
+            # the ad group's language (a mixed-language RSA is disapproved or
+            # simply irrelevant) and read like a local service, not a SaaS.
+            if group_language(group)[0] == "ar":
+                fillers = [
+                    "فنيون محترفون يصلون إليك في نفس اليوم. اتصل الآن واحصل على عرض سعر.",
+                    f"خدمة موثوقة في {TARGET_LOCATION.split(',')[0][:20]}. سعر واضح قبل بدء العمل.",
+                    "نصلح جميع الماركات الشائعة. احجز موعدك اليوم واحصل على تشخيص سريع.",
+                    "فحص سريع وتشخيص دقيق للعطل. تواصل معنا عبر الهاتف أو واتساب.",
+                ]
+            else:
+                fillers = [
+                    f"Professional {NICHE_DESCRIPTION[:40].lower().rstrip('.')} you can rely on. Get a free quote today.",
+                    f"Trusted technicians across {TARGET_LOCATION.split(',')[0][:25]}. Same-day visits, clear pricing.",
+                    "All major brands repaired. Clear quote before any work starts.",
+                    "Call or WhatsApp now. Fast diagnosis and upfront quote before any work.",
+                ]
             d = clean_text(fillers[len(descriptions) % 4], is_headline=False)[:D_MAX]
             if d.lower() in {x.lower() for x in descriptions}:
                 break

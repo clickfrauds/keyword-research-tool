@@ -209,6 +209,33 @@ if os.path.exists("landing_pages_source.json"):
 SINGLE_CAMPAIGN = os.environ.get("SINGLE_CAMPAIGN", "").strip()
 MAX_KEYWORDS_PER_GROUP = int(os.environ.get("MAX_KEYWORDS_PER_GROUP", "40"))
 
+# PLAN MODE (Sep 2026): service_architecture.py (Stage 2.7) has already
+# decided the ad groups, their keywords and their negatives deterministically.
+# The model here only writes themes, intent expansions and page sub-services,
+# and Python re-routes every expansion to the group that owns it. Same input
+# -> same ad group names on every run, which is what the two-part push needs.
+PLAN_FILE = "ad_group_plan.json"
+def _plan_is_fallback():
+    try:
+        with open(PLAN_FILE, encoding="utf-8") as _f:
+            _plan = json.load(_f)
+    except Exception:
+        return True
+    if _plan.get("needs_service_map"):
+        # Stage 2.7 could not map the demand to the seeds. The model is NOT
+        # asked to guess the structure instead — that is the path that gave
+        # 4 ad groups for 7 services.
+        print("❌ NEEDS_SERVICE_MAP: the seeds do not cover this demand "
+              f"(e.g. {', '.join(_plan.get('unmatched_examples', [])[:4])}). "
+              "Give one seed per sub-service or advanced.services_json, then re-run.")
+        sys.exit(1)
+    return bool(_plan.get("fallback_legacy"))
+
+
+PLAN_MODE = (os.path.exists(PLAN_FILE) and not _plan_is_fallback()
+             and os.environ.get("PLAN_MODE", "on").strip().lower() not in ("off", "0", "false", "no")
+             and not FIXED_PAGES and not EXISTING_AD_GROUPS)
+
 
 # ══════════════════════════════════════════════════════════════════════════
 # Robust JSON parsing (4 repair passes — battle-tested in the website builder)
@@ -783,7 +810,7 @@ def validate_strategy(raw, kept):
                 for t in re.findall(r"[^\W_]+", str(txt).lower(), re.UNICODE)
                 if len(t) >= 3 and t not in _MODIFIERS and t not in _loc_toks}
 
-    if len(groups) > 1:
+    if len(groups) > 1 and not PLAN_MODE:
         tok_sets = {g["name"]: _group_tokens(g) for g in groups}
         # Ownership at STEM level (Jul 2026): "partition" (shower group) and
         # "partitions" (office group) are the same theme word — token-exact
@@ -816,7 +843,7 @@ def validate_strategy(raw, kept):
     pages = []
     covered = set()
     _slug_seen = set()
-    for _pi, p in enumerate(raw.get("landing_pages", [])[:6], 1):
+    for _pi, p in enumerate(raw.get("landing_pages", [])[:(99 if PLAN_MODE else 6)], 1):
         ag = [a for a in p.get("ad_groups_covered", []) if a in group_names]
         subs = [str(s).strip() for s in p.get("sub_services", []) if str(s).strip()][:6]
         if not p.get("service_name") or not subs:
@@ -827,9 +854,13 @@ def validate_strategy(raw, kept):
         _slug = (slugify_any(p.get("url_slug", ""), p.get("service_name", ""))
                  or slugify_any(p.get("service_name", ""), p.get("page_name", ""))
                  or f"service-{_pi}")
-        if _slug in _slug_seen:
+        # Duplicate = same slug in the SAME language. The Arabic twin of an
+        # English page shares its slug on purpose (/ar/<slug>/ vs /<slug>/).
+        _p_lang_key = (p.get("language")
+                       or next((g["language"] for g in groups if g["name"] in ag), "en"))
+        if (_slug, _p_lang_key) in _slug_seen:
             _slug = f"{_slug}-{_pi}"
-        _slug_seen.add(_slug)
+        _slug_seen.add((_slug, _p_lang_key))
         # The page inherits the language of the ad groups it serves — Mode 1 in
         # the website builder reads this to publish it under /{lang}/ and to
         # write it in the right language instead of the run default.
@@ -842,6 +873,8 @@ def validate_strategy(raw, kept):
             "industry": str(p.get("industry", NICHE_DESCRIPTION[:40])).strip(),
             "sub_services": subs,
             "ad_groups_covered": ag,
+            **({"keyword_map": p["keyword_map"]} if p.get("keyword_map") else {}),
+            **({"anchor_by_group": p["anchor_by_group"]} if p.get("anchor_by_group") else {}),
         })
     # FIXED PAGES MODE: the pages are already live, so they replace whatever
     # the model returned rather than being described by it. Rule E asks for an
@@ -1160,7 +1193,7 @@ def write_landing_pages_json(pages, groups):
             **p,
             "keywords_covered": kw_count,
             "monthly_volume_covered": vol,
-            "target_keywords": _tk[:25],
+            "target_keywords": _tk[:60],
             "negative_keywords": _neg[:20],
             "ad_group_themes": [g["theme"] for g in _gs if g.get("theme")],
             "match_types": sorted({g["match_type"] for g in _gs if g.get("match_type")}),
@@ -1181,6 +1214,168 @@ def write_landing_pages_json(pages, groups):
 # Main
 # ══════════════════════════════════════════════════════════════════════════
 
+PLAN_SYSTEM = """You write the creative layer for a Google Ads structure that
+is ALREADY decided. Do not add, remove, merge or rename ad groups. Return ONE
+JSON object, nothing else:
+{
+  "ad_groups": [{"name": "exact name given", "theme": "one sentence",
+                 "intent_expansion_keywords": ["5-10 new lowercase queries"]}],
+  "landing_pages": [{"url_slug": "exact slug given", "industry": "2-4 words",
+                     "sub_services": ["exactly 6 Title Case names"]}],
+  "notes": "2 sentences max"
+}
+Rules: expansions are real searches a BUYER of this service types in this
+location, matching THAT group's layer only (core = generic service + location,
+INCLUDING the local and voice phrasings: near me, at home, open now, same
+day, "who can fix ...", "repair my ..."; brand = brand + appliance + repair;
+problem = fault/part/error in the searcher's words WITH a hire word;
+emergency = emergency / 24 hour / 24/7 only; symptom = leave empty). Never product-shopping (buy, price of new,
+sale), jobs, DIY or other cities. Never a bare symptom without a hire word
+("fridge not cooling" is someone fixing it themselves; "fridge not cooling
+repair" and "washing machine drum broken" are buyers). Include word-order and
+voice variants people really say ("repair my fridge", "fridge repair open
+now", "who fixes washing machines near me").
+LANGUAGE: a group whose keywords are Arabic gets Arabic theme, Arabic
+expansions (real Gulf phrasing: "تصليح غسالات قريب مني", "فني ثلاجات دبي") and
+Arabic sub_services for its page; English groups stay English. Never mix. Sub-services must mirror the page's keyword
+map (brands, problems) so the page sections match what the ads promise."""
+
+
+def run_plan_mode(data):
+    """Plan-mode Stage 3: returns (raw, kept) for validate_strategy()."""
+    global MAX_AD_GROUPS, MAX_KEYWORDS_PER_GROUP
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    import service_architecture as vtsa
+
+    with open(PLAN_FILE, encoding="utf-8") as f:
+        plan = json.load(f)
+    vtsa.restore_classifier(plan.get("classifier"))
+    kept = [k for k in data["keywords"] if k.get("kept_for_ai")]
+    by_id = {k["id"]: k for k in kept}
+    MAX_AD_GROUPS = max(MAX_AD_GROUPS, len(plan["ad_groups"]))
+    MAX_KEYWORDS_PER_GROUP = max(MAX_KEYWORDS_PER_GROUP, 500)
+
+    lines = []
+    for g in plan["ad_groups"]:
+        top = [by_id[i]["keyword"] for i in g["keyword_ids"][:12] if i in by_id]
+        lines.append(f'AD GROUP "{g["name"]}" | layer={g["layer"]} | service={g["service"]}\n'
+                     f'  keywords: ' + "; ".join(top))
+    for pg in plan["landing_pages"]:
+        km = pg.get("keyword_map", {})
+        lines.append(f'PAGE slug="{pg["url_slug"]}" sells {pg["service_name"]}\n'
+                     f'  brands: {", ".join(km.get("brands", [])[:6]) or "-"}\n'
+                     f'  problems: {"; ".join(km.get("problems", [])[:6]) or "-"}')
+    prompt = (f"BUSINESS: {BUSINESS_NAME}\nNICHE: {NICHE_DESCRIPTION}\n"
+              f"LOCATION: {TARGET_LOCATION}\n\n" + "\n".join(lines))
+
+    extra = {}
+    try:
+        client = anthropic.Anthropic()
+        with client.messages.stream(model=MODEL, max_tokens=12000,
+                                    output_config={"effort": "low"},
+                                    system=PLAN_SYSTEM,
+                                    messages=[{"role": "user", "content": prompt}]) as st:
+            resp = st.get_final_message()
+        extra = parse_json_robust("".join(b.text for b in resp.content if b.type == "text"))
+    except Exception as e:
+        # The structure does not depend on this call — only the extras do.
+        print(f"⚠️ Plan-mode creative call failed ({str(e)[:80]}) — "
+              "continuing with catchers only and fallback sub-services.")
+
+    x_groups = {str(g.get("name", "")).strip().lower(): g for g in extra.get("ad_groups", []) or []}
+    x_pages = {str(p.get("url_slug", "")).strip().lower(): p for p in extra.get("landing_pages", []) or []}
+
+    # Route every model expansion to the group that OWNS it (same classifier
+    # as Stage 2.7). A "near me" idea written for the core group lands in the
+    # urgent group when that exists; junk and other-service ideas are dropped.
+    services = [{"name": s["name"], "aliases": s["aliases"], "lang": s.get("lang", "en")}
+                for s in plan["services"]]
+    svc_idx = {s["name"]: i for i, s in enumerate(services)}
+    group_by_key = {(g["service"], g["layer"]): g for g in plan["ad_groups"]}
+    routed = {g["name"]: list(g.get("silo_catchers", [])) for g in plan["ad_groups"]}
+    n_moved = n_dropped = 0
+    for g in plan["ad_groups"]:
+        if g["layer"] == "symptom":
+            continue   # exact-match test: its keywords are the Planner's own, nothing added
+        for e in (x_groups.get(g["name"].lower(), {}).get("intent_expansion_keywords") or []):
+            e = str(e).strip().lower()
+            if not e or vtsa.junk_reason(e):
+                n_dropped += 1
+                continue
+            si, layer = vtsa.classify(e, services)
+            if si is None or layer in (None, "symptom") or services[si]["name"] != g["service"]:
+                n_dropped += 1
+                continue
+            target = group_by_key.get((g["service"], layer)) or group_by_key[(g["service"], "core")]
+            if target["name"] != g["name"]:
+                n_moved += 1
+            if e not in routed[target["name"]]:
+                routed[target["name"]].append(e)
+    print(f"🧭 Plan mode: {len(plan['ad_groups'])} fixed ad groups | expansions "
+          f"re-routed={n_moved}, dropped={n_dropped}")
+
+    camp = (SINGLE_CAMPAIGN if SINGLE_CAMPAIGN and SINGLE_CAMPAIGN.lower()
+            not in ("true", "1", "yes", "false", "0", "no", "off")
+            else f"{BUSINESS_NAME or 'Main'} - Search")[:60]
+    raw = {
+        "campaigns": [{"name": camp, "priority": "high"}],
+        "ad_groups": [{
+            "name": g["name"], "campaign": camp,
+            # The RSA stage writes from THEME, so the layer's copy angle and
+            # its compliance rule ride along in it.
+            "theme": ((x_groups.get(g["name"].lower(), {}).get("theme")
+                       or f"{g['layer']} intent for {g['service']}")
+                      + {"brand": " Lead with the brand names searched; independent all-brand "
+                                  "repair — never 'authorized', 'official' or 'genuine service centre'.",
+                         "problem": " Lead with the exact fault the searcher typed "
+                                    "(not spinning, not cooling, leaking) and a same-day fix.",
+                         "emergency": " Lead with round-the-clock availability: emergency "
+                                      "call-outs, 24/7, technician at your door tonight.",
+                         "symptom": " Lead with the exact symptom as a question "
+                                    "(Fridge Not Cooling?) and offer a technician's "
+                                    "diagnosis — never a DIY fix.",
+                         "core": " Lead with the service + location; all brands, same day."}
+                      .get(g["layer"], "")),
+            "match_type": g.get("match_type", "phrase"),
+            "match_type_reason": ("plan: exact — symptom test at a reduced bid"
+                                  if g.get("match_type") == "exact"
+                                  else "plan: phrase for discovery on a new campaign"),
+            "priority": "high" if g["volume"] >= 1000 else "medium" if g["volume"] >= 300 else "low",
+            "bid_multiplier": g.get("bid_multiplier", 1.0),
+            "keyword_ids": g["keyword_ids"],
+            # junk intent lives at CAMPAIGN level (Stage 3.6 packs); ad-group
+            # negatives are only the silo negatives
+            "negative_keywords": g["negative_keywords"],
+            "intent_expansion_keywords": routed[g["name"]],
+        } for g in plan["ad_groups"]],
+        "landing_pages": [],
+        "excluded_ids": [e["id"] for e in plan.get("excluded", [])],
+        "notes": extra.get("notes", "") or plan.get("rule", ""),
+    }
+    for pg in plan["landing_pages"]:
+        xp = x_pages.get(pg["url_slug"].lower(), {})
+        km = pg.get("keyword_map", {})
+        subs = [s for s in (xp.get("sub_services") or []) if str(s).strip()][:6]
+        if len(subs) < 6:   # deterministic fallback from the keyword map
+            fb = ([f"{b} {pg['service_name']}" for b in km.get("brands", [])[:3]]
+                  + [vtsa.title(x) for x in km.get("problems", [])[:3]]
+                  + [f"Emergency {pg['service_name']}", f"Same-Day {pg['service_name']}",
+                     f"{pg['service_name']} at Home", f"All-Brand {pg['service_name']}",
+                     f"{pg['service_name']} Diagnosis", f"Parts Replacement"])
+            subs = (subs + [f for f in fb if f not in subs])[:6]
+        raw["landing_pages"].append({
+            "page_name": pg["page_name"], "url_slug": pg["url_slug"],
+            "language": pg.get("language", "en"),
+            "service_name": pg["service_name"],
+            "industry": xp.get("industry") or NICHE_DESCRIPTION[:40],
+            "sub_services": subs, "ad_groups_covered": pg["ad_groups_covered"],
+            "keyword_map": km,
+            "anchor_by_group": {g["name"]: g["landing_anchor"] for g in plan["ad_groups"]
+                                if g["url_slug"] == pg["url_slug"]},
+        })
+    return raw, kept
+
+
 def main():
     if not os.environ.get("ANTHROPIC_API_KEY"):
         print("❌ ANTHROPIC_API_KEY is missing — check your secrets.")
@@ -1193,6 +1388,14 @@ def main():
     with open(INPUT_FILE, "r", encoding="utf-8") as f:
         data = json.load(f)
 
+    if PLAN_MODE:
+        raw, kept = run_plan_mode(data)
+    else:
+        raw, kept = _legacy_claude_call(data)
+    return _finish(raw, kept, data)
+
+
+def _legacy_claude_call(data):
     user_prompt, kept = build_user_prompt(data)
     est_in = len(SYSTEM_PROMPT + user_prompt) // 4
     print(f"Sending {len(kept)} scored keywords to {MODEL} "
@@ -1238,7 +1441,10 @@ def main():
             f.write(text)
         print(f"❌ Could not get valid JSON: {last_err}. Raw saved for debugging.")
         sys.exit(1)
+    return raw, kept
 
+
+def _finish(raw, kept, data):
     campaigns, groups, pages, uncovered, excluded_ids, unassigned, negatives_for_existing = validate_strategy(raw, kept)
 
     # SEO material = Claude's exclusions + Python-flagged question/informational
@@ -1364,7 +1570,7 @@ def main():
     with open("keyword_strategy.md", "w", encoding="utf-8") as f:
         f.write("\n".join(md))
 
-    usage = getattr(response, "usage", None)
+    usage = None  # token usage is printed by the call itself now
     if usage:
         cost = usage.input_tokens * 3 / 1e6 + usage.output_tokens * 15 / 1e6
         print(f"   Tokens: {usage.input_tokens} in / {usage.output_tokens} out "

@@ -1,0 +1,3475 @@
+{
+"source": "results-data runs ccb9ca47-521e-4728-b09b-433ba3195b1d, e4d7999f-fc6a-47cd-837e-8b36a653be9b (28 Sep 2026, Dubai, PKR)",
+"keywords": [
+{
+"id": 1,
+"keyword": "washing machine repair",
+"avg_monthly_searches": 6600,
+"competition_index": 33,
+"low_top_bid": 1040.03,
+"high_top_bid": 4345.97,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 2,
+"keyword": "fix washing machine",
+"avg_monthly_searches": 6600,
+"competition_index": 33,
+"low_top_bid": 1040.03,
+"high_top_bid": 4345.97,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 3,
+"keyword": "laundry machine repair",
+"avg_monthly_searches": 6600,
+"competition_index": 33,
+"low_top_bid": 1040.03,
+"high_top_bid": 4345.97,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 4,
+"keyword": "clothes washer repair",
+"avg_monthly_searches": 6600,
+"competition_index": 33,
+"low_top_bid": 1040.03,
+"high_top_bid": 4345.97,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 5,
+"keyword": "laundry washer repair",
+"avg_monthly_searches": 6600,
+"competition_index": 33,
+"low_top_bid": 1040.03,
+"high_top_bid": 4345.97,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 6,
+"keyword": "fix laundry machine",
+"avg_monthly_searches": 6600,
+"competition_index": 33,
+"low_top_bid": 1040.03,
+"high_top_bid": 4345.97,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 7,
+"keyword": "bosch washer repair near me",
+"avg_monthly_searches": 20,
+"competition_index": 9,
+"low_top_bid": 603.68,
+"high_top_bid": 6558.83,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 8,
+"keyword": "lg washer repair near me",
+"avg_monthly_searches": 50,
+"competition_index": 26,
+"low_top_bid": 459.28,
+"high_top_bid": 3020.32,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 9,
+"keyword": "lg washing machine repair near me",
+"avg_monthly_searches": 50,
+"competition_index": 26,
+"low_top_bid": 459.28,
+"high_top_bid": 3020.32,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 10,
+"keyword": "washing machine repair near me",
+"avg_monthly_searches": 2900,
+"competition_index": 32,
+"low_top_bid": 970.69,
+"high_top_bid": 3368.72,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 11,
+"keyword": "washer fixer",
+"avg_monthly_searches": 6600,
+"competition_index": 33,
+"low_top_bid": 1040.03,
+"high_top_bid": 4345.97,
+"intent": "commercial",
+"kept_for_ai": true
+},
+{
+"id": 12,
+"keyword": "washer repair near me",
+"avg_monthly_searches": 260,
+"competition_index": 55,
+"low_top_bid": 970.69,
+"high_top_bid": 3941.68,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 13,
+"keyword": "washer repair service near me",
+"avg_monthly_searches": 260,
+"competition_index": 55,
+"low_top_bid": 970.69,
+"high_top_bid": 3941.68,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 14,
+"keyword": "fix washing machine near me",
+"avg_monthly_searches": 260,
+"competition_index": 55,
+"low_top_bid": 970.69,
+"high_top_bid": 3941.68,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 15,
+"keyword": "clothes washer repair near me",
+"avg_monthly_searches": 260,
+"competition_index": 55,
+"low_top_bid": 970.69,
+"high_top_bid": 3941.68,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 16,
+"keyword": "laundry machine repair near me",
+"avg_monthly_searches": 260,
+"competition_index": 55,
+"low_top_bid": 970.69,
+"high_top_bid": 3941.68,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 17,
+"keyword": "repair wash machine near me",
+"avg_monthly_searches": 260,
+"competition_index": 55,
+"low_top_bid": 970.69,
+"high_top_bid": 3941.68,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 18,
+"keyword": "samsung washing machine repair",
+"avg_monthly_searches": 320,
+"competition_index": 16,
+"low_top_bid": 354.89,
+"high_top_bid": 3911.73,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 19,
+"keyword": "samsung washer repair",
+"avg_monthly_searches": 320,
+"competition_index": 16,
+"low_top_bid": 354.89,
+"high_top_bid": 3911.73,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 20,
+"keyword": "fix samsung washing machine",
+"avg_monthly_searches": 320,
+"competition_index": 16,
+"low_top_bid": 354.89,
+"high_top_bid": 3911.73,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 21,
+"keyword": "samsung washer fix",
+"avg_monthly_searches": 320,
+"competition_index": 16,
+"low_top_bid": 354.89,
+"high_top_bid": 3911.73,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 22,
+"keyword": "siemens washing machine repair",
+"avg_monthly_searches": 320,
+"competition_index": 45,
+"low_top_bid": 650.22,
+"high_top_bid": 3052.78,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 23,
+"keyword": "lg washing machine repair",
+"avg_monthly_searches": 320,
+"competition_index": 12,
+"low_top_bid": 225.02,
+"high_top_bid": 3152.5,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 24,
+"keyword": "bosch washing machine repairs near me",
+"avg_monthly_searches": 20,
+"competition_index": 9,
+"low_top_bid": 603.68,
+"high_top_bid": 6558.83,
+"intent": "commercial",
+"kept_for_ai": true
+},
+{
+"id": 25,
+"keyword": "lg washer repairs near me",
+"avg_monthly_searches": 50,
+"competition_index": 26,
+"low_top_bid": 459.28,
+"high_top_bid": 3020.32,
+"intent": "commercial",
+"kept_for_ai": true
+},
+{
+"id": 26,
+"keyword": "bosch washing machine repair",
+"avg_monthly_searches": 320,
+"competition_index": 18,
+"low_top_bid": 396.4,
+"high_top_bid": 1136.46,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 27,
+"keyword": "bosch washer repair",
+"avg_monthly_searches": 320,
+"competition_index": 18,
+"low_top_bid": 396.4,
+"high_top_bid": 1136.46,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 28,
+"keyword": "fix bosch washing machine",
+"avg_monthly_searches": 320,
+"competition_index": 18,
+"low_top_bid": 396.4,
+"high_top_bid": 1136.46,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 29,
+"keyword": "bosch washer dryer repair",
+"avg_monthly_searches": 320,
+"competition_index": 18,
+"low_top_bid": 396.4,
+"high_top_bid": 1136.46,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 30,
+"keyword": "bosch washing machines repair",
+"avg_monthly_searches": 320,
+"competition_index": 18,
+"low_top_bid": 396.4,
+"high_top_bid": 1136.46,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 31,
+"keyword": "lg washer dryer repair near me",
+"avg_monthly_searches": 20,
+"competition_index": 44,
+"low_top_bid": 757.39,
+"high_top_bid": 5324.94,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 32,
+"keyword": "washer fixer near me",
+"avg_monthly_searches": 260,
+"competition_index": 55,
+"low_top_bid": 970.69,
+"high_top_bid": 3941.68,
+"intent": "commercial",
+"kept_for_ai": true
+},
+{
+"id": 33,
+"keyword": "washer repair",
+"avg_monthly_searches": 20,
+"competition_index": 32,
+"low_top_bid": 777.1,
+"high_top_bid": 4216.37,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 34,
+"keyword": "washing machine repair service",
+"avg_monthly_searches": 170,
+"competition_index": 30,
+"low_top_bid": 1067.76,
+"high_top_bid": 3870.39,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 35,
+"keyword": "siemens washing machine repair near me",
+"avg_monthly_searches": 10,
+"competition_index": 5,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 36,
+"keyword": "washing machine repair shops near me",
+"avg_monthly_searches": 70,
+"competition_index": 60,
+"low_top_bid": 970.69,
+"high_top_bid": 2296.66,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 37,
+"keyword": "washer repair shops near me",
+"avg_monthly_searches": 70,
+"competition_index": 60,
+"low_top_bid": 970.69,
+"high_top_bid": 2296.66,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 38,
+"keyword": "bosch service washing machine",
+"avg_monthly_searches": 90,
+"competition_index": 40,
+"low_top_bid": 357.77,
+"high_top_bid": 3162.18,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 39,
+"keyword": "lg washing machine service near me",
+"avg_monthly_searches": 10,
+"competition_index": 14,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 40,
+"keyword": "lg washing machine dryer repair",
+"avg_monthly_searches": 30,
+"competition_index": 27,
+"low_top_bid": 437.15,
+"high_top_bid": 1172.52,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 41,
+"keyword": "lg dryer repair near me",
+"avg_monthly_searches": 20,
+"competition_index": 44,
+"low_top_bid": 757.39,
+"high_top_bid": 5324.94,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 42,
+"keyword": "dryer repair",
+"avg_monthly_searches": 70,
+"competition_index": 17,
+"low_top_bid": 561.79,
+"high_top_bid": 2936.97,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 43,
+"keyword": "bosch dryer repair",
+"avg_monthly_searches": 20,
+"competition_index": 6,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 44,
+"keyword": "bosch tumble dryer repair",
+"avg_monthly_searches": 20,
+"competition_index": 6,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 45,
+"keyword": "lg dryer repair",
+"avg_monthly_searches": 30,
+"competition_index": 27,
+"low_top_bid": 437.15,
+"high_top_bid": 1172.52,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 46,
+"keyword": "lg dryer fix",
+"avg_monthly_searches": 30,
+"competition_index": 27,
+"low_top_bid": 437.15,
+"high_top_bid": 1172.52,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 47,
+"keyword": "lg clothes dryer repair",
+"avg_monthly_searches": 30,
+"competition_index": 27,
+"low_top_bid": 437.15,
+"high_top_bid": 1172.52,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 48,
+"keyword": "lg dryer repair company",
+"avg_monthly_searches": 30,
+"competition_index": 27,
+"low_top_bid": 437.15,
+"high_top_bid": 1172.52,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 49,
+"keyword": "samsung dryer repair",
+"avg_monthly_searches": 20,
+"competition_index": 29,
+"low_top_bid": 391.92,
+"high_top_bid": 2013.41,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 50,
+"keyword": "samsung dryer fix",
+"avg_monthly_searches": 20,
+"competition_index": 29,
+"low_top_bid": 391.92,
+"high_top_bid": 2013.41,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 51,
+"keyword": "samsung clothes dryer repair",
+"avg_monthly_searches": 20,
+"competition_index": 29,
+"low_top_bid": 391.92,
+"high_top_bid": 2013.41,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 52,
+"keyword": "appliance repair samsung dryer",
+"avg_monthly_searches": 20,
+"competition_index": 29,
+"low_top_bid": 391.92,
+"high_top_bid": 2013.41,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 53,
+"keyword": "siemens dryer repair",
+"avg_monthly_searches": 20,
+"competition_index": 36,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 54,
+"keyword": "dryer roller replacement",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 55,
+"keyword": "bosch dryer repair near me",
+"avg_monthly_searches": 10,
+"competition_index": 12,
+"low_top_bid": 824.34,
+"high_top_bid": 4060.26,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 56,
+"keyword": "miele dryer repair",
+"avg_monthly_searches": 10,
+"competition_index": 51,
+"low_top_bid": 559.86,
+"high_top_bid": 2654.15,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 57,
+"keyword": "dryer machine repair",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 58,
+"keyword": "fix dryer machine",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 59,
+"keyword": "samsung dryer roller replacement",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 60,
+"keyword": "same day dryer repair near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 61,
+"keyword": "samsung dryer drum felt seal replacement",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 62,
+"keyword": "dryer vent repair near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 63,
+"keyword": "vent repair near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 64,
+"keyword": "lg dryer repair service near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 65,
+"keyword": "tumble dryer repairs",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "commercial",
+"kept_for_ai": true
+},
+{
+"id": 66,
+"keyword": "dryer repair cost",
+"avg_monthly_searches": 10,
+"competition_index": 71,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 67,
+"keyword": "zanussi tumble dryer repair",
+"avg_monthly_searches": 10,
+"competition_index": 29,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 68,
+"keyword": "dryer repair prices",
+"avg_monthly_searches": 10,
+"competition_index": 71,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 69,
+"keyword": "clothes dryer repair cost",
+"avg_monthly_searches": 10,
+"competition_index": 71,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 70,
+"keyword": "cost to fix dryer",
+"avg_monthly_searches": 10,
+"competition_index": 71,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 71,
+"keyword": "dryer repair service cost",
+"avg_monthly_searches": 10,
+"competition_index": 71,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 72,
+"keyword": "samsung dryer repair near me",
+"avg_monthly_searches": 10,
+"competition_index": 57,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 73,
+"keyword": "dryer repair service near me",
+"avg_monthly_searches": 10,
+"competition_index": 59,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 74,
+"keyword": "gas dryer repair near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 75,
+"keyword": "lg dryer service near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 76,
+"keyword": "dryer vent replacement near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 77,
+"keyword": "dryer duct repair near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 78,
+"keyword": "cloth dryer repair near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 79,
+"keyword": "miele dryer repair near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 80,
+"keyword": "fix dryer machine near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 81,
+"keyword": "refrigerator repair",
+"avg_monthly_searches": 2400,
+"competition_index": 12,
+"low_top_bid": 970.69,
+"high_top_bid": 4152.93,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 82,
+"keyword": "refrig repair",
+"avg_monthly_searches": 2400,
+"competition_index": 12,
+"low_top_bid": 970.69,
+"high_top_bid": 4152.93,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 83,
+"keyword": "refrigerator fridge repair",
+"avg_monthly_searches": 2400,
+"competition_index": 12,
+"low_top_bid": 970.69,
+"high_top_bid": 4152.93,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 84,
+"keyword": "refrigerator repair near me",
+"avg_monthly_searches": 1900,
+"competition_index": 58,
+"low_top_bid": 1040.03,
+"high_top_bid": 3523.06,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 85,
+"keyword": "fridge repair near me",
+"avg_monthly_searches": 1900,
+"competition_index": 58,
+"low_top_bid": 1040.03,
+"high_top_bid": 3523.06,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 86,
+"keyword": "home refrigerator repair near me",
+"avg_monthly_searches": 1900,
+"competition_index": 58,
+"low_top_bid": 1040.03,
+"high_top_bid": 3523.06,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 87,
+"keyword": "fridge service repair near me",
+"avg_monthly_searches": 320,
+"competition_index": 54,
+"low_top_bid": 789.08,
+"high_top_bid": 2517.97,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 88,
+"keyword": "refrigerator repair close to me",
+"avg_monthly_searches": 1900,
+"competition_index": 58,
+"low_top_bid": 1040.03,
+"high_top_bid": 3523.06,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 89,
+"keyword": "wine cooler repair near me",
+"avg_monthly_searches": 90,
+"competition_index": 55,
+"low_top_bid": 838.89,
+"high_top_bid": 1859.23,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 90,
+"keyword": "lg refrigerator repair",
+"avg_monthly_searches": 90,
+"competition_index": 16,
+"low_top_bid": 269.21,
+"high_top_bid": 2713.02,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 91,
+"keyword": "lg fridge repair",
+"avg_monthly_searches": 90,
+"competition_index": 16,
+"low_top_bid": 269.21,
+"high_top_bid": 2713.02,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 92,
+"keyword": "lg freezer repair",
+"avg_monthly_searches": 90,
+"competition_index": 16,
+"low_top_bid": 269.21,
+"high_top_bid": 2713.02,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 93,
+"keyword": "samsung fridge repair",
+"avg_monthly_searches": 50,
+"competition_index": 19,
+"low_top_bid": 502.19,
+"high_top_bid": 2868.05,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 94,
+"keyword": "samsung freezer repair",
+"avg_monthly_searches": 50,
+"competition_index": 19,
+"low_top_bid": 502.19,
+"high_top_bid": 2868.05,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 95,
+"keyword": "lg refrigerator repair near me",
+"avg_monthly_searches": 20,
+"competition_index": 31,
+"low_top_bid": 725.41,
+"high_top_bid": 3507.37,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 96,
+"keyword": "lg fridge repair near me",
+"avg_monthly_searches": 20,
+"competition_index": 31,
+"low_top_bid": 725.41,
+"high_top_bid": 3507.37,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 97,
+"keyword": "refrigerator repair service near me",
+"avg_monthly_searches": 110,
+"competition_index": 53,
+"low_top_bid": 2723.1,
+"high_top_bid": 5087.45,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 98,
+"keyword": "repair freezer near me",
+"avg_monthly_searches": 70,
+"competition_index": 82,
+"low_top_bid": 1028.62,
+"high_top_bid": 4147.77,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 99,
+"keyword": "bosch refrigerator repair near me",
+"avg_monthly_searches": 10,
+"competition_index": 13,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 100,
+"keyword": "bosch fridge repair near me",
+"avg_monthly_searches": 10,
+"competition_index": 13,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 101,
+"keyword": "freezer repair",
+"avg_monthly_searches": 70,
+"competition_index": 45,
+"low_top_bid": 873.62,
+"high_top_bid": 2369.9,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 102,
+"keyword": "bosch fridge repair",
+"avg_monthly_searches": 40,
+"competition_index": 39,
+"low_top_bid": 851.42,
+"high_top_bid": 4427.9,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 103,
+"keyword": "samsung fridge service",
+"avg_monthly_searches": 10,
+"competition_index": 7,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 104,
+"keyword": "samsung fridge maintenance",
+"avg_monthly_searches": 10,
+"competition_index": 7,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 105,
+"keyword": "samsung refrigerator service",
+"avg_monthly_searches": 10,
+"competition_index": 7,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 106,
+"keyword": "refrigerator repair shop near me",
+"avg_monthly_searches": 70,
+"competition_index": 67,
+"low_top_bid": 1005.79,
+"high_top_bid": 3207.46,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 107,
+"keyword": "fridge repair shop near me",
+"avg_monthly_searches": 70,
+"competition_index": 67,
+"low_top_bid": 1005.79,
+"high_top_bid": 3207.46,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 108,
+"keyword": "freezer repairs near me",
+"avg_monthly_searches": 70,
+"competition_index": 82,
+"low_top_bid": 1028.62,
+"high_top_bid": 4147.77,
+"intent": "commercial",
+"kept_for_ai": true
+},
+{
+"id": 109,
+"keyword": "emergency refrigerator repair near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 110,
+"keyword": "emergency fridge repair near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 111,
+"keyword": "siemens fridge repair",
+"avg_monthly_searches": 50,
+"competition_index": 66,
+"low_top_bid": 890.99,
+"high_top_bid": 4216.41,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 112,
+"keyword": "siemens refrigerator repair",
+"avg_monthly_searches": 50,
+"competition_index": 66,
+"low_top_bid": 890.99,
+"high_top_bid": 4216.41,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 113,
+"keyword": "deep freezer repair near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 114,
+"keyword": "hitachi fridge repair near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 115,
+"keyword": "fridge repair technician near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 116,
+"keyword": "samsung fridge repair service near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 117,
+"keyword": "samsung refrigerator servicing",
+"avg_monthly_searches": 10,
+"competition_index": 7,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "commercial",
+"kept_for_ai": true
+},
+{
+"id": 118,
+"keyword": "samsung fridge servicing",
+"avg_monthly_searches": 10,
+"competition_index": 7,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "commercial",
+"kept_for_ai": true
+},
+{
+"id": 119,
+"keyword": "refrigerator repair places near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 120,
+"keyword": "broken refrigerator",
+"avg_monthly_searches": 10,
+"competition_index": 9,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "commercial",
+"kept_for_ai": true
+},
+{
+"id": 121,
+"keyword": "bosch dishwasher repair",
+"avg_monthly_searches": 90,
+"competition_index": 31,
+"low_top_bid": 636.53,
+"high_top_bid": 3916.63,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 122,
+"keyword": "appliance repair bosch dishwasher",
+"avg_monthly_searches": 90,
+"competition_index": 31,
+"low_top_bid": 636.53,
+"high_top_bid": 3916.63,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 123,
+"keyword": "bosch dishwasher service and repair",
+"avg_monthly_searches": 90,
+"competition_index": 31,
+"low_top_bid": 636.53,
+"high_top_bid": 3916.63,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 124,
+"keyword": "dishwasher repair near me",
+"avg_monthly_searches": 260,
+"competition_index": 42,
+"low_top_bid": 873.62,
+"high_top_bid": 4449.17,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 125,
+"keyword": "dishwasher repair service near me",
+"avg_monthly_searches": 260,
+"competition_index": 42,
+"low_top_bid": 873.62,
+"high_top_bid": 4449.17,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 126,
+"keyword": "siemens dishwasher repair",
+"avg_monthly_searches": 140,
+"competition_index": 51,
+"low_top_bid": 706.75,
+"high_top_bid": 4457.23,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 127,
+"keyword": "bosch dishwasher repair near me",
+"avg_monthly_searches": 20,
+"competition_index": 45,
+"low_top_bid": 720.01,
+"high_top_bid": 4457.23,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 128,
+"keyword": "samsung dishwasher repair",
+"avg_monthly_searches": 30,
+"competition_index": 34,
+"low_top_bid": 628.54,
+"high_top_bid": 3332.76,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 129,
+"keyword": "dishwasher repair",
+"avg_monthly_searches": 260,
+"competition_index": 36,
+"low_top_bid": 970.69,
+"high_top_bid": 4725.87,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 130,
+"keyword": "lg dishwasher repair",
+"avg_monthly_searches": 50,
+"competition_index": 48,
+"low_top_bid": 689.33,
+"high_top_bid": 4457.23,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 131,
+"keyword": "dishwasher fixer near me",
+"avg_monthly_searches": 260,
+"competition_index": 42,
+"low_top_bid": 873.62,
+"high_top_bid": 4449.17,
+"intent": "commercial",
+"kept_for_ai": true
+},
+{
+"id": 132,
+"keyword": "dishwasher service",
+"avg_monthly_searches": 20,
+"competition_index": 87,
+"low_top_bid": 873.62,
+"high_top_bid": 4714.05,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 133,
+"keyword": "lg dishwasher repair near me",
+"avg_monthly_searches": 10,
+"competition_index": 57,
+"low_top_bid": 939.5,
+"high_top_bid": 5324.94,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 134,
+"keyword": "dishwasher maintenance",
+"avg_monthly_searches": 20,
+"competition_index": 70,
+"low_top_bid": 3001.13,
+"high_top_bid": 8010.64,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 135,
+"keyword": "daewoo dishwasher repair",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 136,
+"keyword": "samsung dishwasher repairs near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "commercial",
+"kept_for_ai": true
+},
+{
+"id": 137,
+"keyword": "emergency dishwasher repair near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 138,
+"keyword": "fix dishwasher near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 139,
+"keyword": "best dishwasher repair services near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 140,
+"keyword": "electrolux dishwasher repair near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 141,
+"keyword": "dishwasher specialist near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 142,
+"keyword": "dishwasher technician",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "commercial",
+"kept_for_ai": true
+},
+{
+"id": 143,
+"keyword": "dishwasher mechanic",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "commercial",
+"kept_for_ai": true
+},
+{
+"id": 144,
+"keyword": "dishwasher tech",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "commercial",
+"kept_for_ai": true
+},
+{
+"id": 145,
+"keyword": "lg dishwasher repair cost",
+"avg_monthly_searches": 10,
+"competition_index": 29,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 146,
+"keyword": "lg dishwasher repair service near me",
+"avg_monthly_searches": 10,
+"competition_index": 57,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 147,
+"keyword": "local dishwasher repair",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 148,
+"keyword": "best bosch dishwasher repair near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 149,
+"keyword": "bosch dishwasher appliance repair near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 150,
+"keyword": "zanussi dishwasher repair near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 151,
+"keyword": "bosch dishwasher servicing",
+"avg_monthly_searches": 10,
+"competition_index": 54,
+"low_top_bid": 1082.53,
+"high_top_bid": 5324.94,
+"intent": "commercial",
+"kept_for_ai": true
+},
+{
+"id": 152,
+"keyword": "led tv repair near me",
+"avg_monthly_searches": 70,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 153,
+"keyword": "led repair near me",
+"avg_monthly_searches": 70,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 154,
+"keyword": "led repair shop near me",
+"avg_monthly_searches": 20,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 155,
+"keyword": "led tv repair shop near me",
+"avg_monthly_searches": 20,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 156,
+"keyword": "samsung led tv repair near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 157,
+"keyword": "samsung led repair near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 158,
+"keyword": "samsung led tv service center",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 159,
+"keyword": "samsung tv led panel replacement",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 160,
+"keyword": "fix broken led tv screen",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 161,
+"keyword": "led monitor backlight repair",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 162,
+"keyword": "led tv screen repair",
+"avg_monthly_searches": 20,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 163,
+"keyword": "led screen repair",
+"avg_monthly_searches": 20,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 164,
+"keyword": "fix led tv screen",
+"avg_monthly_searches": 20,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 165,
+"keyword": "led tv screen damage repair",
+"avg_monthly_searches": 20,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 166,
+"keyword": "tv led display repair",
+"avg_monthly_searches": 20,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 167,
+"keyword": "dyson hair dryer repair",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 168,
+"keyword": "samsung lcd tv repair near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 169,
+"keyword": "lg smart tv broken screen",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "commercial",
+"kept_for_ai": true
+},
+{
+"id": 170,
+"keyword": "samsung led tv backlight problems",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "commercial",
+"kept_for_ai": true
+},
+{
+"id": 171,
+"keyword": "lcd screen panel replacement",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 172,
+"keyword": "tcl led tv service center near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 173,
+"keyword": "thomson led tv service center near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 174,
+"keyword": "lcd panel replacement for tv",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 175,
+"keyword": "lcd tv replacement screen",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 176,
+"keyword": "philips led tv service center near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 177,
+"keyword": "air conditioning and refrigeration services",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 178,
+"keyword": "aircon and refrigeration services",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 179,
+"keyword": "samsung smart tv repair",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 180,
+"keyword": "fix led screen",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 181,
+"keyword": "lg 55 inch replacement screen",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 182,
+"keyword": "fixing led tv screen",
+"avg_monthly_searches": 20,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "commercial",
+"kept_for_ai": true
+},
+{
+"id": 183,
+"keyword": "samsung led tv backlight replacement",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 184,
+"keyword": "industrial washing machine repair",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 185,
+"keyword": "metalflex zv 446 repair",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 186,
+"keyword": "dyson supersonic repair",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 187,
+"keyword": "led tv panel replacement",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 188,
+"keyword": "led tv panel repair",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 189,
+"keyword": "led tv panel repair cost",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 190,
+"keyword": "black spot on led tv screen repair",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 191,
+"keyword": "led tv cof repair",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 192,
+"keyword": "samsung tv servicing",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "commercial",
+"kept_for_ai": true
+},
+{
+"id": 193,
+"keyword": "mi tv 32 inch screen replacement price",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 194,
+"keyword": "lg smart tv repair near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 195,
+"keyword": "tv backlight repair cost",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 196,
+"keyword": "dyson dryer repair",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 197,
+"keyword": "led tv repair near me home service",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 198,
+"keyword": "tv fixing service near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 199,
+"keyword": "led tv display repair near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 200,
+"keyword": "nearby led tv repair",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 201,
+"keyword": "led tv backlight repair near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 202,
+"keyword": "samsung smart tv repair shop near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 203,
+"keyword": "tv backlight repair",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 204,
+"keyword": "fix backlight on tv",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 205,
+"keyword": "commercial washer repair near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 206,
+"keyword": "glass washer repair near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 207,
+"keyword": "hand dryer repair near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 208,
+"keyword": "cloth drying stand repair near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 209,
+"keyword": "commercial dishwasher repair near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 210,
+"keyword": "commercial dishwasher service near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 211,
+"keyword": "aircon and refrigeration services near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 212,
+"keyword": "sony led tv repair near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 213,
+"keyword": "led tv service near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 214,
+"keyword": "lg led tv repair near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 215,
+"keyword": "sansui tv repair near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 216,
+"keyword": "led tv panel repair near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 217,
+"keyword": "sony led repair near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 218,
+"keyword": "led panel repair near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 219,
+"keyword": "videocon tv service center near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 220,
+"keyword": "lg smart tv repair service near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 221,
+"keyword": "lcd tv service center near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 222,
+"keyword": "led smart tv repair near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 223,
+"keyword": "led tv screen repair near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 224,
+"keyword": "led lcd tv repair near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 225,
+"keyword": "led repair service near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 226,
+"keyword": "fix led tv screen near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 227,
+"keyword": "lcd tv repair near me home service",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 228,
+"keyword": "led tv screen replacement near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 229,
+"keyword": "samsung led tv repair service near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 230,
+"keyword": "near washing machine repair",
+"avg_monthly_searches": 30,
+"competition_index": 82,
+"low_top_bid": 929.09,
+"high_top_bid": 3677.26,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 231,
+"keyword": "nearby washing machine repair",
+"avg_monthly_searches": 30,
+"competition_index": 82,
+"low_top_bid": 929.09,
+"high_top_bid": 3677.26,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 232,
+"keyword": "washing machine maintenance",
+"avg_monthly_searches": 50,
+"competition_index": 63,
+"low_top_bid": 873.62,
+"high_top_bid": 4962.04,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 233,
+"keyword": "laundry machine maintenance",
+"avg_monthly_searches": 50,
+"competition_index": 63,
+"low_top_bid": 873.62,
+"high_top_bid": 4962.04,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 234,
+"keyword": "washing machine maintenance wash",
+"avg_monthly_searches": 50,
+"competition_index": 63,
+"low_top_bid": 873.62,
+"high_top_bid": 4962.04,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 235,
+"keyword": "washer appliance repair",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 236,
+"keyword": "washing machine appliance repair",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 237,
+"keyword": "washing machine repair shops",
+"avg_monthly_searches": 20,
+"competition_index": 79,
+"low_top_bid": 873.62,
+"high_top_bid": 1661.22,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 238,
+"keyword": "washing machine service",
+"avg_monthly_searches": 140,
+"competition_index": 81,
+"low_top_bid": 970.69,
+"high_top_bid": 3848.59,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 239,
+"keyword": "washing machine repair cost near me",
+"avg_monthly_searches": 10,
+"competition_index": 14,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 240,
+"keyword": "washing machine repair at home",
+"avg_monthly_searches": 20,
+"competition_index": 87,
+"low_top_bid": 970.69,
+"high_top_bid": 3779.95,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 241,
+"keyword": "ac washing machine repair",
+"avg_monthly_searches": 10,
+"competition_index": 5,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 242,
+"keyword": "ac washing machine repair near me",
+"avg_monthly_searches": 10,
+"competition_index": 29,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 243,
+"keyword": "best washing machine repair",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 244,
+"keyword": "washing machine body repair",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 245,
+"keyword": "washing machine technician near me",
+"avg_monthly_searches": 40,
+"competition_index": 94,
+"low_top_bid": 1089.95,
+"high_top_bid": 4067.68,
+"intent": "commercial",
+"kept_for_ai": true
+},
+{
+"id": 246,
+"keyword": "washer technician near me",
+"avg_monthly_searches": 40,
+"competition_index": 94,
+"low_top_bid": 1089.95,
+"high_top_bid": 4067.68,
+"intent": "commercial",
+"kept_for_ai": true
+},
+{
+"id": 247,
+"keyword": "washing machine technicians near me",
+"avg_monthly_searches": 40,
+"competition_index": 94,
+"low_top_bid": 1089.95,
+"high_top_bid": 4067.68,
+"intent": "commercial",
+"kept_for_ai": true
+},
+{
+"id": 248,
+"keyword": "local washer repair",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 249,
+"keyword": "near by washing machine repair",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 250,
+"keyword": "teka washing machine repair",
+"avg_monthly_searches": 30,
+"competition_index": 33,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 251,
+"keyword": "smeg washing machine repair",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 252,
+"keyword": "ariston washing machine repair",
+"avg_monthly_searches": 10,
+"competition_index": 36,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 253,
+"keyword": "lg washing machine repair service",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 254,
+"keyword": "lg service washing machine",
+"avg_monthly_searches": 10,
+"competition_index": 10,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 255,
+"keyword": "zanussi washer dryer repair",
+"avg_monthly_searches": 10,
+"competition_index": 50,
+"low_top_bid": 451.29,
+"high_top_bid": 1849.19,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 256,
+"keyword": "samsung washer and dryer service",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 257,
+"keyword": "lg washing machine gearbox repair",
+"avg_monthly_searches": 10,
+"competition_index": 14,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 258,
+"keyword": "washing machine samsung repair near me",
+"avg_monthly_searches": 10,
+"competition_index": 43,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 259,
+"keyword": "midea washing machine repair",
+"avg_monthly_searches": 10,
+"competition_index": 61,
+"low_top_bid": 191.42,
+"high_top_bid": 2616.41,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 260,
+"keyword": "midea washer repair",
+"avg_monthly_searches": 10,
+"competition_index": 61,
+"low_top_bid": 191.42,
+"high_top_bid": 2616.41,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 261,
+"keyword": "beko washing machine service",
+"avg_monthly_searches": 10,
+"competition_index": 64,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 262,
+"keyword": "lg washer repair service near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 263,
+"keyword": "lg washing machine repair service near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 264,
+"keyword": "indesit washing machine repair near me",
+"avg_monthly_searches": 10,
+"competition_index": 50,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 265,
+"keyword": "beko washing machine repair near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 266,
+"keyword": "hitachi washing machine repair near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 267,
+"keyword": "indesit washing machine repair",
+"avg_monthly_searches": 10,
+"competition_index": 47,
+"low_top_bid": 722.14,
+"high_top_bid": 4457.86,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 268,
+"keyword": "indesit washer dryer repair",
+"avg_monthly_searches": 10,
+"competition_index": 47,
+"low_top_bid": 722.14,
+"high_top_bid": 4457.86,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 269,
+"keyword": "samsung washer repair service",
+"avg_monthly_searches": 10,
+"competition_index": 48,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 270,
+"keyword": "samsung washing machine repair service",
+"avg_monthly_searches": 10,
+"competition_index": 48,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 271,
+"keyword": "washer and dryer repair service",
+"avg_monthly_searches": 10,
+"competition_index": 2,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 272,
+"keyword": "stackable washer and dryer repair",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 273,
+"keyword": "washer dryer repair cost",
+"avg_monthly_searches": 10,
+"competition_index": 71,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 274,
+"keyword": "washing machine seal repair",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 275,
+"keyword": "washing machine pcb repair cost",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 276,
+"keyword": "washing machine door seal repair",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 277,
+"keyword": "washer door seal repair",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 278,
+"keyword": "washing machine shock absorber repair",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 279,
+"keyword": "replace washing machine bearings",
+"avg_monthly_searches": 10,
+"competition_index": 43,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 280,
+"keyword": "replace washer bearing",
+"avg_monthly_searches": 10,
+"competition_index": 43,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 281,
+"keyword": "washing machine door broken",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "commercial",
+"kept_for_ai": true
+},
+{
+"id": 282,
+"keyword": "washing machine door not locking",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "commercial",
+"kept_for_ai": true
+},
+{
+"id": 283,
+"keyword": "washing machine drum repair",
+"avg_monthly_searches": 10,
+"competition_index": 29,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 284,
+"keyword": "samsung washing machine pcb repair",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 285,
+"keyword": "broken washing machine",
+"avg_monthly_searches": 10,
+"competition_index": 19,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "commercial",
+"kept_for_ai": true
+},
+{
+"id": 286,
+"keyword": "washer broken",
+"avg_monthly_searches": 10,
+"competition_index": 19,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "commercial",
+"kept_for_ai": true
+},
+{
+"id": 287,
+"keyword": "motor in washing machine",
+"avg_monthly_searches": 40,
+"competition_index": 76,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "commercial",
+"kept_for_ai": true
+},
+{
+"id": 288,
+"keyword": "lg washing machine door latch broken",
+"avg_monthly_searches": 10,
+"competition_index": 19,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "commercial",
+"kept_for_ai": true
+},
+{
+"id": 289,
+"keyword": "fridge technician near me",
+"avg_monthly_searches": 50,
+"competition_index": 95,
+"low_top_bid": 1040.03,
+"high_top_bid": 4135.15,
+"intent": "commercial",
+"kept_for_ai": true
+},
+{
+"id": 290,
+"keyword": "refrigerator technician near me",
+"avg_monthly_searches": 50,
+"competition_index": 95,
+"low_top_bid": 1040.03,
+"high_top_bid": 4135.15,
+"intent": "commercial",
+"kept_for_ai": true
+},
+{
+"id": 291,
+"keyword": "fridge door broken",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "commercial",
+"kept_for_ai": true
+},
+{
+"id": 292,
+"keyword": "fridge handle broken",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "commercial",
+"kept_for_ai": true
+},
+{
+"id": 293,
+"keyword": "refrigerator service near me",
+"avg_monthly_searches": 90,
+"competition_index": 95,
+"low_top_bid": 1040.03,
+"high_top_bid": 4152.93,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 294,
+"keyword": "fridge service near me",
+"avg_monthly_searches": 90,
+"competition_index": 95,
+"low_top_bid": 1040.03,
+"high_top_bid": 4152.93,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 295,
+"keyword": "fridge maintenance near me",
+"avg_monthly_searches": 90,
+"competition_index": 95,
+"low_top_bid": 1040.03,
+"high_top_bid": 4152.93,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 296,
+"keyword": "refrigerator maintenance near me",
+"avg_monthly_searches": 90,
+"competition_index": 95,
+"low_top_bid": 1040.03,
+"high_top_bid": 4152.93,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 297,
+"keyword": "nearest fridge repair shop",
+"avg_monthly_searches": 10,
+"competition_index": 45,
+"low_top_bid": 739.23,
+"high_top_bid": 1903.19,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 298,
+"keyword": "refrigerator seal repair",
+"avg_monthly_searches": 10,
+"competition_index": 50,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 299,
+"keyword": "fridge seal repair",
+"avg_monthly_searches": 10,
+"competition_index": 50,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 300,
+"keyword": "refrigerator technician",
+"avg_monthly_searches": 20,
+"competition_index": 60,
+"low_top_bid": 873.62,
+"high_top_bid": 4632.09,
+"intent": "commercial",
+"kept_for_ai": true
+},
+{
+"id": 301,
+"keyword": "refrigerator freezer repair",
+"avg_monthly_searches": 10,
+"competition_index": 55,
+"low_top_bid": 1132.62,
+"high_top_bid": 3397.85,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 302,
+"keyword": "mini fridge repair",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 303,
+"keyword": "fridge and freezer repair",
+"avg_monthly_searches": 10,
+"competition_index": 55,
+"low_top_bid": 1132.62,
+"high_top_bid": 3397.85,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 304,
+"keyword": "mini refrigerator repair",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 305,
+"keyword": "fix mini fridge",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 306,
+"keyword": "refrigerant leak fix",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 307,
+"keyword": "fridge repair",
+"avg_monthly_searches": 1900,
+"competition_index": 28,
+"low_top_bid": 1010.3,
+"high_top_bid": 4152.93,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 308,
+"keyword": "best refrigerator repair service near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 309,
+"keyword": "home fridge repair near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 310,
+"keyword": "display fridge repair near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 311,
+"keyword": "ac refrigerator repair near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 312,
+"keyword": "near by refrigerator repair shop",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 313,
+"keyword": "fridge servicing near me",
+"avg_monthly_searches": 90,
+"competition_index": 95,
+"low_top_bid": 1040.03,
+"high_top_bid": 4152.93,
+"intent": "commercial",
+"kept_for_ai": true
+},
+{
+"id": 314,
+"keyword": "ref repair near me",
+"avg_monthly_searches": 10,
+"competition_index": 82,
+"low_top_bid": 873.62,
+"high_top_bid": 4455.52,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 315,
+"keyword": "samsung refrig repair near me",
+"avg_monthly_searches": 10,
+"competition_index": 17,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 316,
+"keyword": "lg refrigerator service",
+"avg_monthly_searches": 10,
+"competition_index": 14,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 317,
+"keyword": "lg fridge service",
+"avg_monthly_searches": 10,
+"competition_index": 14,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 318,
+"keyword": "bosch refrigerators repair service",
+"avg_monthly_searches": 10,
+"competition_index": 10,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 319,
+"keyword": "miele fridge repair",
+"avg_monthly_searches": 10,
+"competition_index": 51,
+"low_top_bid": 559.86,
+"high_top_bid": 2654.15,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 320,
+"keyword": "samsung refrigerator repair service",
+"avg_monthly_searches": 10,
+"competition_index": 21,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 321,
+"keyword": "samsung fridge repair service",
+"avg_monthly_searches": 10,
+"competition_index": 21,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 322,
+"keyword": "samsung refrigerator maintenance",
+"avg_monthly_searches": 10,
+"competition_index": 57,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 323,
+"keyword": "sharp fridge repair",
+"avg_monthly_searches": 10,
+"competition_index": 29,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 324,
+"keyword": "sharp refrigerator repair",
+"avg_monthly_searches": 10,
+"competition_index": 29,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 325,
+"keyword": "samsung refrigerator repair",
+"avg_monthly_searches": 10,
+"competition_index": 40,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 326,
+"keyword": "samsung fridge fix",
+"avg_monthly_searches": 10,
+"competition_index": 40,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 327,
+"keyword": "samsung refrigerator fix",
+"avg_monthly_searches": 10,
+"competition_index": 40,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 328,
+"keyword": "samsung refrig repair",
+"avg_monthly_searches": 10,
+"competition_index": 40,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 329,
+"keyword": "lg refrigerator service near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 330,
+"keyword": "samsung fridge mechanic near me",
+"avg_monthly_searches": 10,
+"competition_index": 29,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "commercial",
+"kept_for_ai": true
+},
+{
+"id": 331,
+"keyword": "samsung fridge service near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 332,
+"keyword": "hisense refrigerator repair near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 333,
+"keyword": "electrolux fridge repair near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 334,
+"keyword": "lg freeze repair near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 335,
+"keyword": "panasonic fridge repair near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 336,
+"keyword": "broken freezer door",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "commercial",
+"kept_for_ai": true
+},
+{
+"id": 337,
+"keyword": "fix freezer",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 338,
+"keyword": "wine cooler repair service",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 339,
+"keyword": "freezer repair service near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 340,
+"keyword": "wine chiller repair near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 341,
+"keyword": "freezer repair shop near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 342,
+"keyword": "cooler fix near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 343,
+"keyword": "wine cooler repair service near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 344,
+"keyword": "deep fridge repair near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 345,
+"keyword": "freezer door repair near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 346,
+"keyword": "kedai repair washing machine near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+},
+{
+"id": 347,
+"keyword": "bosch appliance repair service near me",
+"avg_monthly_searches": 10,
+"competition_index": 0,
+"low_top_bid": 0.0,
+"high_top_bid": 0.0,
+"intent": "transactional",
+"kept_for_ai": true
+}
+]
+}

@@ -85,6 +85,28 @@ LOW_AREAS = [s.strip() for s in
              os.environ.get("LOW_AREAS", "").split(",") if s.strip()]
 MODEL = os.environ.get("CLAUDE_MODEL", "claude-sonnet-5")
 
+# HARD FLOOR (Sep 2026): a live Dubai run bid Al Satwa UP. Areas you already
+# know are labour-housing / industrial / fraud-heavy must never depend on the
+# model's judgement. They are forced LOW, the model cannot lift them, and only
+# your own PREMIUM_AREAS can. HARD_LOW_AREAS=none disables; any other value
+# replaces the built-in list for that city.
+_BUILTIN_LOW = {
+    "dubai": ["Al Satwa", "Al Karama", "Deira", "Naif", "Al Muraqqabat", "Al Rigga",
+              "Hor Al Anz", "Al Qusais Industrial Area", "Muhaisnah", "Sonapur",
+              "Al Quoz Industrial Area", "Jebel Ali Industrial Area",
+              "International City", "Al Warsan", "Dubai Investments Park"],
+    "sharjah": ["Industrial Area", "Al Sajaa", "Muwailih"],
+    "abu dhabi": ["Mussafah", "ICAD", "Mafraq Industrial Area"],
+}
+_hl = os.environ.get("HARD_LOW_AREAS", "").strip()
+if _hl.lower() == "none":
+    HARD_LOW_AREAS = []
+elif _hl:
+    HARD_LOW_AREAS = [x.strip() for x in _hl.split(",") if x.strip()]
+else:
+    HARD_LOW_AREAS = next((v for k, v in _BUILTIN_LOW.items()
+                           if k in TARGET_LOCATION.lower()), [])
+
 INPUT_JSON = "keyword_strategy.json"
 OUT_CSV = "locations_editor.csv"
 OUT_NEG_CSV = "locations_negative.csv"
@@ -217,17 +239,23 @@ def apply_area_overrides(chosen, tiers, reasons, city="", cc=""):
     with no ANTHROPIC_API_KEY at all, as a purely manual tier list.
     """
     tiers, reasons = dict(tiers), dict(reasons)
-    for names, tier in ((PREMIUM_AREAS, "premium"), (LOW_AREAS, "low")):
+    _prem_keys = {_norm_area(x) for x in PREMIUM_AREAS}
+    hard_low = [a for a in HARD_LOW_AREAS if _norm_area(a) not in _prem_keys]
+    # order matters: HARD floor first, then your LOW list, then your PREMIUM
+    # list last so your explicit call is the one that stands
+    for names, tier in ((hard_low, "low"), (LOW_AREAS, "low"), (PREMIUM_AREAS, "premium")):
         if not names:
             continue
         mapped, missing = map_tiers_to_areas(
             chosen, {n: tier for n in names}, city, cc)
         for area, t in mapped.items():
             if tiers.get(area) and tiers[area] != t:
-                print(f"   ✏️ Override: '{area}' {tiers[area]} → {t} (your {tier.upper()}_AREAS)")
+                print(f"   ✏️ Override: '{area}' {tiers[area]} → {t} "
+                      f"({'HARD floor' if names is hard_low else 'your ' + tier.upper() + '_AREAS'})")
             tiers[area] = t
-            reasons[area] = "manual override"
-        if missing:
+            reasons[area] = ("hard floor: known low-intent area" if names is hard_low
+                             else "manual override")
+        if missing and names is not hard_low:
             print(f"   ⚠️ {tier.upper()}_AREAS not in the targeted list "
                   f"(ignored): {', '.join(missing)}")
     return tiers, reasons
@@ -462,6 +490,16 @@ def main():
         return
 
     tiers, tier_reasons, neg_names = classify_bid_tiers(chosen, cc, city, geo, index)
+    # Belt and braces: no hard-floor area may leave this stage bid UP, whatever
+    # path produced the tiers (model, override, or a failed model call).
+    _prem_keys = {_norm_area(x) for x in PREMIUM_AREAS}
+    _floor, _ = map_tiers_to_areas(chosen, {a: "low" for a in HARD_LOW_AREAS
+                                            if _norm_area(a) not in _prem_keys}, city, cc)
+    for _area in _floor:
+        if tiers.get(_area) != "low":
+            print(f"   🛑 Hard floor: '{_area}' was {tiers.get(_area, 'standard')} -> low ({LOW_BID_ADJ}%)")
+            tiers[_area] = "low"
+            tier_reasons.setdefault(_area, "hard floor: known low-intent / labour / industrial area")
     # Editor CSV bulk-import format for bid adjustments (per Google's docs,
     # support.google.com/google-ads/editor/answer/30532): a PLAIN NUMBER
     # with no percent sign — "+25%" is written as 25, "-90%" as -90.

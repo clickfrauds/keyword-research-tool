@@ -124,7 +124,7 @@ def main():
                 "Enhanced CPC": "Disabled",
                 # landing-page DKI: every click carries its bid keyword so the
                 # Mode 1 pages' ?kw= H1 message-match swap works automatically
-                "Final URL suffix": "kw={keyword}",
+                "Final URL suffix": "kw={keyword}&cid={campaignid}&agid={adgroupid}&mt={matchtype}&dev={device}&loc={loc_physical_ms}&net={network}",
                 "Campaign Status": "Paused",
             }))
 
