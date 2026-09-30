@@ -218,9 +218,18 @@ PLAN_FILE = "ad_group_plan.json"
 def _plan_is_fallback():
     try:
         with open(PLAN_FILE, encoding="utf-8") as _f:
-            return bool(json.load(_f).get("fallback_legacy"))
+            _plan = json.load(_f)
     except Exception:
         return True
+    if _plan.get("needs_service_map"):
+        # Stage 2.7 could not map the demand to the seeds. The model is NOT
+        # asked to guess the structure instead — that is the path that gave
+        # 4 ad groups for 7 services.
+        print("❌ NEEDS_SERVICE_MAP: the seeds do not cover this demand "
+              f"(e.g. {', '.join(_plan.get('unmatched_examples', [])[:4])}). "
+              "Give one seed per sub-service or advanced.services_json, then re-run.")
+        sys.exit(1)
+    return bool(_plan.get("fallback_legacy"))
 
 
 PLAN_MODE = (os.path.exists(PLAN_FILE) and not _plan_is_fallback()
@@ -1216,10 +1225,11 @@ JSON object, nothing else:
   "notes": "2 sentences max"
 }
 Rules: expansions are real searches a BUYER of this service types in this
-location, matching THAT group's layer only (core = generic service + location;
-brand = brand + appliance + repair; problem = symptom/part/error in the
-searcher's words; urgent = near me / emergency / same day / 24 hour / voice
-questions like "who can fix ..."). Never product-shopping (buy, price of new,
+location, matching THAT group's layer only (core = generic service + location,
+INCLUDING the local and voice phrasings: near me, at home, open now, same
+day, "who can fix ...", "repair my ..."; brand = brand + appliance + repair;
+problem = fault/part/error in the searcher's words WITH a hire word;
+emergency = emergency / 24 hour / 24/7 only; symptom = leave empty). Never product-shopping (buy, price of new,
 sale), jobs, DIY or other cities. Never a bare symptom without a hire word
 ("fridge not cooling" is someone fixing it themselves; "fridge not cooling
 repair" and "washing machine drum broken" are buyers). Include word-order and
@@ -1239,6 +1249,7 @@ def run_plan_mode(data):
 
     with open(PLAN_FILE, encoding="utf-8") as f:
         plan = json.load(f)
+    vtsa.restore_classifier(plan.get("classifier"))
     kept = [k for k in data["keywords"] if k.get("kept_for_ai")]
     by_id = {k["id"]: k for k in kept}
     MAX_AD_GROUPS = max(MAX_AD_GROUPS, len(plan["ad_groups"]))
@@ -1284,16 +1295,17 @@ def run_plan_mode(data):
     routed = {g["name"]: list(g.get("silo_catchers", [])) for g in plan["ad_groups"]}
     n_moved = n_dropped = 0
     for g in plan["ad_groups"]:
+        if g["layer"] == "symptom":
+            continue   # exact-match test: its keywords are the Planner's own, nothing added
         for e in (x_groups.get(g["name"].lower(), {}).get("intent_expansion_keywords") or []):
             e = str(e).strip().lower()
             if not e or vtsa.junk_reason(e):
                 n_dropped += 1
                 continue
-            si = vtsa.assign_service(e, services)
-            if si is None or services[si]["name"] != g["service"]:
+            si, layer = vtsa.classify(e, services)
+            if si is None or layer in (None, "symptom") or services[si]["name"] != g["service"]:
                 n_dropped += 1
                 continue
-            layer, _ = vtsa.layer_of(e, services[si])
             target = group_by_key.get((g["service"], layer)) or group_by_key[(g["service"], "core")]
             if target["name"] != g["name"]:
                 n_moved += 1
@@ -1317,12 +1329,17 @@ def run_plan_mode(data):
                                   "repair — never 'authorized', 'official' or 'genuine service centre'.",
                          "problem": " Lead with the exact fault the searcher typed "
                                     "(not spinning, not cooling, leaking) and a same-day fix.",
-                         "urgent": " Lead with speed and proximity: same day, near you, "
-                                   "technician at your door today.",
+                         "emergency": " Lead with round-the-clock availability: emergency "
+                                      "call-outs, 24/7, technician at your door tonight.",
+                         "symptom": " Lead with the exact symptom as a question "
+                                    "(Fridge Not Cooling?) and offer a technician's "
+                                    "diagnosis — never a DIY fix.",
                          "core": " Lead with the service + location; all brands, same day."}
                       .get(g["layer"], "")),
             "match_type": g.get("match_type", "phrase"),
-            "match_type_reason": "plan: phrase for discovery on a new campaign",
+            "match_type_reason": ("plan: exact — symptom test at a reduced bid"
+                                  if g.get("match_type") == "exact"
+                                  else "plan: phrase for discovery on a new campaign"),
             "priority": "high" if g["volume"] >= 1000 else "medium" if g["volume"] >= 300 else "low",
             "bid_multiplier": g.get("bid_multiplier", 1.0),
             "keyword_ids": g["keyword_ids"],

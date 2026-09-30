@@ -8,8 +8,8 @@ generic ad, the generic bid and the wrong Quality Score history.
 
 This writes `silo_router_script.js`: a Google Ads Script (run hourly) that
 reads the last 14 days of search terms, classifies each one with the SAME
-rules as Stage 2.7 (service -> layer precedence problem > brand > urgent >
-core), and when a term was served by an ad group that does not own it, adds
+rules as Stage 2.7 (the classifier is frozen in the plan and ported line
+for line; tests/test_router_parity.py keeps the two in agreement), and when a term was served by an ad group that does not own it, adds
 an EXACT negative [term] to the wrong group only. The owning group keeps it.
 
 Safety:
@@ -43,74 +43,175 @@ var DRY_RUN = true;
 var CAMPAIGN_NAME = __CAMPAIGN_JSON__;
 var LOOKBACK = 'LAST_14_DAYS';
 var MIN_IMPRESSIONS = 2;
-
-var SERVICES = __SERVICES__;         // [{name, aliases:[...]}] longest alias first
+var SERVICES = __SERVICES__;         // [{name, lang, aliases:[...]}]
 var GROUPS = __GROUPS__;             // {"service|layer": "ad group name"}
-var BRANDS = __BRANDS__;
-var BRAND_PHRASES = __BRAND_PHRASES__;   // multi-word: "ال جي", "fisher paykel"
-var PROBLEM_TRIGGERS = __PROBLEM__;
-var URGENT_PHRASES = __URGENT__;
-var ERROR_CODE = /^(?:[a-z]{1,2}\d{1,3}|\d{1,2}[a-z]{1,2})$/;
+// Stage 2.7's own classifier, frozen in the plan: same word lists, same
+// typo vocabulary, same settings. Every function below is a line-for-line
+// port of service_architecture.py, and tests/test_router_parity.py holds the
+// two to 100% agreement — change one, change both.
+var V = __VOCAB__;
 
-// Same Arabic normaliser as Stage 2.7: diacritics out, alef variants unified,
-// the article stripped, feminine/plural ending stripped ("الثلاجات" -> "ثلاج").
-function arNorm(w) {
-  w = w.replace(/[\u064B-\u0652\u0640]/g, '').replace(/[أإآ]/g, 'ا').replace(/ى/g, 'ي');
-  if (w.length <= 3) return w;
+function setOf(a) { var o = {}; for (var i = 0; i < a.length; i++) o[a[i]] = 1; return o; }
+var S = {};
+['JUNK_TOKENS', 'SOFT_JUNK_TOKENS', 'BRANDS', 'HIRE_WORDS', 'HIRE_SIGNALS', 'PROBLEM_TOKENS',
+ 'HARD_FAULTS', 'PRICE_TOKENS', 'URGENT_TOKENS', 'EMERGENCY_TOKENS', '_WEAK_BRANDS',
+ '_FAULT_WORDS', '_STRONG_PARTS', '_BRAND_PAIRS', '_CANON'].forEach(function (n) { S[n] = setOf(V[n]); });
+var CANON_SORTED = V._CANON;
+var MULTI_BRANDS = V.BRANDS.filter(function (b) { return b.indexOf(' ') !== -1; });
+var ERROR_CODE = /^(?:[a-z]{1,2}\d{1,3}|\d{1,2}[a-z]{1,2})$/;
+var AR_RE = /[؀-ۿ]/;
+var WORD_RE = /[\p{L}\p{N}]+(?:\/[\p{L}\p{N}]+)?/gu;
+var ALPHA_RE = /^\p{L}+$/u;
+
+function has(o, k) { return Object.prototype.hasOwnProperty.call(o, k); }
+function rawToks(s) { return String(s).toLowerCase().match(WORD_RE) || []; }
+function arNorm(t) {
+  t = t.replace(/[ً-ْـ]/g, '').replace(/[أإآ]/g, 'ا').replace(/ى/g, 'ي');
+  if (t.length <= 3) return t;
   var pres = ['وال', 'بال', 'فال', 'كال', 'لل', 'ال'];
   for (var i = 0; i < pres.length; i++) {
-    if (w.indexOf(pres[i]) === 0 && w.length - pres[i].length >= 3) { w = w.slice(pres[i].length); break; }
+    if (t.indexOf(pres[i]) === 0 && t.length - pres[i].length >= 3) { t = t.slice(pres[i].length); break; }
   }
   var sufs = ['ات', 'ة', 'ه'];
   for (var j = 0; j < sufs.length; j++) {
-    var s = sufs[j];
-    if (w.slice(-s.length) === s && w.length - s.length >= 3) { w = w.slice(0, -s.length); break; }
+    var sf = sufs[j];
+    if (t.slice(-sf.length) === sf && t.length - sf.length >= 3) { t = t.slice(0, -sf.length); break; }
   }
-  return w;
+  return t;
 }
-function isArabic(t) { return /[\u0600-\u06FF]/.test(t); }
-function norm(t) {
-  var words = t.toLowerCase().replace(/[^\w\u0600-\u06FF\/]+/g, ' ').replace(/\s+/g, ' ').trim().split(' ');
-  return ' ' + words.map(function (w) { return isArabic(w) ? arNorm(w) : w; }).join(' ') + ' ';
+function lev(a, b, cap) {
+  if (Math.abs(a.length - b.length) > cap) return cap + 1;
+  var prev = [], i, j;
+  for (j = 0; j <= b.length; j++) prev.push(j);
+  for (i = 1; i <= a.length; i++) {
+    var cur = [i], mn = i;
+    for (j = 1; j <= b.length; j++) {
+      var v = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + (a[i - 1] !== b[j - 1] ? 1 : 0));
+      cur.push(v); if (v < mn) mn = v;
+    }
+    if (mn > cap) return cap + 1;
+    prev = cur;
+  }
+  return prev[prev.length - 1];
 }
-function has(text, phrase) { return text.indexOf(' ' + phrase + ' ') !== -1; }
-
-function serviceOf(text) {
-  var best = null, bestLen = 0, bestPos = 1e9;
-  var lang = isArabic(text) ? 'ar' : 'en';
+function fixToken(t) {
+  if (has(V._GLUE, t)) return V._GLUE[t];
+  if (has(S._CANON, t) || t.length < 5 || !ALPHA_RE.test(t)) return t;
+  var cap = t.length >= 9 ? 2 : 1, best = null, bd = cap + 1;
+  for (var i = 0; i < CANON_SORTED.length; i++) {
+    var w = CANON_SORTED[i];
+    if (w[0] === t[0] && Math.abs(w.length - t.length) <= cap) {
+      var d = lev(t, w, cap);
+      if (d < bd) { best = w; bd = d; }
+    }
+  }
+  return (best && bd <= cap) ? best : t;
+}
+function toks(s) {
+  var out = [];
+  rawToks(s).forEach(function (t) {
+    if (AR_RE.test(t)) out.push(arNorm(t));
+    else fixToken(t).split(/\s+/).forEach(function (x) { if (x) out.push(x); });
+  });
+  return out;
+}
+function hasPhrase(text, phrase) { return (' ' + text + ' ').indexOf(' ' + phrase + ' ') !== -1; }
+function singular(text) {
+  return text.split(' ').map(function (w) {
+    return (w.length > 4 && w.slice(-1) === 's' && w.slice(-2) !== 'ss') ? w.slice(0, -1) : w;
+  }).join(' ');
+}
+var SUFFIXES = ['s', 'es', 'ing', 'er', 'ers', 'ed'];
+function aliasHit(text, alias) {
+  if (hasPhrase(text, alias)) return true;
+  if (alias.indexOf(' ') !== -1 || alias.length < 4) return false;
+  for (var i = 0; i < SUFFIXES.length; i++) if (hasPhrase(text, alias + SUFFIXES[i])) return true;
+  return false;
+}
+function assignService(kw) {
+  var text = singular(toks(kw).join(' '));
+  var lang = AR_RE.test(kw) ? 'ar' : 'en';
+  var best = -1, bestLen = 0, bestPos = 1e6;
   for (var i = 0; i < SERVICES.length; i++) {
     if ((SERVICES[i].lang || 'en') !== lang) continue;
     for (var j = 0; j < SERVICES[i].aliases.length; j++) {
       var a = SERVICES[i].aliases[j];
-      if (has(text, a)) {
-        var len = a.split(' ').length, pos = text.indexOf(' ' + a + ' ');
-        if (len > bestLen || (len === bestLen && pos < bestPos)) { best = SERVICES[i]; bestLen = len; bestPos = pos; }
+      if (aliasHit(text, a)) {
+        var alen = a.split(' ').length, pos = (' ' + text + ' ').indexOf(' ' + a + ' ');
+        if (alen > bestLen || (alen === bestLen && pos < bestPos)) { best = i; bestLen = alen; bestPos = pos; }
       }
     }
   }
   return best;
 }
-
-function layerOf(text, svc) {
-  var toks = text.trim().split(' ');
-  var aliasToks = {};
-  svc.aliases.forEach(function (a) { a.split(' ').forEach(function (w) { aliasToks[w] = 1; }); });
-  for (var i = 0; i < toks.length; i++) {
-    if (aliasToks[toks[i]]) continue;
-    if (PROBLEM_TRIGGERS.indexOf(toks[i]) !== -1 || ERROR_CODE.test(toks[i])) return 'problem';
+function tset(text) { return setOf(text ? text.split(' ') : []); }
+function anyIn(ts, set) { for (var k in ts) if (has(set, k)) return true; return false; }
+function symptomOnly(text) {
+  var ts = tset(text), trig = false;
+  for (var k in ts) if (has(S.PROBLEM_TOKENS, k) || ERROR_CODE.test(k)) trig = true;
+  if (!trig) return false;
+  return !anyIn(ts, S.HIRE_SIGNALS) && !anyIn(ts, S.HARD_FAULTS);
+}
+function junkReason(kw) {
+  var text = toks(kw).join(' '), ts = tset(text), i;
+  var hasHire = anyIn(ts, S.HIRE_WORDS);
+  for (i = 0; i < V.WRONG_LOCS.length; i++) if (hasPhrase(text, V.WRONG_LOCS[i])) return 'wrong location';
+  for (i = 0; i < V.DIY_STARTS.length; i++) if (text.indexOf(V.DIY_STARTS[i]) === 0) return 'diy';
+  if (anyIn(ts, S.JUNK_TOKENS)) return 'junk';
+  if (anyIn(ts, S.SOFT_JUNK_TOKENS) && !hasHire) return 'junk';
+  if (anyIn(ts, S.PRICE_TOKENS) && !hasHire) return 'price';
+  if (symptomOnly(text)) return 'symptom only';
+  if (!hasHire && !anyIn(ts, S.HARD_FAULTS) && !anyIn(ts, S.URGENT_TOKENS)) {
+    for (i = 0; i < V._URGENT_PHRASES.length; i++) if (hasPhrase(text, V._URGENT_PHRASES[i])) return null;
+    return 'bare product';
   }
-  for (i = 0; i < toks.length; i++) if (BRANDS.indexOf(toks[i]) !== -1) return 'brand';
-  for (i = 0; i < BRAND_PHRASES.length; i++) if (has(text, BRAND_PHRASES[i])) return 'brand';
-  for (i = 0; i < URGENT_PHRASES.length; i++) if (has(text, URGENT_PHRASES[i])) return 'urgent';
+  return null;
+}
+function brandsIn(text) {
+  var t = text.split(' '), i;
+  for (i = 0; i < t.length; i++) {
+    if (has(S.BRANDS, t[i]) && !has(S._WEAK_BRANDS, t[i])) return true;
+    if (has(S._WEAK_BRANDS, t[i]) && i + 1 < t.length && has(S._BRAND_PAIRS, t[i] + ' ' + t[i + 1])) return true;
+  }
+  for (i = 0; i < MULTI_BRANDS.length; i++) if (hasPhrase(text, MULTI_BRANDS[i])) return true;
+  return false;
+}
+function problemHits(text, aliases) {
+  var ts = tset(text), aliasToks = {}, hits = {}, k, n = 0;
+  aliases.forEach(function (a) { a.split(' ').forEach(function (w) { aliasToks[w] = 1; }); });
+  for (k in ts) if ((has(S.PROBLEM_TOKENS, k) || ERROR_CODE.test(k)) && !has(aliasToks, k)) hits[k] = 1;
+  for (k in ts) if (has(S.HARD_FAULTS, k)) hits[k] = 1;
+  var fault = false, code = false;
+  for (k in hits) { n++; if (has(S._FAULT_WORDS, k)) fault = true; if (ERROR_CODE.test(k)) code = true; }
+  if (fault || code) return n > 0;
+  for (k in hits) if (has(S._STRONG_PARTS, k)) return true;
+  return false;
+}
+function emergencyHit(text) {
+  for (var i = 0; i < V.EMERGENCY_PHRASES.length; i++) if (hasPhrase(text, V.EMERGENCY_PHRASES[i])) return true;
+  return anyIn(tset(text), S.EMERGENCY_TOKENS);
+}
+function layerOf(kw, svc) {
+  var text = toks(kw).join(' ');
+  if (V.OPEN_24_7 && emergencyHit(text)) return 'emergency';
+  if (brandsIn(text)) return 'brand';
+  if (problemHits(text, svc.aliases)) return 'problem';
   return 'core';
 }
-
+// -> [serviceIndex, layer|null] ; [-1, null] = no service
+function classify(kw) {
+  var i = assignService(kw);
+  if (i < 0) return [-1, null];
+  var why = junkReason(kw);
+  if (why) return [i, (V.SYMPTOM_TEST && why === 'symptom only') ? 'symptom' : null];
+  return [i, layerOf(kw, SERVICES[i])];
+}
 function ownerOf(term) {
-  var text = norm(term);
-  var svc = serviceOf(text);
-  if (!svc) return null;
-  var layer = layerOf(text, svc);
-  return GROUPS[svc.name + '|' + layer] || GROUPS[svc.name + '|core'] || null;
+  var c = classify(term);
+  if (c[0] < 0 || !c[1]) return null;
+  var name = SERVICES[c[0]].name;
+  if (c[1] === 'symptom') return has(GROUPS, name + '|symptom') ? GROUPS[name + '|symptom'] : null;
+  return GROUPS[name + '|' + c[1]] || GROUPS[name + '|core'] || null;
 }
 
 function main() {
@@ -147,39 +248,40 @@ function main() {
 """
 
 
+def build_js(plan, camp=""):
+    """The router script for a plan. Pure — the parity test calls it too."""
+    services = [{"name": s["name"], "aliases": s["aliases"], "lang": s.get("lang", "en")}
+                for s in plan["services"]]
+    groups = {f'{g["service"]}|{g["layer"]}': g["name"] for g in plan["ad_groups"]}
+    vocab = plan.get("classifier")
+    if not vocab:
+        # a pre-snapshot plan: rebuild the classifier from this module's lists
+        vtsa._build_normaliser(plan["services"])
+        vocab = vtsa.classifier_snapshot()
+    return (JS.replace("__CAMPAIGN__", camp or "(set CAMPAIGN_NAME)")
+              .replace("__CAMPAIGN_JSON__", json.dumps(camp))
+              .replace("__SERVICES__", json.dumps(services, ensure_ascii=False))
+              .replace("__GROUPS__", json.dumps(groups, ensure_ascii=False, indent=1))
+              .replace("__VOCAB__", json.dumps(vocab, ensure_ascii=False))), len(groups), len(services)
+
+
 def main():
     if not os.path.exists(PLAN):
         print(f"ℹ️ {PLAN} not found (legacy run) — silo router skipped.")
         return
     with open(PLAN, encoding="utf-8") as f:
         plan = json.load(f)
-    if plan.get("fallback_legacy"):
-        print("ℹ️ Plan fell back to legacy grouping — silo router skipped.")
+    if plan.get("fallback_legacy") or plan.get("needs_service_map"):
+        print("ℹ️ No ad group plan for this run — silo router skipped.")
         return
     camp = ""
     if os.path.exists(STRATEGY):
         with open(STRATEGY, encoding="utf-8") as f:
             camp = ((json.load(f).get("campaigns") or [{}])[0]).get("name", "")
-    services = [{"name": s["name"], "aliases": s["aliases"], "lang": s.get("lang", "en")}
-                for s in plan["services"]]
-    groups = {f'{g["service"]}|{g["layer"]}': g["name"] for g in plan["ad_groups"]}
-    problem = sorted({"لا"} | vtsa._NEGATIONS
-                     | {t for t in vtsa.PROBLEM_TOKENS if t not in vtsa._GENERIC_PART_WORDS})
-    urgent = sorted(set(vtsa._URGENT_PHRASES)
-                    | {"emergency", "urgent", "nearby", "near", "local", "24", "same day"})
-    js = (JS.replace("__CAMPAIGN__", camp or "(set CAMPAIGN_NAME)")
-            .replace("__CAMPAIGN_JSON__", json.dumps(camp))
-            .replace("__SERVICES__", json.dumps(services, ensure_ascii=False))
-            .replace("__GROUPS__", json.dumps(groups, ensure_ascii=False, indent=1))
-            .replace("__BRANDS__", json.dumps(sorted(b for b in vtsa.BRANDS if " " not in b and b not in vtsa._WEAK_BRANDS)))
-            .replace("__BRAND_PHRASES__", json.dumps(sorted({vtsa.norm_phrase(b) for b in vtsa.BRANDS if " " in b}
-                                                            | {" ".join(pr) for pr in vtsa._BRAND_PAIRS}),
-                                                           ensure_ascii=False))
-            .replace("__PROBLEM__", json.dumps(problem, ensure_ascii=False))
-            .replace("__URGENT__", json.dumps(urgent, ensure_ascii=False)))
+    js, n_groups, n_services = build_js(plan, camp)
     with open(OUT, "w", encoding="utf-8") as f:
         f.write(js)
-    print(f"✅ {OUT}: {len(groups)} ad groups routed across {len(services)} services (DRY_RUN on)")
+    print(f"✅ {OUT}: {n_groups} ad groups routed across {n_services} services (DRY_RUN on)")
 
 
 if __name__ == "__main__":

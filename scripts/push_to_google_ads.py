@@ -897,7 +897,11 @@ def main():
     n_camp_neg = 0
     _seen_cn = set()
     for r in load_rows("google_ads_campaign_negatives.csv"):
-        t = " ".join(str(r.get("Keyword") or "").split())
+        # Google rejects keyword text holding ! @ % ^ * ( ) = { } ; ~ ` < > ? \ |
+        # or match-type syntax, and this mutate is atomic: ONE model-written
+        # "how to fix?" would fail the whole campaign. Strip, don't send.
+        t = re.sub(r'[!@%^*()={};~`<>?\\|,"\[\]+]', " ", str(r.get("Keyword") or ""))
+        t = " ".join(t.split()).strip(" -.")
         if (not t or (r.get("Ad Group") or "").strip() or len(t) > 80
                 or len(t.split()) > 10 or t.lower() in _seen_cn):
             continue

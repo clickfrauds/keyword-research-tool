@@ -28,7 +28,7 @@ on:
         # auto-detection, the bid currency and its FX rate, and the
         # single-campaign audience switch — so they ride together as JSON and
         # leave room for inputs people actually fill in.
-        description: 'Manual-run overrides as JSON. Keys: bid_currency, bid_fx_rate, location_id, language_id, single_campaign, match_type (phrase|exact — blank lets the model decide per ad group), daily_clicks_target, reuse_request_id (creative/second-part push: reuse the FROZEN strategy of that run — no new research), wait_for_pages_min (poll landing pages before push), plan_mode (on|off), tier_step (default 1000), max_slots (default 4), services_json, extra_brands, business_model (service|parts|retail|installer), negative_allow, extra_junk (comma lists), primary_conversions (default phone,whatsapp,form). Example: {"bid_currency":"AED","match_type":"phrase"}'
+        description: 'Manual-run overrides as JSON. Keys: bid_currency, bid_fx_rate, location_id, language_id, single_campaign, match_type (phrase|exact — blank lets the model decide per ad group), daily_clicks_target, reuse_request_id (creative/second-part push: reuse the FROZEN strategy of that run — no new research), wait_for_pages_min (poll landing pages before push), plan_mode (on|off), tier_step (default 1000), max_slots (default 4), services_json, extra_brands, business_model (service|parts|retail|installer), negative_allow, extra_junk (comma lists), primary_conversions (default phone,whatsapp,form), open_24_7 (on = own Emergency 24/7 groups), symptom_test (on|off), min_layer_clicks (default 50), avg_cpc. Example: {"bid_currency":"AED","match_type":"phrase"}'
         required: false
         default: '{}'
       keywords_csv_url:
@@ -151,8 +151,8 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Check SEO plan contract (offline)
-        run: python -m unittest discover -s tests -p "test_seo_plan_contract.py"
+      - name: Offline checks (SEO plan contract, ad group plan + router parity)
+        run: python -m unittest discover -s tests -p "test_*.py"
 
       - name: Resolve request id (fallback for manual runs)
         id: reqid
@@ -331,6 +331,19 @@ jobs:
           MAX_SLOTS: ${{ fromJSON(github.event.inputs.advanced || '{}').max_slots || '4' }}
           SERVICES_JSON: ${{ fromJSON(github.event.inputs.advanced || '{}').services_json && toJSON(fromJSON(github.event.inputs.advanced || '{}').services_json) || '' }}
           EXTRA_BRANDS: ${{ fromJSON(github.event.inputs.advanced || '{}').extra_brands }}
+          # GPT-review rules (Sep 2026): a layer splits only when it can buy
+          # min_layer_clicks a month at the Planner CPC; emergency is its own
+          # group only for a 24/7 business; symptom-only queries get an exact
+          # test group at 60% of the core bid (symptom_test=off sends them to
+          # the page FAQ instead).
+          OPEN_24_7: ${{ fromJSON(github.event.inputs.advanced || '{}').open_24_7 || 'off' }}
+          SYMPTOM_TEST: ${{ fromJSON(github.event.inputs.advanced || '{}').symptom_test || 'on' }}
+          MIN_LAYER_CLICKS: ${{ fromJSON(github.event.inputs.advanced || '{}').min_layer_clicks || '50' }}
+          AVG_CPC: ${{ fromJSON(github.event.inputs.advanced || '{}').avg_cpc }}
+          NICHE_DESCRIPTION: ${{ github.event.inputs.niche_description }}
+          BUSINESS_MODEL: ${{ fromJSON(github.event.inputs.advanced || '{}').business_model || 'service' }}
+          NEGATIVE_ALLOW: ${{ fromJSON(github.event.inputs.advanced || '{}').negative_allow }}
+          EXTRA_JUNK: ${{ fromJSON(github.event.inputs.advanced || '{}').extra_junk }}
         run: python scripts/service_architecture.py
 
       - name: Stage 3 - Claude campaigns + ad groups + landing pages (~$0.30/run)

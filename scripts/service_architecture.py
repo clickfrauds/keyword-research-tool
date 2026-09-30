@@ -21,16 +21,23 @@ WHY THIS EXISTS (Sep 2026 test run):
                 product shopping ("washing machine price", "buy fridge"),
                 jobs/courses, DIY/how-to, parts shops, wrong emirates/countries
   4. LAYER      every kept keyword gets ONE layer, fixed precedence:
-                   PROBLEM  > BRAND  > URGENT  > CORE
-                ("samsung washer not draining" is a PROBLEM query first)
+                   EMERGENCY (only when OPEN_24_7) > BRAND > PROBLEM > CORE
+                ("samsung washer not draining" is a BRAND query first).
+                Near me / at home / open now / "who can" / today are
+                MODIFIERS, not a layer: they stay in CORE with its local and
+                voice catchers. Symptom-only queries ("fridge not cooling")
+                get an EXACT test group at SYMPTOM_BID x the core bid.
   5. TIER       slots per service from its own relevant volume V:
                    slots = clamp(ceil(V / 1000), 1, 4)
                    (V<=1000 ->1, <=2000 ->2, <=3000 ->3, >3000 ->4)
-                Slots beyond CORE go to the BIGGEST viable layers first.
-                A layer is viable only with >= MIN_LAYER_VOL searches and
-                >= MIN_LAYER_KWS keywords — a group with no traffic never
-                learns anything. Unviable layers fold back into CORE.
-                Never padded: unused slots stay unused.
+                A layer takes a slot only when it can buy MIN_LAYER_CLICKS
+                (50) clicks a month = min(30.4 x budget x share / CPC,
+                volume x ASSUMED_IS x ASSUMED_CTR), CPC from the Planner.
+                Most clicks first. Unviable layers fold back into CORE; the
+                budget guard (~3 clicks/day per group) folds more if needed.
+                Never padded: unused slots stay unused. Seeds that do not
+                cover the demand STOP the run (NEEDS_SERVICE_MAP) — no model
+                fallback.
   6. SILO       precedence-aware negatives (a group negates only the layers
                 ABOVE it) + cross-service head-term negatives.
   7. PAGES      one landing page per SERVICE (all its groups share it, each
@@ -54,8 +61,11 @@ Env:
   EXTRA_JUNK        comma list of extra exclusion tokens/phrases
   TIER_STEP         default 1000 (volume per extra ad group)
   MAX_SLOTS         default 4 ; MAX_SLOTS_SINGLE default 5
-  MIN_LAYER_VOL     default 150 ; MIN_LAYER_KWS default 3
-  DAILY_BUDGET, AVG_CPC   optional budget guard (see budget_guard)
+  MIN_LAYER_CLICKS  default 50 ; ASSUMED_IS 0.5 ; ASSUMED_CTR 0.07
+  DAILY_BUDGET      account currency; AVG_CPC overrides the Planner CPC
+  OPEN_24_7         on = Emergency 24/7 groups (default off)
+  SYMPTOM_TEST      default on ; SYMPTOM_BID 0.6 ; SYMPTOM_MIN_CLICKS 10
+  NICHE_DESCRIPTION, BUSINESS_MODEL, NEGATIVE_ALLOW  niche allow list (negative_packs)
 """
 
 import os
@@ -71,9 +81,41 @@ OUT_PLAN = "ad_group_plan.json"
 TIER_STEP = int(os.environ.get("TIER_STEP", "1000") or 1000)
 MAX_SLOTS = int(os.environ.get("MAX_SLOTS", "4") or 4)
 MAX_SLOTS_SINGLE = int(os.environ.get("MAX_SLOTS_SINGLE", "5") or 5)
-MIN_LAYER_VOL = int(os.environ.get("MIN_LAYER_VOL", "150") or 150)
-MIN_LAYER_KWS = int(os.environ.get("MIN_LAYER_KWS", "3") or 3)
 TARGET_LOCATION = os.environ.get("TARGET_LOCATION", "").strip().lower()
+
+
+def _env_on(name, default="off"):
+    return (os.environ.get(name, "") or default).strip().lower() in ("on", "yes", "true", "1")
+
+
+def _env_float(name, default):
+    try:
+        return float(os.environ.get(name, "") or default)
+    except ValueError:
+        return float(default)
+
+
+# SPLIT GATE (GPT review, Sep 2026). A layer earns its own ad group only when
+# it can buy enough clicks to learn from: expected clicks/month =
+#   min(30.4 x DAILY_BUDGET x share / CPC,  volume x ASSUMED_IS x ASSUMED_CTR)
+# and the split needs >= MIN_LAYER_CLICKS of them. Searches and keyword counts
+# are not the constraint — a layer with 400 searches at a 2,600 PKR CPC on a
+# small budget never gets the clicks to learn anything.
+MIN_LAYER_CLICKS = _env_float("MIN_LAYER_CLICKS", 50)
+ASSUMED_IS = _env_float("ASSUMED_IS", 0.5)
+ASSUMED_CTR = _env_float("ASSUMED_CTR", 0.07)
+# TRUE EMERGENCY is its own layer only for a business that really answers
+# 24/7. Otherwise "emergency fridge repair" is served by the core group
+# during the ad schedule, and no ad promises what the client does not do.
+OPEN_24_7 = _env_on("OPEN_24_7")
+# SYMPTOM TEST. "fridge not cooling" is mostly DIY research, but not all of
+# it: on, those queries get one EXACT-match group per service at
+# SYMPTOM_BID x the core bid, so the data decides. Off, they go to the FAQ.
+SYMPTOM_TEST = _env_on("SYMPTOM_TEST", "on")
+SYMPTOM_BID = _env_float("SYMPTOM_BID", 0.6)
+# ...but only where there is something to learn: a symptom test that cannot
+# buy SYMPTOM_MIN_CLICKS a month stays in the page FAQ instead.
+SYMPTOM_MIN_CLICKS = _env_float("SYMPTOM_MIN_CLICKS", 10)
 
 # ─────────────────────────────────────────────────────────────────────────
 # Vocabularies — generic across home/auto services. Extend by env, never by
@@ -91,6 +133,20 @@ ACTION_WORDS = {
     "تعبئة", "تبديل", "استبدال", "خدمة", "خدمات", "مركز", "شركة", "مصلح", "تصليحات",
 }
 SERVICE_VERBS = ACTION_WORDS - {"shop", "company", "center", "centre"}
+# The PERSON you hire is as much a hire signal as the verb: "plumber dubai",
+# "carpenter reviews", "electrician al barsha" are people choosing a trade,
+# not shoppers. Without this every trade campaign lost its head term as a
+# "bare product".
+PROVIDER_NOUNS = {
+    "plumber", "plumbers", "electrician", "electricians", "carpenter", "carpenters",
+    "handyman", "handymen", "locksmith", "locksmiths", "painter", "painters",
+    "roofer", "roofers", "exterminator", "exterminators", "mechanic", "mechanics",
+    "technician", "technicians", "contractor", "contractors", "installer", "installers",
+    "cleaner", "cleaners", "gardener", "gardeners", "welder", "welders", "mason", "masons",
+    "tiler", "tilers", "glazier", "glaziers",
+    "سباك", "كهربائي", "نجار", "فني", "فنيين", "مصلح", "دهان", "حداد",
+}
+HIRE_WORDS = SERVICE_VERBS | PROVIDER_NOUNS | {"inspection", "inspect"}
 
 # Synonym families. Any two seeds whose heads fall in one family = one service.
 SYNONYMS = [
@@ -185,14 +241,23 @@ _URGENT_PHRASES = ["قريب مني", "بالقرب مني", "24 ساعة", "ف�
                    "24 hours", "right now", "same day", "at home", "home service", "open now",
                    "24 hour", "24 hours", "24/7", "who can", "who fixes",
                    "where can i", "call out"]
+# The words above are MODIFIERS ("near me", "at home", "who can", "open now",
+# "today"): they make a query local or spoken, not a different job, so they
+# stay in whatever layer the query already belongs to — mostly CORE, which
+# is where the local / voice / near-me catchers live. Only these words mean a
+# genuine emergency, and they are a layer only when OPEN_24_7 is on.
+EMERGENCY_TOKENS = {"emergency", "urgent", "24/7", "24x7", "247", "tonight",
+                    "طوارئ", "عاجل", "فوري"}
+EMERGENCY_PHRASES = ["24 hour", "24 hours", "24 hrs", "after hours", "out of hours",
+                     "late night", "24 ساعة"]
 
 JUNK_TOKENS = {
     # product shopping
     "buy", "sale", "sell", "selling", "shopping", "showroom", "deal", "deals",
     "discount", "installment", "installments", "emi", "specs", "specification",
     "specifications", "dimensions", "size", "kg", "inch", "inches", "litre",
-    "liter", "review", "reviews", "vs", "versus", "compare", "comparison",
-    "second", "used", "secondhand", "olx", "dubizzle", "noon", "amazon",
+    "liter", "vs", "versus", "compare", "comparison",
+    "secondhand", "olx", "dubizzle", "noon", "amazon",
     "carrefour", "sharaf", "lulu", "emax", "jumbo", "ikea", "danube",
     "rent", "rental", "rentals", "lease",
     # jobs / training
@@ -200,11 +265,10 @@ JUNK_TOKENS = {
     "careers", "course", "courses", "training", "institute", "learn",
     "learning", "certificate", "certification", "cv",
     # DIY / info
-    "diy", "manual", "manuals", "pdf", "diagram", "youtube", "video", "videos",
-    "tutorial", "wiring", "meaning", "wikipedia", "reset", "myself",
+    "diy", "pdf", "diagram", "youtube", "video", "videos",
+    "tutorial", "meaning", "wikipedia", "reset", "myself",
     # parts retail
-    "spare", "spares", "parts", "wholesale", "supplier", "suppliers",
-    "trading", "llc",
+    "wholesale", "supplier", "suppliers", "trading", "llc",
     # free
     "free",
     # Arabic
@@ -212,6 +276,36 @@ JUNK_TOKENS = {
     "كورس", "قطع", "غيار", "يوتيوب", "كتالوج", "عروض", "تخفيضات",
 }
 JUNK_TOKENS |= {t.strip().lower() for t in os.environ.get("EXTRA_JUNK", "").split(",") if t.strip()}
+# SOFT junk: junk only when nothing in the query says "hire someone".
+# "washing machine manual" / "fridge parts" / "tv reviews" are shoppers and
+# readers; "manual gearbox repair", "fridge parts replacement", "carpenter
+# reviews", "used car inspection" are buyers. ("wiring" is not junk at all:
+# "electrical wiring repair" is a job; "wiring diagram" still dies on "diagram".)
+SOFT_JUNK_TOKENS = {"manual", "manuals", "used", "second", "parts", "spare", "spares",
+                    "review", "reviews", "قطع", "غيار", "مستعمل", "مستعملة"}
+JUNK_TOKENS -= SOFT_JUNK_TOKENS
+
+
+def _niche_allow():
+    """The niche's own buyer words (negative_packs allow list): a garage keeps
+    "manual" and "used", an AC business keeps "gas". Never raises — the packs
+    are an extra, not a dependency of the grouping."""
+    try:
+        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+        import negative_packs
+        seeds = [s.strip() for s in os.environ.get("SEED_KEYWORDS", "").split(",") if s.strip()]
+        _block, allow, _packs = negative_packs.build(
+            os.environ.get("NICHE_DESCRIPTION", ""), seeds,
+            os.environ.get("BUSINESS_MODEL", "service") or "service")
+        return {a for a in allow if " " not in a}
+    except Exception as e:
+        print(f"   ⚠️ negative_packs allow list unavailable ({str(e)[:60]}) — none applied")
+        return set()
+
+
+NICHE_ALLOW = _niche_allow()
+JUNK_TOKENS -= NICHE_ALLOW
+SOFT_JUNK_TOKENS -= NICHE_ALLOW
 # "price/cost" is shopping ONLY without a service verb:
 # "washing machine price" = junk ; "washing machine repair cost" = CORE.
 PRICE_TOKENS = {"price", "prices", "cost", "costs", "cheap", "cheapest", "rate", "rates", "charges",
@@ -274,7 +368,10 @@ def _fix_token(t):
         return t
     cap = 2 if len(t) >= 9 else 1
     best, bd = None, cap + 1
-    for w in _CANON:
+    # sorted: a set's order changes between processes (hash seed), and a
+    # tie between two corrections must resolve the same way on every run —
+    # and in the silo router, which walks the same sorted list.
+    for w in sorted(_CANON):
         if w[0] == t[0] and abs(len(w) - len(t)) <= cap:
             d = _lev(t, w, cap)
             if d < bd:
@@ -560,10 +657,10 @@ HARD_FAULTS = {"broken", "broke", "burst", "damaged", "damage", "dead", "cracked
 # Soft symptoms WITHOUT any hire signal are research: "fridge not cooling",
 # "washing machine not spinning", "dishwasher error e24". People search them
 # to fix it themselves; they go to the page FAQ, not to the ads.
-HIRE_SIGNALS = SERVICE_VERBS | {"near", "nearby", "emergency", "urgent", "company",
-                                "call", "book", "shop",
-                                "center", "centre", "today", "now", "open", "hire",
-                                "قريب", "طوارئ", "عاجل", "فوري", "شركة", "مركز", "رقم", "اتصال"}
+HIRE_SIGNALS = HIRE_WORDS | {"near", "nearby", "emergency", "urgent", "company",
+                             "call", "book", "shop",
+                             "center", "centre", "today", "now", "open", "hire",
+                             "قريب", "طوارئ", "عاجل", "فوري", "شركة", "مركز", "رقم", "اتصال"}
 
 
 def symptom_only(text):
@@ -577,23 +674,23 @@ def symptom_only(text):
 def junk_reason(kw):
     text = " ".join(toks(kw))
     tset = set(text.split())
-    has_verb = bool(tset & SERVICE_VERBS)
+    has_hire = bool(tset & HIRE_WORDS)
     for loc in WRONG_LOCS:
         if has_phrase(text, loc):
             return f"wrong location: {loc}"
     if text.startswith(DIY_STARTS):
         return "diy/info question"
     hit = tset & JUNK_TOKENS
-    # "service center" queries are NOT junk even with "shop"-like words
     if hit:
-        # "used" inside "used to" etc. is rare in this data; accept the risk.
         return f"non-service intent: {sorted(hit)[0]}"
-    if (tset & PRICE_TOKENS) and not has_verb:
+    soft = tset & SOFT_JUNK_TOKENS
+    if soft and not has_hire:
+        return f"non-service intent: {sorted(soft)[0]}"
+    if (tset & PRICE_TOKENS) and not has_hire:
         return "product price (no service word)"
     if symptom_only(text):
         return "symptom only (DIY/info - goes to page FAQ)"
-    if not has_verb and not (tset & HARD_FAULTS) and not (tset & URGENT_TOKENS) \
-            and not any(has_phrase(text, p) for p in _URGENT_PHRASES):
+    if not has_hire and not (tset & HARD_FAULTS) and not (tset & URGENT_TOKENS)             and not any(has_phrase(text, p) for p in _URGENT_PHRASES):
         # bare "washing machine dubai" / "samsung fridge" = shoppers
         return "no service intent (bare product)"
     return None
@@ -613,6 +710,23 @@ def brands_in(text):
     return found
 
 
+_PROBLEM_NEG = {"not", "wont", "won't", "doesnt", "doesn't", "dont", "don't", "cant",
+                "stopped", "stop", "لا", "لايعمل"}
+_FAULT_WORDS = {"leak", "leaking", "leaks", "noise", "noisy", "loud", "error",
+                "code", "broken", "problem", "problems", "issue", "issues",
+                "fault", "faulty", "smell", "smells", "smelly", "vibrating",
+                "vibration", "shaking", "overheating", "tripping", "trips",
+                "stuck", "jammed", "blinking", "flashing", "beeping",
+                "burning", "sparking", "dead", "dripping", "blocked",
+                "clogged", "frozen", "icing", "sweating", "humming",
+                "clicking", "عطل", "اعطال", "أعطال", "تسريب", "صوت"} | _PROBLEM_NEG
+_STRONG_PARTS = {"compressor", "motor", "pcb", "board", "pump", "thermostat",
+                 "bearing", "bearings", "belt", "drum", "gasket", "seal",
+                 "element", "backlight", "panel", "screen", "capacitor",
+                 "valve", "timer", "sensor", "hinge", "coil", "inverter",
+                 "relay", "hose", "lock", "ضاغط", "كمبروسر"}
+
+
 def problem_hits(text, service_aliases):
     tset = set(text.split())
     alias_toks = {w for a in service_aliases for w in a.split()}
@@ -620,29 +734,14 @@ def problem_hits(text, service_aliases):
             and t not in alias_toks}
     # "gas refill" / "drain cleaning" are services, not faults — a part word
     # next to a service verb with no negation stays CORE.
-    neg = {"not", "wont", "won't", "doesnt", "doesn't", "dont", "don't", "cant",
-           "stopped", "stop", "لا", "لايعمل"}
     hits |= (tset & HARD_FAULTS)
-    fault_words = hits & ({"leak", "leaking", "leaks", "noise", "noisy", "loud", "error",
-                           "code", "broken", "problem", "problems", "issue", "issues",
-                           "fault", "faulty", "smell", "smells", "smelly", "vibrating",
-                           "vibration", "shaking", "overheating", "tripping", "trips",
-                           "stuck", "jammed", "blinking", "flashing", "beeping",
-                           "burning", "sparking", "dead", "dripping", "blocked",
-                           "clogged", "frozen", "icing", "sweating", "humming",
-                           "clicking", "عطل", "اعطال", "أعطال", "تسريب", "صوت"} | neg)
-    parts = hits - fault_words
+    fault_words = hits & _FAULT_WORDS
     if fault_words or any(_ERROR_CODE.match(t) for t in hits):
         return sorted(hits)
     # part-only queries ("washing machine motor repair", "fridge compressor
     # replacement") are diagnosed faults -> PROBLEM; generic service phrases
     # like "cooling", "power", "door", "gas" alone are not.
-    strong_parts = parts & {"compressor", "motor", "pcb", "board", "pump", "thermostat",
-                            "bearing", "bearings", "belt", "drum", "gasket", "seal",
-                            "element", "backlight", "panel", "screen", "capacitor",
-                            "valve", "timer", "sensor", "hinge", "coil", "inverter",
-                            "relay", "hose", "lock", "ضاغط", "كمبروسر"}
-    return sorted(strong_parts)
+    return sorted((hits - fault_words) & _STRONG_PARTS)
 
 
 _NEGATIONS = {"not", "wont", "won't", "doesnt", "doesn't", "dont", "don't", "cant",
@@ -663,24 +762,103 @@ def problem_triggers(text, service_aliases):
 
 
 def urgent_hits(text):
+    """Local / voice / time MODIFIERS ("near me", "who can", "today"). They
+    no longer choose a layer — they only mark a query as a hire, not info."""
     tset = set(text.split())
     hits = [p for p in _URGENT_PHRASES if has_phrase(text, p)]
     single = tset & (URGENT_TOKENS - {"me", "same", "open", "home", "who", "where", "call"})
     return sorted(set(hits) | single)
 
 
+def emergency_hits(text):
+    tset = set(text.split())
+    return sorted({p for p in EMERGENCY_PHRASES if has_phrase(text, p)}
+                  | (tset & EMERGENCY_TOKENS))
+
+
 def layer_of(kw, service):
+    """EMERGENCY (only for a 24/7 business) > BRAND > PROBLEM > CORE.
+    Brand beats problem: "samsung washer not draining" is bought by the
+    person who wants a Samsung specialist, and the brand is the one word the
+    headline can match exactly. Near-me / voice / "today" never choose a
+    layer. (The SYMPTOM layer is decided by the junk stage, not here.)"""
     text = " ".join(toks(kw))
-    ph = problem_hits(text, service["aliases"])
-    if ph:
-        return "problem", ph
+    if OPEN_24_7:
+        e = emergency_hits(text)
+        if e:
+            return "emergency", e
     b = brands_in(text)
     if b:
         return "brand", b
-    u = urgent_hits(text)
-    if u:
-        return "urgent", u
+    ph = problem_hits(text, service["aliases"])
+    if ph:
+        return "problem", ph
     return "core", []
+
+
+def classify(kw, services):
+    """(service index, layer) exactly as main() files a keyword — minus the
+    Planner-only 'informational intent' flag, which a search term lacks.
+    (i, None) = junk for that service; (None, None) = no service."""
+    i = assign_service(kw, services)
+    if i is None:
+        return None, None
+    why = junk_reason(kw)
+    if why:
+        if SYMPTOM_TEST and why.startswith("symptom only"):
+            return i, "symptom"
+        return i, None
+    return i, layer_of(kw, services[i])[0]
+
+
+def owner_of(kw, services, groups):
+    """The ad group that owns a query. groups = {"<service>|<layer>": name}.
+    A folded layer falls back to the service's core group; a symptom query
+    without a symptom test group has no owner."""
+    i, layer = classify(kw, services)
+    if i is None or layer is None:
+        return None
+    name = services[i]["name"]
+    if layer == "symptom":
+        return groups.get(f"{name}|symptom")
+    return groups.get(f"{name}|{layer}") or groups.get(f"{name}|core")
+
+
+# Every run-dependent piece of the classifier (env, niche allow list, the
+# typo vocabulary built from this run's services). Saved in the plan so the
+# silo router and Stage 3 decide exactly as this stage did.
+_SNAPSHOT_SETS = ("JUNK_TOKENS", "SOFT_JUNK_TOKENS", "BRANDS", "HIRE_WORDS", "HIRE_SIGNALS",
+                  "PROBLEM_TOKENS", "HARD_FAULTS", "PRICE_TOKENS", "URGENT_TOKENS",
+                  "EMERGENCY_TOKENS", "_WEAK_BRANDS", "_FAULT_WORDS", "_STRONG_PARTS")
+_SNAPSHOT_LISTS = ("WRONG_LOCS", "DIY_STARTS", "_URGENT_PHRASES", "EMERGENCY_PHRASES")
+
+
+def classifier_snapshot():
+    g = globals()
+    snap = {n: sorted(g[n]) for n in _SNAPSHOT_SETS}
+    snap.update({n: list(g[n]) for n in _SNAPSHOT_LISTS})
+    snap["_BRAND_PAIRS"] = sorted(" ".join(p) for p in _BRAND_PAIRS)
+    snap["_CANON"] = sorted(_CANON)
+    snap["_GLUE"] = dict(sorted(_GLUE.items()))
+    snap["OPEN_24_7"] = OPEN_24_7
+    snap["SYMPTOM_TEST"] = SYMPTOM_TEST
+    return snap
+
+
+def restore_classifier(snap):
+    """Load a plan's snapshot into this module (Stage 3 / router)."""
+    if not snap:
+        return
+    g = globals()
+    for n in _SNAPSHOT_SETS:
+        g[n] = set(snap[n])
+    for n in _SNAPSHOT_LISTS:
+        g[n] = tuple(snap[n]) if n == "DIY_STARTS" else list(snap[n])
+    g["_BRAND_PAIRS"] = {tuple(p.split(" ", 1)) for p in snap["_BRAND_PAIRS"]}
+    _CANON.clear(); _CANON.update(snap["_CANON"])
+    _GLUE.clear(); _GLUE.update(snap["_GLUE"])
+    g["OPEN_24_7"] = snap["OPEN_24_7"]
+    g["SYMPTOM_TEST"] = snap["SYMPTOM_TEST"]
 
 
 def _norm_set(sset):
@@ -688,28 +866,35 @@ def _norm_set(sset):
 
 
 for _name in ("ACTION_WORDS", "SERVICE_VERBS", "BRANDS", "PROBLEM_TOKENS", "URGENT_TOKENS",
-              "JUNK_TOKENS", "PRICE_TOKENS", "HARD_FAULTS", "HIRE_SIGNALS"):
+              "JUNK_TOKENS", "SOFT_JUNK_TOKENS", "PRICE_TOKENS", "HARD_FAULTS", "HIRE_SIGNALS",
+              "PROVIDER_NOUNS", "HIRE_WORDS", "EMERGENCY_TOKENS"):
     globals()[_name] = _norm_set(globals()[_name])
 _URGENT_PHRASES = list(dict.fromkeys(_URGENT_PHRASES + [norm_phrase(x) for x in _URGENT_PHRASES]))
+EMERGENCY_PHRASES = list(dict.fromkeys(EMERGENCY_PHRASES + [norm_phrase(x) for x in EMERGENCY_PHRASES]))
 DIY_STARTS = tuple(dict.fromkeys(DIY_STARTS + tuple(norm_phrase(x) + " " for x in DIY_STARTS)))
 WRONG_LOCS = list(dict.fromkeys(WRONG_LOCS + [norm_phrase(x) for x in WRONG_LOCS]))
 
 
-LAYER_PRECEDENCE = ["problem", "brand", "urgent", "core"]
+LAYER_PRECEDENCE = ["emergency", "brand", "problem", "symptom", "core"]
 LAYER_LABEL = {
     "core": "{disp}",
     "brand": "{disp} - Brands",
     "problem": "{svc} Problems & Parts",
-    "urgent": "{disp} - Emergency & Near Me",
+    "symptom": "{disp} - Symptoms (Test)",
+    "emergency": "{disp} - Emergency 24/7",
 }
 LAYER_LABEL_AR = {
     "core": "{disp}",
     "brand": "{disp} - ماركات",
     "problem": "{disp} - أعطال",
-    "urgent": "{disp} - طوارئ وقريب",
+    "symptom": "{disp} - أعراض (تجربة)",
+    "emergency": "{disp} - طوارئ 24 ساعة",
 }
-LAYER_ANCHOR = {"core": "services", "brand": "brands", "problem": "problems", "urgent": "emergency"}
-LAYER_BID = {"core": 1.0, "brand": 1.0, "problem": 1.15, "urgent": 1.2}
+LAYER_ANCHOR = {"core": "services", "brand": "brands", "problem": "problems",
+                "symptom": "problems", "emergency": "emergency"}
+LAYER_BID = {"core": 1.0, "brand": 1.0, "problem": 1.15, "symptom": SYMPTOM_BID,
+             "emergency": 1.2}
+LAYER_MATCH = {"symptom": "exact"}   # everything else: phrase
 
 
 # ─────────────────────────────────────────────────────────────────────────
@@ -720,16 +905,31 @@ def slots_for(volume, single_service):
     return max(1, min(cap, math.ceil(volume / TIER_STEP) if volume > 0 else 1))
 
 
+VOLUME_BASIS = {"value": "estimated"}
+
+
 def real_volume(rows):
     """Sum of searches with Planner close-variant clusters counted ONCE.
 
-    The Planner reports one shared number for a whole variant cluster:
-    "washing machine repair", "fix washing machine", "laundry machine repair",
-    "washer fixer" all came back at 6,600 in the Sep 2026 Dubai run — the
-    naive sum said 55,120 searches for a service with ~9,000. Rows sharing
-    volume + competition index + bid range are one cluster. Small rows
-    (<100) are left alone: equal 10s and 20s are common and genuinely
-    different searches."""
+    When the rows carry Google's own `close_variants` (Planner historical
+    metrics), those clusters are used and the number is exact. Otherwise it
+    is an ESTIMATE: the Planner reports one shared number for a whole variant
+    cluster ("washing machine repair", "fix washing machine", "washer fixer"
+    all came back at 6,600 in the Sep 2026 Dubai run — the naive sum said
+    55,120 for a service with ~9,000), so rows sharing volume + competition
+    index + bid range are taken as one cluster. Small rows (<100) are left
+    alone: equal 10s and 20s are common and genuinely different searches.
+    The plan records which of the two it was (volume_basis)."""
+    if any(r.get("close_variants") for r in rows):
+        VOLUME_BASIS["value"] = "google close_variants"
+        seen, total = set(), 0
+        for r in rows:
+            key = min([r["keyword"].lower()] + [c.lower() for c in r.get("close_variants") or []])
+            if key in seen:
+                continue
+            seen.add(key)
+            total += r["avg_monthly_searches"]
+        return total
     seen, total = set(), 0
     for r in rows:
         v = r["avg_monthly_searches"]
@@ -742,30 +942,60 @@ def real_volume(rows):
     return total
 
 
-def plan_service(svc, rows, single_service):
-    V = real_volume(rows)
+def row_cpc(r):
+    """Planner's expected CPC for a row: the middle of its top-of-page bid
+    range (account currency). 0 when the Planner gave no bid."""
+    lo, hi = float(r.get("low_top_bid") or 0), float(r.get("high_top_bid") or 0)
+    return (lo + hi) / 2 if hi else lo
+
+
+def avg_cpc(rows):
+    """Volume-weighted Planner CPC. AVG_CPC (env) overrides; 0 = unknown."""
+    forced = _env_float("AVG_CPC", 0)
+    if forced > 0:
+        return forced
+    num = den = 0.0
+    for r in rows:
+        c = row_cpc(r)
+        if c > 0:
+            num += c * r["avg_monthly_searches"]
+            den += r["avg_monthly_searches"]
+    return num / den if den else 0.0
+
+
+def expected_clicks(volume, cpc, share):
+    """Clicks/month a layer can realistically buy:
+    min(budget side 30.4 x B x share / CPC, demand side V x IS x CTR).
+    Without a DAILY_BUDGET (sized later from the bids) or a CPC, only the
+    demand side is known."""
+    demand = volume * ASSUMED_IS * ASSUMED_CTR
+    budget = _env_float("DAILY_BUDGET", 0)
+    if budget > 0 and cpc > 0:
+        return min(demand, 30.4 * budget * share / cpc)
+    return demand
+
+
+def plan_service(svc, rows, single_service, campaign_volume):
+    V = real_volume([r for r in rows if r["_layer"] != "symptom"])
     slots = slots_for(V, single_service)
     by_layer = defaultdict(list)
     for r in rows:
         by_layer[r["_layer"]].append(r)
     layer_vol = {l: real_volume(rs) for l, rs in by_layer.items()}
+    layer_cpc = {l: avg_cpc(rs) for l, rs in by_layer.items()}
+    layer_clicks = {l: round(expected_clicks(layer_vol[l], layer_cpc[l],
+                                             layer_vol[l] / max(campaign_volume, 1)), 1)
+                    for l in by_layer}
 
-    min_vol = max(MIN_LAYER_VOL, int(0.08 * V))
-    # Viable = enough traffic AND enough keywords to learn from — except when
-    # the traffic alone is 3x the floor: "fridge repair near me" at 1,900 is a
-    # real layer even with only two phrasings of it.
-    viable = [l for l in ("brand", "problem", "urgent")
-              if layer_vol.get(l, 0) >= min_vol
-              and (len(by_layer.get(l, [])) >= MIN_LAYER_KWS or layer_vol.get(l, 0) >= 3 * min_vol)]
-    # Split where the AD COPY changes most. Brand and problem queries need
-    # their own headlines ("Samsung Washer Repair", "Washer Not Spinning?");
-    # near-me/emergency queries read almost the same as core copy plus an
-    # urgency line, so they only get their own group as the LAST slot.
-    candidates = sorted((l for l in viable if l != "urgent"), key=lambda l: -layer_vol[l])
-    if "urgent" in viable:
-        candidates.append("urgent")
+    # A layer splits only when it can buy MIN_LAYER_CLICKS a month (the
+    # GPT-review rule). The volume tier above still caps the COUNT: slots =
+    # ceil(V / TIER_STEP), max MAX_SLOTS. Most clicks first — that is where
+    # the separate ad copy earns the most.
+    viable = [l for l in ("emergency", "brand", "problem")
+              if by_layer.get(l) and layer_clicks[l] >= MIN_LAYER_CLICKS]
+    candidates = sorted(viable, key=lambda l: -layer_clicks[l])
     split = candidates[: max(0, slots - 1)]
-    folded = [l for l in ("brand", "problem", "urgent") if by_layer.get(l) and l not in split]
+    folded = [l for l in ("emergency", "brand", "problem") if by_layer.get(l) and l not in split]
 
     groups = {"core": list(by_layer.get("core", []))}
     for l in folded:
@@ -773,38 +1003,58 @@ def plan_service(svc, rows, single_service):
     for l in split:
         groups[l] = by_layer[l]
     if not groups["core"]:
-        # every keyword was brand/problem/urgent: the biggest split layer
+        # every keyword was brand/problem/emergency: the biggest split layer
         # becomes the core so the service still has its generic group
         biggest = split.pop(0)
         groups["core"] = groups.pop(biggest)
+    # The symptom TEST group sits outside the slot count: exact match, low
+    # bid, and it never takes a slot from brand or problem.
+    to_faq = []
+    if by_layer.get("symptom"):
+        if layer_clicks["symptom"] >= SYMPTOM_MIN_CLICKS:
+            groups["symptom"] = by_layer["symptom"]
+        else:
+            to_faq = by_layer["symptom"]
 
     return {
         "service": svc["name"],
         "volume": V,
         "slots_allowed": slots,
         "layer_volume": {l: layer_vol.get(l, 0) for l in LAYER_PRECEDENCE},
+        "layer_clicks_per_month": {l: layer_clicks.get(l, 0) for l in LAYER_PRECEDENCE},
+        "layer_cpc": {l: round(layer_cpc.get(l, 0), 2) for l in LAYER_PRECEDENCE},
         "split_layers": split,
         "folded_into_core": folded,
         "groups": groups,
+        "symptom_to_faq": to_faq,
     }
 
 
-def budget_guard(service_plans):
-    """Optional: fewer groups when the budget cannot feed them.
-    Each ad group needs ~3 clicks/day to learn anything. When
-    DAILY_BUDGET / AVG_CPC < 3 x groups, fold the smallest split layers
-    (smallest service first) back into their core until it fits."""
-    try:
-        budget = float(os.environ.get("DAILY_BUDGET", "") or 0)
-        cpc = float(os.environ.get("AVG_CPC", "") or 0)
-    except ValueError:
-        return
+def budget_guard(service_plans, all_rows):
+    """Fewer groups when the budget cannot feed them. Each ad group needs
+    ~3 clicks/day to learn anything. When DAILY_BUDGET / CPC < 3 x groups,
+    the symptom tests go first, then the smallest split layers fold back
+    into their core. CPC is the Planner's own (AVG_CPC overrides) — before
+    Sep 2026 nothing passed AVG_CPC, so this guard never ran."""
+    budget = _env_float("DAILY_BUDGET", 0)
+    cpc = avg_cpc(all_rows)
     if budget <= 0 or cpc <= 0:
+        print("   ℹ️ Budget guard: no DAILY_BUDGET (or no Planner CPC) — group count "
+              "set by volume tier and demand-side clicks only")
         return
     max_groups = max(len(service_plans), int(budget / cpc / 3))
     total = sum(len(p["groups"]) for p in service_plans)
+    print(f"   💸 Budget guard: {budget:g}/day at ~{cpc:.0f} CPC supports ~{max_groups} "
+          f"group(s); plan has {total}")
+    for p in service_plans:
+        if total <= max_groups:
+            break
+        if "symptom" in p["groups"]:
+            p["symptom_to_faq"] = p.get("symptom_to_faq", []) + p["groups"].pop("symptom")
+            total -= 1
+            print(f"   💸 Budget guard: dropped the symptom test for '{p['service']}'")
     while total > max_groups:
-        cands = [(p["groups"][l] and sum(r["avg_monthly_searches"] for r in p["groups"][l]), p, l)
+        cands = [(sum(r["avg_monthly_searches"] for r in p["groups"][l]), p, l)
                  for p in service_plans for l in p["split_layers"]]
         if not cands:
             break
@@ -813,8 +1063,7 @@ def budget_guard(service_plans):
         p["split_layers"].remove(l)
         p["folded_into_core"].append(l)
         total -= 1
-        print(f"   💸 Budget guard: folded '{p['service']} / {l}' into core "
-              f"(budget supports ~{max_groups} groups)")
+        print(f"   💸 Budget guard: folded '{p['service']} / {l}' into core")
 
 
 # ─────────────────────────────────────────────────────────────────────────
@@ -828,8 +1077,8 @@ def layer_tokens(rows, layer, service):
             out |= set(brands_in(text))
         elif layer == "problem":
             out |= problem_triggers(text, service["aliases"])
-        elif layer == "urgent":
-            out |= set(urgent_hits(text))
+        elif layer == "emergency":
+            out |= set(emergency_hits(text))
     # never negate negation words alone in Arabic ("لا" is too common)
     return {t for t in out if t not in {"لا"}}
 
@@ -850,6 +1099,10 @@ def silo_negatives(service_plans, services):
         ltoks = {l: layer_tokens(p["groups"][l], l, svc) for l in p["split_layers"]}
         p["negatives"] = {}
         for l, rows in p["groups"].items():
+            if l == "symptom":
+                # exact match: it only ever serves its own queries
+                p["negatives"][l] = []
+                continue
             own_text = " | ".join(" ".join(toks(r["keyword"])) for r in rows)
             negs = set()
             # intra-service: negate every split layer ABOVE this one
@@ -917,7 +1170,7 @@ def silo_catchers(p, svc):
                           else f"{h} {t} {verb}" if t not in HARD_FAULTS else f"{h} {t}")
                 elif l == "brand":
                     kw = f"{t} {h} {verb}"
-                else:  # urgent — always with the service word, never "fridge now"
+                else:  # emergency — always with the service word, never "fridge now"
                     if t in ("near", "near me", "nearby", "close to me", "around me",
                              "open near me", "near me open", "open now", "open today"):
                         kw = f"{h} {verb} {'near me' if t == 'near' else t}"
@@ -1038,7 +1291,12 @@ def keyword_map(p, svc, location, symptoms=()):
     problems = [r["keyword"] for r in sorted(p["groups"].get("problem", []) or
                                              [r for r in all_rows if r["_layer"] == "problem"],
                                              key=lambda r: -r["avg_monthly_searches"])][:12]
-    urgent = [r["keyword"] for r in all_rows if r["_layer"] == "urgent"][:10]
+    emergency = [r["keyword"] for r in all_rows if emergency_hits(" ".join(toks(r["keyword"])))][:10]
+    # near me / at home / open now / who can — the local + voice layer of the
+    # page (they live in the core ad group, so the page must answer them too)
+    urgent = [r["keyword"] for r in all_rows if urgent_hits(" ".join(toks(r["keyword"])))][:10]
+    symptoms = list(dict.fromkeys([r["keyword"] for r in p["groups"].get("symptom", [])]
+                                  + list(symptoms)))
     questions = [r["keyword"] for r in all_rows
                  if toks(r["keyword"])[:1] and toks(r["keyword"])[0] in
                  {"who", "where", "which", "what", "how", "can", "is", "does"}][:8]
@@ -1051,6 +1309,7 @@ def keyword_map(p, svc, location, symptoms=()):
         "brands": brands,
         "problems": problems,
         "urgent_local": urgent,
+        "emergency": emergency,
         "voice_questions": questions,
         "placement": {
             "title": f"{title(primary_loc)} | Same-Day, All Brands"[:60],
@@ -1060,12 +1319,16 @@ def keyword_map(p, svc, location, symptoms=()):
                 {"layer": l, "anchor": LAYER_ANCHOR[l],
                  "must_include": (brands[:3] if l == "brand" else
                                   problems[:3] if l == "problem" else
-                                  urgent[:3] if l == "urgent" else secondary[:3])}
-                for l in LAYER_PRECEDENCE if p["groups"].get(l)
+                                  symptoms[:3] if l == "symptom" else
+                                  emergency[:3] if l == "emergency" else
+                                  (secondary[:2] + urgent[:1]))}
+                # symptom shares the #problems section (its group lands there)
+                for l in LAYER_PRECEDENCE if p["groups"].get(l) and l != "symptom"
             ] + ([{"layer": "brand", "anchor": "brands", "must_include": brands[:3]}]
                  if brands and "brand" not in p["groups"] else [])
-              + ([{"layer": "problem", "anchor": "problems", "must_include": problems[:3]}]
-                 if problems and "problem" not in p["groups"] else []),
+              + ([{"layer": "problem", "anchor": "problems",
+                   "must_include": (problems[:3] or symptoms[:3])}]
+                 if (problems or symptoms) and "problem" not in p["groups"] else []),
             # symptom-only searches are not bought in ads, but they are the
             # exact questions the page's FAQ should answer (topical relevance
             # for Quality Score, and rich results for SEO)
@@ -1119,6 +1382,10 @@ def main():
                                      f"language '{_l}' has no seed — add a seed in that language")})
             continue
         why = junk_reason(r["keyword"])
+        if why and SYMPTOM_TEST and why.startswith("symptom only"):
+            r["_layer"], r["_hits"] = "symptom", []
+            per_service[i].append(r)
+            continue
         if why:
             excluded.append({"id": r["id"], "keyword": r["keyword"], "why": why,
                              "service": services[i]["name"]})
@@ -1134,36 +1401,45 @@ def main():
     # so "tv mounting", "curtain installation", "furniture assembly" match no
     # service and would silently vanish. When the unmatched keywords that DO
     # carry service intent outweigh half of what matched, the seeds do not
-    # describe this business well enough for a formula: fall back to the
-    # legacy model grouping for this run and say so, instead of shipping a
-    # campaign that covers a fraction of the demand.
+    # describe this business well enough for a formula. The run STOPS here
+    # (NEEDS_SERVICE_MAP) instead of handing the grouping back to the model:
+    # that legacy path is exactly what produced 4 groups for 7 services.
     matched_vol = sum(real_volume(rs) for rs in per_service.values())
     unmatched = [r for r in rows if r["id"] in {e["id"] for e in excluded
                                                  if e["why"] == "matches no service"}
-                 and set(toks(r["keyword"])) & SERVICE_VERBS
+                 and set(toks(r["keyword"])) & HIRE_WORDS
                  and not junk_reason(r["keyword"])]
     unmatched_vol = real_volume(unmatched)
     if unmatched_vol > 0.5 * max(matched_vol, 1):
         top = sorted(unmatched, key=lambda r: -r["avg_monthly_searches"])[:8]
-        print(f"⚠️ VTSA fallback: {unmatched_vol} searches with service intent match none of "
-              f"the seeds (vs {matched_vol} matched). Give one seed per sub-service, "
-              f"or SERVICES_JSON. Examples: " + "; ".join(r["keyword"] for r in top))
+        print(f"::error::NEEDS_SERVICE_MAP — {unmatched_vol} searches with service intent match "
+              f"none of the seeds (vs {matched_vol} matched). Give one seed per sub-service, "
+              f"or advanced.services_json "
+              f'[{{"name": "Drain Unblocking", "aliases": ["drain", "blocked drain"]}}, ...]. '
+              f"Examples: " + "; ".join(r["keyword"] for r in top))
         with open(OUT_PLAN, "w", encoding="utf-8") as f:
-            json.dump({"version": "vtsa-1", "fallback_legacy": True,
+            json.dump({"version": "vtsa-2", "needs_service_map": True,
                        "matched_volume": matched_vol, "unmatched_volume": unmatched_vol,
                        "unmatched_examples": [r["keyword"] for r in top]}, f, indent=1)
-        for r in rows:
-            r.pop("_layer", None); r.pop("_hits", None)
-        return
+        sys.exit(2)
 
     service_plans = []
+    # symptom tests are research volume, not demand for the service — they
+    # never count toward a service's tier or its share of the budget
+    campaign_volume = sum(real_volume([r for r in rs if r["_layer"] != "symptom"])
+                          for rs in per_service.values())
     for i, svc in sorted(enumerate(services), key=lambda x: x[1].get("lang") == "ar"):
         rs = per_service.get(i, [])
         if not rs:
             print(f"   ⚠️ '{svc['name']}': 0 relevant keywords — no ad group (check the seed)")
             continue
-        service_plans.append(plan_service(svc, rs, single))
-    budget_guard(service_plans)
+        service_plans.append(plan_service(svc, rs, single, campaign_volume))
+    budget_guard(service_plans, [r for rs in per_service.values() for r in rs])
+    # symptom queries that did not get a test group go back to the page FAQ
+    for p in service_plans:
+        for r in p.pop("symptom_to_faq", []):
+            excluded.append({"id": r["id"], "keyword": r["keyword"], "service": p["service"],
+                             "why": "symptom only (DIY/info - goes to page FAQ)"})
     silo_negatives(service_plans, services)
     _city = os.environ.get("TARGET_LOCATION", "").split(",")[0].strip()
     for p in service_plans:
@@ -1241,8 +1517,9 @@ def main():
                 "copy_rules": (["never say authorized/official/genuine service centre — "
                                 "independent all-brand repair only (trademark + misleading-claims policy)"]
                                if l == "brand" else []),
-                "bid_multiplier": LAYER_BID[l] if p["volume"] >= 300 else 0.9,
-                "match_type": "phrase",
+                "bid_multiplier": (LAYER_BID[l] if l == "symptom" or p["volume"] >= 300
+                                   else 0.9),
+                "match_type": LAYER_MATCH.get(l, "phrase"),
                 "landing_anchor": LAYER_ANCHOR[l],
                 "language": svc.get("lang", "en"),
                 "url_slug": page_slug,
@@ -1274,10 +1551,19 @@ def main():
     for pg in pages:
         pg.pop("_fam_key", None)
     plan = {
-        "version": "vtsa-1",
-        "rule": f"slots = clamp(ceil(V/{TIER_STEP}), 1, {MAX_SLOTS_SINGLE if single else MAX_SLOTS}); "
-                f"layer precedence problem>brand>urgent>core; layer viable at >= "
-                f"max({MIN_LAYER_VOL}, 8% of V) searches and >= {MIN_LAYER_KWS} keywords",
+        "version": "vtsa-2",
+        "rule": (f"slots = clamp(ceil(V/{TIER_STEP}), 1, {MAX_SLOTS_SINGLE if single else MAX_SLOTS}); "
+                 f"precedence {'emergency>' if OPEN_24_7 else ''}brand>problem>core; a layer "
+                 f"splits at >= {MIN_LAYER_CLICKS:g} expected clicks/month = min(30.4 x budget "
+                 f"x share / CPC, volume x {ASSUMED_IS:g} IS x {ASSUMED_CTR:g} CTR)"
+                 + (f"; symptom test groups exact @ {SYMPTOM_BID:g}x" if SYMPTOM_TEST else "")),
+        "settings": {"open_24_7": OPEN_24_7, "symptom_test": SYMPTOM_TEST,
+                     "symptom_bid": SYMPTOM_BID, "min_layer_clicks": MIN_LAYER_CLICKS,
+                     "assumed_is": ASSUMED_IS, "assumed_ctr": ASSUMED_CTR,
+                     "daily_budget": _env_float("DAILY_BUDGET", 0),
+                     "avg_cpc": round(avg_cpc([r for r in rows if r.get("kept_for_ai")]), 2)},
+        "volume_basis": VOLUME_BASIS["value"],
+        "classifier": classifier_snapshot(),
         "single_service": single,
         "services": [{"name": s["name"], "display": s.get("display", s["name"]),
                       "lang": s.get("lang", "en"), "aliases": s["aliases"],
