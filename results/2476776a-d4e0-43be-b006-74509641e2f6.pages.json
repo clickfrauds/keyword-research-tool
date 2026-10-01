@@ -1,0 +1,5730 @@
+[
+  {
+    "page_name": "Washing Machine Repair",
+    "url_slug": "washing-machine-repair-dubai",
+    "language": "en",
+    "service_name": "Washing Machine Repair",
+    "industry": "خدمة صيانة أجهزة",
+    "sub_services": [
+      "تصليح غسالات سامسونج",
+      "تصليح غسالات ال جي",
+      "تصليح غسالات LG",
+      "تصليح غسالات بوش",
+      "تصليح غسالات ويرلبول",
+      "صيانة غسالات اتوماتيك"
+    ],
+    "ad_groups_covered": [
+      "Washing Machine Repair"
+    ],
+    "keyword_map": {
+      "primary": "washing machine repair dubai",
+      "areas_in_queries": [],
+      "secondary": [
+        "fix washing machine",
+        "laundry machine repair",
+        "clothes washer repair",
+        "laundry washer repair",
+        "fix laundry machine",
+        "washer fixer",
+        "washing machine repair near me",
+        "samsung washing machine repair",
+        "samsung washer repair",
+        "fix samsung washing machine"
+      ],
+      "brands": [
+        "Bosch",
+        "Samsung",
+        "LG",
+        "Siemens",
+        "Panasonic",
+        "Electrolux",
+        "Beko",
+        "Teka",
+        "Indesit",
+        "Daewoo"
+      ],
+      "problems": [
+        "washing machine seal repair",
+        "washing machine pcb repair cost",
+        "washing machine door seal repair",
+        "washer door seal repair",
+        "replace washing machine bearings",
+        "replace washer bearing",
+        "washing machine door broken",
+        "washing machine drum repair",
+        "washing machine pcb repair near me",
+        "broken washing machine",
+        "washer broken",
+        "washing machine drum broken"
+      ],
+      "urgent_local": [
+        "washing machine repair near me",
+        "washer repair near me",
+        "washer repair service near me",
+        "fix washing machine near me",
+        "clothes washer repair near me",
+        "laundry machine repair near me",
+        "repair wash machine near me",
+        "washer fixer near me",
+        "washing machine service near me",
+        "washer maintenance near me"
+      ],
+      "emergency": [
+        "24 hour washing machine repair",
+        "emergency washing machine repair",
+        "emergency washer repair",
+        "emergency washing machine repair near me"
+      ],
+      "voice_questions": [],
+      "placement": {
+        "title": "Washing Machine Repair Dubai | Same-Day, All Brands",
+        "meta_description_must_include": [
+          "washing machine repair dubai",
+          "fix washing machine"
+        ],
+        "h1": "Washing Machine Repair Dubai",
+        "h2_sections": [
+          {
+            "layer": "core",
+            "anchor": "services",
+            "must_include": [
+              "fix washing machine",
+              "laundry machine repair",
+              "washing machine repair near me"
+            ]
+          },
+          {
+            "layer": "brand",
+            "anchor": "brands",
+            "must_include": [
+              "Bosch",
+              "Samsung",
+              "LG"
+            ]
+          },
+          {
+            "layer": "problem",
+            "anchor": "problems",
+            "must_include": [
+              "washing machine seal repair",
+              "washing machine pcb repair cost",
+              "washing machine door seal repair"
+            ]
+          }
+        ],
+        "faq_from": [
+          "motor in washing machine",
+          "washing machine door not locking",
+          "samsung washer door seal",
+          "bosch washing machine door not locking",
+          "samsung washing machine door not locking"
+        ],
+        "symptom_faq": [
+          "motor in washing machine",
+          "washing machine door not locking",
+          "samsung washer door seal",
+          "bosch washing machine door not locking",
+          "samsung washing machine door not locking"
+        ],
+        "body_rules": "primary 3-5x naturally; every secondary once; each brand and problem once in its section; no stuffing, no hidden text"
+      },
+      "schema": {
+        "types": [
+          "LocalBusiness",
+          "Service",
+          "FAQPage",
+          "BreadcrumbList"
+        ],
+        "service.serviceType": "Washing Machine Repair",
+        "service.name": "Washing Machine Repair Dubai",
+        "service.areaServed": "Dubai, United Arab Emirates",
+        "offer_catalog": [
+          "Bosch Washing Machine Repair",
+          "Samsung Washing Machine Repair",
+          "LG Washing Machine Repair",
+          "Siemens Washing Machine Repair",
+          "Panasonic Washing Machine Repair",
+          "Electrolux Washing Machine Repair",
+          "Washing Machine Seal Repair",
+          "Washing Machine PCB Repair Cost",
+          "Washing Machine Door Seal Repair",
+          "Washer Door Seal Repair",
+          "Replace Washing Machine Bearings",
+          "Replace Washer Bearing"
+        ],
+        "never": "no AggregateRating/Review unless real, verifiable reviews exist"
+      }
+    },
+    "anchor_by_group": {
+      "Washing Machine Repair": "services",
+      "تصليح غسالات": "services"
+    },
+    "keywords_covered": 336,
+    "monthly_volume_covered": 59010,
+    "target_keywords": [
+      {
+        "keyword": "washing machine repair",
+        "volume": 6600,
+        "intent": "transactional",
+        "cpc_range": "1038.61-4340.03",
+        "score": 122.3
+      },
+      {
+        "keyword": "fix washing machine",
+        "volume": 6600,
+        "intent": "transactional",
+        "cpc_range": "1038.61-4340.03",
+        "score": 122.3
+      },
+      {
+        "keyword": "laundry machine repair",
+        "volume": 6600,
+        "intent": "transactional",
+        "cpc_range": "1038.61-4340.03",
+        "score": 122.3
+      },
+      {
+        "keyword": "clothes washer repair",
+        "volume": 6600,
+        "intent": "transactional",
+        "cpc_range": "1038.61-4340.03",
+        "score": 122.3
+      },
+      {
+        "keyword": "laundry washer repair",
+        "volume": 6600,
+        "intent": "transactional",
+        "cpc_range": "1038.61-4340.03",
+        "score": 122.3
+      },
+      {
+        "keyword": "fix laundry machine",
+        "volume": 6600,
+        "intent": "transactional",
+        "cpc_range": "1038.61-4340.03",
+        "score": 122.3
+      },
+      {
+        "keyword": "bosch washer repair near me",
+        "volume": 20,
+        "intent": "transactional",
+        "cpc_range": "602.86-6549.87",
+        "score": 111.8
+      },
+      {
+        "keyword": "lg washer repair near me",
+        "volume": 50,
+        "intent": "transactional",
+        "cpc_range": "458.65-3016.19",
+        "score": 109.9
+      },
+      {
+        "keyword": "lg washing machine repair near me",
+        "volume": 50,
+        "intent": "transactional",
+        "cpc_range": "458.65-3016.19",
+        "score": 109.9
+      },
+      {
+        "keyword": "washing machine repair near me",
+        "volume": 2900,
+        "intent": "transactional",
+        "cpc_range": "969.37-3364.12",
+        "score": 108.2
+      },
+      {
+        "keyword": "washer fixer",
+        "volume": 6600,
+        "intent": "commercial",
+        "cpc_range": "1038.61-4340.03",
+        "score": 107.7
+      },
+      {
+        "keyword": "washer repair near me",
+        "volume": 260,
+        "intent": "transactional",
+        "cpc_range": "969.37-3936.29",
+        "score": 103.2
+      },
+      {
+        "keyword": "washer repair service near me",
+        "volume": 260,
+        "intent": "transactional",
+        "cpc_range": "969.37-3936.29",
+        "score": 103.2
+      },
+      {
+        "keyword": "fix washing machine near me",
+        "volume": 260,
+        "intent": "transactional",
+        "cpc_range": "969.37-3936.29",
+        "score": 103.2
+      },
+      {
+        "keyword": "clothes washer repair near me",
+        "volume": 260,
+        "intent": "transactional",
+        "cpc_range": "969.37-3936.29",
+        "score": 103.2
+      },
+      {
+        "keyword": "laundry machine repair near me",
+        "volume": 260,
+        "intent": "transactional",
+        "cpc_range": "969.37-3936.29",
+        "score": 103.2
+      },
+      {
+        "keyword": "repair wash machine near me",
+        "volume": 260,
+        "intent": "transactional",
+        "cpc_range": "969.37-3936.29",
+        "score": 103.2
+      },
+      {
+        "keyword": "samsung washing machine repair",
+        "volume": 320,
+        "intent": "transactional",
+        "cpc_range": "354.4-3906.39",
+        "score": 101.8
+      },
+      {
+        "keyword": "samsung washer repair",
+        "volume": 320,
+        "intent": "transactional",
+        "cpc_range": "354.4-3906.39",
+        "score": 101.8
+      },
+      {
+        "keyword": "fix samsung washing machine",
+        "volume": 320,
+        "intent": "transactional",
+        "cpc_range": "354.4-3906.39",
+        "score": 101.8
+      },
+      {
+        "keyword": "samsung washer fix",
+        "volume": 320,
+        "intent": "transactional",
+        "cpc_range": "354.4-3906.39",
+        "score": 101.8
+      },
+      {
+        "keyword": "siemens washing machine repair",
+        "volume": 320,
+        "intent": "transactional",
+        "cpc_range": "649.33-3048.61",
+        "score": 100.6
+      },
+      {
+        "keyword": "lg washing machine repair",
+        "volume": 320,
+        "intent": "transactional",
+        "cpc_range": "224.71-3148.19",
+        "score": 98.6
+      },
+      {
+        "keyword": "bosch washing machine repairs near me",
+        "volume": 20,
+        "intent": "commercial",
+        "cpc_range": "602.86-6549.87",
+        "score": 98.4
+      },
+      {
+        "keyword": "lg washer repairs near me",
+        "volume": 50,
+        "intent": "commercial",
+        "cpc_range": "458.65-3016.19",
+        "score": 96.7
+      },
+      {
+        "keyword": "bosch washing machine repair",
+        "volume": 320,
+        "intent": "transactional",
+        "cpc_range": "395.86-1134.91",
+        "score": 95.8
+      },
+      {
+        "keyword": "bosch washer repair",
+        "volume": 320,
+        "intent": "transactional",
+        "cpc_range": "395.86-1134.91",
+        "score": 95.8
+      },
+      {
+        "keyword": "fix bosch washing machine",
+        "volume": 320,
+        "intent": "transactional",
+        "cpc_range": "395.86-1134.91",
+        "score": 95.8
+      },
+      {
+        "keyword": "bosch washer dryer repair",
+        "volume": 320,
+        "intent": "transactional",
+        "cpc_range": "395.86-1134.91",
+        "score": 95.8
+      },
+      {
+        "keyword": "bosch washing machines repair",
+        "volume": 320,
+        "intent": "transactional",
+        "cpc_range": "395.86-1134.91",
+        "score": 95.8
+      },
+      {
+        "keyword": "lg washer dryer repair near me",
+        "volume": 20,
+        "intent": "transactional",
+        "cpc_range": "756.35-5317.66",
+        "score": 93.4
+      },
+      {
+        "keyword": "washer fixer near me",
+        "volume": 260,
+        "intent": "commercial",
+        "cpc_range": "969.37-3936.29",
+        "score": 90.8
+      },
+      {
+        "keyword": "washer repair",
+        "volume": 20,
+        "intent": "transactional",
+        "cpc_range": "776.04-4210.61",
+        "score": 90.6
+      },
+      {
+        "keyword": "washing machine repair service",
+        "volume": 170,
+        "intent": "transactional",
+        "cpc_range": "1066.3-3865.1",
+        "score": 87.1
+      },
+      {
+        "keyword": "siemens washing machine repair near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 82.7
+      },
+      {
+        "keyword": "washing machine repair shops near me",
+        "volume": 70,
+        "intent": "transactional",
+        "cpc_range": "969.37-2293.52",
+        "score": 80.8
+      },
+      {
+        "keyword": "washer repair shops near me",
+        "volume": 70,
+        "intent": "transactional",
+        "cpc_range": "969.37-2293.52",
+        "score": 80.8
+      },
+      {
+        "keyword": "bosch service washing machine",
+        "volume": 90,
+        "intent": "transactional",
+        "cpc_range": "357.28-3157.85",
+        "score": 79.8
+      },
+      {
+        "keyword": "lg washing machine service near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 79.3
+      },
+      {
+        "keyword": "lg washing machine dryer repair",
+        "volume": 30,
+        "intent": "transactional",
+        "cpc_range": "436.55-1170.92",
+        "score": 79.2
+      },
+      {
+        "keyword": "teka washing machine repair",
+        "volume": 30,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 76.7
+      },
+      {
+        "keyword": "near washing machine repair",
+        "volume": 30,
+        "intent": "transactional",
+        "cpc_range": "927.82-3672.23",
+        "score": 75.7
+      },
+      {
+        "keyword": "nearby washing machine repair",
+        "volume": 30,
+        "intent": "transactional",
+        "cpc_range": "927.82-3672.23",
+        "score": 75.7
+      },
+      {
+        "keyword": "washing machine maintenance",
+        "volume": 50,
+        "intent": "transactional",
+        "cpc_range": "872.43-4955.27",
+        "score": 70.5
+      },
+      {
+        "keyword": "laundry machine maintenance",
+        "volume": 50,
+        "intent": "transactional",
+        "cpc_range": "872.43-4955.27",
+        "score": 70.5
+      },
+      {
+        "keyword": "washing machine maintenance wash",
+        "volume": 50,
+        "intent": "transactional",
+        "cpc_range": "872.43-4955.27",
+        "score": 70.5
+      },
+      {
+        "keyword": "washer appliance repair",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 70.0
+      },
+      {
+        "keyword": "washing machine appliance repair",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 70.0
+      },
+      {
+        "keyword": "washing machine shock absorber repair",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 70.0
+      },
+      {
+        "keyword": "smeg washing machine repair",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 70.0
+      },
+      {
+        "keyword": "washing machine seal repair",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 70.0
+      },
+      {
+        "keyword": "washing machine pcb repair cost",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 70.0
+      },
+      {
+        "keyword": "washing machine door seal repair",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 70.0
+      },
+      {
+        "keyword": "washer door seal repair",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 70.0
+      },
+      {
+        "keyword": "washing machine repair shops",
+        "volume": 20,
+        "intent": "transactional",
+        "cpc_range": "872.43-1658.95",
+        "score": 68.2
+      },
+      {
+        "keyword": "washing machine service",
+        "volume": 140,
+        "intent": "transactional",
+        "cpc_range": "969.37-3843.33",
+        "score": 66.7
+      },
+      {
+        "keyword": "washing machine repair cost near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 65.5
+      },
+      {
+        "keyword": "ariston washing machine repair",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 64.5
+      },
+      {
+        "keyword": "washing machine repair at home",
+        "volume": 20,
+        "intent": "transactional",
+        "cpc_range": "969.37-3774.79",
+        "score": 64.4
+      },
+      {
+        "keyword": "washer and dryer repair service",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 63.0
+      }
+    ],
+    "negative_keywords": [
+      "freezer",
+      "fridge freezer",
+      "lcd panel",
+      "lcd screen",
+      "lcd tv",
+      "led display",
+      "led panel",
+      "led screen",
+      "led tv",
+      "oled tv",
+      "refrig",
+      "smart tv",
+      "television",
+      "tumble dryer",
+      "wine chiller",
+      "wine chillers",
+      "wine cooler",
+      "wine fridge",
+      "التلفزيون",
+      "التلفزيونات"
+    ],
+    "ad_group_themes": [
+      "Core service ads for washing machine repair across Dubai. Lead with the service + location; all brands, same day."
+    ],
+    "match_types": [
+      "phrase"
+    ],
+    "mode1_config": {
+      "main_service": "Washing Machine Repair",
+      "sub_services": "تصليح غسالات سامسونج, تصليح غسالات ال جي, تصليح غسالات LG, تصليح غسالات بوش, تصليح غسالات ويرلبول, صيانة غسالات اتوماتيك",
+      "industry": "خدمة صيانة أجهزة",
+      "business_name": "Washer Dryer Repair Dubai"
+    },
+    "google_ads_tracking_tip": "Final URL suffix: kw={keyword} — enables the landing page's Dynamic Keyword Insertion (DKI).",
+    "ad_copy": {
+      "headlines": [
+        "Washing Machine Repair Dubai",
+        "Fix Washing Machine Today",
+        "Laundry Machine Repair Now",
+        "Clothes Washer Repair Fast",
+        "Washing Machine Repair Near Me",
+        "Fixed Same Day At Your Home",
+        "Fewer Repeat Breakdowns",
+        "One Visit Fix For Most Faults",
+        "Book Same Day Repair Today",
+        "Call For Free Diagnosis Now",
+        "Get Your Washer Fixed Today",
+        "Rated Dubai Repair Technicians"
+      ],
+      "descriptions": [
+        "Washing machine repair in Dubai today, all brands, same day fix.",
+        "Free diagnosis before repair, no guesswork, no hidden callout fees.",
+        "Not fixed in one visit? No extra charge, we return at no cost to you.",
+        "Trusted technicians serving Dubai daily, book your slot now."
+      ],
+      "sitelinks": [
+        {
+          "text": "Washing Machine Services",
+          "desc1": "What the service covers",
+          "desc2": "All brands, same-day slots",
+          "anchor": "services"
+        },
+        {
+          "text": "Washing Machine Pricing",
+          "desc1": "Transparent price ranges",
+          "desc2": "No hidden charges, ever",
+          "anchor": "pricing"
+        },
+        {
+          "text": "Customer Reviews",
+          "desc1": "Real customer stories",
+          "desc2": "Rated by local clients",
+          "anchor": "reviews"
+        },
+        {
+          "text": "Washing Machine FAQs",
+          "desc1": "Costs, timing & questions",
+          "desc2": "Repair vs replace advice",
+          "anchor": "faq"
+        },
+        {
+          "text": "Get a Free Quote",
+          "desc1": "Free quote before any work",
+          "desc2": "Call or WhatsApp today",
+          "anchor": "contact"
+        }
+      ]
+    }
+  },
+  {
+    "page_name": "Dryer Repair",
+    "url_slug": "dryer-repair-dubai",
+    "language": "en",
+    "service_name": "Dryer Repair",
+    "industry": "خدمة صيانة أجهزة",
+    "sub_services": [
+      "تصليح نشافات ملابس",
+      "تصليح نشافة الغسالة",
+      "صيانة نشافات منزلية",
+      "تصليح نشافات اتوماتيك",
+      "تصليح موتور نشافة",
+      "صيانة نشافات دبي"
+    ],
+    "ad_groups_covered": [
+      "Dryer Repair"
+    ],
+    "keyword_map": {
+      "primary": "dryer repair dubai",
+      "areas_in_queries": [],
+      "secondary": [
+        "dryer repair near me",
+        "fix dryer near me",
+        "dryer appliance repair near me",
+        "laundry dryer repair near me",
+        "dryer fixed near me",
+        "lg dryer repair",
+        "lg dryer fix",
+        "lg clothes dryer repair",
+        "lg dryer repair company",
+        "lg dryer repair near me"
+      ],
+      "brands": [
+        "LG",
+        "Samsung",
+        "Bosch",
+        "Miele",
+        "Electrolux",
+        "Siemens",
+        "AEG",
+        "Candy",
+        "Hoover",
+        "Zanussi"
+      ],
+      "problems": [
+        "dryer motor replacement",
+        "dryer drum felt seal replacement",
+        "dryer bearing replacement",
+        "dryer drum seal replacement",
+        "dryer timer motor replacement",
+        "dryer drum wheel replacement",
+        "front load dryer bearing replacement",
+        "broken hair dryer",
+        "broken dryer"
+      ],
+      "urgent_local": [
+        "dryer repair near me",
+        "fix dryer near me",
+        "dryer appliance repair near me",
+        "laundry dryer repair near me",
+        "dryer fixed near me",
+        "lg dryer repair near me",
+        "same day dryer repair near me",
+        "dryer vent repair near me",
+        "dryer repair service near me",
+        "gas dryer repair near me"
+      ],
+      "emergency": [
+        "emergency dryer repair"
+      ],
+      "voice_questions": [],
+      "placement": {
+        "title": "Dryer Repair Dubai | Same-Day, All Brands",
+        "meta_description_must_include": [
+          "dryer repair dubai",
+          "dryer repair near me"
+        ],
+        "h1": "Dryer Repair Dubai",
+        "h2_sections": [
+          {
+            "layer": "core",
+            "anchor": "services",
+            "must_include": [
+              "dryer repair near me",
+              "fix dryer near me",
+              "dryer repair near me"
+            ]
+          },
+          {
+            "layer": "brand",
+            "anchor": "brands",
+            "must_include": [
+              "LG",
+              "Samsung",
+              "Bosch"
+            ]
+          },
+          {
+            "layer": "problem",
+            "anchor": "problems",
+            "must_include": [
+              "dryer motor replacement",
+              "dryer drum felt seal replacement",
+              "dryer bearing replacement"
+            ]
+          }
+        ],
+        "faq_from": [
+          "samsung dryer not working",
+          "hoover dryer not working",
+          "electrolux dryer not working",
+          "timer on dryer not working",
+          "samsung dryer door reversal",
+          "bosch dryer leaking water",
+          "bosch tumble dryer leaking water",
+          "miele dryer not working",
+          "tumble dryer drum not turning"
+        ],
+        "symptom_faq": [
+          "samsung dryer not working",
+          "hoover dryer not working",
+          "electrolux dryer not working",
+          "timer on dryer not working",
+          "samsung dryer door reversal",
+          "bosch dryer leaking water",
+          "bosch tumble dryer leaking water",
+          "miele dryer not working",
+          "tumble dryer drum not turning"
+        ],
+        "body_rules": "primary 3-5x naturally; every secondary once; each brand and problem once in its section; no stuffing, no hidden text"
+      },
+      "schema": {
+        "types": [
+          "LocalBusiness",
+          "Service",
+          "FAQPage",
+          "BreadcrumbList"
+        ],
+        "service.serviceType": "Dryer Repair",
+        "service.name": "Dryer Repair Dubai",
+        "service.areaServed": "Dubai, United Arab Emirates",
+        "offer_catalog": [
+          "LG Dryer Repair",
+          "Samsung Dryer Repair",
+          "Bosch Dryer Repair",
+          "Miele Dryer Repair",
+          "Electrolux Dryer Repair",
+          "Siemens Dryer Repair",
+          "Dryer Motor Replacement",
+          "Dryer Drum Felt Seal Replacement",
+          "Dryer Bearing Replacement",
+          "Dryer Drum Seal Replacement",
+          "Dryer Timer Motor Replacement",
+          "Dryer Drum Wheel Replacement"
+        ],
+        "never": "no AggregateRating/Review unless real, verifiable reviews exist"
+      }
+    },
+    "anchor_by_group": {
+      "Dryer Repair": "services",
+      "تصليح نشافات": "services"
+    },
+    "keywords_covered": 163,
+    "monthly_volume_covered": 2000,
+    "target_keywords": [
+      {
+        "keyword": "lg dryer repair near me",
+        "volume": 20,
+        "intent": "transactional",
+        "cpc_range": "756.35-5317.66",
+        "score": 93.4
+      },
+      {
+        "keyword": "dryer repair",
+        "volume": 70,
+        "intent": "transactional",
+        "cpc_range": "561.03-2932.96",
+        "score": 88.3
+      },
+      {
+        "keyword": "bosch dryer repair",
+        "volume": 20,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 85.1
+      },
+      {
+        "keyword": "bosch tumble dryer repair",
+        "volume": 20,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 85.1
+      },
+      {
+        "keyword": "lg dryer repair",
+        "volume": 30,
+        "intent": "transactional",
+        "cpc_range": "436.55-1170.92",
+        "score": 79.2
+      },
+      {
+        "keyword": "lg dryer fix",
+        "volume": 30,
+        "intent": "transactional",
+        "cpc_range": "436.55-1170.92",
+        "score": 79.2
+      },
+      {
+        "keyword": "lg clothes dryer repair",
+        "volume": 30,
+        "intent": "transactional",
+        "cpc_range": "436.55-1170.92",
+        "score": 79.2
+      },
+      {
+        "keyword": "lg dryer repair company",
+        "volume": 30,
+        "intent": "transactional",
+        "cpc_range": "436.55-1170.92",
+        "score": 79.2
+      },
+      {
+        "keyword": "samsung dryer repair",
+        "volume": 20,
+        "intent": "transactional",
+        "cpc_range": "391.38-2010.66",
+        "score": 76.1
+      },
+      {
+        "keyword": "samsung dryer fix",
+        "volume": 20,
+        "intent": "transactional",
+        "cpc_range": "391.38-2010.66",
+        "score": 76.1
+      },
+      {
+        "keyword": "samsung clothes dryer repair",
+        "volume": 20,
+        "intent": "transactional",
+        "cpc_range": "391.38-2010.66",
+        "score": 76.1
+      },
+      {
+        "keyword": "appliance repair samsung dryer",
+        "volume": 20,
+        "intent": "transactional",
+        "cpc_range": "391.38-2010.66",
+        "score": 76.1
+      },
+      {
+        "keyword": "siemens dryer repair",
+        "volume": 20,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 73.3
+      },
+      {
+        "keyword": "dryer roller replacement",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 70.0
+      },
+      {
+        "keyword": "bosch dryer repair near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "823.21-4054.71",
+        "score": 66.1
+      },
+      {
+        "keyword": "dyson hair dryer repair",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 66.0
+      },
+      {
+        "keyword": "miele dryer repair",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "559.09-2650.52",
+        "score": 59.3
+      },
+      {
+        "keyword": "dryer machine repair",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 57.8
+      },
+      {
+        "keyword": "fix dryer machine",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 57.8
+      },
+      {
+        "keyword": "samsung dryer roller replacement",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 57.8
+      },
+      {
+        "keyword": "same day dryer repair near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 55.4
+      },
+      {
+        "keyword": "dyson dryer repair",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 54.8
+      },
+      {
+        "keyword": "samsung dryer drum felt seal replacement",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 54.8
+      },
+      {
+        "keyword": "dryer vent repair near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 54.2
+      },
+      {
+        "keyword": "lg dryer repair service near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 54.2
+      },
+      {
+        "keyword": "tumble dryer repairs",
+        "volume": 10,
+        "intent": "commercial",
+        "cpc_range": "0.0-0.0",
+        "score": 53.6
+      },
+      {
+        "keyword": "dryer repair cost",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 52.3
+      },
+      {
+        "keyword": "dryer repair prices",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 52.3
+      },
+      {
+        "keyword": "clothes dryer repair cost",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 52.3
+      },
+      {
+        "keyword": "cost to fix dryer",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 52.3
+      },
+      {
+        "keyword": "dryer repair service cost",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 52.3
+      },
+      {
+        "keyword": "zanussi tumble dryer repair",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 52.3
+      },
+      {
+        "keyword": "samsung dryer repair near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 52.0
+      },
+      {
+        "keyword": "dryer repair service near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 51.3
+      },
+      {
+        "keyword": "gas dryer repair near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 51.3
+      },
+      {
+        "keyword": "dryer repair service",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 51.3
+      },
+      {
+        "keyword": "dryer vent replacement near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 51.3
+      },
+      {
+        "keyword": "dryer duct repair near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 51.3
+      },
+      {
+        "keyword": "cloth dryer repair near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 51.3
+      },
+      {
+        "keyword": "fix dryer machine near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 51.3
+      },
+      {
+        "keyword": "tumble dryer service near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 51.3
+      },
+      {
+        "keyword": "clothes dryer repair service",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 51.3
+      },
+      {
+        "keyword": "dryer repair company near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 51.3
+      },
+      {
+        "keyword": "dryer repair shops near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 51.3
+      },
+      {
+        "keyword": "dryer duct replacement near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 51.3
+      },
+      {
+        "keyword": "fix tumble dryer near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 51.3
+      },
+      {
+        "keyword": "tumble dryer repair man near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 51.3
+      },
+      {
+        "keyword": "hand dryer repair near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 51.3
+      },
+      {
+        "keyword": "lg dryer service",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 51.3
+      },
+      {
+        "keyword": "lg dryer service near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 51.3
+      },
+      {
+        "keyword": "miele dryer repair near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 51.3
+      },
+      {
+        "keyword": "bosch dryer service near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 51.3
+      },
+      {
+        "keyword": "miele dryer service near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 51.3
+      },
+      {
+        "keyword": "dryer machine fixer",
+        "volume": 10,
+        "intent": "commercial",
+        "cpc_range": "0.0-0.0",
+        "score": 50.9
+      },
+      {
+        "keyword": "dryer vent repair",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 49.3
+      },
+      {
+        "keyword": "dryer service",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 49.3
+      },
+      {
+        "keyword": "dryer duct repair",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 49.3
+      },
+      {
+        "keyword": "tumble dryer service",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 49.3
+      },
+      {
+        "keyword": "dryer exhaust repair",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 49.3
+      },
+      {
+        "keyword": "dryer machine maintenance",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 49.3
+      }
+    ],
+    "negative_keywords": [
+      "dish washer",
+      "dishwasher",
+      "dishwashers",
+      "freezer",
+      "fridge",
+      "fridge freezer",
+      "lcd panel",
+      "lcd screen",
+      "lcd tv",
+      "led display",
+      "led panel",
+      "led screen",
+      "led tv",
+      "oled tv",
+      "refrig",
+      "refrigerator",
+      "smart tv",
+      "television",
+      "wine chiller",
+      "wine chillers"
+    ],
+    "ad_group_themes": [
+      "Core service ads for dryer repair across Dubai. Lead with the service + location; all brands, same day."
+    ],
+    "match_types": [
+      "phrase"
+    ],
+    "mode1_config": {
+      "main_service": "Dryer Repair",
+      "sub_services": "تصليح نشافات ملابس, تصليح نشافة الغسالة, صيانة نشافات منزلية, تصليح نشافات اتوماتيك, تصليح موتور نشافة, صيانة نشافات دبي",
+      "industry": "خدمة صيانة أجهزة",
+      "business_name": "Washer Dryer Repair Dubai"
+    },
+    "google_ads_tracking_tip": "Final URL suffix: kw={keyword} — enables the landing page's Dynamic Keyword Insertion (DKI).",
+    "ad_copy": {
+      "headlines": [
+        "Dryer Repair In Dubai Today",
+        "Dryer Repair Near Me Now",
+        "Fix Dryer Near Me Same Day",
+        "Dryer Appliance Repair Dubai",
+        "Laundry Dryer Repair Near You",
+        "LG Dryer Repair Specialists",
+        "Bosch Dryer Repair Dubai",
+        "Samsung Dryer Fix Today",
+        "Dryer Technician Near You",
+        "Open Now For Dryer Repairs",
+        "Dryer Fixed In One Visit",
+        "Book A Dryer Repair Slot"
+      ],
+      "descriptions": [
+        "Dryer repair across Dubai with same day visits and a clear price before work starts.",
+        "Our technicians carry parts for LG, Bosch and Samsung dryers, fixed in one trip.",
+        "Free diagnosis before any repair, so you know the cost before we touch your dryer.",
+        "Trusted by homes across Dubai for fast, reliable dryer repair near you daily."
+      ],
+      "sitelinks": [
+        {
+          "text": "Dryer Repair Services",
+          "desc1": "What the service covers",
+          "desc2": "All brands, same-day slots",
+          "anchor": "services"
+        },
+        {
+          "text": "Dryer Repair Pricing",
+          "desc1": "Transparent price ranges",
+          "desc2": "No hidden charges, ever",
+          "anchor": "pricing"
+        },
+        {
+          "text": "Customer Reviews",
+          "desc1": "Real customer stories",
+          "desc2": "Rated by local clients",
+          "anchor": "reviews"
+        },
+        {
+          "text": "Dryer Repair FAQs",
+          "desc1": "Costs, timing & questions",
+          "desc2": "Repair vs replace advice",
+          "anchor": "faq"
+        },
+        {
+          "text": "Get a Free Quote",
+          "desc1": "Free quote before any work",
+          "desc2": "Call or WhatsApp today",
+          "anchor": "contact"
+        }
+      ]
+    }
+  },
+  {
+    "page_name": "Dishwasher Repair",
+    "url_slug": "dishwasher-repair-dubai",
+    "language": "en",
+    "service_name": "Dishwasher Repair",
+    "industry": "خدمة صيانة أجهزة",
+    "sub_services": [
+      "تصليح غسالة صحون اريستون",
+      "صيانة غسالات صحون",
+      "تصليح مضخة غسالة صحون",
+      "تصليح عنصر تسخين غسالة صحون",
+      "تصليح تسريب غسالة صحون",
+      "فني تصليح غسالة صحون"
+    ],
+    "ad_groups_covered": [
+      "Dishwasher Repair"
+    ],
+    "keyword_map": {
+      "primary": "dishwasher repair near me dubai",
+      "areas_in_queries": [],
+      "secondary": [
+        "dishwasher repair service near me",
+        "dishwasher repair",
+        "dishwasher fixer near me",
+        "siemens dishwasher repair",
+        "bosch dishwasher repair",
+        "appliance repair bosch dishwasher",
+        "bosch dishwasher service and repair",
+        "dishwasher repair service",
+        "lg dishwasher repair",
+        "samsung dishwasher repair"
+      ],
+      "brands": [
+        "Bosch",
+        "Siemens",
+        "LG",
+        "Samsung",
+        "Electrolux",
+        "Zanussi",
+        "AEG",
+        "Indesit",
+        "Beko",
+        "Daewoo"
+      ],
+      "problems": [
+        "fix dishwasher pump",
+        "dishwasher pump repair",
+        "dishwasher heating element repair",
+        "dishwasher pcb repair",
+        "fix dishwasher heating element",
+        "dishwasher leak repair",
+        "fix leaking dishwasher",
+        "broken dishwasher"
+      ],
+      "urgent_local": [
+        "dishwasher repair near me",
+        "dishwasher repair service near me",
+        "dishwasher fixer near me",
+        "bosch dishwasher repair near me",
+        "emergency dishwasher repair near me",
+        "fix dishwasher near me",
+        "best dishwasher repair services near me",
+        "dishwasher specialist near me",
+        "commercial dishwasher repair near me",
+        "local dishwasher repair"
+      ],
+      "emergency": [
+        "emergency dishwasher repair near me",
+        "emergency dishwasher repair"
+      ],
+      "voice_questions": [],
+      "placement": {
+        "title": "Dishwasher Repair Near Me Dubai | Same-Day, All Brands",
+        "meta_description_must_include": [
+          "dishwasher repair near me dubai",
+          "dishwasher repair service near me"
+        ],
+        "h1": "Dishwasher Repair Near Me Dubai",
+        "h2_sections": [
+          {
+            "layer": "core",
+            "anchor": "services",
+            "must_include": [
+              "dishwasher repair service near me",
+              "dishwasher repair",
+              "dishwasher repair near me"
+            ]
+          },
+          {
+            "layer": "brand",
+            "anchor": "brands",
+            "must_include": [
+              "Bosch",
+              "Siemens",
+              "LG"
+            ]
+          },
+          {
+            "layer": "problem",
+            "anchor": "problems",
+            "must_include": [
+              "fix dishwasher pump",
+              "dishwasher pump repair",
+              "dishwasher heating element repair"
+            ]
+          }
+        ],
+        "faq_from": [
+          "kenmore dishwasher leaks",
+          "zanussi dishwasher leaking"
+        ],
+        "symptom_faq": [
+          "kenmore dishwasher leaks",
+          "zanussi dishwasher leaking"
+        ],
+        "body_rules": "primary 3-5x naturally; every secondary once; each brand and problem once in its section; no stuffing, no hidden text"
+      },
+      "schema": {
+        "types": [
+          "LocalBusiness",
+          "Service",
+          "FAQPage",
+          "BreadcrumbList"
+        ],
+        "service.serviceType": "Dishwasher Repair Near Me",
+        "service.name": "Dishwasher Repair Near Me Dubai",
+        "service.areaServed": "Dubai, United Arab Emirates",
+        "offer_catalog": [
+          "Bosch Dishwasher Repair",
+          "Siemens Dishwasher Repair",
+          "LG Dishwasher Repair",
+          "Samsung Dishwasher Repair",
+          "Electrolux Dishwasher Repair",
+          "Zanussi Dishwasher Repair",
+          "Fix Dishwasher Pump",
+          "Dishwasher Pump Repair",
+          "Dishwasher Heating Element Repair",
+          "Dishwasher PCB Repair",
+          "Fix Dishwasher Heating Element",
+          "Dishwasher Leak Repair"
+        ],
+        "never": "no AggregateRating/Review unless real, verifiable reviews exist"
+      }
+    },
+    "anchor_by_group": {
+      "Dishwasher Repair": "services",
+      "تصليح غسالات صحون": "services"
+    },
+    "keywords_covered": 124,
+    "monthly_volume_covered": 2760,
+    "target_keywords": [
+      {
+        "keyword": "bosch dishwasher repair",
+        "volume": 90,
+        "intent": "transactional",
+        "cpc_range": "635.66-3911.28",
+        "score": 101.3
+      },
+      {
+        "keyword": "appliance repair bosch dishwasher",
+        "volume": 90,
+        "intent": "transactional",
+        "cpc_range": "635.66-3911.28",
+        "score": 101.3
+      },
+      {
+        "keyword": "bosch dishwasher service and repair",
+        "volume": 90,
+        "intent": "transactional",
+        "cpc_range": "635.66-3911.28",
+        "score": 101.3
+      },
+      {
+        "keyword": "dishwasher repair near me",
+        "volume": 260,
+        "intent": "transactional",
+        "cpc_range": "872.43-4443.09",
+        "score": 96.7
+      },
+      {
+        "keyword": "dishwasher repair service near me",
+        "volume": 260,
+        "intent": "transactional",
+        "cpc_range": "872.43-4443.09",
+        "score": 96.7
+      },
+      {
+        "keyword": "siemens dishwasher repair",
+        "volume": 140,
+        "intent": "transactional",
+        "cpc_range": "705.79-4451.14",
+        "score": 93.0
+      },
+      {
+        "keyword": "bosch dishwasher repair near me",
+        "volume": 20,
+        "intent": "transactional",
+        "cpc_range": "719.02-4451.14",
+        "score": 92.9
+      },
+      {
+        "keyword": "samsung dishwasher repair",
+        "volume": 30,
+        "intent": "transactional",
+        "cpc_range": "627.68-3328.21",
+        "score": 92.4
+      },
+      {
+        "keyword": "dishwasher repair",
+        "volume": 260,
+        "intent": "transactional",
+        "cpc_range": "969.37-4719.41",
+        "score": 90.8
+      },
+      {
+        "keyword": "lg dishwasher repair",
+        "volume": 50,
+        "intent": "transactional",
+        "cpc_range": "688.38-4451.14",
+        "score": 88.7
+      },
+      {
+        "keyword": "dishwasher fixer near me",
+        "volume": 260,
+        "intent": "commercial",
+        "cpc_range": "872.43-4443.09",
+        "score": 85.1
+      },
+      {
+        "keyword": "dishwasher service",
+        "volume": 20,
+        "intent": "transactional",
+        "cpc_range": "872.43-4707.61",
+        "score": 64.4
+      },
+      {
+        "keyword": "lg dishwasher repair near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "938.22-5317.66",
+        "score": 62.9
+      },
+      {
+        "keyword": "dishwasher maintenance",
+        "volume": 20,
+        "intent": "transactional",
+        "cpc_range": "2997.03-7999.7",
+        "score": 59.9
+      },
+      {
+        "keyword": "daewoo dishwasher repair",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 57.8
+      },
+      {
+        "keyword": "samsung dishwasher repairs near me",
+        "volume": 10,
+        "intent": "commercial",
+        "cpc_range": "0.0-0.0",
+        "score": 57.7
+      },
+      {
+        "keyword": "emergency dishwasher repair near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 55.4
+      },
+      {
+        "keyword": "fix dishwasher near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 54.2
+      },
+      {
+        "keyword": "best dishwasher repair services near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 54.2
+      },
+      {
+        "keyword": "dishwasher specialist near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 54.2
+      },
+      {
+        "keyword": "electrolux dishwasher repair near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 54.2
+      },
+      {
+        "keyword": "dishwasher technician",
+        "volume": 10,
+        "intent": "commercial",
+        "cpc_range": "0.0-0.0",
+        "score": 53.6
+      },
+      {
+        "keyword": "dishwasher mechanic",
+        "volume": 10,
+        "intent": "commercial",
+        "cpc_range": "0.0-0.0",
+        "score": 53.6
+      },
+      {
+        "keyword": "dishwasher tech",
+        "volume": 10,
+        "intent": "commercial",
+        "cpc_range": "0.0-0.0",
+        "score": 53.6
+      },
+      {
+        "keyword": "lg dishwasher repair cost",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 52.3
+      },
+      {
+        "keyword": "lg dishwasher repair service near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 52.0
+      },
+      {
+        "keyword": "commercial dishwasher repair near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 51.3
+      },
+      {
+        "keyword": "local dishwasher repair",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 51.3
+      },
+      {
+        "keyword": "commercial dishwasher service near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 51.3
+      },
+      {
+        "keyword": "best bosch dishwasher repair near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 51.3
+      },
+      {
+        "keyword": "bosch dishwasher appliance repair near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 51.3
+      },
+      {
+        "keyword": "zanussi dishwasher repair near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 51.3
+      },
+      {
+        "keyword": "bosch dishwasher servicing",
+        "volume": 10,
+        "intent": "commercial",
+        "cpc_range": "1081.06-5317.66",
+        "score": 51.2
+      },
+      {
+        "keyword": "commercial dishwasher repair",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 49.3
+      },
+      {
+        "keyword": "dishwasher repair cost",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 49.3
+      },
+      {
+        "keyword": "dishwasher repair company",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 49.3
+      },
+      {
+        "keyword": "fix commercial dishwasher",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 49.3
+      },
+      {
+        "keyword": "dishwasher fix cost",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 49.3
+      },
+      {
+        "keyword": "bosch dishwasher maintenance",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 49.3
+      },
+      {
+        "keyword": "bosch dishwasher fix",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 49.3
+      },
+      {
+        "keyword": "lg dishwasher maintenance",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 49.3
+      },
+      {
+        "keyword": "bosch dishwasher repair service near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 49.2
+      },
+      {
+        "keyword": "dishwasher service near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "969.37-5568.48",
+        "score": 49.1
+      },
+      {
+        "keyword": "dishwasher maintenance near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "969.37-5568.48",
+        "score": 49.1
+      },
+      {
+        "keyword": "dishwasher technician near me",
+        "volume": 10,
+        "intent": "commercial",
+        "cpc_range": "0.0-0.0",
+        "score": 47.7
+      },
+      {
+        "keyword": "fixing dishwasher near me",
+        "volume": 10,
+        "intent": "commercial",
+        "cpc_range": "0.0-0.0",
+        "score": 47.7
+      },
+      {
+        "keyword": "kenmore dishwasher repair",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 46.7
+      },
+      {
+        "keyword": "neff dishwasher repair",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 46.7
+      },
+      {
+        "keyword": "dishwasher appliance repair",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 46.7
+      },
+      {
+        "keyword": "dishwasher repair in my area",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 46.7
+      },
+      {
+        "keyword": "dishwasher repair person",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 46.7
+      },
+      {
+        "keyword": "dishwasher repair service in my area",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 46.7
+      },
+      {
+        "keyword": "dishwasher repair technician",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 46.7
+      },
+      {
+        "keyword": "fagor dishwasher repair",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 46.7
+      },
+      {
+        "keyword": "dishwasher specialist",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 46.7
+      },
+      {
+        "keyword": "portable dishwasher repair",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 46.7
+      },
+      {
+        "keyword": "kitchen dishwasher repair",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 46.7
+      },
+      {
+        "keyword": "dishwasher repair fife",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 46.7
+      },
+      {
+        "keyword": "dishwasher latch repair",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 46.7
+      },
+      {
+        "keyword": "best dishwasher repair",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 46.7
+      }
+    ],
+    "negative_keywords": [
+      "clothes dryer",
+      "clothes washer",
+      "dryer",
+      "dryers",
+      "freezer",
+      "fridge",
+      "fridge freezer",
+      "laundry machine",
+      "lcd panel",
+      "lcd screen",
+      "lcd tv",
+      "led display",
+      "led panel",
+      "led screen",
+      "led tv",
+      "oled tv",
+      "refrig",
+      "refrigerator",
+      "smart tv",
+      "television"
+    ],
+    "ad_group_themes": [
+      "Core service ads for dishwasher repair across Dubai. Lead with the service + location; all brands, same day."
+    ],
+    "match_types": [
+      "phrase"
+    ],
+    "mode1_config": {
+      "main_service": "Dishwasher Repair",
+      "sub_services": "تصليح غسالة صحون اريستون, صيانة غسالات صحون, تصليح مضخة غسالة صحون, تصليح عنصر تسخين غسالة صحون, تصليح تسريب غسالة صحون, فني تصليح غسالة صحون",
+      "industry": "خدمة صيانة أجهزة",
+      "business_name": "Washer Dryer Repair Dubai"
+    },
+    "google_ads_tracking_tip": "Final URL suffix: kw={keyword} — enables the landing page's Dynamic Keyword Insertion (DKI).",
+    "ad_copy": {
+      "headlines": [
+        "Dishwasher Repair Near Me",
+        "Dishwasher Repair In Dubai",
+        "Dishwasher Fixer Near You",
+        "Siemens Dishwasher Repair",
+        "Bosch Dishwasher Repair Dubai",
+        "LG Dishwasher Repair Today",
+        "Samsung Dishwasher Repair",
+        "Same Day Dishwasher Fix",
+        "Book A Same Day Repair Slot",
+        "Call For Dishwasher Diagnosis",
+        "Technicians Across Dubai",
+        "Free Diagnosis Before Repair"
+      ],
+      "descriptions": [
+        "Dishwasher repair near you in Dubai, all brands, same day appointments available.",
+        "Bosch and Siemens dishwasher repair specialists trained on genuine parts and tools.",
+        "Free diagnosis before any repair, so you know the cost before we start work.",
+        "Trusted dishwasher repair service across Dubai, same day slots booked daily."
+      ],
+      "sitelinks": [
+        {
+          "text": "Dishwasher Services",
+          "desc1": "What the service covers",
+          "desc2": "All brands, same-day slots",
+          "anchor": "services"
+        },
+        {
+          "text": "Dishwasher Repair Pricing",
+          "desc1": "Transparent price ranges",
+          "desc2": "No hidden charges, ever",
+          "anchor": "pricing"
+        },
+        {
+          "text": "Customer Reviews",
+          "desc1": "Real customer stories",
+          "desc2": "Rated by local clients",
+          "anchor": "reviews"
+        },
+        {
+          "text": "Dishwasher Repair FAQs",
+          "desc1": "Costs, timing & questions",
+          "desc2": "Repair vs replace advice",
+          "anchor": "faq"
+        },
+        {
+          "text": "Get a Free Quote",
+          "desc1": "Free quote before any work",
+          "desc2": "Call or WhatsApp today",
+          "anchor": "contact"
+        }
+      ]
+    }
+  },
+  {
+    "page_name": "Refrigerator Repair",
+    "url_slug": "refrigerator-repair-dubai",
+    "language": "en",
+    "service_name": "Refrigerator Repair",
+    "industry": "خدمة صيانة أجهزة",
+    "sub_services": [
+      "تصليح ثلاجات سامسونج",
+      "تصليح ثلاجات ال جي",
+      "تصليح ثلاجات LG",
+      "تصليح كمبروسر ثلاجة",
+      "تصليح باب ثلاجة",
+      "صيانة ثلاجات منزلية"
+    ],
+    "ad_groups_covered": [
+      "Refrigerator Repair"
+    ],
+    "keyword_map": {
+      "primary": "refrigerator repair dubai",
+      "areas_in_queries": [],
+      "secondary": [
+        "refrig repair",
+        "refrigerator fridge repair",
+        "refrigerator repair near me",
+        "fridge repair near me",
+        "home refrigerator repair near me",
+        "refrigerator repair close to me",
+        "fridge repair",
+        "fridge service repair near me",
+        "refrigerator repair service near me",
+        "refrigerator service near me"
+      ],
+      "brands": [
+        "LG",
+        "Samsung",
+        "Siemens",
+        "Bosch",
+        "Electrolux",
+        "Hisense",
+        "Panasonic",
+        "Miele",
+        "Beko",
+        "Hitachi"
+      ],
+      "problems": [
+        "broken refrigerator",
+        "fridge door broken",
+        "broken freezer door",
+        "fridge handle broken",
+        "refrigerator seal repair",
+        "fridge seal repair",
+        "refrigerator compressor repair near me",
+        "fridge gas leak repair cost",
+        "refrigerator gas leak repair cost",
+        "refrigerator door seal repair",
+        "fridge door seal repair",
+        "fix refrigerator door seal"
+      ],
+      "urgent_local": [
+        "refrigerator repair near me",
+        "fridge repair near me",
+        "home refrigerator repair near me",
+        "refrigerator repair close to me",
+        "fridge service repair near me",
+        "refrigerator repair service near me",
+        "refrigerator service near me",
+        "fridge service near me",
+        "fridge maintenance near me",
+        "refrigerator maintenance near me"
+      ],
+      "emergency": [
+        "emergency refrigerator repair near me",
+        "emergency fridge repair near me",
+        "emergency refrigerator",
+        "emergency refrigeration service",
+        "emergency refrigerator repair",
+        "emergency fridge repair",
+        "24 hour refrigerator repair near me",
+        "24 hour fridge repair near me",
+        "24 hour refrigerator repair",
+        "emergency freezer repair"
+      ],
+      "voice_questions": [],
+      "placement": {
+        "title": "Refrigerator Repair Dubai | Same-Day, All Brands",
+        "meta_description_must_include": [
+          "refrigerator repair dubai",
+          "refrig repair"
+        ],
+        "h1": "Refrigerator Repair Dubai",
+        "h2_sections": [
+          {
+            "layer": "core",
+            "anchor": "services",
+            "must_include": [
+              "refrig repair",
+              "refrigerator fridge repair",
+              "refrigerator repair near me"
+            ]
+          },
+          {
+            "layer": "brand",
+            "anchor": "brands",
+            "must_include": [
+              "LG",
+              "Samsung",
+              "Siemens"
+            ]
+          },
+          {
+            "layer": "problem",
+            "anchor": "problems",
+            "must_include": [
+              "broken refrigerator",
+              "fridge door broken",
+              "broken freezer door"
+            ]
+          }
+        ],
+        "faq_from": [
+          "fridge re gas"
+        ],
+        "symptom_faq": [
+          "fridge re gas"
+        ],
+        "body_rules": "primary 3-5x naturally; every secondary once; each brand and problem once in its section; no stuffing, no hidden text"
+      },
+      "schema": {
+        "types": [
+          "LocalBusiness",
+          "Service",
+          "FAQPage",
+          "BreadcrumbList"
+        ],
+        "service.serviceType": "Refrigerator Repair",
+        "service.name": "Refrigerator Repair Dubai",
+        "service.areaServed": "Dubai, United Arab Emirates",
+        "offer_catalog": [
+          "LG Refrigerator Repair",
+          "Samsung Refrigerator Repair",
+          "Siemens Refrigerator Repair",
+          "Bosch Refrigerator Repair",
+          "Electrolux Refrigerator Repair",
+          "Hisense Refrigerator Repair",
+          "Broken Refrigerator",
+          "Fridge Door Broken",
+          "Broken Freezer Door",
+          "Fridge Handle Broken",
+          "Refrigerator Seal Repair",
+          "Fridge Seal Repair"
+        ],
+        "never": "no AggregateRating/Review unless real, verifiable reviews exist"
+      }
+    },
+    "anchor_by_group": {
+      "Refrigerator Repair": "services",
+      "تصليح ثلاجات": "services"
+    },
+    "keywords_covered": 390,
+    "monthly_volume_covered": 22600,
+    "target_keywords": [
+      {
+        "keyword": "refrigerator repair",
+        "volume": 2400,
+        "intent": "transactional",
+        "cpc_range": "969.48-4147.74",
+        "score": 130.6
+      },
+      {
+        "keyword": "refrig repair",
+        "volume": 2400,
+        "intent": "transactional",
+        "cpc_range": "969.48-4147.74",
+        "score": 130.6
+      },
+      {
+        "keyword": "refrigerator fridge repair",
+        "volume": 2400,
+        "intent": "transactional",
+        "cpc_range": "969.48-4147.74",
+        "score": 130.6
+      },
+      {
+        "keyword": "refrigerator repair near me",
+        "volume": 1900,
+        "intent": "transactional",
+        "cpc_range": "1038.73-3518.66",
+        "score": 111.1
+      },
+      {
+        "keyword": "fridge repair near me",
+        "volume": 1900,
+        "intent": "transactional",
+        "cpc_range": "1038.73-3518.66",
+        "score": 111.1
+      },
+      {
+        "keyword": "home refrigerator repair near me",
+        "volume": 1900,
+        "intent": "transactional",
+        "cpc_range": "1038.73-3518.66",
+        "score": 111.1
+      },
+      {
+        "keyword": "fridge service repair near me",
+        "volume": 320,
+        "intent": "transactional",
+        "cpc_range": "788.09-2514.82",
+        "score": 105.1
+      },
+      {
+        "keyword": "refrigerator repair close to me",
+        "volume": 1900,
+        "intent": "transactional",
+        "cpc_range": "1038.73-3518.66",
+        "score": 101.0
+      },
+      {
+        "keyword": "lg refrigerator repair",
+        "volume": 90,
+        "intent": "transactional",
+        "cpc_range": "268.88-2709.63",
+        "score": 90.3
+      },
+      {
+        "keyword": "lg fridge repair",
+        "volume": 90,
+        "intent": "transactional",
+        "cpc_range": "268.88-2709.63",
+        "score": 90.3
+      },
+      {
+        "keyword": "lg freezer repair",
+        "volume": 90,
+        "intent": "transactional",
+        "cpc_range": "268.88-2709.63",
+        "score": 90.3
+      },
+      {
+        "keyword": "samsung fridge repair",
+        "volume": 50,
+        "intent": "transactional",
+        "cpc_range": "501.56-2864.46",
+        "score": 85.5
+      },
+      {
+        "keyword": "samsung freezer repair",
+        "volume": 50,
+        "intent": "transactional",
+        "cpc_range": "501.56-2864.46",
+        "score": 85.5
+      },
+      {
+        "keyword": "lg refrigerator repair near me",
+        "volume": 20,
+        "intent": "transactional",
+        "cpc_range": "724.5-3502.98",
+        "score": 82.8
+      },
+      {
+        "keyword": "lg fridge repair near me",
+        "volume": 20,
+        "intent": "transactional",
+        "cpc_range": "724.5-3502.98",
+        "score": 82.8
+      },
+      {
+        "keyword": "refrigerator repair service near me",
+        "volume": 110,
+        "intent": "transactional",
+        "cpc_range": "2719.69-5081.09",
+        "score": 82.5
+      },
+      {
+        "keyword": "repair freezer near me",
+        "volume": 70,
+        "intent": "transactional",
+        "cpc_range": "1027.33-4142.58",
+        "score": 80.3
+      },
+      {
+        "keyword": "bosch refrigerator repair near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 79.7
+      },
+      {
+        "keyword": "bosch fridge repair near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 79.7
+      },
+      {
+        "keyword": "freezer repair",
+        "volume": 70,
+        "intent": "transactional",
+        "cpc_range": "872.53-2366.94",
+        "score": 76.2
+      },
+      {
+        "keyword": "bosch fridge repair",
+        "volume": 40,
+        "intent": "transactional",
+        "cpc_range": "850.36-4422.37",
+        "score": 75.8
+      },
+      {
+        "keyword": "samsung fridge service",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 74.5
+      },
+      {
+        "keyword": "samsung fridge maintenance",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 74.5
+      },
+      {
+        "keyword": "samsung refrigerator service",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 74.5
+      },
+      {
+        "keyword": "refrigerator repair shop near me",
+        "volume": 70,
+        "intent": "transactional",
+        "cpc_range": "1004.53-3203.45",
+        "score": 73.5
+      },
+      {
+        "keyword": "fridge repair shop near me",
+        "volume": 70,
+        "intent": "transactional",
+        "cpc_range": "1004.53-3203.45",
+        "score": 73.5
+      },
+      {
+        "keyword": "emergency refrigerator repair near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 70.8
+      },
+      {
+        "keyword": "emergency fridge repair near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 70.8
+      },
+      {
+        "keyword": "freezer repairs near me",
+        "volume": 70,
+        "intent": "commercial",
+        "cpc_range": "1027.33-4142.58",
+        "score": 70.7
+      },
+      {
+        "keyword": "siemens fridge repair",
+        "volume": 50,
+        "intent": "transactional",
+        "cpc_range": "889.88-4211.14",
+        "score": 65.7
+      },
+      {
+        "keyword": "siemens refrigerator repair",
+        "volume": 50,
+        "intent": "transactional",
+        "cpc_range": "889.88-4211.14",
+        "score": 65.7
+      },
+      {
+        "keyword": "deep freezer repair near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 65.6
+      },
+      {
+        "keyword": "fridge repair technician near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 65.6
+      },
+      {
+        "keyword": "refrigerator repair places near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 65.6
+      },
+      {
+        "keyword": "hitachi fridge repair near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 65.6
+      },
+      {
+        "keyword": "samsung fridge repair service near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 65.6
+      },
+      {
+        "keyword": "samsung refrigerator servicing",
+        "volume": 10,
+        "intent": "commercial",
+        "cpc_range": "0.0-0.0",
+        "score": 65.6
+      },
+      {
+        "keyword": "samsung fridge servicing",
+        "volume": 10,
+        "intent": "commercial",
+        "cpc_range": "0.0-0.0",
+        "score": 65.6
+      },
+      {
+        "keyword": "broken refrigerator",
+        "volume": 10,
+        "intent": "commercial",
+        "cpc_range": "0.0-0.0",
+        "score": 65.0
+      },
+      {
+        "keyword": "samsung refrig repair near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 64.6
+      },
+      {
+        "keyword": "fridge technician near me",
+        "volume": 50,
+        "intent": "commercial",
+        "cpc_range": "1038.73-4129.98",
+        "score": 62.7
+      },
+      {
+        "keyword": "refrigerator technician near me",
+        "volume": 50,
+        "intent": "commercial",
+        "cpc_range": "1038.73-4129.98",
+        "score": 62.7
+      },
+      {
+        "keyword": "lg refrigerator service",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 62.7
+      },
+      {
+        "keyword": "lg fridge service",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 62.7
+      },
+      {
+        "keyword": "fridge door broken",
+        "volume": 10,
+        "intent": "commercial",
+        "cpc_range": "0.0-0.0",
+        "score": 61.6
+      },
+      {
+        "keyword": "broken freezer door",
+        "volume": 10,
+        "intent": "commercial",
+        "cpc_range": "0.0-0.0",
+        "score": 61.6
+      },
+      {
+        "keyword": "fridge handle broken",
+        "volume": 10,
+        "intent": "commercial",
+        "cpc_range": "0.0-0.0",
+        "score": 61.6
+      },
+      {
+        "keyword": "refrigerator service near me",
+        "volume": 90,
+        "intent": "transactional",
+        "cpc_range": "1038.73-4147.74",
+        "score": 61.3
+      },
+      {
+        "keyword": "fridge service near me",
+        "volume": 90,
+        "intent": "transactional",
+        "cpc_range": "1038.73-4147.74",
+        "score": 61.3
+      },
+      {
+        "keyword": "fridge maintenance near me",
+        "volume": 90,
+        "intent": "transactional",
+        "cpc_range": "1038.73-4147.74",
+        "score": 61.3
+      },
+      {
+        "keyword": "refrigerator maintenance near me",
+        "volume": 90,
+        "intent": "transactional",
+        "cpc_range": "1038.73-4147.74",
+        "score": 61.3
+      },
+      {
+        "keyword": "nearest fridge repair shop",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "738.31-1900.81",
+        "score": 61.3
+      },
+      {
+        "keyword": "bosch refrigerators repair service",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 60.7
+      },
+      {
+        "keyword": "air conditioning and refrigeration services",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 59.6
+      },
+      {
+        "keyword": "aircon and refrigeration services",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 59.6
+      },
+      {
+        "keyword": "refrigerator seal repair",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 59.6
+      },
+      {
+        "keyword": "fridge seal repair",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 59.6
+      },
+      {
+        "keyword": "miele fridge repair",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "559.16-2650.83",
+        "score": 59.3
+      },
+      {
+        "keyword": "refrigerator technician",
+        "volume": 20,
+        "intent": "commercial",
+        "cpc_range": "872.53-4626.3",
+        "score": 59.2
+      },
+      {
+        "keyword": "refrigerator freezer repair",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "1131.2-3393.61",
+        "score": 57.9
+      }
+    ],
+    "negative_keywords": [
+      "clothes dryer",
+      "clothes washer",
+      "dish washer",
+      "dishwasher",
+      "dishwashers",
+      "laundry machine",
+      "lcd panel",
+      "lcd screen",
+      "lcd tv",
+      "led display",
+      "led panel",
+      "led screen",
+      "led tv",
+      "oled tv",
+      "smart tv",
+      "television",
+      "tumble dryer",
+      "wash machine",
+      "washer",
+      "washing machine"
+    ],
+    "ad_group_themes": [
+      "Core service ads for refrigerator and fridge repair across Dubai. Lead with the service + location; all brands, same day."
+    ],
+    "match_types": [
+      "phrase"
+    ],
+    "mode1_config": {
+      "main_service": "Refrigerator Repair",
+      "sub_services": "تصليح ثلاجات سامسونج, تصليح ثلاجات ال جي, تصليح ثلاجات LG, تصليح كمبروسر ثلاجة, تصليح باب ثلاجة, صيانة ثلاجات منزلية",
+      "industry": "خدمة صيانة أجهزة",
+      "business_name": "Washer Dryer Repair Dubai"
+    },
+    "google_ads_tracking_tip": "Final URL suffix: kw={keyword} — enables the landing page's Dynamic Keyword Insertion (DKI).",
+    "ad_copy": {
+      "headlines": [
+        "Refrigerator Repair Dubai",
+        "Fridge Repair Near Me Today",
+        "Refrigerator Repair Near Me",
+        "Home Refrigerator Repair",
+        "Fridge Service Repair Dubai",
+        "Same Day Fridge Fix At Home",
+        "No Cooling Fixed Same Visit",
+        "Stop Food Spoilage Today",
+        "Book Your Repair Slot Now",
+        "Call For Same Day Technician",
+        "Schedule A Free Diagnosis",
+        "Techs Rated By Dubai Homes"
+      ],
+      "descriptions": [
+        "Refrigerator repair across Dubai, same day visits and upfront pricing for every brand.",
+        "Our techs carry parts for LG and Samsung on the first visit, not the second.",
+        "Free diagnosis before repair, so you know the cost before work begins.",
+        "Trusted by Dubai households for fast, honest fridge repair every week."
+      ],
+      "sitelinks": [
+        {
+          "text": "Refrigerator Services",
+          "desc1": "What the service covers",
+          "desc2": "All brands, same-day slots",
+          "anchor": "services"
+        },
+        {
+          "text": "Refrigerator Pricing",
+          "desc1": "Transparent price ranges",
+          "desc2": "No hidden charges, ever",
+          "anchor": "pricing"
+        },
+        {
+          "text": "Customer Reviews",
+          "desc1": "Real customer stories",
+          "desc2": "Rated by local clients",
+          "anchor": "reviews"
+        },
+        {
+          "text": "Refrigerator Repair FAQs",
+          "desc1": "Costs, timing & questions",
+          "desc2": "Repair vs replace advice",
+          "anchor": "faq"
+        },
+        {
+          "text": "Get a Free Quote",
+          "desc1": "Free quote before any work",
+          "desc2": "Call or WhatsApp today",
+          "anchor": "contact"
+        }
+      ]
+    }
+  },
+  {
+    "page_name": "Wine Chiller Repair",
+    "url_slug": "wine-chiller-repair-dubai",
+    "language": "en",
+    "service_name": "Wine Chiller Repair",
+    "industry": "Appliance Repair Service",
+    "sub_services": [
+      "Wine Fridge Repair",
+      "Wine Cooler Compressor Repair",
+      "Wine Chiller Door Seal Repair",
+      "Wine Cooler Thermostat Repair",
+      "Wine Fridge Cooling Repair",
+      "Wine Chiller Maintenance"
+    ],
+    "ad_groups_covered": [
+      "Wine Chiller Repair"
+    ],
+    "keyword_map": {
+      "primary": "wine cooler repair near me dubai",
+      "areas_in_queries": [],
+      "secondary": [
+        "wine cooler repair",
+        "wine chiller repair",
+        "fix wine cooler",
+        "wine cooler repair service",
+        "wine chiller repair near me",
+        "wine cooler repair service near me",
+        "wine fridge repair",
+        "fix wine fridge",
+        "wine fridge repair near me",
+        "wine fridge broken"
+      ],
+      "brands": [],
+      "problems": [
+        "wine fridge broken"
+      ],
+      "urgent_local": [
+        "wine cooler repair near me",
+        "wine chiller repair near me",
+        "wine cooler repair service near me",
+        "wine fridge repair near me"
+      ],
+      "emergency": [],
+      "voice_questions": [],
+      "placement": {
+        "title": "Wine Cooler Repair Near Me Dubai | Same-Day, All Brands",
+        "meta_description_must_include": [
+          "wine cooler repair near me dubai",
+          "wine cooler repair"
+        ],
+        "h1": "Wine Cooler Repair Near Me Dubai",
+        "h2_sections": [
+          {
+            "layer": "core",
+            "anchor": "services",
+            "must_include": [
+              "wine cooler repair",
+              "wine chiller repair",
+              "wine cooler repair near me"
+            ]
+          },
+          {
+            "layer": "problem",
+            "anchor": "problems",
+            "must_include": [
+              "wine fridge broken"
+            ]
+          }
+        ],
+        "faq_from": [
+          "how much does wine cooler repair near me cost",
+          "do you offer same day wine cooler repair near me"
+        ],
+        "symptom_faq": [],
+        "body_rules": "primary 3-5x naturally; every secondary once; each brand and problem once in its section; no stuffing, no hidden text"
+      },
+      "schema": {
+        "types": [
+          "LocalBusiness",
+          "Service",
+          "FAQPage",
+          "BreadcrumbList"
+        ],
+        "service.serviceType": "Wine Cooler Repair Near Me",
+        "service.name": "Wine Cooler Repair Near Me Dubai",
+        "service.areaServed": "Dubai, United Arab Emirates",
+        "offer_catalog": [
+          "Wine Fridge Broken"
+        ],
+        "never": "no AggregateRating/Review unless real, verifiable reviews exist"
+      }
+    },
+    "anchor_by_group": {
+      "Wine Chiller Repair": "services"
+    },
+    "keywords_covered": 11,
+    "monthly_volume_covered": 310,
+    "target_keywords": [
+      {
+        "keyword": "wine cooler repair near me",
+        "volume": 90,
+        "intent": "transactional",
+        "cpc_range": "837.84-1856.9",
+        "score": 97.5
+      },
+      {
+        "keyword": "wine cooler repair service",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 57.8
+      },
+      {
+        "keyword": "wine chiller repair near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 54.2
+      },
+      {
+        "keyword": "wine cooler repair service near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 51.3
+      },
+      {
+        "keyword": "wine cooler repair",
+        "volume": 50,
+        "intent": "transactional",
+        "cpc_range": "719.44-1671.46",
+        "score": 49.0
+      },
+      {
+        "keyword": "wine chiller repair",
+        "volume": 50,
+        "intent": "transactional",
+        "cpc_range": "719.44-1671.46",
+        "score": 49.0
+      },
+      {
+        "keyword": "fix wine cooler",
+        "volume": 50,
+        "intent": "transactional",
+        "cpc_range": "719.36-1671.27",
+        "score": 49.0
+      },
+      {
+        "keyword": "wine fridge broken",
+        "volume": 10,
+        "intent": "commercial",
+        "cpc_range": "0.0-0.0",
+        "score": 41.1
+      },
+      {
+        "keyword": "wine fridge repair",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "918.54-1131.23",
+        "score": 39.8
+      },
+      {
+        "keyword": "fix wine fridge",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "918.43-1131.1",
+        "score": 39.8
+      },
+      {
+        "keyword": "wine fridge repair near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 22.3
+      }
+    ],
+    "negative_keywords": [
+      "clothes dryer",
+      "clothes washer",
+      "dish washer",
+      "dishwasher",
+      "dishwashers",
+      "dryer",
+      "dryers",
+      "freezer",
+      "fridge freezer",
+      "laundry machine",
+      "lcd panel",
+      "lcd screen",
+      "lcd tv",
+      "led display",
+      "led panel",
+      "led screen",
+      "led tv",
+      "oled tv",
+      "refrig",
+      "refrigerator"
+    ],
+    "ad_group_themes": [
+      "Core service ads for wine cooler and chiller repair across Dubai. Lead with the service + location; all brands, same day."
+    ],
+    "match_types": [
+      "phrase"
+    ],
+    "mode1_config": {
+      "main_service": "Wine Chiller Repair",
+      "sub_services": "Wine Fridge Repair, Wine Cooler Compressor Repair, Wine Chiller Door Seal Repair, Wine Cooler Thermostat Repair, Wine Fridge Cooling Repair, Wine Chiller Maintenance",
+      "industry": "Appliance Repair Service",
+      "business_name": "Washer Dryer Repair Dubai"
+    },
+    "google_ads_tracking_tip": "Final URL suffix: kw={keyword} — enables the landing page's Dynamic Keyword Insertion (DKI).",
+    "ad_copy": {
+      "headlines": [
+        "Wine Cooler Repair Near Me",
+        "Wine Cooler Repair In Dubai",
+        "Wine Chiller Repair Service",
+        "Fix Wine Cooler Today",
+        "Wine Fridge Repair Dubai",
+        "Cooling Restored Same Day",
+        "Back To Perfect Temperature",
+        "Chiller Running Like New",
+        "Book Same Day Repair Now",
+        "Get Free Diagnosis Today",
+        "Call For Emergency Repair",
+        "Fixed In One Visit Usually"
+      ],
+      "descriptions": [
+        "Same day wine cooler repair across Dubai, all brands fixed on first visit.",
+        "Free diagnosis, transparent pricing, and technicians for every cooler brand.",
+        "No upfront cost worry, free call out and clear quote before any repair work.",
+        "Trusted wine cooler repair near you, booked same day across Dubai today!"
+      ],
+      "sitelinks": [
+        {
+          "text": "Wine Chiller Services",
+          "desc1": "What the service covers",
+          "desc2": "All brands, same-day slots",
+          "anchor": "services"
+        },
+        {
+          "text": "Wine Chiller Pricing",
+          "desc1": "Transparent price ranges",
+          "desc2": "No hidden charges, ever",
+          "anchor": "pricing"
+        },
+        {
+          "text": "Customer Reviews",
+          "desc1": "Real customer stories",
+          "desc2": "Rated by local clients",
+          "anchor": "reviews"
+        },
+        {
+          "text": "Wine Chiller Repair FAQs",
+          "desc1": "Costs, timing & questions",
+          "desc2": "Repair vs replace advice",
+          "anchor": "faq"
+        },
+        {
+          "text": "Get a Free Quote",
+          "desc1": "Free quote before any work",
+          "desc2": "Call or WhatsApp today",
+          "anchor": "contact"
+        }
+      ]
+    }
+  },
+  {
+    "page_name": "LED TV Repair",
+    "url_slug": "led-tv-repair-dubai",
+    "language": "en",
+    "service_name": "LED TV Repair",
+    "industry": "خدمة صيانة أجهزة",
+    "sub_services": [
+      "تصليح تلفزيون سامسونج",
+      "تصليح تلفزيون LG",
+      "تصليح تلفزيون ال جي",
+      "تصليح تلفزيون TCL",
+      "تصليح شاشة تلفزيون مكسورة",
+      "تصليح ريموت تلفزيون"
+    ],
+    "ad_groups_covered": [
+      "LED TV Repair"
+    ],
+    "keyword_map": {
+      "primary": "led tv repair near me dubai",
+      "areas_in_queries": [],
+      "secondary": [
+        "led tv repair shop near me",
+        "led tv screen repair",
+        "led screen repair",
+        "fix led tv screen",
+        "led tv screen damage repair",
+        "tv led display repair",
+        "fixing led tv screen",
+        "lcd screen panel replacement",
+        "thomson led tv service center near me",
+        "lcd panel replacement for tv"
+      ],
+      "brands": [
+        "Samsung",
+        "LG",
+        "Sony",
+        "TCL",
+        "Philips",
+        "Hisense",
+        "Toshiba",
+        "Haier",
+        "Sharp",
+        "Skyworth"
+      ],
+      "problems": [
+        "fix broken led tv screen",
+        "tv backlight repair cost",
+        "led tv backlight repair near me",
+        "tv backlight repair",
+        "fix backlight on tv",
+        "broken lcd tv screen repair cost",
+        "broken led tv screen repair cost",
+        "cost to replace backlight on led tv",
+        "led tv backlight replacement cost",
+        "led tv backlight repair cost",
+        "tv backlight replacement",
+        "mi tv backlight repair cost"
+      ],
+      "urgent_local": [
+        "led tv repair near me",
+        "led tv repair shop near me",
+        "thomson led tv service center near me",
+        "led tv repair near me home service",
+        "tv fixing service near me",
+        "led tv display repair near me",
+        "nearby led tv repair",
+        "led tv service near me",
+        "sansui tv repair near me",
+        "led tv panel repair near me"
+      ],
+      "emergency": [],
+      "voice_questions": [],
+      "placement": {
+        "title": "LED TV Repair Near Me Dubai | Same-Day, All Brands",
+        "meta_description_must_include": [
+          "led tv repair near me dubai",
+          "led tv repair shop near me"
+        ],
+        "h1": "LED TV Repair Near Me Dubai",
+        "h2_sections": [
+          {
+            "layer": "core",
+            "anchor": "services",
+            "must_include": [
+              "led tv repair shop near me",
+              "led tv screen repair",
+              "led tv repair near me"
+            ]
+          },
+          {
+            "layer": "brand",
+            "anchor": "brands",
+            "must_include": [
+              "Samsung",
+              "LG",
+              "Sony"
+            ]
+          },
+          {
+            "layer": "problem",
+            "anchor": "problems",
+            "must_include": [
+              "fix broken led tv screen",
+              "tv backlight repair cost",
+              "led tv backlight repair near me"
+            ]
+          }
+        ],
+        "faq_from": [
+          "samsung led tv backlight problems",
+          "samsung tv backlight problems",
+          "lcd panel bonding machine",
+          "tv backlight problems",
+          "replacing backlight on tv",
+          "led panel cof",
+          "crack in led tv screen",
+          "led screen crack",
+          "scratch on led tv screen",
+          "smashed led tv screen"
+        ],
+        "symptom_faq": [
+          "samsung led tv backlight problems",
+          "samsung tv backlight problems",
+          "lcd panel bonding machine",
+          "tv backlight problems",
+          "replacing backlight on tv",
+          "led panel cof",
+          "crack in led tv screen",
+          "led screen crack",
+          "scratch on led tv screen",
+          "smashed led tv screen"
+        ],
+        "body_rules": "primary 3-5x naturally; every secondary once; each brand and problem once in its section; no stuffing, no hidden text"
+      },
+      "schema": {
+        "types": [
+          "LocalBusiness",
+          "Service",
+          "FAQPage",
+          "BreadcrumbList"
+        ],
+        "service.serviceType": "LED TV Repair Near Me",
+        "service.name": "LED TV Repair Near Me Dubai",
+        "service.areaServed": "Dubai, United Arab Emirates",
+        "offer_catalog": [
+          "Samsung LED TV Repair",
+          "LG LED TV Repair",
+          "Sony LED TV Repair",
+          "TCL LED TV Repair",
+          "Philips LED TV Repair",
+          "Hisense LED TV Repair",
+          "Fix Broken LED TV Screen",
+          "TV Backlight Repair Cost",
+          "LED TV Backlight Repair Near Me",
+          "TV Backlight Repair",
+          "Fix Backlight On TV",
+          "Broken LCD TV Screen Repair Cost"
+        ],
+        "never": "no AggregateRating/Review unless real, verifiable reviews exist"
+      }
+    },
+    "anchor_by_group": {
+      "LED TV Repair": "services",
+      "تصليح تلفزيون": "services"
+    },
+    "keywords_covered": 276,
+    "monthly_volume_covered": 2890,
+    "target_keywords": [
+      {
+        "keyword": "led tv repair near me",
+        "volume": 70,
+        "intent": "transactional",
+        "cpc_range": "748.2-1357.32",
+        "score": 89.5
+      },
+      {
+        "keyword": "led tv repair shop near me",
+        "volume": 20,
+        "intent": "transactional",
+        "cpc_range": "1134.43-1909.27",
+        "score": 80.3
+      },
+      {
+        "keyword": "samsung led tv repair near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 77.8
+      },
+      {
+        "keyword": "samsung led tv service center",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 72.1
+      },
+      {
+        "keyword": "samsung tv led panel replacement",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 72.1
+      },
+      {
+        "keyword": "fix broken led tv screen",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 70.0
+      },
+      {
+        "keyword": "led tv screen repair",
+        "volume": 20,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 67.4
+      },
+      {
+        "keyword": "led screen repair",
+        "volume": 20,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 67.4
+      },
+      {
+        "keyword": "fix led tv screen",
+        "volume": 20,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 67.4
+      },
+      {
+        "keyword": "led tv screen damage repair",
+        "volume": 20,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 67.4
+      },
+      {
+        "keyword": "tv led display repair",
+        "volume": 20,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 67.4
+      },
+      {
+        "keyword": "samsung lcd tv repair near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 62.1
+      },
+      {
+        "keyword": "lg smart tv broken screen",
+        "volume": 10,
+        "intent": "commercial",
+        "cpc_range": "0.0-0.0",
+        "score": 61.6
+      },
+      {
+        "keyword": "lcd screen panel replacement",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 60.9
+      },
+      {
+        "keyword": "thomson led tv service center near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 60.3
+      },
+      {
+        "keyword": "lcd panel replacement for tv",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 60.3
+      },
+      {
+        "keyword": "lcd tv replacement screen",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 60.3
+      },
+      {
+        "keyword": "tcl led tv service center near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 60.3
+      },
+      {
+        "keyword": "philips led tv service center near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 60.3
+      },
+      {
+        "keyword": "fix led screen",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 59.6
+      },
+      {
+        "keyword": "samsung smart tv repair",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 59.6
+      },
+      {
+        "keyword": "fixing led tv screen",
+        "volume": 20,
+        "intent": "commercial",
+        "cpc_range": "0.0-0.0",
+        "score": 59.3
+      },
+      {
+        "keyword": "samsung led tv backlight replacement",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 58.3
+      },
+      {
+        "keyword": "led tv panel replacement",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 57.8
+      },
+      {
+        "keyword": "led tv panel repair",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 57.8
+      },
+      {
+        "keyword": "led tv panel repair cost",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 57.8
+      },
+      {
+        "keyword": "black spot on led tv screen repair",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 57.8
+      },
+      {
+        "keyword": "led tv cof repair",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 57.8
+      },
+      {
+        "keyword": "samsung tv servicing",
+        "volume": 10,
+        "intent": "commercial",
+        "cpc_range": "0.0-0.0",
+        "score": 56.7
+      },
+      {
+        "keyword": "lg smart tv repair near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 56.4
+      },
+      {
+        "keyword": "tv backlight repair cost",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 55.8
+      },
+      {
+        "keyword": "led tv repair near me home service",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 54.2
+      },
+      {
+        "keyword": "tv fixing service near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 54.2
+      },
+      {
+        "keyword": "led tv display repair near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 54.2
+      },
+      {
+        "keyword": "nearby led tv repair",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 54.2
+      },
+      {
+        "keyword": "samsung smart tv repair shop near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 54.2
+      },
+      {
+        "keyword": "led tv backlight repair near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 54.2
+      },
+      {
+        "keyword": "tv backlight repair",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "994.27-1632.91",
+        "score": 53.4
+      },
+      {
+        "keyword": "fix backlight on tv",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "994.27-1632.91",
+        "score": 53.4
+      },
+      {
+        "keyword": "led tv service near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 51.3
+      },
+      {
+        "keyword": "sansui tv repair near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 51.3
+      },
+      {
+        "keyword": "led tv panel repair near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 51.3
+      },
+      {
+        "keyword": "led panel repair near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 51.3
+      },
+      {
+        "keyword": "videocon tv service center near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 51.3
+      },
+      {
+        "keyword": "lcd tv service center near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 51.3
+      },
+      {
+        "keyword": "led smart tv repair near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 51.3
+      },
+      {
+        "keyword": "led tv screen repair near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 51.3
+      },
+      {
+        "keyword": "led lcd tv repair near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 51.3
+      },
+      {
+        "keyword": "fix led tv screen near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 51.3
+      },
+      {
+        "keyword": "lcd tv repair near me home service",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 51.3
+      },
+      {
+        "keyword": "led tv screen replacement near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 51.3
+      },
+      {
+        "keyword": "sony led tv repair near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 51.3
+      },
+      {
+        "keyword": "lg led tv repair near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 51.3
+      },
+      {
+        "keyword": "lg smart tv repair service near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 51.3
+      },
+      {
+        "keyword": "samsung led tv repair service near me",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 51.3
+      },
+      {
+        "keyword": "led tv repair shop",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 49.3
+      },
+      {
+        "keyword": "lcd tv repair cost",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 49.3
+      },
+      {
+        "keyword": "lcd tv repair price",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 49.3
+      },
+      {
+        "keyword": "led screen panel repair",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 49.3
+      },
+      {
+        "keyword": "lg tv led replacement",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 49.3
+      }
+    ],
+    "negative_keywords": [
+      "clothes dryer",
+      "clothes washer",
+      "dish washer",
+      "dishwasher",
+      "dishwashers",
+      "dryer",
+      "dryers",
+      "freezer",
+      "fridge",
+      "fridge freezer",
+      "laundry machine",
+      "refrig",
+      "refrigerator",
+      "tumble dryer",
+      "wash machine",
+      "washer",
+      "washing machine",
+      "washing machines",
+      "wine chiller",
+      "wine chillers"
+    ],
+    "ad_group_themes": [
+      "Core service ads for LED TV screen repair across Dubai. Lead with the service + location; all brands, same day."
+    ],
+    "match_types": [
+      "phrase"
+    ],
+    "mode1_config": {
+      "main_service": "LED TV Repair",
+      "sub_services": "تصليح تلفزيون سامسونج, تصليح تلفزيون LG, تصليح تلفزيون ال جي, تصليح تلفزيون TCL, تصليح شاشة تلفزيون مكسورة, تصليح ريموت تلفزيون",
+      "industry": "خدمة صيانة أجهزة",
+      "business_name": "Washer Dryer Repair Dubai"
+    },
+    "google_ads_tracking_tip": "Final URL suffix: kw={keyword} — enables the landing page's Dynamic Keyword Insertion (DKI).",
+    "ad_copy": {
+      "headlines": [
+        "LED Tv Repair Near You Today",
+        "LED Tv Repair Shop In Dubai",
+        "LED Screen Repair Specialists",
+        "Fix LED Tv Screen Same Day",
+        "LCD Panel Replacement Dubai",
+        "Same Day LED Tv Repair",
+        "Emergency LED Tv Repair Dubai",
+        "Open Now For LED Tv Repair",
+        "All Brands LED Tv Serviced",
+        "Get Your Screen Fixed Today",
+        "Book A Technician Right Now",
+        "Call For LED Panel Repair"
+      ],
+      "descriptions": [
+        "LED tv screen repair across Dubai, all brands, same day technician visit.",
+        "Free diagnosis before repair, unlike shops that charge upfront inspection fees.",
+        "No fix, no fee on LED tv panel replacement, transparent pricing upfront.",
+        "Trusted LED tv repair near you, open now for emergency same day service."
+      ],
+      "sitelinks": [
+        {
+          "text": "LED TV Repair Services",
+          "desc1": "What the service covers",
+          "desc2": "All brands, same-day slots",
+          "anchor": "services"
+        },
+        {
+          "text": "LED TV Repair Pricing",
+          "desc1": "Transparent price ranges",
+          "desc2": "No hidden charges, ever",
+          "anchor": "pricing"
+        },
+        {
+          "text": "Customer Reviews",
+          "desc1": "Real customer stories",
+          "desc2": "Rated by local clients",
+          "anchor": "reviews"
+        },
+        {
+          "text": "LED TV Repair FAQs",
+          "desc1": "Costs, timing & questions",
+          "desc2": "Repair vs replace advice",
+          "anchor": "faq"
+        },
+        {
+          "text": "Get a Free Quote",
+          "desc1": "Free quote before any work",
+          "desc2": "Call or WhatsApp today",
+          "anchor": "contact"
+        }
+      ]
+    }
+  },
+  {
+    "page_name": "تصليح غسالات",
+    "url_slug": "washing-machine-repair-dubai",
+    "language": "ar",
+    "service_name": "تصليح غسالات",
+    "industry": "خدمة صيانة أجهزة",
+    "sub_services": [
+      "تصليح غسالات سامسونج",
+      "تصليح غسالات ال جي",
+      "تصليح غسالات LG",
+      "تصليح غسالات بوش",
+      "تصليح غسالات ويرلبول",
+      "صيانة غسالات اتوماتيك"
+    ],
+    "ad_groups_covered": [
+      "تصليح غسالات"
+    ],
+    "keyword_map": {
+      "primary": "تصليح غسالات dubai",
+      "areas_in_queries": [],
+      "secondary": [
+        "تصليح الغسالة",
+        "تصليح غسالات اتوماتيك",
+        "محل تصليح غسالات وثلاجات",
+        "اصلاح غسالات",
+        "اصلاح الغسالة",
+        "تصليح باب غسالة اتوماتيك",
+        "اصلاح غسالات اتوماتيك",
+        "رقم تصليح غسالات",
+        "شركه تصليح الغسالات الاتوماتيك",
+        "اقرب محل تصليح غسالات"
+      ],
+      "brands": [
+        "سامسونج",
+        "ال جي",
+        "LG",
+        "بوش",
+        "ويرلبول"
+      ],
+      "problems": [],
+      "urgent_local": [],
+      "emergency": [],
+      "voice_questions": [],
+      "placement": {
+        "title": "تصليح غسالات Dubai | Same-Day, All Brands",
+        "meta_description_must_include": [
+          "تصليح غسالات dubai",
+          "تصليح الغسالة"
+        ],
+        "h1": "تصليح غسالات Dubai",
+        "h2_sections": [
+          {
+            "layer": "core",
+            "anchor": "services",
+            "must_include": [
+              "تصليح الغسالة",
+              "تصليح غسالات اتوماتيك"
+            ]
+          },
+          {
+            "layer": "brand",
+            "anchor": "brands",
+            "must_include": [
+              "سامسونج",
+              "ال جي",
+              "LG"
+            ]
+          }
+        ],
+        "faq_from": [
+          "how much does تصليح غسالات cost",
+          "do you offer same day تصليح غسالات"
+        ],
+        "symptom_faq": [],
+        "body_rules": "primary 3-5x naturally; every secondary once; each brand and problem once in its section; no stuffing, no hidden text"
+      },
+      "schema": {
+        "types": [
+          "LocalBusiness",
+          "Service",
+          "FAQPage",
+          "BreadcrumbList"
+        ],
+        "service.serviceType": "تصليح غسالات",
+        "service.name": "تصليح غسالات Dubai",
+        "service.areaServed": "Dubai, United Arab Emirates",
+        "offer_catalog": [
+          "سامسونج تصليح غسالات",
+          "ال جي تصليح غسالات",
+          "LG تصليح غسالات",
+          "بوش تصليح غسالات",
+          "ويرلبول تصليح غسالات"
+        ],
+        "never": "no AggregateRating/Review unless real, verifiable reviews exist"
+      }
+    },
+    "anchor_by_group": {
+      "Washing Machine Repair": "services",
+      "تصليح غسالات": "services"
+    },
+    "keywords_covered": 78,
+    "monthly_volume_covered": 1190,
+    "target_keywords": [
+      {
+        "keyword": "تصليح غسالات",
+        "volume": 210,
+        "intent": "transactional",
+        "cpc_range": "754.05-2404.28",
+        "score": 80.1
+      },
+      {
+        "keyword": "تصليح الغسالة",
+        "volume": 210,
+        "intent": "transactional",
+        "cpc_range": "754.05-2404.28",
+        "score": 80.1
+      },
+      {
+        "keyword": "تصليح غسالة سامسونج اتوماتيك",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 62.0
+      },
+      {
+        "keyword": "تصليح غسالات اتوماتيك",
+        "volume": 20,
+        "intent": "transactional",
+        "cpc_range": "754.06-1862.05",
+        "score": 58.7
+      },
+      {
+        "keyword": "اصلاح غسالات سامسونج",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 57.8
+      },
+      {
+        "keyword": "تصليح غسالة بوش",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 57.2
+      },
+      {
+        "keyword": "محل تصليح غسالات وثلاجات",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 54.8
+      },
+      {
+        "keyword": "اصلاح غسالات",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 54.7
+      },
+      {
+        "keyword": "اصلاح الغسالة",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 54.7
+      },
+      {
+        "keyword": "تصليح باب غسالة اتوماتيك",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 51.3
+      },
+      {
+        "keyword": "اصلاح غسالات اتوماتيك",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 49.3
+      },
+      {
+        "keyword": "رقم تصليح غسالات",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 49.3
+      },
+      {
+        "keyword": "شركه تصليح الغسالات الاتوماتيك",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 49.3
+      },
+      {
+        "keyword": "اقرب محل تصليح غسالات",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 49.3
+      },
+      {
+        "keyword": "فني صيانة غسالات",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 49.3
+      },
+      {
+        "keyword": "اصلاح كروت الغسالات",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 49.3
+      },
+      {
+        "keyword": "تصليح غسالة كوندور",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 49.3
+      },
+      {
+        "keyword": "تصليح مفتاح الغسالة الاتوماتيك",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 49.3
+      },
+      {
+        "keyword": "تصليح غسالات ال جي",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 49.3
+      },
+      {
+        "keyword": "تصليح غسالة ال جي اتوماتيك",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 49.3
+      },
+      {
+        "keyword": "تصليح الغسالات الاتوماتيك lg",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 49.3
+      },
+      {
+        "keyword": "اصلاح غسالة ال جي",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 49.3
+      },
+      {
+        "keyword": "رقم تصليح غسالات اتوماتيك",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 48.6
+      },
+      {
+        "keyword": "فني تصليح غسالات اتوماتيك",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 46.7
+      },
+      {
+        "keyword": "تصليح غسالات اتوماتيك زانوسى",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 46.7
+      },
+      {
+        "keyword": "فني صيانة غسالات اتوماتيك",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 46.7
+      },
+      {
+        "keyword": "مركز صيانة غسالات",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 46.7
+      },
+      {
+        "keyword": "تصليح غسالات دايو",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 46.7
+      },
+      {
+        "keyword": "تصليح غسالات فوق اتوماتيك",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 46.7
+      },
+      {
+        "keyword": "محل صيانة غسالات اتوماتيك",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 46.7
+      },
+      {
+        "keyword": "تصليح لوحات الغسالات الاتوماتيك",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 46.7
+      },
+      {
+        "keyword": "تصليح غسالات حوضين",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 46.7
+      },
+      {
+        "keyword": "تصليح غسالات بالمنزل",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 46.7
+      },
+      {
+        "keyword": "تصليح غسالات المنطقه العاشره",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 46.7
+      },
+      {
+        "keyword": "كهربائي تصليح غسالات",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 46.7
+      },
+      {
+        "keyword": "اصلاح كارتة الغسالة الفول اتوماتيك",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 46.7
+      },
+      {
+        "keyword": "تصليح الغسالات الفوق اتوماتيك",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 46.7
+      },
+      {
+        "keyword": "تصليح غسالات اتوماتيك بيكو",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 46.7
+      },
+      {
+        "keyword": "تصليح غسالات نصف اتوماتيك",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 46.7
+      },
+      {
+        "keyword": "تصليح كارتة الغسالة الاتوماتيك",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 46.7
+      },
+      {
+        "keyword": "تصليح مروحة الغسالة العادية",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 46.7
+      },
+      {
+        "keyword": "صيانة الغسالات الفوق اتوماتيك",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 46.7
+      },
+      {
+        "keyword": "اصلاح غسالة lg",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 46.7
+      },
+      {
+        "keyword": "تصليح غسالة ويرلبول",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 46.7
+      },
+      {
+        "keyword": "محل تصليح غسالات",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "353.76-1038.61",
+        "score": 46.4
+      },
+      {
+        "keyword": "فني تصليح غسالات",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "377.02-2258.28",
+        "score": 44.0
+      },
+      {
+        "keyword": "فنى تصليح غسالات",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "377.02-2258.28",
+        "score": 44.0
+      },
+      {
+        "keyword": "تصليح غسالة ملابس",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 43.2
+      },
+      {
+        "keyword": "تصليح غسالة ملابس اتوماتيك",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 42.9
+      },
+      {
+        "keyword": "فني غسالات اتوماتيك",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 42.3
+      },
+      {
+        "keyword": "تصليح الغسالة الاتوماتيك",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "1477.92-2768.5",
+        "score": 41.8
+      },
+      {
+        "keyword": "تصليح الغساله الاتوماتيك",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "1477.92-2768.5",
+        "score": 41.8
+      },
+      {
+        "keyword": "رقم مصلح غسالات",
+        "volume": 10,
+        "intent": "commercial",
+        "cpc_range": "0.0-0.0",
+        "score": 41.1
+      },
+      {
+        "keyword": "شركة تصليح غسالات",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 41.0
+      },
+      {
+        "keyword": "صيانة الغسالة الاتوماتيك",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 41.0
+      },
+      {
+        "keyword": "عامل تصليح غسالات",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 41.0
+      },
+      {
+        "keyword": "اصلاح الغسالة الاتوماتيك",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 41.0
+      },
+      {
+        "keyword": "مصلح غسالات",
+        "volume": 10,
+        "intent": "commercial",
+        "cpc_range": "498.63-2054.95",
+        "score": 39.5
+      },
+      {
+        "keyword": "فني غسالات",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 39.0
+      },
+      {
+        "keyword": "ارقام تصليح غسالات",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 39.0
+      }
+    ],
+    "negative_keywords": [
+      "clothes dryer",
+      "clothes washer",
+      "dish washer",
+      "dishwasher",
+      "dishwashers",
+      "dryer",
+      "dryers",
+      "freezer",
+      "fridge",
+      "fridge freezer",
+      "laundry machine",
+      "lcd panel",
+      "lcd screen",
+      "lcd tv",
+      "led display",
+      "led panel",
+      "led screen",
+      "led tv",
+      "oled tv",
+      "refrig"
+    ],
+    "ad_group_themes": [
+      "إعلانات أساسية لخدمة تصليح الغسالات في دبي. Lead with the service + location; all brands, same day."
+    ],
+    "match_types": [
+      "phrase"
+    ],
+    "mode1_config": {
+      "main_service": "تصليح غسالات",
+      "sub_services": "تصليح غسالات سامسونج, تصليح غسالات ال جي, تصليح غسالات LG, تصليح غسالات بوش, تصليح غسالات ويرلبول, صيانة غسالات اتوماتيك",
+      "industry": "خدمة صيانة أجهزة",
+      "business_name": "Washer Dryer Repair Dubai"
+    },
+    "google_ads_tracking_tip": "Final URL suffix: kw={keyword} — enables the landing page's Dynamic Keyword Insertion (DKI).",
+    "ad_copy": {
+      "headlines": [
+        "تصليح غسالات في دبي",
+        "تصليح الغسالة في المنزل",
+        "تصليح غسالات اتوماتيك",
+        "اصلاح غسالات جميع الماركات",
+        "فني صيانة غسالات دبي",
+        "تصليح غسالات قريب منك",
+        "صيانة غسالات بجودة عالية",
+        "تصليح باب الغسالة اتوماتيك",
+        "تصليح غسالات بدون انتظار",
+        "احجز فني غسالات الآن",
+        "اتصل لتصليح غسالتك اليوم",
+        "اطلب فني غسالات خلال ساعة"
+      ],
+      "descriptions": [
+        "تصليح غسالات في دبي لجميع الموديلات مع ضمان على القطع، احجز فني اليوم.",
+        "فريقنا يصلح كروت الغسالات ومفاتيح التحكم التي يتجاهلها الآخرون بخبرة عالية.",
+        "فحص مجاني قبل أي تصليح، وأسعار واضحة بدون مفاجآت، اطلب الخدمة الآن.",
+        "فنيون متوفرون على مدار الساعة لتصليح الغسالات في دبي، خدمة سريعة وموثوقة."
+      ],
+      "sitelinks": [
+        {
+          "text": "خدمات تصليح غسالات",
+          "desc1": "ما الذي تشمله الخدمة",
+          "desc2": "جميع الماركات، مواعيد سريعة",
+          "anchor": "services"
+        },
+        {
+          "text": "أسعار تصليح غسالات",
+          "desc1": "أسعار واضحة بدون مفاجآت",
+          "desc2": "لا رسوم خفية إطلاقاً",
+          "anchor": "pricing"
+        },
+        {
+          "text": "آراء العملاء",
+          "desc1": "تجارب عملاء حقيقية",
+          "desc2": "تقييمات من عملاء المنطقة",
+          "anchor": "reviews"
+        },
+        {
+          "text": "أسئلة شائعة",
+          "desc1": "التكلفة والوقت والأعطال",
+          "desc2": "تصليح أم استبدال؟",
+          "anchor": "faq"
+        },
+        {
+          "text": "احصل على عرض سعر",
+          "desc1": "عرض سعر مجاني قبل العمل",
+          "desc2": "اتصل أو واتساب الآن",
+          "anchor": "contact"
+        }
+      ]
+    }
+  },
+  {
+    "page_name": "تصليح نشافات",
+    "url_slug": "dryer-repair-dubai",
+    "language": "ar",
+    "service_name": "تصليح نشافات",
+    "industry": "خدمة صيانة أجهزة",
+    "sub_services": [
+      "تصليح نشافات ملابس",
+      "تصليح نشافة الغسالة",
+      "صيانة نشافات منزلية",
+      "تصليح نشافات اتوماتيك",
+      "تصليح موتور نشافة",
+      "صيانة نشافات دبي"
+    ],
+    "ad_groups_covered": [
+      "تصليح نشافات"
+    ],
+    "keyword_map": {
+      "primary": "تصليح نشافة ملابس dubai",
+      "areas_in_queries": [],
+      "secondary": [
+        "تصليح نشافة الغسالة",
+        "تصليح نشافه غساله",
+        "تصليح نشافات",
+        "تصليح نشافة الغسالة العادية"
+      ],
+      "brands": [],
+      "problems": [],
+      "urgent_local": [],
+      "emergency": [],
+      "voice_questions": [],
+      "placement": {
+        "title": "تصليح نشافة ملابس Dubai | Same-Day, All Brands",
+        "meta_description_must_include": [
+          "تصليح نشافة ملابس dubai",
+          "تصليح نشافة الغسالة"
+        ],
+        "h1": "تصليح نشافة ملابس Dubai",
+        "h2_sections": [
+          {
+            "layer": "core",
+            "anchor": "services",
+            "must_include": [
+              "تصليح نشافة الغسالة",
+              "تصليح نشافه غساله"
+            ]
+          }
+        ],
+        "faq_from": [
+          "how much does تصليح نشافة ملابس cost",
+          "do you offer same day تصليح نشافة ملابس"
+        ],
+        "symptom_faq": [],
+        "body_rules": "primary 3-5x naturally; every secondary once; each brand and problem once in its section; no stuffing, no hidden text"
+      },
+      "schema": {
+        "types": [
+          "LocalBusiness",
+          "Service",
+          "FAQPage",
+          "BreadcrumbList"
+        ],
+        "service.serviceType": "تصليح نشافة ملابس",
+        "service.name": "تصليح نشافة ملابس Dubai",
+        "service.areaServed": "Dubai, United Arab Emirates",
+        "offer_catalog": [],
+        "never": "no AggregateRating/Review unless real, verifiable reviews exist"
+      }
+    },
+    "anchor_by_group": {
+      "Dryer Repair": "services",
+      "تصليح نشافات": "services"
+    },
+    "keywords_covered": 5,
+    "monthly_volume_covered": 50,
+    "target_keywords": [
+      {
+        "keyword": "تصليح نشافة ملابس",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 49.3
+      },
+      {
+        "keyword": "تصليح نشافة الغسالة",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 49.3
+      },
+      {
+        "keyword": "تصليح نشافه غساله",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 49.3
+      },
+      {
+        "keyword": "تصليح نشافات",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 46.7
+      },
+      {
+        "keyword": "تصليح نشافة الغسالة العادية",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 46.7
+      }
+    ],
+    "negative_keywords": [
+      "clothes dryer",
+      "clothes washer",
+      "dish washer",
+      "dishwasher",
+      "dishwashers",
+      "dryer",
+      "dryers",
+      "freezer",
+      "fridge",
+      "fridge freezer",
+      "laundry machine",
+      "lcd panel",
+      "lcd screen",
+      "lcd tv",
+      "led display",
+      "led panel",
+      "led screen",
+      "led tv",
+      "oled tv",
+      "refrig"
+    ],
+    "ad_group_themes": [
+      "إعلانات أساسية لخدمة تصليح النشافات في دبي. Lead with the service + location; all brands, same day."
+    ],
+    "match_types": [
+      "phrase"
+    ],
+    "mode1_config": {
+      "main_service": "تصليح نشافات",
+      "sub_services": "تصليح نشافات ملابس, تصليح نشافة الغسالة, صيانة نشافات منزلية, تصليح نشافات اتوماتيك, تصليح موتور نشافة, صيانة نشافات دبي",
+      "industry": "خدمة صيانة أجهزة",
+      "business_name": "Washer Dryer Repair Dubai"
+    },
+    "google_ads_tracking_tip": "Final URL suffix: kw={keyword} — enables the landing page's Dynamic Keyword Insertion (DKI).",
+    "ad_copy": {
+      "headlines": [
+        "تصليح نشافة ملابس اليوم",
+        "تصليح نشافة الغسالة بسرعة",
+        "تصليح نشافه غساله في دبي",
+        "تصليح نشافات بجميع الأنواع",
+        "تصليح نشافة الغسالة العادية",
+        "تصليح نشافات قريب منك",
+        "تصليح نشافات دبي بسرعة",
+        "فني نشافات محترف",
+        "فني نشافات قريب منك",
+        "صيانة نشافات دورية وفورية",
+        "تصليح نشافات طوارئ الآن",
+        "فني نشافات في المنزل دبي"
+      ],
+      "descriptions": [
+        "نصلح نشافة الملابس والغسالة في دبي لجميع الماركات، اتصل الآن لحجز موعد اليوم.",
+        "فنيون معتمدون يصلحون النشافات في المنزل دون تكاليف خفية أو انتظار طويل.",
+        "تشخيص مجاني قبل أي إصلاح، تدفع فقط عند الموافقة على السعر النهائي.",
+        "خدمة طوارئ لتصليح النشافات في دبي، فنيونا يصلون خلال ساعات قليلة فقط."
+      ],
+      "sitelinks": [
+        {
+          "text": "خدمات تصليح نشافات",
+          "desc1": "ما الذي تشمله الخدمة",
+          "desc2": "جميع الماركات، مواعيد سريعة",
+          "anchor": "services"
+        },
+        {
+          "text": "أسعار تصليح نشافات",
+          "desc1": "أسعار واضحة بدون مفاجآت",
+          "desc2": "لا رسوم خفية إطلاقاً",
+          "anchor": "pricing"
+        },
+        {
+          "text": "آراء العملاء",
+          "desc1": "تجارب عملاء حقيقية",
+          "desc2": "تقييمات من عملاء المنطقة",
+          "anchor": "reviews"
+        },
+        {
+          "text": "أسئلة شائعة",
+          "desc1": "التكلفة والوقت والأعطال",
+          "desc2": "تصليح أم استبدال؟",
+          "anchor": "faq"
+        },
+        {
+          "text": "احصل على عرض سعر",
+          "desc1": "عرض سعر مجاني قبل العمل",
+          "desc2": "اتصل أو واتساب الآن",
+          "anchor": "contact"
+        }
+      ]
+    }
+  },
+  {
+    "page_name": "تصليح غسالات صحون",
+    "url_slug": "dishwasher-repair-dubai",
+    "language": "ar",
+    "service_name": "تصليح غسالات صحون",
+    "industry": "خدمة صيانة أجهزة",
+    "sub_services": [
+      "تصليح غسالة صحون اريستون",
+      "صيانة غسالات صحون",
+      "تصليح مضخة غسالة صحون",
+      "تصليح عنصر تسخين غسالة صحون",
+      "تصليح تسريب غسالة صحون",
+      "فني تصليح غسالة صحون"
+    ],
+    "ad_groups_covered": [
+      "تصليح غسالات صحون"
+    ],
+    "keyword_map": {
+      "primary": "فني تصليح غسالة صحون dubai",
+      "areas_in_queries": [],
+      "secondary": [
+        "اصلاح غسالة صحون",
+        "تصليح غسالات صحون",
+        "تصليح غسالة صحون اريستون"
+      ],
+      "brands": [
+        "اريستون"
+      ],
+      "problems": [],
+      "urgent_local": [],
+      "emergency": [],
+      "voice_questions": [],
+      "placement": {
+        "title": "فني تصليح غسالة صحون Dubai | Same-Day, All Brands",
+        "meta_description_must_include": [
+          "فني تصليح غسالة صحون dubai",
+          "اصلاح غسالة صحون"
+        ],
+        "h1": "فني تصليح غسالة صحون Dubai",
+        "h2_sections": [
+          {
+            "layer": "core",
+            "anchor": "services",
+            "must_include": [
+              "اصلاح غسالة صحون",
+              "تصليح غسالات صحون"
+            ]
+          },
+          {
+            "layer": "brand",
+            "anchor": "brands",
+            "must_include": [
+              "اريستون"
+            ]
+          }
+        ],
+        "faq_from": [
+          "how much does فني تصليح غسالة صحون cost",
+          "do you offer same day فني تصليح غسالة صحون"
+        ],
+        "symptom_faq": [],
+        "body_rules": "primary 3-5x naturally; every secondary once; each brand and problem once in its section; no stuffing, no hidden text"
+      },
+      "schema": {
+        "types": [
+          "LocalBusiness",
+          "Service",
+          "FAQPage",
+          "BreadcrumbList"
+        ],
+        "service.serviceType": "فني تصليح غسالة صحون",
+        "service.name": "فني تصليح غسالة صحون Dubai",
+        "service.areaServed": "Dubai, United Arab Emirates",
+        "offer_catalog": [
+          "اريستون تصليح غسالات صحون"
+        ],
+        "never": "no AggregateRating/Review unless real, verifiable reviews exist"
+      }
+    },
+    "anchor_by_group": {
+      "Dishwasher Repair": "services",
+      "تصليح غسالات صحون": "services"
+    },
+    "keywords_covered": 4,
+    "monthly_volume_covered": 40,
+    "target_keywords": [
+      {
+        "keyword": "فني تصليح غسالة صحون",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 46.7
+      },
+      {
+        "keyword": "اصلاح غسالة صحون",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 46.7
+      },
+      {
+        "keyword": "تصليح غسالة صحون اريستون",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 46.7
+      },
+      {
+        "keyword": "تصليح غسالات صحون",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 28.5
+      }
+    ],
+    "negative_keywords": [
+      "clothes dryer",
+      "clothes washer",
+      "dish washer",
+      "dishwasher",
+      "dishwashers",
+      "dryer",
+      "dryers",
+      "freezer",
+      "fridge",
+      "fridge freezer",
+      "laundry machine",
+      "lcd panel",
+      "lcd screen",
+      "lcd tv",
+      "led display",
+      "led panel",
+      "led screen",
+      "led tv",
+      "oled tv",
+      "refrig"
+    ],
+    "ad_group_themes": [
+      "إعلانات أساسية لخدمة تصليح غسالات الصحون في دبي. Lead with the service + location; all brands, same day."
+    ],
+    "match_types": [
+      "phrase"
+    ],
+    "mode1_config": {
+      "main_service": "تصليح غسالات صحون",
+      "sub_services": "تصليح غسالة صحون اريستون, صيانة غسالات صحون, تصليح مضخة غسالة صحون, تصليح عنصر تسخين غسالة صحون, تصليح تسريب غسالة صحون, فني تصليح غسالة صحون",
+      "industry": "خدمة صيانة أجهزة",
+      "business_name": "Washer Dryer Repair Dubai"
+    },
+    "google_ads_tracking_tip": "Final URL suffix: kw={keyword} — enables the landing page's Dynamic Keyword Insertion (DKI).",
+    "ad_copy": {
+      "headlines": [
+        "فني تصليح غسالة صحون",
+        "اصلاح غسالة صحون في دبي",
+        "تصليح غسالات صحون دبي",
+        "تصليح غسالة صحون اريستون",
+        "فني غسالات صحون قريب منك",
+        "تشخيص مجاني قبل الإصلاح",
+        "ضمان على القطع والعمل",
+        "تصليح من زيارة واحدة",
+        "احجز فني اليوم في دبي",
+        "اتصل الآن لخدمة سريعة",
+        "احصل على عرض سعر فوري",
+        "فنيون معتمدون لجميع الماركات"
+      ],
+      "descriptions": [
+        "فني تصليح غسالات صحون في دبي لجميع الماركات، احجز زيارة اليوم",
+        "نصلح غسالة الصحون من أول زيارة بدون تكرار الأعطال، ضمان على الإصلاح",
+        "تشخيص مجاني وسعر واضح قبل بدء العمل، بدون رسوم خفية أو مفاجآت",
+        "خدمة طوارئ لتصليح غسالات الصحون في دبي يوميًا، فنيون موثوقون وسريعون"
+      ],
+      "sitelinks": [
+        {
+          "text": "خدمات تصليح غسالات صحون",
+          "desc1": "ما الذي تشمله الخدمة",
+          "desc2": "جميع الماركات، مواعيد سريعة",
+          "anchor": "services"
+        },
+        {
+          "text": "أسعار تصليح غسالات صحون",
+          "desc1": "أسعار واضحة بدون مفاجآت",
+          "desc2": "لا رسوم خفية إطلاقاً",
+          "anchor": "pricing"
+        },
+        {
+          "text": "آراء العملاء",
+          "desc1": "تجارب عملاء حقيقية",
+          "desc2": "تقييمات من عملاء المنطقة",
+          "anchor": "reviews"
+        },
+        {
+          "text": "أسئلة شائعة",
+          "desc1": "التكلفة والوقت والأعطال",
+          "desc2": "تصليح أم استبدال؟",
+          "anchor": "faq"
+        },
+        {
+          "text": "احصل على عرض سعر",
+          "desc1": "عرض سعر مجاني قبل العمل",
+          "desc2": "اتصل أو واتساب الآن",
+          "anchor": "contact"
+        }
+      ]
+    }
+  },
+  {
+    "page_name": "تصليح ثلاجات",
+    "url_slug": "refrigerator-repair-dubai",
+    "language": "ar",
+    "service_name": "تصليح ثلاجات",
+    "industry": "خدمة صيانة أجهزة",
+    "sub_services": [
+      "تصليح ثلاجات سامسونج",
+      "تصليح ثلاجات ال جي",
+      "تصليح ثلاجات LG",
+      "تصليح كمبروسر ثلاجة",
+      "تصليح باب ثلاجة",
+      "صيانة ثلاجات منزلية"
+    ],
+    "ad_groups_covered": [
+      "تصليح ثلاجات"
+    ],
+    "keyword_map": {
+      "primary": "تصليح ثلاجات dubai",
+      "areas_in_queries": [],
+      "secondary": [
+        "تصليح ثلاجه",
+        "اصلاح الثلاجات",
+        "اصلاح الثلاجة",
+        "تصليح ثلاجات باكستاني",
+        "فني تصليح ثلاجات",
+        "فنى تصليح ثلاجات",
+        "تصليح ثلاجات السيارات",
+        "تصليح ثلاجات وغسالات",
+        "محل تصليح ثلاجات",
+        "شركة تصليح ثلاجات"
+      ],
+      "brands": [
+        "سامسونج",
+        "ال جي",
+        "LG"
+      ],
+      "problems": [
+        "تصليح كمبروسر ثلاجة"
+      ],
+      "urgent_local": [
+        "تصليح الثلاجات في المنزل"
+      ],
+      "emergency": [],
+      "voice_questions": [],
+      "placement": {
+        "title": "تصليح ثلاجات Dubai | Same-Day, All Brands",
+        "meta_description_must_include": [
+          "تصليح ثلاجات dubai",
+          "تصليح ثلاجه"
+        ],
+        "h1": "تصليح ثلاجات Dubai",
+        "h2_sections": [
+          {
+            "layer": "core",
+            "anchor": "services",
+            "must_include": [
+              "تصليح ثلاجه",
+              "اصلاح الثلاجات",
+              "تصليح الثلاجات في المنزل"
+            ]
+          },
+          {
+            "layer": "brand",
+            "anchor": "brands",
+            "must_include": [
+              "سامسونج",
+              "ال جي",
+              "LG"
+            ]
+          },
+          {
+            "layer": "problem",
+            "anchor": "problems",
+            "must_include": [
+              "تصليح كمبروسر ثلاجة"
+            ]
+          }
+        ],
+        "faq_from": [
+          "how much does تصليح ثلاجات cost",
+          "do you offer same day تصليح ثلاجات"
+        ],
+        "symptom_faq": [],
+        "body_rules": "primary 3-5x naturally; every secondary once; each brand and problem once in its section; no stuffing, no hidden text"
+      },
+      "schema": {
+        "types": [
+          "LocalBusiness",
+          "Service",
+          "FAQPage",
+          "BreadcrumbList"
+        ],
+        "service.serviceType": "تصليح ثلاجات",
+        "service.name": "تصليح ثلاجات Dubai",
+        "service.areaServed": "Dubai, United Arab Emirates",
+        "offer_catalog": [
+          "سامسونج تصليح ثلاجات",
+          "ال جي تصليح ثلاجات",
+          "LG تصليح ثلاجات",
+          "تصليح كمبروسر ثلاجة"
+        ],
+        "never": "no AggregateRating/Review unless real, verifiable reviews exist"
+      }
+    },
+    "anchor_by_group": {
+      "Refrigerator Repair": "services",
+      "تصليح ثلاجات": "services"
+    },
+    "keywords_covered": 37,
+    "monthly_volume_covered": 1110,
+    "target_keywords": [
+      {
+        "keyword": "اصلاح الثلاجات",
+        "volume": 70,
+        "intent": "transactional",
+        "cpc_range": "452.43-1885.12",
+        "score": 101.1
+      },
+      {
+        "keyword": "اصلاح الثلاجة",
+        "volume": 70,
+        "intent": "transactional",
+        "cpc_range": "452.43-1885.12",
+        "score": 101.1
+      },
+      {
+        "keyword": "تصليح ثلاجات",
+        "volume": 320,
+        "intent": "transactional",
+        "cpc_range": "728.27-1885.14",
+        "score": 87.4
+      },
+      {
+        "keyword": "تصليح ثلاجه",
+        "volume": 320,
+        "intent": "transactional",
+        "cpc_range": "728.27-1885.14",
+        "score": 87.4
+      },
+      {
+        "keyword": "تصليح ثلاجات باكستاني",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 54.8
+      },
+      {
+        "keyword": "فني تصليح ثلاجات",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 49.3
+      },
+      {
+        "keyword": "فنى تصليح ثلاجات",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 49.3
+      },
+      {
+        "keyword": "تصليح ثلاجات السيارات",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 49.3
+      },
+      {
+        "keyword": "تصليح ثلاجات وغسالات",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 49.3
+      },
+      {
+        "keyword": "تصليح ثلاجة ال جي",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 49.3
+      },
+      {
+        "keyword": "محل تصليح ثلاجات",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 48.2
+      },
+      {
+        "keyword": "شركة تصليح ثلاجات",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "527.83-1177.09",
+        "score": 47.8
+      },
+      {
+        "keyword": "صيانة ثلاجة كريازى",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 46.7
+      },
+      {
+        "keyword": "تصليح فريزر الثلاجة",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 46.7
+      },
+      {
+        "keyword": "تصليح ثلاجات بيكو",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 46.7
+      },
+      {
+        "keyword": "اقرب محل تصليح ثلاجات",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 46.7
+      },
+      {
+        "keyword": "عامل تصليح ثلاجات",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 46.7
+      },
+      {
+        "keyword": "مركز تصليح ثلاجات",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 46.7
+      },
+      {
+        "keyword": "اصلاح ثلاجة سامسونج",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 46.7
+      },
+      {
+        "keyword": "تصليح ثلاجة lg",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 46.7
+      },
+      {
+        "keyword": "اصلاح ثلاجات",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "368.21-859.64",
+        "score": 44.9
+      },
+      {
+        "keyword": "مصلح ثلاجات",
+        "volume": 10,
+        "intent": "commercial",
+        "cpc_range": "232.48-1235.92",
+        "score": 44.3
+      },
+      {
+        "keyword": "رقم تصليح ثلاجات",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 42.3
+      },
+      {
+        "keyword": "صيانة الثلاجات المنزلية",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 42.3
+      },
+      {
+        "keyword": "ارقام تصليح ثلاجات",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 42.3
+      },
+      {
+        "keyword": "اصلاح الثلاجة المنزلية",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 42.3
+      },
+      {
+        "keyword": "ورشة تصليح ثلاجات",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 40.1
+      },
+      {
+        "keyword": "تصليح كمبروسر ثلاجة",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 39.0
+      },
+      {
+        "keyword": "محل اصلاح ثلاجات",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 36.9
+      },
+      {
+        "keyword": "محل تصليح ثلاجات وغسالات",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 33.1
+      },
+      {
+        "keyword": "فني ثلاجات",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 28.5
+      },
+      {
+        "keyword": "فني تبريد ثلاجات",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 28.5
+      },
+      {
+        "keyword": "تصليح ثلاجات سامسونج",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 28.5
+      },
+      {
+        "keyword": "فنى ثلاجات",
+        "volume": 10,
+        "intent": "commercial",
+        "cpc_range": "0.0-0.0",
+        "score": 25.1
+      },
+      {
+        "keyword": "تصليح الثلاجات في المنزل",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 22.6
+      },
+      {
+        "keyword": "شركات صيانة الثلاجات",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 22.6
+      },
+      {
+        "keyword": "فني اصلاح ثلاجات",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 20.2
+      }
+    ],
+    "negative_keywords": [
+      "clothes dryer",
+      "clothes washer",
+      "dish washer",
+      "dishwasher",
+      "dishwashers",
+      "dryer",
+      "dryers",
+      "freezer",
+      "fridge",
+      "fridge freezer",
+      "laundry machine",
+      "lcd panel",
+      "lcd screen",
+      "lcd tv",
+      "led display",
+      "led panel",
+      "led screen",
+      "led tv",
+      "oled tv",
+      "refrig"
+    ],
+    "ad_group_themes": [
+      "إعلانات أساسية لخدمة تصليح الثلاجات في دبي. Lead with the service + location; all brands, same day."
+    ],
+    "match_types": [
+      "phrase"
+    ],
+    "mode1_config": {
+      "main_service": "تصليح ثلاجات",
+      "sub_services": "تصليح ثلاجات سامسونج, تصليح ثلاجات ال جي, تصليح ثلاجات LG, تصليح كمبروسر ثلاجة, تصليح باب ثلاجة, صيانة ثلاجات منزلية",
+      "industry": "خدمة صيانة أجهزة",
+      "business_name": "Washer Dryer Repair Dubai"
+    },
+    "google_ads_tracking_tip": "Final URL suffix: kw={keyword} — enables the landing page's Dynamic Keyword Insertion (DKI).",
+    "ad_copy": {
+      "headlines": [
+        "تصليح ثلاجات في دبي",
+        "تصليح ثلاجة بنفس اليوم",
+        "اصلاح الثلاجات بسرعة",
+        "فني تصليح ثلاجات دبي",
+        "محل تصليح ثلاجات قريب منك",
+        "تصليح ثلاجات باكستاني وكوري",
+        "صيانة ثلاجة كريازي وبيكو",
+        "تصليح فريزر الثلاجة بسرعة",
+        "فني ثلاجات في المنزل دبي",
+        "تصليح ثلاجات طوارئ وفورا",
+        "تصليح ثلاجات 24 ساعة يوميا",
+        "ضمان على قطع الغيار"
+      ],
+      "descriptions": [
+        "تصليح ثلاجات في دبي بنفس اليوم لجميع الماركات احجز الآن",
+        "فنيون معتمدون يصلحون كريازي وبيكو وثلاجات السيارات بخبرة",
+        "تشخيص مجاني قبل الإصلاح وضمان على القطع بدون رسوم خفية",
+        "فريق تصليح ثلاجات طوارئ متاح 24 ساعة لخدمتكم في أي وقت"
+      ],
+      "sitelinks": [
+        {
+          "text": "خدمات تصليح ثلاجات",
+          "desc1": "ما الذي تشمله الخدمة",
+          "desc2": "جميع الماركات، مواعيد سريعة",
+          "anchor": "services"
+        },
+        {
+          "text": "أسعار تصليح ثلاجات",
+          "desc1": "أسعار واضحة بدون مفاجآت",
+          "desc2": "لا رسوم خفية إطلاقاً",
+          "anchor": "pricing"
+        },
+        {
+          "text": "آراء العملاء",
+          "desc1": "تجارب عملاء حقيقية",
+          "desc2": "تقييمات من عملاء المنطقة",
+          "anchor": "reviews"
+        },
+        {
+          "text": "أسئلة شائعة",
+          "desc1": "التكلفة والوقت والأعطال",
+          "desc2": "تصليح أم استبدال؟",
+          "anchor": "faq"
+        },
+        {
+          "text": "احصل على عرض سعر",
+          "desc1": "عرض سعر مجاني قبل العمل",
+          "desc2": "اتصل أو واتساب الآن",
+          "anchor": "contact"
+        }
+      ]
+    }
+  },
+  {
+    "page_name": "تصليح تلفزيون",
+    "url_slug": "led-tv-repair-dubai",
+    "language": "ar",
+    "service_name": "تصليح تلفزيون",
+    "industry": "خدمة صيانة أجهزة",
+    "sub_services": [
+      "تصليح تلفزيون سامسونج",
+      "تصليح تلفزيون LG",
+      "تصليح تلفزيون ال جي",
+      "تصليح تلفزيون TCL",
+      "تصليح شاشة تلفزيون مكسورة",
+      "تصليح ريموت تلفزيون"
+    ],
+    "ad_groups_covered": [
+      "تصليح تلفزيون"
+    ],
+    "keyword_map": {
+      "primary": "تصليح تلفزيون dubai",
+      "areas_in_queries": [],
+      "secondary": [
+        "تصليح شاشات تلفزيون",
+        "تصليح شاشة تلفزيون",
+        "تصليح الشاشات التلفزيون",
+        "محل تصليح شاشات تلفزيون",
+        "محل تصليح التلفزيون",
+        "محل تصليح التلفزيونات",
+        "محل تصليح ريموت التلفزيون",
+        "تصليح شاشات تلفزيون في المنزل",
+        "إصلاح تلفزيونات",
+        "تصليح التلفزيون في البيت"
+      ],
+      "brands": [
+        "سامسونج",
+        "LG",
+        "ال جي",
+        "TCL"
+      ],
+      "problems": [],
+      "urgent_local": [
+        "تصليح شاشات تلفزيون في المنزل",
+        "تصليح تلفزيونات في المنزل"
+      ],
+      "emergency": [],
+      "voice_questions": [],
+      "placement": {
+        "title": "تصليح تلفزيون Dubai | Same-Day, All Brands",
+        "meta_description_must_include": [
+          "تصليح تلفزيون dubai",
+          "تصليح شاشات تلفزيون"
+        ],
+        "h1": "تصليح تلفزيون Dubai",
+        "h2_sections": [
+          {
+            "layer": "core",
+            "anchor": "services",
+            "must_include": [
+              "تصليح شاشات تلفزيون",
+              "تصليح شاشة تلفزيون",
+              "تصليح شاشات تلفزيون في المنزل"
+            ]
+          },
+          {
+            "layer": "brand",
+            "anchor": "brands",
+            "must_include": [
+              "سامسونج",
+              "LG",
+              "ال جي"
+            ]
+          }
+        ],
+        "faq_from": [
+          "how much does تصليح تلفزيون cost",
+          "do you offer same day تصليح تلفزيون"
+        ],
+        "symptom_faq": [],
+        "body_rules": "primary 3-5x naturally; every secondary once; each brand and problem once in its section; no stuffing, no hidden text"
+      },
+      "schema": {
+        "types": [
+          "LocalBusiness",
+          "Service",
+          "FAQPage",
+          "BreadcrumbList"
+        ],
+        "service.serviceType": "تصليح تلفزيون",
+        "service.name": "تصليح تلفزيون Dubai",
+        "service.areaServed": "Dubai, United Arab Emirates",
+        "offer_catalog": [
+          "سامسونج تصليح تلفزيون",
+          "LG تصليح تلفزيون",
+          "ال جي تصليح تلفزيون",
+          "TCL تصليح تلفزيون"
+        ],
+        "never": "no AggregateRating/Review unless real, verifiable reviews exist"
+      }
+    },
+    "anchor_by_group": {
+      "LED TV Repair": "services",
+      "تصليح تلفزيون": "services"
+    },
+    "keywords_covered": 61,
+    "monthly_volume_covered": 920,
+    "target_keywords": [
+      {
+        "keyword": "تصليح تلفزيون",
+        "volume": 140,
+        "intent": "transactional",
+        "cpc_range": "597.09-1625.61",
+        "score": 80.9
+      },
+      {
+        "keyword": "تصليح شاشات تلفزيون",
+        "volume": 70,
+        "intent": "transactional",
+        "cpc_range": "273.73-1123.56",
+        "score": 68.9
+      },
+      {
+        "keyword": "تصليح شاشة تلفزيون",
+        "volume": 70,
+        "intent": "transactional",
+        "cpc_range": "273.73-1123.56",
+        "score": 68.9
+      },
+      {
+        "keyword": "تصليح الشاشات التلفزيون",
+        "volume": 70,
+        "intent": "transactional",
+        "cpc_range": "273.73-1123.56",
+        "score": 68.9
+      },
+      {
+        "keyword": "محل تصليح شاشات تلفزيون",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 60.9
+      },
+      {
+        "keyword": "محل تصليح التلفزيون",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "447.15-1529.49",
+        "score": 57.2
+      },
+      {
+        "keyword": "محل تصليح التلفزيونات",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "447.15-1529.49",
+        "score": 57.2
+      },
+      {
+        "keyword": "اسعار تصليح كسر شاشة التلفزيون lg",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 56.4
+      },
+      {
+        "keyword": "أسعار تصليح شاشات تلفزيون سامسونج",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 55.3
+      },
+      {
+        "keyword": "سعر تصليح شاشة تلفزيون سامسونج",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 55.3
+      },
+      {
+        "keyword": "محل تصليح ريموت التلفزيون",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 54.7
+      },
+      {
+        "keyword": "تصليح شاشات تلفزيون في المنزل",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "200.76-870.18",
+        "score": 54.1
+      },
+      {
+        "keyword": "إصلاح تلفزيونات",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "470.54-1239.54",
+        "score": 51.0
+      },
+      {
+        "keyword": "تصليح التلفزيون في البيت",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 49.3
+      },
+      {
+        "keyword": "تصليح تلفزيون سوني",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 49.3
+      },
+      {
+        "keyword": "تصليح شاشة التلفزيون البلازما",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 49.3
+      },
+      {
+        "keyword": "شركة تصليح تلفزيونات",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 49.3
+      },
+      {
+        "keyword": "محل صيانة تلفزيونات",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 49.3
+      },
+      {
+        "keyword": "تصليح تلفزيونات في المنزل",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 48.7
+      },
+      {
+        "keyword": "تصليح شاشات تلفزيون مكسورة",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "223.2-679.47",
+        "score": 48.2
+      },
+      {
+        "keyword": "تصليح شاشة التلفزيون المكسورة",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "223.2-679.47",
+        "score": 48.2
+      },
+      {
+        "keyword": "اصلاح تلفزيون سامسونج",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 47.2
+      },
+      {
+        "keyword": "ارقام تصليح شاشات تلفزيون",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 46.7
+      },
+      {
+        "keyword": "تصليح تلفزيونات حولي",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 46.7
+      },
+      {
+        "keyword": "صيانة تلفزيونات بالمنزل",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 46.7
+      },
+      {
+        "keyword": "ورشة تصليح تلفزيونات",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 46.7
+      },
+      {
+        "keyword": "اقرب محل تصليح تلفزيونات",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 46.7
+      },
+      {
+        "keyword": "اقرب محل تصليح شاشات تلفزيون",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 46.7
+      },
+      {
+        "keyword": "تصليح التلفزيون البلازما",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 46.7
+      },
+      {
+        "keyword": "تصليح جميع انواع التلفزيونات",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 46.7
+      },
+      {
+        "keyword": "تصليح شاشات تلفزيون سوني",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 46.7
+      },
+      {
+        "keyword": "تصليح شاشة تلفزيون lcd",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 46.7
+      },
+      {
+        "keyword": "فني تصليح شاشات تلفزيون",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 46.7
+      },
+      {
+        "keyword": "محل اصلاح تلفزيونات",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 46.7
+      },
+      {
+        "keyword": "مركز تصليح تلفزيونات",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 46.7
+      },
+      {
+        "keyword": "تصليح تلفزيون ال جي",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 46.7
+      },
+      {
+        "keyword": "تصليح شاشات تلفزيون ال جي",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 46.7
+      },
+      {
+        "keyword": "تصليح شاشة تلفزيون tcl",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 46.7
+      },
+      {
+        "keyword": "تكلفة تصليح شاشة تلفزيون سامسونج",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 46.7
+      },
+      {
+        "keyword": "سعر تصليح شاشة تلفزيون سامسونج 43 بو",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 46.7
+      },
+      {
+        "keyword": "تصليح شاشة تلفزيون سمارت",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 45.8
+      },
+      {
+        "keyword": "مصلح تلفزيونات",
+        "volume": 10,
+        "intent": "commercial",
+        "cpc_range": "0.0-0.0",
+        "score": 45.1
+      },
+      {
+        "keyword": "اماكن تصليح تلفزيونات",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 42.3
+      },
+      {
+        "keyword": "تصليح تلفزيونات سامسونج",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "767.62-1790.88",
+        "score": 41.8
+      },
+      {
+        "keyword": "رقم مصلح تلفزيونات",
+        "volume": 10,
+        "intent": "commercial",
+        "cpc_range": "0.0-0.0",
+        "score": 41.1
+      },
+      {
+        "keyword": "تصليح شاشات تلفزيون سامسونج",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 41.0
+      },
+      {
+        "keyword": "محلات اصلاح شاشات تلفزيون",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 36.9
+      },
+      {
+        "keyword": "اصلاح شاشة التلفزيون المكسورة",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 35.0
+      },
+      {
+        "keyword": "رقم تصليح تلفزيونات",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 28.5
+      },
+      {
+        "keyword": "تصليح ريموت التلفزيون",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 28.5
+      },
+      {
+        "keyword": "تصليح تلفزيون بالمنزل",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 28.5
+      },
+      {
+        "keyword": "أسعار تصليح شاشة التلفزيون",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 28.5
+      },
+      {
+        "keyword": "اماكن تصليح شاشات التلفزيون",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 28.5
+      },
+      {
+        "keyword": "تصليح الريموت التلفزيون",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 28.5
+      },
+      {
+        "keyword": "سعر تصليح شاشة التلفزيون",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 28.5
+      },
+      {
+        "keyword": "تصليح شاشات تلفزيون lg",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 28.5
+      },
+      {
+        "keyword": "تصليح شاشة تلفزيون lg",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 28.5
+      },
+      {
+        "keyword": "تصليح تلفزيونات lg",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 28.5
+      },
+      {
+        "keyword": "تصليح شاشة تلفزيون سامسونج سمارت",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 28.5
+      },
+      {
+        "keyword": "سعر تصليح شاشة تلفزيون tcl",
+        "volume": 10,
+        "intent": "transactional",
+        "cpc_range": "0.0-0.0",
+        "score": 28.5
+      }
+    ],
+    "negative_keywords": [
+      "clothes dryer",
+      "clothes washer",
+      "dish washer",
+      "dishwasher",
+      "dishwashers",
+      "dryer",
+      "dryers",
+      "freezer",
+      "fridge",
+      "fridge freezer",
+      "laundry machine",
+      "lcd panel",
+      "lcd screen",
+      "lcd tv",
+      "led display",
+      "led panel",
+      "led screen",
+      "led tv",
+      "oled tv",
+      "refrig"
+    ],
+    "ad_group_themes": [
+      "إعلانات أساسية لخدمة تصليح التلفزيونات في دبي. Lead with the service + location; all brands, same day."
+    ],
+    "match_types": [
+      "phrase"
+    ],
+    "mode1_config": {
+      "main_service": "تصليح تلفزيون",
+      "sub_services": "تصليح تلفزيون سامسونج, تصليح تلفزيون LG, تصليح تلفزيون ال جي, تصليح تلفزيون TCL, تصليح شاشة تلفزيون مكسورة, تصليح ريموت تلفزيون",
+      "industry": "خدمة صيانة أجهزة",
+      "business_name": "Washer Dryer Repair Dubai"
+    },
+    "google_ads_tracking_tip": "Final URL suffix: kw={keyword} — enables the landing page's Dynamic Keyword Insertion (DKI).",
+    "ad_copy": {
+      "headlines": [
+        "تصليح تلفزيون في دبي",
+        "تصليح شاشات تلفزيون",
+        "تصليح شاشة تلفزيون اليوم",
+        "محل تصليح تلفزيونات دبي",
+        "فني تلفزيون قريب منك",
+        "صيانة تلفزيون جميع الماركات",
+        "إصلاح تلفزيونات بلازما وسوني",
+        "تصليح تلفزيون في المنزل",
+        "فني تلفزيون خلال نفس اليوم",
+        "تصليح تلفزيون طوارئ 24 ساعة",
+        "احجز فني تلفزيون الآن",
+        "اطلب تصليح شاشتك اليوم"
+      ],
+      "descriptions": [
+        "تصليح تلفزيون في دبي لجميع الماركات، فني يصل خلال ساعة ويبدأ العمل فورا",
+        "خدمة تصليح شاشات تلفزيون في المنزل مع تشخيص مجاني قبل أي تكلفة",
+        "لا تدفع شيئا قبل معرفة السعر الكامل، ضمان على القطع والعمل",
+        "فنيون متاحون 24 ساعة لإصلاح تلفزيونك اليوم بثقة وخبرة في دبي"
+      ],
+      "sitelinks": [
+        {
+          "text": "خدمات تصليح تلفزيون",
+          "desc1": "ما الذي تشمله الخدمة",
+          "desc2": "جميع الماركات، مواعيد سريعة",
+          "anchor": "services"
+        },
+        {
+          "text": "أسعار تصليح تلفزيون",
+          "desc1": "أسعار واضحة بدون مفاجآت",
+          "desc2": "لا رسوم خفية إطلاقاً",
+          "anchor": "pricing"
+        },
+        {
+          "text": "آراء العملاء",
+          "desc1": "تجارب عملاء حقيقية",
+          "desc2": "تقييمات من عملاء المنطقة",
+          "anchor": "reviews"
+        },
+        {
+          "text": "أسئلة شائعة",
+          "desc1": "التكلفة والوقت والأعطال",
+          "desc2": "تصليح أم استبدال؟",
+          "anchor": "faq"
+        },
+        {
+          "text": "احصل على عرض سعر",
+          "desc1": "عرض سعر مجاني قبل العمل",
+          "desc2": "اتصل أو واتساب الآن",
+          "anchor": "contact"
+        }
+      ]
+    }
+  }
+]
