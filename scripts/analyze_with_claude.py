@@ -1223,8 +1223,8 @@ JSON object, nothing else:
 {
   "ad_groups": [{"name": "exact name given", "theme": "one sentence",
                  "intent_expansion_keywords": ["5-10 new lowercase queries"]}],
-  "landing_pages": [{"url_slug": "exact slug given", "industry": "2-4 words",
-                     "sub_services": ["exactly 6 Title Case names"]}],
+  "landing_pages": [{"page_id": "exact id given", "industry": "2-4 words, in the page's language",
+                     "sub_services": ["exactly 6 names, in the page's language"]}],
   "notes": "2 sentences max"
 }
 Rules: expansions are real searches a BUYER of this service types in this
@@ -1242,6 +1242,13 @@ LANGUAGE: a group whose keywords are Arabic gets Arabic theme, Arabic
 expansions (real Gulf phrasing: "تصليح غسالات قريب مني", "فني ثلاجات دبي") and
 Arabic sub_services for its page; English groups stay English. Never mix. Sub-services must mirror the page's keyword
 map (brands, problems) so the page sections match what the ads promise."""
+
+
+def plan_page_id(pg):
+    """Unique per landing page: the slug for English, "<lang>/<slug>" for the
+    other language's twin, which shares the slug and lives under /<lang>/."""
+    lang = str(pg.get("language") or "en").strip().lower()
+    return pg["url_slug"] if lang in ("", "en") else f"{lang}/{pg['url_slug']}"
 
 
 def run_plan_mode(data):
@@ -1265,7 +1272,8 @@ def run_plan_mode(data):
                      f'  keywords: ' + "; ".join(top))
     for pg in plan["landing_pages"]:
         km = pg.get("keyword_map", {})
-        lines.append(f'PAGE slug="{pg["url_slug"]}" sells {pg["service_name"]}\n'
+        lines.append(f'PAGE id="{plan_page_id(pg)}" language={pg.get("language", "en")} '
+                     f'sells {pg["service_name"]}\n'
                      f'  brands: {", ".join(km.get("brands", [])[:6]) or "-"}\n'
                      f'  problems: {"; ".join(km.get("problems", [])[:6]) or "-"}')
     prompt = (f"BUSINESS: {BUSINESS_NAME}\nNICHE: {NICHE_DESCRIPTION}\n"
@@ -1286,7 +1294,12 @@ def run_plan_mode(data):
               "continuing with catchers only and fallback sub-services.")
 
     x_groups = {str(g.get("name", "")).strip().lower(): g for g in extra.get("ad_groups", []) or []}
-    x_pages = {str(p.get("url_slug", "")).strip().lower(): p for p in extra.get("landing_pages", []) or []}
+    # Keyed by page id, NOT slug: the English and Arabic twins share a slug
+    # (/x/ and /ar/x/), so a slug key let the Arabic answer overwrite the
+    # English one — run 2476776a shipped Arabic sub-services and an Arabic
+    # industry on every English page.
+    x_pages = {str(p.get("page_id") or p.get("url_slug") or "").strip().lower(): p
+               for p in extra.get("landing_pages", []) or []}
 
     # Route every model expansion to the group that OWNS it (same classifier
     # as Stage 2.7). A "near me" idea written for the core group lands in the
@@ -1356,15 +1369,21 @@ def run_plan_mode(data):
         "notes": extra.get("notes", "") or plan.get("rule", ""),
     }
     for pg in plan["landing_pages"]:
-        xp = x_pages.get(pg["url_slug"].lower(), {})
+        xp = x_pages.get(plan_page_id(pg).lower(), {})
         km = pg.get("keyword_map", {})
         subs = [s for s in (xp.get("sub_services") or []) if str(s).strip()][:6]
         if len(subs) < 6:   # deterministic fallback from the keyword map
-            fb = ([f"{b} {pg['service_name']}" for b in km.get("brands", [])[:3]]
-                  + [vtsa.title(x) for x in km.get("problems", [])[:3]]
-                  + [f"Emergency {pg['service_name']}", f"Same-Day {pg['service_name']}",
-                     f"{pg['service_name']} at Home", f"All-Brand {pg['service_name']}",
-                     f"{pg['service_name']} Diagnosis", f"Parts Replacement"])
+            _sn = pg["service_name"]
+            if pg.get("language") == "ar":
+                fb = ([f"{_sn} {b}" for b in km.get("brands", [])[:3]]
+                      + list(km.get("problems", [])[:3])
+                      + [f"{_sn} في نفس اليوم", f"{_sn} في المنزل", f"{_sn} لجميع الماركات",
+                         f"فحص وتشخيص {_sn}", f"{_sn} طوارئ", "تبديل قطع الغيار"])
+            else:
+                fb = ([f"{b} {_sn}" for b in km.get("brands", [])[:3]]
+                      + [vtsa.title(x) for x in km.get("problems", [])[:3]]
+                      + [f"Emergency {_sn}", f"Same-Day {_sn}", f"{_sn} at Home",
+                         f"All-Brand {_sn}", f"{_sn} Diagnosis", "Parts Replacement"])
             subs = (subs + [f for f in fb if f not in subs])[:6]
         raw["landing_pages"].append({
             "page_name": pg["page_name"], "url_slug": pg["url_slug"],

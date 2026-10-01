@@ -1271,11 +1271,22 @@ def keyword_map(p, svc, location, symptoms=()):
     all_rows = [r for rs in p["groups"].values() for r in rs]
     all_rows.sort(key=lambda r: -r["avg_monthly_searches"])
     loc = location.split(",")[0].strip().lower()
+    if svc.get("lang") == "ar":
+        # an Arabic page's title reads "تصليح غسالات دبي", never "... dubai"
+        loc = city_names()[1] or ""
     core = sorted(p["groups"].get("core", []), key=lambda r: -r["avg_monthly_searches"])
-    # primary: highest-volume CORE keyword that contains the service head and
-    # a service verb — this is the H1 / title term
-    primary = next((r["keyword"] for r in core
-                    if set(toks(r["keyword"])) & SERVICE_VERBS), core[0]["keyword"] if core else svc["name"].lower())
+
+    def _plain(kw):
+        text = " ".join(toks(kw))
+        return not urgent_hits(text) and not emergency_hits(text)
+
+    # primary: highest-volume CORE keyword with a service verb and no
+    # modifier — this is the H1 / title term. "dishwasher repair near me" is
+    # often the biggest row, but "Dishwasher Repair Near Me Dubai" is not a
+    # headline; the modifier variants stay in the body and the FAQ.
+    _verb = [r["keyword"] for r in core if set(toks(r["keyword"])) & SERVICE_VERBS]
+    primary = next((k for k in _verb if _plain(k)),
+                   _verb[0] if _verb else (core[0]["keyword"] if core else svc["name"].lower()))
     if loc and loc not in primary:
         primary_loc = f"{primary} {loc}"
     else:

@@ -163,6 +163,28 @@ class Structure(unittest.TestCase):
                 self.assertEqual(g["bid_multiplier"], 0.6)
         self.assertNotIn("fallback_legacy", plan)
         self.assertIn("classifier", plan)
+        # the H1 term: no "near me", and an Arabic page carries the Arabic city
+        for pg in plan["landing_pages"]:
+            prim = pg["keyword_map"]["primary"]
+            self.assertNotIn("near me", prim, pg["url_slug"])
+            if pg["language"] == "ar":
+                self.assertTrue(prim.endswith("دبي"), prim)
+                self.assertNotIn("dubai", prim)
+            else:
+                self.assertTrue(prim.endswith("dubai"), prim)
+
+    def test_plan_page_ids_are_unique_per_language(self):
+        sys.path.insert(0, SCRIPTS)
+        import importlib
+        os.environ.setdefault("ANTHROPIC_API_KEY", "offline")
+        import analyze_with_claude as awc
+        awc = importlib.reload(awc)
+        with tempfile.TemporaryDirectory() as d:
+            plan, _ = run_stage(d, {"DAILY_BUDGET": "150000"})
+        ids = [awc.plan_page_id(pg) for pg in plan["landing_pages"]]
+        self.assertEqual(len(ids), len(set(ids)))
+        self.assertIn("ar/washing-machine-repair-dubai", ids)
+        self.assertIn("washing-machine-repair-dubai", ids)
 
     def test_small_budget_folds_groups(self):
         with tempfile.TemporaryDirectory() as d:

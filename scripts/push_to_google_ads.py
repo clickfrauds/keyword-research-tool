@@ -586,7 +586,12 @@ def main():
     # ── decide what this run is allowed to push ─────────────────────────
     creative_urls = collect_creative_urls()
     pages_live, dead = (True, [])
-    if PREFLIGHT and creative_urls and PUSH_PHASE != "structure":
+    # AUTO does not look at the pages at all (user rule, 1 Oct 2026): the
+    # campaign is pushed complete and Paused, and the site goes live after
+    # it. Checking only produced a wall of 404 lines that read like a failure.
+    # wait_for_pages_min > 0 is the explicit way to ask auto to wait for them.
+    _check_pages = PUSH_PHASE == "creative" or (PUSH_PHASE == "auto" and WAIT_FOR_PAGES_MIN > 0)
+    if PREFLIGHT and creative_urls and _check_pages:
         pages_live, dead = preflight(creative_urls)
         # The site build (Cloudflare Pages) usually finishes minutes after
         # this job starts. Poll instead of failing on a page that is seconds
@@ -625,7 +630,11 @@ def main():
         # campaign is created Paused, so nothing spends before you look.
         push_creative = True
         log("")
-        if pages_live:
+        if not _check_pages:
+            log(f"▶ Phase: AUTO — pushing the complete campaign (structure + ads). "
+                f"{len(set(u.rstrip('/') for u in creative_urls))} landing page(s) not checked: "
+                "publish the site before you enable the campaign.")
+        elif pages_live:
             log("▶ Phase: AUTO — every page answers, pushing structure + ads together")
         else:
             log(f"▶ Phase: AUTO — pushing structure + ads. ⚠️ {len(dead)} of "
