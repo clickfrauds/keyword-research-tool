@@ -1,0 +1,133 @@
+{
+  "positive": [
+    {
+      "name": "Home Appliances",
+      "type": "IN_MARKET",
+      "level": "campaign",
+      "campaign": "Washer Dryer Repair Dubai - Search",
+      "ad_group": "",
+      "mode": "observation",
+      "bid_adjustment": 25,
+      "reason": "Direct match for appliance repair intent"
+    },
+    {
+      "name": "Washers & Dryers",
+      "type": "IN_MARKET",
+      "level": "campaign",
+      "campaign": "Washer Dryer Repair Dubai - Search",
+      "ad_group": "",
+      "mode": "observation",
+      "bid_adjustment": 30,
+      "reason": "Exact product match for washing machine repair"
+    },
+    {
+      "name": "Dishwashers",
+      "type": "IN_MARKET",
+      "level": "campaign",
+      "campaign": "Washer Dryer Repair Dubai - Search",
+      "ad_group": "",
+      "mode": "observation",
+      "bid_adjustment": 30,
+      "reason": "Exact product match dishwasher repair"
+    },
+    {
+      "name": "Refrigerators",
+      "type": "IN_MARKET",
+      "level": "campaign",
+      "campaign": "Washer Dryer Repair Dubai - Search",
+      "ad_group": "",
+      "mode": "observation",
+      "bid_adjustment": 30,
+      "reason": "Exact product match fridge repair"
+    },
+    {
+      "name": "Televisions",
+      "type": "IN_MARKET",
+      "level": "campaign",
+      "campaign": "Washer Dryer Repair Dubai - Search",
+      "ad_group": "",
+      "mode": "observation",
+      "bid_adjustment": 25,
+      "reason": "Exact product match TV repair"
+    },
+    {
+      "name": "Home Improvement",
+      "type": "IN_MARKET",
+      "level": "campaign",
+      "campaign": "Washer Dryer Repair Dubai - Search",
+      "ad_group": "",
+      "mode": "observation",
+      "bid_adjustment": 15,
+      "reason": "Related home maintenance intent audience"
+    },
+    {
+      "name": "Home Decor Enthusiasts",
+      "type": "AFFINITY",
+      "level": "campaign",
+      "campaign": "Washer Dryer Repair Dubai - Search",
+      "ad_group": "",
+      "mode": "observation",
+      "bid_adjustment": 10,
+      "reason": "Homeowners likely to need appliance repair"
+    },
+    {
+      "name": "Family-Focused",
+      "type": "AFFINITY",
+      "level": "campaign",
+      "campaign": "Washer Dryer Repair Dubai - Search",
+      "ad_group": "",
+      "mode": "observation",
+      "bid_adjustment": 10,
+      "reason": "Households with appliances needing repair"
+    },
+    {
+      "name": "Value Shoppers",
+      "type": "AFFINITY",
+      "level": "campaign",
+      "campaign": "Washer Dryer Repair Dubai - Search",
+      "ad_group": "",
+      "mode": "observation",
+      "bid_adjustment": 10,
+      "reason": "Price-conscious repair-vs-replace decision makers"
+    }
+  ],
+  "negative": [
+    {
+      "name": "Construction Jobs",
+      "type": "IN_MARKET",
+      "campaign": "Washer Dryer Repair Dubai - Search",
+      "reason": "Job seekers not service buyers"
+    },
+    {
+      "name": "Manufacturing Jobs",
+      "type": "IN_MARKET",
+      "campaign": "Washer Dryer Repair Dubai - Search",
+      "reason": "Job seekers not service buyers"
+    },
+    {
+      "name": "Do-It-Yourselfers",
+      "type": "AFFINITY",
+      "campaign": "Washer Dryer Repair Dubai - Search",
+      "reason": "DIY repairers won't hire a technician"
+    },
+    {
+      "name": "Technology Education",
+      "type": "IN_MARKET",
+      "campaign": "Washer Dryer Repair Dubai - Search",
+      "reason": "Students not repair customers"
+    },
+    {
+      "name": "Luxury Shoppers",
+      "type": "AFFINITY",
+      "campaign": "Washer Dryer Repair Dubai - Search",
+      "reason": "Mismatched budget-focused repair service"
+    },
+    {
+      "name": "New Houses (For Sale)",
+      "type": "IN_MARKET",
+      "campaign": "Washer Dryer Repair Dubai - Search",
+      "reason": "New homes have warrantied appliances"
+    }
+  ],
+  "strategy_note": "Use ad-group level audiences for product-specific appliance signals to boost bids on highly qualified intent. Keep campaign-level broad home/appliance audiences in observation only to avoid limiting reach. Exclude job-seeker and DIY segments to cut wasted spend. Monitor Arabic ad groups separately since intent audiences may show lower volume in UAE Arabic searches."
+}
