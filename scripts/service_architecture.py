@@ -306,6 +306,37 @@ def _niche_allow():
 NICHE_ALLOW = _niche_allow()
 JUNK_TOKENS -= NICHE_ALLOW
 SOFT_JUNK_TOKENS -= NICHE_ALLOW
+
+# Run 2476776a (1 Oct 2026) bid on these: aggregator platforms that are
+# competitors, not customers ("urbanclap washing machine repair"), the
+# wrong product sharing a word ("dyson hair dryer repair", "dryer vent
+# repair" — duct work), and in a home business, commercial/industrial and
+# car units ("تصليح ثلاجات السيارات").
+JUNK_TOKENS |= {"urbanclap", "justlife", "servicemarket", "dyson"} - NICHE_ALLOW
+JUNK_PHRASES = ["urban company", "hair dryer", "hair dryers", "dryer vent", "dryer vents"]
+if re.search(r"\b(home|household|residential|domestic|appliances?)\b",
+             os.environ.get("NICHE_DESCRIPTION", ""), re.IGNORECASE):
+    JUNK_TOKENS |= {"commercial", "industrial", "car", "cars", "سيارة", "سيارات",
+                    "السيارات", "السيارة"} - NICHE_ALLOW
+# Other trades the business did not seed. Filled per run in main(): an AC
+# term in an appliance plan ("ac washing machine repair", "air conditioning
+# and refrigeration services") is someone else's job.
+OTHER_SERVICE_PHRASES = []
+_OTHER_FAMILIES = [{"ac", "air conditioner", "air conditioning", "aircon", "a/c",
+                    "مكيف", "مكيفات", "تكييف"}]
+# Real words the typo fixer must never "correct": "refrigeration" is HVAC
+# work, two edits from "refrigerator", and was being read as a fridge query.
+_NO_FIX = {"refrigeration", "refrigerant", "refrigerated", "conditioning", "ventilation"}
+
+# BID KEYWORDS (1 Oct 2026). Every Planner row that maps to a service stays
+# on the page (keyword_map) and in the group's demand. The BID list is
+# smaller: 1,321 of run 2476776a's 1,485 bid keywords had <= 10 searches, and
+# 50-70% per group were already reached by a shorter PHRASE keyword in the
+# same group ("washing machine repair" matches "samsung washing machine repair
+# dubai"). Kept: every keyword not covered that way with MIN_BID_VOLUME+
+# searches, and at least MIN_KEYWORDS_PER_GROUP per group.
+MIN_BID_VOLUME = _env_float("MIN_BID_VOLUME", 20)
+MIN_KEYWORDS_PER_GROUP = int(_env_float("MIN_KEYWORDS_PER_GROUP", 10))
 # "price/cost" is shopping ONLY without a service verb:
 # "washing machine price" = junk ; "washing machine repair cost" = CORE.
 PRICE_TOKENS = {"price", "prices", "cost", "costs", "cheap", "cheapest", "rate", "rates", "charges",
@@ -364,7 +395,7 @@ def _fix_token(t):
     "bridge" can never become "fridge" and short words are left alone."""
     if t in _GLUE:
         return _GLUE[t]
-    if t in _CANON or len(t) < 5 or not t.isalpha():
+    if t in _CANON or t in _NO_FIX or len(t) < 5 or not t.isalpha():
         return t
     cap = 2 if len(t) >= 9 else 1
     best, bd = None, cap + 1
@@ -683,6 +714,12 @@ def junk_reason(kw):
     hit = tset & JUNK_TOKENS
     if hit:
         return f"non-service intent: {sorted(hit)[0]}"
+    for ph in JUNK_PHRASES:
+        if has_phrase(text, ph):
+            return f"non-service intent: {ph}"
+    for ph in OTHER_SERVICE_PHRASES:
+        if has_phrase(text, ph):
+            return f"other service (not seeded): {ph}"
     soft = tset & SOFT_JUNK_TOKENS
     if soft and not has_hire:
         return f"non-service intent: {sorted(soft)[0]}"
@@ -829,8 +866,9 @@ def owner_of(kw, services, groups):
 # silo router and Stage 3 decide exactly as this stage did.
 _SNAPSHOT_SETS = ("JUNK_TOKENS", "SOFT_JUNK_TOKENS", "BRANDS", "HIRE_WORDS", "HIRE_SIGNALS",
                   "PROBLEM_TOKENS", "HARD_FAULTS", "PRICE_TOKENS", "URGENT_TOKENS",
-                  "EMERGENCY_TOKENS", "_WEAK_BRANDS", "_FAULT_WORDS", "_STRONG_PARTS")
-_SNAPSHOT_LISTS = ("WRONG_LOCS", "DIY_STARTS", "_URGENT_PHRASES", "EMERGENCY_PHRASES")
+                  "EMERGENCY_TOKENS", "_WEAK_BRANDS", "_FAULT_WORDS", "_STRONG_PARTS", "_NO_FIX")
+_SNAPSHOT_LISTS = ("WRONG_LOCS", "DIY_STARTS", "_URGENT_PHRASES", "EMERGENCY_PHRASES",
+                   "JUNK_PHRASES", "OTHER_SERVICE_PHRASES")
 
 
 def classifier_snapshot():
@@ -870,6 +908,7 @@ for _name in ("ACTION_WORDS", "SERVICE_VERBS", "BRANDS", "PROBLEM_TOKENS", "URGE
               "PROVIDER_NOUNS", "HIRE_WORDS", "EMERGENCY_TOKENS"):
     globals()[_name] = _norm_set(globals()[_name])
 _URGENT_PHRASES = list(dict.fromkeys(_URGENT_PHRASES + [norm_phrase(x) for x in _URGENT_PHRASES]))
+JUNK_PHRASES = list(dict.fromkeys(JUNK_PHRASES + [norm_phrase(x) for x in JUNK_PHRASES]))
 EMERGENCY_PHRASES = list(dict.fromkeys(EMERGENCY_PHRASES + [norm_phrase(x) for x in EMERGENCY_PHRASES]))
 DIY_STARTS = tuple(dict.fromkeys(DIY_STARTS + tuple(norm_phrase(x) + " " for x in DIY_STARTS)))
 WRONG_LOCS = list(dict.fromkeys(WRONG_LOCS + [norm_phrase(x) for x in WRONG_LOCS]))
@@ -1361,6 +1400,71 @@ def keyword_map(p, svc, location, symptoms=()):
     }
 
 
+def register_other_services(services):
+    """Trades in _OTHER_FAMILIES that this run did NOT seed become junk."""
+    seeded = {a for s in services for a in s["aliases"]}
+    OTHER_SERVICE_PHRASES[:] = []
+    for fam in _OTHER_FAMILIES:
+        fam_n = {norm_phrase(x) for x in fam} | set(fam)
+        if not (fam_n & seeded):
+            OTHER_SERVICE_PHRASES.extend(sorted(fam_n))
+
+
+def _phrase_key(kw):
+    """A keyword as Google's phrase match reads it: our normalised words,
+    plurals folded (close variants). Arabic is compared LIGHTLY — diacritics
+    and alef forms only. Our matching stem folds "الغسالة" and "غسالات"
+    together, but nothing says Google's phrase match does, and run 2476776a
+    would have dropped the head term "تصليح غسالات" (210) for "تصليح الغسالة"."""
+    if is_arabic(kw):
+        return [re.sub("[أإآ]", "ا", _AR_DIAC.sub("", w)).replace("ى", "ي")
+                for w in _raw_toks(kw)]
+    return _singular(" ".join(toks(kw))).split()
+
+
+def _contains(longer, shorter):
+    n = len(shorter)
+    return 0 < n <= len(longer) and any(longer[i:i + n] == shorter
+                                        for i in range(len(longer) - n + 1))
+
+
+def select_bid_rows(rows, exact=False):
+    """The keywords an ad group actually bids on, out of all its rows.
+
+    A keyword whose words contain a chosen keyword's words, contiguous and in
+    order, is reached by that one's PHRASE match and is not bid on twice.
+    Pass 1 walks SHORTEST first, so the covering term ("washer repair") is
+    chosen before what it covers ("clothes washer repair"), and keeps every
+    uncovered keyword with MIN_BID_VOLUME+ searches. Pass 2 tops a group up
+    to MIN_KEYWORDS_PER_GROUP with its highest-volume uncovered rows — an
+    Arabic group whose Planner rows are all "10" still gets its head terms.
+    Exact-match groups (the symptom test) skip containment: an exact keyword
+    reaches nothing but itself."""
+    def _covered(k, keys):
+        return not exact and any(_contains(k, c) for c in keys)
+
+    keyed = [(_phrase_key(r["keyword"]), r) for r in rows]
+    chosen, keys = [], []
+    for k, r in sorted(keyed, key=lambda x: (len(x[0]), -x[1]["avg_monthly_searches"],
+                                             x[1]["keyword"])):
+        if r["avg_monthly_searches"] >= MIN_BID_VOLUME and not _covered(k, keys):
+            chosen.append(r)
+            keys.append(k)
+    if len(chosen) < MIN_KEYWORDS_PER_GROUP:
+        for k, r in sorted(keyed, key=lambda x: (-x[1]["avg_monthly_searches"], len(x[0]),
+                                                 x[1]["keyword"])):
+            if len(chosen) >= MIN_KEYWORDS_PER_GROUP:
+                break
+            if r in chosen or _covered(k, keys):
+                continue
+            # a short keyword added here may cover one chosen before it
+            chosen = [c for c, ck in zip(chosen, keys) if not (not exact and _contains(ck, k))]
+            keys = [ck for ck in keys if not (not exact and _contains(ck, k))]
+            chosen.append(r)
+            keys.append(k)
+    return chosen, keys
+
+
 # ─────────────────────────────────────────────────────────────────────────
 def main():
     if hasattr(sys.stdout, "reconfigure"):
@@ -1374,6 +1478,7 @@ def main():
     rows = data["keywords"]
     services = build_services(seeds)
     _build_normaliser(services)
+    register_other_services(services)
     single = len(services) == 1
     print(f"🧭 VTSA: {len(services)} service(s): " + ", ".join(s["name"] for s in services))
 
@@ -1487,6 +1592,7 @@ def main():
     loc_label = os.environ.get("TARGET_LOCATION", "").strip() or ""
     by_id_vol = {r["id"]: r["avg_monthly_searches"] for r in rows}
     plan_groups, pages, kept_ids = [], [], set()
+    _bid_n = [0, 0]      # bid keywords, all rows
     svc_by_name = {s["name"]: s for s in services}
     for p in service_plans:
         svc = svc_by_name[p["service"]]
@@ -1514,17 +1620,26 @@ def main():
             _lab = LAYER_LABEL_AR if svc.get("lang") == "ar" else LAYER_LABEL
             name = _lab[l].format(svc=p["service"], disp=svc.get("display", p["service"]))[:60]
             names.append(name)
-            kept_ids |= {r["id"] for r in rs}
+            bid_rows, bid_keys = select_bid_rows(rs, exact=LAYER_MATCH.get(l) == "exact")
+            kept_ids |= {r["id"] for r in bid_rows}
+            # a catcher or template the group's own phrase keywords already
+            # reach is a duplicate bid, not a new home for anything
+            _catch = [c for c in p["catchers"].get(l, [])
+                      if not any(_contains(_phrase_key(c), k) for k in bid_keys)]
+            _bid_n[0] += len(bid_rows)
+            _bid_n[1] += len(rs)
             plan_groups.append({
                 "name": name,
                 "service": p["service"],
                 "layer": l,
-                "keyword_ids": [r["id"] for r in sorted(rs, key=lambda r: -r["avg_monthly_searches"])],
+                "keyword_ids": [r["id"] for r in bid_rows],
+                # every row the layer owns — demand, the page's keyword map
+                "all_keyword_ids": [r["id"] for r in sorted(rs, key=lambda r: -r["avg_monthly_searches"])],
                 "volume": real_volume(rs),
                 "negative_keywords": p["negatives"][l],
                 # positive phrase keywords (volume unknown) that give every
                 # token negated elsewhere a home in THIS group
-                "silo_catchers": p["catchers"].get(l, []),
+                "silo_catchers": _catch,
                 "copy_rules": (["never say authorized/official/genuine service centre — "
                                 "independent all-brand repair only (trademark + misleading-claims policy)"]
                                if l == "brand" else []),
@@ -1552,6 +1667,9 @@ def main():
               f"groups={len(names)}  split={p['split_layers'] or '-'}  "
               f"folded={p['folded_into_core'] or '-'}")
 
+    print(f"   🎯 Bid keywords: {_bid_n[0]} of {_bid_n[1]} relevant rows — the rest are reached "
+          f"by a shorter phrase keyword or have < {MIN_BID_VOLUME:g} searches (min "
+          f"{MIN_KEYWORDS_PER_GROUP}/group); all of them stay in the page keyword maps")
     for r in rows:
         r["kept_for_ai"] = r["id"] in kept_ids
         r.pop("_layer", None)
@@ -1570,6 +1688,9 @@ def main():
                  + (f"; symptom test groups exact @ {SYMPTOM_BID:g}x" if SYMPTOM_TEST else "")),
         "settings": {"open_24_7": OPEN_24_7, "symptom_test": SYMPTOM_TEST,
                      "symptom_bid": SYMPTOM_BID, "min_layer_clicks": MIN_LAYER_CLICKS,
+                     "min_bid_volume": MIN_BID_VOLUME,
+                     "min_keywords_per_group": MIN_KEYWORDS_PER_GROUP,
+                     "bid_keywords": _bid_n[0], "relevant_rows": _bid_n[1],
                      "assumed_is": ASSUMED_IS, "assumed_ctr": ASSUMED_CTR,
                      "daily_budget": _env_float("DAILY_BUDGET", 0),
                      "avg_cpc": round(avg_cpc([r for r in rows if r.get("kept_for_ai")]), 2)},

@@ -108,10 +108,45 @@ class Classifier(unittest.TestCase):
         for k in ("OPEN_24_7", "SYMPTOM_TEST", "EXTRA_JUNK", "NEGATIVE_ALLOW"):
             os.environ.pop(k, None)
         os.environ["TARGET_LOCATION"] = "Dubai, United Arab Emirates"
+        os.environ["NICHE_DESCRIPTION"] = "Home Appliance Repair Services"
         import service_architecture as vtsa
         cls.v = importlib.reload(vtsa)
         cls.svcs = cls.v.build_services(["fridge repair", "washing machine repair"])
         cls.v._build_normaliser(cls.svcs)
+        cls.v.register_other_services(cls.svcs)
+
+    def test_run_2476776a_junk(self):
+        # all of these were BID on in the 1 Oct 2026 run
+        for kw in ("urbanclap washing machine repair", "dyson hair dryer repair",
+                   "dryer vent repair near me", "ac washing machine repair",
+                   "air conditioning and refrigeration services",
+                   "commercial washing machine repair", "industrial washing machine repair",
+                   "تصليح ثلاجات السيارات"):
+            self.assertIsNotNone(self.v.junk_reason(kw), kw)
+        # "refrigeration" is a real word, never corrected to "refrigerator"
+        self.assertEqual(self.v.toks("refrigeration"), ["refrigeration"])
+        for kw in ("washing machine repair", "fridge repair near me", "تصليح ثلاجات"):
+            self.assertIsNone(self.v.junk_reason(kw), kw)
+
+    def test_bid_selection(self):
+        rows = [{"id": i, "keyword": k, "avg_monthly_searches": v} for i, (k, v) in enumerate([
+            ("washing machine repair", 6600), ("washing machine repair near me", 880),
+            ("samsung washing machine repair", 90), ("washing machines repair dubai", 10),
+            ("fix washing machine", 6600), ("washer fixer", 6600), ("washer repair", 30),
+            ("lg washer repair", 10), ("washing machine drum repair", 10)])]
+        chosen, _ = self.v.select_bid_rows(rows)
+        kws = [r["keyword"] for r in chosen]
+        # reached by "washing machine repair" (phrase, plural folded)
+        for k in ("washing machine repair near me", "samsung washing machine repair",
+                  "washing machines repair dubai"):
+            self.assertNotIn(k, kws)
+        # "drum" sits INSIDE the phrase, so phrase match does not reach it
+        self.assertIn("washing machine drum repair", kws)
+        self.assertIn("washer repair", kws)
+        # "lg washer repair" is reached by "washer repair"
+        self.assertNotIn("lg washer repair", kws)
+        exact, _ = self.v.select_bid_rows(rows, exact=True)
+        self.assertGreater(len(exact), len(chosen))
 
     def layer(self, kw):
         i, layer = self.v.classify(kw, self.svcs)
@@ -157,10 +192,25 @@ class Structure(unittest.TestCase):
                     "LED TV"):
             self.assertIn(svc, services)
         self.assertIn("Washing Machine Repair - Brands", names)
+        with open(FIXTURE, encoding="utf-8") as f:
+            text = {r["id"]: r["keyword"] for r in json.load(f)["keywords"]}
+        sys.path.insert(0, SCRIPTS)
+        import service_architecture as vtsa
+        vtsa.restore_classifier(plan["classifier"])
         for g in plan["ad_groups"]:
             self.assertEqual(g["match_type"], "exact" if g["layer"] == "symptom" else "phrase")
             if g["layer"] == "symptom":
                 self.assertEqual(g["bid_multiplier"], 0.6)
+            # bid list is a subset of the layer's rows, never empty
+            self.assertTrue(set(g["keyword_ids"]) <= set(g["all_keyword_ids"]))
+            self.assertTrue(g["keyword_ids"])
+            if g["match_type"] == "phrase":
+                keys = [vtsa._phrase_key(text[i]) for i in g["keyword_ids"] if i in text]
+                for a in keys:
+                    for b in keys:
+                        if a is not b:
+                            self.assertFalse(vtsa._contains(a, b) and len(b) < len(a),
+                                             f"{a} is already reached by {b}")
         self.assertNotIn("fallback_legacy", plan)
         self.assertIn("classifier", plan)
         # the H1 term: no "near me", and an Arabic page carries the Arabic city

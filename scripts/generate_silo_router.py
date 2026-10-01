@@ -55,7 +55,7 @@ function setOf(a) { var o = {}; for (var i = 0; i < a.length; i++) o[a[i]] = 1; 
 var S = {};
 ['JUNK_TOKENS', 'SOFT_JUNK_TOKENS', 'BRANDS', 'HIRE_WORDS', 'HIRE_SIGNALS', 'PROBLEM_TOKENS',
  'HARD_FAULTS', 'PRICE_TOKENS', 'URGENT_TOKENS', 'EMERGENCY_TOKENS', '_WEAK_BRANDS',
- '_FAULT_WORDS', '_STRONG_PARTS', '_BRAND_PAIRS', '_CANON'].forEach(function (n) { S[n] = setOf(V[n]); });
+ '_FAULT_WORDS', '_STRONG_PARTS', '_BRAND_PAIRS', '_CANON', '_NO_FIX'].forEach(function (n) { S[n] = setOf(V[n] || []); });
 var CANON_SORTED = V._CANON;
 var MULTI_BRANDS = V.BRANDS.filter(function (b) { return b.indexOf(' ') !== -1; });
 var ERROR_CODE = /^(?:[a-z]{1,2}\d{1,3}|\d{1,2}[a-z]{1,2})$/;
@@ -96,7 +96,7 @@ function lev(a, b, cap) {
 }
 function fixToken(t) {
   if (has(V._GLUE, t)) return V._GLUE[t];
-  if (has(S._CANON, t) || t.length < 5 || !ALPHA_RE.test(t)) return t;
+  if (has(S._CANON, t) || has(S._NO_FIX, t) || t.length < 5 || !ALPHA_RE.test(t)) return t;
   var cap = t.length >= 9 ? 2 : 1, best = null, bd = cap + 1;
   for (var i = 0; i < CANON_SORTED.length; i++) {
     var w = CANON_SORTED[i];
@@ -158,6 +158,8 @@ function junkReason(kw) {
   for (i = 0; i < V.WRONG_LOCS.length; i++) if (hasPhrase(text, V.WRONG_LOCS[i])) return 'wrong location';
   for (i = 0; i < V.DIY_STARTS.length; i++) if (text.indexOf(V.DIY_STARTS[i]) === 0) return 'diy';
   if (anyIn(ts, S.JUNK_TOKENS)) return 'junk';
+  var jp = (V.JUNK_PHRASES || []).concat(V.OTHER_SERVICE_PHRASES || []);
+  for (i = 0; i < jp.length; i++) if (hasPhrase(text, jp[i])) return 'junk';
   if (anyIn(ts, S.SOFT_JUNK_TOKENS) && !hasHire) return 'junk';
   if (anyIn(ts, S.PRICE_TOKENS) && !hasHire) return 'price';
   if (symptomOnly(text)) return 'symptom only';

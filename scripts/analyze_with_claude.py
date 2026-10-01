@@ -1309,7 +1309,14 @@ def run_plan_mode(data):
     svc_idx = {s["name"]: i for i, s in enumerate(services)}
     group_by_key = {(g["service"], g["layer"]): g for g in plan["ad_groups"]}
     routed = {g["name"]: list(g.get("silo_catchers", [])) for g in plan["ad_groups"]}
-    n_moved = n_dropped = 0
+    # What each group's phrase keywords already reach: an idea inside one of
+    # them ("washing machine repair today" under "washing machine repair")
+    # is a duplicate bid, not a new query (same rule as Stage 2.7's bid list).
+    _id_kw = {k["id"]: k["keyword"] for k in data["keywords"]}
+    reach = {g["name"]: [vtsa._phrase_key(_id_kw[i]) for i in g["keyword_ids"] if i in _id_kw]
+             + [vtsa._phrase_key(c) for c in g.get("silo_catchers", [])]
+             for g in plan["ad_groups"]}
+    n_moved = n_dropped = n_reached = 0
     for g in plan["ad_groups"]:
         if g["layer"] == "symptom":
             continue   # exact-match test: its keywords are the Planner's own, nothing added
@@ -1323,12 +1330,19 @@ def run_plan_mode(data):
                 n_dropped += 1
                 continue
             target = group_by_key.get((g["service"], layer)) or group_by_key[(g["service"], "core")]
+            ek = vtsa._phrase_key(e)
+            if target.get("match_type", "phrase") == "phrase" and \
+                    any(vtsa._contains(ek, k) for k in reach[target["name"]]):
+                n_reached += 1
+                continue
             if target["name"] != g["name"]:
                 n_moved += 1
             if e not in routed[target["name"]]:
                 routed[target["name"]].append(e)
+                reach[target["name"]].append(ek)
     print(f"🧭 Plan mode: {len(plan['ad_groups'])} fixed ad groups | expansions "
-          f"re-routed={n_moved}, dropped={n_dropped}")
+          f"re-routed={n_moved}, dropped={n_dropped}, already reached by a phrase "
+          f"keyword={n_reached}")
 
     camp = (SINGLE_CAMPAIGN if SINGLE_CAMPAIGN and SINGLE_CAMPAIGN.lower()
             not in ("true", "1", "yes", "false", "0", "no", "off")
