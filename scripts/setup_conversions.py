@@ -314,6 +314,18 @@ def select_clients():
                 missing.append(t)
         if missing:
             log(f"⚠️ Not found in the client list: {', '.join(missing)}")
+        # A brand-new client is usually not registered yet when its first
+        # campaign is built (run 2476776a, 1 Oct 2026: the step exited and the
+        # campaign went out with no conversion actions at all). The account
+        # is known, so the actions are created anyway; only the label
+        # write-back has to wait for the client row.
+        if not picked and PUSH_CUSTOMER_ID:
+            log(f"   ↳ creating the conversion actions in account {PUSH_CUSTOMER_ID} anyway. "
+                "Labels are NOT written to a client row — register the client on "
+                "clickadsprotector.com/admin-clients, then re-run with conv_setup=check "
+                "to write them back.")
+            return [{"website_name": f"account {PUSH_CUSTOMER_ID}",
+                     "customer_id": PUSH_CUSTOMER_ID, "client_token": None}]
         # Setting PUSH_CUSTOMER_ID as well as a token used to be the way to
         # write one account's labels onto another client's row. The row is the
         # authority, so a disagreement is refused rather than silently resolved.

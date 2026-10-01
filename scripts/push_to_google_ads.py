@@ -235,6 +235,49 @@ def preflight(urls):
     return (not dead), dead
 
 
+_POLICY_CODES = ("policy_violation_error", "policy_finding_error")
+
+
+def _oneof(msg, group):
+    try:
+        return msg._pb.WhichOneof(group) or ""
+    except Exception:
+        return ""
+
+
+def policy_keyword_ops(exc, ops):
+    """[(op index, keyword text, policy name)] when EVERY error in a failed
+    mutate is a policy refusal of a keyword criterion; otherwise None, and
+    the caller reports the failure as before. Never guesses: an error with
+    no operation index, or one pointing at anything but a keyword, means
+    nothing is dropped."""
+    out = []
+    for err in exc.failure.errors:
+        if _oneof(err.error_code, "error_code") not in _POLICY_CODES:
+            return None
+        idx = None
+        for el in err.location.field_path_elements:
+            if el.field_name == "mutate_operations":
+                idx = el.index
+                break
+        if idx is None or not (0 <= idx < len(ops)):
+            return None
+        o = ops[idx]
+        if _oneof(o, "operation") != "ad_group_criterion_operation":
+            return None
+        text = o.ad_group_criterion_operation.create.keyword.text
+        if not text:
+            return None
+        try:
+            d = err.details.policy_violation_details
+            policy = d.external_policy_name or d.key.policy_name or "policy"
+        except Exception:
+            policy = "policy"
+        if idx not in {i for i, _, _ in out}:
+            out.append((idx, text, policy))
+    return out or None
+
+
 def write_manifest(phase, camp_name, urls, dead):
     data = {
         "phase": phase,
@@ -958,25 +1001,47 @@ def main():
         f"{n_loc} locations + {n_loc_neg} excluded locations = {len(ops)}")
 
     # ── the atomic core mutate ──────────────────────────────────────────
-    req = client.get_type("MutateGoogleAdsRequest")
-    req.customer_id = PUSH_CUSTOMER_ID
-    req.mutate_operations.extend(ops)
-    req.validate_only = validate
-    req.partial_failure = False   # all-or-nothing: no half-built campaign
-    try:
-        svc.mutate(request=req)
-        log("✅ VALIDATION PASSED — every operation is valid; nothing was "
-            "created (run again with push_mode=live to build it)." if validate
-            else f"✅ LIVE PUSH DONE — campaign '{camp_name}' created PAUSED "
-                 f"in account {PUSH_CUSTOMER_ID}.")
-    except GoogleAdsException as e:
-        log("❌ Google Ads API rejected the core push (CSV path unaffected — "
-            "fix the errors below or import the master CSV):")
-        for err in e.failure.errors[:20]:
-            log(f"   - {err.error_code} | {err.message}"
-                + (f" | at {err.location.field_path_elements}" if err.location.field_path_elements else ""))
-        _write_report()
-        return
+    # A keyword Google refuses on POLICY grounds ("haier led tv screen
+    # replacement cost", run 2476776a, 1 Oct 2026) used to take the whole
+    # atomic push down with it — 2,814 operations lost to one keyword. Those
+    # keywords are now dropped, named in the report, and the push retried.
+    # Only keyword criteria are ever dropped this way; a policy error on
+    # anything else (an ad, the campaign) still stops the push.
+    dropped_for_policy = []
+    for _attempt in range(6):
+        req = client.get_type("MutateGoogleAdsRequest")
+        req.customer_id = PUSH_CUSTOMER_ID
+        req.mutate_operations.extend(ops)
+        req.validate_only = validate
+        req.partial_failure = False   # all-or-nothing: no half-built campaign
+        try:
+            svc.mutate(request=req)
+            if dropped_for_policy:
+                log(f"⚠️ {len(dropped_for_policy)} keyword(s) left out — Google refused them "
+                    "on policy grounds:")
+                for text, policy in dropped_for_policy:
+                    log(f"      - {text}  [{policy}]")
+            log("✅ VALIDATION PASSED — every operation is valid; nothing was "
+                "created (run again with push_mode=live to build it)." if validate
+                else f"✅ LIVE PUSH DONE — campaign '{camp_name}' created PAUSED "
+                     f"in account {PUSH_CUSTOMER_ID}.")
+            break
+        except GoogleAdsException as e:
+            drop = policy_keyword_ops(e, ops) if _attempt < 5 else None
+            if drop:
+                for idx, text, policy in sorted(drop, reverse=True):
+                    del ops[idx]
+                    dropped_for_policy.append((text, policy))
+                log(f"⚠️ Google refused {len(drop)} keyword(s) on policy grounds — dropped, "
+                    f"retrying: {', '.join(t for _, t, _ in drop)[:200]}")
+                continue
+            log("❌ Google Ads API rejected the core push (CSV path unaffected — "
+                "fix the errors below or import the master CSV):")
+            for err in e.failure.errors[:20]:
+                log(f"   - {err.error_code} | {err.message}"
+                    + (f" | at {err.location.field_path_elements}" if err.location.field_path_elements else ""))
+            _write_report()
+            return
 
     # ── what happens next ───────────────────────────────────────────────
     # A held push is only half a campaign, and the half that is missing is

@@ -493,8 +493,15 @@ def main():
     # Belt and braces: no hard-floor area may leave this stage bid UP, whatever
     # path produced the tiers (model, override, or a failed model call).
     _prem_keys = {_norm_area(x) for x in PREMIUM_AREAS}
-    _floor, _ = map_tiers_to_areas(chosen, {a: "low" for a in HARD_LOW_AREAS
-                                            if _norm_area(a) not in _prem_keys}, city, cc)
+    _floor, _not_targetable = map_tiers_to_areas(chosen, {a: "low" for a in HARD_LOW_AREAS
+                                                          if _norm_area(a) not in _prem_keys}, city, cc)
+    if _not_targetable:
+        # Google has no geo target for these (Al Satwa, Deira, Al Karama... are
+        # absent from its Dubai list), so no bid can be set on them: their
+        # clicks bid at the city level. The fraud agent's IP blocking is what
+        # protects them, not this stage. Said out loud instead of silently.
+        print(f"   ℹ️ Hard floor: {len(_not_targetable)} area(s) are not Google location "
+              f"targets, so they cannot be bid down: {', '.join(_not_targetable)}")
     for _area in _floor:
         if tiers.get(_area) != "low":
             print(f"   🛑 Hard floor: '{_area}' was {tiers.get(_area, 'standard')} -> low ({LOW_BID_ADJ}%)")
