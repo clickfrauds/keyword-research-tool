@@ -1,0 +1,25 @@
+{
+  "customer_id": "9896735391",
+  "website_name": "account 9896735391",
+  "aw_id": "AW-10780853411",
+  "actions": {
+    "Phone Call Click": {
+      "column": "label_phone",
+      "id": 7810459829,
+      "label": "sBGtCLXRqIwdEKOJ25Qo",
+      "primary": true
+    },
+    "WhatsApp Click": {
+      "column": "label_whatsapp",
+      "id": 7810459832,
+      "label": "vp23CLjRqIwdEKOJ25Qo",
+      "primary": true
+    },
+    "Form Submit": {
+      "column": "label_form",
+      "id": 7810459835,
+      "label": "VrORCLvRqIwdEKOJ25Qo",
+      "primary": true
+    }
+  }
+}
