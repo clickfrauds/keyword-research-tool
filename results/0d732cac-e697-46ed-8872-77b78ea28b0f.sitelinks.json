@@ -1,0 +1,521 @@
+{
+  "sitelink_sets": [
+    {
+      "ad_group": "Washing Machine Repair",
+      "campaign": "Washer Dryer Repair Dubai - Search",
+      "final_url_base": "https://washerdryerrepairdubai.com/washing-machine-repair-dubai",
+      "sitelinks": [
+        {
+          "text": "Washing Machine Services",
+          "desc1": "What the service covers",
+          "desc2": "All brands, same-day slots",
+          "url": "https://washerdryerrepairdubai.com/washing-machine-repair-dubai#services",
+          "anchor": "services",
+          "source": "fallback:latin"
+        },
+        {
+          "text": "Washing Machine Pricing",
+          "desc1": "Transparent price ranges",
+          "desc2": "No hidden charges, ever",
+          "url": "https://washerdryerrepairdubai.com/washing-machine-repair-dubai#pricing",
+          "anchor": "pricing",
+          "source": "fallback:latin"
+        },
+        {
+          "text": "Customer Reviews",
+          "desc1": "Real customer stories",
+          "desc2": "Rated by local clients",
+          "url": "https://washerdryerrepairdubai.com/washing-machine-repair-dubai#reviews",
+          "anchor": "reviews",
+          "source": "fallback:latin"
+        },
+        {
+          "text": "Washing Machine FAQs",
+          "desc1": "Costs, timing & questions",
+          "desc2": "Repair vs replace advice",
+          "url": "https://washerdryerrepairdubai.com/washing-machine-repair-dubai#faq",
+          "anchor": "faq",
+          "source": "fallback:latin"
+        },
+        {
+          "text": "Get a Free Quote",
+          "desc1": "Free quote before any work",
+          "desc2": "Call or WhatsApp today",
+          "url": "https://washerdryerrepairdubai.com/washing-machine-repair-dubai#contact",
+          "anchor": "contact",
+          "source": "fallback:latin"
+        }
+      ]
+    },
+    {
+      "ad_group": "Dryer Repair",
+      "campaign": "Washer Dryer Repair Dubai - Search",
+      "final_url_base": "https://washerdryerrepairdubai.com/dryer-repair-dubai",
+      "sitelinks": [
+        {
+          "text": "Dryer Repair Services",
+          "desc1": "What the service covers",
+          "desc2": "All brands, same-day slots",
+          "url": "https://washerdryerrepairdubai.com/dryer-repair-dubai#services",
+          "anchor": "services",
+          "source": "fallback:latin"
+        },
+        {
+          "text": "Dryer Repair Pricing",
+          "desc1": "Transparent price ranges",
+          "desc2": "No hidden charges, ever",
+          "url": "https://washerdryerrepairdubai.com/dryer-repair-dubai#pricing",
+          "anchor": "pricing",
+          "source": "fallback:latin"
+        },
+        {
+          "text": "Customer Reviews",
+          "desc1": "Real customer stories",
+          "desc2": "Rated by local clients",
+          "url": "https://washerdryerrepairdubai.com/dryer-repair-dubai#reviews",
+          "anchor": "reviews",
+          "source": "fallback:latin"
+        },
+        {
+          "text": "Dryer Repair FAQs",
+          "desc1": "Costs, timing & questions",
+          "desc2": "Repair vs replace advice",
+          "url": "https://washerdryerrepairdubai.com/dryer-repair-dubai#faq",
+          "anchor": "faq",
+          "source": "fallback:latin"
+        },
+        {
+          "text": "Get a Free Quote",
+          "desc1": "Free quote before any work",
+          "desc2": "Call or WhatsApp today",
+          "url": "https://washerdryerrepairdubai.com/dryer-repair-dubai#contact",
+          "anchor": "contact",
+          "source": "fallback:latin"
+        }
+      ]
+    },
+    {
+      "ad_group": "Dishwasher Repair",
+      "campaign": "Washer Dryer Repair Dubai - Search",
+      "final_url_base": "https://washerdryerrepairdubai.com/dishwasher-repair-dubai",
+      "sitelinks": [
+        {
+          "text": "Dishwasher Services",
+          "desc1": "What the service covers",
+          "desc2": "All brands, same-day slots",
+          "url": "https://washerdryerrepairdubai.com/dishwasher-repair-dubai#services",
+          "anchor": "services",
+          "source": "fallback:latin"
+        },
+        {
+          "text": "Dishwasher Repair Pricing",
+          "desc1": "Transparent price ranges",
+          "desc2": "No hidden charges, ever",
+          "url": "https://washerdryerrepairdubai.com/dishwasher-repair-dubai#pricing",
+          "anchor": "pricing",
+          "source": "fallback:latin"
+        },
+        {
+          "text": "Customer Reviews",
+          "desc1": "Real customer stories",
+          "desc2": "Rated by local clients",
+          "url": "https://washerdryerrepairdubai.com/dishwasher-repair-dubai#reviews",
+          "anchor": "reviews",
+          "source": "fallback:latin"
+        },
+        {
+          "text": "Dishwasher Repair FAQs",
+          "desc1": "Costs, timing & questions",
+          "desc2": "Repair vs replace advice",
+          "url": "https://washerdryerrepairdubai.com/dishwasher-repair-dubai#faq",
+          "anchor": "faq",
+          "source": "fallback:latin"
+        },
+        {
+          "text": "Get a Free Quote",
+          "desc1": "Free quote before any work",
+          "desc2": "Call or WhatsApp today",
+          "url": "https://washerdryerrepairdubai.com/dishwasher-repair-dubai#contact",
+          "anchor": "contact",
+          "source": "fallback:latin"
+        }
+      ]
+    },
+    {
+      "ad_group": "Refrigerator Repair",
+      "campaign": "Washer Dryer Repair Dubai - Search",
+      "final_url_base": "https://washerdryerrepairdubai.com/refrigerator-repair-dubai",
+      "sitelinks": [
+        {
+          "text": "Refrigerator Services",
+          "desc1": "What the service covers",
+          "desc2": "All brands, same-day slots",
+          "url": "https://washerdryerrepairdubai.com/refrigerator-repair-dubai#services",
+          "anchor": "services",
+          "source": "fallback:latin"
+        },
+        {
+          "text": "Refrigerator Pricing",
+          "desc1": "Transparent price ranges",
+          "desc2": "No hidden charges, ever",
+          "url": "https://washerdryerrepairdubai.com/refrigerator-repair-dubai#pricing",
+          "anchor": "pricing",
+          "source": "fallback:latin"
+        },
+        {
+          "text": "Customer Reviews",
+          "desc1": "Real customer stories",
+          "desc2": "Rated by local clients",
+          "url": "https://washerdryerrepairdubai.com/refrigerator-repair-dubai#reviews",
+          "anchor": "reviews",
+          "source": "fallback:latin"
+        },
+        {
+          "text": "Refrigerator Repair FAQs",
+          "desc1": "Costs, timing & questions",
+          "desc2": "Repair vs replace advice",
+          "url": "https://washerdryerrepairdubai.com/refrigerator-repair-dubai#faq",
+          "anchor": "faq",
+          "source": "fallback:latin"
+        },
+        {
+          "text": "Get a Free Quote",
+          "desc1": "Free quote before any work",
+          "desc2": "Call or WhatsApp today",
+          "url": "https://washerdryerrepairdubai.com/refrigerator-repair-dubai#contact",
+          "anchor": "contact",
+          "source": "fallback:latin"
+        }
+      ]
+    },
+    {
+      "ad_group": "Wine Chiller Repair",
+      "campaign": "Washer Dryer Repair Dubai - Search",
+      "final_url_base": "https://washerdryerrepairdubai.com/wine-chiller-repair-dubai",
+      "sitelinks": [
+        {
+          "text": "Wine Chiller Services",
+          "desc1": "What the service covers",
+          "desc2": "All brands, same-day slots",
+          "url": "https://washerdryerrepairdubai.com/wine-chiller-repair-dubai#services",
+          "anchor": "services",
+          "source": "fallback:latin"
+        },
+        {
+          "text": "Wine Chiller Pricing",
+          "desc1": "Transparent price ranges",
+          "desc2": "No hidden charges, ever",
+          "url": "https://washerdryerrepairdubai.com/wine-chiller-repair-dubai#pricing",
+          "anchor": "pricing",
+          "source": "fallback:latin"
+        },
+        {
+          "text": "Customer Reviews",
+          "desc1": "Real customer stories",
+          "desc2": "Rated by local clients",
+          "url": "https://washerdryerrepairdubai.com/wine-chiller-repair-dubai#reviews",
+          "anchor": "reviews",
+          "source": "fallback:latin"
+        },
+        {
+          "text": "Wine Chiller Repair FAQs",
+          "desc1": "Costs, timing & questions",
+          "desc2": "Repair vs replace advice",
+          "url": "https://washerdryerrepairdubai.com/wine-chiller-repair-dubai#faq",
+          "anchor": "faq",
+          "source": "fallback:latin"
+        },
+        {
+          "text": "Get a Free Quote",
+          "desc1": "Free quote before any work",
+          "desc2": "Call or WhatsApp today",
+          "url": "https://washerdryerrepairdubai.com/wine-chiller-repair-dubai#contact",
+          "anchor": "contact",
+          "source": "fallback:latin"
+        }
+      ]
+    },
+    {
+      "ad_group": "LED TV Repair",
+      "campaign": "Washer Dryer Repair Dubai - Search",
+      "final_url_base": "https://washerdryerrepairdubai.com/led-tv-repair-dubai",
+      "sitelinks": [
+        {
+          "text": "LED TV Repair Services",
+          "desc1": "What the service covers",
+          "desc2": "All brands, same-day slots",
+          "url": "https://washerdryerrepairdubai.com/led-tv-repair-dubai#services",
+          "anchor": "services",
+          "source": "fallback:latin"
+        },
+        {
+          "text": "LED TV Repair Pricing",
+          "desc1": "Transparent price ranges",
+          "desc2": "No hidden charges, ever",
+          "url": "https://washerdryerrepairdubai.com/led-tv-repair-dubai#pricing",
+          "anchor": "pricing",
+          "source": "fallback:latin"
+        },
+        {
+          "text": "Customer Reviews",
+          "desc1": "Real customer stories",
+          "desc2": "Rated by local clients",
+          "url": "https://washerdryerrepairdubai.com/led-tv-repair-dubai#reviews",
+          "anchor": "reviews",
+          "source": "fallback:latin"
+        },
+        {
+          "text": "LED TV Repair FAQs",
+          "desc1": "Costs, timing & questions",
+          "desc2": "Repair vs replace advice",
+          "url": "https://washerdryerrepairdubai.com/led-tv-repair-dubai#faq",
+          "anchor": "faq",
+          "source": "fallback:latin"
+        },
+        {
+          "text": "Get a Free Quote",
+          "desc1": "Free quote before any work",
+          "desc2": "Call or WhatsApp today",
+          "url": "https://washerdryerrepairdubai.com/led-tv-repair-dubai#contact",
+          "anchor": "contact",
+          "source": "fallback:latin"
+        }
+      ]
+    },
+    {
+      "ad_group": "تصليح غسالات",
+      "campaign": "Washer Dryer Repair Dubai - Search",
+      "final_url_base": "https://washerdryerrepairdubai.com/ar/washing-machine-repair-dubai",
+      "sitelinks": [
+        {
+          "text": "خدمات تصليح غسالات",
+          "desc1": "ما الذي تشمله الخدمة",
+          "desc2": "جميع الماركات، مواعيد سريعة",
+          "url": "https://washerdryerrepairdubai.com/ar/washing-machine-repair-dubai#services",
+          "anchor": "services",
+          "source": "fallback:arabic"
+        },
+        {
+          "text": "أسعار تصليح غسالات",
+          "desc1": "أسعار واضحة بدون مفاجآت",
+          "desc2": "لا رسوم خفية إطلاقاً",
+          "url": "https://washerdryerrepairdubai.com/ar/washing-machine-repair-dubai#pricing",
+          "anchor": "pricing",
+          "source": "fallback:arabic"
+        },
+        {
+          "text": "آراء العملاء",
+          "desc1": "تجارب عملاء حقيقية",
+          "desc2": "تقييمات من عملاء المنطقة",
+          "url": "https://washerdryerrepairdubai.com/ar/washing-machine-repair-dubai#reviews",
+          "anchor": "reviews",
+          "source": "fallback:arabic"
+        },
+        {
+          "text": "أسئلة شائعة",
+          "desc1": "التكلفة والوقت والأعطال",
+          "desc2": "تصليح أم استبدال؟",
+          "url": "https://washerdryerrepairdubai.com/ar/washing-machine-repair-dubai#faq",
+          "anchor": "faq",
+          "source": "fallback:arabic"
+        },
+        {
+          "text": "احصل على عرض سعر",
+          "desc1": "عرض سعر مجاني قبل العمل",
+          "desc2": "اتصل أو واتساب الآن",
+          "url": "https://washerdryerrepairdubai.com/ar/washing-machine-repair-dubai#contact",
+          "anchor": "contact",
+          "source": "fallback:arabic"
+        }
+      ]
+    },
+    {
+      "ad_group": "تصليح نشافات",
+      "campaign": "Washer Dryer Repair Dubai - Search",
+      "final_url_base": "https://washerdryerrepairdubai.com/ar/dryer-repair-dubai",
+      "sitelinks": [
+        {
+          "text": "خدمات تصليح نشافات",
+          "desc1": "ما الذي تشمله الخدمة",
+          "desc2": "جميع الماركات، مواعيد سريعة",
+          "url": "https://washerdryerrepairdubai.com/ar/dryer-repair-dubai#services",
+          "anchor": "services",
+          "source": "fallback:arabic"
+        },
+        {
+          "text": "أسعار تصليح نشافات",
+          "desc1": "أسعار واضحة بدون مفاجآت",
+          "desc2": "لا رسوم خفية إطلاقاً",
+          "url": "https://washerdryerrepairdubai.com/ar/dryer-repair-dubai#pricing",
+          "anchor": "pricing",
+          "source": "fallback:arabic"
+        },
+        {
+          "text": "آراء العملاء",
+          "desc1": "تجارب عملاء حقيقية",
+          "desc2": "تقييمات من عملاء المنطقة",
+          "url": "https://washerdryerrepairdubai.com/ar/dryer-repair-dubai#reviews",
+          "anchor": "reviews",
+          "source": "fallback:arabic"
+        },
+        {
+          "text": "أسئلة شائعة",
+          "desc1": "التكلفة والوقت والأعطال",
+          "desc2": "تصليح أم استبدال؟",
+          "url": "https://washerdryerrepairdubai.com/ar/dryer-repair-dubai#faq",
+          "anchor": "faq",
+          "source": "fallback:arabic"
+        },
+        {
+          "text": "احصل على عرض سعر",
+          "desc1": "عرض سعر مجاني قبل العمل",
+          "desc2": "اتصل أو واتساب الآن",
+          "url": "https://washerdryerrepairdubai.com/ar/dryer-repair-dubai#contact",
+          "anchor": "contact",
+          "source": "fallback:arabic"
+        }
+      ]
+    },
+    {
+      "ad_group": "تصليح غسالات صحون",
+      "campaign": "Washer Dryer Repair Dubai - Search",
+      "final_url_base": "https://washerdryerrepairdubai.com/ar/dishwasher-repair-dubai",
+      "sitelinks": [
+        {
+          "text": "خدمات تصليح غسالات صحون",
+          "desc1": "ما الذي تشمله الخدمة",
+          "desc2": "جميع الماركات، مواعيد سريعة",
+          "url": "https://washerdryerrepairdubai.com/ar/dishwasher-repair-dubai#services",
+          "anchor": "services",
+          "source": "fallback:arabic"
+        },
+        {
+          "text": "أسعار تصليح غسالات صحون",
+          "desc1": "أسعار واضحة بدون مفاجآت",
+          "desc2": "لا رسوم خفية إطلاقاً",
+          "url": "https://washerdryerrepairdubai.com/ar/dishwasher-repair-dubai#pricing",
+          "anchor": "pricing",
+          "source": "fallback:arabic"
+        },
+        {
+          "text": "آراء العملاء",
+          "desc1": "تجارب عملاء حقيقية",
+          "desc2": "تقييمات من عملاء المنطقة",
+          "url": "https://washerdryerrepairdubai.com/ar/dishwasher-repair-dubai#reviews",
+          "anchor": "reviews",
+          "source": "fallback:arabic"
+        },
+        {
+          "text": "أسئلة شائعة",
+          "desc1": "التكلفة والوقت والأعطال",
+          "desc2": "تصليح أم استبدال؟",
+          "url": "https://washerdryerrepairdubai.com/ar/dishwasher-repair-dubai#faq",
+          "anchor": "faq",
+          "source": "fallback:arabic"
+        },
+        {
+          "text": "احصل على عرض سعر",
+          "desc1": "عرض سعر مجاني قبل العمل",
+          "desc2": "اتصل أو واتساب الآن",
+          "url": "https://washerdryerrepairdubai.com/ar/dishwasher-repair-dubai#contact",
+          "anchor": "contact",
+          "source": "fallback:arabic"
+        }
+      ]
+    },
+    {
+      "ad_group": "تصليح ثلاجات",
+      "campaign": "Washer Dryer Repair Dubai - Search",
+      "final_url_base": "https://washerdryerrepairdubai.com/ar/refrigerator-repair-dubai",
+      "sitelinks": [
+        {
+          "text": "خدمات تصليح ثلاجات",
+          "desc1": "ما الذي تشمله الخدمة",
+          "desc2": "جميع الماركات، مواعيد سريعة",
+          "url": "https://washerdryerrepairdubai.com/ar/refrigerator-repair-dubai#services",
+          "anchor": "services",
+          "source": "fallback:arabic"
+        },
+        {
+          "text": "أسعار تصليح ثلاجات",
+          "desc1": "أسعار واضحة بدون مفاجآت",
+          "desc2": "لا رسوم خفية إطلاقاً",
+          "url": "https://washerdryerrepairdubai.com/ar/refrigerator-repair-dubai#pricing",
+          "anchor": "pricing",
+          "source": "fallback:arabic"
+        },
+        {
+          "text": "آراء العملاء",
+          "desc1": "تجارب عملاء حقيقية",
+          "desc2": "تقييمات من عملاء المنطقة",
+          "url": "https://washerdryerrepairdubai.com/ar/refrigerator-repair-dubai#reviews",
+          "anchor": "reviews",
+          "source": "fallback:arabic"
+        },
+        {
+          "text": "أسئلة شائعة",
+          "desc1": "التكلفة والوقت والأعطال",
+          "desc2": "تصليح أم استبدال؟",
+          "url": "https://washerdryerrepairdubai.com/ar/refrigerator-repair-dubai#faq",
+          "anchor": "faq",
+          "source": "fallback:arabic"
+        },
+        {
+          "text": "احصل على عرض سعر",
+          "desc1": "عرض سعر مجاني قبل العمل",
+          "desc2": "اتصل أو واتساب الآن",
+          "url": "https://washerdryerrepairdubai.com/ar/refrigerator-repair-dubai#contact",
+          "anchor": "contact",
+          "source": "fallback:arabic"
+        }
+      ]
+    },
+    {
+      "ad_group": "تصليح تلفزيون",
+      "campaign": "Washer Dryer Repair Dubai - Search",
+      "final_url_base": "https://washerdryerrepairdubai.com/ar/led-tv-repair-dubai",
+      "sitelinks": [
+        {
+          "text": "خدمات تصليح تلفزيون",
+          "desc1": "ما الذي تشمله الخدمة",
+          "desc2": "جميع الماركات، مواعيد سريعة",
+          "url": "https://washerdryerrepairdubai.com/ar/led-tv-repair-dubai#services",
+          "anchor": "services",
+          "source": "fallback:arabic"
+        },
+        {
+          "text": "أسعار تصليح تلفزيون",
+          "desc1": "أسعار واضحة بدون مفاجآت",
+          "desc2": "لا رسوم خفية إطلاقاً",
+          "url": "https://washerdryerrepairdubai.com/ar/led-tv-repair-dubai#pricing",
+          "anchor": "pricing",
+          "source": "fallback:arabic"
+        },
+        {
+          "text": "آراء العملاء",
+          "desc1": "تجارب عملاء حقيقية",
+          "desc2": "تقييمات من عملاء المنطقة",
+          "url": "https://washerdryerrepairdubai.com/ar/led-tv-repair-dubai#reviews",
+          "anchor": "reviews",
+          "source": "fallback:arabic"
+        },
+        {
+          "text": "أسئلة شائعة",
+          "desc1": "التكلفة والوقت والأعطال",
+          "desc2": "تصليح أم استبدال؟",
+          "url": "https://washerdryerrepairdubai.com/ar/led-tv-repair-dubai#faq",
+          "anchor": "faq",
+          "source": "fallback:arabic"
+        },
+        {
+          "text": "احصل على عرض سعر",
+          "desc1": "عرض سعر مجاني قبل العمل",
+          "desc2": "اتصل أو واتساب الآن",
+          "url": "https://washerdryerrepairdubai.com/ar/led-tv-repair-dubai#contact",
+          "anchor": "contact",
+          "source": "fallback:arabic"
+        }
+      ]
+    }
+  ]
+}
