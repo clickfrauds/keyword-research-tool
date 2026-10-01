@@ -87,6 +87,7 @@ UNIVERSAL_ACTIONS = [
     "now", "today", "book", "booking", "hire", "quote", "quotes", "quotation",
     "contact", "number", "whatsapp", "call",
     "check", "inspect", "inspection", "diagnose", "solution", "help",
+    "refill", "recharge", "regas", "re gas", "gas filling", "gas refilling", "gas charging",
     "near me", "nearby", "local", "in my area",
     "تصليح", "اصلاح", "صيانة", "فني", "فنيين", "تركيب", "تنظيف", "تعبئة", "تبديل",
     "شركة", "خدمة", "مركز", "قريب", "طوارئ",
@@ -101,6 +102,7 @@ UNIVERSAL_STRONG_ACTIONS = [
     "install", "installs", "installation", "installing", "replace",
     "replacement", "replacing", "service", "services", "servicing",
     "maintenance", "maintain", "amc", "clean", "cleaning", "wash", "washing",
+    "refill", "recharge", "regas", "re gas", "gas filling", "gas refilling", "gas charging",
     "custom", "bespoke", "made to measure", "made to order", "tailor made",
     "design", "designer", "build", "builder", "making", "maker",
     "renovation", "renovate", "remodel", "remodeling", "refurbish",
@@ -133,14 +135,28 @@ UNIVERSAL_EDU_CAREER = [
     "shop kaise", "business kaise", "kitni salary", "ka kaam", "ka kam",
     "kya hota hai", "kya hai", "kitne prakar", "kitne type", "meaning in",
     "in hindi", "in urdu", "translate",
+    # Arabic
+    "وظائف", "وظيفة", "مطلوب", "راتب", "رواتب", "دورة", "دورات", "كورس", "تعليم",
+    "تدريب", "معهد", "شهادة",
 ]
 
-# Searcher wants to do it themselves / just wants information.
+# Searcher wants to do it themselves / just wants information. "manual" only
+# as a document: "manual washing machine repair" is a buyer.
 UNIVERSAL_INFO_DIY = [
-    "how to", "diy", "do it yourself", "tutorial", "youtube", "manual",
+    "how to", "diy", "do it yourself", "tutorial", "youtube", "user manual",
+    "owners manual", "owner manual", "instruction manual", "service manual",
+    "manual pdf", "pdf",
     "instructions", "difference between", "what causes", "wikipedia",
     # Roman-Urdu / Hindi DIY
     "khud se", "khud lagana", "khud banana", "ghar par kaise", "ki setting",
+    # Arabic
+    "كيف", "كيفية", "طريقة", "طريقه", "بنفسك", "يوتيوب", "شرح",
+]
+
+# Searcher wants the MAKER's own line, not a local business.
+UNIVERSAL_FORBIDDEN = [
+    "customer care", "customer service number", "helpline", "toll free",
+    "complaint number", "official website", "خدمة العملاء", "الوكيل",
 ]
 
 # Roman-Urdu price/shopping intent — merged into FORBIDDEN (collision-filtered).
@@ -324,6 +340,10 @@ JS_TEMPLATE = r"""/**
  *   2. Education / Career / Tools / Specs     -> BLOCK (multi-language)
  *   3. Info / DIY intent                      -> BLOCK
  *   4. Forbidden Word (typo-aware)            -> BLOCK
+ *      Soft word (brand, other trade, price)
+ *      with none of OUR services in the query -> BLOCK
+ *      Part shopping ("replacement screen")   -> BLOCK
+ *      Product price / symptom, no hire word  -> BLOCK
  *   5. Context word (product-shopping) with
  *      NO service signal in the same query    -> BLOCK
  *   6. Fuzzy service-root typo (plamber,
@@ -368,6 +388,14 @@ function main() {
   var INFO_DIY = %%INFO_DIY%%;
 
   var FORBIDDEN_WORDS = %%FORBIDDEN_WORDS%%;
+
+  // Brands, other trades, hire and price words: banned only when the term
+  // names none of OUR services ("siemens" vs "siemens dishwasher repair",
+  // "electrician" vs "fridge electrician near me").
+  var SOFT_FORBIDDEN = %%SOFT_FORBIDDEN%%;
+
+  // This plan's services and their synonyms, any language.
+  var OWN_SERVICES = %%OWN_SERVICES%%;
 
   // Ambiguous words: product-shopping UNLESS a service signal appears too
   var CONTEXT_WORDS = %%CONTEXT_WORDS%%;
@@ -428,6 +456,13 @@ function main() {
   STRONG_ACTIONS = arList(STRONG_ACTIONS); PROBLEMS = arList(PROBLEMS);
   HIRE_WORDS = arList(HIRE_WORDS); HARD_FAULTS = arList(HARD_FAULTS);
   FORBIDDEN_WORDS = arList(FORBIDDEN_WORDS); EDU_CAREER = arList(EDU_CAREER);
+  SOFT_FORBIDDEN = arList(SOFT_FORBIDDEN); OWN_SERVICES = arList(OWN_SERVICES);
+  // every single word of a product or service ("lcd screen" -> "screen"):
+  // what may follow "replacement"/"spare" when someone is buying the part
+  var PART_NOUNS = [];
+  PRODUCTS.concat(OWN_SERVICES, CONTEXT_WORDS).forEach(function (p) {
+    p.split(/\s+/).forEach(function (w) { if (w.length > 1 && PART_NOUNS.indexOf(w) < 0) PART_NOUNS.push(w); });
+  });
   INFO_DIY = arList(INFO_DIY); CONTEXT_WORDS = arList(CONTEXT_WORDS);
   FORBIDDEN_LOCATIONS = arList(FORBIDDEN_LOCATIONS);
 
@@ -617,10 +652,24 @@ function main() {
     // Action words are read from the term WITHOUT our product names: in
     // "washing machine not spinning" the "washing" is the product, not a
     // wash service, and it was passing symptom queries as service intent.
-    var termNoProd = stripPhrases(term, PRODUCTS);
+    // Our own multi-word services go first: PRODUCTS holds single tokens,
+    // and "washing" is also an action word, so "washing machine price"
+    // read as a wash service.
+    var ownHit = matchFuzzy(term, OWN_SERVICES);
+    var termNoProd = stripPhrases(stripPhrases(term, OWN_SERVICES), PRODUCTS);
     var actionHit = matchFuzzy(termNoProd, ACTIONS);
     var problemHit = matchFuzzy(term, PROBLEMS);
     var strongHit = matchFuzzy(termNoProd, STRONG_ACTIONS);
+    // "replacement screen", "spare drum": a part-swap word BEFORE a product
+    // names the part being bought; "screen replacement cost" is the job.
+    var partShop = false;
+    var tokList = splitTokens(term);
+    for (var pi = 0; pi < tokList.length - 1; pi++) {
+      if (/^(replacement|spare|spares)$/.test(tokList[pi]) &&
+          matchStrict(tokList[pi + 1], PART_NOUNS)) partShop = true;
+    }
+    if (partShop && matchFuzzy(stripPhrases(termNoProd, ["replacement", "replace", "replacing", "spare", "spares"]),
+                               STRONG_ACTIONS)) partShop = false;
     // The PERSON you hire is a service signal of its own: "plumber ballard",
     // "plumber seattle cost" are buyers with no repair verb in them. Read on
     // the raw term — for a trade, "plumber" is also one of the PRODUCTS that
@@ -649,9 +698,16 @@ function main() {
           } else {
             // 4️⃣ forbidden words (typo-aware, whole tokens only)
             var bad = matchFuzzy(term, FORBIDDEN_WORDS);
+            var softBad = bad ? null : matchFuzzy(term, SOFT_FORBIDDEN);
             if (bad) {
               reason = "Forbidden Word: [" + bad + "]";
               forbiddenRootHits[bad] = (forbiddenRootHits[bad] || 0) + 1;
+            } else if (softBad && !ownHit) {
+              // 4️⃣ soft word with none of our services ("siemens", "ac repair")
+              reason = "Forbidden Word, no service of ours: [" + softBad + "]";
+            } else if (partShop && !providerHit) {
+              // 4️⃣ part shopping ("replacement screen for 55 inch tv")
+              reason = "Part shopping (replacement/spare before the product)";
             } else if (!actionHit && !strongHit && !providerHit && !isHireOrFault(term)
                        && PRICE_RE.test(term)) {
               // 4️⃣a product price, no service word ("fridge price")
@@ -692,7 +748,7 @@ function main() {
                 // that SURVIVED rule 5 (service signal present) counts as a
                 // product too — "wooden door installation" is a job, and
                 // "door" is its product.
-                var prod = matchFuzzy(term, PRODUCTS) || (ctx ? ctx : null);
+                var prod = matchFuzzy(term, PRODUCTS) || ownHit || (ctx ? ctx : null);
                 if (prod && (actionHit || problemHit || providerHit)) {
                   isSafe = true;
                 }
@@ -1009,7 +1065,12 @@ def _plan_classifier():
         return None, None
     sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
     import service_architecture as vtsa
-    vtsa.restore_classifier(plan["classifier"])
+    try:
+        vtsa.restore_classifier(plan["classifier"])
+    except (KeyError, TypeError) as e:
+        # an older or partial snapshot: legacy behaviour, never a crash
+        print(f"   ⚠️ plan classifier snapshot incomplete ({e}) — plan-aware filters off")
+        return None, None
     return vtsa, plan.get("services") or []
 
 
@@ -1120,6 +1181,48 @@ def campaign_negative_gate(terms):
     return still, dropped
 
 
+# Roman-Urdu PRICE words are a buyer's detail next to a service ("washing
+# machine repair ka price"); the buy words beside them are not.
+_SOFT_RU = {"ka dam", "ki qeemat", "kitna hai", "kitne ka", "ka price", "sasta"}
+
+
+def guard_word_split(words):
+    """FORBIDDEN_WORDS for the guard -> (hard, soft, own_services).
+
+    The guard bans a search term the moment a forbidden word is in it, BEFORE
+    it looks for a service. Run 0d732cac's guard banned "siemens dishwasher
+    repair" (a bid keyword), "whirlpool fridge repair", "fridge electrician
+    near me" and "كهربائي غسالات" that way. Split by the plan's classifier:
+      hard  junk on its own — jobs, aggregators, buy/used, a wrong-job
+            phrase ("hair dryer", "dryer vent"): banned in any query
+      soft  a brand, another trade, a hire or provider word, a price word:
+            banned only when the query names none of our services
+    own_services: the plan's services and their synonyms, any language.
+    Without a plan every word is hard and own_services is empty (legacy)."""
+    v, services = _plan_classifier()
+    if v is None:
+        return list(words), [], []
+    other = {x for fam in v._OTHER_FAMILIES for x in ({v.norm_phrase(m) for m in fam} | set(fam)) if x}
+    soft_tokens = set(v.HIRE_WORDS) | set(v.PROVIDER_NOUNS) | set(v.PRICE_TOKENS)
+    hard, soft = [], []
+    for w in words:
+        text = " ".join(v.toks(w))
+        why = v.junk_reason(w) or ""
+        real_junk = why and not why.startswith(("no service intent", "symptom only", "product price"))
+        if (real_junk and w not in _SOFT_RU) or w in UNIVERSAL_FORBIDDEN:
+            hard.append(w)
+        elif (w in _SOFT_RU or v.brands_in(text) or set(text.split()) & soft_tokens
+              or any(v.has_phrase(text, x) for x in other)):
+            soft.append(w)
+        else:
+            hard.append(w)
+    own = []
+    for s in services:
+        own += [a for a in [s.get("name", "")] + list(s.get("aliases") or []) if a]
+    own = list(dict.fromkeys(a.lower() for a in own if not a.endswith(")")))
+    return hard, soft, own
+
+
 def plan_block_lists():
     """What Stage 2.7 decided is NOT this business, from its classifier
     snapshot in ad_group_plan.json: wrong locations (any country — the geo
@@ -1148,8 +1251,9 @@ def render_script(campaigns, bid_keywords, products, fuzzy_roots, niche):
     # the (much shorter) bid list
     protect = list(bid_keywords) + plan_buyer_keywords()
     forbidden = filter_forbidden(
-        _lst("forbidden_words") + UNIVERSAL_PRICE_SHOPPING_RU + plan_words,
+        _lst("forbidden_words") + UNIVERSAL_PRICE_SHOPPING_RU + UNIVERSAL_FORBIDDEN + plan_words,
         protect, "forbidden")
+    hard_forbidden, soft_forbidden, own_services = guard_word_split(forbidden)
     edu = filter_forbidden(
         UNIVERSAL_EDU_CAREER + _lst("edu_career_words"), protect, "edu/career")
     info_diy = filter_forbidden(
@@ -1170,7 +1274,9 @@ def render_script(campaigns, bid_keywords, products, fuzzy_roots, niche):
           .replace("%%FORBIDDEN_LOCATIONS%%", js_list(forbidden_locations))
           .replace("%%EDU_CAREER%%", js_list(edu, 4))
           .replace("%%INFO_DIY%%", js_list(info_diy, 4))
-          .replace("%%FORBIDDEN_WORDS%%", js_list(forbidden))
+          .replace("%%FORBIDDEN_WORDS%%", js_list(hard_forbidden))
+          .replace("%%SOFT_FORBIDDEN%%", js_list(soft_forbidden))
+          .replace("%%OWN_SERVICES%%", js_list(own_services))
           .replace("%%CONTEXT_WORDS%%", js_list(context_words))
           .replace("%%SAFE_ROOTS%%", js_list(safe_roots, 4))
           .replace("%%PRODUCTS%%", js_list(all_products))

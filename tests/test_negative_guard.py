@@ -140,6 +140,67 @@ class Guard(unittest.TestCase):
         gas = importlib.reload(gas)
         self.assertEqual(gas.plan_block_lists(), ([], []))
 
+    def real_plan_guard(self, seeds, niche, location, bid, products, forbidden):
+        """A guard rendered from a REAL classifier snapshot, as a run makes it."""
+        import importlib
+        os.environ.update(SEED_KEYWORDS=", ".join(seeds), NICHE_DESCRIPTION=niche,
+                          TARGET_LOCATION=location)
+        import service_architecture as v
+        v = importlib.reload(v)
+        svcs = v.build_services(seeds)
+        v._build_normaliser(svcs)
+        with open("ad_group_plan.json", "w", encoding="utf-8") as f:
+            json.dump({"classifier": v.classifier_snapshot(),
+                       "services": [{"name": s["name"], "aliases": s["aliases"], "lang": s["lang"]}
+                                    for s in svcs]}, f, ensure_ascii=False)
+        import generate_ads_script as gas
+        gas = importlib.reload(gas)
+        js, _ = gas.render_script(["Test - Search"], bid, products, [], {"forbidden_words": forbidden})
+        return js
+
+    def check(self, js, allow, block):
+        banned = self.run_guard(js, allow + block)
+        for t in allow:
+            self.assertNotIn(t, banned, t)
+        for t in block:
+            self.assertIn(t, banned, t)
+
+    def test_soft_words_never_ban_our_own_service(self):
+        """Run 0d732cac's guard banned "siemens dishwasher repair" (a bid
+        keyword), "fridge electrician near me" and "كهربائي غسالات": a brand
+        or another trade was checked before the service was."""
+        js = self.real_plan_guard(
+            ["Washing machine repair", "Dishwasher repair", "Refrigerator repair", "LED TV repair",
+             "تصليح غسالات", "تصليح ثلاجات", "تصليح تلفزيون"],
+            "Home Appliance Repair Services", "Dubai, United Arab Emirates",
+            ["washing machine repair", "dishwasher repair", "fridge repair", "led tv repair",
+             "تصليح غسالات"], ["washing", "machine", "dishwasher", "fridge", "tv", "samsung"],
+            ["siemens", "whirlpool", "electrician", "ac", "handyman", "ka price", "كهربائي",
+             "urban company", "hair dryer", "jobs"])
+        self.check(js,
+                   ["siemens dishwasher repair", "whirlpool fridge repair", "fridge electrician near me",
+                    "ac fridge repair", "handyman fridge repair", "washing machine repair ka price",
+                    "كهربائي غسالات", "تصليح شاشات تلفاز", "manual washing machine repair",
+                    "samsung 55 inch tv screen replacement cost", "fridge gas filling"],
+                   ["siemens", "electrician dubai", "ac repair", "washing machine price",
+                    "washing machine not spinning", "urban company fridge repair",
+                    "dyson hair dryer repair", "washing machine repair jobs",
+                    "replacement screen for 55 inch tv", "samsung customer care number",
+                    "طريقة تصليح الغسالة", "وظائف فني غسالات"])
+
+    def test_soft_words_for_a_trade_business(self):
+        js = self.real_plan_guard(
+            ["Plumber Seattle", "Drain cleaning", "Water heater repair"],
+            "Residential plumbing company", "Seattle, WA, United States",
+            ["plumber seattle", "drain cleaning", "water heater repair"],
+            ["plumber", "drain", "water", "heater"],
+            ["electrician", "rheem", "kohler", "hvac", "jobs", "home depot"])
+        self.check(js,
+                   ["rheem water heater repair", "kohler toilet plumber", "plumber seattle",
+                    "emergency plumber near me", "drain cleaning cost"],
+                   ["electrician seattle", "rheem", "hvac repair", "plumber jobs",
+                    "water heater home depot", "how to unclog a drain"])
+
 
 class CampaignNegativeGate(unittest.TestCase):
     """A campaign negative blocks every query containing it, in every ad
