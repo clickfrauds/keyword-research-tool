@@ -1,0 +1,14 @@
+﻿Campaign,Ad Group,Audience,Bid Modifier,Flexible Reach,Comment
+Washer Dryer Repair Dubai - Search,,Home Appliances,30%,,IN_MARKET | observation | Direct appliance repair intent match
+Washer Dryer Repair Dubai - Search,,Washers & Dryers,25%,,IN_MARKET | observation | Exact washer category intent
+Washer Dryer Repair Dubai - Search,,Dishwashers,25%,,IN_MARKET | observation | Exact dishwasher category intent
+Washer Dryer Repair Dubai - Search,,Refrigerators,25%,,IN_MARKET | observation | Exact fridge category intent
+Washer Dryer Repair Dubai - Search,,Televisions,20%,,IN_MARKET | observation | TV screen repair category match
+Washer Dryer Repair Dubai - Search,,Home Improvement,15%,,IN_MARKET | observation | Homeowners needing repair services
+Washer Dryer Repair Dubai - Search,,Home Cleaning Services,10%,,IN_MARKET | observation | Similar home maintenance service seekers
+Washer Dryer Repair Dubai - Search,,Plumbing Services,10%,,IN_MARKET | observation | Adjacent home service audience overlap
+Washer Dryer Repair Dubai - Search,,Electrician Services,10%,,IN_MARKET | observation | Adjacent home service audience overlap
+Washer Dryer Repair Dubai - Search,,Home Decor Enthusiasts,10%,,AFFINITY | observation | Homeowners caring about home upkeep
+Washer Dryer Repair Dubai - Search,,Do-It-Yourselfers,10%,,AFFINITY | observation | May escalate to pro repair
+Washer Dryer Repair Dubai - Search,,Technophiles,15%,,AFFINITY | observation | Tech-savvy TV owners needing repair
+Washer Dryer Repair Dubai - Search,,Business Professionals,10%,,"AFFINITY | observation | Higher income, villa/apartment owners"
