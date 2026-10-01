@@ -157,6 +157,7 @@ jobs:
         run: |
           python -m unittest discover -s tests -p "test_seo_plan_contract.py"
           python -m unittest discover -s tests -p "test_service_architecture.py"
+          python -m unittest discover -s tests -p "test_negative_guard.py"
 
       - name: Resolve request id (fallback for manual runs)
         id: reqid

@@ -357,7 +357,9 @@ function main() {
                                    // log mein reason ke saath likha jata hai.
                                    // Audit ke liye TRUE kar ke sirf log dekh lein.
   var PROTECT_CONVERTERS = true;   // conversion wali term kabhi ban nahi hogi
-  var ALLOW_SHORT_PRODUCT = true;  // "kitchen cabinets" type <=3-word product query allow
+  var ALLOW_SHORT_PRODUCT = %%ALLOW_SHORT_PRODUCT%%;  // <=3-word bare product query allowed?
+                                   // true for makers/installers ("kitchen cabinets"),
+                                   // false for repair/maintenance ("samsung fridge" is a shopper)
 
   var FORBIDDEN_LOCATIONS = %%FORBIDDEN_LOCATIONS%%;
 
@@ -387,6 +389,8 @@ function main() {
   // unless a hard fault says they need a technician ("drum broken").
   var HIRE_WORDS = %%HIRE_WORDS%%;
   var HARD_FAULTS = %%HARD_FAULTS%%;
+  // People you hire, any trade: a bare (typo'd) search for one is a lead.
+  var PROVIDERS = %%PROVIDERS%%;
   var SYMPTOM_RE = /(^|\s)(not|wont|won't|doesnt|doesn't|stopped|error|code|[a-z]{1,2}\d{1,3}|لا|ما|عطل)(\s|$)/;
   var PRICE_RE = /(^|\s)(price|prices|cost|costs|rate|rates|cheap|cheapest|سعر|اسعار|أسعار|كم)(\s|$)/;
   function isHireOrFault(t) { return !!(matchFuzzy(t, HIRE_WORDS) || matchStrict(t, HARD_FAULTS)); }
@@ -617,7 +621,12 @@ function main() {
     var actionHit = matchFuzzy(termNoProd, ACTIONS);
     var problemHit = matchFuzzy(term, PROBLEMS);
     var strongHit = matchFuzzy(termNoProd, STRONG_ACTIONS);
-    var serviceSignal = !!(fuzzyRootHit || safeHit || problemHit || strongHit);
+    // The PERSON you hire is a service signal of its own: "plumber ballard",
+    // "plumber seattle cost" are buyers with no repair verb in them. Read on
+    // the raw term — for a trade, "plumber" is also one of the PRODUCTS that
+    // termNoProd strips out.
+    var providerHit = matchFuzzy(term, PROVIDERS);
+    var serviceSignal = !!(fuzzyRootHit || safeHit || problemHit || strongHit || providerHit);
 
     // 0️⃣ converted terms are sacred
     if (PROTECT_CONVERTERS && conversions > 0) {
@@ -643,11 +652,11 @@ function main() {
             if (bad) {
               reason = "Forbidden Word: [" + bad + "]";
               forbiddenRootHits[bad] = (forbiddenRootHits[bad] || 0) + 1;
-            } else if (!actionHit && !strongHit && !isHireOrFault(term)
+            } else if (!actionHit && !strongHit && !providerHit && !isHireOrFault(term)
                        && PRICE_RE.test(term)) {
               // 4️⃣a product price, no service word ("fridge price")
               reason = "Product price, no service word";
-            } else if ((problemHit || SYMPTOM_RE.test(term)) && !actionHit && !strongHit
+            } else if ((problemHit || SYMPTOM_RE.test(term)) && !actionHit && !strongHit && !providerHit
                        && !matchFuzzy(term, HIRE_WORDS) && !matchStrict(term, HARD_FAULTS)
                        && !safeHit) {
               // 4️⃣b symptom only — research, not a hire
@@ -668,7 +677,11 @@ function main() {
               }
               // 6️⃣b bare typo'd service search ("plumbr", "plumbrs") —
               // 1-2 words with nothing else in them is still a lead
-              else if (fuzzyRootHit && !safeHit && splitTokens(term).length <= 2) {
+              // ... but only when the root is the PERSON you hire ("plumbr
+              // dubai") or the business makes the product. For a repair
+              // business a bare product root is a shopper: "samsung fridge".
+              else if (fuzzyRootHit && !safeHit && splitTokens(term).length <= 2
+                       && (ALLOW_SHORT_PRODUCT || matchFuzzy(fuzzyRootHit, PROVIDERS))) {
                 isSafe = true; reason = "fuzzy root [" + fuzzyRootHit + "] (short bare query)";
               }
               // 7️⃣ safe roots (our own keywords + known-good phrases)
@@ -680,7 +693,7 @@ function main() {
                 // product too — "wooden door installation" is a job, and
                 // "door" is its product.
                 var prod = matchFuzzy(term, PRODUCTS) || (ctx ? ctx : null);
-                if (prod && (actionHit || problemHit)) {
+                if (prod && (actionHit || problemHit || providerHit)) {
                   isSafe = true;
                 }
                 // 9️⃣ short bare product query ("kitchen cabinets")
@@ -771,6 +784,12 @@ HARD_FAULTS_JS = ["broken", "broke", "burst", "damaged", "dead", "cracked", "spa
                   "smoke", "burnt", "burned", "shock", "flooding", "failed", "tripping",
                   "مكسور", "مكسورة", "خربان", "خربانة", "محروق", "محروقة", "معطل", "معطلة"]
 
+PROVIDERS_JS = ["plumber", "electrician", "carpenter", "handyman", "locksmith", "painter",
+                "roofer", "mechanic", "technician", "cleaner", "exterminator", "gardener",
+                "landscaper", "welder", "mason", "tiler", "glazier", "installer", "contractor",
+                "builder", "fitter", "upholsterer", "tailor", "mover", "movers",
+                "سباك", "كهربائي", "نجار", "فني", "دهان", "حداد", "مصلح"]
+
 CAMPAIGN_NEGATIVES_CSV = "google_ads_campaign_negatives.csv"
 
 
@@ -838,6 +857,9 @@ def pack_negatives(strategy, bid_keywords):
     seeds = [s.strip() for s in os.environ.get("SEED_KEYWORDS", "").split(",") if s.strip()]
     svc = [g.get("name", "") for g in strategy.get("ad_groups", [])]
     block, _allow, packs = negative_packs.build(NICHE_DESCRIPTION, seeds + svc)
+    # the wrong-job phrases (aggregators, the niche's "exclude" list) are
+    # campaign negatives too, not only a Stage 2.7 selection rule
+    block += negative_packs.exclusions(NICHE_DESCRIPTION, seeds + svc)
     kept = filter_forbidden(block, bid_keywords, "niche-pack")
     print(f"   📦 Negative packs: universal + {packs or ['(no niche pack matched)']} "
           f"-> {len(kept)} campaign negatives after collision filter "
@@ -898,19 +920,62 @@ def write_campaign_negatives(campaigns, block_lists):
     return len(rows)
 
 
+_SERVICE_SEED_RE = re.compile(
+    r"\b(repair|repairs|fix|fixing|maintenance|servicing|service|cleaning|clean|unblock\w*|"
+    r"pest|inspection|technician|mechanic|plumber|electrician|locksmith|"
+    r"تصليح|اصلاح|صيانة|تنظيف|فني)\b", re.IGNORECASE)
+
+
+def allow_short_product():
+    """Rule 9 of the guard ("<= 3-word bare product query -> ALLOW") was made
+    for businesses that MAKE or INSTALL the product: "kitchen cabinets" is a
+    buyer. For a repair/maintenance business the same query — "samsung
+    fridge", "lg washing machine" — is a shopper. Decided from the seeds and
+    the niche (any business, no list of trades to keep current);
+    ALLOW_SHORT_PRODUCT=on|off overrides."""
+    forced = os.environ.get("ALLOW_SHORT_PRODUCT", "").strip().lower()
+    if forced in ("on", "yes", "true", "1"):
+        return True
+    if forced in ("off", "no", "false", "0"):
+        return False
+    seeds = [s for s in os.environ.get("SEED_KEYWORDS", "").split(",") if s.strip()]
+    text = " ".join(seeds) + " " + NICHE_DESCRIPTION
+    return not _SERVICE_SEED_RE.search(text)
+
+
+def plan_block_lists():
+    """What Stage 2.7 decided is NOT this business, from its classifier
+    snapshot in ad_group_plan.json: wrong locations (any country — the geo
+    lookup, data-found other towns), other trades, wrong-job phrases. The
+    guard enforces the same rules the selection used; without this a search
+    like "dyson hair dryer repair" passed the guard on the safe root "dryer
+    repair". Empty when there is no plan (legacy runs)."""
+    try:
+        with open("ad_group_plan.json", encoding="utf-8") as f:
+            snap = json.load(f).get("classifier") or {}
+    except Exception:
+        return [], []
+    locs = [w for w in snap.get("WRONG_LOCS", []) if " " in w or len(w) > 3]
+    words = list(snap.get("JUNK_PHRASES", [])) + list(snap.get("OTHER_SERVICE_PHRASES", []))
+    return list(dict.fromkeys(locs)), [w for w in dict.fromkeys(words) if len(w) > 1]
+
+
 def render_script(campaigns, bid_keywords, products, fuzzy_roots, niche):
     """Merge universal + niche lists (collision-filtered) and render the JS.
     Pure function — testable without the Claude API."""
     def _lst(key):
         return [str(x).lower() for x in (niche.get(key) or [])]
 
+    plan_locs, plan_words = plan_block_lists()
     forbidden = filter_forbidden(
-        _lst("forbidden_words") + UNIVERSAL_PRICE_SHOPPING_RU, bid_keywords, "forbidden")
+        _lst("forbidden_words") + UNIVERSAL_PRICE_SHOPPING_RU + plan_words,
+        bid_keywords, "forbidden")
     edu = filter_forbidden(
         UNIVERSAL_EDU_CAREER + _lst("edu_career_words"), bid_keywords, "edu/career")
     info_diy = filter_forbidden(
         UNIVERSAL_INFO_DIY + _lst("info_diy_words"), bid_keywords, "info/DIY")
-    forbidden_locations = _lst("forbidden_locations")
+    forbidden_locations = filter_forbidden(
+        list(dict.fromkeys(_lst("forbidden_locations") + plan_locs)), bid_keywords, "location")
     context_words = _lst("context_product_words")
     problems = UNIVERSAL_PROBLEM_SIGNALS + _lst("problem_signals")
     safe_roots = bid_keywords + _lst("extra_safe_roots")
@@ -934,6 +999,8 @@ def render_script(campaigns, bid_keywords, products, fuzzy_roots, niche):
           .replace("%%PROBLEMS%%", js_list(problems, 4))
           .replace("%%HIRE_WORDS%%", js_list(HIRE_WORDS_JS))
           .replace("%%HARD_FAULTS%%", js_list(HARD_FAULTS_JS))
+          .replace("%%PROVIDERS%%", js_list(PROVIDERS_JS))
+          .replace("%%ALLOW_SHORT_PRODUCT%%", "true" if allow_short_product() else "false")
           .replace("%%FUZZY_ROOTS%%", js_list(fuzzy_roots)))
 
     stats = {
