@@ -1,0 +1,179 @@
+{
+  "positive": [
+    {
+      "name": "Home Appliances",
+      "type": "IN_MARKET",
+      "level": "campaign",
+      "campaign": "Washer Dryer Repair Dubai - Search",
+      "ad_group": "",
+      "mode": "observation",
+      "bid_adjustment": 30,
+      "reason": "Direct appliance repair intent match"
+    },
+    {
+      "name": "Washers & Dryers",
+      "type": "IN_MARKET",
+      "level": "campaign",
+      "campaign": "Washer Dryer Repair Dubai - Search",
+      "ad_group": "",
+      "mode": "observation",
+      "bid_adjustment": 25,
+      "reason": "Exact washer category intent"
+    },
+    {
+      "name": "Dishwashers",
+      "type": "IN_MARKET",
+      "level": "campaign",
+      "campaign": "Washer Dryer Repair Dubai - Search",
+      "ad_group": "",
+      "mode": "observation",
+      "bid_adjustment": 25,
+      "reason": "Exact dishwasher category intent"
+    },
+    {
+      "name": "Refrigerators",
+      "type": "IN_MARKET",
+      "level": "campaign",
+      "campaign": "Washer Dryer Repair Dubai - Search",
+      "ad_group": "",
+      "mode": "observation",
+      "bid_adjustment": 25,
+      "reason": "Exact fridge category intent"
+    },
+    {
+      "name": "Televisions",
+      "type": "IN_MARKET",
+      "level": "campaign",
+      "campaign": "Washer Dryer Repair Dubai - Search",
+      "ad_group": "",
+      "mode": "observation",
+      "bid_adjustment": 20,
+      "reason": "TV screen repair category match"
+    },
+    {
+      "name": "Home Improvement",
+      "type": "IN_MARKET",
+      "level": "campaign",
+      "campaign": "Washer Dryer Repair Dubai - Search",
+      "ad_group": "",
+      "mode": "observation",
+      "bid_adjustment": 15,
+      "reason": "Homeowners needing repair services"
+    },
+    {
+      "name": "Home Cleaning Services",
+      "type": "IN_MARKET",
+      "level": "campaign",
+      "campaign": "Washer Dryer Repair Dubai - Search",
+      "ad_group": "",
+      "mode": "observation",
+      "bid_adjustment": 10,
+      "reason": "Similar home maintenance service seekers"
+    },
+    {
+      "name": "Plumbing Services",
+      "type": "IN_MARKET",
+      "level": "campaign",
+      "campaign": "Washer Dryer Repair Dubai - Search",
+      "ad_group": "",
+      "mode": "observation",
+      "bid_adjustment": 10,
+      "reason": "Adjacent home service audience overlap"
+    },
+    {
+      "name": "Electrician Services",
+      "type": "IN_MARKET",
+      "level": "campaign",
+      "campaign": "Washer Dryer Repair Dubai - Search",
+      "ad_group": "",
+      "mode": "observation",
+      "bid_adjustment": 10,
+      "reason": "Adjacent home service audience overlap"
+    },
+    {
+      "name": "Home Decor Enthusiasts",
+      "type": "AFFINITY",
+      "level": "campaign",
+      "campaign": "Washer Dryer Repair Dubai - Search",
+      "ad_group": "",
+      "mode": "observation",
+      "bid_adjustment": 10,
+      "reason": "Homeowners caring about home upkeep"
+    },
+    {
+      "name": "Do-It-Yourselfers",
+      "type": "AFFINITY",
+      "level": "campaign",
+      "campaign": "Washer Dryer Repair Dubai - Search",
+      "ad_group": "",
+      "mode": "observation",
+      "bid_adjustment": 10,
+      "reason": "May escalate to pro repair"
+    },
+    {
+      "name": "Technophiles",
+      "type": "AFFINITY",
+      "level": "campaign",
+      "campaign": "Washer Dryer Repair Dubai - Search",
+      "ad_group": "",
+      "mode": "observation",
+      "bid_adjustment": 15,
+      "reason": "Tech-savvy TV owners needing repair"
+    },
+    {
+      "name": "Business Professionals",
+      "type": "AFFINITY",
+      "level": "campaign",
+      "campaign": "Washer Dryer Repair Dubai - Search",
+      "ad_group": "",
+      "mode": "observation",
+      "bid_adjustment": 10,
+      "reason": "Higher income, villa/apartment owners"
+    }
+  ],
+  "negative": [
+    {
+      "name": "Bargain Hunters",
+      "type": "AFFINITY",
+      "campaign": "Washer Dryer Repair Dubai - Search",
+      "reason": "Price-sensitive, low conversion for service calls"
+    },
+    {
+      "name": "Value Shoppers",
+      "type": "AFFINITY",
+      "campaign": "Washer Dryer Repair Dubai - Search",
+      "reason": "Discount-focused, not urgent repair buyers"
+    },
+    {
+      "name": "Construction Jobs",
+      "type": "IN_MARKET",
+      "campaign": "Washer Dryer Repair Dubai - Search",
+      "reason": "Job seekers not repair customers"
+    },
+    {
+      "name": "Manufacturing Jobs",
+      "type": "IN_MARKET",
+      "campaign": "Washer Dryer Repair Dubai - Search",
+      "reason": "Job seekers not repair customers"
+    },
+    {
+      "name": "Motor Vehicles (New)",
+      "type": "IN_MARKET",
+      "campaign": "Washer Dryer Repair Dubai - Search",
+      "reason": "Irrelevant auto purchase intent"
+    },
+    {
+      "name": "Residential Properties (For Sale)",
+      "type": "IN_MARKET",
+      "campaign": "Washer Dryer Repair Dubai - Search",
+      "reason": "Real estate buyers not repair seekers"
+    },
+    {
+      "name": "Internships",
+      "type": "IN_MARKET",
+      "campaign": "Washer Dryer Repair Dubai - Search",
+      "reason": "Students, irrelevant to repair service"
+    }
+  ],
+  "strategy_note": "Use campaign-level observation for broad appliance categories, ad-group level for exact brand/category matches. Monitor Arabic ad groups separately for regional targeting signals. Exclude job-seeker and bargain-hunter segments to protect budget for high-intent homeowners. Layer bid adjustments higher on direct in-market appliance categories vs supporting affinities."
+}
