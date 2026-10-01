@@ -348,6 +348,9 @@ jobs:
           # min_keywords_per_group each. Every row still feeds the page.
           MIN_BID_VOLUME: ${{ fromJSON(github.event.inputs.advanced || '{}').min_bid_volume || '20' }}
           MIN_KEYWORDS_PER_GROUP: ${{ fromJSON(github.event.inputs.advanced || '{}').min_keywords_per_group || '10' }}
+          # Towns/areas the client serves beyond the target city (comma list):
+          # never treated as a wrong location, used in geo templates.
+          GEO_AREAS: ${{ fromJSON(github.event.inputs.advanced || '{}').service_areas }}
           AVG_CPC: ${{ fromJSON(github.event.inputs.advanced || '{}').avg_cpc }}
           NICHE_DESCRIPTION: ${{ github.event.inputs.niche_description }}
           BUSINESS_MODEL: ${{ fromJSON(github.event.inputs.advanced || '{}').business_model || 'service' }}

@@ -307,23 +307,48 @@ NICHE_ALLOW = _niche_allow()
 JUNK_TOKENS -= NICHE_ALLOW
 SOFT_JUNK_TOKENS -= NICHE_ALLOW
 
-# Run 2476776a (1 Oct 2026) bid on these: aggregator platforms that are
-# competitors, not customers ("urbanclap washing machine repair"), the
-# wrong product sharing a word ("dyson hair dryer repair", "dryer vent
-# repair" — duct work), and in a home business, commercial/industrial and
-# car units ("تصليح ثلاجات السيارات").
-JUNK_TOKENS |= {"urbanclap", "justlife", "servicemarket", "dyson"} - NICHE_ALLOW
-JUNK_PHRASES = ["urban company", "hair dryer", "hair dryers", "dryer vent", "dryer vents"]
-if re.search(r"\b(home|household|residential|domestic|appliances?)\b",
+def _niche_exclusions():
+    """Wrong-JOB phrases for this niche (negative_packs: aggregators every
+    niche, plus the detected niche's "exclude" list — e.g. appliance: "hair
+    dryer", "dryer vent"). Data, per niche, never hard-coded here."""
+    try:
+        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+        import negative_packs
+        seeds = [s.strip() for s in os.environ.get("SEED_KEYWORDS", "").split(",") if s.strip()]
+        return negative_packs.exclusions(os.environ.get("NICHE_DESCRIPTION", ""), seeds,
+                                         os.environ.get("BUSINESS_MODEL", "service") or "service")
+    except Exception as e:
+        print(f"   ⚠️ niche exclusions unavailable ({str(e)[:60]}) — none applied")
+        return []
+
+
+JUNK_PHRASES = _niche_exclusions()
+# A HOME-service business (any trade: "home appliance repair", "residential
+# plumbing", "household pest control") does not sell to factories, fleets or
+# cars. Read from the niche text, so a commercial-refrigeration or auto
+# business is unaffected.
+if re.search(r"\b(home|household|residential|domestic)\b",
              os.environ.get("NICHE_DESCRIPTION", ""), re.IGNORECASE):
     JUNK_TOKENS |= {"commercial", "industrial", "car", "cars", "سيارة", "سيارات",
                     "السيارات", "السيارة"} - NICHE_ALLOW
-# Other trades the business did not seed. Filled per run in main(): an AC
-# term in an appliance plan ("ac washing machine repair", "air conditioning
-# and refrigeration services") is someone else's job.
+# OTHER TRADES. Filled per run in register_other_services(): the head noun of
+# a trade this plan did not seed is someone else's job — "ac washing machine
+# repair" in an appliance plan, "electrician" in a plumbing plan. Trade NAMES
+# only: "electrical fault" stays an appliance problem, "water heater" can be
+# an appliance or a plumbing job, so neither is listed. A seeded trade is
+# never junk.
 OTHER_SERVICE_PHRASES = []
-_OTHER_FAMILIES = [{"ac", "air conditioner", "air conditioning", "aircon", "a/c",
-                    "مكيف", "مكيفات", "تكييف"}]
+_OTHER_FAMILIES = [
+    {"ac", "air conditioner", "air conditioning", "aircon", "a/c", "hvac", "مكيف", "مكيفات", "تكييف"},
+    {"plumber", "plumbers", "plumbing", "سباك", "سباكة"},
+    {"electrician", "electricians", "كهربائي"},
+    {"roofer", "roofers", "roofing"},
+    {"locksmith", "locksmiths"},
+    {"pest control", "exterminator", "مكافحة حشرات"},
+    {"carpenter", "carpenters", "carpentry", "نجار"},
+    {"painter", "painters", "دهان"},
+    {"mechanic shop", "auto repair", "car repair", "car service"},
+]
 # Real words the typo fixer must never "correct": "refrigeration" is HVAC
 # work, two edits from "refrigerator", and was being read as a fridge query.
 _NO_FIX = {"refrigeration", "refrigerant", "refrigerated", "conditioning", "ventilation"}
@@ -337,6 +362,9 @@ _NO_FIX = {"refrigeration", "refrigerant", "refrigerated", "conditioning", "vent
 # searches, and at least MIN_KEYWORDS_PER_GROUP per group.
 MIN_BID_VOLUME = _env_float("MIN_BID_VOLUME", 20)
 MIN_KEYWORDS_PER_GROUP = int(_env_float("MIN_KEYWORDS_PER_GROUP", 10))
+# How many of a group's unreached low-volume rows Stage 3's model is shown to
+# pick buyer queries from (it may add up to RESCUE_MAX_PER_GROUP of them).
+RESCUE_POOL = int(_env_float("RESCUE_POOL", 40))
 # "price/cost" is shopping ONLY without a service verb:
 # "washing machine price" = junk ; "washing machine repair cost" = CORE.
 PRICE_TOKENS = {"price", "prices", "cost", "costs", "cheap", "cheapest", "rate", "rates", "charges",
@@ -1401,13 +1429,151 @@ def keyword_map(p, svc, location, symptoms=()):
 
 
 def register_other_services(services):
-    """Trades in _OTHER_FAMILIES that this run did NOT seed become junk."""
+    """Trades in _OTHER_FAMILIES that this run did NOT seed become junk. A
+    trade named in the niche or the seeds counts as seeded even when the
+    services came from SERVICES_JSON ("drain", "leak"), so a plumbing
+    business never loses "plumber near me"."""
     seeded = {a for s in services for a in s["aliases"]}
+    told = " " + norm_phrase(os.environ.get("NICHE_DESCRIPTION", "") + " "
+                             + os.environ.get("SEED_KEYWORDS", "").replace(",", " ")) + " "
     OTHER_SERVICE_PHRASES[:] = []
     for fam in _OTHER_FAMILIES:
         fam_n = {norm_phrase(x) for x in fam} | set(fam)
-        if not (fam_n & seeded):
-            OTHER_SERVICE_PHRASES.extend(sorted(fam_n))
+        if fam_n & seeded or any(has_phrase(told, x) for x in fam_n if x):
+            continue
+        OTHER_SERVICE_PHRASES.extend(sorted(x for x in fam_n if x))
+
+
+def geo_context():
+    """(areas inside the target city, other provinces/states of its country)
+    from the same Google geo-target data Stage 3.9 uses — any city, any
+    country, nothing per market in the code. Areas feed the geo templates and
+    the page's areas block; other provinces become wrong-location junk
+    ("fridge repair sharjah" in a Dubai plan, "plumber dallas" in a Seattle
+    one). GEO_LOOKUP=off or any failure -> ([], []), and the built-in table
+    plus GEO_AREAS / WRONG_LOCATIONS stay in charge."""
+    GEO_CITIES.clear()
+    if not TARGET_LOCATION or not _env_on("GEO_LOOKUP", "on"):
+        return [], []
+    try:
+        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+        import generate_locations as gl
+        index = gl.fetch_json(f"{gl.GEO_BASE}/index.json")
+        cc, _rest = gl.resolve_country(TARGET_LOCATION, index)
+        if not cc:
+            return [], []
+        geo = gl.fetch_json(f"{gl.GEO_BASE}/{cc}.json")
+        # The city is whichever comma part names a real place EXACTLY:
+        # "Seattle, WA, United States" -> "Seattle". No exact place, no geo
+        # context — the country-level fallback would call every state an
+        # "area" of the target.
+        names = {gl.norm(g.get("n", "")) for g in geo}
+        city = next((p.strip() for p in TARGET_LOCATION.split(",")
+                     if p.strip() and gl.norm(p) in names), "")
+        if not city:
+            return [], []
+        cnorm = gl.norm(city)
+        exact = [g for g in geo if gl.norm(g.get("n", "")) == cnorm]
+        # inside = every place whose canonical path runs through the target
+        # ("Ballard,Seattle,Washington,..."), whether the target is a city
+        # or a province; ancestors = the target's own state/country, which
+        # are never a "wrong" location ("plumber seattle washington").
+        anc_paths = {g["n"] for g in exact}
+        ancestors = {gl.norm(p) for g in exact for p in str(g.get("c", "")).split(",")}
+        chosen = exact + [g for g in geo if g not in exact and any(
+            ("," + a + ",") in ("," + str(g.get("c", "")) + ",") for a in anc_paths)]
+        inside = {id(g) for g in chosen}
+        # Some countries' data skips the city in a neighbourhood's path
+        # (US: "Ballard,Washington,United States"), so a neighbourhood of the
+        # target's own state/province counts as an area too. Over-inclusive on
+        # purpose: an area is only ever protected or used in templates when the
+        # data mentions it, while a wrong "wrong location" drops a buyer.
+        parents = {str(g.get("c", "")).split(",")[1] for g in exact
+                   if len(str(g.get("c", "")).split(",")) >= 3}
+        nearby = [g for g in geo if id(g) not in inside
+                  and g.get("t") in ("Neighborhood", "District", "Borough")
+                  and len(str(g.get("c", "")).split(",")) >= 3
+                  and str(g.get("c", "")).split(",")[1] in parents]
+        chosen += nearby
+        _own = {gl.norm(g["n"]) for g in chosen}
+        areas = sorted({g["n"].lower() for g in chosen
+                        if gl.norm(g["n"]) != cnorm and g.get("t") != "Country"})
+        wrong = sorted({g["n"].lower() for g in geo
+                        if g.get("t") in ("Province", "State", "Region", "Governorate", "Territory")
+                        and id(g) not in inside and gl.norm(g["n"]) not in ancestors})
+        # every OTHER town of the country, for wrong_city_names() to match
+        # against the data (only the names that actually occur are kept)
+        GEO_CITIES.update(gl.norm(g["n"]) for g in geo
+                          if g.get("t") in ("City", "Municipality", "Town", "County")
+                          and id(g) not in inside and gl.norm(g["n"]) not in ancestors
+                          and gl.norm(g["n"]) not in _own)
+        return areas, wrong
+    except Exception as e:
+        print(f"   ⚠️ geo lookup failed ({str(e)[:80]}) — built-in area lists used")
+        return [], []
+
+
+GEO_CITIES = set()   # filled by geo_context(); other towns of the target's country
+
+
+def wrong_city_names(keywords, services, own_areas):
+    """Other towns that appear in THIS data as the place a search is about:
+    the last 1-3 words of a query, straight after a hire word, a service word,
+    "in" or "near" ("plumber portland", "fridge repair in al ain"). Matching
+    on position keeps town names that are ordinary words out of it, and only
+    names found in the data are returned, so the list stays small enough for
+    the plan and the silo router."""
+    if not GEO_CITIES:
+        return []
+    before = set(HIRE_WORDS) | {w for s in services for a in s["aliases"] for w in a.split()} \
+        | {"in", "near", "at", "around"}
+    own = {norm_phrase(a) for a in own_areas} | set(own_areas) | set(_loc_tokens())
+    vocab = set(HIRE_WORDS) | set(URGENT_TOKENS) | set(BRANDS) | set(PROBLEM_TOKENS)
+    found = set()
+    for kw in keywords:
+        t = str(kw).lower().split()
+        for n in (3, 2, 1):
+            if len(t) <= n:
+                continue
+            tail = " ".join(t[-n:])
+            if tail in GEO_CITIES and t[-n - 1] in before and tail not in own \
+                    and not (n == 1 and (tail in vocab or len(tail) < 4)):
+                found.add(tail)
+                break
+    return sorted(found)
+
+
+def resolve_cannibalization(groups):
+    """One owner per query. groups: [{"name", "language", "match_type",
+    "keywords": [...], "negatives": [...]}] — keywords = everything the group
+    bids on (Planner rows, catchers, expansions, rescues).
+
+    When group A's PHRASE keyword reaches group B's keyword ("dryer repair"
+    reaches "washer dryer repair"), both bid on the same search and compete
+    with each other in the auction. B's keyword is the more specific one, so
+    B owns it: it is added to A as a phrase negative — unless A itself bids
+    on something containing it (that would block A's own keyword) or A
+    already negates it. Same language only. Returns (added, unresolved) and
+    edits the groups' "negatives" in place."""
+    keyed = [(g, [(_phrase_key(k), k) for k in g["keywords"]]) for g in groups]
+    added, unresolved = [], []
+    for gb, kb_list in keyed:
+        for kb, kb_text in kb_list:
+            for ga, ka_list in keyed:
+                if ga is gb or ga.get("language") != gb.get("language") \
+                        or ga.get("match_type", "phrase") != "phrase":
+                    continue
+                if not any(_contains(kb, ka) for ka, _ in ka_list):
+                    continue
+                neg_keys = [_phrase_key(n) for n in ga["negatives"]]
+                if any(_contains(kb, nk) for nk in neg_keys):
+                    continue
+                if any(_contains(ka, kb) for ka, _ in ka_list):
+                    unresolved.append((ga["name"], gb["name"], kb_text))
+                    continue
+                ga["negatives"].append(kb_text)
+                added.append((ga["name"], gb["name"], kb_text))
+    return added, unresolved
 
 
 def _phrase_key(kw):
@@ -1479,6 +1645,22 @@ def main():
     services = build_services(seeds)
     _build_normaliser(services)
     register_other_services(services)
+    _areas, _wrong = geo_context()
+    if _areas:
+        _GEO_AREAS[:] = list(dict.fromkeys(_areas + [a.strip().lower() for a in
+                                                     os.environ.get("GEO_AREAS", "").split(",")
+                                                     if a.strip()]))
+    # the client's own service areas (GEO_AREAS / advanced.service_areas) are
+    # never a wrong location, even when the geo data calls them another town
+    _towns = wrong_city_names([r["keyword"] for r in rows], services, list(_GEO_AREAS) + _areas)
+    _wrong = _wrong + _towns
+    if _wrong:
+        WRONG_LOCS.extend(w for w in dict.fromkeys(_wrong + [norm_phrase(x) for x in _wrong])
+                          if w and w not in WRONG_LOCS)
+    print(f"   🗺️ Geo: {len(_areas)} area(s) in the target city, {len(_wrong) - len(_towns)} "
+          f"other province(s)/state(s) and {len(_towns)} other town(s) found in the data "
+          f"treated as wrong locations" + (f": {', '.join(_towns[:12])}" if _towns else "")
+          + ("" if _areas or _wrong else " (lookup off/failed — built-in lists)"))
     single = len(services) == 1
     print(f"🧭 VTSA: {len(services)} service(s): " + ", ".join(s["name"] for s in services))
 
@@ -1635,6 +1817,13 @@ def main():
                 "keyword_ids": [r["id"] for r in bid_rows],
                 # every row the layer owns — demand, the page's keyword map
                 "all_keyword_ids": [r["id"] for r in sorted(rs, key=lambda r: -r["avg_monthly_searches"])],
+                # Rows the bid list does NOT reach: below the floor and not
+                # inside any chosen phrase keyword. Stage 3's model picks the
+                # buyer ones among them (rescue); the rest stay page-only.
+                "rescue_candidate_ids": [r["id"] for r in sorted(
+                    (r for r in rs if r not in bid_rows
+                     and not any(_contains(_phrase_key(r["keyword"]), k) for k in bid_keys)),
+                    key=lambda r: (-r["avg_monthly_searches"], len(r["keyword"])))][:RESCUE_POOL],
                 "volume": real_volume(rs),
                 "negative_keywords": p["negatives"][l],
                 # positive phrase keywords (volume unknown) that give every

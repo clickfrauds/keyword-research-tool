@@ -57,8 +57,27 @@ UNIVERSAL = [
     "قطع غيار", "جملة", "مورد", "مجانا",
 ]
 
+# Home-service MARKETPLACES and aggregators, worldwide. Someone searching
+# "urban company washing machine repair" wants that platform, not you; they
+# are competitors, never customers. Hard junk in Stage 2.7 and a campaign
+# negative everywhere. Only names that are not ordinary words.
+AGGREGATORS = [
+    "urban company", "urbanclap", "justlife", "servicemarket", "service market",
+    "matic", "taskrabbit", "angi", "angies list", "angie s list", "homeadvisor",
+    "home advisor", "thumbtack", "yelp", "checkatrade", "rated people", "mybuilder",
+    "airtasker", "hipages", "oneflare", "nextdoor", "housejoy", "zimmber", "mr right",
+    "sulekha", "justdial",
+]
+UNIVERSAL += AGGREGATORS
+
 PACKS = {
     "appliance": {
+        # "exclude": the wrong JOB behind a shared word — junk in Stage 2.7
+        # even with a hire word ("dyson hair dryer repair", "dryer vent repair"
+        # are a hair-care product and duct work, not a laundry appliance).
+        "exclude": ["hair dryer", "hair dryers", "hair straightener", "hairdryer",
+                    "dryer vent", "dryer vents", "vent cleaning", "duct cleaning",
+                    "car fridge", "car refrigerator", "ثلاجة سيارة", "ثلاجات السيارات"],
         "detect": ["appliance", "washing machine", "washer", "fridge", "refrigerator",
                    "dishwasher", "dryer", "oven", "cooker", "microwave", "wine chiller",
                    "tv repair", "led tv"],
@@ -80,6 +99,7 @@ PACKS = {
                   "showroom", "rent", "rental", "carrefour", "sharaf dg", "emax",
                   "portable ac", "car ac", "remote", "remote code", "error code list",
                   "wallpaper"],
+        "exclude": ["car ac", "car aircon", "car air conditioning", "auto ac"],
         "allow": ["installation", "gas", "gas refill", "company", "maintenance contract",
                   "shop"],
     },
@@ -152,6 +172,20 @@ def detect_packs(niche_text, seeds=()):
     found = [name for name, p in PACKS.items()
              if any((" " + _norm(d) + " ") in text for d in p["detect"])]
     return found
+
+
+def exclusions(niche_text, seeds=(), business_model=None):
+    """Hard exclusions for keyword SELECTION (Stage 2.7): aggregators plus the
+    detected niches' "exclude" lists, minus this niche's allow list. Unlike
+    the campaign negatives these drop a keyword even when it has a hire word,
+    so only wrong-job phrases belong here — never shopping words."""
+    packs = detect_packs(niche_text, seeds)
+    raw = list(AGGREGATORS)
+    for name in packs:
+        raw += PACKS[name].get("exclude", [])
+    _block, allow, _p = build(niche_text, seeds, business_model)
+    allow = set(allow)
+    return sorted({_norm(x) for x in raw if _norm(x) and _norm(x) not in allow})
 
 
 def build(niche_text, seeds=(), business_model=None):

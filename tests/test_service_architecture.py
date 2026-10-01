@@ -87,7 +87,7 @@ def run_stage(workdir, env_extra):
         json.dump(data, f, ensure_ascii=False)
     env = dict(os.environ, SEED_KEYWORDS=SEEDS, TARGET_LOCATION="Dubai, United Arab Emirates",
                NICHE_DESCRIPTION="Home Appliance Repair Services", PYTHONIOENCODING="utf-8",
-               **env_extra)
+               GEO_LOOKUP="off", **env_extra)
     for k in ("OPEN_24_7", "SYMPTOM_TEST", "DAILY_BUDGET", "AVG_CPC", "SERVICES_JSON"):
         if k not in env_extra:
             env.pop(k, None)
@@ -128,6 +128,79 @@ class Classifier(unittest.TestCase):
         for kw in ("washing machine repair", "fridge repair near me", "تصليح ثلاجات"):
             self.assertIsNone(self.v.junk_reason(kw), kw)
 
+    def test_exclusions_follow_the_niche_not_the_code(self):
+        import negative_packs as np
+        app = np.exclusions("Home appliance repair", ["washing machine repair"])
+        plumb = np.exclusions("Residential plumbing company", ["plumber"])
+        self.assertIn("hair dryer", app)
+        self.assertNotIn("hair dryer", plumb)
+        for agg in ("urban company", "thumbtack", "checkatrade"):
+            self.assertIn(agg, app)
+            self.assertIn(agg, plumb)
+
+    def test_other_trades_are_per_plan(self):
+        v = self.v
+        # appliance plan: a plumber or AC query is someone else's job
+        self.assertIsNotNone(v.junk_reason("washing machine plumber"))
+        self.assertIsNotNone(v.junk_reason("ac fridge repair"))
+        # an appliance problem word is NOT a trade name
+        self.assertIsNone(v.junk_reason("washing machine electrical fault repair"))
+        # a plumbing business whose services came as sub-services keeps "plumber"
+        saved = dict(os.environ)
+        try:
+            os.environ["NICHE_DESCRIPTION"] = "Plumbing company"
+            os.environ["SEED_KEYWORDS"] = "drain unblocking, leak detection"
+            svcs = v.build_services(["drain unblocking", "leak detection"])
+            v.register_other_services(svcs)
+            self.assertFalse(any("plumber" in p for p in v.OTHER_SERVICE_PHRASES))
+            self.assertTrue(any("electrician" in p for p in v.OTHER_SERVICE_PHRASES))
+        finally:
+            os.environ.clear(); os.environ.update(saved)
+            v.register_other_services(self.svcs)
+
+    def test_cannibalization_one_owner_per_query(self):
+        groups = [
+            {"name": "Dryer", "language": "en", "match_type": "phrase",
+             "keywords": ["dryer repair"], "negatives": []},
+            {"name": "Washer", "language": "en", "match_type": "phrase",
+             "keywords": ["washing machine repair", "washer dryer repair"], "negatives": []},
+            {"name": "Washer AR", "language": "ar", "match_type": "phrase",
+             "keywords": ["تصليح غسالات"], "negatives": []},
+        ]
+        added, unresolved = self.v.resolve_cannibalization(groups)
+        # "dryer repair" reaches "washer dryer repair": the specific group owns it
+        self.assertEqual(groups[0]["negatives"], ["washer dryer repair"])
+        self.assertEqual(groups[1]["negatives"], [])
+        self.assertEqual(unresolved, [])
+        # running again adds nothing (already negated)
+        self.assertEqual(self.v.resolve_cannibalization(groups)[0], [])
+
+    def test_geo_context_any_country(self):
+        import generate_locations as gl
+        geo = [{"id": 1, "n": "Dubai", "c": "Dubai,United Arab Emirates", "t": "Province"},
+               {"id": 2, "n": "Dubai", "c": "Dubai,Dubai,United Arab Emirates", "t": "City"},
+               {"id": 3, "n": "Dubai Marina", "c": "Dubai Marina,Dubai,United Arab Emirates",
+                "t": "Neighborhood"},
+               {"id": 4, "n": "Sharjah", "c": "Sharjah,United Arab Emirates", "t": "Province"},
+               {"id": 5, "n": "Al Nahda", "c": "Al Nahda,Sharjah,United Arab Emirates",
+                "t": "Neighborhood"}]
+        index = [{"name": "United Arab Emirates", "cc": "AE"}]
+        old = (gl.fetch_json, self.v.TARGET_LOCATION, os.environ.get("GEO_LOOKUP"))
+        try:
+            gl.fetch_json = lambda url: index if url.endswith("index.json") else geo
+            self.v.TARGET_LOCATION = "dubai, united arab emirates"
+            os.environ["GEO_LOOKUP"] = "on"
+            areas, wrong = self.v.geo_context()
+        finally:
+            gl.fetch_json, self.v.TARGET_LOCATION = old[0], old[1]
+            if old[2] is None:
+                os.environ.pop("GEO_LOOKUP", None)
+            else:
+                os.environ["GEO_LOOKUP"] = old[2]
+        self.assertIn("dubai marina", areas)
+        self.assertNotIn("al nahda", areas)          # another emirate's area
+        self.assertEqual(wrong, ["sharjah"])
+
     def test_bid_selection(self):
         rows = [{"id": i, "keyword": k, "avg_monthly_searches": v} for i, (k, v) in enumerate([
             ("washing machine repair", 6600), ("washing machine repair near me", 880),
@@ -153,9 +226,29 @@ class Classifier(unittest.TestCase):
         return layer
 
     def test_gpt_review_junk_bugs(self):
-        for kw in ("electrical wiring repair", "carpenter reviews", "manual gearbox repair",
-                   "plumber dubai", "washing machine parts replacement"):
-            self.assertIsNone(self.v.junk_reason(kw), kw)
+        # each keyword in ITS OWN business's plan: a carpenter query is a
+        # buyer for a carpenter and someone else's job for an appliance shop
+        import importlib
+        cases = [("electrical wiring repair", "Electrician services", ["electrician"]),
+                 ("carpenter reviews", "Carpentry services", ["carpenter"]),
+                 ("manual gearbox repair", "Auto repair garage", ["gearbox repair"]),
+                 ("plumber dubai", "Plumbing company", ["plumber"])]
+        saved = dict(os.environ)
+        try:
+            for kw, niche, seeds in cases:
+                os.environ["NICHE_DESCRIPTION"] = niche
+                os.environ["SEED_KEYWORDS"] = ", ".join(seeds)
+                v = importlib.reload(self.v)
+                svcs = v.build_services(seeds)
+                v._build_normaliser(svcs)
+                v.register_other_services(svcs)
+                self.assertIsNone(v.junk_reason(kw), f"{kw} in a '{niche}' plan")
+        finally:
+            os.environ.clear(); os.environ.update(saved)
+            type(self).v = importlib.reload(self.v)
+            type(self).v._build_normaliser(self.svcs)
+            type(self).v.register_other_services(self.svcs)
+        self.assertIsNone(self.v.junk_reason("washing machine parts replacement"))
         for kw in ("washing machine manual", "fridge parts", "washing machine price",
                    "washing machine reviews", "wiring diagram", "fridge repair jobs"):
             self.assertIsNotNone(self.v.junk_reason(kw), kw)
@@ -251,6 +344,72 @@ class Structure(unittest.TestCase):
                 run_stage(d, {"SERVICES_JSON": json.dumps(
                     [{"name": "Wine Chiller", "aliases": ["wine chiller", "wine cooler"]}])})
             self.assertIn("NEEDS_SERVICE_MAP", str(cm.exception))
+
+
+FAKE_MODEL_RUNNER = r'''
+import json, os, sys, runpy, types
+import anthropic
+plan = json.load(open("ad_group_plan.json", encoding="utf-8"))
+rows = {r["id"]: r["keyword"] for r in json.load(open("scored_keywords.json", encoding="utf-8"))["keywords"]}
+gs = plan["ad_groups"]
+ans = {"ad_groups": [], "landing_pages": [], "notes": ""}
+for i, g in enumerate(gs):
+    c = [rows[x] for x in g.get("rescue_candidate_ids", [])]
+    o = gs[(i + 1) % len(gs)].get("rescue_candidate_ids", [])
+    ans["ad_groups"].append({"name": g["name"], "theme": "t", "intent_expansion_keywords": [],
+                             "rescued_keywords": c[:3] + ["not a candidate at all"] + ([rows[o[0]]] if o else [])})
+class M: content = [types.SimpleNamespace(type="text", text=json.dumps(ans, ensure_ascii=False))]
+class S:
+    def __enter__(self): return self
+    def __exit__(self, *a): return False
+    def get_final_message(self): return M()
+class F:
+    def __init__(self, *a, **k): self.messages = types.SimpleNamespace(stream=lambda **kw: S())
+anthropic.Anthropic = F
+os.environ["ANTHROPIC_API_KEY"] = "offline"
+sys.argv = ["x"]
+runpy.run_path(os.environ["AWC_PATH"], run_name="__main__")
+'''
+
+
+class Rescue(unittest.TestCase):
+    """The model's picks among unreached low-volume rows: only real
+    candidates of THAT group are accepted."""
+
+    def test_rescue_accepts_only_the_groups_own_candidates(self):
+        try:
+            import anthropic  # noqa: F401
+        except Exception:
+            self.skipTest("anthropic not installed")
+        with tempfile.TemporaryDirectory() as d:
+            plan, _ = run_stage(d, {"DAILY_BUDGET": "20000"})
+            runner = os.path.join(d, "fake.py")
+            with open(runner, "w", encoding="utf-8") as f:
+                f.write(FAKE_MODEL_RUNNER)
+            env = dict(os.environ, AWC_PATH=os.path.join(SCRIPTS, "analyze_with_claude.py"),
+                       BUSINESS_NAME="Washer Dryer Repair Dubai", SEED_KEYWORDS="x",
+                       NICHE_DESCRIPTION="Home Appliance Repair Services",
+                       TARGET_LOCATION="Dubai, United Arab Emirates", PYTHONIOENCODING="utf-8")
+            res = subprocess.run([sys.executable, runner], cwd=d, env=env, capture_output=True,
+                                 text=True, encoding="utf-8")
+            self.assertEqual(res.returncode, 0, res.stdout[-2000:] + res.stderr[-2000:])
+            with open(os.path.join(d, "keyword_strategy.json"), encoding="utf-8") as f:
+                strat = json.load(f)
+            with open(os.path.join(d, "scored_keywords.json"), encoding="utf-8") as f:
+                text = {r["id"]: r["keyword"] for r in json.load(f)["keywords"]}
+        bid = {g["name"]: {k["keyword"] for k in g["keywords"]} for g in strat["ad_groups"]}
+        added = 0
+        for g in plan["ad_groups"]:
+            own = {text[i] for i in g.get("rescue_candidate_ids", [])}
+            got = bid.get(g["name"], set())
+            self.assertNotIn("not a candidate at all", got)
+            added += len(got & own)
+            # another SERVICE's candidate never lands here
+            foreign = {text[i] for o in plan["ad_groups"] if o["service"] != g["service"]
+                       for i in o.get("rescue_candidate_ids", [])}
+            self.assertFalse(got & (foreign - own), g["name"])
+        self.assertGreater(added, 0)
+        self.assertIn("Rescue:", res.stdout)
 
 
 @unittest.skipUnless(shutil.which("node"), "node not installed")

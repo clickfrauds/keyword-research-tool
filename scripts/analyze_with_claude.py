@@ -1222,7 +1222,8 @@ is ALREADY decided. Do not add, remove, merge or rename ad groups. Return ONE
 JSON object, nothing else:
 {
   "ad_groups": [{"name": "exact name given", "theme": "one sentence",
-                 "intent_expansion_keywords": ["5-10 new lowercase queries"]}],
+                 "intent_expansion_keywords": ["5-10 new lowercase queries"],
+                 "rescued_keywords": ["0-8 strings copied EXACTLY from that group's candidates"]}],
   "landing_pages": [{"page_id": "exact id given", "industry": "2-4 words, in the page's language",
                      "sub_services": ["exactly 6 names, in the page's language"]}],
   "notes": "2 sentences max"
@@ -1241,7 +1242,16 @@ now", "who fixes washing machines near me").
 LANGUAGE: a group whose keywords are Arabic gets Arabic theme, Arabic
 expansions (real Gulf phrasing: "تصليح غسالات قريب مني", "فني ثلاجات دبي") and
 Arabic sub_services for its page; English groups stay English. Never mix. Sub-services must mirror the page's keyword
-map (brands, problems) so the page sections match what the ads promise."""
+map (brands, problems) so the page sections match what the ads promise.
+RESCUE: some groups list low-volume "candidates" — real Planner searches no
+keyword in the group reaches. Pick at most 8 a paying customer in THIS
+location types to HIRE someone for THIS service: local ("... near me", an
+area of this city), voice ("who can fix ...", "... at home"), a specific
+part or fault with a hire word, a brand that is sold here. Reject: other
+countries' brands or towns (e.g. US-only brands, Kuwaiti areas in a Dubai
+plan), parts shopping, DIY, commercial/industrial units, other trades
+(ducts, AC), vague or garbled strings. Copy each pick exactly; an empty
+list is a fine answer."""
 
 
 def plan_page_id(pg):
@@ -1262,14 +1272,18 @@ def run_plan_mode(data):
     vtsa.restore_classifier(plan.get("classifier"))
     kept = [k for k in data["keywords"] if k.get("kept_for_ai")]
     by_id = {k["id"]: k for k in kept}
+    all_by_id = {k["id"]: k for k in data["keywords"]}
     MAX_AD_GROUPS = max(MAX_AD_GROUPS, len(plan["ad_groups"]))
     MAX_KEYWORDS_PER_GROUP = max(MAX_KEYWORDS_PER_GROUP, 500)
 
     lines = []
     for g in plan["ad_groups"]:
         top = [by_id[i]["keyword"] for i in g["keyword_ids"][:12] if i in by_id]
+        cands = [all_by_id[i]["keyword"] for i in g.get("rescue_candidate_ids", [])
+                 if i in all_by_id]
         lines.append(f'AD GROUP "{g["name"]}" | layer={g["layer"]} | service={g["service"]}\n'
-                     f'  keywords: ' + "; ".join(top))
+                     f'  keywords: ' + "; ".join(top)
+                     + (f'\n  candidates: ' + "; ".join(cands) if cands else ""))
     for pg in plan["landing_pages"]:
         km = pg.get("keyword_map", {})
         lines.append(f'PAGE id="{plan_page_id(pg)}" language={pg.get("language", "en")} '
@@ -1316,6 +1330,45 @@ def run_plan_mode(data):
     reach = {g["name"]: [vtsa._phrase_key(_id_kw[i]) for i in g["keyword_ids"] if i in _id_kw]
              + [vtsa._phrase_key(c) for c in g.get("silo_catchers", [])]
              for g in plan["ad_groups"]}
+
+    # RESCUE (Oct 2026): the model's picks among the low-volume rows the bid
+    # list does not reach. Python has the last word: the pick must be one of
+    # THAT group's candidates (a real Planner row, so it keeps its own volume
+    # and bid), not junk, the same service, and still unreached. Run before
+    # the expansions so an expansion never duplicates a rescued keyword.
+    _rescue_max = int(os.environ.get("RESCUE_MAX_PER_GROUP", "8") or 8)
+    rescued = []
+    for g in plan["ad_groups"]:
+        if g["layer"] == "symptom":
+            continue
+        cands = {all_by_id[i]["keyword"].strip().lower(): all_by_id[i]
+                 for i in g.get("rescue_candidate_ids", []) if i in all_by_id}
+        n_add = 0
+        for pick in (x_groups.get(g["name"].lower(), {}).get("rescued_keywords") or []):
+            row = cands.get(str(pick).strip().lower())
+            if not row or n_add >= _rescue_max or vtsa.junk_reason(row["keyword"]):
+                continue
+            si, layer = vtsa.classify(row["keyword"], services)
+            if si is None or layer in (None, "symptom") or services[si]["name"] != g["service"]:
+                continue
+            target = group_by_key.get((g["service"], layer)) or group_by_key[(g["service"], "core")]
+            k = vtsa._phrase_key(row["keyword"])
+            if row["id"] in target["keyword_ids"] or \
+                    any(vtsa._contains(k, r) for r in reach[target["name"]]):
+                continue
+            target["keyword_ids"].append(row["id"])
+            reach[target["name"]].append(k)
+            if row["id"] not in by_id:
+                kept.append(row)
+                by_id[row["id"]] = row
+            rescued.append((target["name"], row["keyword"], row.get("avg_monthly_searches", 0)))
+            n_add += 1
+    print(f"🛟 Rescue: {len(rescued)} low-volume buyer keyword(s) added from "
+          f"{sum(len(g.get('rescue_candidate_ids', [])) for g in plan['ad_groups'])} unreached "
+          f"candidates")
+    for gname, kw, vol in rescued[:60]:
+        print(f"      + [{gname}] {kw} ({vol})")
+
     n_moved = n_dropped = n_reached = 0
     for g in plan["ad_groups"]:
         if g["layer"] == "symptom":
@@ -1409,6 +1462,24 @@ def run_plan_mode(data):
             "anchor_by_group": {g["name"]: g["landing_anchor"] for g in plan["ad_groups"]
                                 if g["url_slug"] == pg["url_slug"]},
         })
+
+    # CANNIBALIZATION: with every group's final bid list known (Planner rows,
+    # rescues, expansions), a query two groups would both bid on gets ONE
+    # owner — the group with the more specific keyword.
+    _lang = {g["name"]: g.get("language", "en") for g in plan["ad_groups"]}
+    _view = [{"name": ag["name"], "language": _lang.get(ag["name"], "en"),
+              "match_type": ag.get("match_type", "phrase"),
+              "keywords": [by_id[i]["keyword"] for i in ag["keyword_ids"] if i in by_id]
+                          + list(ag.get("intent_expansion_keywords") or []),
+              "negatives": ag["negative_keywords"]} for ag in raw["ad_groups"]]
+    _added, _unres = vtsa.resolve_cannibalization(_view)
+    print(f"🥊 Cannibalization: {len(_added)} cross-group overlap(s) resolved with a phrase "
+          f"negative in the broader group" + (f", {len(_unres)} left (same keyword in two "
+                                              "groups)" if _unres else ""))
+    for a, b, kw in _added[:25]:
+        print(f"      '{kw}' -> owned by [{b}], negative in [{a}]")
+    for a, b, kw in _unres[:10]:
+        print(f"      ⚠️ '{kw}' bid in both [{a}] and [{b}]")
     return raw, kept
 
 
