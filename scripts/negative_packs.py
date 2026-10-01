@@ -76,6 +76,12 @@ PACKS = {
         # even with a hire word ("dyson hair dryer repair", "dryer vent repair"
         # are a hair-care product and duct work, not a laundry appliance).
         "exclude": ["hair dryer", "hair dryers", "hair straightener", "hairdryer",
+                    "dyson supersonic", "dyson airwrap",
+                    # a drying stand/rack is furniture, not a tumble dryer
+                    "drying stand", "drying rack", "clothes horse",
+                    "vent repair",
+                    # a computer monitor is IT repair, not a television
+                    "led monitor", "lcd monitor", "computer monitor", "pc monitor",
                     "dryer vent", "dryer vents", "vent cleaning", "duct cleaning",
                     "car fridge", "car refrigerator", "ثلاجة سيارة", "ثلاجات السيارات"],
         "detect": ["appliance", "washing machine", "washer", "fridge", "refrigerator",
