@@ -118,15 +118,22 @@ class Classifier(unittest.TestCase):
     def test_run_2476776a_junk(self):
         # all of these were BID on in the 1 Oct 2026 run
         for kw in ("urbanclap washing machine repair", "dyson hair dryer repair",
-                   "dryer vent repair near me", "ac washing machine repair",
-                   "air conditioning and refrigeration services",
+                   "dryer vent repair near me",
                    "commercial washing machine repair", "industrial washing machine repair",
                    "تصليح ثلاجات السيارات"):
             self.assertIsNotNone(self.v.junk_reason(kw), kw)
-        # "refrigeration" is a real word, never corrected to "refrigerator"
+        # "refrigeration" is a real word, never corrected to "refrigerator" —
+        # so this one matches no service at all (it is not a fridge query)
         self.assertEqual(self.v.toks("refrigeration"), ["refrigeration"])
-        for kw in ("washing machine repair", "fridge repair near me", "تصليح ثلاجات"):
+        self.assertIsNone(self.v.assign_service("air conditioning and refrigeration services",
+                                                self.svcs))
+        for kw in ("washing machine repair", "fridge repair near me", "تصليح ثلاجات",
+                   # buyers run 0d732cac excluded and negated (Naseem, 1 Oct)
+                   "fridge electrician near me", "electrician for fridge repair near me",
+                   "32 inch led tv backlight repair cost", "8 kg washing machine repair"):
             self.assertIsNone(self.v.junk_reason(kw), kw)
+        # a bare size is still shopping
+        self.assertIsNotNone(self.v.junk_reason("8 kg washing machine"))
 
     def test_exclusions_follow_the_niche_not_the_code(self):
         import negative_packs as np
@@ -140,14 +147,17 @@ class Classifier(unittest.TestCase):
 
     def test_other_trades_are_per_plan(self):
         v = self.v
-        # appliance plan: a plumber or AC query is someone else's job
-        self.assertIsNotNone(v.junk_reason("washing machine plumber"))
-        self.assertIsNotNone(v.junk_reason("ac fridge repair"))
-        # an appliance problem word is NOT a trade name
+        # default: naming another trade next to OUR product is still our job
+        self.assertEqual(v.OTHER_SERVICE_PHRASES, [])
+        self.assertIsNone(v.junk_reason("washing machine plumber"))
+        self.assertIsNone(v.junk_reason("ac fridge repair"))
         self.assertIsNone(v.junk_reason("washing machine electrical fault repair"))
-        # a plumbing business whose services came as sub-services keeps "plumber"
+        # opt-in: OTHER_TRADE_JUNK=on, and a trade the plan names is never junk
         saved = dict(os.environ)
         try:
+            os.environ["OTHER_TRADE_JUNK"] = "on"
+            v.register_other_services(self.svcs)
+            self.assertIsNotNone(v.junk_reason("washing machine plumber"))
             os.environ["NICHE_DESCRIPTION"] = "Plumbing company"
             os.environ["SEED_KEYWORDS"] = "drain unblocking, leak detection"
             svcs = v.build_services(["drain unblocking", "leak detection"])

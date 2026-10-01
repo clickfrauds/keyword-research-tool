@@ -826,9 +826,17 @@ def negatives_from_excluded(strategy, bid_keywords):
         kw = str(k.get("keyword", "")).strip().lower()
         if kw:
             cands.append(kw)
+    junk = plan_junk_keywords()
+    if junk is not None:
+        # plan mode: only what Stage 2.7 excluded for a JUNK reason
+        before = len(cands)
+        cands = [c for c in cands if c in junk]
+        if before - len(cands):
+            print(f"   🛡️ Excluded-keyword negatives: {before - len(cands)} skipped — excluded "
+                  "for a non-junk reason (no service match, symptom, bare product, info)")
     if not cands:
         return []
-    kept = filter_forbidden(cands, bid_keywords, "excluded-keyword")
+    kept = filter_forbidden(cands, list(bid_keywords) + plan_buyer_keywords(), "excluded-keyword")
     bid_tokens = {t for kw in bid_keywords for t in tokens_of(kw)}
     out, short, no_signal = [], 0, 0
     for kw in kept:
@@ -860,7 +868,7 @@ def pack_negatives(strategy, bid_keywords):
     # the wrong-job phrases (aggregators, the niche's "exclude" list) are
     # campaign negatives too, not only a Stage 2.7 selection rule
     block += negative_packs.exclusions(NICHE_DESCRIPTION, seeds + svc)
-    kept = filter_forbidden(block, bid_keywords, "niche-pack")
+    kept = filter_forbidden(block, list(bid_keywords) + plan_buyer_keywords(), "niche-pack")
     print(f"   📦 Negative packs: universal + {packs or ['(no niche pack matched)']} "
           f"-> {len(kept)} campaign negatives after collision filter "
           f"(BUSINESS_MODEL={os.environ.get('BUSINESS_MODEL', 'service') or 'service'})")
@@ -904,6 +912,12 @@ def write_campaign_negatives(campaigns, block_lists):
             if t and t not in seen:
                 seen.add(t)
                 rows.append(t)
+    rows, dropped = campaign_negative_gate(rows)
+    if dropped:
+        print(f"   🛡️ Campaign-negative gate: {sum(len(x) for x in dropped.values())} phrase(s) "
+              "NOT added — each would block buyers:")
+        for reason, terms in sorted(dropped.items(), key=lambda x: -len(x[1])):
+            print(f"      {reason}: {len(terms)} — e.g. {', '.join(terms[:5])}")
     if not rows:
         return 0
     with open(CAMPAIGN_NEGATIVES_CSV, "w", encoding="utf-8-sig", newline="") as f:
@@ -943,6 +957,169 @@ def allow_short_product():
     return not _SERVICE_SEED_RE.search(text)
 
 
+def plan_buyer_keywords():
+    """Every Planner row Stage 2.7 filed under one of OUR services and did
+    not judge junk — bid on or not. A negative must never sit inside one of
+    these: run 0d732cac shipped campaign negatives "electrician", "mini
+    fridge", "dish machine repair" and "led backlight repair", each of which
+    blocked a buyer ("fridge electrician near me", "mini fridge repair") that
+    the bid-keyword-only collision check could not see. Empty without a plan."""
+    try:
+        with open("ad_group_plan.json", encoding="utf-8") as f:
+            plan = json.load(f)
+        with open("scored_keywords.json", encoding="utf-8") as f:
+            rows = json.load(f)["keywords"]
+    except Exception:
+        return []
+    ids = {i for g in plan.get("ad_groups", [])
+           for i in (g.get("all_keyword_ids") or g.get("keyword_ids") or [])}
+    return sorted({str(r["keyword"]).lower() for r in rows if r.get("id") in ids})
+
+
+# Stage 2.7 reasons that make an excluded keyword a NEGATIVE. "matches no
+# service" is a gap in our own synonym list ("dish machine repair" is a
+# dishwasher job), "symptom only" is the FAQ/test pool, "bare product" and
+# "informational" are not worth bidding on but not worth blocking either.
+NEGATIVE_REASONS = ("wrong location", "diy/info question", "non-service intent",
+                    "product price")
+
+
+def plan_junk_keywords():
+    """Excluded keywords whose Stage 2.7 reason is real junk; None = no plan."""
+    try:
+        with open("ad_group_plan.json", encoding="utf-8") as f:
+            ex = json.load(f).get("excluded")
+    except Exception:
+        return None
+    if ex is None:
+        return None
+    return {str(e.get("keyword", "")).lower() for e in ex
+            if str(e.get("why", "")).startswith(NEGATIVE_REASONS)}
+
+
+def _plan_classifier():
+    """Stage 2.7's classifier with this plan's snapshot loaded, plus the
+    plan's services. (None, None) without a plan (legacy runs)."""
+    try:
+        with open("ad_group_plan.json", encoding="utf-8") as f:
+            plan = json.load(f)
+    except Exception:
+        return None, None
+    if not plan.get("classifier"):
+        return None, None
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    import service_architecture as vtsa
+    vtsa.restore_classifier(plan["classifier"])
+    return vtsa, plan.get("services") or []
+
+
+# Words that are junk ON THEIR OWN but a buyer's detail next to a service:
+# a one-word phrase negative of these blocks "55 inch tv screen repair",
+# "8 kg washing machine repair", "fridge repair reviews". The guard judges
+# them per search term, with the service signal in view.
+_CONTEXT_SINGLE = {"size", "kg", "inch", "inches", "capacity", "litre", "liter",
+                   "review", "reviews"}
+# A part-swap verb is a hire word only AFTER the thing being swapped ("55 inch
+# tv screen replacement cost" — have it done). BEFORE a noun it names the part
+# being bought ("replacement screen for 50 inch tv", "replace led backlight").
+_PART_VERBS = {"replacement", "replace", "replacing"}
+_HIRE_TAIL = {"near", "me", "estimate", "service", "services", "company", "shop", "cheap"}
+
+
+def _part_swap_is_hire(words, v):
+    """True when a part-swap verb is followed by nothing but price, size,
+    place or near-me words ("... screen replacement price in dubai", "lcd
+    screen replacement 55 inch"), or asks the price of the job ("cost of
+    replacing led tv screen")."""
+    price = set(v.PRICE_TOKENS)
+    tail_ok = price | _HIRE_TAIL | _CONTEXT_SINGLE | v._loc_tokens() | {"in", "at", "for"}
+    for i, w in enumerate(words):
+        if w not in _PART_VERBS:
+            continue
+        if price & set(words[:i]):
+            return True
+        if i > 0 and all(x in tail_ok or x.isdigit() for x in words[i + 1:]):
+            return True
+    return False
+
+
+def campaign_negative_gate(terms):
+    """The last check before a phrase becomes a CAMPAIGN-level negative —
+    which blocks every query containing it, for every ad group, forever.
+
+    Run 0d732cac shipped 607 of them; 195 blocked buyers. The rule, for any
+    business and any language, using the plan's own classifier:
+      KEEP  a phrase that is junk by itself: jobs, courses, DIY, a wrong
+            location, an aggregator, a wrong-job phrase, or another trade
+            with none of our services in it ("ac repair", "plumber").
+      DROP  a symptom ("samsung dryer not working" also blocks "... repair");
+            a one-word size/review word; a price modifier with no product
+            ("price in dubai" blocks "washing machine repair price in dubai");
+            a brand with a repair word, or a bare brand ("siemens"); anything
+            with a hire word (repair, fix, service, technician, تصليح, صيانة)
+            and no junk signal ("fridge electrician near me", "تصليح شاشات
+            تلفاز"); a part swap AFTER its part ("tv screen replacement
+            cost"); a kept word that sits inside any phrase dropped above
+            ("electrician" inside "fridge electrician near me").
+      KEEP  a part swap BEFORE its part: "replacement screen for 50 inch tv".
+    Without a plan nothing is dropped (legacy behaviour).
+    -> (kept, {reason: [dropped]})"""
+    v, services = _plan_classifier()
+    if v is None:
+        return list(terms), {}
+    other = {x for fam in v._OTHER_FAMILIES for x in ({v.norm_phrase(m) for m in fam} | set(fam)) if x}
+    kept, dropped = [], {}
+
+    def _drop(reason, t):
+        dropped.setdefault(reason, []).append(t)
+
+    for t in terms:
+        text = " ".join(v.toks(t))
+        ts = set(text.split())
+        if not ts:
+            continue
+        why = v.junk_reason(t) or ""
+        ours = v.assign_service(t, services) is not None
+        if why.startswith("symptom only"):
+            _drop("symptom (also blocks the buyer version)", t)
+            continue
+        if len(ts) == 1 and ts & _CONTEXT_SINGLE:
+            _drop("one-word size/review word", t)
+            continue
+        if why.startswith("product price") and not ours:
+            _drop("price modifier with no product", t)
+            continue
+        other_trade = (not ours) and any(v.has_phrase(text, x) for x in other)
+        if (why and not why.startswith("no service intent")) or other_trade:
+            kept.append(t)
+            continue
+        hire = ts & set(v.HIRE_WORDS)
+        real_hire = hire - _PART_VERBS
+        if not real_hire and _part_swap_is_hire(text.split(), v):
+            real_hire = hire & _PART_VERBS
+        if v.brands_in(text) and (real_hire or len(ts) <= 2):
+            _drop("brand", t)
+            continue
+        if real_hire:
+            _drop("hire word, no junk signal", t)
+            continue
+        kept.append(t)
+
+    # A bare word kept above still blocks every buyer phrase it sits inside:
+    # "electrician" kills "fridge electrician near me" though that phrase was
+    # itself dropped as a buyer. Judged against this gate's own buyer verdicts.
+    buyers = [" ".join(v.toks(b)) for r in ("hire word, no junk signal", "brand")
+              for b in dropped.get(r, [])]
+    still = []
+    for t in kept:
+        text = " ".join(v.toks(t))
+        if any(text != b and v.has_phrase(b, text) for b in buyers):
+            _drop("sits inside a buyer phrase", t)
+        else:
+            still.append(t)
+    return still, dropped
+
+
 def plan_block_lists():
     """What Stage 2.7 decided is NOT this business, from its classifier
     snapshot in ad_group_plan.json: wrong locations (any country — the geo
@@ -967,15 +1144,18 @@ def render_script(campaigns, bid_keywords, products, fuzzy_roots, niche):
         return [str(x).lower() for x in (niche.get(key) or [])]
 
     plan_locs, plan_words = plan_block_lists()
+    # block lists are checked against every buyer row of the plan, not only
+    # the (much shorter) bid list
+    protect = list(bid_keywords) + plan_buyer_keywords()
     forbidden = filter_forbidden(
         _lst("forbidden_words") + UNIVERSAL_PRICE_SHOPPING_RU + plan_words,
-        bid_keywords, "forbidden")
+        protect, "forbidden")
     edu = filter_forbidden(
-        UNIVERSAL_EDU_CAREER + _lst("edu_career_words"), bid_keywords, "edu/career")
+        UNIVERSAL_EDU_CAREER + _lst("edu_career_words"), protect, "edu/career")
     info_diy = filter_forbidden(
-        UNIVERSAL_INFO_DIY + _lst("info_diy_words"), bid_keywords, "info/DIY")
+        UNIVERSAL_INFO_DIY + _lst("info_diy_words"), protect, "info/DIY")
     forbidden_locations = filter_forbidden(
-        list(dict.fromkeys(_lst("forbidden_locations") + plan_locs)), bid_keywords, "location")
+        list(dict.fromkeys(_lst("forbidden_locations") + plan_locs)), protect, "location")
     context_words = _lst("context_product_words")
     problems = UNIVERSAL_PROBLEM_SIGNALS + _lst("problem_signals")
     safe_roots = bid_keywords + _lst("extra_safe_roots")

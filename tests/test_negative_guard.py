@@ -107,11 +107,105 @@ class Guard(unittest.TestCase):
         self.assertIn("var ALLOW_SHORT_PRODUCT = true;", js)
         self.assertNotIn("wooden wardrobe", self.run_guard(js, ["wooden wardrobe"]))
 
+    def test_negatives_never_sit_inside_a_buyer_row(self):
+        """Run 0d732cac: "electrician", "mini fridge", "dish machine repair",
+        "led backlight repair" became campaign negatives and blocked buyers."""
+        import importlib
+        import generate_ads_script as gas
+        gas = importlib.reload(gas)
+        rows = [("fridge repair", 1), ("fridge electrician near me", 2), ("mini fridge repair", 3),
+                ("dish machine repair", 4), ("fridge repair jobs", 5), ("led backlight repair", 6)]
+        json.dump({"keywords": [{"id": i, "keyword": k} for k, i in rows]},
+                  open("scored_keywords.json", "w", encoding="utf-8"))
+        json.dump({"ad_groups": [{"all_keyword_ids": [1, 2, 3], "keyword_ids": [1]}],
+                   "excluded": [{"keyword": "fridge repair jobs", "why": "non-service intent: jobs"},
+                                {"keyword": "dish machine repair", "why": "matches no service"},
+                                {"keyword": "led backlight repair", "why": "matches no service"}]},
+                  open("ad_group_plan.json", "w", encoding="utf-8"))
+        js, stats = gas.render_script(["C"], ["fridge repair"], ["fridge"], ["fridge"],
+                                      {"forbidden_words": ["electrician", "mini fridge", "jobs"]})
+        forb = stats["block_lists"]["forbidden"]
+        self.assertNotIn("electrician", forb)       # inside "fridge electrician near me"
+        self.assertNotIn("mini fridge", forb)       # inside "mini fridge repair"
+        self.assertIn("jobs", forb)
+        neg = gas.negatives_from_excluded(
+            {"seo_content_keywords": [{"keyword": k} for k, _ in rows[3:]]}, ["fridge repair"])
+        self.assertIn("fridge repair jobs", neg)            # real junk reason
+        self.assertNotIn("dish machine repair", neg)        # a synonym gap, not junk
+        self.assertNotIn("led backlight repair", neg)
+
     def test_no_plan_is_the_old_behaviour(self):
         import importlib
         import generate_ads_script as gas
         gas = importlib.reload(gas)
         self.assertEqual(gas.plan_block_lists(), ([], []))
+
+
+class CampaignNegativeGate(unittest.TestCase):
+    """A campaign negative blocks every query containing it, in every ad
+    group. Run 0d732cac shipped 607; these are its real false positives and
+    its real junk, English and Arabic. Python only — no node needed."""
+
+    def setUp(self):
+        self.cwd = os.getcwd()
+        self.tmp = tempfile.mkdtemp()
+        os.chdir(self.tmp)
+        self.env = dict(os.environ)
+
+    def tearDown(self):
+        os.chdir(self.cwd)
+        shutil.rmtree(self.tmp, ignore_errors=True)
+        os.environ.clear(); os.environ.update(self.env)
+
+    def gate(self, terms):
+        import importlib
+        seeds = ["Washing machine repair", "Dryer repair", "Dishwasher repair",
+                 "Refrigerator repair", "LED TV repair", "تصليح غسالات", "تصليح ثلاجات",
+                 "تصليح تلفزيون"]
+        os.environ["NICHE_DESCRIPTION"] = "Home Appliance Repair Services"
+        os.environ["SEED_KEYWORDS"] = ", ".join(seeds)
+        import service_architecture as v
+        v = importlib.reload(v)
+        svcs = v.build_services(seeds)
+        v._build_normaliser(svcs)
+        snap = v.classifier_snapshot()
+        snap["WRONG_LOCS"] = ["sharjah", "abu dhabi"]
+        json.dump({"classifier": snap,
+                   "services": [{"name": s["name"], "aliases": s["aliases"], "lang": s["lang"]}
+                                for s in svcs]},
+                  open("ad_group_plan.json", "w", encoding="utf-8"), ensure_ascii=False)
+        import generate_ads_script as gas
+        gas = importlib.reload(gas)
+        kept, dropped = gas.campaign_negative_gate(terms)
+        return set(kept), {t for ts in dropped.values() for t in ts}
+
+    def test_buyers_dropped_junk_kept(self):
+        buyers = ["fridge electrician near me", "تصليح شاشات تلفاز", "siemens", "inch",
+                  "price in dubai", "samsung dryer not working", "dish machine repair",
+                  "led backlight repair", "تصليح ديب فريزر", "washing machine breakdown",
+                  "lg dryer squeaking", "55 inch screen replacement price",
+                  "samsung 55 inch led tv screen replacement cost", "cost of replacing led tv screen",
+                  "lcd screen replacement 55 inch",
+                  # bare words that sit inside a buyer phrase above
+                  "electrician", "كهربائي", "كهربائي تصليح غسالات"]
+        junk = ["appliance repair course dubai", "dyson hair dryer repair",
+                "dyson supersonic repair", "vent repair near me", "ac repair",
+                "replacement screen for 50 inch tv", "lcd panel bonding machine",
+                "plumber", "urban company fridge repair",
+                "طريقة تصليح الغسالة", "fridge repair sharjah", "appliance repair apprenticeship",
+                "multimeter", "compressor types explained", "led monitor repair"]
+        kept, dropped = self.gate(buyers + junk)
+        for t in buyers:
+            self.assertIn(t, dropped, t)
+        for t in junk:
+            self.assertIn(t, kept, t)
+
+    def test_no_plan_drops_nothing(self):
+        import importlib
+        import generate_ads_script as gas
+        gas = importlib.reload(gas)
+        self.assertEqual(gas.campaign_negative_gate(["siemens", "inch"]),
+                         (["siemens", "inch"], {}))
 
 
 if __name__ == "__main__":

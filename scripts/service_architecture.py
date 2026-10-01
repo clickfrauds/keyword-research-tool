@@ -126,7 +126,7 @@ ACTION_WORDS = {
     "servicing", "maintenance", "technician", "technicians", "mechanic",
     "engineer", "installation", "install", "installer", "cleaning", "clean",
     "refill", "recharge", "workshop", "center", "centre", "specialist",
-    "company", "contractor", "expert", "shop", "replacement", "replace",
+    "company", "contractor", "expert", "shop", "replacement", "replace", "replacing",
     "unblocking", "unblock", "leak", "detection", "fixer", "tech", "techs",
     # Arabic
     "تصليح", "اصلاح", "إصلاح", "صيانة", "صيانه", "فني", "فنيين", "تركيب", "تنظيف", "ورشة",
@@ -144,22 +144,25 @@ PROVIDER_NOUNS = {
     "technician", "technicians", "contractor", "contractors", "installer", "installers",
     "cleaner", "cleaners", "gardener", "gardeners", "welder", "welders", "mason", "masons",
     "tiler", "tilers", "glazier", "glaziers",
-    "سباك", "كهربائي", "نجار", "فني", "فنيين", "مصلح", "دهان", "حداد",
+    "سباك", "كهربائي", "نجار", "فني", "فنيين", "مصلح", "دهان", "حداد", "مهندس",
 }
 HIRE_WORDS = SERVICE_VERBS | PROVIDER_NOUNS | {"inspection", "inspect"}
 
 # Synonym families. Any two seeds whose heads fall in one family = one service.
 SYNONYMS = [
-    {"fridge", "refrigerator", "fridge freezer", "freezer", "refrig", "ثلاجة", "ثلاجات"},
+    {"fridge", "refrigerator", "fridge freezer", "freezer", "refrig", "deep freezer",
+     "ثلاجة", "ثلاجات", "فريزر", "ديب فريزر"},
     {"washing machine", "washer", "washing machines", "laundry machine", "wash machine",
      "clothes washer", "غسالة", "غسالات"},
-    {"dishwasher", "dish washer", "dishwashers", "غسالة صحون"},
+    # "dish machine" / "dishwashing machine" / "جلاية" (Gulf): same machine
+    {"dishwasher", "dish washer", "dishwashers", "dish machine", "dishwashing machine",
+     "غسالة صحون", "جلاية", "جلايات", "جلاية صحون"},
     {"dryer", "tumble dryer", "clothes dryer", "dryers", "نشافة"},
     {"wine chiller", "wine cooler", "wine fridge", "wine chillers"},
     # bare "led"/"lcd" are NOT aliases: "led light repair" is an electrician
     # query, not a TV one. Only screen/display phrasings count.
     {"led tv", "tv", "television", "lcd tv", "smart tv", "oled tv", "led screen",
-     "led display", "led panel", "lcd screen", "lcd panel", "تلفزيون"},
+     "led display", "led panel", "lcd screen", "lcd panel", "تلفزيون", "تلفاز"},
     {"ac", "air conditioner", "air conditioning", "aircon", "a/c", "مكيف", "مكيفات"},
     {"oven", "cooker", "stove", "cooking range", "gas cooker", "فرن"},
     {"microwave", "microwave oven"},
@@ -211,6 +214,8 @@ PROBLEM_TOKENS = {
     "fault", "faulty", "smell", "smells", "smelly", "vibrating", "vibration",
     "shaking", "overheating", "tripping", "trips", "stuck", "jammed", "blinking",
     "flashing", "beeping", "burning", "sparking", "dead", "dripping", "blocked",
+    "squeak", "squeaking", "squeaky", "squeal", "squealing", "grinding", "rattling",
+    "banging", "breakdown",
     "clogged", "frozen", "icing", "ice", "sweating", "humming", "clicking",
     # parts
     "compressor", "motor", "pcb", "board", "pump", "thermostat", "bearing",
@@ -264,6 +269,9 @@ JUNK_TOKENS = {
     "job", "jobs", "vacancy", "vacancies", "salary", "hiring", "career",
     "careers", "course", "courses", "training", "institute", "learn",
     "learning", "certificate", "certification", "cv",
+    "apprenticeship", "apprentice", "internship", "trainee", "tools", "multimeter",
+    # explaining how a thing works is reading, not hiring
+    "explained", "types", "bonding",
     # DIY / info
     "diy", "pdf", "diagram", "youtube", "video", "videos",
     "tutorial", "meaning", "wikipedia", "reset", "myself",
@@ -274,6 +282,7 @@ JUNK_TOKENS = {
     # Arabic
     "شراء", "بيع", "للبيع", "مستعمل", "مستعملة", "وظائف", "وظيفة", "راتب", "دورة",
     "كورس", "قطع", "غيار", "يوتيوب", "كتالوج", "عروض", "تخفيضات",
+    "مطلوب",   # "مطلوب فني" = technician WANTED — a job ad, not a customer
 }
 JUNK_TOKENS |= {t.strip().lower() for t in os.environ.get("EXTRA_JUNK", "").split(",") if t.strip()}
 # SOFT junk: junk only when nothing in the query says "hire someone".
@@ -282,7 +291,12 @@ JUNK_TOKENS |= {t.strip().lower() for t in os.environ.get("EXTRA_JUNK", "").spli
 # reviews", "used car inspection" are buyers. ("wiring" is not junk at all:
 # "electrical wiring repair" is a job; "wiring diagram" still dies on "diagram".)
 SOFT_JUNK_TOKENS = {"manual", "manuals", "used", "second", "parts", "spare", "spares",
-                    "review", "reviews", "قطع", "غيار", "مستعمل", "مستعملة"}
+                    "review", "reviews", "قطع", "غيار", "مستعمل", "مستعملة",
+                    # sizes are shopping on their own ("55 inch tv", "8 kg washer")
+                    # and a buyer's detail with a hire word ("32 inch led tv
+                    # backlight repair cost") — run 0d732cac excluded and
+                    # NEGATED that one
+                    "size", "kg", "inch", "inches", "litre", "liter"}
 JUNK_TOKENS -= SOFT_JUNK_TOKENS
 
 
@@ -351,7 +365,8 @@ _OTHER_FAMILIES = [
 ]
 # Real words the typo fixer must never "correct": "refrigeration" is HVAC
 # work, two edits from "refrigerator", and was being read as a fridge query.
-_NO_FIX = {"refrigeration", "refrigerant", "refrigerated", "conditioning", "ventilation"}
+_NO_FIX = {"refrigeration", "refrigerant", "refrigerated", "conditioning", "ventilation",
+           "mechanism", "mechanisms"}
 
 # BID KEYWORDS (1 Oct 2026). Every Planner row that maps to a service stays
 # on the page (keyword_map) and in the group's demand. The BID list is
@@ -784,7 +799,9 @@ _FAULT_WORDS = {"leak", "leaking", "leaks", "noise", "noisy", "loud", "error",
                 "stuck", "jammed", "blinking", "flashing", "beeping",
                 "burning", "sparking", "dead", "dripping", "blocked",
                 "clogged", "frozen", "icing", "sweating", "humming",
-                "clicking", "عطل", "اعطال", "أعطال", "تسريب", "صوت"} | _PROBLEM_NEG
+                "clicking", "squeak", "squeaking", "squeaky", "squeal", "squealing",
+                "grinding", "rattling", "banging", "breakdown",
+                "عطل", "اعطال", "أعطال", "تسريب", "صوت"} | _PROBLEM_NEG
 _STRONG_PARTS = {"compressor", "motor", "pcb", "board", "pump", "thermostat",
                  "bearing", "bearings", "belt", "drum", "gasket", "seal",
                  "element", "backlight", "panel", "screen", "capacitor",
@@ -1433,10 +1450,19 @@ def register_other_services(services):
     trade named in the niche or the seeds counts as seeded even when the
     services came from SERVICES_JSON ("drain", "leak"), so a plumbing
     business never loses "plumber near me"."""
+    OTHER_SERVICE_PHRASES[:] = []
+    # OFF by default (1 Oct 2026). A keyword only reaches this check when it
+    # already names one of OUR services, and then the other trade's word is
+    # usually how the buyer names the repairer: "fridge electrician near me"
+    # is a fridge job (run 0d732cac excluded it and made "electrician" a
+    # campaign negative). A query naming only another trade never matches our
+    # phrase keywords, and the guard bans it for having no product of ours.
+    # OTHER_TRADE_JUNK=on brings the rule back for a plan that needs it.
+    if not _env_on("OTHER_TRADE_JUNK"):
+        return
     seeded = {a for s in services for a in s["aliases"]}
     told = " " + norm_phrase(os.environ.get("NICHE_DESCRIPTION", "") + " "
                              + os.environ.get("SEED_KEYWORDS", "").replace(",", " ")) + " "
-    OTHER_SERVICE_PHRASES[:] = []
     for fam in _OTHER_FAMILIES:
         fam_n = {norm_phrase(x) for x in fam} | set(fam)
         if fam_n & seeded or any(has_phrase(told, x) for x in fam_n if x):
